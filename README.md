@@ -9,3 +9,11 @@ runverter is a web app providing a set of tools to convert different running met
     - if you don't have rvm, please make sure you are using ruby version 2.2.2. or 2.2 at least
 - run ```gem install bundler``` if bundler is not present yet
 - run ```bundle``` to install all required gems
+
+## start the server 
+
+- run the ruby app via puma server
+```shell
+pumactl -F config/puma/development.rb start
+```
+- open http://localhost:8000/ in your browser
