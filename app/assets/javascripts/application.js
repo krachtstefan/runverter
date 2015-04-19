@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require uikit
 //= require turbolinks
 //= require ember
 //= require ember-data
