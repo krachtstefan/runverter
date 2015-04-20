@@ -19,4 +19,5 @@ group :development, :test do
   gem 'autotest-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem "qunit-rails"
 end
