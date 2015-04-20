@@ -9,6 +9,7 @@ gem 'ember-rails'
 gem 'ember-source', '1.11.1'
 gem 'puma'
 gem 'uikit-sass-rails'
+gem 'compass-rails'
 
 group :development, :test do
   gem 'byebug'
