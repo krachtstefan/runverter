@@ -1,0 +1,1 @@
+Runverter.Run = DS.Model.extend()
