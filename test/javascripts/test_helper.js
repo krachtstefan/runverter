@@ -1,3 +1,6 @@
 //= require application
-//= require_tree .
 //= require_self
+//= require_tree .
+
+Runverter.setupForTesting();
+Runverter.injectTestHelpers();
