@@ -19,8 +19,7 @@
 //= require localstorage_adapter_0.3.2
 //= require_self
 //= require ./runverter
+//= require_tree .
 
 // for more details see: http://emberjs.com/guides/application/
 Runverter = Ember.Application.create();
-
-//= require_tree .
