@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require ember
 //= require ember-data
+//= require localstorage_adapter_0.3.2
 //= require_self
 //= require ./runverter
 
