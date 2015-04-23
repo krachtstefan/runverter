@@ -23,4 +23,6 @@
 //= require_tree .
 
 // for more details see: http://emberjs.com/guides/application/
-Runverter = Ember.Application.create();
+Runverter = Ember.Application.create({
+	rootElement: "#app"
+});
