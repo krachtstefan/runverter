@@ -17,6 +17,7 @@
 //= require ember
 //= require ember-data
 //= require localstorage_adapter_0.3.2
+//= ember-i18n-3.1.0.js
 //= require_self
 //= require ./runverter
 //= require_tree .
