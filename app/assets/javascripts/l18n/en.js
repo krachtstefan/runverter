@@ -1,2 +1,5 @@
-Runverter.I18n = Stickerlicious.I18n || {}
-Runverter.I18n.en = {};
+Runverter.I18n = Runverter.I18n || {}
+Runverter.I18n.en = {
+  'run' : {
+  }
+};
