@@ -17,7 +17,7 @@ module("/", {
   }
 });
 
-test("/", function() {
+test("renders pace calculator form", function() {
   expect(1);
   visit("/").then(function() {
     ok(exists("form.uk-form"), "Pace calculator form was rendered");
