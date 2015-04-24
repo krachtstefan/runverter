@@ -7,8 +7,12 @@ Runverter.Run = DS.Model.extend({
 	lengthKm : null,
 	
 	paceMinPerKm : null,
+	paceMinPerKmArr : [],
 	paceMinPerMile : null,
+	paceMinPerMileArr : [],
 	
 	speedKmHour : null,
-	speedMilesHour : null
+	speedKmHourArr : [],
+	speedMilesHour : null,
+	speedMilesHourArr : []
 })
