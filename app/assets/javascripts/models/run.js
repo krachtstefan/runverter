@@ -1,6 +1,11 @@
 Runverter.Run = DS.Model.extend({
 
 	timeSec : null,
+	
+	timeMin : function(){
+		return this.get('timeSec')/60;
+	}.property('timeSec'),
+
 	timeArr : function(){
 		return [];
 	}.property('timeSec'),
