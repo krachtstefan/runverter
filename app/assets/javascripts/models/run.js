@@ -6,6 +6,10 @@ Runverter.Run = DS.Model.extend({
 		return this.get('timeSec')/60;
 	}.property('timeSec'),
 
+	timeHour : function(){
+		return this.get('timeSec')/60/60;
+	}.property('timeSec'),
+
 	timeArr : function(){
 		return [];
 	}.property('timeSec'),
