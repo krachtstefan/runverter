@@ -13,7 +13,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthKm : function(){
-		return null;
+		return this.get('lenghtM')*0.001;
 	}.property('lenghtM'),
 
 	
