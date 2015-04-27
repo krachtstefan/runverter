@@ -44,8 +44,8 @@ Runverter.Run = DS.Model.extend({
 	
 
 	speedKmHour : function(){
-		return null;
-	}.property('timeSec', 'lenghtM'),
+		return this.get('lengthKm')/this.get('timeHour');
+	}.property('lengthKm', 'timeHour'),
 
 	speedKmHourArr : function(){
 		return [];
