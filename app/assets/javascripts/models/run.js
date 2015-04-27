@@ -31,8 +31,8 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec', 'lenghtM'),
 	
 	paceMinPerMile  : function(){
-		return null;
-	}.property('timeSec', 'lenghtM'),
+		return this.get('timeMin')/this.get('lengthMiles');
+	}.property('timeSec', 'lengthMiles'),
 
 	paceMinPerMileArr : function(){
 		return [];
