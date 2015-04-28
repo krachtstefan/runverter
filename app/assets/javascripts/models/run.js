@@ -11,8 +11,12 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec'),
 
 	timeArr : function(){
-		return [1, 2, 3];
-	}.property('timeSec'),
+		whole_hours = parseInt(this.get("timeHour"))
+		whole_minutes = parseInt(this.get("timeMin"))
+		minutes_remainder = whole_minutes-(whole_hours*60)
+		seconds_remainder = this.get("timeSec")-(whole_minutes*60)
+		return [ whole_hours , minutes_remainder, seconds_remainder];
+	}.property('timeSec', 'timeMin', 'timeHour'),
 
 
 	lenghtM : null,
