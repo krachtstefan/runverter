@@ -10,14 +10,18 @@ Runverter.Run = DS.Model.extend({
 		return this.get('timeSec')/60/60;
 	}.property('timeSec'),
 
-	timeArr : function(){
-		whole_hours = parseInt(this.get("timeHr"))
-		whole_minutes = parseInt(this.get("timeMin"))
-		minutes_remainder = whole_minutes-(whole_hours*60)
-		seconds_remainder = this.get("timeSec")-(whole_minutes*60)
-		return [ whole_hours , minutes_remainder, seconds_remainder];
-	}.property('timeSec', 'timeMin', 'timeHr'),
+	// timeStack is used to create a view like 12:34:56 and is available as timeStackSec, timeStackMin and timeStackHr
+	timeStackSec : function(){
+		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60)
+	}.property('timeSec', 'timeMin'),
 
+	timeStackMin : function(){
+		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60)
+	}.property('timeMin', 'timeStackHr'),
+
+	timeStackHr : function(){
+		return parseInt(this.get("timeHr"))
+	}.property('timeHr'),
 
 	lenghtM : null,
 
