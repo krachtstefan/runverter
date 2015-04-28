@@ -11,7 +11,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec'),
 
 	timeArr : function(){
-		return [];
+		return [1, 2, 3];
 	}.property('timeSec'),
 
 
@@ -30,7 +30,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthKmArr : function(){
-		return [];
+		return [1, 2];
 	}.property('lenghtM'),
 
 	
@@ -39,7 +39,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec', 'lengthKm'),
 
 	paceMinPerKmArr : function(){
-		return [];
+		return [1, 2];
 	}.property('paceMinPerKm'),
 	
 	paceMinPerMile  : function(){
@@ -47,7 +47,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec', 'lengthMiles'),
 
 	paceMinPerMileArr : function(){
-		return [];
+		return [1, 2];
 	}.property('paceMinPerMile'),
 	
 
@@ -56,7 +56,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lengthKm', 'timeHour'),
 
 	speedKmHourArr : function(){
-		return [];
+		return [1, 2];
 	}.property('speedKmHour'),
 
 	speedMilesHour : function(){
@@ -64,6 +64,6 @@ Runverter.Run = DS.Model.extend({
 	}.property('lengthMiles', 'timeHour'),
 
 	speedMilesHourArr : function(){
-		return [];
+		return [1, 2];
 	}.property('speedMilesHour'),
 })
