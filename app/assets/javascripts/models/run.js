@@ -23,7 +23,7 @@ Runverter.Run = DS.Model.extend({
 
 	lengthMilesArr : function(){
 		return [1, 2];
-	}.property('lenghtM'),
+	}.property('lengthMiles'),
 
 	lengthKm : function(){
 		return this.get('lenghtM')*0.001;
@@ -31,7 +31,7 @@ Runverter.Run = DS.Model.extend({
 
 	lengthKmArr : function(){
 		return [1, 2];
-	}.property('lenghtM'),
+	}.property('lengthKm'),
 
 	
 	paceMinPerKm : function(){
