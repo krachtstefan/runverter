@@ -6,17 +6,17 @@ Runverter.Run = DS.Model.extend({
 		return this.get('timeSec')/60;
 	}.property('timeSec'),
 
-	timeHour : function(){
+	timeHr : function(){
 		return this.get('timeSec')/60/60;
 	}.property('timeSec'),
 
 	timeArr : function(){
-		whole_hours = parseInt(this.get("timeHour"))
+		whole_hours = parseInt(this.get("timeHr"))
 		whole_minutes = parseInt(this.get("timeMin"))
 		minutes_remainder = whole_minutes-(whole_hours*60)
 		seconds_remainder = this.get("timeSec")-(whole_minutes*60)
 		return [ whole_hours , minutes_remainder, seconds_remainder];
-	}.property('timeSec', 'timeMin', 'timeHour'),
+	}.property('timeSec', 'timeMin', 'timeHr'),
 
 
 	lenghtM : null,
@@ -55,19 +55,19 @@ Runverter.Run = DS.Model.extend({
 	}.property('paceMinPerMile'),
 	
 
-	speedKmHour : function(){
-		return this.get('lengthKm')/this.get('timeHour');
-	}.property('lengthKm', 'timeHour'),
+	speedKmHr : function(){
+		return this.get('lengthKm')/this.get('timeHr');
+	}.property('lengthKm', 'timeHr'),
 
-	speedKmHourArr : function(){
+	speedKmHrArr : function(){
 		return [1, 2];
-	}.property('speedKmHour'),
+	}.property('speedKmHr'),
 
-	speedMilesHour : function(){
-		return this.get('lengthMiles')/this.get('timeHour');
-	}.property('lengthMiles', 'timeHour'),
+	speedMilesHr : function(){
+		return this.get('lengthMiles')/this.get('timeHr');
+	}.property('lengthMiles', 'timeHr'),
 
-	speedMilesHourArr : function(){
+	speedMilesHrArr : function(){
 		return [1, 2];
-	}.property('speedMilesHour'),
+	}.property('speedMilesHr'),
 })
