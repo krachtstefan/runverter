@@ -22,7 +22,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthMilesArr : function(){
-		return [1, 2];
+		return this.get("lengthMiles").toFixed(2).split(".", 2)
 	}.property('lengthMiles'),
 
 	lengthKm : function(){
@@ -30,7 +30,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthKmArr : function(){
-		return [1, 2];
+		return this.get("lengthKm").toFixed(2).split(".", 2)
 	}.property('lengthKm'),
 
 	
