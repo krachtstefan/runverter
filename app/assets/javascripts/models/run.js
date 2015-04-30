@@ -91,7 +91,12 @@ Runverter.Run = DS.Model.extend({
 		return this.get('lengthMiles')/this.get('timeHr');
 	}.property('lengthMiles', 'timeHr'),
 
-	speedMilesHrArr : function(){
-		return [1, 2];
+	speedMilesHrStackKm : function(){
+		return parseInt(this.get("speedMilesHr"));
 	}.property('speedMilesHr'),
+
+	speedMilesHrStackM : function(){
+		decimalPlace = this.get("speedMilesHr") - parseInt(this.get("speedMilesHr"));
+		return Math.round(decimalPlace*100);
+	}.property('speedMilesHr')
 })
