@@ -35,8 +35,8 @@ Runverter.Run = DS.Model.extend({
 		return this.get("lengthMi").toFixed(2).split(".", 2);
 	}.property('lengthMi'),
 
-	lengthKm : function(){
-		return this.get('lenghtM')*0.001;
+	lengthKm : function(key, value, previousValue) {
+		return this.get('lenghtM')/1000;
 	}.property('lenghtM'),
 
 	lengthKmArr : function(){
