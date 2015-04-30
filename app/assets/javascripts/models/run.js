@@ -23,6 +23,8 @@ Runverter.Run = DS.Model.extend({
 		return parseInt(this.get("timeHr"))
 	}.property('timeHr'),
 
+
+
 	lenghtM : null,
 
 	lengthMiles : function(){
@@ -40,6 +42,7 @@ Runverter.Run = DS.Model.extend({
 	lengthKmArr : function(){
 		return this.get("lengthKm").toFixed(2).split(".", 2)
 	}.property('lengthKm'),
+
 
 	
 	paceMinPerKm : function(){
