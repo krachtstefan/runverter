@@ -82,9 +82,8 @@ Runverter.Run = DS.Model.extend({
 	}.property('speedKmHr'),
 
 	speedKmHrStackM : function(){
-		decimalPlace = this.get("speedKmHr") - parseInt(this.get("speedKmHr"))
-		return Math.round(decimalPlace*100)
-		return 
+		decimalPlace = this.get("speedKmHr") - parseInt(this.get("speedKmHr"));
+		return Math.round(decimalPlace*100);
 	}.property('speedKmHr'),
 
 	speedMilesHr : function(){
