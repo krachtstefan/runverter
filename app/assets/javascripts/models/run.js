@@ -27,13 +27,13 @@ Runverter.Run = DS.Model.extend({
 
 	lenghtM : null,
 
-	lengthMiles : function(){
+	lengthMi : function(){
 		return this.get('lenghtM')*0.000621371;
 	}.property('lenghtM'),
 
-	lengthMilesArr : function(){
-		return this.get("lengthMiles").toFixed(2).split(".", 2);
-	}.property('lengthMiles'),
+	lengthMiArr : function(){
+		return this.get("lengthMi").toFixed(2).split(".", 2);
+	}.property('lengthMi'),
 
 	lengthKm : function(){
 		return this.get('lenghtM')*0.001;
@@ -58,18 +58,18 @@ Runverter.Run = DS.Model.extend({
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
 	
-	paceMinPerMile  : function(){
-		return this.get('timeMin')/this.get('lengthMiles');
-	}.property('timeSec', 'lengthMiles'),
+	paceMinPerMi  : function(){
+		return this.get('timeMin')/this.get('lengthMi');
+	}.property('timeSec', 'lengthMi'),
 
-	paceMinPerMileStackMin : function(){
-		return parseInt(this.get("paceMinPerMile"));
-	}.property('paceMinPerMile'),
+	paceMinPerMiStackMin : function(){
+		return parseInt(this.get("paceMinPerMi"));
+	}.property('paceMinPerMi'),
 
-	paceMinPerMileStackSec : function(){
-		decimalPlace = this.get("paceMinPerMile")-parseInt(this.get("paceMinPerMile"));
+	paceMinPerMiStackSec : function(){
+		decimalPlace = this.get("paceMinPerMi")-parseInt(this.get("paceMinPerMi"));
 		return Math.round(decimalPlace*60);
-	}.property('paceMinPerMile'),
+	}.property('paceMinPerMi'),
 
 
 	
@@ -86,16 +86,16 @@ Runverter.Run = DS.Model.extend({
 		return Math.round(decimalPlace*100);
 	}.property('speedKmHr'),
 
-	speedMilesHr : function(){
-		return this.get('lengthMiles')/this.get('timeHr');
-	}.property('lengthMiles', 'timeHr'),
+	speedMiHr : function(){
+		return this.get('lengthMi')/this.get('timeHr');
+	}.property('lengthMi', 'timeHr'),
 
-	speedMilesHrStackKm : function(){
-		return parseInt(this.get("speedMilesHr"));
-	}.property('speedMilesHr'),
+	speedMiHrStackKm : function(){
+		return parseInt(this.get("speedMiHr"));
+	}.property('speedMiHr'),
 
-	speedMilesHrStackM : function(){
-		decimalPlace = this.get("speedMilesHr") - parseInt(this.get("speedMilesHr"));
+	speedMiHrStackM : function(){
+		decimalPlace = this.get("speedMiHr") - parseInt(this.get("speedMiHr"));
 		return Math.round(decimalPlace*100);
-	}.property('speedMilesHr')
+	}.property('speedMiHr')
 });
