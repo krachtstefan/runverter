@@ -12,15 +12,15 @@ Runverter.Run = DS.Model.extend({
 
 	// timeStack is used to create a view like 12:34:56 and is available as timeStackSec, timeStackMin and timeStackHr
 	timeStackSec : function(){
-		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60)
+		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
 	}.property('timeSec', 'timeMin'),
 
 	timeStackMin : function(){
-		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60)
+		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
 	}.property('timeMin', 'timeStackHr'),
 
 	timeStackHr : function(){
-		return parseInt(this.get("timeHr"))
+		return parseInt(this.get("timeHr"));
 	}.property('timeHr'),
 
 
@@ -32,7 +32,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthMilesArr : function(){
-		return this.get("lengthMiles").toFixed(2).split(".", 2)
+		return this.get("lengthMiles").toFixed(2).split(".", 2);
 	}.property('lengthMiles'),
 
 	lengthKm : function(){
@@ -40,7 +40,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lenghtM'),
 
 	lengthKmArr : function(){
-		return this.get("lengthKm").toFixed(2).split(".", 2)
+		return this.get("lengthKm").toFixed(2).split(".", 2);
 	}.property('lengthKm'),
 
 
@@ -50,12 +50,12 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec', 'lengthKm'),
 
 	paceMinPerKmStackMin : function(){
-		return parseInt(this.get("paceMinPerKm"))
+		return parseInt(this.get("paceMinPerKm"));
 	}.property('paceMinPerKm'),
 
 	paceMinPerKmStackSec : function(){
-		decimalPlace = this.get("paceMinPerKm")-parseInt(this.get("paceMinPerKm"))
-		return Math.round(decimalPlace*60)
+		decimalPlace = this.get("paceMinPerKm")-parseInt(this.get("paceMinPerKm"));
+		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
 	
 	paceMinPerMile  : function(){
@@ -63,12 +63,12 @@ Runverter.Run = DS.Model.extend({
 	}.property('timeSec', 'lengthMiles'),
 
 	paceMinPerMileStackMin : function(){
-		return parseInt(this.get("paceMinPerMile"))
+		return parseInt(this.get("paceMinPerMile"));
 	}.property('paceMinPerMile'),
 
 	paceMinPerMileStackSec : function(){
-		decimalPlace = this.get("paceMinPerMile")-parseInt(this.get("paceMinPerMile"))
-		return Math.round(decimalPlace*60)
+		decimalPlace = this.get("paceMinPerMile")-parseInt(this.get("paceMinPerMile"));
+		return Math.round(decimalPlace*60);
 	}.property('paceMinPerMile'),
 
 
@@ -78,7 +78,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lengthKm', 'timeHr'),
 
 	speedKmHrStackKm : function(){
-		return parseInt(this.get("speedKmHr"))
+		return parseInt(this.get("speedKmHr"));
 	}.property('speedKmHr'),
 
 	speedKmHrStackM : function(){
@@ -98,4 +98,4 @@ Runverter.Run = DS.Model.extend({
 		decimalPlace = this.get("speedMilesHr") - parseInt(this.get("speedMilesHr"));
 		return Math.round(decimalPlace*100);
 	}.property('speedMilesHr')
-})
+});
