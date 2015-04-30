@@ -49,8 +49,13 @@ Runverter.Run = DS.Model.extend({
 		return this.get('timeMin')/this.get('lengthKm');
 	}.property('timeSec', 'lengthKm'),
 
-	paceMinPerKmArr : function(){
-		return [1, 2];
+	paceMinPerKmStackMin : function(){
+		return parseInt(this.get("paceMinPerKm"))
+	}.property('paceMinPerKm'),
+
+	paceMinPerKmStackSec : function(){
+		decimalPlace = this.get("paceMinPerKm")-parseInt(this.get("paceMinPerKm"))
+		return Math.round(decimalPlace*60)
 	}.property('paceMinPerKm'),
 	
 	paceMinPerMile  : function(){
