@@ -54,7 +54,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('paceMinPerKm'),
 
 	paceMinPerKmStackSec : function(){
-		decimalPlace = this.get("paceMinPerKm")-parseInt(this.get("paceMinPerKm"));
+		decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
 	
@@ -67,7 +67,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('paceMinPerMi'),
 
 	paceMinPerMiStackSec : function(){
-		decimalPlace = this.get("paceMinPerMi")-parseInt(this.get("paceMinPerMi"));
+		decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerMi'),
 
@@ -82,7 +82,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('speedKmHr'),
 
 	speedKmHrStackM : function(){
-		decimalPlace = this.get("speedKmHr") - parseInt(this.get("speedKmHr"));
+		decimalPlace = this.get("speedKmHr") - this.get("speedKmHrStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('speedKmHr'),
 
@@ -95,7 +95,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('speedMiHr'),
 
 	speedMiHrStackM : function(){
-		decimalPlace = this.get("speedMiHr") - parseInt(this.get("speedMiHr"));
+		decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('speedMiHr')
 });
