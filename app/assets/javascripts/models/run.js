@@ -36,7 +36,7 @@ Runverter.Run = DS.Model.extend({
 	}.property('lengthMi'),
 
 	lengthMiStackM : function(){
-		decimalPlace = this.get("lengthMi")-this.get("lengthMiStackKm");
+		decimalPlace = this.get("lengthMi")-this.get("lengthMiStackMi");
 		return Math.round(decimalPlace*100);
 	}.property('lengthMi'),
 
