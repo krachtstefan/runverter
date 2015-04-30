@@ -40,7 +40,7 @@ Runverter.Run = DS.Model.extend({
 		return Math.round(decimalPlace*100);
 	}.property('lengthMi'),
 
-	lengthKm : function(key, value, previousValue) {
+	lengthKm : function() {
 		return this.get('lenghtM')/1000;
 	}.property('lenghtM'),
 
