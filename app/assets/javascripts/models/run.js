@@ -39,8 +39,13 @@ Runverter.Run = DS.Model.extend({
 		return this.get('lenghtM')/1000;
 	}.property('lenghtM'),
 
-	lengthKmArr : function(){
-		return this.get("lengthKm").toFixed(2).split(".", 2);
+	lengthKmStackKm : function(){
+		return parseInt(this.get("lengthKm"));
+	}.property('lengthKm'),
+
+	lengthKmStackM : function(){
+		decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm");
+		return Math.round(decimalPlace*100);
 	}.property('lengthKm'),
 
 
