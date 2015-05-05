@@ -52,7 +52,24 @@ Runverter.Run = DS.Model.extend({
 		return parseInt(this.get("lengthKm"));
 	}.property('lengthKm'),
 
-	lengthKmStackM : function(){
+	lengthKmStackM : function(propertyName, value, previousValue) {
+   	if (arguments.length > 1) {
+   		var leadingZeros = 0;
+   		while (value[0]=="0") {
+    		value = value.substring(1);
+    		leadingZeros ++;
+			}
+			valueLenght = value.toString().length; 
+    	value = +value || 0; // convert to number or set to 0
+
+    	// reflects the decimal precision of the value
+    	// 1 = 100; 10 = 10
+    	decimalPrecision = 100/Math.pow(10, valueLenght-1); 
+    	
+    	// calulate the meters from decimal place 
+			decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
+			this.set("lenghtM", this.get('lengthKmStackKm')*1000+decimalMeters);
+		}
 		decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('lengthKm'),
