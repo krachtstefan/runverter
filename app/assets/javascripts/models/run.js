@@ -54,13 +54,11 @@ Runverter.Run = DS.Model.extend({
 
 	lengthKmStackM : function(propertyName, value, previousValue) {
    	if (arguments.length > 1) {
-   		var leadingZeros = 0;
-   		while (value[0]=="0") {
-    		value = value.substring(1);
-    		leadingZeros ++;
-			}
-			valueLenght = value.toString().length; 
+   		var leadingZeros = this._getLeadingZerosFromString(value);	
+			
+			valueLenght = value.toString().length; 			
     	value = +value || 0; // convert to number or set to 0
+			
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
