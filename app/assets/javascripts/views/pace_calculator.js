@@ -1,1 +1,1 @@
-Runverter.PaceCalculatorView = Ember.View.extend({})
+Runverter.PaceCalculatorView = Ember.View.extend({});

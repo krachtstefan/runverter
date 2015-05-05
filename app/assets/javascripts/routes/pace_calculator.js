@@ -5,4 +5,4 @@ Runverter.PaceCalculatorRoute = Ember.Route.extend({
     	lenghtM : 42195,
     });
   }
-})
+});

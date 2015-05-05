@@ -3,7 +3,7 @@ module("/", {
     Ember.run(Runverter, Runverter.advanceReadiness);
   },
   teardown: function() {
-    Runverter.registry = Runverter.buildRegistry()  // see https://github.com/emberjs/ember.js/issues/10310#issuecomment-95685137
+    Runverter.registry = Runverter.buildRegistry(); // see https://github.com/emberjs/ember.js/issues/10310#issuecomment-95685137
     Runverter.reset();
   }
 });

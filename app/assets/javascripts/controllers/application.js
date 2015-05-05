@@ -3,4 +3,4 @@ Runverter.ApplicationController = Ember.Controller.extend({
     this._super();
     Em.I18n.translations = Runverter.I18n['en']
   }
-})
+});
