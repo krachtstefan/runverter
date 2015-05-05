@@ -128,5 +128,15 @@ Runverter.Run = DS.Model.extend({
 	speedMiHrStackM : function(){
 		decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
 		return Math.round(decimalPlace*100);
-	}.property('speedMiHr')
+	}.property('speedMiHr'),
+
+
+	_getLeadingZerosFromString : function(string){
+		var leadingZeros = 0;
+   	while (string[0]=="0") {
+			string = string.substring(1);
+    	leadingZeros ++;
+		}
+		return leadingZeros;
+	}
 });
