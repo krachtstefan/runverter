@@ -1,10 +1,17 @@
 *.log
 .DS_Store
-*.pid
-.bundle
-.sass-cache
-
-/log/*.log
+# compiled output
+/dist
 /tmp
-/.bundle
-/public/
+
+# dependencies
+/node_modules
+/bower_components
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
