@@ -1,3 +1,17 @@
 body{
-	background:red;
+	font-size:3em;
+	line-height:0.8em;
+	color:#3d3d3d;
+
+	h1{
+		font-size:2em;
+		line-height:2em;
+	}
+
+	.uk-form input[type="text"], .uk-form input[type="number"]{
+		text-align: center;
+		color:#0088cc;
+		height:2em;
+		border-top:none; border-left:none; border-right:none;
+	}
 }
