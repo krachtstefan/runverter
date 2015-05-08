@@ -1,1 +1,0 @@
-Runverter.PaceCalculatorController = Ember.Controller.extend({});
