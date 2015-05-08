@@ -37,7 +37,7 @@ export default DS.Model.extend({
 	}.property('lengthMi'),
 
 	lengthMiStackM : function(){
-		decimalPlace = this.get("lengthMi")-this.get("lengthMiStackMi");
+		var decimalPlace = this.get("lengthMi")-this.get("lengthMiStackMi");
 		return Math.round(decimalPlace*100);
 	}.property('lengthMi'),
 
@@ -58,17 +58,17 @@ export default DS.Model.extend({
    		var leadingZeros = this._getLeadingZerosFromString(value);	
 			
     	value = +value || 0; // convert to number or set to 0
-    	valueLenght = value.toString().length; 			
+    	var valueLenght = value.toString().length; 			
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	decimalPrecision = 100/Math.pow(10, valueLenght-1); 
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
     	
     	// calulate the meters from decimal place 
-			decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
+			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lenghtM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
-		decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm"); // TODO more precision, try to type 001 
+		var decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm"); // TODO more precision, try to type 001 
 		return this.get("lengthKm").toString().split(".")[1];
 	}.property('lengthKm'),
 
@@ -83,7 +83,7 @@ export default DS.Model.extend({
 	}.property('paceMinPerKm'),
 
 	paceMinPerKmStackSec : function(){
-		decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
+		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
 	
@@ -96,7 +96,7 @@ export default DS.Model.extend({
 	}.property('paceMinPerMi'),
 
 	paceMinPerMiStackSec : function(){
-		decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
+		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerMi'),
 
@@ -111,7 +111,7 @@ export default DS.Model.extend({
 	}.property('speedKmHr'),
 
 	speedKmHrStackM : function(){
-		decimalPlace = this.get("speedKmHr") - this.get("speedKmHrStackKm");
+		var decimalPlace = this.get("speedKmHr") - this.get("speedKmHrStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('speedKmHr'),
 
@@ -124,7 +124,7 @@ export default DS.Model.extend({
 	}.property('speedMiHr'),
 
 	speedMiHrStackM : function(){
-		decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
+		var decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('speedMiHr'),
 
