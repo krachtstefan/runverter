@@ -53,7 +53,7 @@ export default DS.Model.extend({
 		return parseInt(this.get("lengthKm"));
 	}.property('lengthKm'),
 
-	lengthKmStackM : function(propertyName, value, previousValue) {
+	lengthKmStackM : function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);	
 			
