@@ -68,7 +68,7 @@ export default DS.Model.extend({
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lenghtM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
-		var decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm"); // TODO more precision, try to type 001 
+		//var decimalPlace = this.get("lengthKm")-this.get("lengthKmStackKm"); // TODO more precision, try to type 001 
 		return this.get("lengthKm").toString().split(".")[1];
 	}.property('lengthKm'),
 
