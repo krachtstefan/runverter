@@ -131,7 +131,7 @@ export default DS.Model.extend({
 
 	_getLeadingZerosFromString : function(string){
 		var leadingZeros = 0;
-   	while (string[0]=="0") {
+   	while (string[0]==="0") {
 			string = string.substring(1);
     	leadingZeros ++;
 		}
