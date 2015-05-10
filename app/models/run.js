@@ -42,7 +42,7 @@ export default DS.Model.extend({
 	}.property('lengthMi'),
 
 	lengthKm : function() {
-		return this.get('lenghtM')/1000;
+		return (this.get('lenghtM')/1000).toFixed(4);
 	}.property('lenghtM'),
 
 	lengthKmStackKm : function(propertyName, value, previousValue) {
