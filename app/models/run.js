@@ -8,7 +8,7 @@ export default DS.Model.extend({
 	}.property('timeSec'),
 
 	timeHr : function(){
-		return this.get('timeSec')/60/60;
+		return (this.get('timeSec')/60/60).toFixed(2);
 	}.property('timeSec'),
 
 	// timeStack is used to create a view like 12:34:56 and is available as timeStackSec, timeStackMin and timeStackHr
