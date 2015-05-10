@@ -132,6 +132,14 @@ test('lengthKmStackM can be zero', function(assert) {
  	assert.equal(run.get("lengthKmStackM"), 0);
 });
 
+// helper methods
+test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
+ 	assert.equal(this.subject()._getLeadingZerosFromString("0001"), 3);
+ 	assert.equal(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
+});
+
+
+
 // TODO: 
 // check the type of every returned var
 // add tests for setter
