@@ -138,7 +138,13 @@ test('_getLeadingZerosFromString returns the amount of leading zeros a string ha
  	assert.equal(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
 });
 
+test('_removeEndingZeros removes all zeros at the end of a string', function(assert) {
+ 	assert.equal(this.subject()._removeEndingZeros("1000"), "1");
+});
 
+test('_removeEndingZeros removes all zeros at the end of a number', function(assert) {
+ 	assert.equal(this.subject()._removeEndingZeros(1000), "1");
+});
 
 // TODO: 
 // check the type of every returned var
