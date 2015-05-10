@@ -40,3 +40,18 @@ test('timeHr can round up', function(assert) {
 	var run = this.subject({timeSec : 14860});
   assert.equal(run.get("timeHr"), 4.13);
 });
+
+test('timeStackSec property is calculated from timeSec', function(assert) {
+	var run = this.subject({timeSec : 62});
+ 	assert.equal(run.get("timeStackSec"), 2);
+});
+
+test('timeStackMin property is calculated from timeSec', function(assert) {
+	var run = this.subject({timeSec : 145});
+ 	assert.equal(run.get("timeStackMin"), 2);
+});
+
+test('timeStackHr property is calculated from timeSec', function(assert) {
+	var run = this.subject({timeSec : 20000});
+ 	assert.equal(run.get("timeStackHr"), 5);
+});
