@@ -67,9 +67,14 @@ test('lengthMi property is calculated from lenghtM', function(assert) {
  	assert.equal(run.get("lengthMi"), 1);
 });
 
-test('lengthMi has 4 digit precision', function(assert) {
+test('lengthMi has 4 digit precision and can round up', function(assert) {
 	var run = this.subject({lenghtM : 12000});
  	assert.equal(run.get("lengthMi"), 7.4565);
+});
+
+test('lengthMi can round down', function(assert) {
+	var run = this.subject({lenghtM : 11550});
+ 	assert.equal(run.get("lengthMi"), 7.1768);
 });
 
 // lengthMiStackMi
