@@ -136,5 +136,8 @@ export default DS.Model.extend({
     	leadingZeros ++;
 		}
 		return leadingZeros;
+	},
+
+	_removeEndingZeros : function(string){
 	}
 });
