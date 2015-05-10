@@ -55,3 +55,13 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 20000});
  	assert.equal(run.get("timeStackHr"), 5);
 });
+
+test('lengthMi property is calculated from lenghtM', function(assert) {
+	var run = this.subject({lenghtM : 1609.344});
+ 	assert.equal(run.get("lengthMi"), 1);
+});
+
+test('lengthMi has 4 digit precision', function(assert) {
+	var run = this.subject({lenghtM : 12000});
+ 	assert.equal(run.get("lengthMi"), 7.4565);
+});
