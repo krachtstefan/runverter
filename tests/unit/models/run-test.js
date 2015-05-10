@@ -131,3 +131,8 @@ test('lengthKmStackM can be zero', function(assert) {
 	var run = this.subject({lenghtM : 1000});
  	assert.equal(run.get("lengthKmStackM"), 0);
 });
+
+// TODO: 
+// check the type of every returned var
+// add tests for setter
+// add tets fot _helper methods as well
