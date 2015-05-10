@@ -4,7 +4,7 @@ export default DS.Model.extend({
 	timeSec : null,
 	
 	timeMin : function(){
-		return this.get('timeSec')/60;
+		return (this.get('timeSec')/60).toFixed(2);
 	}.property('timeSec'),
 
 	timeHr : function(){
