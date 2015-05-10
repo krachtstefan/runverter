@@ -93,3 +93,19 @@ test('lengthMiStackM can be zero', function(assert) {
 	var run = this.subject({lenghtM : 1609.344});
  	assert.equal(run.get("lengthMiStackM"), 0);
 });
+
+// lengthKm
+test('lengthKm property is calculated from lenghtM', function(assert) {
+	var run = this.subject({lenghtM : 2000});
+ 	assert.equal(run.get("lengthKm"), 2);
+});
+
+test('lengthKm has 4 digit precision and can round up', function(assert) {
+	var run = this.subject({lenghtM : 1234.56});
+ 	assert.equal(run.get("lengthKm"), 1.2346);
+});
+
+test('lengthKm can round down', function(assert) {
+	var run = this.subject({lenghtM : 1234.52});
+ 	assert.equal(run.get("lengthKm"), 1.2345);
+});
