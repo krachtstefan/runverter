@@ -138,6 +138,11 @@ export default DS.Model.extend({
 		return leadingZeros;
 	},
 
-	_removeEndingZeros : function(string){
+	_removeEndingZeros : function(input){
+		input = input.toString();
+		while (input[input.length-1]==="0") {
+			input = input.slice(0,-1);
+		}
+		return input;
 	}
 });
