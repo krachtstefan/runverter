@@ -29,7 +29,7 @@ export default DS.Model.extend({
 	lenghtM : null,
 
 	lengthMi : function(){
-		return this.get('lenghtM')*0.000621371;
+		return (this.get('lenghtM')*0.000621371).toFixed(4);
 	}.property('lenghtM'),
 
 	lengthMiStackMi : function(){
