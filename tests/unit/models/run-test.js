@@ -14,33 +14,33 @@ test('run is a valid ember data Model', function(assert) {
 // timeMin
 test('timeMin property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 3600});
-  assert.strictEqual(run.get("timeMin"), 60);
+  assert.strictEqual(run.get("timeMin"), "60.0000");
 });
 
 test('timeMin can round down', function(assert) {
 	var run = this.subject({timeSec : 2612});
-  assert.strictEqual(run.get("timeMin"), 43.53);
+  assert.strictEqual(run.get("timeMin"), "43.5333");
 });
 
 test('timeMin can round up', function(assert) {
 	var run = this.subject({timeSec : 2614});
-  assert.strictEqual(run.get("timeMin"), 43.57);
+  assert.strictEqual(run.get("timeMin"), "43.5667");
 });
 
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 14400});
- 	assert.strictEqual(run.get("timeHr"), 4);
+ 	assert.strictEqual(run.get("timeHr"), "4.0000");
 });
 
 test('timeHr can round down', function(assert) {
 	var run = this.subject({timeSec : 14560});
-  assert.strictEqual(run.get("timeHr"), 4.04);
+  assert.strictEqual(run.get("timeHr"), "4.0444");
 });
 
 test('timeHr can round up', function(assert) {
 	var run = this.subject({timeSec : 14860});
-  assert.strictEqual(run.get("timeHr"), 4.13);
+  assert.strictEqual(run.get("timeHr"), "4.1278");
 });
 
 // timeStackSec
@@ -64,17 +64,17 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
 // lengthMi
 test('lengthMi property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1609.344});
- 	assert.strictEqual(run.get("lengthMi"), 1);
+ 	assert.strictEqual(run.get("lengthMi"), "1.0000");
 });
 
 test('lengthMi has 4 digit precision and can round up', function(assert) {
 	var run = this.subject({lenghtM : 12000});
- 	assert.strictEqual(run.get("lengthMi"), 7.4565);
+ 	assert.strictEqual(run.get("lengthMi"), "7.4565");
 });
 
 test('lengthMi can round down', function(assert) {
 	var run = this.subject({lenghtM : 11550});
- 	assert.strictEqual(run.get("lengthMi"), 7.1768);
+ 	assert.strictEqual(run.get("lengthMi"), "7.1768");
 });
 
 // lengthMiStackMi
@@ -102,17 +102,17 @@ test('lengthMiStackM can be zero', function(assert) {
 // lengthKm
 test('lengthKm property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 2000});
- 	assert.strictEqual(run.get("lengthKm"), 2);
+ 	assert.strictEqual(run.get("lengthKm"), "2.0000");
 });
 
 test('lengthKm has 4 digit precision and can round up', function(assert) {
 	var run = this.subject({lenghtM : 1234.56});
- 	assert.strictEqual(run.get("lengthKm"), 1.2346);
+ 	assert.strictEqual(run.get("lengthKm"), "1.2346");
 });
 
 test('lengthKm can round down', function(assert) {
 	var run = this.subject({lenghtM : 1234.52});
- 	assert.strictEqual(run.get("lengthKm"), 1.2345);
+ 	assert.strictEqual(run.get("lengthKm"), "1.2345");
 });
 
 // lengthKmStackKm
