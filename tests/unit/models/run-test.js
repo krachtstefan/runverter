@@ -146,6 +146,12 @@ test('_removeEndingZeros removes all zeros at the end of a number', function(ass
  	assert.strictEqual(this.subject()._removeEndingZeros(1000), "1");
 });
 
+test('_removeEndingZeros returns an empty string if the parameter only contains zeros ', function(assert) {
+	assert.strictEqual(this.subject()._removeEndingZeros(0), "");
+ 	assert.strictEqual(this.subject()._removeEndingZeros("0"), "");
+ 	assert.strictEqual(this.subject()._removeEndingZeros("000"), "");
+});
+
 // TODO: 
 // check the type of every returned var
 // add tests for setter
