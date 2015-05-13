@@ -1,6 +1,11 @@
 import DS from 'ember-data';
 export default DS.Model.extend({
 
+	/**
+	 * timeSec represents the time of a run, should be set on create
+	 * 
+	 * @type {number}
+	 */
 	timeSec : null,
 	
 	timeMin : function(){
@@ -25,7 +30,11 @@ export default DS.Model.extend({
 	}.property('timeHr'),
 
 
-
+	/**
+	 * lenghtM represents the length of a run, should be set on create
+	 * 
+	 * @type {number}
+	 */
 	lenghtM : null,
 
 	lengthMi : function(){
