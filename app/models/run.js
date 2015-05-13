@@ -8,23 +8,42 @@ export default DS.Model.extend({
 	 */
 	timeSec : null,
 	
+	/**
+	 * time of the run in minutes
+	 * @return {string} [minutes with 4 digits precision]
+	 */
 	timeMin : function(){
 		return (this.get('timeSec')/60).toFixed(4);
 	}.property('timeSec'),
 
+	/**
+	 * time of the run in hours
+	 * @return {string} [hours with 4 digits precision]
+	 */
 	timeHr : function(){
 		return (this.get('timeSec')/60/60).toFixed(4);
 	}.property('timeSec'),
 
-	// timeStack is used to create a view like 12:34:56 and is available as timeStackSec, timeStackMin and timeStackHr
+	/**
+	 * timeStackSec is used to create a view like 12:34:56 and represends the seconds
+	 * @return {number} [second stack of the run time]
+	 */
 	timeStackSec : function(){
 		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
 	}.property('timeSec', 'timeMin'),
 
+	/**
+	 * timeStackMin is used to create a view like 12:34:56 and represends the minutes
+	 * @return {number} [minutes stack of the run time]
+	 */
 	timeStackMin : function(){
 		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
 	}.property('timeMin', 'timeStackHr'),
 
+	/**
+	 * timeStackHr is used to create a view like 12:34:56 and represends the hours
+	 * @return {number} [hours stack of the run time]
+	 */
 	timeStackHr : function(){
 		return parseInt(this.get("timeHr"));
 	}.property('timeHr'),
