@@ -156,7 +156,11 @@ export default DS.Model.extend({
 		return Math.round(decimalPlace*100);
 	}.property('speedMiHr'),
 
-
+	/**
+	 * returns the number of leading zeros from a string
+	 * @param  {string} string string that should be analyzed for leading zeros
+	 * @return {number}        number of leading zeros
+	 */
 	_getLeadingZerosFromString : function(string){
 		var leadingZeros = 0;
    	while (string[0]==="0") {
