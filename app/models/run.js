@@ -18,31 +18,31 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in hours
-	 * @return {string} [hours with 4 digits precision]
+	 * @return {string} hours with 4 digits precision
 	 */
 	timeHr : function(){
 		return (this.get('timeSec')/60/60).toFixed(4);
 	}.property('timeSec'),
 
 	/**
-	 * timeStackSec is used to create a view like 12:34:56 and represends the seconds
-	 * @return {number} [second stack of the run time]
+	 * timeStackSec is used to create a view like 12:34:56
+	 * @return {number} second stack of the run time
 	 */
 	timeStackSec : function(){
 		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
 	}.property('timeSec', 'timeMin'),
 
 	/**
-	 * timeStackMin is used to create a view like 12:34:56 and represends the minutes
-	 * @return {number} [minutes stack of the run time]
+	 * timeStackMin is used to create a view like 12:34:56
+	 * @return {number} minutes stack of the run time
 	 */
 	timeStackMin : function(){
 		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
 	}.property('timeMin', 'timeStackHr'),
 
 	/**
-	 * timeStackHr is used to create a view like 12:34:56 and represends the hours
-	 * @return {number} [hours stack of the run time]
+	 * timeStackHr is used to create a view like 12:34:56
+	 * @return {number} hours stack of the run time
 	 */
 	timeStackHr : function(){
 		return parseInt(this.get("timeHr"));
@@ -50,29 +50,54 @@ export default DS.Model.extend({
 
 
 	/**
-	 * lenghtM represents the length of a run, should be set on create
+	 * lenghtM represents the length of a run in meter, should be set on create
 	 * 
 	 * @type {number}
 	 */
 	lenghtM : null,
 
+	/**
+	 * lenght of the run in miles
+	 * 
+	 * @return {string} miles with 4 digits precision
+	 */
 	lengthMi : function(){
 		return (this.get('lenghtM')*0.000621371).toFixed(4);
 	}.property('lenghtM'),
 
+	/**
+	 * lengthMiStackMi is used to create a view like 12,34
+	 * 
+	 * @return {number} miles stack of the run
+	 */
 	lengthMiStackMi : function(){
 		return parseInt(this.get("lengthMi"));
 	}.property('lengthMi'),
 
+	/**
+	 * lengthMiStackM is used to create a view like 12,34
+	 * 
+	 * @return {number} decimal place of the run in miles
+	 */
 	lengthMiStackM : function(){
 		var decimalPlace = this.get("lengthMi")-this.get("lengthMiStackMi");
 		return Math.round(decimalPlace*100);
 	}.property('lengthMi'),
 
+	/**
+	 * lenght of the run in km
+	 * 
+	 * @return {string} km with 4 digits precision
+	 */
 	lengthKm : function() {
 		return (this.get('lenghtM')/1000).toFixed(4);
 	}.property('lenghtM'),
 
+	/**
+	 * lengthKmStackKm is used to create a view like 12,34
+	 * 
+	 * @return {number} km stack of the run
+	 */
 	lengthKmStackKm : function(propertyName, value, previousValue) {
     if (arguments.length > 1) {
     	value = +value || 0; // convert to number or set to 0
@@ -81,7 +106,15 @@ export default DS.Model.extend({
 		return parseInt(this.get("lengthKm"));
 	}.property('lengthKm'),
 
-	lengthKmStackM : function(propertyName, value) {
+	/**
+	 * lengthKmStackM is used to create a view like 12,34
+	 * if arguments are passed, they are used a setter for this computed property 
+	 * 
+	 * @param  {string} propertyName if defined, it will be lengthKmStackM
+	 * @param  {string} value        new value of lengthKmStackM
+	 * @return {number}              decimal place of the run in km
+	 */
+	lengthKmStackM :  function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);	
 			
