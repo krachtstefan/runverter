@@ -83,20 +83,20 @@ test('lengthMiStackMi property is calculated from lenghtM', function(assert) {
  	assert.strictEqual(run.get("lengthMiStackMi"), 1);
 });
 
-// lengthMiStackM
-test('lengthMiStackM property is calculated from lenghtM and can round up', function(assert) {
+// lengthMiStackDecimal
+test('lengthMiStackDecimal property is calculated from lenghtM and can round up', function(assert) {
 	var run = this.subject({lenghtM : 1712});
- 	assert.strictEqual(run.get("lengthMiStackM"), 06);
+ 	assert.strictEqual(run.get("lengthMiStackDecimal"), 06);
 });
 
-test('lengthMiStackM can round down', function(assert) {
+test('lengthMiStackDecimal can round down', function(assert) {
 	var run = this.subject({lenghtM : 1800});
- 	assert.strictEqual(run.get("lengthMiStackM"), 12);
+ 	assert.strictEqual(run.get("lengthMiStackDecimal"), 12);
 });
 
-test('lengthMiStackM can be zero', function(assert) {
+test('lengthMiStackDecimal can be zero', function(assert) {
 	var run = this.subject({lenghtM : 1609.344});
- 	assert.strictEqual(run.get("lengthMiStackM"), 0);
+ 	assert.strictEqual(run.get("lengthMiStackDecimal"), 0);
 });
 
 // lengthKm
