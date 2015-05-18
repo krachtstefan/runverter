@@ -124,12 +124,12 @@ test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
 // lengthKmStackDecimal
 test('lengthKmStackDecimal property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1712});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), 712);
+ 	assert.strictEqual(run.get("lengthKmStackDecimal"), "712");
 });
 
 test('lengthKmStackDecimal can be zero', function(assert) {
 	var run = this.subject({lenghtM : 1000});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), 0);
+ 	assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
 });
 
 test('lengthKmStackDecimal setter changes lengthKmStackDecimal', function(assert) {
