@@ -139,8 +139,16 @@ test('lengthKmStackDecimal can be zero', function(assert) {
 
 test('lengthKmStackDecimal setter changes lengthKmStackDecimal', function(assert) {
 	var run = this.subject({lenghtM : 1000});
+	run.set("lengthKmStackDecimal", "9");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "9");
+});
+
+test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
+	var run = this.subject({lenghtM : 1000});
 	run.set("lengthKmStackDecimal", "09");
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
+	run.set("lengthKmStackDecimal", "009");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "009");
 });
 
 test('lengthKmStackDecimal setter changes lenghtM', function(assert) {
