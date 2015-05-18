@@ -107,12 +107,12 @@ export default DS.Model.extend({
 	}.property('lengthKm'),
 
 	/**
-	 * lengthKmStackDecimal is used to create a view like 12,34
+	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
 	 * if arguments are passed, they are used a setter for this computed property 
 	 * 
 	 * @param  {string} propertyName if defined, it will be lengthKmStackDecimal
 	 * @param  {string} value        new value of lengthKmStackDecimal
-	 * @return {number}              decimal place of the run in km
+	 * @return {string}              up to 4 digits of the decimal place of the run in km
 	 */
 	lengthKmStackDecimal :  function(propertyName, value) {
    	if (arguments.length > 1) {
