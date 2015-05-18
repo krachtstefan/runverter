@@ -132,6 +132,19 @@ test('lengthKmStackDecimal can be zero', function(assert) {
  	assert.strictEqual(run.get("lengthKmStackDecimal"), 0);
 });
 
+test('lengthKmStackDecimal setter changes lengthKmStackDecimal', function(assert) {
+	var run = this.subject({lenghtM : 1000});
+	run.set("lengthKmStackDecimal", "09");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
+});
+
+test('lengthKmStackDecimal setter changes lenghtM', function(assert) {
+	var run = this.subject({lenghtM : 1000});
+	run.set("lengthKmStackDecimal", "09");
+	assert.strictEqual(run.get("lenghtM"), 1090);
+});
+
+
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
