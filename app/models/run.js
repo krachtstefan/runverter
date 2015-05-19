@@ -112,7 +112,7 @@ export default DS.Model.extend({
 	 * 
 	 * @param  {string} propertyName if defined, it will be lengthKmStackDecimal
 	 * @param  {string} value        new value of lengthKmStackDecimal
-	 * @return {string}              up to 4 digits of the decimal place of the run in km
+	 * @return {string}              up to 2 digits of the decimal place of the run in km
 	 */
 	lengthKmStackDecimal :  function(propertyName, value) {
    	if (arguments.length > 1) {
@@ -129,7 +129,7 @@ export default DS.Model.extend({
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lenghtM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
-		var kmDecimalPlace = this._removeEndingZeros(this.get("lengthKm").toString().split(".")[1]);
+		var kmDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthKm")).toFixed(2).split(".")[1]);
 		return kmDecimalPlace ? kmDecimalPlace : "0";
 	}.property('lengthKm'),
 

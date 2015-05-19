@@ -124,7 +124,7 @@ test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
 // lengthKmStackDecimal
 test('lengthKmStackDecimal property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1712});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "712");
+ 	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
 
 test('lengthKmStackDecimal supports leading zero', function(assert) {
@@ -147,8 +147,10 @@ test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
 	var run = this.subject({lenghtM : 1000});
 	run.set("lengthKmStackDecimal", "09");
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
+	run.set("lengthKmStackDecimal", "002");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "00");
 	run.set("lengthKmStackDecimal", "009");
-	assert.strictEqual(run.get("lengthKmStackDecimal"), "009");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "01");
 });
 
 test('lengthKmStackDecimal setter changes lenghtM', function(assert) {
