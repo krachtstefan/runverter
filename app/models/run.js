@@ -98,8 +98,9 @@ export default DS.Model.extend({
 	 * 
 	 * @return {number} km stack of the run
 	 */
-	lengthKmStackKm : function(propertyName, value, previousValue) {
+	lengthKmStackKm : function(propertyName, value) {
     if (arguments.length > 1) {
+    	var previousValue = this.get("lengthKmStackKm");
     	value = +value || 0; // convert to number or set to 0
 			this.set("lenghtM", this.get('lenghtM')+(value-previousValue)*1000);
 		}
