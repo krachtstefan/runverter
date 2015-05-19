@@ -153,7 +153,7 @@ test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
 	run.set("lengthKmStackDecimal", "09");
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
 	run.set("lengthKmStackDecimal", "002");
-	assert.strictEqual(run.get("lengthKmStackDecimal"), "00");
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
 	run.set("lengthKmStackDecimal", "009");
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "01");
 });
