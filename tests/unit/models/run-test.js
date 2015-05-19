@@ -122,7 +122,7 @@ test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
 });
 
 // lengthKmStackDecimal
-test('lengthKmStackDecimal property is calculated from lenghtM', function(assert) {
+test('lengthKmStackDecimal property is calculated from lenghtM and can round down', function(assert) {
 	var run = this.subject({lenghtM : 1712});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
