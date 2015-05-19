@@ -94,6 +94,11 @@ test('lengthMiStackDecimal can round up', function(assert) {
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
 });
 
+test('lengthMiStackDecimal can have 1 digit', function(assert) {
+	var run = this.subject({lenghtM : 804.672});
+ 	assert.strictEqual(run.get("lengthMiStackDecimal"), "5");
+});
+
 test('lengthMiStackDecimal supports leading zero', function(assert) {
 	var run = this.subject({lenghtM : 100});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "06");
@@ -135,6 +140,11 @@ test('lengthKmStackDecimal property is calculated from lenghtM and can round dow
 test('lengthKmStackDecimal property can round up', function(assert) {
 	var run = this.subject({lenghtM : 1719});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
+});
+
+test('lengthKmStackDecimal can have 1 digit', function(assert) {
+	var run = this.subject({lenghtM : 500});
+ 	assert.strictEqual(run.get("lengthKmStackDecimal"), "5");
 });
 
 test('lengthKmStackDecimal supports leading zero', function(assert) {
