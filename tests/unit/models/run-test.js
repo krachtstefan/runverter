@@ -127,6 +127,11 @@ test('lengthKmStackDecimal property is calculated from lenghtM', function(assert
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
 
+test('lengthKmStackDecimal property can round up', function(assert) {
+	var run = this.subject({lenghtM : 1719});
+ 	assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
+});
+
 test('lengthKmStackDecimal supports leading zero', function(assert) {
 	var run = this.subject({lenghtM : 90});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
