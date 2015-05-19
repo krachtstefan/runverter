@@ -131,6 +131,18 @@ test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
  	assert.strictEqual(run.get("lengthKmStackKm"), 1);
 });
 
+test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
+	var run = this.subject({lenghtM : 1000});
+	run.set("lengthKmStackKm", "2");
+	assert.strictEqual(run.get("lengthKmStackKm"), 2);
+});
+
+test('lengthKmStackKm setter changes lenghtM', function(assert) {
+	var run = this.subject({lenghtM : 1234});
+	run.set("lengthKmStackKm", "2");
+	assert.strictEqual(run.get("lenghtM"), 2234);
+});
+
 // lengthKmStackDecimal
 test('lengthKmStackDecimal property is calculated from lenghtM and can round down', function(assert) {
 	var run = this.subject({lenghtM : 1712});
