@@ -75,13 +75,13 @@ export default DS.Model.extend({
 	}.property('lengthMi'),
 
 	/**
-	 * lengthMiStackDecimal is used to create a view like 12,34
+	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
 	 * 
-	 * @return {number} decimal place of the run in miles
+	 * @return {string} up to 4 digits of the decimal place of the run in miles
 	 */
 	lengthMiStackDecimal : function(){
-		var decimalPlace = this.get("lengthMi")-this.get("lengthMiStackMi");
-		return Math.round(decimalPlace*100);
+		var miDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthMi")).toFixed(2).split(".")[1]);
+		return miDecimalPlace ? miDecimalPlace : "0";
 	}.property('lengthMi'),
 
 	/**
