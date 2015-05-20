@@ -58,10 +58,17 @@ export default DS.Model.extend({
 
 	/**
 	 * lenght of the run in miles
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @return {string} miles with 4 digits precision
+	 * @param  {string}								propertyName		if defined, it will be lengthMi
+	 * @param  {Object|string|number} value						new value of lengthMi
+	 * @return {string} 							miles with 4 digits precision
 	 */
-	lengthMi : function(){
+	lengthMi : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +value || 0; // convert to number or set to 0
+			this.set("lenghtM", value*1609.344);
+		}
 		return (this.get('lenghtM')*0.000621371).toFixed(4);
 	}.property('lenghtM'),
 
