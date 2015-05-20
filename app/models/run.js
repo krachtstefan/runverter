@@ -74,10 +74,18 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @return {number} miles	stack of the run
+	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
+	 * @param  {Object|string|number} value						new value of lengthMiStackMi
+	 * @return {number} 															miles	stack of the run
 	 */
-	lengthMiStackMi : function(){
+	lengthMiStackMi : function(propertyName, value) {
+    if (arguments.length > 1) {
+    	var previousValue = this.get("lengthMiStackMi");
+    	value = +value || 0; // convert to number or set to 0
+			this.set("lenghtM", this.get('lenghtM')+(value-previousValue)*1609.344);
+		}
 		return parseInt(this.get("lengthMi"));
 	}.property('lengthMi'),
 
