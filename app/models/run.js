@@ -4,13 +4,13 @@ export default DS.Model.extend({
 	/**
 	 * timeSec represents the time of a run, should be set on create
 	 * 
-	 * @type {number}
+	 * @type {number}	tiem of the run in seconds
 	 */
 	timeSec : null,
 	
 	/**
 	 * time of the run in minutes
-	 * @return {string} [minutes with 4 digits precision]
+	 * @return {string} minutes with 4 digits precision
 	 */
 	timeMin : function(){
 		return (this.get('timeSec')/60).toFixed(4);
@@ -52,7 +52,7 @@ export default DS.Model.extend({
 	/**
 	 * lenghtM represents the length of a run in meter, should be set on create
 	 * 
-	 * @type {number}
+	 * @type {number} length of the run in meter
 	 */
 	lenghtM : null,
 
@@ -68,7 +68,7 @@ export default DS.Model.extend({
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
 	 * 
-	 * @return {number} miles stack of the run
+	 * @return {number} miles	stack of the run
 	 */
 	lengthMiStackMi : function(){
 		return parseInt(this.get("lengthMi"));
@@ -87,7 +87,7 @@ export default DS.Model.extend({
 	/**
 	 * lenght of the run in km
 	 * 
-	 * @return {string} km with 4 digits precision
+	 * @return {string}	km with 4 digits precision
 	 */
 	lengthKm : function() {
 		return (this.get('lenghtM')/1000).toFixed(4);
@@ -95,8 +95,11 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @return {number} km stack of the run
+	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
+	 * @param  {Object|string|number} value						new value of lengthKmStackKm
+	 * @return {number} 															km stack of the run
 	 */
 	lengthKmStackKm : function(propertyName, value) {
     if (arguments.length > 1) {
@@ -111,9 +114,9 @@ export default DS.Model.extend({
 	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
 	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @param  {string} propertyName if defined, it will be lengthKmStackDecimal
-	 * @param  {string} value        new value of lengthKmStackDecimal
-	 * @return {string}              up to 2 digits of the decimal place of the run in km
+	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
+	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
+	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
 	lengthKmStackDecimal :  function(propertyName, value) {
    	if (arguments.length > 1) {
