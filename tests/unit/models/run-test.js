@@ -125,6 +125,26 @@ test('lengthKm can round down', function(assert) {
  	assert.strictEqual(run.get("lengthKm"), "1.2345");
 });
 
+test('lengthKm setter changes lengthKm', function(assert) {
+	var run = this.subject();
+	run.set("lengthKm", "100");
+	assert.strictEqual(run.get("lengthKm"), "100.0000");
+});
+
+test('lengthKm setter also works with integer', function(assert) {
+	var run = this.subject({lenghtM : 1234});
+	run.set("lengthKm", 100);
+	assert.strictEqual(run.get("lengthKm"), "100.0000");
+});
+
+test('lengthKm setter changes lenghtM', function(assert) {
+	var run = this.subject();
+	run.set("lengthKm", "12");
+	assert.strictEqual(run.get("lenghtM"), 12000);
+	run.set("lengthKm", "12.123");
+	assert.strictEqual(run.get("lenghtM"), 12123);
+});
+
 // lengthKmStackKm
 test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1800});
