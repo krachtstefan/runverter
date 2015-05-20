@@ -86,8 +86,11 @@ export default DS.Model.extend({
 
 	/**
 	 * lenght of the run in km
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @return {string}	km with 4 digits precision
+	 * @param  {string}								propertyName		if defined, it will be lengthKm
+	 * @param  {Object|string|number} value						new value of lengthKm
+	 * @return {string}								km with 4 digits precision
 	 */
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
