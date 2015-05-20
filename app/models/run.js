@@ -89,7 +89,11 @@ export default DS.Model.extend({
 	 * 
 	 * @return {string}	km with 4 digits precision
 	 */
-	lengthKm : function() {
+	lengthKm : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +value || 0; // convert to number or set to 0
+			this.set("lenghtM", value*1000);
+		}
 		return (this.get('lenghtM')/1000).toFixed(4);
 	}.property('lenghtM'),
 
