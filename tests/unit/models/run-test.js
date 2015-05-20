@@ -77,6 +77,26 @@ test('lengthMi can round down', function(assert) {
  	assert.strictEqual(run.get("lengthMi"), "7.1768");
 });
 
+test('lengthMi setter changes lengthMi', function(assert) {
+	var run = this.subject();
+	run.set("lengthMi", "100");
+	assert.strictEqual(run.get("lengthMi"), "100.0000");
+});
+
+test('lengthMi setter also works with integer', function(assert) {
+	var run = this.subject({lenghtM : 1234});
+	run.set("lengthMi", 100);
+	assert.strictEqual(run.get("lengthMi"), "100.0000");
+});
+
+test('lengthMi setter changes lenghtM', function(assert) {
+	var run = this.subject();
+	run.set("lengthMi", "12");
+	assert.strictEqual(run.get("lenghtM"), 19312.1);
+	run.set("lengthMi", "12.123");
+	assert.strictEqual(run.get("lenghtM"), 19510.077312);
+});
+
 // lengthMiStackMi
 test('lengthMiStackMi property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1800});
