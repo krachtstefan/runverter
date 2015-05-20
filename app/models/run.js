@@ -109,7 +109,7 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 * if arguments are passed, they are used a setter for this computed property 
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
 	 * @param  {string} propertyName if defined, it will be lengthKmStackDecimal
 	 * @param  {string} value        new value of lengthKmStackDecimal
