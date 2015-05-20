@@ -107,6 +107,25 @@ test('lengthMiStackMi property can be zero', function(assert) {
 	var run = this.subject({lenghtM : 800});
  	assert.strictEqual(run.get("lengthMiStackMi"), 0);
 });
+
+test('lengthMiStackMi setter changes lengthMiStackMi', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackMi", "2");
+	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+});
+
+test('lengthMiStackMi setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackMi", "2");
+	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+});
+
+test('lengthMiStackMi setter changes lenghtM', function(assert) {
+	var run = this.subject({lenghtM : 1234});
+	run.set("lengthMiStackMi", "2");
+	assert.strictEqual(run.get("lenghtM"), 1234+3218.688);
+});
+
 // lengthMiStackDecimal
 test('lengthMiStackDecimal property is calculated from lenghtM and can round down', function(assert) {
 	var run = this.subject({lenghtM : 2711});
