@@ -137,6 +137,12 @@ test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
 	assert.strictEqual(run.get("lengthKmStackKm"), 2);
 });
 
+test('lengthKmStackKm also works with integer', function(assert) {
+	var run = this.subject({lenghtM : 1234});
+	run.set("lengthKmStackKm", 2);
+	assert.strictEqual(run.get("lenghtM"), 2234);
+});
+
 test('lengthKmStackKm setter changes lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1234});
 	run.set("lengthKmStackKm", "2");
