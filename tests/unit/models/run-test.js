@@ -92,7 +92,7 @@ test('lengthMi setter also works with integer', function(assert) {
 test('lengthMi setter changes lenghtM', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "12");
-	assert.strictEqual(run.get("lenghtM"), 19312.1);
+	assert.strictEqual(run.get("lenghtM"), 19312.128);
 	run.set("lengthMi", "12.123");
 	assert.strictEqual(run.get("lenghtM"), 19510.077312);
 });
