@@ -103,6 +103,10 @@ test('lengthMiStackMi property is calculated from lenghtM', function(assert) {
  	assert.strictEqual(run.get("lengthMiStackMi"), 1);
 });
 
+test('lengthMiStackMi property can be zero', function(assert) {
+	var run = this.subject({lenghtM : 800});
+ 	assert.strictEqual(run.get("lengthMiStackMi"), 0);
+});
 // lengthMiStackDecimal
 test('lengthMiStackDecimal property is calculated from lenghtM and can round down', function(assert) {
 	var run = this.subject({lenghtM : 2711});
@@ -169,6 +173,11 @@ test('lengthKm setter changes lenghtM', function(assert) {
 test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
 	var run = this.subject({lenghtM : 1800});
  	assert.strictEqual(run.get("lengthKmStackKm"), 1);
+});
+
+test('lengthKmStackKm property canbe zero', function(assert) {
+	var run = this.subject({lenghtM : 12});
+ 	assert.strictEqual(run.get("lengthKmStackKm"), 0);
 });
 
 test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
