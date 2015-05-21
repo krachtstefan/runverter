@@ -84,7 +84,7 @@ test('lengthMi setter changes lengthMi', function(assert) {
 });
 
 test('lengthMi setter also works with integer', function(assert) {
-	var run = this.subject({lengthM : 1234});
+	var run = this.subject();
 	run.set("lengthMi", 100);
 	assert.strictEqual(run.get("lengthMi"), "100.0000");
 });
@@ -203,7 +203,7 @@ test('lengthKm setter changes lengthKm', function(assert) {
 });
 
 test('lengthKm setter also works with integer', function(assert) {
-	var run = this.subject({lengthM : 1234});
+	var run = this.subject();
 	run.set("lengthKm", 100);
 	assert.strictEqual(run.get("lengthKm"), "100.0000");
 });
