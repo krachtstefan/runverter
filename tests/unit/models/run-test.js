@@ -152,6 +152,34 @@ test('lengthMiStackDecimal can be zero', function(assert) {
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
 });
 
+test('lengthMiStackDecimal setter changes lengthMiStackDecimal', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackDecimal", "9");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
+});
+
+test('lengthMiStackDecimal setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackDecimal", 9);
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
+});
+
+test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackDecimal", "09");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "09");
+	run.set("lengthMiStackDecimal", "002");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
+	run.set("lengthMiStackDecimal", "009");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "01");
+});
+
+test('lengthMiStackDecimal setter changes lengthM', function(assert) {
+	var run = this.subject({lengthM : 1000});
+	run.set("lengthMiStackDecimal", "09");
+	assert.strictEqual(run.get("lengthM"), 1144.84096);
+});
+
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : 2000});
