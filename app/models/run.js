@@ -140,7 +140,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
 	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
-	lengthKmStackDecimal :  function(propertyName, value) {
+	lengthKmStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);	
 			
