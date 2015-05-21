@@ -10,9 +10,17 @@ export default DS.Model.extend({
 	
 	/**
 	 * time of the run in minutes
-	 * @return {string} minutes with 4 digits precision
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be timeMin
+	 * @param  {Object|string|number} value						new value of timeMin
+	 * @return {string} 															minutes with 4 digits precision
 	 */
-	timeMin : function(){
+	timeMin : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +value || 0; // convert to number or set to 0
+			this.set("timeSec", value*60);
+		}
 		return (this.get('timeSec')/60).toFixed(4);
 	}.property('timeSec'),
 
