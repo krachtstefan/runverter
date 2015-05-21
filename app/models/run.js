@@ -91,10 +91,29 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
+	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
-	 * @return {string} up to 4 digits of the decimal place of the run in miles
+	 * @param  {string} 								propertyName 	if defined, it will be lengthMiStackDecimal
+	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
+	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
-	lengthMiStackDecimal : function(){
+	lengthMiStackDecimal : function(propertyName, value) {
+   	if (arguments.length > 1) {
+   		var leadingZeros = this._getLeadingZerosFromString(value);	
+			
+    	value = +value || 0; // convert to number or set to 0
+    	var valueLenght = value.toString().length; 			
+
+    	// reflects the decimal precision of the value
+    	// 1 = 100; 10 = 10
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
+    	
+    	// calulate the meters from decimal place 
+			var decimalMiles = (value*decimalPrecision)/Math.pow(10, leadingZeros);
+    	var decimalMeters = decimalMiles/1000*1609.344;
+
+			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
+		}
 		var miDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthMi")).toFixed(2).split(".")[1]);
 		return miDecimalPlace ? miDecimalPlace : "0";
 	}.property('lengthMi'),
