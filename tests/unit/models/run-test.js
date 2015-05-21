@@ -111,6 +111,14 @@ test('lengthMi setter changes lengthMi', function(assert) {
 	assert.strictEqual(run.get("lengthMi"), "100.0000");
 });
 
+test('lengthMi setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthMi", "100.55");
+	assert.strictEqual(run.get("lengthMi"), "100.5500");
+	run.set("lengthMi", 100.12);
+	assert.strictEqual(run.get("lengthMi"), "100.1200");
+});
+
 test('lengthMi setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", 100);
@@ -140,6 +148,14 @@ test('lengthMiStackMi setter changes lengthMiStackMi', function(assert) {
 	var run = this.subject();
 	run.set("lengthMiStackMi", "2");
 	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+});
+
+test('lengthMiStackMi setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackMi", "2.2");
+	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+	run.set("lengthMiStackMi", 2.5);
+	assert.strictEqual(run.get("lengthMiStackMi"), 3);
 });
 
 test('lengthMiStackMi setter also works with integer', function(assert) {
@@ -186,6 +202,14 @@ test('lengthMiStackDecimal setter changes lengthMiStackDecimal', function(assert
 	assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
 });
 
+test('lengthMiStackDecimal setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthMiStackDecimal", "9.2");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
+	run.set("lengthMiStackDecimal", "9.5");
+	assert.strictEqual(run.get("lengthMiStackDecimal"), "1");
+});
+
 test('lengthMiStackDecimal setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthMiStackDecimal", 9);
@@ -230,6 +254,14 @@ test('lengthKm setter changes lengthKm', function(assert) {
 	assert.strictEqual(run.get("lengthKm"), "100.0000");
 });
 
+test('lengthKm setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthKm", "100.12345");
+	assert.strictEqual(run.get("lengthKm"), "100.1235");
+	run.set("lengthKm", 100.34);
+	assert.strictEqual(run.get("lengthKm"), "100.3400");
+});
+
 test('lengthKm setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", 100);
@@ -258,6 +290,14 @@ test('lengthKmStackKm property canbe zero', function(assert) {
 test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
 	var run = this.subject();
 	run.set("lengthKmStackKm", "2");
+	assert.strictEqual(run.get("lengthKmStackKm"), 2);
+});
+
+test('lengthKmStackKm setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthKmStackKm", "2.9");
+	assert.strictEqual(run.get("lengthKmStackKm"), 3);
+	run.set("lengthKmStackKm", 2.3);
 	assert.strictEqual(run.get("lengthKmStackKm"), 2);
 });
 
@@ -309,6 +349,14 @@ test('lengthKmStackDecimal setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthKmStackDecimal", 9);
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "9");
+});
+
+test('lengthKmStackDecimal setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("lengthKmStackDecimal", 8.2);
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "8");
+	run.set("lengthKmStackDecimal", 9.5);
+	assert.strictEqual(run.get("lengthKmStackDecimal"), "1");
 });
 
 test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
