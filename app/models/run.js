@@ -91,7 +91,7 @@ export default DS.Model.extend({
 	lengthMiStackMi : function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthMiStackMi");
-    	value = +value || 0; // convert to number or set to 0
+    	value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1609.344);
 		}
 		return parseInt(this.get("lengthMi"));
@@ -109,7 +109,7 @@ export default DS.Model.extend({
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);	
 			
-    	value = +value || 0; // convert to number or set to 0
+    	value = +Math.round(value) || 0; // convert to number or set to 0
     	var valueLenght = value.toString().length; 			
 
     	// reflects the decimal precision of the value
@@ -153,7 +153,7 @@ export default DS.Model.extend({
 	lengthKmStackKm : function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthKmStackKm");
-    	value = +value || 0; // convert to number or set to 0
+    	value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
 		}
 		return parseInt(this.get("lengthKm"));
@@ -170,9 +170,9 @@ export default DS.Model.extend({
 	lengthKmStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);	
-			
-    	value = +value || 0; // convert to number or set to 0
-    	var valueLenght = value.toString().length; 			
+   		
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+    	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
