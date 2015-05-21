@@ -62,18 +62,18 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
 });
 
 // lengthMi
-test('lengthMi property is calculated from lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1609.344});
+test('lengthMi property is calculated from lengthM', function(assert) {
+	var run = this.subject({lengthM : 1609.344});
  	assert.strictEqual(run.get("lengthMi"), "1.0000");
 });
 
 test('lengthMi has 4 digit precision and can round up', function(assert) {
-	var run = this.subject({lenghtM : 12000});
+	var run = this.subject({lengthM : 12000});
  	assert.strictEqual(run.get("lengthMi"), "7.4565");
 });
 
 test('lengthMi can round down', function(assert) {
-	var run = this.subject({lenghtM : 11550});
+	var run = this.subject({lengthM : 11550});
  	assert.strictEqual(run.get("lengthMi"), "7.1768");
 });
 
@@ -84,27 +84,27 @@ test('lengthMi setter changes lengthMi', function(assert) {
 });
 
 test('lengthMi setter also works with integer', function(assert) {
-	var run = this.subject({lenghtM : 1234});
+	var run = this.subject({lengthM : 1234});
 	run.set("lengthMi", 100);
 	assert.strictEqual(run.get("lengthMi"), "100.0000");
 });
 
-test('lengthMi setter changes lenghtM', function(assert) {
+test('lengthMi setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "12");
-	assert.strictEqual(run.get("lenghtM"), 19312.128);
+	assert.strictEqual(run.get("lengthM"), 19312.128);
 	run.set("lengthMi", "12.123");
-	assert.strictEqual(run.get("lenghtM"), 19510.077312);
+	assert.strictEqual(run.get("lengthM"), 19510.077312);
 });
 
 // lengthMiStackMi
-test('lengthMiStackMi property is calculated from lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1800});
+test('lengthMiStackMi property is calculated from lengthM', function(assert) {
+	var run = this.subject({lengthM : 1800});
  	assert.strictEqual(run.get("lengthMiStackMi"), 1);
 });
 
 test('lengthMiStackMi property can be zero', function(assert) {
-	var run = this.subject({lenghtM : 800});
+	var run = this.subject({lengthM : 800});
  	assert.strictEqual(run.get("lengthMiStackMi"), 0);
 });
 
@@ -120,51 +120,51 @@ test('lengthMiStackMi setter also works with integer', function(assert) {
 	assert.strictEqual(run.get("lengthMiStackMi"), 2);
 });
 
-test('lengthMiStackMi setter changes lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1234});
+test('lengthMiStackMi setter changes lengthM', function(assert) {
+	var run = this.subject({lengthM : 1234});
 	run.set("lengthMiStackMi", "2");
-	assert.strictEqual(run.get("lenghtM"), 1234+3218.688);
+	assert.strictEqual(run.get("lengthM"), 1234+3218.688);
 });
 
 // lengthMiStackDecimal
-test('lengthMiStackDecimal property is calculated from lenghtM and can round down', function(assert) {
-	var run = this.subject({lenghtM : 2711});
+test('lengthMiStackDecimal property is calculated from lengthM and can round down', function(assert) {
+	var run = this.subject({lengthM : 2711});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "68");
 });
 
 test('lengthMiStackDecimal can round up', function(assert) {
-	var run = this.subject({lenghtM : 2712});
+	var run = this.subject({lengthM : 2712});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
 });
 
 test('lengthMiStackDecimal can have 1 digit', function(assert) {
-	var run = this.subject({lenghtM : 804.672});
+	var run = this.subject({lengthM : 804.672});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "5");
 });
 
 test('lengthMiStackDecimal supports leading zero', function(assert) {
-	var run = this.subject({lenghtM : 100});
+	var run = this.subject({lengthM : 100});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "06");
 });
 
 test('lengthMiStackDecimal can be zero', function(assert) {
-	var run = this.subject({lenghtM : 1609.344});
+	var run = this.subject({lengthM : 1609.344});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
 });
 
 // lengthKm
-test('lengthKm property is calculated from lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 2000});
+test('lengthKm property is calculated from lengthM', function(assert) {
+	var run = this.subject({lengthM : 2000});
  	assert.strictEqual(run.get("lengthKm"), "2.0000");
 });
 
 test('lengthKm has 4 digit precision and can round up', function(assert) {
-	var run = this.subject({lenghtM : 1234.56});
+	var run = this.subject({lengthM : 1234.56});
  	assert.strictEqual(run.get("lengthKm"), "1.2346");
 });
 
 test('lengthKm can round down', function(assert) {
-	var run = this.subject({lenghtM : 1234.52});
+	var run = this.subject({lengthM : 1234.52});
  	assert.strictEqual(run.get("lengthKm"), "1.2345");
 });
 
@@ -175,27 +175,27 @@ test('lengthKm setter changes lengthKm', function(assert) {
 });
 
 test('lengthKm setter also works with integer', function(assert) {
-	var run = this.subject({lenghtM : 1234});
+	var run = this.subject({lengthM : 1234});
 	run.set("lengthKm", 100);
 	assert.strictEqual(run.get("lengthKm"), "100.0000");
 });
 
-test('lengthKm setter changes lenghtM', function(assert) {
+test('lengthKm setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "12");
-	assert.strictEqual(run.get("lenghtM"), 12000);
+	assert.strictEqual(run.get("lengthM"), 12000);
 	run.set("lengthKm", "12.123");
-	assert.strictEqual(run.get("lenghtM"), 12123);
+	assert.strictEqual(run.get("lengthM"), 12123);
 });
 
 // lengthKmStackKm
-test('lengthKmStackKm property is calculated from lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1800});
+test('lengthKmStackKm property is calculated from lengthM', function(assert) {
+	var run = this.subject({lengthM : 1800});
  	assert.strictEqual(run.get("lengthKmStackKm"), 1);
 });
 
 test('lengthKmStackKm property canbe zero', function(assert) {
-	var run = this.subject({lenghtM : 12});
+	var run = this.subject({lengthM : 12});
  	assert.strictEqual(run.get("lengthKmStackKm"), 0);
 });
 
@@ -211,35 +211,35 @@ test('lengthKmStackKm setter also works with integer', function(assert) {
 	assert.strictEqual(run.get("lengthKmStackKm"), 2);
 });
 
-test('lengthKmStackKm setter changes lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1234});
+test('lengthKmStackKm setter changes lengthM', function(assert) {
+	var run = this.subject({lengthM : 1234});
 	run.set("lengthKmStackKm", "2");
-	assert.strictEqual(run.get("lenghtM"), 2234);
+	assert.strictEqual(run.get("lengthM"), 2234);
 });
 
 // lengthKmStackDecimal
-test('lengthKmStackDecimal property is calculated from lenghtM and can round down', function(assert) {
-	var run = this.subject({lenghtM : 1712});
+test('lengthKmStackDecimal property is calculated from lengthM and can round down', function(assert) {
+	var run = this.subject({lengthM : 1712});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
 
 test('lengthKmStackDecimal property can round up', function(assert) {
-	var run = this.subject({lenghtM : 1719});
+	var run = this.subject({lengthM : 1719});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
 });
 
 test('lengthKmStackDecimal can have 1 digit', function(assert) {
-	var run = this.subject({lenghtM : 500});
+	var run = this.subject({lengthM : 500});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "5");
 });
 
 test('lengthKmStackDecimal supports leading zero', function(assert) {
-	var run = this.subject({lenghtM : 90});
+	var run = this.subject({lengthM : 90});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
 });
 
 test('lengthKmStackDecimal can be zero', function(assert) {
-	var run = this.subject({lenghtM : 1000});
+	var run = this.subject({lengthM : 1000});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
 });
 
@@ -265,10 +265,10 @@ test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
 	assert.strictEqual(run.get("lengthKmStackDecimal"), "01");
 });
 
-test('lengthKmStackDecimal setter changes lenghtM', function(assert) {
-	var run = this.subject({lenghtM : 1000});
+test('lengthKmStackDecimal setter changes lengthM', function(assert) {
+	var run = this.subject({lengthM : 1000});
 	run.set("lengthKmStackDecimal", "09");
-	assert.strictEqual(run.get("lenghtM"), 1090);
+	assert.strictEqual(run.get("lengthM"), 1090);
 });
 
 

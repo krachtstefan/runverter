@@ -50,11 +50,11 @@ export default DS.Model.extend({
 
 
 	/**
-	 * lenghtM represents the length of a run in meter, should be set on create
+	 * lengthM represents the length of a run in meter, should be set on create
 	 * 
 	 * @type {number} length of the run in meter
 	 */
-	lenghtM : null,
+	lengthM : null,
 
 	/**
 	 * lenght of the run in miles
@@ -67,10 +67,10 @@ export default DS.Model.extend({
 	lengthMi : function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = +value || 0; // convert to number or set to 0
-			this.set("lenghtM", value*1609.344);
+			this.set("lengthM", value*1609.344);
 		}
-		return (this.get('lenghtM')*0.000621371).toFixed(4);
-	}.property('lenghtM'),
+		return (this.get('lengthM')*0.000621371).toFixed(4);
+	}.property('lengthM'),
 
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
@@ -84,7 +84,7 @@ export default DS.Model.extend({
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthMiStackMi");
     	value = +value || 0; // convert to number or set to 0
-			this.set("lenghtM", this.get('lenghtM')+(value-previousValue)*1609.344);
+			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1609.344);
 		}
 		return parseInt(this.get("lengthMi"));
 	}.property('lengthMi'),
@@ -110,10 +110,10 @@ export default DS.Model.extend({
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = +value || 0; // convert to number or set to 0
-			this.set("lenghtM", value*1000);
+			this.set("lengthM", value*1000);
 		}
-		return (this.get('lenghtM')/1000).toFixed(4);
-	}.property('lenghtM'),
+		return (this.get('lengthM')/1000).toFixed(4);
+	}.property('lengthM'),
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
@@ -127,7 +127,7 @@ export default DS.Model.extend({
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthKmStackKm");
     	value = +value || 0; // convert to number or set to 0
-			this.set("lenghtM", this.get('lenghtM')+(value-previousValue)*1000);
+			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
 		}
 		return parseInt(this.get("lengthKm"));
 	}.property('lengthKm'),
@@ -153,7 +153,7 @@ export default DS.Model.extend({
     	
     	// calulate the meters from decimal place 
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-			this.set("lenghtM", this.get('lengthKmStackKm')*1000+decimalMeters);
+			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
 		var kmDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthKm")).toFixed(2).split(".")[1]);
 		return kmDecimalPlace ? kmDecimalPlace : "0";
