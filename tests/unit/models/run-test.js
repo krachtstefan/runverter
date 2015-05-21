@@ -27,6 +27,34 @@ test('timeMin can round up', function(assert) {
   assert.strictEqual(run.get("timeMin"), "43.5667");
 });
 
+test('timeMin setter changes timeMin', function(assert) {
+	var run = this.subject();
+	run.set("timeMin", "100");
+	assert.strictEqual(run.get("timeMin"), "100.0000");
+});
+
+test('timeMin setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("timeMin", "100.5");
+	assert.strictEqual(run.get("timeMin"), "100.5000");
+	run.set("timeMin", 50.5);
+	assert.strictEqual(run.get("timeMin"), "50.5000");
+});
+
+test('timeMin setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("timeMin", 100);
+	assert.strictEqual(run.get("timeMin"), "100.0000");
+});
+
+test('timeMin setter changes timeSec', function(assert) {
+	var run = this.subject();
+	run.set("timeMin", "12");
+	assert.strictEqual(run.get("timeSec"), 720);
+	run.set("timeMin", "12.123");
+	assert.strictEqual(run.get("timeSec"), 727.38);
+});
+
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 14400});
