@@ -71,6 +71,34 @@ test('timeHr can round up', function(assert) {
   assert.strictEqual(run.get("timeHr"), "4.1278");
 });
 
+test('timeHr setter changes timeHr', function(assert) {
+	var run = this.subject();
+	run.set("timeHr", "2");
+	assert.strictEqual(run.get("timeHr"), "2.0000");
+});
+
+test('timeHr setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("timeHr", "2.5");
+	assert.strictEqual(run.get("timeHr"), "2.5000");
+	run.set("timeHr", 2.5);
+	assert.strictEqual(run.get("timeHr"), "2.5000");
+});
+
+test('timeHr setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("timeHr", 2);
+	assert.strictEqual(run.get("timeHr"), "2.0000");
+});
+
+test('timeHr setter changes timeSec', function(assert) {
+	var run = this.subject();
+	run.set("timeHr", "2");
+	assert.strictEqual(run.get("timeSec"), 7200);
+	run.set("timeHr", "2.123");
+	assert.strictEqual(run.get("timeSec"), 7642.8);
+});
+
 // timeStackSec
 test('timeStackSec property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 62});
