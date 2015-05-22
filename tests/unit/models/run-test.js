@@ -423,8 +423,3 @@ test('_removeEndingZeros returns an empty string if the parameter only contains 
  	assert.strictEqual(this.subject()._removeEndingZeros("0"), "");
  	assert.strictEqual(this.subject()._removeEndingZeros("000"), "");
 });
-
-// TODO: 
-// check the type of every returned var
-// add tests for setter
-// add tets fot _helper methods as well
