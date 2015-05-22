@@ -117,6 +117,32 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
  	assert.strictEqual(run.get("timeStackHr"), 5);
 });
 
+test('timeStackHr setter changes timeStackHr', function(assert) {
+	var run = this.subject();
+	run.set("timeStackHr", "2");
+	assert.strictEqual(run.get("timeStackHr"), 2);
+});
+
+test('timeStackHr setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("timeStackHr", "2.2");
+	assert.strictEqual(run.get("timeStackHr"), 2);
+	run.set("timeStackHr", 2.5);
+	assert.strictEqual(run.get("timeStackHr"), 3);
+});
+
+test('timeStackHr setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("timeStackHr", 2);
+	assert.strictEqual(run.get("timeStackHr"), 2);
+});
+
+test('timeStackHr setter changes timeSec', function(assert) {
+	var run = this.subject({timeSec : 12345}); // around 3.4292 hours
+	run.set("timeStackHr", "2");
+	assert.strictEqual(run.get("timeSec"), 8745.12); // 2.4292 hours
+});
+
 // lengthMi
 test('lengthMi property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : 1609.344});
