@@ -260,6 +260,15 @@ test('lengthMiStackDecimal setter changes lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM"), 1754.18496); // 1.09 miles
 });
 
+test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi', function(assert) {
+	var run = this.subject();
+	run.setProperties({
+		"lengthMiStackMi" : "12",
+		"lengthMiStackDecimal" : "09"
+	});
+	assert.strictEqual(run.get("lengthMi"), "12.0900");
+});
+
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : 2000});
