@@ -255,9 +255,9 @@ test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
 });
 
 test('lengthMiStackDecimal setter changes lengthM', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : 2000}); // around 1.24 miles
 	run.set("lengthMiStackDecimal", "09");
-	assert.strictEqual(run.get("lengthM"), 1144.84096);
+	assert.strictEqual(run.get("lengthM"), 1754.18496); // 1.09 miles
 });
 
 // lengthKm
