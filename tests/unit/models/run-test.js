@@ -188,7 +188,7 @@ test('lengthMiStackMi setter can handle floats', function(assert) {
 
 test('lengthMiStackMi setter also works with integer', function(assert) {
 	var run = this.subject();
-	run.set("lengthMiStackMi", "2");
+	run.set("lengthMiStackMi", 2);
 	assert.strictEqual(run.get("lengthMiStackMi"), 2);
 });
 
