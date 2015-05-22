@@ -412,6 +412,14 @@ test('lengthKmStackDecimal setter changes lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM"), 1090);
 });
 
+test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', function(assert) {
+	var run = this.subject();
+	run.setProperties({
+		"lengthKmStackKm" : "12",
+		"lengthKmStackDecimal" : "09"
+	});
+	assert.strictEqual(run.get("lengthKm"), "12.0900");
+});
 
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
