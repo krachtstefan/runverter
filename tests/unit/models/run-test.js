@@ -138,9 +138,9 @@ test('timeStackHr setter also works with integer', function(assert) {
 });
 
 test('timeStackHr setter changes timeSec', function(assert) {
-	var run = this.subject({timeSec : 12345}); // around 3.4292 hours
+	var run = this.subject({timeSec : 12345}); // 3,429166667 hours
 	run.set("timeStackHr", "2");
-	assert.strictEqual(run.get("timeSec"), 8745.12); // 2.4292 hours
+	assert.strictEqual(run.get("timeSec"), 8745); // 2,429166667 hours
 });
 
 // lengthMi
