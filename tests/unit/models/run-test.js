@@ -111,6 +111,35 @@ test('timeStackMin property is calculated from timeSec', function(assert) {
  	assert.strictEqual(run.get("timeStackMin"), 2);
 });
 
+test('timeStackMin setter changes timeStackMin', function(assert) {
+	var run = this.subject();
+	run.set("timeStackMin", "10");
+	assert.strictEqual(run.get("timeStackMin"), 10);
+});
+
+test('timeStackMin setter can handle floats', function(assert) {
+	var run = this.subject();
+	run.set("timeStackMin", "2.2");
+	assert.strictEqual(run.get("timeStackMin"), 2);
+	run.set("timeStackMin", 2.5);
+	assert.strictEqual(run.get("timeStackMin"), 3);
+});
+
+test('timeStackMin setter also works with integer', function(assert) {
+	var run = this.subject();
+	run.set("timeStackMin", 2);
+	assert.strictEqual(run.get("timeStackMin"), 2);
+});
+
+test('timeStackMin setter changes timeSec', function(assert) {
+	var run = this.subject({timeSec : 90}); // 1 minute, 30 seconds
+	run.set("timeStackMin", "10"); // 10 minutes, 30 seconds
+	assert.strictEqual(run.get("timeStackHr"), 0);
+	assert.strictEqual(run.get("timeStackMin"), 10);
+	assert.strictEqual(run.get("timeStackSec"), 30);
+	assert.strictEqual(run.get("timeSec"), 630);
+});
+
 // timeStackHr
 test('timeStackHr property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 20000});
