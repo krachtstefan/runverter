@@ -131,7 +131,7 @@ test('timeStackMin setter also works with integer', function(assert) {
 	assert.strictEqual(run.get("timeStackMin"), 2);
 });
 
-test('timeStackMin setter changes timeSec', function(assert) {
+test('timeStackMin setter influences all time related properties', function(assert) {
 	var run = this.subject({timeSec : 90}); // 1 minute, 30 seconds
 	run.set("timeStackMin", "10"); // 10 minutes, 30 seconds
 	assert.strictEqual(run.get("timeStackHr"), 0);
@@ -166,7 +166,7 @@ test('timeStackHr setter also works with integer', function(assert) {
 	assert.strictEqual(run.get("timeStackHr"), 2);
 });
 
-test('timeStackHr setter changes timeSec', function(assert) {
+test('timeStackHr setter influences all time related properties', function(assert) {
 	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
 	run.set("timeStackHr", "2"); // 2,5 hours and 12 seconds
 	assert.strictEqual(run.get("timeStackHr"), 2);
