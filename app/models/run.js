@@ -50,9 +50,18 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 *
+	 * @param  {string}								propertyName		if defined, it will be timeStackMin
+	 * @param  {Object|string|number} value						new value of timeStackMin
 	 * @return {number} minutes stack of the run time
 	 */
-	timeStackMin : function(){
+	timeStackMin : function(propertyName, value) {
+		if (arguments.length > 1) {
+			var previousValue = this.get("timeStackMin");
+			value = +Math.round(value) || 0; // convert to number or set to 0			
+			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60);
+		}
 		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
 	}.property('timeMin', 'timeStackHr'),
 
