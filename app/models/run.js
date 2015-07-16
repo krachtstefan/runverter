@@ -42,9 +42,18 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackSec is used to create a view like 12:34:56
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 *
+	 * @param  {string}								propertyName		if defined, it will be timeStackSec
+	 * @param  {Object|string|number} value						new value of timeStackSec
 	 * @return {number} second stack of the run time
 	 */
-	timeStackSec : function(){
+	timeStackSec : function(propertyName, value) {
+		if (arguments.length > 1) {
+			var previousValue = this.get("timeStackSec");
+			value = +Math.round(value) || 0; // convert to number or set to 0			
+			this.set("timeSec", this.get('timeSec')+(value-previousValue));
+		}
 		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
 	}.property('timeSec', 'timeMin'),
 
