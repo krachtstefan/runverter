@@ -592,6 +592,32 @@ test('speedMiHrStackMi property can be zero', function(assert) {
  	assert.strictEqual(run.get("speedMiHrStackMi"), 0);
 });
 
+// speedMiHrStackDecimal
+test('speedMiHrStackDecimal property is calculated from timeSec and lengthM and can round down', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 2500.9206}); // 1.554 mi
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "55");
+});
+
+test('speedMiHrStackDecimal property can round up', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 2502.5299}); // 1.555 mi
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "56");
+});
+
+test('speedMiHrStackDecimal can have 1 digit', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 2414.02}); // 1.5 mi
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "5");
+});
+
+test('speedMiHrStackDecimal supports leading zero', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 1689.811}); // 1.05 mi
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "05");
+});
+
+test('speedMiHrStackDecimal can be zero', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 1609.34}); // 1.00 mi
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
+});
+
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
