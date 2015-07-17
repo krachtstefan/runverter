@@ -227,7 +227,7 @@ export default DS.Model.extend({
 	
 	paceMinPerKm : function(){
 		return this.get('timeMin')/this.get('lengthKm');
-	}.property('timeSec', 'lengthKm'),
+	}.property('timeMin', 'lengthKm'),
 
 	paceMinPerKmStackMin : function(){
 		return parseInt(this.get("paceMinPerKm"));
@@ -240,7 +240,7 @@ export default DS.Model.extend({
 	
 	paceMinPerMi  : function(){
 		return this.get('timeMin')/this.get('lengthMi');
-	}.property('timeSec', 'lengthMi'),
+	}.property('timeMin', 'lengthMi'),
 
 	paceMinPerMiStackMin : function(){
 		return parseInt(this.get("paceMinPerMi"));
@@ -249,7 +249,7 @@ export default DS.Model.extend({
 	paceMinPerMiStackSec : function(){
 		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
 		return Math.round(decimalPlace*60);
-	}.property('paceMinPerMi'),
+	}.property('paceMinPerMi', 'paceMinPerMiStackMin'),
 
 
 	/**
@@ -284,7 +284,7 @@ export default DS.Model.extend({
 	 */
 	speedMiHr : function(){
 		return this._toFixed((this.get('lengthM')/1609.344)/(this.get('timeMin')/60), 4);
-	}.property('lengthMi', 'timeHr'),
+	}.property('lengthM', 'timeHr'),
 
 	/**
 	 * speedMiHrStackMi is used to create a view like 12,34
