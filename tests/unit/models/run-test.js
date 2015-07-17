@@ -527,3 +527,28 @@ test('_removeEndingZeros returns an empty string if the parameter only contains 
  	assert.strictEqual(this.subject()._removeEndingZeros("0"), "");
  	assert.strictEqual(this.subject()._removeEndingZeros("000"), "");
 });
+
+test('_toFixed returns a string with desired precision and can round up', function(assert) {
+	assert.strictEqual(this.subject()._toFixed(2.05, 1), "2.1"); // 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
+});
+
+test('_toFixed can round down', function(assert) {
+	assert.strictEqual(this.subject()._toFixed(2.434, 2), "2.43");
+});
+
+test('_toFixed can add floating points ', function(assert) {
+	assert.strictEqual(this.subject()._toFixed(2, 5), "2.00000");
+});
+
+test('_toFixed can remove floating points ', function(assert) {
+	assert.strictEqual(this.subject()._toFixed(2.12345, 0), "2");
+	assert.strictEqual(this.subject()._toFixed(2.5, 0), "3");
+});
+
+test('_toFixed can handle string as input number', function(assert) {
+	assert.strictEqual(this.subject()._toFixed("2.23", 1), "2.2");
+});
+
+test('_toFixed can handle string as precision number', function(assert) {
+	assert.strictEqual(this.subject()._toFixed(123.25, "1"), "123.3");
+});
