@@ -255,8 +255,8 @@ export default DS.Model.extend({
 
 
 	/**
-	 * speedKmHr represents the sped of the run in km per hour
-	 * @return {string} km/h with 4 digits precision
+	 * speedKmHr represents the speed of the run in km per hour
+	 * @return {string} km/hr with 4 digits precision
 	 */
 	speedKmHr : function(){
 		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeMin')/60), 4);
@@ -272,7 +272,7 @@ export default DS.Model.extend({
 
 	/**
 	 * speedKmHrStackDecimal is used to create a view like 12,34
-	 * @return {number} up to 2 digits of the decimal place of the speed in km/h
+	 * @return {number} up to 2 digits of the decimal place of the speed in km/hr
 	 */
 	speedKmHrStackDecimal : function(){
 		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
