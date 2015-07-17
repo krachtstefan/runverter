@@ -302,5 +302,20 @@ export default DS.Model.extend({
 			output = output.slice(0,-1);
 		}
 		return output;
+	},
+
+	/**
+	 * optimied version of the .toFixed method which has a lag of precision
+	 * 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
+	 * 
+	 * @param  {float} 	number 		input value		
+	 * @param  {number} precision desired precision
+	 * @return {string}       		output string with desired precision
+	 */
+	_toFixed : function(number, precision){
+		number = parseFloat(number);
+		precision = +Math.round(precision) || 0; // convert to number or set to 0
+		var precisionHelpoer = Math.pow(10,precision);
+		return (Math.round(number * precisionHelpoer) / precisionHelpoer).toFixed(precision);
 	}
 });
