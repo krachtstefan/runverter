@@ -406,7 +406,7 @@ test('lengthKmStackKm property is calculated from lengthM', function(assert) {
  	assert.strictEqual(run.get("lengthKmStackKm"), 1);
 });
 
-test('lengthKmStackKm property canbe zero', function(assert) {
+test('lengthKmStackKm property can be zero', function(assert) {
 	var run = this.subject({lengthM : 12});
  	assert.strictEqual(run.get("lengthKmStackKm"), 0);
 });
@@ -534,7 +534,7 @@ test('speedKmHrStackKm property is calculated from timeSec and lengthM', functio
  	assert.strictEqual(run.get("speedKmHrStackKm"), 25);
 });
 
-test('speedKmHrStackKm property canbe zero', function(assert) {
+test('speedKmHrStackKm property can be zero', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
  	assert.strictEqual(run.get("speedKmHrStackKm"), 0);
 });
