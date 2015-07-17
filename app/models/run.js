@@ -296,9 +296,14 @@ export default DS.Model.extend({
 		return parseInt(this.get("speedMiHr"));
 	}.property('speedMiHr'),
 
+	/**
+	 * speedMiHrStackDecimal is used to create a view like 12,34
+	 * @return {number} up to 2 digits of the decimal place of the speed in mi/hr
+	 */
 	speedMiHrStackDecimal : function(){
-		var decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
-		return Math.round(decimalPlace*100);
+		var miHrDecimalPlace = this._toFixed(parseFloat(this.get("speedMiHr")),2);
+		miHrDecimalPlace = this._removeEndingZeros(miHrDecimalPlace.split(".")[1]);
+		return miHrDecimalPlace ? miHrDecimalPlace : "0";
 	}.property('speedMiHr'),
 
 	/**
