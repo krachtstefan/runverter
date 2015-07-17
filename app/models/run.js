@@ -157,7 +157,6 @@ export default DS.Model.extend({
 
 			this.set("lengthM", this.get('lengthMiStackMi')*1609.344+decimalMeters);
 		}
-		//
 		var miDecimalPlace = this._toFixed(parseFloat(this.get("lengthMi")),2);
 		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
 		return miDecimalPlace ? miDecimalPlace : "0";
@@ -219,7 +218,6 @@ export default DS.Model.extend({
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
-		//
 		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
 		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
 		return kmDecimalPlace ? kmDecimalPlace : "0";
