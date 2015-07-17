@@ -46,7 +46,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackSec
 	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {number} second stack of the run time
+	 * @return {number} 															second stack of the run time
 	 */
 	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
@@ -63,7 +63,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackMin
 	 * @param  {Object|string|number} value						new value of timeStackMin
-	 * @return {number} minutes stack of the run time
+	 * @return {number} 															minutes stack of the run time
 	 */
 	timeStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
@@ -105,7 +105,7 @@ export default DS.Model.extend({
 	 * 
 	 * @param  {string}								propertyName		if defined, it will be lengthMi
 	 * @param  {Object|string|number} value						new value of lengthMi
-	 * @return {string} 							miles with 4 digits precision
+	 * @return {string} 															miles with 4 digits precision
 	 */
 	lengthMi : function(propertyName, value) {
 		if (arguments.length > 1) {
@@ -167,7 +167,7 @@ export default DS.Model.extend({
 	 * 
 	 * @param  {string}								propertyName		if defined, it will be lengthKm
 	 * @param  {Object|string|number} value						new value of lengthKm
-	 * @return {string}								km with 4 digits precision
+	 * @return {string}																km with 4 digits precision
 	 */
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
