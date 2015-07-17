@@ -280,8 +280,12 @@ export default DS.Model.extend({
 		return kmHrDecimalPlace ? kmHrDecimalPlace : "0";
 	}.property('speedKmHr'),
 
+	/**
+	 * speedMiHr represents the speed of the run in miles per hour
+	 * @return {string} mi/hr with 4 digits precision
+	 */
 	speedMiHr : function(){
-		return this.get('lengthMi')/this.get('timeHr');
+		return this._toFixed((this.get('lengthM')/1609.344)/(this.get('timeMin')/60), 4);
 	}.property('lengthMi', 'timeHr'),
 
 	speedMiHrStackKm : function(){
