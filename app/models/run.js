@@ -250,10 +250,13 @@ export default DS.Model.extend({
 	}.property('paceMinPerMi'),
 
 
-	
+	/**
+	 * speedKmHr represents the sped of the run in km per hour
+	 * @return {string} km/h with 4 digits precision
+	 */
 	speedKmHr : function(){
-		return this.get('lengthKm')/this.get('timeHr');
-	}.property('lengthKm', 'timeHr'),
+		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeMin')/60), 4);
+	}.property('lengthM', 'timeMin'),
 
 	speedKmHrStackKm : function(){
 		return parseInt(this.get("speedKmHr"));
