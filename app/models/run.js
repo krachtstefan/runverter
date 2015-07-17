@@ -21,7 +21,7 @@ export default DS.Model.extend({
     	value = +value || 0; // convert to number or set to 0
 			this.set("timeSec", value*60);
 		}
-		return (this.get('timeSec')/60).toFixed(4);
+		return this._toFixed(this.get('timeSec')/60,4);
 	}.property('timeSec'),
 
 	/**
@@ -37,7 +37,7 @@ export default DS.Model.extend({
     	value = +value || 0; // convert to number or set to 0
 			this.set("timeSec", value*60*60);
 		}
-		return (this.get('timeSec')/60/60).toFixed(4);
+		return this._toFixed(this.get('timeSec')/60/60,4);
 	}.property('timeSec'),
 
 	/**
@@ -112,7 +112,7 @@ export default DS.Model.extend({
     	value = +value || 0; // convert to number or set to 0
 			this.set("lengthM", value*1609.344);
 		}
-		return (this.get('lengthM')*0.000621371).toFixed(4);
+		return this._toFixed(this.get('lengthM')*0.000621371,4);
 	}.property('lengthM'),
 
 	/**
@@ -157,7 +157,9 @@ export default DS.Model.extend({
 
 			this.set("lengthM", this.get('lengthMiStackMi')*1609.344+decimalMeters);
 		}
-		var miDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthMi")).toFixed(2).split(".")[1]);
+		//
+		var miDecimalPlace = this._toFixed(parseFloat(this.get("lengthMi")),2);
+		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
 		return miDecimalPlace ? miDecimalPlace : "0";
 	}.property('lengthMi'),
 
@@ -174,7 +176,7 @@ export default DS.Model.extend({
     	value = +value || 0; // convert to number or set to 0
 			this.set("lengthM", value*1000);
 		}
-		return (this.get('lengthM')/1000).toFixed(4);
+		return this._toFixed(this.get('lengthM')/1000,4);
 	}.property('lengthM'),
 
 	/**
@@ -217,7 +219,9 @@ export default DS.Model.extend({
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
-		var kmDecimalPlace = this._removeEndingZeros(parseFloat(this.get("lengthKm")).toFixed(2).split(".")[1]);
+		//
+		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
+		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
 		return kmDecimalPlace ? kmDecimalPlace : "0";
 	}.property('lengthKm'),
 
