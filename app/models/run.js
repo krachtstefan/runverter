@@ -262,6 +262,10 @@ export default DS.Model.extend({
 		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeMin')/60), 4);
 	}.property('lengthM', 'timeMin'),
 
+	/**
+	 * lengthKmStackKm is used to create a view like 12,34
+	 * @return {number} km stack of the speed
+	 */
 	speedKmHrStackKm : function(){
 		return parseInt(this.get("speedKmHr"));
 	}.property('speedKmHr'),
