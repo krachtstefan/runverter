@@ -288,7 +288,7 @@ export default DS.Model.extend({
 		return this._toFixed((this.get('lengthM')/1609.344)/(this.get('timeMin')/60), 4);
 	}.property('lengthMi', 'timeHr'),
 
-	speedMiHrStackKm : function(){
+	speedMiHrStackMi : function(){
 		return parseInt(this.get("speedMiHr"));
 	}.property('speedMiHr'),
 
