@@ -283,7 +283,7 @@ export default DS.Model.extend({
 		return parseInt(this.get("speedMiHr"));
 	}.property('speedMiHr'),
 
-	speedMiHrStackM : function(){
+	speedMiHrStackDecimal : function(){
 		var decimalPlace = this.get("speedMiHr") - this.get("speedMiHrStackKm");
 		return Math.round(decimalPlace*100);
 	}.property('speedMiHr'),
