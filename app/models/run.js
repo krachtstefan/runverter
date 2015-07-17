@@ -270,9 +270,14 @@ export default DS.Model.extend({
 		return parseInt(this.get("speedKmHr"));
 	}.property('speedKmHr'),
 
+	/**
+	 * speedKmHrStackDecimal is used to create a view like 12,34
+	 * @return {number} up to 2 digits of the decimal place of the speed in km/h
+	 */
 	speedKmHrStackDecimal : function(){
-		var decimalPlace = this.get("speedKmHr") - this.get("speedKmHrStackKm");
-		return Math.round(decimalPlace*100);
+		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
+		kmHrDecimalPlace = this._removeEndingZeros(kmHrDecimalPlace.split(".")[1]);
+		return kmHrDecimalPlace ? kmHrDecimalPlace : "0";
 	}.property('speedKmHr'),
 
 	speedMiHr : function(){
