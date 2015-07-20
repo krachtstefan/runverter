@@ -265,8 +265,8 @@ export default DS.Model.extend({
     	value = +Math.round(value) || 0; // convert to number or set to 0
     	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
 		}
-		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeMin')/60), 4);
-	}.property('lengthM', 'timeMin'),
+		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeSec')/60/60), 4);
+	}.property('lengthM', 'timeSec'),
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
