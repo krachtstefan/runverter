@@ -517,7 +517,7 @@ test('speedKmHr property is calculated from timeSec and lengthM', function(asser
 test('speedKmHr can round down', function(assert) {
 	var run = this.subject({timeSec : 3600, lengthM : 12.34});
   assert.strictEqual(run.get("speedKmHr"), "0.0123");
-  run.set("lengthM", 23.4321);
+  run.set("lengthM", "23.4321");
   assert.strictEqual(run.get("speedKmHr"), "0.0234");
 });
 
