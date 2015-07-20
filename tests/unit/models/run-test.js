@@ -571,6 +571,38 @@ test('speedKmHrStackKm property can be zero', function(assert) {
  	assert.strictEqual(run.get("speedKmHrStackKm"), 0);
 });
 
+test('speedKmHrStackKm setter changes speedKmHrStackKm', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 24000});
+	run.set("speedKmHrStackKm", "18");
+	assert.strictEqual(run.get("speedKmHrStackKm"), 18);
+});
+
+test('speedKmHrStackKm setter can handle floats', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 24000});
+	run.set("speedKmHrStackKm", "5.5");
+	assert.strictEqual(run.get("speedKmHrStackKm"), 6);
+	run.set("speedKmHrStackKm", 2.3);
+	assert.strictEqual(run.get("speedKmHrStackKm"), 2);
+});
+
+test('speedKmHrStackKm setter also works with integer', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 24123});
+	run.set("speedKmHrStackKm", 12);
+	assert.strictEqual(run.get("speedKmHrStackKm"), 12);
+});
+
+test('speedKmHrStackKm setter changes timeSec', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 8000});
+	run.set("speedKmHrStackKm", "2");
+	assert.strictEqual(run.get("timeSec"), 14400); // 8km with 2km/hr will take 4 hours (14400 sek)
+});
+
+test('speedKmHrStackKm setter doesn\'t change lengthM', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 2500});
+	run.set("speedKmHrStackKm", "12");
+	assert.strictEqual(run.get("lengthM"), 2500);
+});
+
 // speedKmHrStackDecimal
 test('speedKmHrStackDecimal property is calculated from timeSec and lengthM and can round down', function(assert) {
 	var run = this.subject({timeSec : 3600, lengthM : 25123});
