@@ -18,7 +18,7 @@ export default DS.Model.extend({
 	 */
 	timeMin : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +value || 0; // convert to number or set to 0
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
 			this.set("timeSec", value*60);
 		}
 		return this._toFixed(this.get('timeSec')/60,4);
@@ -34,7 +34,7 @@ export default DS.Model.extend({
 	 */
 	timeHr : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +value || 0; // convert to number or set to 0
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
 			this.set("timeSec", value*60*60);
 		}
 		return this._toFixed(this.get('timeSec')/60/60,4);
@@ -109,7 +109,7 @@ export default DS.Model.extend({
 	 */
 	lengthMi : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +value || 0; // convert to number or set to 0
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
 			this.set("lengthM", value*1609.344);
 		}
 		return this._toFixed(this.get('lengthM')*0.000621371,4);
@@ -172,7 +172,7 @@ export default DS.Model.extend({
 	 */
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +value || 0; // convert to number or set to 0
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
 			this.set("lengthM", value*1000);
 		}
 		return this._toFixed(this.get('lengthM')/1000,4);
@@ -262,7 +262,7 @@ export default DS.Model.extend({
 	 */
 	speedKmHr :  function(propertyName, value) {
    	if (arguments.length > 1) {
-    	value = +value || 0; // convert to number or set to 0
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
     	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
 		}
 		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeSec')/60/60), 4);
