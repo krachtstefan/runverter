@@ -287,9 +287,27 @@ export default DS.Model.extend({
 
 	/**
 	 * speedKmHrStackDecimal is used to create a view like 12,34
+	 * if arguments are passed, they are used as a setter for this computed property
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
+	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {number} up to 2 digits of the decimal place of the speed in km/hr
 	 */
-	speedKmHrStackDecimal : function(){
+	speedKmHrStackDecimal : function(propertyName, value) {
+		if (arguments.length > 1) {
+			var leadingZeros = this._getLeadingZerosFromString(value);	
+
+			value = +Math.round(value) || 0; // convert to number or set to 0
+			var valueLenght = value.toString().length;
+
+    	// reflects the decimal precision of the value
+    	// 1 = 100; 10 = 10
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
+    	
+     	// calulate the speed from decimal place 
+			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
+ 			this.set("speedKmHr", decimalSpeed/1000);
+		}
 		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
 		kmHrDecimalPlace = this._removeEndingZeros(kmHrDecimalPlace.split(".")[1]);
 		return kmHrDecimalPlace ? kmHrDecimalPlace : "0";
