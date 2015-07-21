@@ -306,7 +306,7 @@ export default DS.Model.extend({
     	
      	// calulate the speed from decimal place 
 			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
- 			this.set("speedKmHr", decimalSpeed/1000);
+ 			this.set("speedKmHr", this.get("speedKmHrStackKm")+(decimalSpeed/1000)) ;
 		}
 		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
 		kmHrDecimalPlace = this._removeEndingZeros(kmHrDecimalPlace.split(".")[1]);
