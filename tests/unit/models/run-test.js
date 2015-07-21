@@ -708,6 +708,7 @@ test('_removeEndingZeros returns an empty string if the parameter only contains 
 
 test('_toFixed returns a string with desired precision and can round up', function(assert) {
 	assert.strictEqual(this.subject()._toFixed(2.05, 1), "2.1"); // 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
+	assert.strictEqual(this.subject()._toFixed(2.21235, 4), "2.2124"); // TODO
 });
 
 test('_toFixed can round down', function(assert) {
