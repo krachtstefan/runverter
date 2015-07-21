@@ -543,9 +543,13 @@ test('speedKmHr setter also works with integer', function(assert) {
 test('speedKmHr setter can handle floats', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1000});
 	run.set("speedKmHr", 2.2);
-	assert.strictEqual(run.get("speedKmHr"), "2.0000");
+	assert.strictEqual(run.get("speedKmHr"), "2.2000");
 	run.set("speedKmHr", "2.5");
-	assert.strictEqual(run.get("speedKmHr"), "3.0000");
+	assert.strictEqual(run.get("speedKmHr"), "2.5000");
+	run.set("speedKmHr", 2.21234);
+	assert.strictEqual(run.get("speedKmHr"), "2.2123");
+	run.set("speedKmHr", 2.21235);
+	assert.strictEqual(run.get("speedKmHr"), "2.2123"); // TODO: Compression loss here
 });
 
 test('speedKmHr setter changes timeSec', function(assert) {
