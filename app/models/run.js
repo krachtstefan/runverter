@@ -262,7 +262,7 @@ export default DS.Model.extend({
 	 */
 	speedKmHr :  function(propertyName, value) {
    	if (arguments.length > 1) {
-    	value = +Math.round(value) || 0; // convert to number or set to 0
+    	value = +value || 0; // convert to number or set to 0
     	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
 		}
 		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeSec')/60/60), 4);
