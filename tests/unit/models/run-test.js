@@ -536,7 +536,7 @@ test('speedKmHr setter changes speedKmHr', function(assert) {
 
 test('speedKmHr setter also works with integer', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1000});
-	run.set("speedKmHr", "2");
+	run.set("speedKmHr", 2);
 	assert.strictEqual(run.get("speedKmHr"), "2.0000");
 });
 
