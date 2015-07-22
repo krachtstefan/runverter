@@ -527,8 +527,6 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 test('paceMinPerKm property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeMin : 60, lengthM : 1000});
  	assert.strictEqual(run.get("paceMinPerKm"), "60.0000");
- 	run.setProperties({timeMin : 1, lengthM : 999});
- 	// assert.strictEqual(run.get("paceMinPerKm"), 1.0000); // TODO: Compression loss here
 });
 
 test('paceMinPerKm has 4 digit precision and can round up', function(assert) {
