@@ -345,9 +345,18 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHrStackMi is used to create a view like 12,34
-	 * @return {number} mi stack of the speed
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackMi
+	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
+	 * @return {number} 															mi stack of the speed
 	 */
-	speedMiHrStackMi : function(){
+	speedMiHrStackMi : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	var previousValue = this.get("speedMiHrStackMi");
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+    	this.set("speedMiHr", parseFloat(this.get('speedMiHr'))+(value-previousValue));
+		}
 		return parseInt(this.get("speedMiHr"));
 	}.property('speedMiHr'),
 
