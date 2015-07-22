@@ -550,6 +550,22 @@ test('paceMinPerKmStackMin property can be zero', function(assert) {
  	assert.strictEqual(run.get("paceMinPerKmStackMin"), 0);
 });
 
+// paceMinPerKmStackSec
+test('paceMinPerKmStackSec property is calculated from timeMin and lengthM and can round down' , function(assert) {
+	var run = this.subject({timeMin : 1.54, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKmStackSec"), 32); // 60 * 0,54 = 32,4 seconds
+});
+
+test('paceMinPerKmStackSec property can round up' , function(assert) {
+	var run = this.subject({timeMin : 1.56, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKmStackSec"), 34); // 60 * 0,56 = 33,6 seconds
+});
+
+test('paceMinPerKmStackSec can be zero', function(assert) {
+	var run = this.subject({timeMin : 1, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKmStackSec"), 0);
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
