@@ -539,6 +539,42 @@ test('paceMinPerKm can round down', function(assert) {
  	assert.strictEqual(run.get("paceMinPerKm"), "1.2346");
 });
 
+test('paceMinPerKm setter changes paceMinPerKm', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerKm", "21");
+	assert.strictEqual(run.get("paceMinPerKm"), "21.0000");
+});
+
+test('paceMinPerKm setter also works with integer', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerKm", 21);
+	assert.strictEqual(run.get("paceMinPerKm"), "21.0000");
+});
+
+test('paceMinPerKm setter can handle floats', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerKm", 2.2);
+	assert.strictEqual(run.get("paceMinPerKm"), "2.2000");
+	run.set("paceMinPerKm", "2.5");
+	assert.strictEqual(run.get("paceMinPerKm"), "2.5000");
+	run.set("paceMinPerKm", 2.21234);
+	assert.strictEqual(run.get("paceMinPerKm"), "2.2123");
+	run.set("paceMinPerKm", 2.21235);
+	assert.strictEqual(run.get("paceMinPerKm"), "2.2123"); // TODO: Compression loss here
+});
+
+test('paceMinPerKm setter changes timeSec', function(assert) {
+	var run = this.subject({lengthM : 8000});
+	run.set("paceMinPerKm", "2");
+	assert.strictEqual(run.get("timeSec"), 960); // 8km with 2min/km will take 16 min (960 sek)
+});
+
+test('paceMinPerKm setter doesn\'t change lengthM', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerKm", 21);
+	assert.strictEqual(run.get("lengthM"), 2000);
+});
+
 // paceMinPerKmStackMin
 test('paceMinPerKmStackMin property is calculated from lengthM', function(assert) {
 	var run = this.subject({timeMin : 1.23454, lengthM : 1000});
