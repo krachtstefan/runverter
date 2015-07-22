@@ -806,6 +806,58 @@ test('speedMiHrStackDecimal can be zero', function(assert) {
  	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
 });
 
+test('speedMiHrStackDecimal setter changes speedMiHrStackDecimal', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 12000});
+	run.set("speedMiHrStackDecimal", "9");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
+});
+
+test('speedMiHrStackDecimal setter also works with integer', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 12000});
+	run.set("speedMiHrStackDecimal", 9);
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
+});
+
+test('speedMiHrStackDecimal setter can handle floats', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 12000});
+	run.set("speedMiHrStackDecimal", "8.2");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "8");
+	run.set("speedMiHrStackDecimal", 8.5);
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
+});
+
+test('speedMiHrStackDecimal setter works with leading zeros', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 12000});
+	run.set("speedMiHrStackDecimal", "09");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "09");
+	run.set("speedMiHrStackDecimal", "002");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
+	run.set("speedMiHrStackDecimal", "009");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "01");
+});
+
+test('speedMiHrStackDecimal setter changes timeSec', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 4828.032});
+	run.set("speedMiHrStackMi", "1");
+	run.set("speedMiHrStackDecimal", "5");
+	assert.strictEqual(run.get("timeSec"), 7200); // 3m with 1,5m/hr will take 2 hours (7200 sek)
+});
+
+test('speedMiHrStackDecimal setter doesn\'t change lengthM', function(assert) {
+	var run = this.subject({timeSec : 3600, lengthM : 12000});
+	run.set("speedMiHrStackDecimal", "9");
+	assert.strictEqual(run.get("lengthM"), 12000);
+});
+
+test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
+	var run = this.subject({timeSec : 7200, lengthM : 4400});
+	run.setProperties({
+		"speedMiHrStackMi" : "12",
+		"speedMiHrStackDecimal" : "05"
+	});
+	assert.strictEqual(run.get("speedMiHr"), "12.0500");
+});
+
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
