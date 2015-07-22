@@ -2,13 +2,6 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 
 	/**
-	 * timeSec represents the time of a run, should be set on create
-	 * 
-	 * @type {number}	time of the run in seconds
-	 */
-	timeSec : null,
-
-	/**
 	 * MtoMi the lenght of a meter in miles
 	 * 
 	 * @type {number}	lenght of a meter in miles
@@ -21,7 +14,14 @@ export default DS.Model.extend({
 	 * @type {number}	lenght of a mile in meters
 	 */
 	miToM : 1609.344,
-	
+
+	/**
+	 * timeSec represents the time of a run, should be set on create
+	 * 
+	 * @type {number}	time of the run in seconds
+	 */
+	timeSec : null,
+
 	/**
 	 * time of the run in hours
 	 * if arguments are passed, they are used as a setter for this computed property 
@@ -114,6 +114,67 @@ export default DS.Model.extend({
 	lengthM : null,
 
 	/**
+	 * lenght of the run in km
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be lengthKm
+	 * @param  {Object|string|number} value						new value of lengthKm
+	 * @return {string}																km with 4 digits precision
+	 */
+	lengthKm : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
+			this.set("lengthM", value*1000);
+		}
+		return this._toFixed(this.get('lengthM')/1000,4);
+	}.property('lengthM'),
+
+	/**
+	 * lengthKmStackKm is used to create a view like 12,34
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
+	 * @param  {Object|string|number} value						new value of lengthKmStackKm
+	 * @return {number} 															km stack of the run
+	 */
+	lengthKmStackKm : function(propertyName, value) {
+    if (arguments.length > 1) {
+    	var previousValue = this.get("lengthKmStackKm");
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
+		}
+		return parseInt(this.get("lengthKm"));
+	}.property('lengthKm'),
+
+	/**
+	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
+	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
+	 * @return {string}              									up to 2 digits of the decimal place of the run in km
+	 */
+	lengthKmStackDecimal : function(propertyName, value) {
+   	if (arguments.length > 1) {
+   		var leadingZeros = this._getLeadingZerosFromString(value);	
+   		
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+    	var valueLenght = value.toString().length;
+
+    	// reflects the decimal precision of the value
+    	// 1 = 100; 10 = 10
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
+    	
+    	// calulate the meters from decimal place 
+			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
+			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
+		}
+		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
+		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
+		return kmDecimalPlace ? kmDecimalPlace : "0";
+	}.property('lengthKm'),
+
+	/**
 	 * lenght of the run in miles
 	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
@@ -175,68 +236,6 @@ export default DS.Model.extend({
 		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
 		return miDecimalPlace ? miDecimalPlace : "0";
 	}.property('lengthMi'),
-
-	/**
-	 * lenght of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
-	 * @param  {string}								propertyName		if defined, it will be lengthKm
-	 * @param  {Object|string|number} value						new value of lengthKm
-	 * @return {string}																km with 4 digits precision
-	 */
-	lengthKm : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("lengthM", value*1000);
-		}
-		return this._toFixed(this.get('lengthM')/1000,4);
-	}.property('lengthM'),
-
-	/**
-	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
-	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
-	 * @param  {Object|string|number} value						new value of lengthKmStackKm
-	 * @return {number} 															km stack of the run
-	 */
-	lengthKmStackKm : function(propertyName, value) {
-    if (arguments.length > 1) {
-    	var previousValue = this.get("lengthKmStackKm");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
-		}
-		return parseInt(this.get("lengthKm"));
-	}.property('lengthKm'),
-
-	/**
-	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
-	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
-	 * @return {string}              									up to 2 digits of the decimal place of the run in km
-	 */
-	lengthKmStackDecimal : function(propertyName, value) {
-   	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);	
-   		
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	var valueLenght = value.toString().length;
-
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
-    	
-    	// calulate the meters from decimal place 
-			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
-		}
-		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
-		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
-		return kmDecimalPlace ? kmDecimalPlace : "0";
-	}.property('lengthKm'),
-
 
 	/**
 	 * paceMinPerKm represents the pace of the run in min/km
