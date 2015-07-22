@@ -539,6 +539,17 @@ test('paceMinPerKm can round down', function(assert) {
  	assert.strictEqual(run.get("paceMinPerKm"), "1.2346");
 });
 
+// paceMinPerKmStackMin
+test('paceMinPerKmStackMin property is calculated from lengthM', function(assert) {
+	var run = this.subject({timeMin : 1.23454, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKmStackMin"), 1);
+});
+
+test('paceMinPerKmStackMin property can be zero', function(assert) {
+	var run = this.subject({timeMin : 1, lengthM : 1001});
+ 	assert.strictEqual(run.get("paceMinPerKmStackMin"), 0);
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
