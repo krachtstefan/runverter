@@ -508,6 +508,22 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 	assert.strictEqual(run.get("lengthMi"), "12.0900");
 });
 
+// paceMinPerKm
+test('paceMinPerKm property is calculated from timeSec and lengthM', function(assert) {
+	var run = this.subject({timeMin : 60, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKm"), "60.0000");
+});
+
+test('paceMinPerKm has 4 digit precision and can round up', function(assert) {
+	var run = this.subject({timeMin : 1.23454, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKm"), "1.2345");
+});
+
+test('paceMinPerKm can round down', function(assert) {
+	var run = this.subject({timeMin : 1.23455, lengthM : 1000});
+ 	assert.strictEqual(run.get("paceMinPerKm"), "1.2346");
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
