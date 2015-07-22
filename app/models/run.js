@@ -23,22 +23,6 @@ export default DS.Model.extend({
 	miToM : 1609.344,
 	
 	/**
-	 * time of the run in minutes
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
-	 * @param  {string}								propertyName		if defined, it will be timeMin
-	 * @param  {Object|string|number} value						new value of timeMin
-	 * @return {string} 															minutes with 4 digits precision
-	 */
-	timeMin : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("timeSec", value*60);
-		}
-		return this._toFixed(this.get('timeSec')/60,4);
-	}.property('timeSec'),
-
-	/**
 	 * time of the run in hours
 	 * if arguments are passed, they are used as a setter for this computed property 
 	 * 
@@ -55,21 +39,37 @@ export default DS.Model.extend({
 	}.property('timeSec'),
 
 	/**
-	 * timeStackSec is used to create a view like 12:34:56
+	 * time of the run in minutes
 	 * if arguments are passed, they are used as a setter for this computed property 
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackSec
-	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {number} 															second stack of the run time
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be timeMin
+	 * @param  {Object|string|number} value						new value of timeMin
+	 * @return {string} 															minutes with 4 digits precision
 	 */
-	timeStackSec : function(propertyName, value) {
+	timeMin : function(propertyName, value) {
 		if (arguments.length > 1) {
-			var previousValue = this.get("timeStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0			
-			this.set("timeSec", this.get('timeSec')+(value-previousValue));
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
+			this.set("timeSec", value*60);
 		}
-		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
-	}.property('timeSec', 'timeMin'),
+		return this._toFixed(this.get('timeSec')/60,4);
+	}.property('timeSec'),
+
+	/**
+	 * timeStackHr is used to create a view like 12:34:56
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be timeStackHr
+	 * @param  {Object|string|number} value						new value of timeStackHr
+	 * @return {number} 															hours stack of the run time
+	 */
+	timeStackHr : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	var previousValue = this.get("timeStackHr");
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60*60);
+		}
+		return parseInt(this.get("timeHr"));
+	}.property('timeHr'),
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
@@ -89,21 +89,21 @@ export default DS.Model.extend({
 	}.property('timeMin', 'timeStackHr'),
 
 	/**
-	 * timeStackHr is used to create a view like 12:34:56
+	 * timeStackSec is used to create a view like 12:34:56
 	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
-	 * @param  {string}								propertyName		if defined, it will be timeStackHr
-	 * @param  {Object|string|number} value						new value of timeStackHr
-	 * @return {number} 															hours stack of the run time
+	 *
+	 * @param  {string}								propertyName		if defined, it will be timeStackSec
+	 * @param  {Object|string|number} value						new value of timeStackSec
+	 * @return {number} 															second stack of the run time
 	 */
-	timeStackHr : function(propertyName, value) {
+	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	var previousValue = this.get("timeStackHr");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60*60);
+			var previousValue = this.get("timeStackSec");
+			value = +Math.round(value) || 0; // convert to number or set to 0			
+			this.set("timeSec", this.get('timeSec')+(value-previousValue));
 		}
-		return parseInt(this.get("timeHr"));
-	}.property('timeHr'),
+		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
+	}.property('timeSec', 'timeMin'),
 
 
 	/**
