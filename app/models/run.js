@@ -7,6 +7,20 @@ export default DS.Model.extend({
 	 * @type {number}	time of the run in seconds
 	 */
 	timeSec : null,
+
+	/**
+	 * MtoMi the lenght of a meter in miles
+	 * 
+	 * @type {number}	lenght of a meter in miles
+	 */
+	mToMi : 0.000621371,
+
+	/**
+	 * MitoM the lenght of a mile in meters
+	 * 
+	 * @type {number}	lenght of a mile in meters
+	 */
+	miToM : 1609.344,
 	
 	/**
 	 * time of the run in minutes
