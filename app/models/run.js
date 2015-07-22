@@ -126,7 +126,7 @@ export default DS.Model.extend({
     	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
 			this.set("lengthM", value*this.miToM);
 		}
-		return this._toFixed(this.get('lengthM')*0.000621371,4);
+		return this._toFixed(this.get('lengthM')*this.mToMi,4);
 	}.property('lengthM'),
 
 	/**
