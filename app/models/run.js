@@ -124,7 +124,7 @@ export default DS.Model.extend({
 	lengthMi : function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("lengthM", value*1609.344);
+			this.set("lengthM", value*this.miToM);
 		}
 		return this._toFixed(this.get('lengthM')*0.000621371,4);
 	}.property('lengthM'),
@@ -141,7 +141,7 @@ export default DS.Model.extend({
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthMiStackMi");
     	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1609.344);
+			this.set("lengthM", this.get('lengthM')+(value-previousValue)*this.miToM);
 		}
 		return parseInt(this.get("lengthMi"));
 	}.property('lengthMi'),
@@ -167,9 +167,9 @@ export default DS.Model.extend({
     	
     	// calulate the meters from decimal place 
 			var decimalMiles = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-    	var decimalMeters = decimalMiles/1000*1609.344;
+    	var decimalMeters = decimalMiles/1000*this.miToM;
 
-			this.set("lengthM", this.get('lengthMiStackMi')*1609.344+decimalMeters);
+			this.set("lengthM", this.get('lengthMiStackMi')*this.miToM+decimalMeters);
 		}
 		var miDecimalPlace = this._toFixed(parseFloat(this.get("lengthMi")),2);
 		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
@@ -333,7 +333,7 @@ export default DS.Model.extend({
 	 * @return {string} mi/hr with 4 digits precision
 	 */
 	speedMiHr : function(){
-		return this._toFixed((this.get('lengthM')/1609.344)/(this.get('timeMin')/60), 4);
+		return this._toFixed((this.get('lengthM')/this.miToM)/(this.get('timeMin')/60), 4);
 	}.property('lengthM', 'timeHr'),
 
 	/**
