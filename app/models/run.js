@@ -251,8 +251,8 @@ export default DS.Model.extend({
 		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
-	
-	paceMinPerMi  : function(){
+	  
+	paceMinPerMi : function(){
 		return this.get('timeMin')/this.get('lengthMi');
 	}.property('timeMin', 'lengthMi'),
 
@@ -274,7 +274,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
 	 * @return {string} 															km/hr with 4 digits precision
 	 */
-	speedKmHr :  function(propertyName, value) {
+	speedKmHr : function(propertyName, value) {
    	if (arguments.length > 1) {
     	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
     	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
@@ -305,7 +305,7 @@ export default DS.Model.extend({
 	 * 
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
-	 * @return {number} up to 2 digits of the decimal place of the speed in km/hr
+	 * @return {number} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
 	speedKmHrStackDecimal : function(propertyName, value) {
 		if (arguments.length > 1) {
