@@ -280,6 +280,7 @@ export default DS.Model.extend({
 		if (arguments.length > 1) {
     	var previousValue = this.get("speedKmHrStackKm");
     	value = +Math.round(value) || 0; // convert to number or set to 0
+    	// TODO: set seconds to avoid lag of precision? 
     	this.set("speedKmHr", parseFloat(this.get('speedKmHr'))+(value-previousValue));
 		}
 		return parseInt(this.get("speedKmHr"));
