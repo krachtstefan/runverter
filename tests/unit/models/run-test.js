@@ -105,6 +105,11 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
  	assert.strictEqual(run.get("timeStackHr"), 5);
 });
 
+test('timeStackHr property can be zero', function(assert) {
+	var run = this.subject({timeSec : 3599});
+ 	assert.strictEqual(run.get("timeStackHr"), 0);
+});
+
 test('timeStackHr setter changes timeStackHr', function(assert) {
 	var run = this.subject();
 	run.set("timeStackHr", "2");
@@ -140,6 +145,11 @@ test('timeStackMin property is calculated from timeSec', function(assert) {
  	assert.strictEqual(run.get("timeStackMin"), 2);
 });
 
+test('timeStackMin property can be zero', function(assert) {
+	var run = this.subject({timeSec : 59});
+ 	assert.strictEqual(run.get("timeStackMin"), 0);
+});
+
 test('timeStackMin setter changes timeStackMin', function(assert) {
 	var run = this.subject();
 	run.set("timeStackMin", "10");
@@ -173,6 +183,11 @@ test('timeStackMin setter influences all time related properties', function(asse
 test('timeStackSec property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : 62});
  	assert.strictEqual(run.get("timeStackSec"), 2);
+});
+
+test('timeStackSec property can be zero', function(assert) {
+	var run = this.subject({timeSec : 60});
+ 	assert.strictEqual(run.get("timeStackSec"), 0);
 });
 
 test('timeStackSec setter changes timeStackSec', function(assert) {
