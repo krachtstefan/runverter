@@ -238,29 +238,76 @@ export default DS.Model.extend({
 	}.property('lengthKm'),
 
 
-	
-	paceMinPerKm : function(){
+	/**
+	 * paceMinPerKm represents the pace of the run in min/km
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
+	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
+	 * @return {string}              									min/km with 4 digits precision
+	 */
+	paceMinPerKm : function(propertyName, value) {
 		return this.get('timeMin')/this.get('lengthKm');
 	}.property('timeMin', 'lengthKm'),
 
-	paceMinPerKmStackMin : function(){
+	/**
+	 * paceMinPerKmStackMin is used to create a view like 12:34
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
+	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
+	 * @return {number} 															min stack of the pace
+	 */
+	paceMinPerKmStackMin : function(propertyName, value) {
 		return parseInt(this.get("paceMinPerKm"));
 	}.property('paceMinPerKm'),
 
-	paceMinPerKmStackSec : function(){
+	/**
+	 * paceMinPerKmStackSec is used to create a view like 12:34
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 *
+	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackSec
+	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
+	 * @return {number} 															second stack of the pace
+	 */
+	paceMinPerKmStackSec : function(propertyName, value) {
 		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
-	  
-	paceMinPerMi : function(){
+	
+	/**
+	 * paceMinPerMi represents the pace of the run in min/mi
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerMi
+	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
+	 * @return {string}              									min/mi with 4 digits precision
+	 */
+	paceMinPerMi : function(propertyName, value) {
 		return this.get('timeMin')/this.get('lengthMi');
 	}.property('timeMin', 'lengthMi'),
 
-	paceMinPerMiStackMin : function(){
+	/**
+	 * paceMinPerMiStackMin is used to create a view like 12:34
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackMin
+	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
+	 * @return {number} 															min stack of the pace
+	 */
+	paceMinPerMiStackMin : function(propertyName, value) {
 		return parseInt(this.get("paceMinPerMi"));
 	}.property('paceMinPerMi'),
 
-	paceMinPerMiStackSec : function(){
+	/**
+	 * paceMinPerMiStackSec is used to create a view like 12:34
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 *
+	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
+	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec
+	 * @return {number} 															second stack of the pace
+	 */
+	paceMinPerMiStackSec : function(propertyName, value) {
 		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerMi', 'paceMinPerMiStackMin'),
