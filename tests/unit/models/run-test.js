@@ -676,7 +676,7 @@ test('speedKmHrStackDecimal setter doesn\'t change lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM"), 12000);
 });
 
-test('speedKmHrStack and speedKmHrStackDecimal setter will define speedKmHr', function(assert) {
+test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 4400});
 	run.setProperties({
 		"speedKmHrStackKm" : "12",
