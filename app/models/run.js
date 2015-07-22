@@ -330,9 +330,17 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHr represents the speed of the run in miles per hour
-	 * @return {string} mi/hr with 4 digits precision
+	 * if arguments are passed, they are used as a setter for this computed property 
+	 * 
+	 * @param  {string} 								propertyName 	if defined, it will be speedMiHr
+	 * @param  {Object|string|number} 	value        	new value of speedMiHr
+	 * @return {string}																mi/hr with 4 digits precision
 	 */
-	speedMiHr : function(){
+	speedMiHr : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
+    	this.set('timeSec',(this.get('lengthM')/this.miToM)/value*(60*60));
+		}
 		return this._toFixed((this.get('lengthM')/this.miToM)/(this.get('timeMin')/60), 4);
 	}.property('lengthM', 'timeHr'),
 
