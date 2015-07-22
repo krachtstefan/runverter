@@ -303,8 +303,8 @@ export default DS.Model.extend({
 	 * if arguments are passed, they are used as a setter for this computed property 
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
-	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec
-	 * @return {number} 															second stack of the pace
+	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
+	 * @return {number} 															second stack of the pace, betweeen 0 and 59
 	 */
 	paceMinPerMiStackSec : function(propertyName, value) {
 		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
