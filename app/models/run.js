@@ -279,6 +279,11 @@ export default DS.Model.extend({
 	 * @return {number} 															second stack of the pace
 	 */
 	paceMinPerKmStackSec : function(propertyName, value) {
+		if (arguments.length > 1) {
+			var previousValue = this.get("paceMinPerKmStackSec");
+			value = +Math.round(value) || 0; // convert to number or set to 0	
+			this.set("paceMinPerKm", parseFloat(this.get('paceMinPerKm'))+(value-previousValue)/60);
+		}
 		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
