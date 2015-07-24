@@ -94,7 +94,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackSec
 	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {number} 															second stack of the run time
+	 * @return {number} 															second stack of the run time, betweeen 0 and 59
 	 */
 	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {

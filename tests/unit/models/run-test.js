@@ -219,6 +219,15 @@ test('timeStackSec setter influences all time related properties', function(asse
 	assert.strictEqual(run.get("timeSec"), 12620);
 });
 
+test('timeStackSec setter handles values bigger than 59', function(assert) {
+	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
+	run.set("timeStackSec", "62"); // 3,5 hours and 62 seconds
+	assert.strictEqual(run.get("timeStackHr"), 3);
+	assert.strictEqual(run.get("timeStackMin"), 31); // 30 flipps to 31 because 62 seconds starts another minute
+	assert.strictEqual(run.get("timeStackSec"), 2);
+	assert.strictEqual(run.get("timeSec"), 12662);
+});
+
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : 2000});
