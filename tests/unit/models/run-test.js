@@ -643,6 +643,42 @@ test('paceMinPerKmStackSec can be zero', function(assert) {
  	assert.strictEqual(run.get("paceMinPerKmStackSec"), 0);
 });
 
+test('paceMinPerKmStackSec setter changes paceMinPerKmStackSec', function(assert) {
+	var run = this.subject({timeMin : 1.5, lengthM : 1000});
+	run.set("paceMinPerKmStackSec", "10");
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 10);
+});
+
+test('paceMinPerKmStackSec setter can handle floats', function(assert) {
+	var run = this.subject({timeMin : 1.5, lengthM : 1000});
+	run.set("paceMinPerKmStackSec", "2.2");
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 2);
+	run.set("paceMinPerKmStackSec", 2.5);
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 3);
+});
+
+test('paceMinPerKmStackSec setter also works with integer', function(assert) {
+	var run = this.subject({timeMin : 1.5, lengthM : 1000});
+	run.set("paceMinPerKmStackSec", 2);
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 2);
+});
+
+test('paceMinPerKmStackSec setter influences all pace related properties', function(assert) {
+	var run = this.subject({timeMin : 12, lengthM : 2000}); // 6 min/km	
+	run.set("paceMinPerKmStackSec", "20"); // 6.3333 min/km
+	assert.strictEqual(run.get("paceMinPerKmStackMin"), 6);
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 20);
+	assert.strictEqual(run.get("paceMinPerKm"), "6.3333");
+});
+
+test('paceMinPerKmStackSec setter handles values bigger than 59', function(assert) {
+	var run = this.subject({timeMin : 12, lengthM : 2000}); // 6 min/km	
+	run.set("paceMinPerKmStackSec", "90"); // 7.5000 min/km
+	assert.strictEqual(run.get("paceMinPerKmStackMin"), 7); // 6 flipps to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
+	assert.strictEqual(run.get("paceMinPerKmStackSec"), 30);
+	assert.strictEqual(run.get("paceMinPerKm"), "7.5000");
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
