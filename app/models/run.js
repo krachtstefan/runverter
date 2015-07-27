@@ -500,7 +500,7 @@ export default DS.Model.extend({
 	_toFixed : function(number, precision){
 		number = parseFloat(number);
 		precision = +Math.round(precision) || 0; // convert to number or set to 0
-		var precisionHelpoer = Math.pow(10,precision);
-		return (Math.round(number * precisionHelpoer) / precisionHelpoer).toFixed(precision);
+		var precisionHelper = Math.pow(10,precision);
+		return (Math.round(number * precisionHelper) / precisionHelper).toFixed(precision);
 	}
 });
