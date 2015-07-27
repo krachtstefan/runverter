@@ -679,6 +679,58 @@ test('paceMinPerKmStackSec setter handles values bigger than 59', function(asser
 	assert.strictEqual(run.get("paceMinPerKm"), "7.5000");
 });
 
+// paceMinPerMi
+test('paceMinPerMi property is calculated from timeSec and lengthM', function(assert) {
+	var run = this.subject({timeMin : 60, lengthM : 1609.344});
+ 	assert.strictEqual(run.get("paceMinPerMi"), "60.0000");
+});
+
+test('paceMinPerMi has 4 digit precision and can round down', function(assert) {
+	var run = this.subject({timeMin : 1.23454, lengthMi : 1});
+ 	assert.strictEqual(run.get("paceMinPerMi"), "1.2345");
+});
+
+test('paceMinPerMi can round up', function(assert) {
+	var run = this.subject({timeMin : 1.23455, lengthMi : 1});
+ 	assert.strictEqual(run.get("paceMinPerMi"), "1.2346");
+});
+
+test('paceMinPerMi setter changes paceMinPerMi', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerMi", "21");
+	assert.strictEqual(run.get("paceMinPerMi"), "21.0000");
+});
+
+test('paceMinPerMi setter also works with integer', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerMi", 21);
+	assert.strictEqual(run.get("paceMinPerMi"), "21.0000");
+});
+
+test('paceMinPerMi setter can handle floats', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerMi", 2.2);
+	assert.strictEqual(run.get("paceMinPerMi"), "2.2000");
+	run.set("paceMinPerMi", "2.5");
+	assert.strictEqual(run.get("paceMinPerMi"), "2.5000");
+	run.set("paceMinPerMi", 2.21234);
+	assert.strictEqual(run.get("paceMinPerMi"), "2.2123");
+	run.set("paceMinPerMi", 2.21235);
+	assert.strictEqual(run.get("paceMinPerMi"), "2.2123"); // TODO: Compression loss here
+});
+
+test('paceMinPerMi setter changes timeSec', function(assert) {
+	var run = this.subject({lengthMi : 8});
+	run.set("paceMinPerMi", "2");
+	assert.strictEqual(run.get("timeSec"), 960); // 8mi with 2min/mi will take 16 min (960 sek)
+});
+
+test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
+	var run = this.subject({lengthM : 2000});
+	run.set("paceMinPerMi", 21);
+	assert.strictEqual(run.get("lengthM"), 2000);
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : 7200, lengthM : 1500});
