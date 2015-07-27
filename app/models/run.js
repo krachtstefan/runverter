@@ -492,6 +492,7 @@ export default DS.Model.extend({
 	/**
 	 * optimied version of the .toFixed method which has a lag of precision
 	 * 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
+	 * found some issues with this fix as well f.e. 2.21235 results in 2.2124 
 	 * 
 	 * @param  {float} 	number 		input value		
 	 * @param  {number} precision desired precision

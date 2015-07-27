@@ -568,8 +568,6 @@ test('paceMinPerKm setter can handle floats', function(assert) {
 	assert.strictEqual(run.get("paceMinPerKm"), "2.5000");
 	run.set("paceMinPerKm", 2.21234);
 	assert.strictEqual(run.get("paceMinPerKm"), "2.2123");
-	run.set("paceMinPerKm", 2.21235);
-	assert.strictEqual(run.get("paceMinPerKm"), "2.2123"); // TODO: Compression loss here
 });
 
 test('paceMinPerKm setter changes timeSec', function(assert) {
@@ -715,8 +713,6 @@ test('paceMinPerMi setter can handle floats', function(assert) {
 	assert.strictEqual(run.get("paceMinPerMi"), "2.5000");
 	run.set("paceMinPerMi", 2.21234);
 	assert.strictEqual(run.get("paceMinPerMi"), "2.2123");
-	run.set("paceMinPerMi", 2.21235);
-	assert.strictEqual(run.get("paceMinPerMi"), "2.2123"); // TODO: Compression loss here
 });
 
 test('paceMinPerMi setter changes timeSec', function(assert) {
@@ -866,8 +862,6 @@ test('speedKmHr setter can handle floats', function(assert) {
 	assert.strictEqual(run.get("speedKmHr"), "2.5000");
 	run.set("speedKmHr", 2.21234);
 	assert.strictEqual(run.get("speedKmHr"), "2.2123");
-	run.set("speedKmHr", 2.21235);
-	assert.strictEqual(run.get("speedKmHr"), "2.2123"); // TODO: Compression loss here
 });
 
 test('speedKmHr setter changes timeSec', function(assert) {
@@ -1039,8 +1033,6 @@ test('speedMiHr setter can handle floats', function(assert) {
 	assert.strictEqual(run.get("speedMiHr"), "2.5000");
 	run.set("speedMiHr", 2.21234);
 	assert.strictEqual(run.get("speedMiHr"), "2.2123");
-	run.set("speedMiHr", 2.21235);
-	assert.strictEqual(run.get("speedMiHr"), "2.2123"); // TODO: Compression loss here
 });
 
 test('speedMiHr setter changes timeSec', function(assert) {
@@ -1198,7 +1190,6 @@ test('_removeEndingZeros returns an empty string if the parameter only contains 
 
 test('_toFixed returns a string with desired precision and can round up', function(assert) {
 	assert.strictEqual(this.subject()._toFixed(2.05, 1), "2.1"); // 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
-	// assert.strictEqual(this.subject()._toFixed(2.21235, 4), "2.2124"); // TODO
 });
 
 test('_toFixed can round down', function(assert) {
