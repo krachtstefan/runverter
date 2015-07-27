@@ -223,7 +223,7 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
 	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
 	run.set("timeStackSec", "62"); // 3,5 hours and 62 seconds
 	assert.strictEqual(run.get("timeStackHr"), 3);
-	assert.strictEqual(run.get("timeStackMin"), 31); // 30 flipps to 31 because 62 seconds starts another minute
+	assert.strictEqual(run.get("timeStackMin"), 31); // 30 flips to 31 because 62 seconds starts another minute
 	assert.strictEqual(run.get("timeStackSec"), 2);
 	assert.strictEqual(run.get("timeSec"), 12662);
 });
@@ -674,7 +674,7 @@ test('paceMinPerKmStackSec setter influences all pace related properties', funct
 test('paceMinPerKmStackSec setter handles values bigger than 59', function(assert) {
 	var run = this.subject({timeMin : 12, lengthM : 2000}); // 6 min/km	
 	run.set("paceMinPerKmStackSec", "90"); // 7.5000 min/km
-	assert.strictEqual(run.get("paceMinPerKmStackMin"), 7); // 6 flipps to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
+	assert.strictEqual(run.get("paceMinPerKmStackMin"), 7); // 6 flips to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
 	assert.strictEqual(run.get("paceMinPerKmStackSec"), 30);
 	assert.strictEqual(run.get("paceMinPerKm"), "7.5000");
 });
