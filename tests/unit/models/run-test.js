@@ -538,12 +538,12 @@ test('paceMinPerKm property is calculated from timeSec and lengthM', function(as
  	assert.strictEqual(run.get("paceMinPerKm"), "60.0000");
 });
 
-test('paceMinPerKm has 4 digit precision and can round up', function(assert) {
+test('paceMinPerKm has 4 digit precision and can round down', function(assert) {
 	var run = this.subject({timeMin : 1.23454, lengthM : 1000});
  	assert.strictEqual(run.get("paceMinPerKm"), "1.2345");
 });
 
-test('paceMinPerKm can round down', function(assert) {
+test('paceMinPerKm can round up', function(assert) {
 	var run = this.subject({timeMin : 1.23455, lengthM : 1000});
  	assert.strictEqual(run.get("paceMinPerKm"), "1.2346");
 });
