@@ -1188,6 +1188,14 @@ test('_removeEndingZeros returns an empty string if the parameter only contains 
  	assert.strictEqual(this.subject()._removeEndingZeros("000"), "");
 });
 
+test('_removeEndingZeros returns an empty string if the parameter is undefined', function(assert) {
+	assert.strictEqual(this.subject()._removeEndingZeros(), "");
+});
+
+test('_removeEndingZeros returns an empty string if the parameter is an empty string', function(assert) {
+	assert.strictEqual(this.subject()._removeEndingZeros(""), "");
+});
+
 test('_toFixed returns a string with desired precision and can round up', function(assert) {
 	assert.strictEqual(this.subject()._toFixed(2.05, 1), "2.1"); // 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
 });

@@ -482,7 +482,7 @@ export default DS.Model.extend({
 	 * @return {string}       output string
 	 */
 	_removeEndingZeros : function(input){
-		var output = input.toString();
+		var output = (typeof input === "undefined") ? "" : input.toString();
 		while (output[output.length-1]==="0") {
 			output = output.slice(0,-1);
 		}
