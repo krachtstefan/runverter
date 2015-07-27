@@ -313,6 +313,11 @@ export default DS.Model.extend({
 	 * @return {number} 															min stack of the pace
 	 */
 	paceMinPerMiStackMin : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	var previousValue = this.get("paceMinPerMiStackMin");
+    	value = +Math.round(value) || 0; // convert to number or set to 0
+			this.set("paceMinPerMi", parseFloat(this.get('paceMinPerMi'))+(value-previousValue));
+		}
 		return parseInt(this.get("paceMinPerMi"));
 	}.property('paceMinPerMi'),
 
