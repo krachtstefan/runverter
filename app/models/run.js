@@ -297,6 +297,10 @@ export default DS.Model.extend({
 	 * @return {string}              									min/mi with 4 digits precision
 	 */
 	paceMinPerMi : function(propertyName, value) {
+		if (arguments.length > 1) {
+    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
+    	this.set('timeSec',value*this.get('lengthMi')*60);
+		}
 		return this._toFixed(this.get('timeMin')/this.get('lengthMi'),4);
 	}.property('timeMin', 'lengthMi'),
 
