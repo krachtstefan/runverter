@@ -13,10 +13,13 @@ body{
 	.uk-form input[type="text"], .uk-form input[type="number"]{
 		text-align: center;
 		color:$color-form-text;
+		border-color:$color-form-border;
 		height:2em;
 		border-top:none; border-left:none; border-right:none;
 		&:focus{
 			color:$color-main-text;
+			background-color: $color-form-background;
+			border-color: $color-form-border-active;
 		}
 	}
 }
