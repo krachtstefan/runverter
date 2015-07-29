@@ -111,14 +111,14 @@
             left: 0;
             display: none;
             height: auto;
-            width: 200px;
-            margin: 0 0 0 -3px;
+            width: 114px;
+            margin: 0;
             background: #ffffff;
-            border: 3px solid #000000;
-            border-top: none;
-            color: #444444;
-            font-weight: 300;
+            color:$color-main-text;
+            background-color: $color-form-background;
             z-index: 1;
+            border:1px solid  $color-form-border-active;
+            outline: 5px solid rgba(140,183,197,0.2);
         }
 
         /* Shows the option list (don't edit) */
@@ -186,29 +186,26 @@
             /* Hover state for options, also used when a user uses his/hers up/down keys */
             .sod_select .sod_option.active
                 {
-                    background: #f7f7f7;
-                    color: #333333;
+                    color:$color-form-text;
                 }
 
             /*Make room for the check mark */
             .sod_select .sod_option.selected
                 {
-                    font-weight: 700;
                     padding-right: 25px;
                 }
 
                 /* Displays a check mark for the selected option */
                 .sod_select .sod_option.selected:before
                     {
-                        content: "";
                         position: absolute;
                         right: 10px;
                         top: 50%;
+                        content: "";
                         -webkit-transform: translateY(-50%);
                             -ms-transform: translateY(-50%);
                                 transform: translateY(-50%);
                         display: inline-block;
-                        color: #808080;
                         height: 9px;
                         width: 10px;
                         background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMTAgOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAgOSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjRDlEOUQ4IiBkPSJNNCw2LjdDMy42LDYuMywzLjUsNi4xLDMuMSw1LjdDMi42LDUuMiwyLDQuNiwxLjUsNC4xYy0wLjgtMC44LTIsMC40LTEuMiwxLjJjMC45LDAuOSwxLjksMS45LDIuOCwyLjgNCgkJYzAuNywwLjcsMS4zLDEsMiwwQzYuNyw2LDguMywzLjcsOS44LDEuNUMxMC41LDAuNSw5LTAuMyw4LjMsMC42bDAsMEM2LjcsMi45LDUuNyw0LjQsNCw2LjciLz4NCjwvZz4NCjwvc3ZnPg0K);
