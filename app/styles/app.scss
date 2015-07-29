@@ -3,7 +3,7 @@
 body{
 	font-size:3em;
 	line-height:0.8em;
-	color:#3d3d3d;
+	color:$color-main-text;
 
 	h1{
 		font-size:2em;
@@ -12,8 +12,11 @@ body{
 
 	.uk-form input[type="text"], .uk-form input[type="number"]{
 		text-align: center;
-		color:#0088cc;
+		color:$color-form-text;
 		height:2em;
 		border-top:none; border-left:none; border-right:none;
+		&:focus{
+			color:$color-main-text;
+		}
 	}
 }
