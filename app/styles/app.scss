@@ -16,6 +16,7 @@ body{
 		border-color:$color-form-border;
 		height:2em;
 		border-top:none; border-left:none; border-right:none;
+		padding: 0px 6px 8px 6px;
 		&:focus{
 			color:$color-main-text;
 			background-color: $color-form-background;
