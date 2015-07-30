@@ -4,11 +4,11 @@ export default Ember.Controller.extend({
 	runLength : [
 		{
 			id : "km",
-			label : "Km"
+			label : "km"
 		},
 		{
 			id : "mi",
-			label : "Mi"
+			label : "mi"
 		}
 	]
 });
