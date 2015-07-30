@@ -1,7 +1,8 @@
 <form class="uk-form">
-	<div class="uk-form-row">		
-		<span>{{input value=model.lengthKmStackKm size="2" maxlength="2" type="text"}} , {{input value=model.lengthKmStackDecimal size="2" maxlength="2" type="text"}}</span>
-		<span>{{input value=model.lengthMiStackMi size="2" maxlength="2" type="text"}} , {{input value=model.lengthMiStackDecimal size="2" maxlength="2" type="text"}}</span>
+	<div class="uk-form-row">
+		{{#if view.showRunLengthKm}}<span>{{input value=model.lengthKmStackKm size="2" maxlength="2" type="text"}} , {{input value=model.lengthKmStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
+		{{#if view.showRunLengthMi}}<span>{{input value=model.lengthMiStackMi size="2" maxlength="2" type="text"}} , {{input value=model.lengthMiStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
+		
 		{{view "select" value=view.content.runLengthSelected content=view.content.runLength optionValuePath="content.id" optionLabelPath="content.label" class="selectordie"}}
 	</div>
 	<div class="uk-form-row">
