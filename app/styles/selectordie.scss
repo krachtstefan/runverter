@@ -17,6 +17,20 @@
 /* Remove, change to fit your needs */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,700);
 
+#runTempo{
+    width: 200px;
+    .sod_list_wrapper{
+        width: 200px;
+    }
+}
+
+#runLength{
+    width: 114px;
+    .sod_list_wrapper{
+        width: 114px;
+    }
+}
+
 .sod_select,
 .sod_select *
     {
@@ -42,7 +56,6 @@
         background: #ffffff;
         color:$color-form-text;
         font-size: 42px;
-        width: 115px;
         height:2em;
         text-align: left;
         outline: 0;
@@ -111,7 +124,6 @@
             left: 0;
             display: none;
             height: auto;
-            width: 114px;
             margin: 0;
             background: #ffffff;
             color:$color-main-text;
