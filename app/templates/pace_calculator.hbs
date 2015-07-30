@@ -6,7 +6,7 @@
 		{{view "select" value=view.content.runLengthSelected content=view.content.runLength optionValuePath="content.id" optionLabelPath="content.label" class="selectordie"}}
 	</div>
 	<div class="uk-form-row">
-		{{input value=model.timeStackHr size="2" maxlength="2" type="text"}} : {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} : {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} hh:mm:ss
+		{{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hrs {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
 	</div>
 	<div class="uk-form-row">
 		{{#if view.showRunTempoMinKm}}{{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}}{{/if}}
