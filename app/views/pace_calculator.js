@@ -30,6 +30,7 @@ export default Ember.View.extend({
   
 
   didInsertElement: function() {
-    $(".selectordie").selectOrDie();
+    $("select.runLength").selectOrDie({customID:"runLength"});
+    $("select.runTempo").selectOrDie({customID:"runTempo"});
   }
 });
