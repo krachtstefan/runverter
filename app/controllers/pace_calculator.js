@@ -1,6 +1,6 @@
 import Ember from 'ember';
 export default Ember.Controller.extend({
-	runLengthSelected : "mi", 
+	runLengthSelected : "km", 
 	runLength : [
 		{
 			id : "km",
