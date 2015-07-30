@@ -10,5 +10,26 @@ export default Ember.Controller.extend({
 			id : "mi",
 			label : "mi"
 		}
+	],
+
+	runTempoSelected : "minkm", 
+
+	runTempo : [
+		{
+			id : "minkm",
+			label : "min/km"
+		},
+		{
+			id : "minmi",
+			label : "min/mi"
+		},
+		{
+			id : "kmh",
+			label : "km/h"
+		},
+		{
+			id : "mih",
+			label : "mi/h"
+		}
 	]
 });
