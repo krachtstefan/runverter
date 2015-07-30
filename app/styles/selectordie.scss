@@ -128,10 +128,8 @@
             color:$color-main-text;
             background-color: $color-form-background;
             z-index: 1;
-            border:1px solid  $color-form-border-active;
             outline: 5px solid rgba(140,183,197,0.2);
         }
-
         /* Shows the option list (don't edit) */
         .sod_select.open .sod_list_wrapper { display: block;  }
 
