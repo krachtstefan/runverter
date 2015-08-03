@@ -1,3 +1,16 @@
-<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-	{{outlet "main"}}
+<header></header>
+<div class="uk-container uk-container-center uk-padding-remove">
+	<div class="uk-grid">
+		<div class="uk-width-1-4 nav">
+			<ul class="uk-nav uk-nav-side">
+				<li><a href="#">Pace Calculator</a></li>
+    		<li><a href="#">Pace Converter</a></li>
+    		<li class="uk-active"><a href="#">Race Prediction</a></li>
+    		<li><a href="#">Paceband Generator</a></li>
+			</ul>
+		</div>
+		<div class="uk-width-3-4">
+			{{outlet "main"}}
+		</div>
+	</div>
 </div>
