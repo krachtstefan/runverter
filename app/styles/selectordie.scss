@@ -62,6 +62,7 @@
 /* Up/Down arrows */
 .sod_select:before,
 .sod_select:after{
+  color:$color-main-text;
   font-family: "Arial";
   content: "\25B2";
   position: absolute;
