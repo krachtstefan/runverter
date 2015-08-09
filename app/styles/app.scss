@@ -1,6 +1,6 @@
 @import "config";
 @import "selectordie";
-@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 body{
 	line-height:0.8em;
@@ -14,7 +14,7 @@ body{
 	form{
 		font-size:42px;
 		padding:50px 0;
-		font-family: 'Inconsolata';
+		font-family: 'Open Sans', Georgia, sans-serif;
 	}
 
 	header{
@@ -22,7 +22,7 @@ body{
 	}
 	
 	.nav{
-		font-family: 'Inconsolata';
+		font-family: 'Open Sans', Georgia, sans-serif;
 		text-transform: uppercase;
 		.uk-nav-side{
 			border-right:1px solid $color-form-border;
