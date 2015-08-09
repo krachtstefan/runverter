@@ -2,6 +2,10 @@
 @import "selectordie";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
+html{
+	background-color:$color-main-background;
+}
+
 body{
 	line-height:0.8em;
 	color:$color-main-text;
@@ -28,6 +32,12 @@ body{
 			border-right:1px solid $color-form-border;
 			a{
 				padding:40px 20px;
+				&:hover, &:active, &:focus{
+					background-color:$color-main-background;		
+				}
+			}
+			&>li.uk-active>a{
+				background-color:$color-main-background;
 			}
 		}
 	}
@@ -36,6 +46,7 @@ body{
 		text-align: center;
 		color:$color-form-text;
 		border-color:$color-form-border;
+		background-color:$color-main-background;
 		height:2em;
 		border-top:none; border-left:none; border-right:none;
 		padding: 0px 6px 6px 6px;
