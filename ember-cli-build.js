@@ -18,6 +18,13 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+  // 
+  // 
+  
+  app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js");
+  app.import('bower_components/uikit/css/uikit.min.css');
+  app.import('bower_components/uikit/js/uikit.min.js');
+  app.import('bower_components/SelectOrDie/_src/selectordie.min.js');
 
   return app.toTree();
 };
