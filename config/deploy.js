@@ -3,7 +3,7 @@ module.exports = {
     buildEnv: 'development',
     store: {
       type: 'redis',
-      host: 'localhost',
+      host: 'docker.dev',
       port: 6379
     },
     assets: {
