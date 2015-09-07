@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
 		}
 	],
 
-	runTempoSelected : "minkm", 
+	runTempoMetricsSelected : "minkm", 
 
 	runTempoMetrics : [
 		{
@@ -42,18 +42,18 @@ export default Ember.Controller.extend({
   }.property('runLengthSelected'),
 
   showRunTempoMinKm: function () {
-    return this.get("runTempoSelected") === "minkm" ? true : false;
-  }.property('runTempoSelected'),
+    return this.get("runTempoMetricsSelected") === "minkm" ? true : false;
+  }.property('runTempoMetricsSelected'),
 
   showRunTempoMinMi: function () {
-    return this.get("runTempoSelected") === "minmi" ? true : false;
-  }.property('runTempoSelected'),
+    return this.get("runTempoMetricsSelected") === "minmi" ? true : false;
+  }.property('runTempoMetricsSelected'),
 
   showRunTempoKmH: function () {
-    return this.get("runTempoSelected") === "kmh" ? true : false;
-  }.property('runTempoSelected'),
+    return this.get("runTempoMetricsSelected") === "kmh" ? true : false;
+  }.property('runTempoMetricsSelected'),
 
   showRunTempoMiH: function () {
-    return this.get("runTempoSelected") === "mih" ? true : false;
-  }.property('runTempoSelected'),
+    return this.get("runTempoMetricsSelected") === "mih" ? true : false;
+  }.property('runTempoMetricsSelected'),
 });
