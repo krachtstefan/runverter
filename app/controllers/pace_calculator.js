@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 
 	runTempoSelected : "minkm", 
 
-	runTempo : [
+	runTempoMetrics : [
 		{
 			id : "minkm",
 			label : "min/km"

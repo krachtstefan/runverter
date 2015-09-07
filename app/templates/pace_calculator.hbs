@@ -12,6 +12,6 @@
 		{{#if showRunTempoMinMi}}{{input value=model.paceMinPerMiStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerMiStackSec size="2" maxlength="2" type="text"}}{{/if}}
 		{{#if showRunTempoKmH}}{{input value=model.speedKmHrStackKm size="2" maxlength="2" type="text"}} , {{input value=model.speedKmHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
 		{{#if showRunTempoMiH}}{{input value=model.speedMiHrStackMi size="2" maxlength="2" type="text"}} , {{input value=model.speedMiHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
-		{{view "select" value=runTempoSelected content=runTempo optionValuePath="content.id" optionLabelPath="content.label" class="runTempo"}}
+		{{view "select" value=runTempoSelected content=runTempoMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runTempo"}}
 	</div>
 </form>
