@@ -1,6 +1,6 @@
 import Ember from 'ember';
 export default Ember.Controller.extend({
-	runLengthSelected : "km", 
+	runLengthMetricsSelected : "km", 
 	runLengthMetrics : [
 		{
 			id : "km",
@@ -34,12 +34,12 @@ export default Ember.Controller.extend({
 	],
 
 	showRunLengthKm: function () {
-    return this.get("runLengthSelected") === "km" ? true : false;
-  }.property('runLengthSelected'),
+    return this.get("runLengthMetricsSelected") === "km" ? true : false;
+  }.property('runLengthMetricsSelected'),
 
   showRunLengthMi: function () {
-    return this.get("runLengthSelected") === "mi" ? true : false;
-  }.property('runLengthSelected'),
+    return this.get("runLengthMetricsSelected") === "mi" ? true : false;
+  }.property('runLengthMetricsSelected'),
 
   showRunTempoMinKm: function () {
     return this.get("runTempoMetricsSelected") === "minkm" ? true : false;
