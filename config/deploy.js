@@ -1,6 +1,6 @@
 module.exports = {
-  development: {
-    buildEnv: 'development',
+  staging: {
+    buildEnv: 'staging',
     store: {
       type: 'redis',
       host: 'docker.dev',
