@@ -11,7 +11,7 @@ module.exports = {
       exclude: ['.DS_Store', '*-test.js'],
       accessKeyId: 'AKIAJQH4RE42AHIISVXQ',
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'runverter-development',
+      bucket: 'runverter',
       region: "eu-west-1"
     }
   },
@@ -27,7 +27,7 @@ module.exports = {
       exclude: ['.DS_Store', '*-test.js'],
       accessKeyId: 'AKIAJQH4RE42AHIISVXQ',
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'runverter-development',
+      bucket: 'runverter',
       region: "eu-west-1"
     }
   }
