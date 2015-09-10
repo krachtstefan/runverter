@@ -3,7 +3,7 @@ module.exports = {
     buildEnv: 'staging',
     store: {
       type: 'redis',
-      host: 'docker.dev',
+      host: 'runverter.staging',
       port: 6379
     },
     assets: {
