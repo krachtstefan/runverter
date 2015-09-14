@@ -29,6 +29,10 @@ body{
 		height: 180px;
 	}
 
+  .intro{
+    text-align: center;
+  }
+
 	.uk-form input[type="text"], .uk-form input[type="number"]{
 		text-align: center;
 		color:$color-form-text;
