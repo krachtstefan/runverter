@@ -4,3 +4,18 @@ $color-form-text: #0088cc;
 $color-form-background: #fff;
 $color-form-border: #dddddd;
 $color-form-border-active: #fff;
+
+@mixin respond-to($size) {
+  @if $size == "small" {
+    @media only screen and (min-width:480px) { @content; }
+  }
+  @else if $size == "medium" {
+    @media only screen and (min-width: 768px) { @content; }
+  }
+  @if $size == "large" {
+    @media only screen and (min-width: 960px) { @content; }
+  }
+  @if $size == "xlarge" {
+    @media only screen and (min-width: 1220px) { @content; }
+  }
+}
