@@ -28,27 +28,6 @@ body{
     background-size:300px;
 		height: 180px;
 	}
-	
-	.nav{
-		font-family: 'Open Sans', Georgia, sans-serif;
-		text-transform: uppercase;
-		font-size: 20px;
-		.uk-nav-side{
-			border-right:1px solid $color-form-border;
-			&>li>a{
-				color:$color-main-text;
-				padding:40px 20px;
-				&:hover, &:active, &:focus{
-					font-weight: bold;
-					background-color:$color-main-background;		
-				}
-			}
-			&>li.uk-active>a{
-				font-weight: bold;
-				background-color:$color-main-background;
-			}
-		}
-	}
 
 	.uk-form input[type="text"], .uk-form input[type="number"]{
 		text-align: center;
