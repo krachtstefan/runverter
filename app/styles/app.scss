@@ -29,6 +29,7 @@ body{
 	.header{
     background:url('images/runverter-logo.svg') no-repeat center;
     background-size:contain;
+    background-color:$color-secondary-background;
     background-size:300px;
 		height: 180px;
 	}
@@ -38,7 +39,10 @@ body{
     h1, .sod_select{
       font-size: 42px;
       border:none;
+      background:$color-secondary-background;
     }
+    background:$color-secondary-background;
+    padding:30px 0 40px 0;
   }
 
 	.uk-form input[type="text"], .uk-form input[type="number"]{
