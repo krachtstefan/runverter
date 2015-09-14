@@ -1,6 +1,7 @@
 import Ember from 'ember';
 export default Ember.Controller.extend({
-	runLengthMetricsSelected : "km", 
+  queryParams: ['runLengthMetricsSelected', 'runTempoMetricsSelected'],
+	runLengthMetricsSelected : "km",
 	runLengthMetrics : [
 		{
 			id : "km",
