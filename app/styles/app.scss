@@ -56,4 +56,11 @@ body{
 			border-color: $color-form-border-active;
 		}
 	}
+
+  .tool-label{
+    font-size:42px;
+    padding:33px 0 0 0;
+    color:$color-main-text-light;
+    text-align: right;
+  }
 }
