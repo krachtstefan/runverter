@@ -1,17 +1,28 @@
 <form class="uk-form">
-	<div class="uk-form-row">
-		{{#if showRunLengthKm}}<span>{{input value=model.lengthKmStackKm size="2" maxlength="2" type="text"}} , {{input value=model.lengthKmStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
-		{{#if showRunLengthMi}}<span>{{input value=model.lengthMiStackMi size="2" maxlength="2" type="text"}} , {{input value=model.lengthMiStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
-		{{view "select" value=runLengthMetricsSelected content=runLengthMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runLength"}}
-	</div>
-	<div class="uk-form-row">
-		{{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hrs {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
-	</div>
-	<div class="uk-form-row">
-		{{#if showRunTempoMinKm}}{{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}}{{/if}}
-		{{#if showRunTempoMinMi}}{{input value=model.paceMinPerMiStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerMiStackSec size="2" maxlength="2" type="text"}}{{/if}}
-		{{#if showRunTempoKmH}}{{input value=model.speedKmHrStackKm size="2" maxlength="2" type="text"}} , {{input value=model.speedKmHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
-		{{#if showRunTempoMiH}}{{input value=model.speedMiHrStackMi size="2" maxlength="2" type="text"}} , {{input value=model.speedMiHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
-		{{view "select" value=runTempoMetricsSelected content=runTempoMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runTempo"}}
-	</div>
+  <div class="uk-grid">
+    <div class="uk-width-1-3" style="text-align:right;">
+        ...
+    </div>
+    <div class="uk-width-2-3">
+      {{#if showRunLengthKm}}<span>{{input value=model.lengthKmStackKm size="2" maxlength="2" type="text"}} , {{input value=model.lengthKmStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
+      {{#if showRunLengthMi}}<span>{{input value=model.lengthMiStackMi size="2" maxlength="2" type="text"}} , {{input value=model.lengthMiStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
+      {{view "select" value=runLengthMetricsSelected content=runLengthMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runLength"}}
+    </div>
+    <div class="uk-width-1-3">
+      ...
+    </div>
+    <div class="uk-width-2-3">
+      {{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hrs {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
+    </div>
+    <div class="uk-width-1-3">
+      ...
+    </div>
+    <div class="uk-width-2-3">
+      {{#if showRunTempoMinKm}}{{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}}{{/if}}
+      {{#if showRunTempoMinMi}}{{input value=model.paceMinPerMiStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerMiStackSec size="2" maxlength="2" type="text"}}{{/if}}
+      {{#if showRunTempoKmH}}{{input value=model.speedKmHrStackKm size="2" maxlength="2" type="text"}} , {{input value=model.speedKmHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
+      {{#if showRunTempoMiH}}{{input value=model.speedMiHrStackMi size="2" maxlength="2" type="text"}} , {{input value=model.speedMiHrStackDecimal size="2" maxlength="2" type="text"}}{{/if}}
+      {{view "select" value=runTempoMetricsSelected content=runTempoMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runTempo"}}
+    </div>
+  </div>
 </form>
