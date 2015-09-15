@@ -32,8 +32,11 @@ body{
     background:url('images/runverter-logo.svg') no-repeat center;
     background-color:$color-secondary-background;
     background-size:250px;
-    @include respond-to("small"){background-size:350px;}
-		height: 180px;
+    height: 100px;
+    @include respond-to("small"){
+      background-size:350px;
+      height: 180px;
+    }
 	}
 
   .intro{
