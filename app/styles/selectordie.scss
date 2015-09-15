@@ -91,7 +91,7 @@
 /* Change the border color on hover, focus and when open */
 
 .sod_select.focus{
-  color:$color-main-text;
+  color:$color-form-text;
   background-color: $color-form-background;
   border-color: $color-form-border-active;
 }
