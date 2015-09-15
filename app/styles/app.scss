@@ -61,13 +61,20 @@ body{
 	}
 
   .tool-line{
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    @include respond-to("medium"){
+      margin-bottom: 20px;
+    }
   }
 
   .tool-label{
     font-size:21px;
-    padding:37px 0 0 0;
     color:$color-main-text-light;
-    @include respond-to("medium"){text-align: right;}
+    padding:0 0 10px 0;
+    // separate column
+    @include respond-to("medium"){
+      padding:37px 0 0 0;
+      text-align: right;
+    }
   }
 }
