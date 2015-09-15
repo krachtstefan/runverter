@@ -64,6 +64,6 @@ body{
     font-size:21px;
     padding:37px 0 0 0;
     color:$color-main-text-light;
-    text-align: right;
+    @include respond-to("medium"){text-align: right;}
   }
 }
