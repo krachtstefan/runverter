@@ -30,6 +30,12 @@
   }
 }
 
+#menu{
+  .sod_label{
+    padding-right: 25px !important;
+  }
+}
+
 .sod_select,
 .sod_select *{
   -webkit-box-sizing: border-box;
@@ -46,13 +52,13 @@
 .sod_select{
   display: inline-block;
   position: relative;
-  
+
   line-height:35px;
   padding: 18px 10px 30px 6px;
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
   color:$color-form-text;
-  font-size: 42px;  
+  font-size: 42px;
   text-align: left;
   outline: 0;
   outline-offset: -2px; /* Opera */
@@ -219,7 +225,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 /* The native select in touch mode. Keep this first line. Sorry, keep everything. */
 .sod_select.touch select{
   -webkit-appearance: menulist-button;
-  
+
   position: absolute;
   top: 0;
   left: 0;
