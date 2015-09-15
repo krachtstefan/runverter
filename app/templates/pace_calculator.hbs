@@ -1,5 +1,5 @@
 <form class="uk-form">
-  <div class="uk-grid uk-grid-collapse">
+  <div class="uk-grid uk-grid-collapse tool-line">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
         Running a distance of &nbsp;
     </div>
@@ -9,7 +9,7 @@
       {{view "select" value=runLengthMetricsSelected content=runLengthMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runLength"}}
     </div>
   </div>
-  <div class="uk-grid uk-grid-collapse">
+  <div class="uk-grid uk-grid-collapse tool-line">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
       in &nbsp;
     </div>
@@ -17,7 +17,7 @@
       {{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hr {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
     </div>
   </div>
-  <div class="uk-grid uk-grid-collapse">
+  <div class="uk-grid uk-grid-collapse tool-line">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
       requires a pace of &nbsp;
     </div>
