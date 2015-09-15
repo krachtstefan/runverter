@@ -8,12 +8,16 @@
       {{#if showRunLengthMi}}<span>{{input value=model.lengthMiStackMi size="2" maxlength="2" type="text"}} , {{input value=model.lengthMiStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
       {{view "select" value=runLengthMetricsSelected content=runLengthMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runLength"}}
     </div>
+  </div>
+  <div class="uk-grid">
     <div class="uk-width-2-5 tool-label">
       in
     </div>
     <div class="uk-width-3-5">
       {{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hrs {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
     </div>
+  </div>
+  <div class="uk-grid">
     <div class="uk-width-2-5 tool-label">
       requires a pace of
     </div>
