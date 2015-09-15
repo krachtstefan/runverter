@@ -57,9 +57,8 @@
 .sod_select{
   display: inline-block;
   position: relative;
-
   line-height:35px;
-  padding: 18px 10px 30px 6px;
+  padding: 8px 10px 30px 6px;
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
   color:$color-form-text;
@@ -112,8 +111,9 @@
   text-overflow: ellipsis;
   position: relative;
   text-align: center;
-  top:3px;
+  top:12px;
   padding-right: 15px;
+  padding-bottom:10px;
 }
 
 sod_select .sod_prefix { /* Use this if you're using a prefix and want to style it */ }
