@@ -33,7 +33,7 @@ body{
     background-color:$color-secondary-background;
 
     background-size:250px;
-    @include respond-to("small"){background-size:300px;}
+    @include respond-to("small"){background-size:350px;}
 		height: 180px;
 	}
 
