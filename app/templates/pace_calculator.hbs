@@ -1,7 +1,7 @@
 <form class="uk-form">
-  <div class="uk-grid">
+  <div class="uk-grid uk-grid-collapse">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        Running a distance of
+        Running a distance of &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
       {{#if showRunLengthKm}}<span>{{input value=model.lengthKmStackKm size="2" maxlength="2" type="text"}} , {{input value=model.lengthKmStackDecimal size="2" maxlength="2" type="text"}}</span>{{/if}}
@@ -9,17 +9,17 @@
       {{view "select" value=runLengthMetricsSelected content=runLengthMetrics optionValuePath="content.id" optionLabelPath="content.label" class="runLength"}}
     </div>
   </div>
-  <div class="uk-grid">
+  <div class="uk-grid uk-grid-collapse">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-      in
+      in &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
       {{input value=model.timeStackHr size="2" maxlength="2" type="text"}} hr {{input value=model.timeStackMin size="2" maxlength="2" type="text"}} min {{input value=model.timeStackSec size="2" maxlength="2" type="text"}} sec
     </div>
   </div>
-  <div class="uk-grid">
+  <div class="uk-grid uk-grid-collapse">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-      requires a pace of
+      requires a pace of &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
       {{#if showRunTempoMinKm}}{{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}}{{/if}}
