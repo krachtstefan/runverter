@@ -10,26 +10,26 @@ export default Ember.Controller.extend({
     {
       route : "paceConverter",
       name : "Pace Converter",
-      label : "You're using the",
+      label : "Hi! I'm the",
       description : "Some description."
     },
     {
       route : "lengthConverter",
       name : "Lenght Converter",
-      label : "km",
-      description : "Some description."
+      label : "This is the",
+      description : "Here you can convert the major. And yes, length matters."
     },
     {
       route : "racePredictor",
       name : "Race Predictor",
-      label : "You're using the",
-      description : "Some description."
+      label : "This space is reserved for the",
+      description : "Not quite ready yet..."
     },
     {
       route : "splitsCalculator",
       name : "Split Time Calculator",
-      label : "You're using the",
-      description : "Some description."
+      label : "Unfortunately this is not the",
+      description : "This feature will come pretty soon. I promise."
     }
   ],
 
