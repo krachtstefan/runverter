@@ -41,8 +41,7 @@ export default Ember.Controller.extend({
 
   actions: {
     navigateTo: function(selection, component) {
-
-      this.transitionTo(selection);
+      this.transitionToRoute(selection);
     }
   }
 });
