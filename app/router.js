@@ -10,6 +10,7 @@ Router.map(function() {
   this.resource('paceConverter', { path: '/pace' }, function(){});
   this.resource('lengthConverter', { path: '/length' }, function(){});
   this.resource('racePredictor', { path: '/race' }, function(){});
+  this.resource('splitsCalculator', { path: '/splits' }, function(){});
 });
 
 
