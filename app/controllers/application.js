@@ -32,4 +32,10 @@ export default Ember.Controller.extend({
       description : "Some description."
     }
   ],
+  actions: {
+    navigateTo: function(selection, component) {
+
+      this.transitionTo(selection);
+    }
+  }
 });
