@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
   ],
 
   menuItemsSelected : function() {
-    var currentPath = this.get("currentPath").split(".")[1];
+    var currentPath = this.get("currentPath").split(".")[0];
     var foundMenuItem = this.get("menuItems").findBy("route", currentPath);
     return foundMenuItem ? foundMenuItem : this.get("menuItems")[0];
   }.property('currentPath'),
