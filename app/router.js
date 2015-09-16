@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 	this.resource('paceCalculator', { path: '/' }, function(){});
+  this.resource('paceConverter', { path: '/pace' }, function(){});
 });
 
 
