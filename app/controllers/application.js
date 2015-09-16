@@ -32,6 +32,11 @@ export default Ember.Controller.extend({
       description : "Some description."
     }
   ],
+
+  menuItemsSelected : function() {
+    return this.get("currentPath").split(".")[0];
+  }.property('currentPath'),
+
   actions: {
     navigateTo: function(selection, component) {
 
