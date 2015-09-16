@@ -1,14 +1,14 @@
 <div class="header">&nbsp;</div>
 <div class="intro">
   <h1>
-    {{menuItemsSelected.label}}
-    {{#x-select value=menuItemsSelected.route action="navigateTo" class="menu"}}
+    You're using the
+    {{#x-select value=menuItemsSelected action="navigateTo" class="menu"}}
       {{#each menuItems as |item|}}
         {{#x-option value=item.route}}{{item.name}}{{/x-option}}
       {{/each}}
     {{/x-select}}
   </h1>
-  <p>{{menuItemsSelected.description}}</p>
+  <p>See which pace you need, to finish a run in your desired time.</p>
 </div>
 <div class="uk-container uk-container-center">
   {{outlet "main"}}
