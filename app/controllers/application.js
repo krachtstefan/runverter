@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
 
   menuDescription : function() {
     var selectedMenuItem = this.get("menuItems").findBy("route", this.get("menuItemsSelected"));
-    return selectedMenuItem.description
+    return selectedMenuItem.description;
   }.property('menuItemsSelected'),
 
   menuLabel: function() {
@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
   }.property('menuItemsSelected'),
 
   actions: {
-    navigateTo: function(selection, component) {
+    navigateTo: function(selection) {
       this.transitionToRoute(selection);
     }
   }
