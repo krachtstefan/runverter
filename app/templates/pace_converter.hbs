@@ -1,1 +1,34 @@
-Pace Converter
+<form class="uk-form">
+  <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
+        A pace of
+    </div>
+    <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
+        {{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}} min/km
+    </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
+        or
+    </div>
+    <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
+        {{input value=model.paceMinPerMiStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerMiStackSec size="2" maxlength="2" type="text"}} min/m
+    </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
+        equals a speed of
+    </div>
+    <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
+        {{input value=model.speedKmHrStackKm size="2" maxlength="2" type="text"}} , {{input value=model.speedKmHrStackDecimal size="2" maxlength="2" type="text"}} km/h
+    </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
+        or
+    </div>
+    <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
+        {{input value=model.speedMiHrStackMi size="2" maxlength="2" type="text"}} , {{input value=model.speedMiHrStackDecimal size="2" maxlength="2" type="text"}} mi/h
+    </div>
+  </div>
+</form>
