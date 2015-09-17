@@ -11,13 +11,13 @@ export default Ember.Controller.extend({
       route : "paceConverter",
       name : "Pace Converter",
       label : "Hi! I'm the",
-      description : "Some description."
+      description : "There a lots of ways to define a tempo. Here you have all in one place."
     },
     {
       route : "lengthConverter",
       name : "Lenght Converter",
       label : "This is the",
-      description : "Here you can convert the major. And yes, length matters."
+      description : "Here you can see the relation of all major length units. And yes, length matters."
     },
     {
       route : "racePredictor",
