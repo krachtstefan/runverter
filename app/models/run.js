@@ -3,29 +3,29 @@ export default DS.Model.extend({
 
 	/**
 	 * MtoMi the lenght of a meter in miles
-	 * 
+	 *
 	 * @type {number}	lenght of a meter in miles
 	 */
 	mToMi : 0.000621371,
 
 	/**
 	 * MitoM the lenght of a mile in meters
-	 * 
+	 *
 	 * @type {number}	lenght of a mile in meters
 	 */
 	miToM : 1609.344,
 
 	/**
 	 * timeSec represents the time of a run, should be set on create
-	 * 
+	 *
 	 * @type {number}	time of the run in seconds
 	 */
 	timeSec : null,
 
 	/**
 	 * time of the run in hours
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be timeHr
 	 * @param  {Object|string|number} value						new value of timeHr
 	 * @return {string} 															hours with 4 digits precision
@@ -40,8 +40,8 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in minutes
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be timeMin
 	 * @param  {Object|string|number} value						new value of timeMin
 	 * @return {string} 															minutes with 4 digits precision
@@ -56,8 +56,8 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackHr is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackHr
 	 * @param  {Object|string|number} value						new value of timeStackHr
 	 * @return {number} 															hours stack of the run time
@@ -73,7 +73,7 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property 
+	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackMin
 	 * @param  {Object|string|number} value						new value of timeStackMin
@@ -82,7 +82,7 @@ export default DS.Model.extend({
 	timeStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackMin");
-			value = +Math.round(value) || 0; // convert to number or set to 0			
+			value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60);
 		}
 		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
@@ -90,7 +90,7 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackSec is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property 
+	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackSec
 	 * @param  {Object|string|number} value						new value of timeStackSec
@@ -99,7 +99,7 @@ export default DS.Model.extend({
 	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0			
+			value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("timeSec", this.get('timeSec')+(value-previousValue));
 		}
 		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
@@ -108,15 +108,15 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthM represents the length of a run in meter, should be set on create
-	 * 
+	 *
 	 * @type {number} length of the run in meter
 	 */
 	lengthM : null,
 
 	/**
 	 * lenght of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKm
 	 * @param  {Object|string|number} value						new value of lengthKm
 	 * @return {string}																km with 4 digits precision
@@ -131,8 +131,8 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
 	 * @return {number} 															km stack of the run
@@ -148,24 +148,24 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
 	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
 	lengthKmStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);	
-   		
+   		var leadingZeros = this._getLeadingZerosFromString(value);
+
     	value = +Math.round(value) || 0; // convert to number or set to 0
     	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
-    	
-    	// calulate the meters from decimal place 
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+
+    	// calulate the meters from decimal place
 			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
 			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
 		}
@@ -176,8 +176,8 @@ export default DS.Model.extend({
 
 	/**
 	 * lenght of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMi
 	 * @param  {Object|string|number} value						new value of lengthMi
 	 * @return {string} 															miles with 4 digits precision
@@ -192,8 +192,8 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
 	 * @return {number} 															miles	stack of the run
@@ -209,24 +209,24 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be lengthMiStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
 	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
 	lengthMiStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);	
-			
+   		var leadingZeros = this._getLeadingZerosFromString(value);
+
     	value = +Math.round(value) || 0; // convert to number or set to 0
-    	var valueLenght = value.toString().length; 			
+    	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
-    	
-    	// calulate the meters from decimal place 
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+
+    	// calulate the meters from decimal place
 			var decimalMiles = (value*decimalPrecision)/Math.pow(10, leadingZeros);
     	var decimalMeters = decimalMiles/1000*this.miToM;
 
@@ -239,8 +239,8 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKm represents the pace of the run in min/km
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
 	 * @return {string}              									min/km with 4 digits precision
@@ -255,8 +255,8 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKmStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
 	 * @return {number} 															min stack of the pace
@@ -272,7 +272,7 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKmStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property 
+	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackSec
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
@@ -281,17 +281,17 @@ export default DS.Model.extend({
 	paceMinPerKmStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("paceMinPerKmStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0	
+			value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("paceMinPerKm", parseFloat(this.get('paceMinPerKm'))+(value-previousValue)/60);
 		}
 		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
 		return Math.round(decimalPlace*60);
 	}.property('paceMinPerKm'),
-	
+
 	/**
 	 * paceMinPerMi represents the pace of the run in min/mi
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerMi
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
 	 * @return {string}              									min/mi with 4 digits precision
@@ -306,8 +306,8 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerMiStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackMin
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
 	 * @return {number} 															min stack of the pace
@@ -323,7 +323,7 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerMiStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property 
+	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
@@ -332,7 +332,7 @@ export default DS.Model.extend({
 	paceMinPerMiStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("paceMinPerMiStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0	
+			value = +Math.round(value) || 0; // convert to number or set to 0
 			this.set("paceMinPerMi", parseFloat(this.get('paceMinPerMi'))+(value-previousValue)/60);
 		}
 		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
@@ -342,8 +342,8 @@ export default DS.Model.extend({
 
 	/**
 	 * speedKmHr represents the speed of the run in km per hour
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHr
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
 	 * @return {string} 															km/hr with 4 digits precision
@@ -358,8 +358,8 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackKm
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
 	 * @return {number} 															km stack of the speed
@@ -376,23 +376,23 @@ export default DS.Model.extend({
 	/**
 	 * speedKmHrStackDecimal is used to create a view like 12,34
 	 * if arguments are passed, they are used as a setter for this computed property
-	 * 
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {number} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
 	speedKmHrStackDecimal : function(propertyName, value) {
 		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);	
+			var leadingZeros = this._getLeadingZerosFromString(value);
 
 			value = +Math.round(value) || 0; // convert to number or set to 0
 			var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
-    	
-     	// calulate the speed from decimal place 
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+
+     	// calulate the speed from decimal place
 			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
  			this.set("speedKmHr", this.get("speedKmHrStackKm")+(decimalSpeed/1000)) ;
 		}
@@ -403,8 +403,8 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHr represents the speed of the run in miles per hour
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHr
 	 * @param  {Object|string|number} 	value        	new value of speedMiHr
 	 * @return {string}																mi/hr with 4 digits precision
@@ -419,8 +419,8 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHrStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property 
-	 * 
+	 * if arguments are passed, they are used as a setter for this computed property
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackMi
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
 	 * @return {number} 															mi stack of the speed
@@ -437,23 +437,23 @@ export default DS.Model.extend({
 	/**
 	 * speedMiHrStackDecimal is used to create a view like 12,34
 	 * if arguments are passed, they are used as a setter for this computed property
-	 * 
+	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
 	 * @return {number} 															up to 2 digits of the decimal place of the speed in mi/hr
 	 */
 	speedMiHrStackDecimal : function(propertyName, value) {
 		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);	
+			var leadingZeros = this._getLeadingZerosFromString(value);
 
 			value = +Math.round(value) || 0; // convert to number or set to 0
 			var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1); 
-    	
-     	// calulate the speed from decimal place 
+    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+
+     	// calulate the speed from decimal place
 			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
  			this.set("speedMiHr", this.get("speedMiHrStackMi")+(decimalSpeed/1000)) ;
 		}
@@ -492,9 +492,9 @@ export default DS.Model.extend({
 	/**
 	 * optimied version of the .toFixed method which has a lag of precision
 	 * 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
-	 * found some issues with this fix as well f.e. 2.21235 results in 2.2124 
-	 * 
-	 * @param  {float} 	number 		input value		
+	 * found some issues with this fix as well f.e. 2.21235 results in 2.2124
+	 *
+	 * @param  {float} 	number 		input value
 	 * @param  {number} precision desired precision
 	 * @return {string}       		output string with desired precision
 	 */
