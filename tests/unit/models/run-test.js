@@ -89,12 +89,12 @@ test('timeMin setter changes timeSec', function(assert) {
 
 // timeStackHr
 test('timeStackHr property is calculated from timeSec', function(assert) {
-	var run = this.subject({timeSec : 20000});
+	var run = this.subject({timeSec : new BigNumber(20000)});
  	assert.strictEqual(run.get("timeStackHr"), 5);
 });
 
 test('timeStackHr property can be zero', function(assert) {
-	var run = this.subject({timeSec : 3599});
+	var run = this.subject({timeSec : new BigNumber(3599)});
  	assert.strictEqual(run.get("timeStackHr"), 0);
 });
 
@@ -119,12 +119,12 @@ test('timeStackHr setter also works with integer', function(assert) {
 });
 
 test('timeStackHr setter influences all time related properties', function(assert) {
-	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
+	var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
 	run.set("timeStackHr", "2"); // 2,5 hours and 12 seconds
 	assert.strictEqual(run.get("timeStackHr"), 2);
 	assert.strictEqual(run.get("timeStackMin"), 30);
 	assert.strictEqual(run.get("timeStackSec"), 12);
-	assert.strictEqual(run.get("timeSec"), 9012);
+	assert.strictEqual(run.get("timeSec").toString(), "9012");
 });
 
 // timeStackMin
