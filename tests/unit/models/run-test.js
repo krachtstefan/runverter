@@ -50,46 +50,41 @@ test('timeHr setter changes timeSec', function(assert) {
 
 // timeMin
 test('timeMin property is calculated from timeSec', function(assert) {
-	var run = this.subject({timeSec : 3600});
-  assert.strictEqual(run.get("timeMin"), "60.0000");
+	var run = this.subject({timeSec : new BigNumber(3600)});
+  assert.strictEqual(run.get("timeMin").toString(), "60");
 });
 
-test('timeMin can round down', function(assert) {
-	var run = this.subject({timeSec : 2612});
-  assert.strictEqual(run.get("timeMin"), "43.5333");
-});
-
-test('timeMin can round up', function(assert) {
-	var run = this.subject({timeSec : 2614});
-  assert.strictEqual(run.get("timeMin"), "43.5667");
+test('timeMin can have up to 20 decimal places', function(assert) {
+	var run = this.subject({timeSec : new BigNumber(2612)});
+  assert.strictEqual(run.get("timeMin").toString(), "43.53333333333333333333");
 });
 
 test('timeMin setter changes timeMin', function(assert) {
 	var run = this.subject();
 	run.set("timeMin", "100");
-	assert.strictEqual(run.get("timeMin"), "100.0000");
+  assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("timeMin", "100.5");
-	assert.strictEqual(run.get("timeMin"), "100.5000");
+  assert.strictEqual(run.get("timeMin").toString(), "100.5");
 	run.set("timeMin", 50.5);
-	assert.strictEqual(run.get("timeMin"), "50.5000");
+	assert.strictEqual(run.get("timeMin").toString(), "50.5");
 });
 
 test('timeMin setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("timeMin", 100);
-	assert.strictEqual(run.get("timeMin"), "100.0000");
+  assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter changes timeSec', function(assert) {
 	var run = this.subject();
 	run.set("timeMin", "12");
-	assert.strictEqual(run.get("timeSec"), 720);
+  assert.strictEqual(run.get("timeSec").toString(), "720");
 	run.set("timeMin", "12.123");
-	assert.strictEqual(run.get("timeSec"), 727.38);
+  assert.strictEqual(run.get("timeSec").toString(), "727.38");
 });
 
 // timeStackHr
