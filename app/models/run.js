@@ -32,8 +32,8 @@ export default DS.Model.extend({
 	 */
 	timeHr : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("timeSec", value*60*60);
+    	value = new BigNumber(+value || 0); // convert to number or set to 0
+			this.set("timeSec", value.times(3600));
 		}
 		return this._toFixed(this.get('timeSec')/60/60,4);
 	}.property('timeSec'),
