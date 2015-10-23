@@ -20,7 +20,7 @@ export default DS.Model.extend({
 	 *
 	 * @type {BigNumber}	time of the run in seconds
 	 */
-	timeSec : null,
+	timeSec : new BigNumber(0),
 
 	/**
 	 * time of the run in hours
