@@ -1167,16 +1167,16 @@ test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', 
 });
 
 // some test cases from the application itself
-test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
-  var run = this.subject({timeSec : 3600*4,lengthM : 10});
-  run.set("paceMinPerKmStackMin", "6");
-  run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr"), "10.0000");
-  run.set("lengthM", "42195");
-  run.set("paceMinPerKmStackMin", "6");
-  run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr"), "10.0000");
-});
+// test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
+//   var run = this.subject({timeSec : 3600*4,lengthM : 10});
+//   run.set("paceMinPerKmStackMin", "6");
+//   run.set("paceMinPerKmStackSec", "0");
+//   assert.strictEqual(run.get("speedKmHr"), "10.0000");
+//   run.set("lengthM", "42195");
+//   run.set("paceMinPerKmStackMin", "6");
+//   run.set("paceMinPerKmStackSec", "0");
+//   assert.strictEqual(run.get("speedKmHr"), "10.0000");
+// });
 
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
