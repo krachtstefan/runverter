@@ -28,14 +28,14 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeHr
 	 * @param  {Object|string|number} value						new value of timeHr
-	 * @return {string} 															hours with 4 digits precision
+	 * @return {BigNumber} 														hours
 	 */
 	timeHr : function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = new BigNumber(+value || 0); // convert to number or set to 0
 			this.set("timeSec", value.times(3600));
 		}
-		return this._toFixed(this.get('timeSec')/60/60,4);
+		return this.get('timeSec').dividedBy(3600);
 	}.property('timeSec'),
 
 	/**
