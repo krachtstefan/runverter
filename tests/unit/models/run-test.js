@@ -11,46 +11,41 @@ test('run is a valid ember data Model', function(assert) {
 
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
-	var run = this.subject({timeSec : 14400});
- 	assert.strictEqual(run.get("timeHr"), "4.0000");
+	var run = this.subject({timeSec : new BigNumber(14400)});
+  assert.strictEqual(run.get("timeHr").toString(), "4");
 });
 
-test('timeHr can round down', function(assert) {
-	var run = this.subject({timeSec : 14560});
-  assert.strictEqual(run.get("timeHr"), "4.0444");
-});
-
-test('timeHr can round up', function(assert) {
-	var run = this.subject({timeSec : 14860});
-  assert.strictEqual(run.get("timeHr"), "4.1278");
+test('timeHr can have up to 20 decimal places', function(assert) {
+	var run = this.subject({timeSec : new BigNumber(14560)});
+  assert.strictEqual(run.get("timeHr").toString(), "4.04444444444444444444");
 });
 
 test('timeHr setter changes timeHr', function(assert) {
 	var run = this.subject();
 	run.set("timeHr", "2");
-	assert.strictEqual(run.get("timeHr"), "2.0000");
+  assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("timeHr", "2.5");
-	assert.strictEqual(run.get("timeHr"), "2.5000");
-	run.set("timeHr", 2.5);
-	assert.strictEqual(run.get("timeHr"), "2.5000");
+  assert.strictEqual(run.get("timeHr").toString(), "2.5");
+	run.set("timeHr", 2.3);
+	assert.strictEqual(run.get("timeHr").toString(), "2.3");
 });
 
 test('timeHr setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("timeHr", 2);
-	assert.strictEqual(run.get("timeHr"), "2.0000");
+  assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter changes timeSec', function(assert) {
 	var run = this.subject();
 	run.set("timeHr", "2");
-	assert.ok(run.get("timeSec").equals(7200));
+  assert.strictEqual(run.get("timeSec").toString(), "7200");
 	run.set("timeHr", "2.123");
-	assert.ok(run.get("timeSec").equals(7642.8));
+  assert.strictEqual(run.get("timeSec").toString(), "7642.8");
 });
 
 // timeMin
