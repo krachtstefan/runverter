@@ -11,9 +11,9 @@ export default DS.Model.extend({
 	/**
 	 * MitoM the lenght of a mile in meters
 	 *
-	 * @type {number}	lenght of a mile in meters
+	 * @type {BigNumber}	lenght of a mile in meters
 	 */
-	miToM : 1609.344,
+	miToM : new BigNumber(1609.344),
 
 	/**
 	 * timeSec represents the time of a run, should be set on create
