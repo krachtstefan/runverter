@@ -18,7 +18,7 @@ export default DS.Model.extend({
 	/**
 	 * timeSec represents the time of a run, should be set on create
 	 *
-	 * @type {number}	time of the run in seconds
+	 * @type {BigNumber}	time of the run in seconds
 	 */
 	timeSec : null,
 
