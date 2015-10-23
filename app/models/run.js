@@ -65,8 +65,8 @@ export default DS.Model.extend({
 	timeStackHr : function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("timeStackHr");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60*60);
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
 		}
 		return parseInt(this.get("timeHr"));
 	}.property('timeHr'),
