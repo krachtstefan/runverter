@@ -77,15 +77,15 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackMin
 	 * @param  {Object|string|number} value						new value of timeStackMin
-	 * @return {number} 															minutes stack of the run time
+	 * @return {BigNumber} 														minutes stack of the run time
 	 */
 	timeStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackMin");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60);
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
 		}
-		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
+		return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
 	}.property('timeMin', 'timeStackHr'),
 
 	/**
