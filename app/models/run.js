@@ -189,7 +189,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
-	 * @return {BigNumber} 													 miles	stack of the run
+	 * @return {BigNumber} 													  miles	stack of the run
 	 */
 	lengthMiStackMi : function(propertyName, value) {
     if (arguments.length > 1) {
