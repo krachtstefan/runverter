@@ -135,15 +135,15 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
-	 * @return {number} 															km stack of the run
+	 * @return {BigNumber} 														km stack of the run
 	 */
 	lengthKmStackKm : function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthKmStackKm");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(1000)));
 		}
-		return parseInt(this.get("lengthKm"));
+		return this.get("lengthKm").floor();
 	}.property('lengthKm'),
 
 	/**
