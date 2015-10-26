@@ -212,22 +212,22 @@ export default DS.Model.extend({
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
 
-    	value = +Math.round(value) || 0; // convert to number or set to 0
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
     	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
     	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
 
-    	// calulate the meters from decimal place
-			var decimalMiles = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-    	var decimalMeters = decimalMiles/1000*this.miToM;
+    	// calulate the Meters from decimal place
+      var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      var decimalMeters = decimalMiles.dividedBy(1000).times(this.miToM);
 
-			this.set("lengthM", this.get('lengthMiStackMi')*this.miToM+decimalMeters);
+      this.set("lengthM", this.get('lengthMiStackMi').times(this.miToM).plus(decimalMeters));
 		}
-		var miDecimalPlace = this._toFixed(parseFloat(this.get("lengthMi")),2);
-		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
-		return miDecimalPlace ? miDecimalPlace : "0";
+
+    var lengthMiStackDecimal = this.get("lengthMi").round(2).toString().split(".")[1];
+		return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
 	}.property('lengthMi'),
 
 	/**
