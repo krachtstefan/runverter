@@ -303,27 +303,27 @@ test('lengthKmStackKm setter changes lengthM', function(assert) {
 
 // lengthKmStackDecimal
 test('lengthKmStackDecimal property is calculated from lengthM and can round down', function(assert) {
-	var run = this.subject({lengthM : 1712});
+	var run = this.subject({lengthM : new BigNumber(1712)});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
 
 test('lengthKmStackDecimal property can round up', function(assert) {
-	var run = this.subject({lengthM : 1719});
+	var run = this.subject({lengthM : new BigNumber(1719)});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
 });
 
 test('lengthKmStackDecimal can have 1 digit', function(assert) {
-	var run = this.subject({lengthM : 500});
+	var run = this.subject({lengthM : new BigNumber(500)});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "5");
 });
 
 test('lengthKmStackDecimal supports leading zero', function(assert) {
-	var run = this.subject({lengthM : 90});
+	var run = this.subject({lengthM : new BigNumber(90)});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
 });
 
 test('lengthKmStackDecimal can be zero', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : new BigNumber(1000)});
  	assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
 });
 
@@ -358,9 +358,9 @@ test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
 });
 
 test('lengthKmStackDecimal setter changes lengthM', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("lengthKmStackDecimal", "09");
-	assert.strictEqual(run.get("lengthM"), 1090);
+	assert.strictEqual(run.get("lengthM").toString(), "1090");
 });
 
 test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', function(assert) {
@@ -369,7 +369,7 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
 		"lengthKmStackKm" : "12",
 		"lengthKmStackDecimal" : "09"
 	});
-	assert.strictEqual(run.get("lengthKm"), "12.0900");
+	assert.strictEqual(run.get("lengthKm").toString(), "12.09");
 });
 
 // lengthMi
