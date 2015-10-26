@@ -158,7 +158,7 @@ export default DS.Model.extend({
     	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
 
     	// calulate the meters from decimal place
-			var decimalMeters = value.times(decimalPrecision)/Math.pow(10, leadingZeros);
+			var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
       this.set("lengthM", this.get('lengthKmStackKm').times(1000).plus(decimalMeters));
 		}
