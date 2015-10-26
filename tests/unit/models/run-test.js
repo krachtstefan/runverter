@@ -218,46 +218,50 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
 
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
-	var run = this.subject({lengthM : 2000});
- 	assert.strictEqual(run.get("lengthKm"), "2.0000");
+	var run = this.subject({lengthM : new BigNumber(2000)});
+ 	assert.strictEqual(run.get("lengthKm").toString(), "2");
 });
 
-test('lengthKm has 4 digit precision and can round up', function(assert) {
-	var run = this.subject({lengthM : 1234.56});
- 	assert.strictEqual(run.get("lengthKm"), "1.2346");
+test('lengthKm can have up to 20 decimal places and can round up', function(assert) {
+  // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
+	var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(6)});
+  // http://keisan.casio.com/calculator results in "0.001520576131502056666667"
+ 	assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 });
 
 test('lengthKm can round down', function(assert) {
-	var run = this.subject({lengthM : 1234.52});
- 	assert.strictEqual(run.get("lengthKm"), "1.2345");
+  // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
+  var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(9)});
+	// http://keisan.casio.com/calculator results in "0.001013717421001371111111"
+ 	assert.strictEqual(run.get("lengthKm").toString(), "0.00101371742100137111");
 });
 
 test('lengthKm setter changes lengthKm', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "100");
-	assert.strictEqual(run.get("lengthKm"), "100.0000");
+	assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "100.12345");
-	assert.strictEqual(run.get("lengthKm"), "100.1235");
+	assert.strictEqual(run.get("lengthKm").toString(), "100.12345");
 	run.set("lengthKm", 100.34);
-	assert.strictEqual(run.get("lengthKm"), "100.3400");
+	assert.strictEqual(run.get("lengthKm").toString(), "100.34");
 });
 
 test('lengthKm setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", 100);
-	assert.strictEqual(run.get("lengthKm"), "100.0000");
+	assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "12");
-	assert.strictEqual(run.get("lengthM"), 12000);
+	assert.strictEqual(run.get("lengthM").toString(), "12000");
 	run.set("lengthKm", "12.123");
-	assert.strictEqual(run.get("lengthM"), 12123);
+	assert.strictEqual(run.get("lengthM").toString(), "12123");
 });
 
 // lengthKmStackKm
