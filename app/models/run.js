@@ -60,7 +60,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackHr
 	 * @param  {Object|string|number} value						new value of timeStackHr
-	 * @return {number} 															hours stack of the run time
+	 * @return {BigNumber} 													  hours stack of the run time
 	 */
 	timeStackHr : function(propertyName, value) {
 		if (arguments.length > 1) {
@@ -68,7 +68,7 @@ export default DS.Model.extend({
       value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
 		}
-		return parseInt(this.get("timeHr"));
+		return this.get("timeHr").floor();
 	}.property('timeHr'),
 
 	/**
