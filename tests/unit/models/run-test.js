@@ -374,46 +374,48 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
 
 // lengthMi
 test('lengthMi property is calculated from lengthM', function(assert) {
-	var run = this.subject({lengthM : 1609.344});
- 	assert.strictEqual(run.get("lengthMi"), "1.0000");
+	var run = this.subject({lengthM : new BigNumber(1609.344)});
+ 	assert.strictEqual(run.get("lengthMi").toString(), "1");
 });
 
-test('lengthMi has 4 digit precision and can round up', function(assert) {
-	var run = this.subject({lengthM : 12000});
- 	assert.strictEqual(run.get("lengthMi"), "7.4565");
+test('lengthMi can have up to 20 decimal places and can round up', function(assert) {
+	var run = this.subject({lengthM : new BigNumber(9.12345678901235)});
+  // http://keisan.casio.com/calculator results in 0.005669053222314402638591
+ 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
 });
 
 test('lengthMi can round down', function(assert) {
-	var run = this.subject({lengthM : 11550});
- 	assert.strictEqual(run.get("lengthMi"), "7.1768");
+	var run = this.subject({lengthM : new BigNumber(9.12345678901234)});
+  // http://keisan.casio.com/calculator results in 0.005669053222314396424879
+ 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
 });
 
 test('lengthMi setter changes lengthMi', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "100");
-	assert.strictEqual(run.get("lengthMi"), "100.0000");
+	assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "100.55");
-	assert.strictEqual(run.get("lengthMi"), "100.5500");
+	assert.strictEqual(run.get("lengthMi").toString(), "100.55");
 	run.set("lengthMi", 100.12);
-	assert.strictEqual(run.get("lengthMi"), "100.1200");
+	assert.strictEqual(run.get("lengthMi").toString(), "100.12");
 });
 
 test('lengthMi setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", 100);
-	assert.strictEqual(run.get("lengthMi"), "100.0000");
+	assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "12");
-	assert.strictEqual(run.get("lengthM"), 19312.128);
+	assert.strictEqual(run.get("lengthM").toString(), "19312.128");
 	run.set("lengthMi", "12.123");
-	assert.strictEqual(run.get("lengthM"), 19510.077312);
+	assert.strictEqual(run.get("lengthM").toString(), "19510.077312");
 });
 
 // lengthMiStackMi
