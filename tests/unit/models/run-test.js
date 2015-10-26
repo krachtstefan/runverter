@@ -420,39 +420,39 @@ test('lengthMi setter changes lengthM', function(assert) {
 
 // lengthMiStackMi
 test('lengthMiStackMi property is calculated from lengthM', function(assert) {
-	var run = this.subject({lengthM : 1800});
- 	assert.strictEqual(run.get("lengthMiStackMi"), 1);
+	var run = this.subject({lengthM : new BigNumber(1800)});
+ 	assert.strictEqual(run.get("lengthMiStackMi").toString(), "1");
 });
 
 test('lengthMiStackMi property can be zero', function(assert) {
-	var run = this.subject({lengthM : 800});
- 	assert.strictEqual(run.get("lengthMiStackMi"), 0);
+	var run = this.subject({lengthM : new BigNumber(800)});
+ 	assert.strictEqual(run.get("lengthMiStackMi").toString(), "0");
 });
 
 test('lengthMiStackMi setter changes lengthMiStackMi', function(assert) {
 	var run = this.subject();
 	run.set("lengthMiStackMi", "2");
-	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+	assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
 });
 
 test('lengthMiStackMi setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthMiStackMi", "2.2");
-	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+	assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
 	run.set("lengthMiStackMi", 2.5);
-	assert.strictEqual(run.get("lengthMiStackMi"), 3);
+	assert.strictEqual(run.get("lengthMiStackMi").toString(), "3");
 });
 
 test('lengthMiStackMi setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthMiStackMi", 2);
-	assert.strictEqual(run.get("lengthMiStackMi"), 2);
+	assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
 });
 
 test('lengthMiStackMi setter changes lengthM', function(assert) {
-	var run = this.subject({lengthM : 1234});
+	var run = this.subject({lengthM : new BigNumber(1234)});
 	run.set("lengthMiStackMi", "2");
-	assert.strictEqual(run.get("lengthM"), 1234+3218.688);
+	assert.strictEqual(run.get("lengthM").toString(), "4452.688");
 });
 
 // lengthMiStackDecimal
