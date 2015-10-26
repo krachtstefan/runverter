@@ -457,27 +457,27 @@ test('lengthMiStackMi setter changes lengthM', function(assert) {
 
 // lengthMiStackDecimal
 test('lengthMiStackDecimal property is calculated from lengthM and can round down', function(assert) {
-	var run = this.subject({lengthM : 2711});
+	var run = this.subject({lengthM : new BigNumber(2711)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "68");
 });
 
 test('lengthMiStackDecimal can round up', function(assert) {
-	var run = this.subject({lengthM : 2712});
+	var run = this.subject({lengthM : new BigNumber(2712)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
 });
 
 test('lengthMiStackDecimal can have 1 digit', function(assert) {
-	var run = this.subject({lengthM : 804.672});
+	var run = this.subject({lengthM : new BigNumber(804.672)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "5");
 });
 
 test('lengthMiStackDecimal supports leading zero', function(assert) {
-	var run = this.subject({lengthM : 100});
+	var run = this.subject({lengthM : new BigNumber(100)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "06");
 });
 
 test('lengthMiStackDecimal can be zero', function(assert) {
-	var run = this.subject({lengthM : 1609.344});
+	var run = this.subject({lengthM : new BigNumber(1609.344)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
 });
 
@@ -512,9 +512,9 @@ test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
 });
 
 test('lengthMiStackDecimal setter changes lengthM', function(assert) {
-	var run = this.subject({lengthM : 2000}); // around 1.24 miles
+	var run = this.subject({lengthM : new BigNumber(2000)}); // around 1.24 miles
 	run.set("lengthMiStackDecimal", "09");
-	assert.strictEqual(run.get("lengthM"), 1754.18496); // 1.09 miles
+	assert.strictEqual(run.get("lengthM").toString(), "1754.18496"); // 1.09 miles
 });
 
 test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi', function(assert) {
@@ -523,7 +523,7 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 		"lengthMiStackMi" : "12",
 		"lengthMiStackDecimal" : "09"
 	});
-	assert.strictEqual(run.get("lengthMi"), "12.0900");
+	assert.strictEqual(run.get("lengthMi").toString(), "12.09");
 });
 
 // paceMinPerKm
