@@ -122,49 +122,49 @@ test('timeStackHr setter influences all time related properties', function(asser
 	var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
 	run.set("timeStackHr", "2"); // 2,5 hours and 12 seconds
 	assert.strictEqual(run.get("timeStackHr").toString(), "2");
-	assert.strictEqual(run.get("timeStackMin"), 30);
+	assert.strictEqual(run.get("timeStackMin").toString(), "30");
 	assert.strictEqual(run.get("timeStackSec"), 12);
 	assert.strictEqual(run.get("timeSec").toString(), "9012");
 });
 
 // timeStackMin
 test('timeStackMin property is calculated from timeSec', function(assert) {
-	var run = this.subject({timeSec : 145});
- 	assert.strictEqual(run.get("timeStackMin"), 2);
+	var run = this.subject({timeSec : new BigNumber(145)});
+ 	assert.strictEqual(run.get("timeStackMin").toString(), "2");
 });
 
 test('timeStackMin property can be zero', function(assert) {
-	var run = this.subject({timeSec : 59});
- 	assert.strictEqual(run.get("timeStackMin"), 0);
+	var run = this.subject({timeSec : new BigNumber(59)});
+ 	assert.strictEqual(run.get("timeStackMin").toString(), "0");
 });
 
 test('timeStackMin setter changes timeStackMin', function(assert) {
 	var run = this.subject();
 	run.set("timeStackMin", "10");
-	assert.strictEqual(run.get("timeStackMin"), 10);
+	assert.strictEqual(run.get("timeStackMin").toString(), "10");
 });
 
 test('timeStackMin setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("timeStackMin", "2.2");
-	assert.strictEqual(run.get("timeStackMin"), 2);
+	assert.strictEqual(run.get("timeStackMin").toString(), "2");
 	run.set("timeStackMin", 2.5);
-	assert.strictEqual(run.get("timeStackMin"), 3);
+	assert.strictEqual(run.get("timeStackMin").toString(), "3");
 });
 
 test('timeStackMin setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("timeStackMin", 2);
-	assert.strictEqual(run.get("timeStackMin"), 2);
+	assert.strictEqual(run.get("timeStackMin").toString(), "2");
 });
 
 test('timeStackMin setter influences all time related properties', function(assert) {
-	var run = this.subject({timeSec : 90}); // 1 minute, 30 seconds
+	var run = this.subject({timeSec : new BigNumber(90)}); // 1 minute, 30 seconds
 	run.set("timeStackMin", "10"); // 10 minutes, 30 seconds
-	assert.strictEqual(run.get("timeStackHr"), 0);
-	assert.strictEqual(run.get("timeStackMin"), 10);
+	assert.strictEqual(run.get("timeStackHr").toString(), "0");
+	assert.strictEqual(run.get("timeStackMin").toString(), "10");
 	assert.strictEqual(run.get("timeStackSec"), 30);
-	assert.strictEqual(run.get("timeSec"), 630);
+	assert.strictEqual(run.get("timeSec").toString(), "630");
 });
 
 // timeStackSec
