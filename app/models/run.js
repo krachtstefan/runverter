@@ -109,9 +109,9 @@ export default DS.Model.extend({
 	/**
 	 * lengthM represents the length of a run in meter, should be set on create
 	 *
-	 * @type {number} length of the run in meter
+	 * @type {BigNumber} length of the run in meter
 	 */
-	lengthM : null,
+	lengthM : new BigNumber(0),
 
 	/**
 	 * lenght of the run in km
