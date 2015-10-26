@@ -119,14 +119,14 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKm
 	 * @param  {Object|string|number} value						new value of lengthKm
-	 * @return {string}																km with 4 digits precision
+	 * @return {BigNumber}														km
 	 */
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("lengthM", value*1000);
+      value = new BigNumber(+value || 0); // convert to number or set to 0
+			this.set("lengthM", value.times(1000));
 		}
-		return this._toFixed(this.get('lengthM')/1000,4);
+    return this.get('lengthM').dividedBy(1000);
 	}.property('lengthM'),
 
 	/**
