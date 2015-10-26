@@ -44,7 +44,7 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeMin
 	 * @param  {Object|string|number} value						new value of timeMin
-	 * @return {BigNumber} 															minutes
+	 * @return {BigNumber} 														minutes
 	 */
 	timeMin : function(propertyName, value) {
 		if (arguments.length > 1) {
