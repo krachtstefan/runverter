@@ -94,15 +94,15 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackSec
 	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {number} 															second stack of the run time, betweeen 0 and 59
+	 * @return {BigNumber} 														second stack of the run time, betweeen 0 and 59
 	 */
 	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue));
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
 		}
-		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
+		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
 	}.property('timeSec', 'timeMin'),
 
 
