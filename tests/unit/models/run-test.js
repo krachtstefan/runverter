@@ -123,7 +123,7 @@ test('timeStackHr setter influences all time related properties', function(asser
 	run.set("timeStackHr", "2"); // 2,5 hours and 12 seconds
 	assert.strictEqual(run.get("timeStackHr").toString(), "2");
 	assert.strictEqual(run.get("timeStackMin").toString(), "30");
-	assert.strictEqual(run.get("timeStackSec"), 12);
+	assert.strictEqual(run.get("timeStackSec").toString(), "12");
 	assert.strictEqual(run.get("timeSec").toString(), "9012");
 });
 
@@ -163,57 +163,57 @@ test('timeStackMin setter influences all time related properties', function(asse
 	run.set("timeStackMin", "10"); // 10 minutes, 30 seconds
 	assert.strictEqual(run.get("timeStackHr").toString(), "0");
 	assert.strictEqual(run.get("timeStackMin").toString(), "10");
-	assert.strictEqual(run.get("timeStackSec"), 30);
+	assert.strictEqual(run.get("timeStackSec").toString(), "30");
 	assert.strictEqual(run.get("timeSec").toString(), "630");
 });
 
 // timeStackSec
 test('timeStackSec property is calculated from timeSec', function(assert) {
-	var run = this.subject({timeSec : 62});
- 	assert.strictEqual(run.get("timeStackSec"), 2);
+	var run = this.subject({timeSec : new BigNumber(62)});
+ 	assert.strictEqual(run.get("timeStackSec").toString(), "2");
 });
 
 test('timeStackSec property can be zero', function(assert) {
-	var run = this.subject({timeSec : 60});
- 	assert.strictEqual(run.get("timeStackSec"), 0);
+	var run = this.subject({timeSec : new BigNumber(60)});
+ 	assert.strictEqual(run.get("timeStackSec").toString(), "0");
 });
 
 test('timeStackSec setter changes timeStackSec', function(assert) {
 	var run = this.subject();
 	run.set("timeStackSec", "10");
-	assert.strictEqual(run.get("timeStackSec"), 10);
+	assert.strictEqual(run.get("timeStackSec").toString(), "10");
 });
 
 test('timeStackSec setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("timeStackSec", "2.2");
-	assert.strictEqual(run.get("timeStackSec"), 2);
+	assert.strictEqual(run.get("timeStackSec").toString(), "2");
 	run.set("timeStackSec", 2.5);
-	assert.strictEqual(run.get("timeStackSec"), 3);
+	assert.strictEqual(run.get("timeStackSec").toString(), "3");
 });
 
 test('timeStackSec setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("timeStackSec", 2);
-	assert.strictEqual(run.get("timeStackSec"), 2);
+	assert.strictEqual(run.get("timeStackSec").toString(), "2");
 });
 
 test('timeStackSec setter influences all time related properties', function(assert) {
-	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
+	var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
 	run.set("timeStackSec", "20"); // 3,5 hours and 20 seconds
-	assert.strictEqual(run.get("timeStackHr"), 3);
-	assert.strictEqual(run.get("timeStackMin"), 30);
-	assert.strictEqual(run.get("timeStackSec"), 20);
-	assert.strictEqual(run.get("timeSec"), 12620);
+	assert.strictEqual(run.get("timeStackHr").toString(), "3");
+	assert.strictEqual(run.get("timeStackMin").toString(), "30");
+	assert.strictEqual(run.get("timeStackSec").toString(), "20");
+	assert.strictEqual(run.get("timeSec").toString(), "12620");
 });
 
 test('timeStackSec setter handles values bigger than 59', function(assert) {
-	var run = this.subject({timeSec : 12612}); // 3,5 hours and 12 seconds
+	var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
 	run.set("timeStackSec", "62"); // 3,5 hours and 62 seconds
-	assert.strictEqual(run.get("timeStackHr"), 3);
-	assert.strictEqual(run.get("timeStackMin"), 31); // 30 flips to 31 because 62 seconds starts another minute
-	assert.strictEqual(run.get("timeStackSec"), 2);
-	assert.strictEqual(run.get("timeSec"), 12662);
+	assert.strictEqual(run.get("timeStackHr").toString(), "3");
+	assert.strictEqual(run.get("timeStackMin").toString(), "31"); // 30 flips to 31 because 62 seconds starts another minute
+	assert.strictEqual(run.get("timeStackSec").toString(), "2");
+	assert.strictEqual(run.get("timeSec").toString(), "12662");
 });
 
 // lengthKm
