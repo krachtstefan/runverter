@@ -157,8 +157,7 @@ export default DS.Model.extend({
 	lengthKmStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
-
-    	value = +Math.round(value) || 0; // convert to number or set to 0
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
     	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
@@ -166,12 +165,13 @@ export default DS.Model.extend({
     	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
 
     	// calulate the meters from decimal place
-			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
+			var decimalMeters = value.times(decimalPrecision)/Math.pow(10, leadingZeros);
+
+      this.set("lengthM", this.get('lengthKmStackKm').times(1000).plus(decimalMeters));
 		}
-		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
-		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
-		return kmDecimalPlace ? kmDecimalPlace : "0";
+
+    var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
+    return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
 	}.property('lengthKm'),
 
 	/**
