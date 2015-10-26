@@ -225,14 +225,14 @@ test('lengthKm property is calculated from lengthM', function(assert) {
 test('lengthKm can have up to 20 decimal places and can round up', function(assert) {
   // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
 	var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(6)});
-  // http://keisan.casio.com/calculator results in "0.001520576131502056666667"
+  // http://keisan.casio.com/calculator results in 0.001520576131502056666667
  	assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 });
 
 test('lengthKm can round down', function(assert) {
   // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
   var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(9)});
-	// http://keisan.casio.com/calculator results in "0.001013717421001371111111"
+	// http://keisan.casio.com/calculator results in 0.001013717421001371111111
  	assert.strictEqual(run.get("lengthKm").toString(), "0.00101371742100137111");
 });
 
