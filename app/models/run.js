@@ -2,13 +2,6 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 
 	/**
-	 * MtoMi the lenght of a meter in miles
-	 *
-	 * @type {BigNumber}	lenght of a meter in miles
-	 */
-	mToMi : new BigNumber(0.000621371),
-
-	/**
 	 * MitoM the lenght of a mile in meters
 	 *
 	 * @type {BigNumber}	lenght of a mile in meters
