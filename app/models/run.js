@@ -236,14 +236,14 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
-	 * @return {string}              									min/km with 4 digits precision
+	 * @return {BigNumber}              							min/km
 	 */
 	paceMinPerKm : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',value*this.get('lengthKm')*60);
+      value = new BigNumber(+value || 0); // convert to number or set to 0
+    	this.set('timeSec',value.times(this.get('lengthKm').times(60)));
 		}
-		return this._toFixed(this.get('timeMin')/this.get('lengthKm'),4);
+    return this.get('timeMin').dividedBy(this.get('lengthKm'));
 	}.property('timeMin', 'lengthKm'),
 
 	/**
