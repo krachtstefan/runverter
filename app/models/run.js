@@ -25,7 +25,7 @@ export default DS.Model.extend({
 	 */
 	timeHr : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = new BigNumber(+value || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value);
 			this.set("timeSec", value.times(3600));
 		}
 		return this.get('timeSec').dividedBy(3600);
@@ -41,7 +41,7 @@ export default DS.Model.extend({
 	 */
 	timeMin : function(propertyName, value) {
 		if (arguments.length > 1) {
-      value = new BigNumber(+value || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value);
 			this.set("timeSec", value.times(60));
 		}
     return this.get('timeSec').dividedBy(60);
@@ -58,7 +58,7 @@ export default DS.Model.extend({
 	timeStackHr : function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("timeStackHr");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
 		}
 		return this.get("timeHr").floor();
@@ -75,7 +75,7 @@ export default DS.Model.extend({
 	timeStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackMin");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
 		}
 		return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
@@ -92,7 +92,7 @@ export default DS.Model.extend({
 	timeStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackSec");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
 		}
 		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
@@ -116,7 +116,7 @@ export default DS.Model.extend({
 	 */
 	lengthKm : function(propertyName, value) {
 		if (arguments.length > 1) {
-      value = new BigNumber(+value || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value);
 			this.set("lengthM", value.times(1000));
 		}
     return this.get('lengthM').dividedBy(1000);
@@ -133,7 +133,7 @@ export default DS.Model.extend({
 	lengthKmStackKm : function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthKmStackKm");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(1000)));
 		}
 		return this.get("lengthKm").floor();
@@ -150,7 +150,7 @@ export default DS.Model.extend({
 	lengthKmStackDecimal : function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
     	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
@@ -177,7 +177,7 @@ export default DS.Model.extend({
 	 */
 	lengthMi : function(propertyName, value) {
 		if (arguments.length > 1) {
-    	value = new BigNumber(+value || 0); // convert to number or set to 0
+    	value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(this.miToM));
 		}
     return this.get('lengthM').dividedBy(this.miToM);
@@ -194,7 +194,7 @@ export default DS.Model.extend({
 	lengthMiStackMi : function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthMiStackMi");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(this.miToM)));
 		}
 		return this.get("lengthMi").floor();
@@ -212,7 +212,7 @@ export default DS.Model.extend({
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
 
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
     	var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
@@ -240,7 +240,7 @@ export default DS.Model.extend({
 	 */
 	paceMinPerKm : function(propertyName, value) {
 		if (arguments.length > 1) {
-      value = new BigNumber(+value || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value);
     	this.set('timeSec',value.times(this.get('lengthKm').times(60)));
 		}
     return this.get('timeMin').dividedBy(this.get('lengthKm'));
@@ -257,7 +257,7 @@ export default DS.Model.extend({
 	paceMinPerKmStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("paceMinPerKmStackMin");
-      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
 		}
 		return this.get("paceMinPerKm").floor();
@@ -274,7 +274,7 @@ export default DS.Model.extend({
 	paceMinPerKmStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("paceMinPerKmStackSec");
-			value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			value = this._ensureBigNumber(value).round();
       this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue).dividedBy(60)));
 		}
 		return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
