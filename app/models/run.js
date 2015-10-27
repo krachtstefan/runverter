@@ -319,16 +319,15 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
-	 * @return {number} 															second stack of the pace, betweeen 0 and 59
+	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
 	 */
 	paceMinPerMiStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("paceMinPerMiStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerMi", parseFloat(this.get('paceMinPerMi'))+(value-previousValue)/60);
+			value = this._ensureBigNumber(value).round();
+      this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue).dividedBy(60)));
 		}
-		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
-		return Math.round(decimalPlace*60);
+    return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
 	}.property('paceMinPerMi', 'paceMinPerMiStackMin'),
 
 
