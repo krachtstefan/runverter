@@ -252,15 +252,15 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
-	 * @return {number} 															min stack of the pace
+	 * @return {BigNumber} 														min stack of the pace
 	 */
 	paceMinPerKmStackMin : function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("paceMinPerKmStackMin");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerKm", parseFloat(this.get('paceMinPerKm'))+(value-previousValue));
+      value = new BigNumber(+Math.round(value) || 0); // convert to number or set to 0
+			this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
 		}
-		return parseInt(this.get("paceMinPerKm"));
+		return this.get("paceMinPerKm").floor();
 	}.property('paceMinPerKm'),
 
 	/**
