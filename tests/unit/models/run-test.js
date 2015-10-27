@@ -675,52 +675,54 @@ test('paceMinPerKmStackSec setter handles values bigger than 59', function(asser
 
 // paceMinPerMi
 test('paceMinPerMi property is calculated from timeSec and lengthM', function(assert) {
-	var run = this.subject({timeMin : 60, lengthM : 1609.344});
- 	assert.strictEqual(run.get("paceMinPerMi"), "60.0000");
+	var run = this.subject({timeMin : new BigNumber(60), lengthM : new BigNumber(1609.344)});
+ 	assert.strictEqual(run.get("paceMinPerMi").toString(), "60");
 });
 
-test('paceMinPerMi has 4 digit precision and can round down', function(assert) {
-	var run = this.subject({timeMin : 1.23454, lengthMi : 1});
- 	assert.strictEqual(run.get("paceMinPerMi"), "1.2345");
+test('paceMinPerMi can have up to 20 decimal places and can round up', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(900)});
+  // http://keisan.casio.com/calculator results in 0.001248285321248666666667
+ 	assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
 });
 
-test('paceMinPerMi can round up', function(assert) {
-	var run = this.subject({timeMin : 1.23455, lengthMi : 1});
- 	assert.strictEqual(run.get("paceMinPerMi"), "1.2346");
+test('paceMinPerMi can round down', function(assert) {
+	var run = this.subject({timeMin : new BigNumber(3.1131567891211), lengthMi : new BigNumber(900)});
+  // http://keisan.casio.com/calculator results in 0.003459063099023444444444
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00345906309902344444");
 });
 
 test('paceMinPerMi setter changes paceMinPerMi', function(assert) {
-	var run = this.subject({lengthM : 2000});
+	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMi", "21");
-	assert.strictEqual(run.get("paceMinPerMi"), "21.0000");
+	assert.strictEqual(run.get("paceMinPerMi").toString(), "21");
 });
 
 test('paceMinPerMi setter also works with integer', function(assert) {
-	var run = this.subject({lengthM : 2000});
+	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMi", 21);
-	assert.strictEqual(run.get("paceMinPerMi"), "21.0000");
+	assert.strictEqual(run.get("paceMinPerMi").toString(), "21");
 });
 
 test('paceMinPerMi setter can handle floats', function(assert) {
-	var run = this.subject({lengthM : 2000});
+	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMi", 2.2);
-	assert.strictEqual(run.get("paceMinPerMi"), "2.2000");
+	assert.strictEqual(run.get("paceMinPerMi").toString(), "2.2");
 	run.set("paceMinPerMi", "2.5");
-	assert.strictEqual(run.get("paceMinPerMi"), "2.5000");
+	assert.strictEqual(run.get("paceMinPerMi").toString(), "2.5");
 	run.set("paceMinPerMi", 2.21234);
-	assert.strictEqual(run.get("paceMinPerMi"), "2.2123");
+	assert.strictEqual(run.get("paceMinPerMi").toString(), "2.21234");
 });
 
 test('paceMinPerMi setter changes timeSec', function(assert) {
-	var run = this.subject({lengthMi : 8});
+	var run = this.subject({lengthMi : new BigNumber(8)});
 	run.set("paceMinPerMi", "2");
-	assert.strictEqual(run.get("timeSec"), 960); // 8mi with 2min/mi will take 16 min (960 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "960"); // 8mi with 2min/mi will take 16 min (960 sek)
 });
 
 test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
-	var run = this.subject({lengthM : 2000});
+	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMi", 21);
-	assert.strictEqual(run.get("lengthM"), 2000);
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerMiStackMin
