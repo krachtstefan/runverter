@@ -1228,3 +1228,33 @@ test('_toFixed can handle string as input number', function(assert) {
 test('_toFixed can handle string as precision number', function(assert) {
 	assert.strictEqual(this.subject()._toFixed(123.25, "1"), "123.3");
 });
+
+test('_ensureBigNumber can handle numeric strings', function(assert) {
+  var ensureBigNumber = this.subject()._ensureBigNumber("1");
+  assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
+  assert.strictEqual(ensureBigNumber.toString(), "1");
+
+  ensureBigNumber = this.subject()._ensureBigNumber("1.1");
+  assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
+  assert.strictEqual(ensureBigNumber.toString(), "1.1");
+});
+
+test('_ensureBigNumber can handle floats', function(assert) {
+  var ensureBigNumber = this.subject()._ensureBigNumber(1.1);
+  assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
+  assert.strictEqual(ensureBigNumber.toString(), "1.1");
+});
+
+test('_ensureBigNumber will leave BigNumber input unchanged', function(assert) {
+  var bigNumber = new BigNumber(1.23456);
+  var ensureBigNumber = this.subject()._ensureBigNumber(bigNumber);
+  assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
+  assert.strictEqual(ensureBigNumber.toString(), "1.23456");
+  assert.strictEqual(ensureBigNumber, bigNumber);
+});
+
+test('_ensureBigNumber will treat non numeric input as 0', function(assert) {
+  var ensureBigNumber = this.subject()._ensureBigNumber("dumb user input from a random hacker kid");
+  assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
+  assert.strictEqual(ensureBigNumber.toString(), "0");
+});
