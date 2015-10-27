@@ -727,45 +727,45 @@ test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
 
 // paceMinPerMiStackMin
 test('paceMinPerMiStackMin property is calculated from lengthM', function(assert) {
-	var run = this.subject({timeMin : 1.23454, lengthMi : 1});
- 	assert.strictEqual(run.get("paceMinPerMiStackMin"), 1);
+	var run = this.subject({timeMin : new BigNumber(1.23454), lengthMi : new BigNumber(1)});
+ 	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1");
 });
 
 test('paceMinPerMiStackMin property can be zero', function(assert) {
-	var run = this.subject({timeMin : 1, lengthMi : 1.1});
- 	assert.strictEqual(run.get("paceMinPerMiStackMin"), 0);
+  var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1.1)});
+ 	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");
 });
 
 test('paceMinPerMiStackMin setter changes paceMinPerMiStackMin', function(assert) {
-	var run = this.subject({timeSec : 270, lengthMi : 2});
+  var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
 	run.set("paceMinPerMiStackMin", "12");
-	assert.strictEqual(run.get("paceMinPerMiStackMin"), 12);
+	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "12");
 });
 
 test('paceMinPerMiStackMin setter can handle floats', function(assert) {
-	var run = this.subject({timeSec : 270, lengthMi : 2});
+  var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
 	run.set("paceMinPerMiStackMin", "5.5");
-	assert.strictEqual(run.get("paceMinPerMiStackMin"), 6);
+	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
 	run.set("paceMinPerMiStackMin", 2.3);
-	assert.strictEqual(run.get("paceMinPerMiStackMin"), 2);
+	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "2");
 });
 
 test('paceMinPerMiStackMin setter also works with integer', function(assert) {
-	var run = this.subject({timeSec : 270, lengthMi : 2});
+	var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
 	run.set("paceMinPerMiStackMin", 12);
-	assert.strictEqual(run.get("paceMinPerMiStackMin"), 12);
+	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "12");
 });
 
 test('paceMinPerMiStackMin setter changes timeSec', function(assert) {
-	var run = this.subject({timeSec : 60, lengthMi : 2});
+  var run = this.subject({timeSec : new BigNumber(60), lengthMi : new BigNumber(2)});
 	run.set("paceMinPerMiStackMin", "2");
-	assert.strictEqual(run.get("timeSec"), 300); // 2mi with 2,5min/km will take 5 minutes (300 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "300"); // 2mi with 2,5min/km will take 5 minutes (300 sek)
 });
 
 test('paceMinPerMiStackMin setter doesn\'t change lengthM', function(assert) {
-	var run = this.subject({timeSec : 270, lengthM : 2000});
+  var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMiStackMin", 12);
-	assert.strictEqual(run.get("lengthM"), 2000);
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerMiStackSec
