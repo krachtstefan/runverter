@@ -362,10 +362,10 @@ export default DS.Model.extend({
 	speedKmHrStackKm : function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("speedKmHrStackKm");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	this.set("speedKmHr", parseFloat(this.get('speedKmHr'))+(value-previousValue));
+    	value = this._ensureBigNumber(value).round();
+    	this.set("speedKmHr", this.get('speedKmHr').plus(value.minus(previousValue)));
 		}
-		return parseInt(this.get("speedKmHr"));
+		return this.get("speedKmHr").floor();
 	}.property('speedKmHr'),
 
 	/**
