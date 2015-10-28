@@ -822,56 +822,54 @@ test('paceMinPerMiStackSec setter handles values bigger than 59', function(asser
 
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 1500});
-  assert.strictEqual(run.get("speedKmHr"), "0.7500");
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.75");
+});
+
+test('speedKmHr can have up to 20 decimal places and can round up', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4511)});
+  // http://keisan.casio.com/calculator results in 7.674905454545454545455
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454544"); // TODO: should be 7.67490545454545454545?
 });
 
 test('speedKmHr can round down', function(assert) {
-	var run = this.subject({timeSec : 3600, lengthM : 12.34});
-  assert.strictEqual(run.get("speedKmHr"), "0.0123");
-  run.set("lengthM", "23.4321");
-  assert.strictEqual(run.get("speedKmHr"), "0.0234");
-});
-
-test('speedKmHr can round up', function(assert) {
-  var run = this.subject({timeSec : 3600, lengthM : 2000.05});
-  assert.strictEqual(run.get("speedKmHr"), "2.0001");
-  run.set("lengthM", 23.4511);
-  assert.strictEqual(run.get("speedKmHr"), "0.0235");
+  var run = this.subject({timeSec : new BigNumber(49), lengthM : new BigNumber(12.9912)});
+  // http://keisan.casio.com/calculator results in 0.9544555102040816326531
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.95445551020408163265");
 });
 
 test('speedKmHr setter changes speedKmHr', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", "21");
-	assert.strictEqual(run.get("speedKmHr"), "21.0000");
+	assert.strictEqual(run.get("speedKmHr").toString(), "21");
 });
 
 test('speedKmHr setter also works with integer', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", 2);
-	assert.strictEqual(run.get("speedKmHr"), "2.0000");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2");
 });
 
 test('speedKmHr setter can handle floats', function(assert) {
-	var run = this.subject({lengthM : 1000});
+	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", 2.2);
-	assert.strictEqual(run.get("speedKmHr"), "2.2000");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.2");
 	run.set("speedKmHr", "2.5");
-	assert.strictEqual(run.get("speedKmHr"), "2.5000");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.5");
 	run.set("speedKmHr", 2.21234);
-	assert.strictEqual(run.get("speedKmHr"), "2.2123");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.21234");
 });
 
 test('speedKmHr setter changes timeSec', function(assert) {
-	var run = this.subject({lengthM : 8000});
+	var run = this.subject({lengthM : new BigNumber(8000)});
 	run.set("speedKmHr", "2");
-	assert.strictEqual(run.get("timeSec"), 14400); // 8km with 2km/hr will take 4 hours (14400 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHr setter doesn\'t change lengthM', function(assert) {
-	var run = this.subject({lengthM : 2500});
+  var run = this.subject({lengthM : new BigNumber(2500)});
 	run.set("speedKmHr", "12");
-	assert.strictEqual(run.get("lengthM"), 2500);
+	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
 // speedKmHrStackKm
@@ -1177,6 +1175,14 @@ test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', 
 //   run.set("paceMinPerKmStackSec", "0");
 //   assert.strictEqual(run.get("speedKmHr"), "10.0000");
 // });
+
+// some edge cases found during development
+test('speedKmHr accuracy edge case was fixed', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
+  // older version of speedKmHr getter resulted in 2.81413200000000000113
+  // problem was fixed by optmizing the calculation by eleminating a dividedBy call
+  assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
+});
 
 // helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
