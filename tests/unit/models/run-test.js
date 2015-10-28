@@ -872,47 +872,47 @@ test('speedKmHr setter doesn\'t change lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
-// speedKmHrStackKm
+// // speedKmHrStackKm
 test('speedKmHrStackKm property is calculated from timeSec and lengthM', function(assert) {
-	var run = this.subject({timeSec : 3600, lengthM : 25000});
- 	assert.strictEqual(run.get("speedKmHrStackKm"), 25);
+	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(25000)});
+ 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "25");
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 1500});
- 	assert.strictEqual(run.get("speedKmHrStackKm"), 0);
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
+ 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
 test('speedKmHrStackKm setter changes speedKmHrStackKm', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 24000});
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
 	run.set("speedKmHrStackKm", "18");
-	assert.strictEqual(run.get("speedKmHrStackKm"), 18);
+	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "18");
 });
 
 test('speedKmHrStackKm setter can handle floats', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 24000});
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
 	run.set("speedKmHrStackKm", "5.5");
-	assert.strictEqual(run.get("speedKmHrStackKm"), 6);
+	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "6");
 	run.set("speedKmHrStackKm", 2.3);
-	assert.strictEqual(run.get("speedKmHrStackKm"), 2);
+	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "2");
 });
 
 test('speedKmHrStackKm setter also works with integer', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 24123});
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24123)});
 	run.set("speedKmHrStackKm", 12);
-	assert.strictEqual(run.get("speedKmHrStackKm"), 12);
+	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "12");
 });
 
 test('speedKmHrStackKm setter changes timeSec', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 8000});
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(8000)});
 	run.set("speedKmHrStackKm", "2");
-	assert.strictEqual(run.get("timeSec"), 14400); // 8km with 2km/hr will take 4 hours (14400 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHrStackKm setter doesn\'t change lengthM', function(assert) {
-	var run = this.subject({timeSec : 7200, lengthM : 2500});
+	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(2500)});
 	run.set("speedKmHrStackKm", "12");
-	assert.strictEqual(run.get("lengthM"), 2500);
+	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
 // speedKmHrStackDecimal
