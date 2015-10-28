@@ -374,13 +374,13 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
-	 * @return {number} 															up to 2 digits of the decimal place of the speed in km/hr
+	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
 	speedKmHrStackDecimal : function(propertyName, value) {
 		if (arguments.length > 1) {
 			var leadingZeros = this._getLeadingZerosFromString(value);
 
-			value = +Math.round(value) || 0; // convert to number or set to 0
+			value = this._ensureBigNumber(value).round();
 			var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
@@ -388,12 +388,13 @@ export default DS.Model.extend({
     	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
 
      	// calulate the speed from decimal place
-			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
- 			this.set("speedKmHr", this.get("speedKmHrStackKm")+(decimalSpeed/1000)) ;
+      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+
+      this.set("speedKmHr", this.get('speedKmHrStackKm').plus(decimalSpeed.dividedBy(1000)));
 		}
-		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
-		kmHrDecimalPlace = this._removeEndingZeros(kmHrDecimalPlace.split(".")[1]);
-		return kmHrDecimalPlace ? kmHrDecimalPlace : "0";
+
+    var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().toString().split(".")[1];
+		return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
 	}.property('speedKmHr'),
 
 	/**
