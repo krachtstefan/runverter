@@ -337,14 +337,18 @@ export default DS.Model.extend({
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHr
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
-	 * @return {string} 															km/hr with 4 digits precision
+	 * @return {BigNumber} 														km/hr
 	 */
 	speedKmHr : function(propertyName, value) {
    	if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
+      value = this._ensureBigNumber(value);
+    	this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
 		}
-		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeSec')/60/60), 4);
+
+    // more unprecise initial version, final version has one less dividedBy
+    // return this.get('lengthM').dividedBy(1000).dividedBy(this.get('timeSec').dividedBy(3600));
+
+    return this.get('lengthM').dividedBy(this.get('timeSec').dividedBy(3.6));
 	}.property('lengthM', 'timeSec'),
 
 	/**
