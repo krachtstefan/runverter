@@ -393,7 +393,7 @@ export default DS.Model.extend({
       this.set("speedKmHr", this.get('speedKmHrStackKm').plus(decimalSpeed.dividedBy(1000)));
 		}
 
-    var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().toString().split(".")[1];
+    var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
 		return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
 	}.property('speedKmHr'),
 
