@@ -565,14 +565,30 @@ test('paceMinPerKm property is calculated from timeSec and lengthM', function(as
 
 test('paceMinPerKm can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthM : new BigNumber(900)});
-  // http://keisan.casio.com/calculator results in 1.248285321248666666667
+  // http://keisan.casio.com/calculator results in 1.2482853212486666666666667
  	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
+
+  run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93)});
+  // http://keisan.casio.com/calculator results in 31.279569892473118279569892
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "31.27956989247311827957");
+
+  run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123)});
+  // http://keisan.casio.com/calculator results in 23.650406504065040650406504
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "23.65040650406504065041");
 });
 
 test('paceMinPerKm can round down', function(assert) {
 	var run = this.subject({timeMin : new BigNumber(1.1234567891234), lengthM : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 1.248285321248222222222
  	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
+
+  run.setProperties({timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921)});
+  // http://keisan.casio.com/calculator results in 2.3055991195698154180238871
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "2.30559911956981541802");
+
+  run.setProperties({timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123)});
+  // http://keisan.casio.com/calculator results in 17.26387627951219512195122
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "17.26387627951219512195");
 });
 
 test('paceMinPerKm setter changes paceMinPerKm', function(assert) {
@@ -712,14 +728,30 @@ test('paceMinPerMi property is calculated from timeSec and lengthM', function(as
 
 test('paceMinPerMi can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(900)});
-  // http://keisan.casio.com/calculator results in 0.001248285321248666666667
+  // http://keisan.casio.com/calculator results in 0.0012482853212486666666666667
  	assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
+
+  run.setProperties({timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123)});
+  // http://keisan.casio.com/calculator results in 0.001248285321248666666667
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00913379503352682927");
+
+  run.setProperties({timeMin : new BigNumber(13), lengthMi : new BigNumber(124)});
+  // http://keisan.casio.com/calculator results in 0.10483870967741935483870968
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.10483870967741935484");
 });
 
 test('paceMinPerMi can round down', function(assert) {
 	var run = this.subject({timeMin : new BigNumber(3.1131567891211), lengthMi : new BigNumber(900)});
-  // http://keisan.casio.com/calculator results in 0.003459063099023444444444
+  // http://keisan.casio.com/calculator results in 0.0034590630990234444444444444
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00345906309902344444");
+
+  run.setProperties({timeMin : new BigNumber(9), lengthMi : new BigNumber(124)});
+  // http://keisan.casio.com/calculator results in 0.072580645161290322580645161
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.07258064516129032258");
+
+  run.setProperties({timeMin : new BigNumber(1245), lengthMi : new BigNumber(124)});
+  // http://keisan.casio.com/calculator results in 10.04032258064516129032 2581
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "10.04032258064516129032");
 });
 
 test('paceMinPerMi setter changes paceMinPerMi', function(assert) {
