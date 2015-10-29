@@ -1189,24 +1189,24 @@ test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', 
 	assert.strictEqual(run.get("speedMiHr").toString(), "12.05");
 });
 
-// some test cases from the application itself
-// test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
-//   var run = this.subject({timeSec : 3600*4,lengthM : 10});
-//   run.set("paceMinPerKmStackMin", "6");
-//   run.set("paceMinPerKmStackSec", "0");
-//   assert.strictEqual(run.get("speedKmHr"), "10.0000");
-//   run.set("lengthM", "42195");
-//   run.set("paceMinPerKmStackMin", "6");
-//   run.set("paceMinPerKmStackSec", "0");
-//   assert.strictEqual(run.get("speedKmHr"), "10.0000");
-// });
-
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
   // older version of speedKmHr getter resulted in 2.81413200000000000113
   // problem was fixed by optmizing the calculation by eleminating a dividedBy call
   assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
+});
+
+// some test cases from the application itself
+test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600*4), lengthM : new BigNumber(10)});
+  run.set("paceMinPerKmStackMin", "6");
+  run.set("paceMinPerKmStackSec", "0");
+  assert.strictEqual(run.get("speedKmHr").toString(), "10");
+  run.set("lengthM", new BigNumber(42195));
+  run.set("paceMinPerKmStackMin", "6");
+  run.set("paceMinPerKmStackSec", "0");
+  assert.strictEqual(run.get("speedKmHr").toString(), "10");
 });
 
 // helper methods
