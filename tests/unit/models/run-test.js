@@ -830,12 +830,28 @@ test('speedKmHr can have up to 20 decimal places and can round up', function(ass
   var run = this.subject({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4511)});
   // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454545"); // TODO: should be 7.67490545454545454545?
+
+  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510)});
+  // http://keisan.casio.com/calculator results in 7.6748727272727272727272727
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.67487272727272727273"); // TODO: should be 67487272727272727273?
+
+  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.121)});
+  // http://keisan.casio.com/calculator results in 3.9668727272727272727272727
+  assert.strictEqual(run.get("speedKmHr").toString(), "3.96687272727272727273"); // TODO: should be 3.96687272727272727273?
 });
 
 test('speedKmHr can round down', function(assert) {
   var run = this.subject({timeSec : new BigNumber(49), lengthM : new BigNumber(12.9912)});
   // http://keisan.casio.com/calculator results in 0.9544555102040816326531
   assert.strictEqual(run.get("speedKmHr").toString(), "0.95445551020408163265");
+
+  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912)});
+  // http://keisan.casio.com/calculator results in 4.2516654545454545454545455
+  assert.strictEqual(run.get("speedKmHr").toString(), "4.25166545454545454545");
+
+  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912)});
+  // http://keisan.casio.com/calculator results in 7.8516654545454545454545455
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.85166545454545454545"); // TODO: should be 7.85166545454545454545?
 });
 
 test('speedKmHr setter changes speedKmHr', function(assert) {
@@ -1187,6 +1203,18 @@ test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', 
 		"speedMiHrStackDecimal" : "05"
 	});
 	assert.strictEqual(run.get("speedMiHr").toString(), "12.05"); // TODO: shouldn't be 12.05000000000000000023
+
+  run.setProperties({
+    "speedMiHrStackMi" : "12",
+    "speedMiHrStackDecimal" : "04"
+  });
+  assert.strictEqual(run.get("speedMiHr").toString(), "12.04"); // TODO: shouldn't be 12.04000000000000000004
+
+  run.setProperties({
+    "speedMiHrStackMi" : "1",
+    "speedMiHrStackDecimal" : "04"
+  });
+  assert.strictEqual(run.get("speedMiHr").toString(), "1.04");
 });
 
 // some edge cases found during development
@@ -1203,6 +1231,7 @@ test('speedKmHr should be calculated evenly, also with odd lenght numbers', func
   run.set("paceMinPerKmStackMin", "6");
   run.set("paceMinPerKmStackSec", "0");
   assert.strictEqual(run.get("speedKmHr").toString(), "10");
+
   run.set("lengthM", new BigNumber(42195));
   run.set("paceMinPerKmStackMin", "6");
   run.set("paceMinPerKmStackSec", "0");
