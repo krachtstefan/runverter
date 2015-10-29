@@ -828,7 +828,7 @@ test('speedKmHr property is calculated from timeSec and lengthM', function(asser
 
 test('speedKmHr can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4511)});
-  // http://keisan.casio.com/calculator results in 7.674905454545454545455
+  // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454544"); // TODO: should be 7.67490545454545454545?
 });
 
@@ -1044,7 +1044,7 @@ test('speedMiHr setter can handle floats', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1609.344)});
 	run.set("speedMiHr", 2.2);
   // TODO:
-  // 1/(1/2.2) is 2.2
+  // 1/(1/2.2) is 2.2 but BigNumber has a lag of presicion
   // new BigNumber(1).dividedBy(new BigNumber(1).dividedBy(2.2)).toString()
 	assert.strictEqual(run.get("speedMiHr").toString(), "2.20000000000000000002");
   // TODO: But it work swith 2.5
