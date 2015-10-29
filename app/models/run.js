@@ -440,9 +440,9 @@ export default DS.Model.extend({
 	 */
 	speedMiHrStackDecimal : function(propertyName, value) {
 		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);
+      var leadingZeros = this._getLeadingZerosFromString(value);
 
-			value = +Math.round(value) || 0; // convert to number or set to 0
+      value = this._ensureBigNumber(value).round();
 			var valueLenght = value.toString().length;
 
     	// reflects the decimal precision of the value
@@ -450,12 +450,13 @@ export default DS.Model.extend({
     	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
 
      	// calulate the speed from decimal place
-			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
- 			this.set("speedMiHr", this.get("speedMiHrStackMi")+(decimalSpeed/1000)) ;
+      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+
+ 			this.set("speedMiHr", this.get("speedMiHrStackMi").plus(decimalSpeed.dividedBy(1000)));
 		}
-		var miHrDecimalPlace = this._toFixed(parseFloat(this.get("speedMiHr")),2);
-		miHrDecimalPlace = this._removeEndingZeros(miHrDecimalPlace.split(".")[1]);
-		return miHrDecimalPlace ? miHrDecimalPlace : "0";
+
+    var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
+		return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
 	}.property('speedMiHr'),
 
 	/**
