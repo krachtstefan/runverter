@@ -829,7 +829,7 @@ test('speedKmHr property is calculated from timeSec and lengthM', function(asser
 test('speedKmHr can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4511)});
   // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
-  assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454544"); // TODO: should be 7.67490545454545454545?
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454545"); // TODO: should be 7.67490545454545454545?
 });
 
 test('speedKmHr can round down', function(assert) {
@@ -1046,14 +1046,14 @@ test('speedMiHr setter can handle floats', function(assert) {
   // TODO:
   // 1/(1/2.2) is 2.2 but BigNumber has a lag of presicion
   // new BigNumber(1).dividedBy(new BigNumber(1).dividedBy(2.2)).toString()
-	assert.strictEqual(run.get("speedMiHr").toString(), "2.20000000000000000002");
+	assert.strictEqual(run.get("speedMiHr").toString(), "2.2");
   // TODO: But it work swith 2.5
 	run.set("speedMiHr", "2.5");
 	assert.strictEqual(run.get("speedMiHr").toString(), "2.5");
 	run.set("speedMiHr", 2.21234);
   // TODO: 2.21234 doesn't work as well
   // new BigNumber(1).dividedBy(new BigNumber(1).dividedBy(2.2)).toString()
-	assert.strictEqual(run.get("speedMiHr").toString(), "2.21233999999999999998");
+	assert.strictEqual(run.get("speedMiHr").toString(), "2.21234");
 });
 
 test('speedMiHr setter changes timeSec', function(assert) {
@@ -1186,7 +1186,7 @@ test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', 
 		"speedMiHrStackMi" : "12",
 		"speedMiHrStackDecimal" : "05"
 	});
-	assert.strictEqual(run.get("speedMiHr").toString(), "12.05");
+	assert.strictEqual(run.get("speedMiHr").toString(), "12.05"); // TODO: shouldn't be 12.05000000000000000023
 });
 
 // some edge cases found during development
@@ -1206,7 +1206,7 @@ test('speedKmHr should be calculated evenly, also with odd lenght numbers', func
   run.set("lengthM", new BigNumber(42195));
   run.set("paceMinPerKmStackMin", "6");
   run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr").toString(), "10");
+  assert.strictEqual(run.get("speedKmHr").toString(), "10"); // TODO: shouldn't be 9.99763061248667219523
 });
 
 // helper methods
