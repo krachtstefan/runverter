@@ -514,5 +514,17 @@ export default DS.Model.extend({
    */
   _ensureBigNumber : function(string){
     return (string instanceof BigNumber) ? string : new BigNumber(+string || 0);
+  },
+
+  /**
+   * This method detects if a fraction has repeating decimals
+   *
+   * @param  {BigNumber}   value      numerator
+   * @param  {BigNumber}   value      denominator
+   * @return {Boolean}                answer to "has repeating decimals?"
+   */
+  _hasRepeatingDecimals : function(numerator, denominator){
+    console.log(numerator+"/"+denominator);
+    return false;
   }
 });
