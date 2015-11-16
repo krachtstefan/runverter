@@ -1383,3 +1383,30 @@ test('_ensureBigNumber will treat non numeric input as 0', function(assert) {
   assert.strictEqual(ensureBigNumber instanceof BigNumber, true);
   assert.strictEqual(ensureBigNumber.toString(), "0");
 });
+
+test('_detectPeriod detects periods ', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
+});
+
+test('_detectPeriod detects one digit repeating decimals', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
+});
+
+test('_detectPeriod detects two digit repeating decimals', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
+});
+
+test('_detectPeriod detects 22 digit repeating decimals starting at second decimal place', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(29), new BigNumber(46)), true); // 0,6(3043478260869565217391)
+});
+
+test('_detectPeriod also works if fraction is not well canceled', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(6)), true); // same as 29/46
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(58), new BigNumber(92)), true); // same as 29/46
+});
+
+test('_detectPeriod detects periods without repeating decimals', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.5
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // 0.5
+});
