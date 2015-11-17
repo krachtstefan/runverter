@@ -1402,11 +1402,12 @@ test('_detectPeriod detects 22 digit repeating decimals starting at second decim
 });
 
 test('_detectPeriod also works if fraction is not well canceled', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(6)), true); // same as 29/46
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(6)), true); // same as 1/3
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(58), new BigNumber(92)), true); // same as 29/46
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // same as 1/5
 });
 
 test('_detectPeriod detects periods without repeating decimals', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.5
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // 0.5
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // 0.2
 });
