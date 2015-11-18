@@ -532,6 +532,32 @@ export default DS.Model.extend({
     }
     return arr;
   },
+
+  /**
+   * detects all prime factors of a given number and returns it as an array
+   * source:
+   * http://www.coderenaissance.com/2011/06/finding-prime-factors-in-javascript.html
+   *
+   * @param  {number}    num    source array
+   * @return {array}            all prime factors
+   */
+  _returnPrimeFactors : function(num){
+    var root = Math.sqrt(num),
+    result = arguments[1] || [],  //get unnamed paremeter from recursive calls
+    x = 2;
+
+    if(num % x){//if not divisible by 2
+     x = 3;//assign first odd
+     while((num % x) && ((x = x + 2) < root)){}//iterate odds
+    }
+    //if no factor found then num is prime
+    x = (x <= root) ? x : num;
+    result.push(x);//push latest prime factor
+
+    //if num isn't prime factor make recursive call
+    return (x === num) ? result : this._returnPrimeFactors(num/x, result) ;
+  },
+
   /**
    * This method detects if a fraction has repeating decimals
    *
