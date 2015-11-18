@@ -560,13 +560,17 @@ export default DS.Model.extend({
 
   /**
    * This method detects if a fraction has repeating decimals
+   * A fraction N/D has no repeating decimals when D is equal to 1 or D's prime factors only consist of 2's and/or 5's
+   * http://math.stackexchange.com/questions/197478/detecting-that-a-fraction-is-a-repeating-decimal
    *
    * @param  {BigNumber}   value      numerator
    * @param  {BigNumber}   value      denominator
    * @return {Boolean}                answer to "has repeating decimals?"
    */
   _hasRepeatingDecimals : function(numerator, denominator){
-    console.log(numerator+"/"+denominator);
-    return false;
+    var denominatorPrimeFactors = this._returnPrimeFactors(denominator.toNumber());
+    denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 2);
+    denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 5);
+    return (denominator.equals(1) || denominatorPrimeFactors.length === 0) ? false : true;
   }
 });
