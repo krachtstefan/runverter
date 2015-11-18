@@ -1384,6 +1384,12 @@ test('_ensureBigNumber will treat non numeric input as 0', function(assert) {
   assert.strictEqual(ensureBigNumber.toString(), "0");
 });
 
+test('_removeElementFromArray returns a new array with the desired element removed', function(assert) {
+  var arrayA = [1, 2, 1, 3, 4, 5, 6];
+  assert.deepEqual(this.subject()._removeElementFromArray(arrayA, 1), [2, 3, 4, 5, 6]);
+  assert.deepEqual(arrayA, [1, 2, 1, 3, 4, 5, 6]);
+});
+
 test('_detectPeriod detects periods ', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
