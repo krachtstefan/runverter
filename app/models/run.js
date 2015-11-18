@@ -509,11 +509,11 @@ export default DS.Model.extend({
    * already provide Bignumber. In the second case, it is important to keep the BigNumber
    * type to prevent precision loss
    *
-   * @param  {BigNumber|string|number}   value      any number like input
+   * @param  {BigNumber|string|number}   input      any number like input
    * @return {BigNumber}                            output instance of BigNumber
    */
-  _ensureBigNumber : function(string){
-    return (string instanceof BigNumber) ? string : new BigNumber(+string || 0);
+  _ensureBigNumber : function(input){
+    return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
   },
 
   /**
