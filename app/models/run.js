@@ -516,6 +516,22 @@ export default DS.Model.extend({
     return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
   },
 
+
+  /**
+   * searches an input array for e specific element and returns
+   * a new array with all of the found elements removed
+   *
+   * @param  {array}    srcArr    source array
+   * @param  {any}      element   element to search for
+   * @return {array}              new array
+   */
+  _removeElementFromArray : function(srcArr, element){
+    var arr = srcArr.slice();
+    while (arr.indexOf(element)>=0) {
+      arr.splice(arr.indexOf(element), 1);
+    }
+    return arr;
+  },
   /**
    * This method detects if a fraction has repeating decimals
    *
