@@ -1390,6 +1390,15 @@ test('_removeElementFromArray returns a new array with the desired element remov
   assert.deepEqual(arrayA, [1, 2, 1, 3, 4, 5, 6]);
 });
 
+test('_returnPrimeFactors returns all prime factors of a given number', function(assert) {
+  assert.deepEqual(this.subject()._returnPrimeFactors(75), [3,5,5]);
+  assert.deepEqual(this.subject()._returnPrimeFactors(355), [5,71]);
+  assert.deepEqual(this.subject()._returnPrimeFactors(959835983), [1213,791291]);
+  assert.deepEqual(this.subject()._returnPrimeFactors(1), [1]);
+  assert.deepEqual(this.subject()._returnPrimeFactors(0), [0]);
+
+});
+
 test('_detectPeriod detects periods ', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
