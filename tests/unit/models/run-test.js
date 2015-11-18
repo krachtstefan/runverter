@@ -1399,9 +1399,12 @@ test('_returnPrimeFactors returns all prime factors of a given number', function
 
 });
 
-test('_detectPeriod detects periods ', function(assert) {
+test('_detectPeriod detects simple periods', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
+});
+
+test('_detectPeriod returns false if denominator equals 1', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(1)), false); // 5
 });
 
 test('_detectPeriod detects one digit repeating decimals', function(assert) {
@@ -1416,6 +1419,23 @@ test('_detectPeriod detects 22 digit repeating decimals starting at second decim
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(29), new BigNumber(46)), true); // 0,6(3043478260869565217391)
 });
 
+test('_detectPeriod works with a bunch of other (complex) examples', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(6)), true); // 0.1(6)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(7)), true); // 0.(142857)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(9)), true); // 0.(1)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(11)), true); // 0.(09)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(12)), true); // 0.08(3)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(13)), true); // 0.(076923)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(14)), true); // 0.0(714285)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(15)), true); // 0.0(6)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(35)), true); // 0.0(285714)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(38)), true); // 0.0(263157894736842105)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(43)), true); // 0.0(23255813953488372093)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(45)), true); // 0.0(2)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(46)), true); // 0.0(2173913043478260869565)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(3227), new BigNumber(555)), true); // 5.8(144)
+});
+
 test('_detectPeriod also works if fraction is not well canceled', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(6)), true); // same as 1/3
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(58), new BigNumber(92)), true); // same as 29/46
@@ -1424,5 +1444,11 @@ test('_detectPeriod also works if fraction is not well canceled', function(asser
 
 test('_detectPeriod detects periods without repeating decimals', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.2
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // 0.2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(4)), false); // 0.25
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(8)), false); // 0.125
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(10)), false); // 0.1
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(25)), false); // 0.04
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(32)), false); // 0.03125
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(40)), false); // 0.025
 });
