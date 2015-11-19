@@ -1452,3 +1452,11 @@ test('_detectPeriod detects periods without repeating decimals', function(assert
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(32)), false); // 1/32 = 0.03125
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(40)), false); // 1/40 = 0.025
 });
+
+test('_detectPeriod detects periods if denminator has floating points', function(assert) {
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(3.6)), true); // 1/3,6 = 10/36 = 0.2(7)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5.55)), true); // 1/5.55 = 100/555 =  0,(180)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.5)), false); // 1/0.5 = 10/5 = 2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.0004)), false); // 0.0004 = 1000/4 = 2500
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.0032)), false); // 1/0,0032 = 10000/32 = 312,5
+});
