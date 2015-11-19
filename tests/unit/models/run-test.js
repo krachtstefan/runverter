@@ -1420,35 +1420,35 @@ test('_detectPeriod detects 22 digit repeating decimals starting at second decim
 });
 
 test('_detectPeriod works with a bunch of other (complex) examples', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(6)), true); // 0.1(6)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(7)), true); // 0.(142857)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(9)), true); // 0.(1)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(11)), true); // 0.(09)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(12)), true); // 0.08(3)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(13)), true); // 0.(076923)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(14)), true); // 0.0(714285)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(15)), true); // 0.0(6)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(35)), true); // 0.0(285714)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(38)), true); // 0.0(263157894736842105)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(43)), true); // 0.0(23255813953488372093)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(45)), true); // 0.0(2)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(46)), true); // 0.0(2173913043478260869565)
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(3227), new BigNumber(555)), true); // 5.8(144)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(6)), true); // 1/6 = 0.1(6)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(7)), true); // 1/7 = 0.(142857)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(9)), true); // 1/9 = 0.(1)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(11)), true); // 1/11 = 0.(09)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(12)), true); // 1/12 = 0.08(3)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(13)), true); // 1/13 = 0.(076923)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(14)), true); // 1/14 = 0.0(714285)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(15)), true); // 1/15 = 0.0(6)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(35)), true); // 1/35 = 0.0(285714)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(38)), true); // 1/38 = 0.0(263157894736842105)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(43)), true); // 1/43 = 0.0(23255813953488372093)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(45)), true); // 1/45 = 0.0(2)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(46)), true); // 1/46 = 0.0(2173913043478260869565)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(555)), true); // 3227/555 = 5.8(144)
 });
 
 test('_detectPeriod also works if fraction is not well canceled', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(6)), true); // same as 1/3
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(58), new BigNumber(92)), true); // same as 29/46
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(2), new BigNumber(10)), false); // same as 1/5
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(6)), true); // 2/6 = same as 1/3
+  assert.strictEqual(this.subject()._hasRepeatingDecimals( new BigNumber(92)), true); // 58/46 = same as 29/46
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(10)), false); // 2/10 = same as 1/5
 });
 
 test('_detectPeriod detects periods without repeating decimals', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.2
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(4)), false); // 0.25
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(5)), false); // 0.2
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(8)), false); // 0.125
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(10)), false); // 0.1
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(25)), false); // 0.04
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(32)), false); // 0.03125
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(40)), false); // 0.025
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5)), false); // 1/5 = 0.2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(4)), false); // 1/4 = 0.25
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5)), false); // 1/5 = 0.2
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(8)), false); // 1/8 = 0.125
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(10)), false); // 1/10 = 0.1
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(25)), false); // 1/25 = 0.04
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(32)), false); // 1/32 = 0.03125
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(40)), false); // 1/40 = 0.025
 });
