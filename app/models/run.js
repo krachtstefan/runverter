@@ -567,6 +567,10 @@ export default DS.Model.extend({
    * @return {Boolean}                answer to "has repeating decimals?"
    */
   _hasRepeatingDecimals : function(denominator){
+    // handle floating points by shifting the comma (turn 3.456 to 3456)
+    if(denominator.decimalPlaces() > 0){
+      denominator = denominator.shift(denominator.decimalPlaces());
+    }
     var denominatorPrimeFactors = this._returnPrimeFactors(denominator.toNumber());
     denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 2);
     denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 5);
