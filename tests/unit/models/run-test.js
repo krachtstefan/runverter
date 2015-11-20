@@ -9,6 +9,11 @@ test('run is a valid ember data Model', function(assert) {
   assert.ok(run instanceof DS.Model);
 });
 
+// miToMHasRepeatingDigits
+test('every division with miToM (which equals 1609.344) as a divisor returns a quotient with repeating digits', function(assert) {
+  assert.strictEqual(this.subject().get("miToMHasRepeatingDigits"), true);
+});
+
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(14400)});
