@@ -2,9 +2,9 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 
 	/**
-	 * MiToM the lenght of a mile in meters
+	 * MiToM the length of a mile in meters
 	 *
-	 * @type {BigNumber}	lenght of a mile in meters
+	 * @type {BigNumber}	length of a mile in meters
 	 */
 	miToM : new BigNumber(1609.344),
 
@@ -117,7 +117,7 @@ export default DS.Model.extend({
 	lengthM : new BigNumber(0),
 
 	/**
-	 * lenght of the run in km
+	 * length of the run in km
 	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKm
@@ -161,11 +161,11 @@ export default DS.Model.extend({
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
       value = this._ensureBigNumber(value).round();
-    	var valueLenght = value.toString().length;
+    	var valueLength = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
     	// calulate the meters from decimal place
 			var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
@@ -178,7 +178,7 @@ export default DS.Model.extend({
 	}.property('lengthKm'),
 
 	/**
-	 * lenght of the run in miles
+	 * length of the run in miles
 	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMi
@@ -223,11 +223,11 @@ export default DS.Model.extend({
    		var leadingZeros = this._getLeadingZerosFromString(value);
 
       value = this._ensureBigNumber(value).round();
-    	var valueLenght = value.toString().length;
+    	var valueLength = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
     	// calulate the Meters from decimal place
       var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
@@ -391,11 +391,11 @@ export default DS.Model.extend({
 			var leadingZeros = this._getLeadingZerosFromString(value);
 
 			value = this._ensureBigNumber(value).round();
-			var valueLenght = value.toString().length;
+			var valueLength = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
      	// calulate the speed from decimal place
       var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
@@ -453,11 +453,11 @@ export default DS.Model.extend({
       var leadingZeros = this._getLeadingZerosFromString(value);
 
       value = this._ensureBigNumber(value).round();
-			var valueLenght = value.toString().length;
+			var valueLength = value.toString().length;
 
     	// reflects the decimal precision of the value
     	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
      	// calulate the speed from decimal place
       var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
