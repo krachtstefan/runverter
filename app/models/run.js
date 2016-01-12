@@ -354,11 +354,12 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value);
     	this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
 		}
-
-    // more unprecise initial version, final version has one less dividedBy
-    // return this.get('lengthM').dividedBy(1000).dividedBy(this.get('timeSec').dividedBy(3600));
-
-    return this.get('lengthM').dividedBy(this.get('timeSec').dividedBy(3.6));
+    // dividing by 3.6 will always have infinite number of digits
+    BigNumber.config({DECIMAL_PLACES: 21});
+    // more unprecise initial version, final version nees one less dividedBy
+    var speedKmHr =  this.get('lengthM').dividedBy(this.get('timeSec').dividedBy(3.6)).round(20);
+    BigNumber.config({DECIMAL_PLACES: 20});
+    return speedKmHr;
 	}.property('lengthM', 'timeSec'),
 
 	/**
