@@ -1405,23 +1405,23 @@ test('_returnPrimeFactors returns all prime factors of a given number', function
 });
 
 test('_detectPeriod detects simple periods', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(11)), true); // 0.(45)
 });
 
 test('_detectPeriod returns false if denominator equals 1', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(1)), false); // 5
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1)), false); // 5
 });
 
 test('_detectPeriod detects one digit repeating decimals', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1), new BigNumber(3)), true); // 0.(3)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(3)), true); // 0.(3)
 });
 
 test('_detectPeriod detects two digit repeating decimals', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(5), new BigNumber(11)), true); // 0.(45)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(11)), true); // 0.(45)
 });
 
 test('_detectPeriod detects 22 digit repeating decimals starting at second decimal place', function(assert) {
-  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(29), new BigNumber(46)), true); // 0,6(3043478260869565217391)
+  assert.strictEqual(this.subject()._hasRepeatingDecimals( new BigNumber(46)), true); // 0,6(3043478260869565217391)
 });
 
 test('_detectPeriod works with a bunch of other (complex) examples', function(assert) {
