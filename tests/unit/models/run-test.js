@@ -1443,7 +1443,7 @@ test('_detectPeriod works with a bunch of other (complex) examples', function(as
 
 test('_detectPeriod also works if fraction is not well canceled', function(assert) {
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(6)), true); // 2/6 = same as 1/3
-  assert.strictEqual(this.subject()._hasRepeatingDecimals( new BigNumber(92)), true); // 58/46 = same as 29/46
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(92)), true); // 58/46 = same as 29/46
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(10)), false); // 2/10 = same as 1/5
 });
 
@@ -1464,4 +1464,5 @@ test('_detectPeriod detects periods if denminator has floating points', function
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.5)), false); // 1/0.5 = 10/5 = 2
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.0004)), false); // 0.0004 = 1000/4 = 2500
   assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(0.0032)), false); // 1/0,0032 = 10000/32 = 312,5
+  assert.strictEqual(this.subject()._hasRepeatingDecimals(new BigNumber(1609344)), true); // 1/1609344 = 0,000000621
 });
