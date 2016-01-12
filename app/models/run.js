@@ -418,9 +418,26 @@ export default DS.Model.extend({
 	speedMiHr : function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
-      this.set('timeHr',this.get('lengthMi').dividedBy(value));
+      var newValue = "";
+      if(this._hasRepeatingDecimals(value) === true){
+        BigNumber.config({DECIMAL_PLACES: 21});
+        newValue = this.get('lengthMi').dividedBy(value).round(22);
+        BigNumber.config({DECIMAL_PLACES: 20});
+      }else{
+        newValue = this.get('lengthMi').dividedBy(value);
+      }
+      this.set('timeHr',newValue);
 		}
-		return this.get('lengthMi').dividedBy(this.get('timeHr'));
+
+    var speedMiHr = 0;
+    if(this._hasRepeatingDecimals(this.get('timeHr')) === true){
+      BigNumber.config({DECIMAL_PLACES: 21});
+      speedMiHr = this.get('lengthMi').dividedBy(this.get('timeHr')).round(20);
+      BigNumber.config({DECIMAL_PLACES: 20});
+    }else{
+      speedMiHr = this.get('lengthMi').dividedBy(this.get('timeHr'));
+    }
+    return speedMiHr;
 	}.property('lengthM', 'timeHr'),
 
 	/**
