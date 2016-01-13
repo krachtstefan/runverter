@@ -412,10 +412,10 @@ test('lengthMi can have up to 20 decimal places and can round up', function(asse
   assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.07670827368169887855");
 });
 
-test('TODO: lengthMi can round down', function(assert) {
+test('lengthMi can round down', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(9.12345678901234)});
   // http://keisan.casio.com/calculator results in 0.005669053222314396424879
- 	assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.00566905322231439642"); // TODO: shouldn't be 0.00566905322231439643
+ 	assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.00566905322231439642");
 
   run.setProperties({lengthM : new BigNumber(123)});
   // http://keisan.casio.com/calculator results in 0.076428656645192078262944405
@@ -1084,10 +1084,10 @@ test('speedMiHr property is calculated from timeSec and lengthM', function(asser
 });
 
 
-test('TODO: speedMiHr can have up to 20 decimal places and can round up', function(assert) {
+test('speedMiHr can have up to 20 decimal places and can round up', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.364239)});
   // http://keisan.casio.com/calculator results in 1.0124399997763063707945598
-  assert.strictEqual(run.get("speedMiHr").round(20).toString(), "1.01243999977630637079"); // TODO: shouldn't be 1.01243999977630637078
+  assert.strictEqual(run.get("speedMiHr").round(20).toString(), "1.01243999977630637079");
 
   run.setProperties({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380333)});
   // http://keisan.casio.com/calculator results in 1.0124500001242742384474668
@@ -1258,7 +1258,7 @@ test('speedMiHrStackDecimal setter doesn\'t change lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM").round(20).toString(), "12000");
 });
 
-test('TODO: speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
+test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(4400)});
 	run.setProperties({
 		"speedMiHrStackMi" : "12",
@@ -1270,7 +1270,7 @@ test('TODO: speedMiHrStackMi and speedMiHrStackDecimal setter will define speedM
     "speedMiHrStackMi" : "12",
     "speedMiHrStackDecimal" : "04"
   });
-  assert.strictEqual(run.get("speedMiHr").round(20).toString(), "12.04"); // TODO: shouldn't be 12.04000000000000000003
+  assert.strictEqual(run.get("speedMiHr").round(20).toString(), "12.04");
 
   run.setProperties({
     "speedMiHrStackMi" : "1",
