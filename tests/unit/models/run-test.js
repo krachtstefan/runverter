@@ -723,6 +723,25 @@ test('paceMinPerKmStackSec setter handles values bigger than 59', function(asser
 	assert.strictEqual(run.get("paceMinPerKmStackMin").round(20).toString(), "7"); // 6 flips to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
 	assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "30");
 	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "7.5");
+
+});
+
+test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMinPerKmStackSec (with digits) to have exact results', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600*4), lengthM : new BigNumber(42195)});
+  // paceMinPerKmStackSec is calculated from the previous paceMinPerKmStackSec
+  // Since this value is normally rounded, it should be used in uncompressed form for calculation
+
+  // In this example paceMinPerKm is currently 5.68787771062922147174
+  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "5.68787771062922147174");
+
+  // which results in a paceMinPerKmStackSec of 41
+  assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "41");
+
+  // actually it is 41,272662638 (0.68787771062922147174*60)
+  // when setting paceMinPerKmStackSec
+  run.set("paceMinPerKmStackSec", "0");
+  // it should refer to 41,272662638 and not 41 to result in 5 (aka 5.00) instead of 5.00454437729588813841
+  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "5");
 });
 
 // paceMinPerMi
@@ -1285,19 +1304,6 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
   // older version of speedKmHr getter resulted in 2.81413200000000000113
   // problem was fixed by optmizing the calculation by eleminating a dividedBy call
   assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2.814132");
-});
-
-// some test cases from the application itself
-test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(3600*4), lengthM : new BigNumber(10)});
-  run.set("paceMinPerKmStackMin", "6");
-  run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "10");
-
-  run.set("lengthM", new BigNumber(42195));
-  run.set("paceMinPerKmStackMin", "6");
-  run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "10");
 });
 
 // helper methods
