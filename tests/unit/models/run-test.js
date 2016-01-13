@@ -1288,7 +1288,7 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
 });
 
 // some test cases from the application itself
-test('TODO: speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
+test('speedKmHr should be calculated evenly, also with odd lenght numbers', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600*4), lengthM : new BigNumber(10)});
   run.set("paceMinPerKmStackMin", "6");
   run.set("paceMinPerKmStackSec", "0");
@@ -1297,7 +1297,7 @@ test('TODO: speedKmHr should be calculated evenly, also with odd lenght numbers'
   run.set("lengthM", new BigNumber(42195));
   run.set("paceMinPerKmStackMin", "6");
   run.set("paceMinPerKmStackSec", "0");
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "10"); // TODO: shouldn't be 9.99763061248667219524
+  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "10");
 });
 
 // helper methods
