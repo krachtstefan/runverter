@@ -907,6 +907,24 @@ test('paceMinPerMiStackSec setter handles values bigger than 59', function(asser
 	assert.strictEqual(run.get("paceMinPerMi").round(20).toString(), "7.5");
 });
 
+test('paceMinPerMiStackSec setter should refer to an uncompressed version paceMinPerMiStackSec (with digits) to have exact results', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600*4), lengthM : new BigNumber(42195)});
+  // paceMinPerMiStackSec is calculated from the previous paceMinPerMiStackSec
+  // Since this value is normally rounded, it should be used in uncompressed form for calculation
+
+  // In this example paceMinPerMi is currently 9.15375186633487380021
+  assert.strictEqual(run.get("paceMinPerMi").round(20).toString(), "9.15375186633487380021");
+
+  // which results in a paceMinPerMiStackSec of 09
+  assert.strictEqual(run.get("paceMinPerMiStackSec").round(20).toString(), "9");
+
+  // actually it is 9.2251119800924280126 (0.15375186633487380021*60)
+  // when setting paceMinPerMiStackSec
+  run.set("paceMinPerMiStackSec", "0");
+  // it should refer to 9.2251119800924280126 and not 9 to result in 9 (aka 9.00) instead of 9.00375186633487380021
+  assert.strictEqual(run.get("paceMinPerMi").round(20).toString(), "9");
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
