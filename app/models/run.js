@@ -356,11 +356,7 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value);
     	this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
 		}
-
-    // more unprecise initial version, final version has one less dividedBy
-    // return this.get('lengthM').dividedBy(1000).dividedBy(this.get('timeSec').dividedBy(3600));
-
-    return this.get('lengthM').dividedBy(this.get('timeSec').dividedBy(3.6));
+    return this.get('lengthKm').dividedBy(this.get('timeHr'));
 	}.property('lengthM', 'timeSec'),
 
 	/**
