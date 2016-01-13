@@ -284,7 +284,8 @@ export default DS.Model.extend({
 	 */
 	paceMinPerKmStackSec : function(propertyName, value) {
 		if (arguments.length > 1) {
-			var previousValue = this.get("paceMinPerKmStackSec");
+      // TODO: use this.get("paceMinPerKmStackSec") again if it's not rounded
+			var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
 			value = this._ensureBigNumber(value).round();
       this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue).dividedBy(60)));
 		}
