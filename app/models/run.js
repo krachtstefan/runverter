@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -21,10 +22,9 @@ export default DS.Model.extend({
    *
    * @type {Boolean} is the
    */
-  miToMHasRepeatingDigits : function() {
+  miToMHasRepeatingDigits: Ember.computed("miToM", function() {
     return this._hasRepeatingDecimals(this.miToM);
-  }.property('miToM'),
-
+  }),
 
 	/**
 	 * time of the run in hours
@@ -34,13 +34,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeHr
 	 * @return {BigNumber} 														hours
 	 */
-	timeHr : function(propertyName, value) {
+  timeHr: Ember.computed("timeSec", function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
 			this.set("timeSec", value.times(3600));
 		}
 		return this.get('timeSec').dividedBy(3600);
-	}.property('timeSec'),
+	}),
 
 	/**
 	 * time of the run in minutes
@@ -50,13 +50,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeMin
 	 * @return {BigNumber} 														minutes
 	 */
-	timeMin : function(propertyName, value) {
+  timeMin : Ember.computed("timeSec", function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
 			this.set("timeSec", value.times(60));
 		}
     return this.get('timeSec').dividedBy(60);
-	}.property('timeSec'),
+	}),
 
 	/**
 	 * timeStackHr is used to create a view like 12:34:56
@@ -66,14 +66,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackHr
 	 * @return {BigNumber} 													  hours stack of the run time
 	 */
-	timeStackHr : function(propertyName, value) {
+  timeStackHr : Ember.computed("timeHr", function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("timeStackHr");
       value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
 		}
 		return this.get("timeHr").floor();
-	}.property('timeHr'),
+	}),
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
@@ -83,14 +83,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackMin
 	 * @return {BigNumber} 														minutes stack of the run time
 	 */
-	timeStackMin : function(propertyName, value) {
+  timeStackMin : Ember.computed("timeMin", "timeStackHr", function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackMin");
       value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
 		}
 		return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
-	}.property('timeMin', 'timeStackHr'),
+	}),
 
 	/**
 	 * timeStackSec is used to create a view like 12:34:56
@@ -100,14 +100,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackSec
 	 * @return {BigNumber} 														second stack of the run time, betweeen 0 and 59
 	 */
-	timeStackSec : function(propertyName, value) {
+  timeStackSec : Ember.computed("timeSec", "timeMin", function(propertyName, value) {
 		if (arguments.length > 1) {
 			var previousValue = this.get("timeStackSec");
       value = this._ensureBigNumber(value).round();
 			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
 		}
 		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
-	}.property('timeSec', 'timeMin'),
+	}),
 
 
 	/**
@@ -125,13 +125,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKm
 	 * @return {BigNumber}														km
 	 */
-	lengthKm : function(propertyName, value) {
+  lengthKm : Ember.computed("lengthM", function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
 			this.set("lengthM", value.times(1000));
 		}
     return this.get('lengthM').dividedBy(1000);
-	}.property('lengthM'),
+	}),
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
@@ -141,14 +141,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
 	 * @return {BigNumber} 														km stack of the run
 	 */
-	lengthKmStackKm : function(propertyName, value) {
+  lengthKmStackKm : Ember.computed("lengthKm", function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthKmStackKm");
       value = this._ensureBigNumber(value).round();
 			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(1000)));
 		}
 		return this.get("lengthKm").floor();
-	}.property('lengthKm'),
+	}),
 
 	/**
 	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
@@ -158,7 +158,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
 	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
-	lengthKmStackDecimal : function(propertyName, value) {
+  lengthKmStackDecimal : Ember.computed("lengthKm", function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
       value = this._ensureBigNumber(value).round();
@@ -176,7 +176,7 @@ export default DS.Model.extend({
 
     var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
     return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
-	}.property('lengthKm'),
+	}),
 
 	/**
 	 * length of the run in miles
@@ -186,13 +186,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMi
 	 * @return {BigNumber} 														miles
 	 */
-	lengthMi : function(propertyName, value) {
+  lengthMi : Ember.computed("lengthM", function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(this.miToM));
 		}
     return this.get('lengthM').dividedBy(this.miToM);
-	}.property('lengthM'),
+	}),
 
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
@@ -202,14 +202,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
 	 * @return {BigNumber} 													  miles	stack of the run
 	 */
-	lengthMiStackMi : function(propertyName, value) {
+  lengthMiStackMi : Ember.computed("lengthMi", function(propertyName, value) {
     if (arguments.length > 1) {
     	var previousValue = this.get("lengthMiStackMi");
       value = this._ensureBigNumber(value).round();
 			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(this.miToM)));
 		}
 		return this.get("lengthMi").floor();
-	}.property('lengthMi'),
+	}),
 
 	/**
 	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
@@ -219,7 +219,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
 	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
-	lengthMiStackDecimal : function(propertyName, value) {
+  lengthMiStackDecimal : Ember.computed("lengthMi", function(propertyName, value) {
    	if (arguments.length > 1) {
    		var leadingZeros = this._getLeadingZerosFromString(value);
 
@@ -239,7 +239,7 @@ export default DS.Model.extend({
 
     var lengthMiStackDecimal = this.get("lengthMi").round(2).toString().split(".")[1];
 		return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
-	}.property('lengthMi'),
+	}),
 
 	/**
 	 * paceMinPerKm represents the pace of the run in min/km
@@ -249,13 +249,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
 	 * @return {BigNumber}              							min/km
 	 */
-	paceMinPerKm : function(propertyName, value) {
+  paceMinPerKm : Ember.computed("timeMin", "lengthKm", function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
     	this.set('timeSec',value.times(this.get('lengthKm').times(60)));
 		}
     return this.get('timeMin').dividedBy(this.get('lengthKm'));
-	}.property('timeMin', 'lengthKm'),
+	}),
 
 	/**
 	 * paceMinPerKmStackMin is used to create a view like 12:34
@@ -265,14 +265,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
 	 * @return {BigNumber} 														min stack of the pace
 	 */
-	paceMinPerKmStackMin : function(propertyName, value) {
+  paceMinPerKmStackMin : Ember.computed("paceMinPerKm", function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("paceMinPerKmStackMin");
       value = this._ensureBigNumber(value).round();
 			this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
 		}
 		return this.get("paceMinPerKm").floor();
-	}.property('paceMinPerKm'),
+	}),
 
 	/**
 	 * paceMinPerKmStackSec is used to create a view like 12:34
@@ -282,7 +282,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
 	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
 	 */
-	paceMinPerKmStackSec : function(propertyName, value) {
+  paceMinPerKmStackSec : Ember.computed("paceMinPerKm", function(propertyName, value) {
 		if (arguments.length > 1) {
       // TODO: use this.get("paceMinPerKmStackSec") again if it's not rounded
 			var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
@@ -290,7 +290,7 @@ export default DS.Model.extend({
       this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue).dividedBy(60)));
 		}
 		return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
-	}.property('paceMinPerKm'),
+	}),
 
 	/**
 	 * paceMinPerMi represents the pace of the run in min/mi
@@ -300,13 +300,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
 	 * @return {BigNumber}              							min/mi
 	 */
-	paceMinPerMi : function(propertyName, value) {
+  paceMinPerMi : Ember.computed("timeMin", "lengthMi", function(propertyName, value) {
 		if (arguments.length > 1) {
     	value = this._ensureBigNumber(value);
       this.set('timeSec',value.times(this.get('lengthMi').times(60)));
 		}
     return this.get('timeMin').dividedBy(this.get('lengthMi'));
-	}.property('timeMin', 'lengthMi'),
+	}),
 
 	/**
 	 * paceMinPerMiStackMin is used to create a view like 12:34
@@ -316,14 +316,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
 	 * @return {BigNumber} 													  min stack of the pace
 	 */
-	paceMinPerMiStackMin : function(propertyName, value) {
+  paceMinPerMiStackMin : Ember.computed("paceMinPerMi", function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("paceMinPerMiStackMin");
     	value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue)));
 		}
 		return this.get("paceMinPerMi").floor();
-	}.property('paceMinPerMi'),
+	}),
 
 	/**
 	 * paceMinPerMiStackSec is used to create a view like 12:34
@@ -333,7 +333,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
 	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
 	 */
-	paceMinPerMiStackSec : function(propertyName, value) {
+  paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", function(propertyName, value) {
 		if (arguments.length > 1) {
       // TODO: use this.get("paceMinPerMiStackMin") again if it's not rounded
 			var previousValue = this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60);
@@ -341,7 +341,7 @@ export default DS.Model.extend({
       this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue).dividedBy(60)));
 		}
     return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
-	}.property('paceMinPerMi', 'paceMinPerMiStackMin'),
+	}),
 
 
 	/**
@@ -352,13 +352,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
 	 * @return {BigNumber} 														km/hr
 	 */
-	speedKmHr : function(propertyName, value) {
+  speedKmHr : Ember.computed("lengthM", "timeSec", function(propertyName, value) {
    	if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
     	this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
 		}
     return this.get('lengthKm').dividedBy(this.get('timeHr'));
-	}.property('lengthM', 'timeSec'),
+	}),
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
@@ -368,14 +368,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
 	 * @return {number} 															km stack of the speed
 	 */
-	speedKmHrStackKm : function(propertyName, value) {
+  speedKmHrStackKm : Ember.computed("speedKmHr", function(propertyName, value) {
 		if (arguments.length > 1) {
     	var previousValue = this.get("speedKmHrStackKm");
     	value = this._ensureBigNumber(value).round();
     	this.set("speedKmHr", this.get('speedKmHr').plus(value.minus(previousValue)));
 		}
 		return this.get("speedKmHr").floor();
-	}.property('speedKmHr'),
+	}),
 
 	/**
 	 * speedKmHrStackDecimal is used to create a view like 12,34
@@ -385,7 +385,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
-	speedKmHrStackDecimal : function(propertyName, value) {
+  speedKmHrStackDecimal : Ember.computed("speedKmHr", function(propertyName, value) {
 		if (arguments.length > 1) {
 			var leadingZeros = this._getLeadingZerosFromString(value);
 
@@ -404,7 +404,7 @@ export default DS.Model.extend({
 
     var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
 		return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
-	}.property('speedKmHr'),
+	}),
 
 	/**
 	 * speedMiHr represents the speed of the run in miles per hour
@@ -414,13 +414,13 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHr
 	 * @return {BigNumber}														mi/hr
 	 */
-	speedMiHr : function(propertyName, value) {
+  speedMiHr : Ember.computed("lengthM", "timeHr", function(propertyName, value) {
 		if (arguments.length > 1) {
       value = this._ensureBigNumber(value);
       this.set('timeHr',this.get('lengthMi').dividedBy(value));
 		}
 		return this.get('lengthMi').dividedBy(this.get('timeHr'));
-	}.property('lengthM', 'timeHr'),
+	}),
 
 	/**
 	 * speedMiHrStackMi is used to create a view like 12,34
@@ -430,14 +430,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
 	 * @return {BigNumber} 														mi stack of the speed
 	 */
-	speedMiHrStackMi : function(propertyName, value) {
+  speedMiHrStackMi : Ember.computed("speedMiHr", function(propertyName, value) {
 		if (arguments.length > 1) {
       var previousValue = this.get("speedMiHrStackMi");
       value = this._ensureBigNumber(value).round();
       this.set("speedMiHr", this.get('speedMiHr').plus(value.minus(previousValue)));
 		}
 		return this.get("speedMiHr").floor();
-	}.property('speedMiHr'),
+	}),
 
 	/**
 	 * speedMiHrStackDecimal is used to create a view like 12,34
@@ -447,7 +447,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
 	 * @return {number} 															up to 2 digits of the decimal place of the speed in mi/hr
 	 */
-	speedMiHrStackDecimal : function(propertyName, value) {
+  speedMiHrStackDecimal : Ember.computed("speedMiHr", function(propertyName, value) {
 		if (arguments.length > 1) {
       var leadingZeros = this._getLeadingZerosFromString(value);
 
@@ -466,7 +466,7 @@ export default DS.Model.extend({
 
     var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
 		return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
-	}.property('speedMiHr'),
+	}),
 
 	/**
 	 * returns the number of leading zeros from a string
