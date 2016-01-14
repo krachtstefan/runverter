@@ -723,7 +723,6 @@ test('paceMinPerKmStackSec setter handles values bigger than 59', function(asser
 	assert.strictEqual(run.get("paceMinPerKmStackMin").round(20).toString(), "7"); // 6 flips to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
 	assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "30");
 	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "7.5");
-
 });
 
 test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMinPerKmStackSec (with digits) to have exact results', function(assert) {
