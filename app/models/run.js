@@ -34,12 +34,15 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeHr
 	 * @return {BigNumber} 														hours
 	 */
-  timeHr: Ember.computed("timeSec", function(propertyName, value) {
-		if (arguments.length > 1) {
+  timeHr: Ember.computed("timeSec", {
+    get: function() {
+      return this.get('timeSec').dividedBy(3600);
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-			this.set("timeSec", value.times(3600));
-		}
-		return this.get('timeSec').dividedBy(3600);
+      this.set("timeSec", value.times(3600));
+      return value;
+    }
 	}),
 
 	/**
@@ -50,12 +53,15 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeMin
 	 * @return {BigNumber} 														minutes
 	 */
-  timeMin : Ember.computed("timeSec", function(propertyName, value) {
-		if (arguments.length > 1) {
+  timeMin : Ember.computed("timeSec", {
+    get: function() {
+      return this.get('timeSec').dividedBy(60);
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-			this.set("timeSec", value.times(60));
-		}
-    return this.get('timeSec').dividedBy(60);
+      this.set("timeSec", value.times(60));
+      return this.get('timeSec').dividedBy(60);
+    }
 	}),
 
 	/**
@@ -66,13 +72,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackHr
 	 * @return {BigNumber} 													  hours stack of the run time
 	 */
-  timeStackHr : Ember.computed("timeHr", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("timeStackHr");
+  timeStackHr : Ember.computed("timeHr" ,{
+    get: function() {
+      return this.get("timeHr").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackHr");
       value = this._ensureBigNumber(value).round();
-			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
-		}
-		return this.get("timeHr").floor();
+      this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(3600)));
+      return this.get("timeHr").floor();
+    }
 	}),
 
 	/**
@@ -83,13 +92,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackMin
 	 * @return {BigNumber} 														minutes stack of the run time
 	 */
-  timeStackMin : Ember.computed("timeMin", "timeStackHr", function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("timeStackMin");
+  timeStackMin : Ember.computed("timeMin", "timeStackHr",{
+    get: function() {
+      return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackMin");
       value = this._ensureBigNumber(value).round();
-			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
-		}
-		return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
+      this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
+      return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
+    }
 	}),
 
 	/**
@@ -100,13 +112,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackSec
 	 * @return {BigNumber} 														second stack of the run time, betweeen 0 and 59
 	 */
-  timeStackSec : Ember.computed("timeSec", "timeMin", function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("timeStackSec");
+  timeStackSec : Ember.computed("timeSec", "timeMin",{
+    get: function() {
+      return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackSec");
       value = this._ensureBigNumber(value).round();
-			this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
-		}
-		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+      this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
+      return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+    }
 	}),
 
 
@@ -125,12 +140,15 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKm
 	 * @return {BigNumber}														km
 	 */
-  lengthKm : Ember.computed("lengthM", function(propertyName, value) {
-		if (arguments.length > 1) {
+  lengthKm : Ember.computed("lengthM", {
+    get: function() {
+      return this.get('lengthM').dividedBy(1000);
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-			this.set("lengthM", value.times(1000));
-		}
-    return this.get('lengthM').dividedBy(1000);
+      this.set("lengthM", value.times(1000));
+      return this.get('lengthM').dividedBy(1000);
+    }
 	}),
 
 	/**
@@ -141,13 +159,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
 	 * @return {BigNumber} 														km stack of the run
 	 */
-  lengthKmStackKm : Ember.computed("lengthKm", function(propertyName, value) {
-    if (arguments.length > 1) {
-    	var previousValue = this.get("lengthKmStackKm");
+  lengthKmStackKm : Ember.computed("lengthKm", {
+    get: function() {
+      return this.get("lengthKm").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("lengthKmStackKm");
       value = this._ensureBigNumber(value).round();
-			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(1000)));
-		}
-		return this.get("lengthKm").floor();
+      this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(1000)));
+      return this.get("lengthKm").floor();
+    }
 	}),
 
 	/**
@@ -158,24 +179,28 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
 	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
-  lengthKmStackDecimal : Ember.computed("lengthKm", function(propertyName, value) {
-   	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);
+  lengthKmStackDecimal : Ember.computed("lengthKm", {
+    get: function() {
+      var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
+    },
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
       value = this._ensureBigNumber(value).round();
-    	var valueLength = value.toString().length;
+      var valueLength = value.toString().length;
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
-    	// calulate the meters from decimal place
-			var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      // calulate the meters from decimal place
+      var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
       this.set("lengthM", this.get('lengthKmStackKm').times(1000).plus(decimalMeters));
-		}
 
-    var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
-    return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
+      var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
+    }
 	}),
 
 	/**
@@ -186,12 +211,15 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMi
 	 * @return {BigNumber} 														miles
 	 */
-  lengthMi : Ember.computed("lengthM", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = this._ensureBigNumber(value);
+  lengthMi : Ember.computed("lengthM", {
+    get: function() {
+      return this.get('lengthM').dividedBy(this.miToM);
+    },
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(this.miToM));
-		}
-    return this.get('lengthM').dividedBy(this.miToM);
+      return this.get('lengthM').dividedBy(this.miToM);
+    }
 	}),
 
 	/**
@@ -202,13 +230,17 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
 	 * @return {BigNumber} 													  miles	stack of the run
 	 */
-  lengthMiStackMi : Ember.computed("lengthMi", function(propertyName, value) {
-    if (arguments.length > 1) {
-    	var previousValue = this.get("lengthMiStackMi");
+  lengthMiStackMi : Ember.computed("lengthMi", {
+    get: function() {
+      return this.get("lengthMi").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("lengthMiStackMi");
       value = this._ensureBigNumber(value).round();
-			this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(this.miToM)));
-		}
-		return this.get("lengthMi").floor();
+      this.set("lengthM", this.get('lengthM').plus(value.minus(previousValue).times(this.miToM)));
+
+      return this.get("lengthMi").floor();
+    }
 	}),
 
 	/**
@@ -219,26 +251,30 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
 	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
-  lengthMiStackDecimal : Ember.computed("lengthMi", function(propertyName, value) {
-   	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);
+  lengthMiStackDecimal : Ember.computed("lengthMi", {
+    get: function() {
+      var lengthMiStackDecimal = this.get("lengthMi").round(2).toString().split(".")[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
+    },
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
 
       value = this._ensureBigNumber(value).round();
-    	var valueLength = value.toString().length;
+      var valueLength = value.toString().length;
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
-    	// calulate the Meters from decimal place
+      // calulate the Meters from decimal place
       var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
       var decimalMeters = decimalMiles.dividedBy(1000).times(this.miToM);
 
       this.set("lengthM", this.get('lengthMiStackMi').times(this.miToM).plus(decimalMeters));
-		}
 
-    var lengthMiStackDecimal = this.get("lengthMi").round(2).toString().split(".")[1];
-		return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
+      var lengthMiStackDecimal = this.get("lengthMi").round(2).toString().split(".")[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
+    }
 	}),
 
 	/**
@@ -249,12 +285,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
 	 * @return {BigNumber}              							min/km
 	 */
-  paceMinPerKm : Ember.computed("timeMin", "lengthKm", function(propertyName, value) {
-		if (arguments.length > 1) {
+  paceMinPerKm : Ember.computed("timeMin", "lengthKm", {
+    get: function() {
+      return this.get('timeMin').dividedBy(this.get('lengthKm'));
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-    	this.set('timeSec',value.times(this.get('lengthKm').times(60)));
-		}
-    return this.get('timeMin').dividedBy(this.get('lengthKm'));
+      this.set('timeSec',value.times(this.get('lengthKm').times(60)));
+
+      return this.get('timeMin').dividedBy(this.get('lengthKm'));
+    }
 	}),
 
 	/**
@@ -265,13 +305,17 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
 	 * @return {BigNumber} 														min stack of the pace
 	 */
-  paceMinPerKmStackMin : Ember.computed("paceMinPerKm", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("paceMinPerKmStackMin");
+  paceMinPerKmStackMin : Ember.computed("paceMinPerKm", {
+    get: function() {
+      return this.get("paceMinPerKm").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerKmStackMin");
       value = this._ensureBigNumber(value).round();
-			this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
-		}
-		return this.get("paceMinPerKm").floor();
+      this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
+
+      return this.get("paceMinPerKm").floor();
+    }
 	}),
 
 	/**
@@ -282,14 +326,18 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
 	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
 	 */
-  paceMinPerKmStackSec : Ember.computed("paceMinPerKm", function(propertyName, value) {
-		if (arguments.length > 1) {
+  paceMinPerKmStackSec : Ember.computed("paceMinPerKm", {
+    get: function() {
+      return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
+    },
+    set: function(propertyName, value) {
       // TODO: use this.get("paceMinPerKmStackSec") again if it's not rounded
-			var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
-			value = this._ensureBigNumber(value).round();
+      var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
+      value = this._ensureBigNumber(value).round();
       this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue).dividedBy(60)));
-		}
-		return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
+
+      return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
+    }
 	}),
 
 	/**
@@ -300,12 +348,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
 	 * @return {BigNumber}              							min/mi
 	 */
-  paceMinPerMi : Ember.computed("timeMin", "lengthMi", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = this._ensureBigNumber(value);
+  paceMinPerMi : Ember.computed("timeMin", "lengthMi", {
+    get: function() {
+      return this.get('timeMin').dividedBy(this.get('lengthMi'));
+    },
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
       this.set('timeSec',value.times(this.get('lengthMi').times(60)));
-		}
-    return this.get('timeMin').dividedBy(this.get('lengthMi'));
+
+      return this.get('timeMin').dividedBy(this.get('lengthMi'));
+    }
 	}),
 
 	/**
@@ -316,13 +368,17 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
 	 * @return {BigNumber} 													  min stack of the pace
 	 */
-  paceMinPerMiStackMin : Ember.computed("paceMinPerMi", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("paceMinPerMiStackMin");
-    	value = this._ensureBigNumber(value).round();
+  paceMinPerMiStackMin : Ember.computed("paceMinPerMi", {
+    get: function() {
+      return this.get("paceMinPerMi").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerMiStackMin");
+      value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue)));
-		}
-		return this.get("paceMinPerMi").floor();
+
+      return this.get("paceMinPerMi").floor();
+    }
 	}),
 
 	/**
@@ -333,14 +389,18 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
 	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
 	 */
-  paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", function(propertyName, value) {
-		if (arguments.length > 1) {
+  paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", {
+    get: function() {
+      return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+    },
+    set: function(propertyName, value) {
       // TODO: use this.get("paceMinPerMiStackMin") again if it's not rounded
-			var previousValue = this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60);
-			value = this._ensureBigNumber(value).round();
+      var previousValue = this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60);
+      value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue).dividedBy(60)));
-		}
-    return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+
+      return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+    }
 	}),
 
 
@@ -352,12 +412,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
 	 * @return {BigNumber} 														km/hr
 	 */
-  speedKmHr : Ember.computed("lengthM", "timeSec", function(propertyName, value) {
-   	if (arguments.length > 1) {
+  speedKmHr : Ember.computed("lengthM", "timeSec", {
+    get: function() {
+      return this.get('lengthKm').dividedBy(this.get('timeHr'));
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-    	this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
-		}
-    return this.get('lengthKm').dividedBy(this.get('timeHr'));
+      this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
+
+      return this.get('lengthKm').dividedBy(this.get('timeHr'));
+    }
 	}),
 
 	/**
@@ -368,13 +432,17 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
 	 * @return {number} 															km stack of the speed
 	 */
-  speedKmHrStackKm : Ember.computed("speedKmHr", function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("speedKmHrStackKm");
-    	value = this._ensureBigNumber(value).round();
-    	this.set("speedKmHr", this.get('speedKmHr').plus(value.minus(previousValue)));
-		}
-		return this.get("speedKmHr").floor();
+  speedKmHrStackKm : Ember.computed("speedKmHr", {
+    get: function() {
+      return this.get("speedKmHr").floor();
+    },
+    set: function(propertyName, value) {
+      var previousValue = this.get("speedKmHrStackKm");
+      value = this._ensureBigNumber(value).round();
+      this.set("speedKmHr", this.get('speedKmHr').plus(value.minus(previousValue)));
+
+      return this.get("speedKmHr").floor();
+    }
 	}),
 
 	/**
@@ -385,25 +453,29 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
-  speedKmHrStackDecimal : Ember.computed("speedKmHr", function(propertyName, value) {
-		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);
+  speedKmHrStackDecimal : Ember.computed("speedKmHr", {
+    get: function() {
+      var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
+      return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
+    },
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
 
-			value = this._ensureBigNumber(value).round();
-			var valueLength = value.toString().length;
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
-     	// calulate the speed from decimal place
+      // calulate the speed from decimal place
       var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
       this.set("speedKmHr", this.get('speedKmHrStackKm').plus(decimalSpeed.dividedBy(1000)));
-		}
 
-    var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
-		return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
+      var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
+      return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
+    }
 	}),
 
 	/**
@@ -414,12 +486,16 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHr
 	 * @return {BigNumber}														mi/hr
 	 */
-  speedMiHr : Ember.computed("lengthM", "timeHr", function(propertyName, value) {
-		if (arguments.length > 1) {
+  speedMiHr : Ember.computed("lengthM", "timeHr", {
+    get: function() {
+      return this.get('lengthMi').dividedBy(this.get('timeHr'));
+    },
+    set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set('timeHr',this.get('lengthMi').dividedBy(value));
-		}
-		return this.get('lengthMi').dividedBy(this.get('timeHr'));
+
+      return this.get('lengthMi').dividedBy(this.get('timeHr'));
+    }
 	}),
 
 	/**
@@ -430,13 +506,17 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
 	 * @return {BigNumber} 														mi stack of the speed
 	 */
-  speedMiHrStackMi : Ember.computed("speedMiHr", function(propertyName, value) {
-		if (arguments.length > 1) {
+  speedMiHrStackMi : Ember.computed("speedMiHr", {
+    get: function() {
+      return this.get("speedMiHr").floor();
+    },
+    set: function(propertyName, value) {
       var previousValue = this.get("speedMiHrStackMi");
       value = this._ensureBigNumber(value).round();
       this.set("speedMiHr", this.get('speedMiHr').plus(value.minus(previousValue)));
-		}
-		return this.get("speedMiHr").floor();
+
+      return this.get("speedMiHr").floor();
+    }
 	}),
 
 	/**
@@ -447,25 +527,29 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
 	 * @return {number} 															up to 2 digits of the decimal place of the speed in mi/hr
 	 */
-  speedMiHrStackDecimal : Ember.computed("speedMiHr", function(propertyName, value) {
-		if (arguments.length > 1) {
+  speedMiHrStackDecimal : Ember.computed("speedMiHr", {
+    get: function() {
+      var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
+    },
+    set: function(propertyName, value) {
       var leadingZeros = this._getLeadingZerosFromString(value);
 
       value = this._ensureBigNumber(value).round();
-			var valueLength = value.toString().length;
+      var valueLength = value.toString().length;
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
-     	// calulate the speed from decimal place
+      // calulate the speed from decimal place
       var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
- 			this.set("speedMiHr", this.get("speedMiHrStackMi").plus(decimalSpeed.dividedBy(1000)));
-		}
+      this.set("speedMiHr", this.get("speedMiHrStackMi").plus(decimalSpeed.dividedBy(1000)));
 
-    var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
-		return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
+      var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
+    }
 	}),
 
 	/**
