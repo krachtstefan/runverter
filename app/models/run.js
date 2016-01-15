@@ -59,13 +59,17 @@ export default DS.Model.extend({
 	 */
   timeMin : Ember.computed("timeSec", {
     get: function() {
-      return this.get('timeSec').dividedBy(60);
+      return this.get('timeMinRaw').round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(60));
-      return this.get('timeSec').dividedBy(60);
+      return this.get('timeMinRaw');
     }
+	}),
+
+	timeMinRaw : Ember.computed("timeSec", function(){
+		return this.get('timeSec').dividedBy(60);
 	}),
 
 	/**
@@ -98,13 +102,13 @@ export default DS.Model.extend({
 	 */
   timeStackMin : Ember.computed("timeMin", "timeStackHr",{
     get: function() {
-      return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
+      return this.get("timeMinRaw").floor().minus(this.get("timeStackHr")*60);
     },
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackMin");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue).times(60)));
-      return this.get("timeMin").floor().minus(this.get("timeStackHr")*60);
+      return this.get("timeMinRaw").floor().minus(this.get("timeStackHr")*60);
     }
 	}),
 
@@ -128,8 +132,8 @@ export default DS.Model.extend({
     }
 	}),
 
-	timeStackSecRaw : Ember.computed("timeSec", "timeMin",function(){
-		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+	timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
+		return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
 	}),
 
 
@@ -295,13 +299,13 @@ export default DS.Model.extend({
 	 */
   paceMinPerKm : Ember.computed("timeMin", "lengthKm", {
     get: function() {
-      return this.get('timeMin').dividedBy(this.get('lengthKm'));
+      return this.get('timeMinRaw').dividedBy(this.get('lengthKm'));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set('timeSec',value.times(this.get('lengthKm').times(60)));
 
-      return this.get('timeMin').dividedBy(this.get('lengthKm'));
+      return this.get('timeMinRaw').dividedBy(this.get('lengthKm'));
     }
 	}),
 
@@ -358,13 +362,13 @@ export default DS.Model.extend({
 	 */
   paceMinPerMi : Ember.computed("timeMin", "lengthMi", {
     get: function() {
-      return this.get('timeMin').dividedBy(this.get('lengthMi'));
+      return this.get('timeMinRaw').dividedBy(this.get('lengthMi'));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set('timeSec',value.times(this.get('lengthMi').times(60)));
 
-      return this.get('timeMin').dividedBy(this.get('lengthMi'));
+      return this.get('timeMinRaw').dividedBy(this.get('lengthMi'));
     }
 	}),
 

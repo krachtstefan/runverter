@@ -56,32 +56,32 @@ test('timeHr setter changes timeSec', function(assert) {
 // timeMin
 test('timeMin property is calculated from timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600)});
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "60");
+  assert.strictEqual(run.get("timeMin").toString(), "60");
 });
 
 test('timeMin can have up to 20 decimal places', function(assert) {
   var run = this.subject({timeSec : new BigNumber(2612)});
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "43.53333333333333333333");
+  assert.strictEqual(run.get("timeMin").toString(), "43.53333333333333333333");
 });
 
 test('timeMin setter changes timeMin', function(assert) {
   var run = this.subject();
   run.set("timeMin", "100");
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "100");
+  assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter can handle floats', function(assert) {
   var run = this.subject();
   run.set("timeMin", "100.5");
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "100.5");
+  assert.strictEqual(run.get("timeMin").toString(), "100.5");
   run.set("timeMin", 50.5);
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "50.5");
+  assert.strictEqual(run.get("timeMin").toString(), "50.5");
 });
 
 test('timeMin setter also works with integer', function(assert) {
   var run = this.subject();
   run.set("timeMin", 100);
-  assert.strictEqual(run.get("timeMin").round(20).toString(), "100");
+  assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter changes timeSec', function(assert) {
