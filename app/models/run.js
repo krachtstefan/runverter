@@ -114,14 +114,18 @@ export default DS.Model.extend({
 	 */
   timeStackSec : Ember.computed("timeSec", "timeMin",{
     get: function() {
-      return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+      return this.get("timeStackSecRaw").round(20);
     },
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackSec");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get('timeSec').plus(value.minus(previousValue)));
-      return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
+      return this.get("timeStackSecRaw");
     }
+	}),
+
+	timeStackSecRaw : Ember.computed("timeSec", "timeMin",function(){
+		return this.get("timeSec").minus(this.get("timeMin").floor().times(60));
 	}),
 
 
