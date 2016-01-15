@@ -36,13 +36,17 @@ export default DS.Model.extend({
 	 */
   timeHr: Ember.computed("timeSec", {
     get: function() {
-      return this.get('timeSec').dividedBy(3600);
+      return this.get('timeHrRaw').round("20");
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(3600));
-      return value;
+      return this.get("timeHrRaw");
     }
+	}),
+
+	timeHrRaw : Ember.computed("timeSec", function(){
+	  return this.get('timeSec').dividedBy(3600);
 	}),
 
 	/**
@@ -418,13 +422,13 @@ export default DS.Model.extend({
 	 */
   speedKmHr : Ember.computed("lengthM", "timeSec", {
     get: function() {
-      return this.get('lengthKm').dividedBy(this.get('timeHr'));
+      return this.get('lengthKm').dividedBy(this.get('timeHrRaw'));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set('timeSec',this.get('lengthM').dividedBy(value).times(3.6));
 
-      return this.get('lengthKm').dividedBy(this.get('timeHr'));
+      return this.get('lengthKm').dividedBy(this.get('timeHrRaw'));
     }
 	}),
 
@@ -492,13 +496,13 @@ export default DS.Model.extend({
 	 */
   speedMiHr : Ember.computed("lengthM", "timeHr", {
     get: function() {
-      return this.get('lengthMi').dividedBy(this.get('timeHr'));
+      return this.get('lengthMi').dividedBy(this.get('timeHrRaw'));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set('timeHr',this.get('lengthMi').dividedBy(value));
 
-      return this.get('lengthMi').dividedBy(this.get('timeHr'));
+      return this.get('lengthMi').dividedBy(this.get('timeHrRaw'));
     }
 	}),
 

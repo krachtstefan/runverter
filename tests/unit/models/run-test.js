@@ -17,32 +17,32 @@ test('every division with miToM (which equals 1609.344) as a divisor returns a q
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(14400)});
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "4");
+  assert.strictEqual(run.get("timeHr").toString(), "4");
 });
 
 test('timeHr can have up to 20 decimal places', function(assert) {
   var run = this.subject({timeSec : new BigNumber(14560)});
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "4.04444444444444444444");
+  assert.strictEqual(run.get("timeHr").toString(), "4.04444444444444444444");
 });
 
 test('timeHr setter changes timeHr', function(assert) {
   var run = this.subject();
   run.set("timeHr", "2");
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "2");
+  assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter can handle floats', function(assert) {
   var run = this.subject();
   run.set("timeHr", "2.5");
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "2.5");
+  assert.strictEqual(run.get("timeHr").toString(), "2.5");
   run.set("timeHr", 2.3);
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "2.3");
+  assert.strictEqual(run.get("timeHr").toString(), "2.3");
 });
 
 test('timeHr setter also works with integer', function(assert) {
   var run = this.subject();
   run.set("timeHr", 2);
-  assert.strictEqual(run.get("timeHr").round(20).toString(), "2");
+  assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter changes timeSec', function(assert) {
