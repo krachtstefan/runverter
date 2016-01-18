@@ -323,7 +323,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerKmStackMin");
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue)));
+      this.set("paceMinPerKm", this.get("paceMinPerKm").plus(value.minus(previousValue)));
 
       return this.get("paceMinPerKm").floor();
     }
@@ -345,7 +345,7 @@ export default DS.Model.extend({
       // TODO: use this.get("paceMinPerKmStackSec") again if it's not rounded
       var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get('paceMinPerKm').plus(value.minus(previousValue).dividedBy(60)));
+      this.set("paceMinPerKm", this.get("paceMinPerKm").plus(value.minus(previousValue).dividedBy(60)));
 
       return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
     }
@@ -361,13 +361,13 @@ export default DS.Model.extend({
 	 */
   paceMinPerMi : Ember.computed("timeMin", "lengthMi", {
     get: function() {
-      return this.get("timeMinRaw").dividedBy(this.get('lengthMi'));
+      return this.get("timeMinRaw").dividedBy(this.get("lengthMi"));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec",value.times(this.get('lengthMi').times(60)));
+      this.set("timeSec",value.times(this.get("lengthMi").times(60)));
 
-      return this.get("timeMinRaw").dividedBy(this.get('lengthMi'));
+      return this.get("timeMinRaw").dividedBy(this.get("lengthMi"));
     }
 	}),
 
@@ -386,7 +386,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerMiStackMin");
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue)));
+      this.set("paceMinPerMi", this.get("paceMinPerMi").plus(value.minus(previousValue)));
 
       return this.get("paceMinPerMi").floor();
     }
@@ -408,7 +408,7 @@ export default DS.Model.extend({
       // TODO: use this.get("paceMinPerMiStackMin") again if it's not rounded
       var previousValue = this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60);
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get('paceMinPerMi').plus(value.minus(previousValue).dividedBy(60)));
+      this.set("paceMinPerMi", this.get("paceMinPerMi").plus(value.minus(previousValue).dividedBy(60)));
 
       return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
     }
@@ -450,7 +450,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       var previousValue = this.get("speedKmHrStackKm");
       value = this._ensureBigNumber(value).round();
-      this.set("speedKmHr", this.get('speedKmHr').plus(value.minus(previousValue)));
+      this.set("speedKmHr", this.get("speedKmHr").plus(value.minus(previousValue)));
 
       return this.get("speedKmHr").floor();
     }
@@ -499,13 +499,13 @@ export default DS.Model.extend({
 	 */
   speedMiHr : Ember.computed("lengthM", "timeHr", {
     get: function() {
-      return this.get('lengthMi').dividedBy(this.get("timeHrRaw"));
+      return this.get("lengthMi").dividedBy(this.get("timeHrRaw"));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set('timeHr',this.get('lengthMi').dividedBy(value));
+      this.set("timeHr",this.get("lengthMi").dividedBy(value));
 
-      return this.get('lengthMi').dividedBy(this.get("timeHrRaw"));
+      return this.get("lengthMi").dividedBy(this.get("timeHrRaw"));
     }
 	}),
 
@@ -524,7 +524,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       var previousValue = this.get("speedMiHrStackMi");
       value = this._ensureBigNumber(value).round();
-      this.set("speedMiHr", this.get('speedMiHr').plus(value.minus(previousValue)));
+      this.set("speedMiHr", this.get("speedMiHr").plus(value.minus(previousValue)));
 
       return this.get("speedMiHr").floor();
     }
