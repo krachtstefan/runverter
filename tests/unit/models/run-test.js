@@ -224,22 +224,22 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
- 	assert.strictEqual(run.get("lengthKm").round(20).toString(), "2");
+ 	assert.strictEqual(run.get("lengthKm").toString(), "2");
 });
 
 test('lengthKm can have up to 20 decimal places and can round up', function(assert) {
   // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
 	var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(6)});
   // http://keisan.casio.com/calculator results in 0.0015205761315020566666666667
- 	assert.strictEqual(run.get("lengthKm").round(20).toString(), "0.00152057613150205667");
+ 	assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 
   run.setProperties({lengthM : new BigNumber("8.78748598595").dividedBy(3)});
   // http://keisan.casio.com/calculator results in 0.0029291619953166666666666667
-  assert.strictEqual(run.get("lengthKm").round(20).toString(), "0.00292916199531666667");
+  assert.strictEqual(run.get("lengthKm").toString(), "0.00292916199531666667");
 
   run.setProperties({lengthM : new BigNumber("8.123455").dividedBy(7)});
   // http://keisan.casio.com/calculator results in 0.0011604935714285714285714286
-  assert.strictEqual(run.get("lengthKm").round(20).toString(), "0.00116049357142857143");
+  assert.strictEqual(run.get("lengthKm").toString(), "0.00116049357142857143");
 });
 
 test('lengthKm can round down', function(assert) {
@@ -249,31 +249,31 @@ test('lengthKm can round down', function(assert) {
 
  	run.setProperties({lengthM : new BigNumber("9.3343442341212212212").dividedBy(5)});
   // http://keisan.casio.com/calculator results in 0.00186686884682424424424
-  assert.strictEqual(run.get("lengthKm").round(20).toString(), "0.00186686884682424424");
+  assert.strictEqual(run.get("lengthKm").toString(), "0.00186686884682424424");
 
   run.setProperties({lengthM : new BigNumber("9.3343442341214223423324212").dividedBy(3)});
   // http://keisan.casio.com/calculator results in 0.0031114480780404741141108071
-  assert.strictEqual(run.get("lengthKm").round(20).toString(), "0.00311144807804047411");
+  assert.strictEqual(run.get("lengthKm").toString(), "0.00311144807804047411");
 });
 
 test('lengthKm setter changes lengthKm', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "100");
-	assert.strictEqual(run.get("lengthKm").round(20).toString(), "100");
+	assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "100.12345");
-	assert.strictEqual(run.get("lengthKm").round(20).toString(), "100.12345");
+	assert.strictEqual(run.get("lengthKm").toString(), "100.12345");
 	run.set("lengthKm", 100.34);
-	assert.strictEqual(run.get("lengthKm").round(20).toString(), "100.34");
+	assert.strictEqual(run.get("lengthKm").toString(), "100.34");
 });
 
 test('lengthKm setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", 100);
-	assert.strictEqual(run.get("lengthKm").round(20).toString(), "100");
+	assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter changes lengthM', function(assert) {
@@ -389,7 +389,7 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
 		"lengthKmStackKm" : "12",
 		"lengthKmStackDecimal" : "09"
 	});
-	assert.strictEqual(run.get("lengthKm").round(20).toString(), "12.09");
+	assert.strictEqual(run.get("lengthKm").toString(), "12.09");
 });
 
 // lengthMi

@@ -162,14 +162,19 @@ export default DS.Model.extend({
 	 */
   lengthKm : Ember.computed("lengthM", {
     get: function() {
-      return this.get("lengthM").dividedBy(1000);
+      return this.get("lengthKmRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(1000));
-      return this.get("lengthM").dividedBy(1000);
+			return this.get("lengthKmRaw");
     }
 	}),
+
+	lengthKmRaw : Ember.computed("lengthM", function(){
+		return this.get("lengthM").dividedBy(1000);
+	}),
+
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
@@ -181,13 +186,13 @@ export default DS.Model.extend({
 	 */
   lengthKmStackKm : Ember.computed("lengthKm", {
     get: function() {
-      return this.get("lengthKm").floor();
+      return this.get("lengthKmRaw").floor();
     },
     set: function(propertyName, value) {
       var previousValue = this.get("lengthKmStackKm");
       value = this._ensureBigNumber(value).round();
       this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(1000)));
-      return this.get("lengthKm").floor();
+      return this.get("lengthKmRaw").floor();
     }
 	}),
 
@@ -201,7 +206,7 @@ export default DS.Model.extend({
 	 */
   lengthKmStackDecimal : Ember.computed("lengthKm", {
     get: function() {
-      var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
     set: function(propertyName, value) {
@@ -218,7 +223,7 @@ export default DS.Model.extend({
 
       this.set("lengthM", this.get("lengthKmStackKm").times(1000).plus(decimalMeters));
 
-      var lengthKmStackDecimal = this.get("lengthKm").round(2).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     }
 	}),
@@ -306,13 +311,13 @@ export default DS.Model.extend({
 	 */
   paceMinPerKm : Ember.computed("timeMin", "lengthKm", {
     get: function() {
-      return this.get("timeMinRaw").dividedBy(this.get("lengthKm"));
+      return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec",value.times(this.get("lengthKm").times(60)));
+      this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
 
-      return this.get("timeMinRaw").dividedBy(this.get("lengthKm"));
+      return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
     }
 	}),
 
@@ -433,13 +438,13 @@ export default DS.Model.extend({
 	 */
   speedKmHr : Ember.computed("lengthM", "timeSec", {
     get: function() {
-      return this.get("lengthKm").dividedBy(this.get("timeHrRaw"));
+      return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",this.get("lengthM").dividedBy(value).times(3.6));
 
-      return this.get("lengthKm").dividedBy(this.get("timeHrRaw"));
+      return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
     }
 	}),
 
