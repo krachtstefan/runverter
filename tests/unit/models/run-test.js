@@ -395,55 +395,55 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
 // lengthMi
 test('lengthMi property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("lengthMi").round(20).toString(), "1");
+ 	assert.strictEqual(run.get("lengthMi").toString(), "1");
 });
 
 test('lengthMi can have up to 20 decimal places and can round up', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(9.12345678901235)});
   // http://keisan.casio.com/calculator results in 0.0056690532223144026385906307
- 	assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.00566905322231440264");
+ 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
 
   run.setProperties({lengthM : new BigNumber(14232.25)});
   // http://keisan.casio.com/calculator results in 8.8435101507197963890877277
-  assert.strictEqual(run.get("lengthMi").round(20).toString(), "8.84351015071979638909");
+  assert.strictEqual(run.get("lengthMi").toString(), "8.84351015071979638909");
 
   run.setProperties({lengthM : new BigNumber(123.45)});
   // http://keisan.casio.com/calculator results in 0.07670827368169887854927225
-  assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.07670827368169887855");
+  assert.strictEqual(run.get("lengthMi").toString(), "0.07670827368169887855");
 });
 
 test('lengthMi can round down', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(9.12345678901234)});
   // http://keisan.casio.com/calculator results in 0.005669053222314396424879
- 	assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.00566905322231439642");
+ 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
 
   run.setProperties({lengthM : new BigNumber(123)});
   // http://keisan.casio.com/calculator results in 0.076428656645192078262944405
-  assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.07642865664519207826");
+  assert.strictEqual(run.get("lengthMi").toString(), "0.07642865664519207826");
 
   run.setProperties({lengthM : new BigNumber(12.12)});
   // http://keisan.casio.com/calculator results in 0.0075310188499164877117633023
-  assert.strictEqual(run.get("lengthMi").round(20).toString(), "0.00753101884991648771");
+  assert.strictEqual(run.get("lengthMi").toString(), "0.00753101884991648771");
 });
 
 test('lengthMi setter changes lengthMi', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "100");
-	assert.strictEqual(run.get("lengthMi").round(20).toString(), "100");
+	assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "100.55");
-	assert.strictEqual(run.get("lengthMi").round(20).toString(), "100.55");
+	assert.strictEqual(run.get("lengthMi").toString(), "100.55");
 	run.set("lengthMi", 100.12);
-	assert.strictEqual(run.get("lengthMi").round(20).toString(), "100.12");
+	assert.strictEqual(run.get("lengthMi").toString(), "100.12");
 });
 
 test('lengthMi setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", 100);
-	assert.strictEqual(run.get("lengthMi").round(20).toString(), "100");
+	assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter changes lengthM', function(assert) {
@@ -559,7 +559,7 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 		"lengthMiStackMi" : "12",
 		"lengthMiStackDecimal" : "09"
 	});
-	assert.strictEqual(run.get("lengthMi").round(20).toString(), "12.09");
+	assert.strictEqual(run.get("lengthMi").toString(), "12.09");
 });
 
 // paceMinPerKm
