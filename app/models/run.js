@@ -80,17 +80,21 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackHr
 	 * @return {BigNumber} 													  hours stack of the run time
 	 */
-  timeStackHr : Ember.computed("timeHr" ,{
-    get: function() {
-      return this.get("timeHr").floor();
-    },
-    set: function(propertyName, value) {
-      var previousValue = this.get("timeStackHr");
-      value = this._ensureBigNumber(value).round();
-      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
-      return this.get("timeHr").floor();
-    }
-	}),
+	 timeStackHr : Ember.computed("timeHr" ,{
+	   get: function() {
+	     return this.get("timeStackHrRaw").round(20);
+	   },
+	   set: function(propertyName, value) {
+	     var previousValue = this.get("timeStackHrRaw");
+	     value = this._ensureBigNumber(value).round();
+	     this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
+	     return this.get("timeStackHrRaw");
+	   }
+	 }),
+
+	 timeStackHrRaw : Ember.computed("timeHr", function(){
+	   return this.get("timeHr").floor();
+	 }),
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
@@ -102,13 +106,13 @@ export default DS.Model.extend({
 	 */
   timeStackMin : Ember.computed("timeMin", "timeStackHr",{
     get: function() {
-      return this.get("timeMinRaw").floor().minus(this.get("timeStackHr")*60);
+      return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
     },
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackMin");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
-      return this.get("timeMinRaw").floor().minus(this.get("timeStackHr")*60);
+      return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
     }
 	}),
 
