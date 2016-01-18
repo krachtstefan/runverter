@@ -265,14 +265,18 @@ export default DS.Model.extend({
 	 */
   lengthMiStackMi : Ember.computed("lengthMi", {
     get: function() {
-      return this.get("lengthMiRaw").floor();
+      return this.get("lengthMiStackMiRaw").round(20);
     },
     set: function(propertyName, value) {
-      var previousValue = this.get("lengthMiStackMi");
+      var previousValue = this.get("lengthMiStackMiRaw");
       value = this._ensureBigNumber(value).round();
       this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(this.miToM)));
-      return this.get("lengthMiRaw").floor();
+      return this.get("lengthMiStackMiRaw");
     }
+	}),
+
+	lengthMiStackMiRaw : Ember.computed("lengthM", function(){
+		return this.get("lengthMiRaw").floor();
 	}),
 
 	/**
@@ -302,7 +306,7 @@ export default DS.Model.extend({
       var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
       var decimalMeters = decimalMiles.dividedBy(1000).times(this.miToM);
 
-      this.set("lengthM", this.get("lengthMiStackMi").times(this.miToM).plus(decimalMeters));
+      this.set("lengthM", this.get("lengthMiStackMiRaw").times(this.miToM).plus(decimalMeters));
 
       var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
