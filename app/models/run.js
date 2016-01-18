@@ -186,14 +186,18 @@ export default DS.Model.extend({
 	 */
   lengthKmStackKm : Ember.computed("lengthKm", {
     get: function() {
-      return this.get("lengthKmRaw").floor();
+      return this.get("lengthKmStackKmRaw").round(20);
     },
     set: function(propertyName, value) {
-      var previousValue = this.get("lengthKmStackKm");
+      var previousValue = this.get("lengthKmStackKmRaw");
       value = this._ensureBigNumber(value).round();
       this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(1000)));
-      return this.get("lengthKmRaw").floor();
+      return this.get("lengthKmStackKmRaw");
     }
+	}),
+
+	lengthKmStackKmRaw : Ember.computed("lengthM", function(){
+		return this.get("lengthKmRaw").floor();
 	}),
 
 	/**
@@ -221,7 +225,7 @@ export default DS.Model.extend({
       // calulate the meters from decimal place
       var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
-      this.set("lengthM", this.get("lengthKmStackKm").times(1000).plus(decimalMeters));
+      this.set("lengthM", this.get("lengthKmStackKmRaw").times(1000).plus(decimalMeters));
 
       var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";

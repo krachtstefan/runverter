@@ -287,32 +287,32 @@ test('lengthKm setter changes lengthM', function(assert) {
 // lengthKmStackKm
 test('lengthKmStackKm property is calculated from lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1800)});
- 	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "1");
+ 	assert.strictEqual(run.get("lengthKmStackKm").toString(), "1");
 });
 
 test('lengthKmStackKm property can be zero', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(12)});
- 	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "0");
+ 	assert.strictEqual(run.get("lengthKmStackKm").toString(), "0");
 });
 
 test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
 	var run = this.subject();
 	run.set("lengthKmStackKm", "2");
-	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "2");
+	assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter can handle floats', function(assert) {
 	var run = this.subject();
 	run.set("lengthKmStackKm", "2.9");
-	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "3");
+	assert.strictEqual(run.get("lengthKmStackKm").toString(), "3");
 	run.set("lengthKmStackKm", 2.3);
-	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "2");
+	assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter also works with integer', function(assert) {
 	var run = this.subject();
 	run.set("lengthKmStackKm", 2);
-	assert.strictEqual(run.get("lengthKmStackKm").round(20).toString(), "2");
+	assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter changes lengthM', function(assert) {
