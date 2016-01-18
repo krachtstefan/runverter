@@ -321,16 +321,20 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
 	 * @return {BigNumber}              							min/km
 	 */
-  paceMinPerKm : Ember.computed("timeMin", "lengthKm", {
+  paceMinPerKm : Ember.computed("timeSec", "lengthM", "paceMinPerKmRaw", {
     get: function() {
-      return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
+      return this.get("paceMinPerKmRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
 
-      return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
+      return this.get("paceMinPerKmRaw");
     }
+	}),
+
+	paceMinPerKmRaw : Ember.computed("lengthM", "timeSec", "paceMinPerKmStackSec", function(){
+		return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
 	}),
 
 	/**
@@ -343,14 +347,14 @@ export default DS.Model.extend({
 	 */
   paceMinPerKmStackMin : Ember.computed("paceMinPerKm", {
     get: function() {
-      return this.get("paceMinPerKm").floor();
+      return this.get("paceMinPerKmRaw").floor();
     },
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerKmStackMin");
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get("paceMinPerKm").plus(value.minus(previousValue)));
+      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue)));
 
-      return this.get("paceMinPerKm").floor();
+      return this.get("paceMinPerKmRaw").floor();
     }
 	}),
 
@@ -364,15 +368,15 @@ export default DS.Model.extend({
 	 */
   paceMinPerKmStackSec : Ember.computed("paceMinPerKm", {
     get: function() {
-      return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
+      return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMin")).times(60).round();
     },
     set: function(propertyName, value) {
       // TODO: use this.get("paceMinPerKmStackSec") again if it's not rounded
-      var previousValue = this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60);
+      var previousValue = this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMin")).times(60);
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get("paceMinPerKm").plus(value.minus(previousValue).dividedBy(60)));
+      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerKm").minus(this.get("paceMinPerKmStackMin")).times(60).round();
+      return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMin")).times(60).round();
     }
 	}),
 

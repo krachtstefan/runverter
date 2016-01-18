@@ -565,57 +565,57 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 // paceMinPerKm
 test('paceMinPerKm property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeMin : new BigNumber(60), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "60");
+ 	assert.strictEqual(run.get("paceMinPerKm").toString(), "60");
 });
 
 test('paceMinPerKm can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthM : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 1.2482853212486666666666667
- 	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "1.24828532124866666667");
+ 	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
 
   run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93)});
   // http://keisan.casio.com/calculator results in 31.279569892473118279569892
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "31.27956989247311827957");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "31.27956989247311827957");
 
   run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123)});
   // http://keisan.casio.com/calculator results in 23.650406504065040650406504
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "23.65040650406504065041");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "23.65040650406504065041");
 });
 
 test('paceMinPerKm can round down', function(assert) {
 	var run = this.subject({timeMin : new BigNumber(1.1234567891234), lengthM : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 1.248285321248222222222
- 	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "1.24828532124822222222");
+ 	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
 
   run.setProperties({timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921)});
   // http://keisan.casio.com/calculator results in 2.3055991195698154180238871
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "2.30559911956981541802");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "2.30559911956981541802");
 
   run.setProperties({timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123)});
   // http://keisan.casio.com/calculator results in 17.26387627951219512195122
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "17.26387627951219512195");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "17.26387627951219512195");
 });
 
 test('paceMinPerKm setter changes paceMinPerKm', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKm", "21");
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "21");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "21");
 });
 
 test('paceMinPerKm setter also works with integer', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKm", 21);
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "21");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "21");
 });
 
 test('paceMinPerKm setter can handle floats', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKm", 2.2);
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "2.2");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "2.2");
 	run.set("paceMinPerKm", "2.5");
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "2.5");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "2.5");
 	run.set("paceMinPerKm", 2.21234);
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "2.21234");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "2.21234");
 });
 
 test('paceMinPerKm setter changes timeSec', function(assert) {
@@ -711,10 +711,10 @@ test('paceMinPerKmStackSec setter also works with integer', function(assert) {
 
 test('paceMinPerKmStackSec setter influences all pace related properties', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthM : new BigNumber(2000)}); // 6 min/km
-	run.set("paceMinPerKmStackSec", "20"); // 6.3333 min/km
+  run.set("paceMinPerKmStackSec", "20"); // 6.3333 min/km
 	assert.strictEqual(run.get("paceMinPerKmStackMin").round(20).toString(), "6");
 	assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "20");
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "6.33333333333333333333");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "6.33333333333333333333");
 });
 
 test('paceMinPerKmStackSec setter handles values bigger than 59', function(assert) {
@@ -722,7 +722,7 @@ test('paceMinPerKmStackSec setter handles values bigger than 59', function(asser
 	run.set("paceMinPerKmStackSec", "90"); // 7.5000 min/km
 	assert.strictEqual(run.get("paceMinPerKmStackMin").round(20).toString(), "7"); // 6 flips to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
 	assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "30");
-	assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "7.5");
+	assert.strictEqual(run.get("paceMinPerKm").toString(), "7.5");
 });
 
 test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMinPerKmStackSec (with digits) to have exact results', function(assert) {
@@ -731,7 +731,7 @@ test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMi
   // Since this value is normally rounded, it should be used in uncompressed form for calculation
 
   // In this example paceMinPerKm is currently 5.68787771062922147174
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "5.68787771062922147174");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "5.68787771062922147174");
 
   // which results in a paceMinPerKmStackSec of 41
   assert.strictEqual(run.get("paceMinPerKmStackSec").round(20).toString(), "41");
@@ -740,7 +740,7 @@ test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMi
   // when setting paceMinPerKmStackSec
   run.set("paceMinPerKmStackSec", "0");
   // it should refer to 41,272662638 and not 41 to result in 5 (aka 5.00) instead of 5.00454437729588813841
-  assert.strictEqual(run.get("paceMinPerKm").round(20).toString(), "5");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "5");
 });
 
 // paceMinPerMi
