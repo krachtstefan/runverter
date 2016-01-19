@@ -397,16 +397,20 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
 	 * @return {BigNumber}              							min/mi
 	 */
-  paceMinPerMi : Ember.computed("timeMin", "lengthMi", {
+  paceMinPerMi : Ember.computed("timeMin", "lengthMi", "paceMinPerMiStackSec", {
     get: function() {
-      return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+      return this.get("paceMinPerMiRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
 
-      return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+			return this.get("paceMinPerMiRaw");
     }
+	}),
+
+	paceMinPerMiRaw : Ember.computed("timeSec", "lengthM", function(){
+		return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
 	}),
 
 	/**
@@ -419,14 +423,14 @@ export default DS.Model.extend({
 	 */
   paceMinPerMiStackMin : Ember.computed("paceMinPerMi", {
     get: function() {
-      return this.get("paceMinPerMi").floor();
+      return this.get("paceMinPerMiRaw").floor();
     },
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerMiStackMin");
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get("paceMinPerMi").plus(value.minus(previousValue)));
+      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue)));
 
-      return this.get("paceMinPerMi").floor();
+      return this.get("paceMinPerMiRaw").floor();
     }
 	}),
 
@@ -440,15 +444,15 @@ export default DS.Model.extend({
 	 */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", {
     get: function() {
-      return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60).round();
     },
     set: function(propertyName, value) {
       // TODO: use this.get("paceMinPerMiStackMin") again if it's not rounded
-      var previousValue = this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60);
+      var previousValue = this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60);
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get("paceMinPerMi").plus(value.minus(previousValue).dividedBy(60)));
+      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerMi").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60).round();
     }
 	}),
 
