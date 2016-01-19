@@ -48,9 +48,9 @@ test('timeHr setter also works with integer', function(assert) {
 test('timeHr setter changes timeSec', function(assert) {
   var run = this.subject();
   run.set("timeHr", "2");
-  assert.strictEqual(run.get("timeSec").round(20).toString(), "7200");
+  assert.strictEqual(run.get("timeSec").toString(), "7200");
   run.set("timeHr", "2.123");
-  assert.strictEqual(run.get("timeSec").round(20).toString(), "7642.8");
+  assert.strictEqual(run.get("timeSec").toString(), "7642.8");
 });
 
 // timeMin
@@ -87,9 +87,9 @@ test('timeMin setter also works with integer', function(assert) {
 test('timeMin setter changes timeSec', function(assert) {
   var run = this.subject();
   run.set("timeMin", "12");
-  assert.strictEqual(run.get("timeSec").round(20).toString(), "720");
+  assert.strictEqual(run.get("timeSec").toString(), "720");
   run.set("timeMin", "12.123");
-  assert.strictEqual(run.get("timeSec").round(20).toString(), "727.38");
+  assert.strictEqual(run.get("timeSec").toString(), "727.38");
 });
 
 // timeStackHr
@@ -129,7 +129,7 @@ test('timeStackHr setter influences all time related properties', function(asser
   assert.strictEqual(run.get("timeStackHr").toString(), "2");
   assert.strictEqual(run.get("timeStackMin").toString(), "30");
   assert.strictEqual(run.get("timeStackSec").toString(), "12");
-  assert.strictEqual(run.get("timeSec").round(20).toString(), "9012");
+  assert.strictEqual(run.get("timeSec").toString(), "9012");
 });
 
 // timeStackMin
@@ -169,7 +169,7 @@ test('timeStackMin setter influences all time related properties', function(asse
 	assert.strictEqual(run.get("timeStackHr").toString(), "0");
 	assert.strictEqual(run.get("timeStackMin").toString(), "10");
 	assert.strictEqual(run.get("timeStackSec").toString(), "30");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "630");
+	assert.strictEqual(run.get("timeSec").toString(), "630");
 });
 
 // timeStackSec
@@ -209,7 +209,7 @@ test('timeStackSec setter influences all time related properties', function(asse
 	assert.strictEqual(run.get("timeStackHr").toString(), "3");
 	assert.strictEqual(run.get("timeStackMin").toString(), "30");
 	assert.strictEqual(run.get("timeStackSec").toString(), "20");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "12620");
+	assert.strictEqual(run.get("timeSec").toString(), "12620");
 });
 
 test('timeStackSec setter handles values bigger than 59', function(assert) {
@@ -218,7 +218,7 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
 	assert.strictEqual(run.get("timeStackHr").toString(), "3");
 	assert.strictEqual(run.get("timeStackMin").toString(), "31"); // 30 flips to 31 because 62 seconds starts another minute
 	assert.strictEqual(run.get("timeStackSec").toString(), "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "12662");
+	assert.strictEqual(run.get("timeSec").toString(), "12662");
 });
 
 // lengthKm
@@ -279,9 +279,9 @@ test('lengthKm setter also works with integer', function(assert) {
 test('lengthKm setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthKm", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "12000");
+	assert.strictEqual(run.get("lengthM").toString(), "12000");
 	run.set("lengthKm", "12.123");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "12123");
+	assert.strictEqual(run.get("lengthM").toString(), "12123");
 });
 
 // lengthKmStackKm
@@ -318,7 +318,7 @@ test('lengthKmStackKm setter also works with integer', function(assert) {
 test('lengthKmStackKm setter changes lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1234)});
 	run.set("lengthKmStackKm", "2");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2234");
+	assert.strictEqual(run.get("lengthM").toString(), "2234");
 });
 
 // lengthKmStackDecimal
@@ -380,7 +380,7 @@ test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
 test('lengthKmStackDecimal setter changes lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("lengthKmStackDecimal", "09");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "1090");
+	assert.strictEqual(run.get("lengthM").toString(), "1090");
 });
 
 test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', function(assert) {
@@ -449,9 +449,9 @@ test('lengthMi setter also works with integer', function(assert) {
 test('lengthMi setter changes lengthM', function(assert) {
 	var run = this.subject();
 	run.set("lengthMi", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "19312.128");
+	assert.strictEqual(run.get("lengthM").toString(), "19312.128");
 	run.set("lengthMi", "12.123");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "19510.077312");
+	assert.strictEqual(run.get("lengthM").toString(), "19510.077312");
 });
 
 // lengthMiStackMi
@@ -488,7 +488,7 @@ test('lengthMiStackMi setter also works with integer', function(assert) {
 test('lengthMiStackMi setter changes lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1234)});
 	run.set("lengthMiStackMi", "2");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "4452.688");
+	assert.strictEqual(run.get("lengthM").toString(), "4452.688");
 });
 
 // lengthMiStackDecimal
@@ -550,7 +550,7 @@ test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
 test('lengthMiStackDecimal setter changes lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)}); // around 1.24 miles
 	run.set("lengthMiStackDecimal", "09");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "1754.18496"); // 1.09 miles
+	assert.strictEqual(run.get("lengthM").toString(), "1754.18496"); // 1.09 miles
 });
 
 test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi', function(assert) {
@@ -621,13 +621,13 @@ test('paceMinPerKm setter can handle floats', function(assert) {
 test('paceMinPerKm setter changes timeSec', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(8000)});
 	run.set("paceMinPerKm", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "960"); // 8km with 2min/km will take 16 min (960 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "960"); // 8km with 2min/km will take 16 min (960 sek)
 });
 
 test('paceMinPerKm setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKm", 21);
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2000");
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerKmStackMin
@@ -664,13 +664,13 @@ test('paceMinPerKmStackMin setter also works with integer', function(assert) {
 test('paceMinPerKmStackMin setter changes timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(60), lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKmStackMin", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "300"); // 2km with 2,5min/km will take 5 minutes (300 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "300"); // 2km with 2,5min/km will take 5 minutes (300 sek)
 });
 
 test('paceMinPerKmStackMin setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
 	run.set("paceMinPerKmStackMin", 12);
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2000");
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerKmStackSec
@@ -802,13 +802,13 @@ test('paceMinPerMi setter can handle floats', function(assert) {
 test('paceMinPerMi setter changes timeSec', function(assert) {
 	var run = this.subject({lengthMi : new BigNumber(8)});
 	run.set("paceMinPerMi", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "960"); // 8mi with 2min/mi will take 16 min (960 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "960"); // 8mi with 2min/mi will take 16 min (960 sek)
 });
 
 test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMi", 21);
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2000");
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerMiStackMin
@@ -845,13 +845,13 @@ test('paceMinPerMiStackMin setter also works with integer', function(assert) {
 test('paceMinPerMiStackMin setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(60), lengthMi : new BigNumber(2)});
 	run.set("paceMinPerMiStackMin", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "300"); // 2mi with 2,5min/km will take 5 minutes (300 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "300"); // 2mi with 2,5min/km will take 5 minutes (300 sek)
 });
 
 test('paceMinPerMiStackMin setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
 	run.set("paceMinPerMiStackMin", 12);
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2000");
+	assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
 // paceMinPerMiStackSec
@@ -983,13 +983,13 @@ test('speedKmHr setter can handle floats', function(assert) {
 test('speedKmHr setter changes timeSec', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(8000)});
 	run.set("speedKmHr", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHr setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2500)});
 	run.set("speedKmHr", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2500");
+	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
 // speedKmHrStackKm
@@ -1026,13 +1026,13 @@ test('speedKmHrStackKm setter also works with integer', function(assert) {
 test('speedKmHrStackKm setter changes timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(8000)});
 	run.set("speedKmHrStackKm", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHrStackKm setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(2500)});
 	run.set("speedKmHrStackKm", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2500");
+	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
 // speedKmHrStackDecimal
@@ -1095,13 +1095,13 @@ test('speedKmHrStackDecimal setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(3000)});
 	run.set("speedKmHrStackKm", "1");
 	run.set("speedKmHrStackDecimal", "5");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "7200"); // 3km with 1,5km/hr will take 2 hours (7200 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3km with 1,5km/hr will take 2 hours (7200 sek)
 });
 
 test('speedKmHrStackDecimal setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
 	run.set("speedKmHrStackDecimal", "9");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "12000");
+	assert.strictEqual(run.get("lengthM").toString(), "12000");
 });
 
 test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', function(assert) {
@@ -1173,13 +1173,13 @@ test('speedMiHr setter can handle floats', function(assert) {
 test('speedMiHr setter changes timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(6437.376)});
 	run.set("speedMiHr", "2");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "7200"); // 4mi with 2mi/hr will take 2 hours (7200 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "7200"); // 4mi with 2mi/hr will take 2 hours (7200 sek)
 });
 
 test('speedMiHr setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(6437.376)});
 	run.set("speedMiHr", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "6437.376");
+	assert.strictEqual(run.get("lengthM").toString(), "6437.376");
 });
 
 // speedMiHrStackMi
@@ -1216,13 +1216,13 @@ test('speedMiHrStackMi setter also works with integer', function(assert) {
 test('speedMiHrStackMi setter changes timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(6437.376)});
 	run.set("speedMiHrStackMi", "4");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "3600"); // 4mi with 4mi/hr will take 1 hour (3600 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "3600"); // 4mi with 4mi/hr will take 1 hour (3600 sek)
 });
 
 test('speedMiHrStackMi setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(2500)});
 	run.set("speedMiHrStackMi", "12");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "2500");
+	assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
 // speedMiHrStackDecimal
@@ -1285,13 +1285,13 @@ test('speedMiHrStackDecimal setter changes timeSec', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4828.032)});
 	run.set("speedMiHrStackMi", "1");
 	run.set("speedMiHrStackDecimal", "5");
-	assert.strictEqual(run.get("timeSec").round(20).toString(), "7200"); // 3m with 1,5m/hr will take 2 hours (7200 sek)
+	assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3m with 1,5m/hr will take 2 hours (7200 sek)
 });
 
 test('speedMiHrStackDecimal setter doesn\'t change lengthM', function(assert) {
 	var run = this.subject({timeSec :  new BigNumber(3600), lengthM :  new BigNumber(12000)});
 	run.set("speedMiHrStackDecimal", "9");
-	assert.strictEqual(run.get("lengthM").round(20).toString(), "12000");
+	assert.strictEqual(run.get("lengthM").toString(), "12000");
 });
 
 test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
