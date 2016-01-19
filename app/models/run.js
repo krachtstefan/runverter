@@ -423,16 +423,21 @@ export default DS.Model.extend({
 	 */
   paceMinPerMiStackMin : Ember.computed("paceMinPerMi", {
     get: function() {
-      return this.get("paceMinPerMiRaw").floor();
+      return this.get("paceMinPerMiStackMinRaw");
     },
     set: function(propertyName, value) {
-      var previousValue = this.get("paceMinPerMiStackMin");
+      var previousValue = this.get("paceMinPerMiStackMinRaw");
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue)));
 
-      return this.get("paceMinPerMiRaw").floor();
+      return this.get("paceMinPerMiStackMinRaw");
     }
 	}),
+
+	paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMi", function(){
+		return this.get("paceMinPerMiRaw").floor();
+	}),
+
 
 	/**
 	 * paceMinPerMiStackSec is used to create a view like 12:34
@@ -444,15 +449,15 @@ export default DS.Model.extend({
 	 */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", {
     get: function() {
-      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60).round();
     },
     set: function(propertyName, value) {
-      // TODO: use this.get("paceMinPerMiStackMin") again if it's not rounded
-      var previousValue = this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60);
+      // TODO: use this.get("paceMinPerMiStackMinRaw") again if it's not rounded
+      var previousValue = this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMin")).times(60).round();
+      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60).round();
     }
 	}),
 
