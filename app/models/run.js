@@ -449,16 +449,19 @@ export default DS.Model.extend({
 	 */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", {
     get: function() {
-      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60).round();
+      return this.get("paceMinPerMiStackSecRaw").round();
     },
     set: function(propertyName, value) {
-      // TODO: use this.get("paceMinPerMiStackMinRaw") again if it's not rounded
-      var previousValue = this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
+      var previousValue = this.get("paceMinPerMiStackSecRaw");
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60).round();
+      return this.get("paceMinPerMiStackSecRaw").round();
     }
+	}),
+
+	paceMinPerMiStackSecRaw : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", function(){
+		return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
 	}),
 
 
