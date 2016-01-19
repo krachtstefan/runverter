@@ -581,15 +581,19 @@ export default DS.Model.extend({
 	 */
   speedMiHrStackMi : Ember.computed("speedMiHr", {
     get: function() {
-      return this.get("speedMiHrRaw").floor();
+      return this.get("speedMiHrStackMiRaw");
     },
     set: function(propertyName, value) {
-      var previousValue = this.get("speedMiHrStackMi");
+      var previousValue = this.get("speedMiHrStackMiRaw");
       value = this._ensureBigNumber(value).round();
       this.set("speedMiHr", this.get("speedMiHrRaw").plus(value.minus(previousValue)));
 
-      return this.get("speedMiHrRaw").floor();
+      return this.get("speedMiHrStackMiRaw");
     }
+	}),
+
+	speedMiHrStackMiRaw : Ember.computed("speedMiHr", function(){
+		return this.get("speedMiHrRaw").floor();
 	}),
 
 	/**
@@ -618,7 +622,7 @@ export default DS.Model.extend({
       // calulate the speed from decimal place
       var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
-      this.set("speedMiHr", this.get("speedMiHrStackMi").plus(decimalSpeed.dividedBy(1000)));
+      this.set("speedMiHr", this.get("speedMiHrStackMiRaw").plus(decimalSpeed.dividedBy(1000)));
 
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";

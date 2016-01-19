@@ -1185,32 +1185,32 @@ test('speedMiHr setter doesn\'t change lengthM', function(assert) {
 // // speedMiHrStackMi
 test('speedMiHrStackMi property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4000)});
- 	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "2");
+ 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
 });
 
 test('speedMiHrStackMi property can be zero', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "0");
+ 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
 test('speedMiHrStackMi setter changes speedMiHrStackMi', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
 	run.set("speedMiHrStackMi", "18");
-	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "18");
+	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "18");
 });
 
 test('speedMiHrStackMi setter can handle floats', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
 	run.set("speedMiHrStackMi", "5.5");
-	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "6");
+	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
 	run.set("speedMiHrStackMi", 2.3);
-	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "2");
+	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
 });
 
 test('speedMiHrStackMi setter also works with integer', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24123)});
 	run.set("speedMiHrStackMi", 12);
-	assert.strictEqual(run.get("speedMiHrStackMi").round(20).toString(), "12");
+	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "12");
 });
 
 test('speedMiHrStackMi setter changes timeSec', function(assert) {
