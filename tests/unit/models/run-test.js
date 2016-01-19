@@ -992,7 +992,7 @@ test('speedKmHr setter doesn\'t change lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM").round(20).toString(), "2500");
 });
 
-// // speedKmHrStackKm
+// speedKmHrStackKm
 test('speedKmHrStackKm property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(25000)});
  	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "25");
@@ -1182,7 +1182,7 @@ test('speedMiHr setter doesn\'t change lengthM', function(assert) {
 	assert.strictEqual(run.get("lengthM").round(20).toString(), "6437.376");
 });
 
-// // speedMiHrStackMi
+// speedMiHrStackMi
 test('speedMiHrStackMi property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4000)});
  	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
