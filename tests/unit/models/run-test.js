@@ -927,57 +927,57 @@ test('paceMinPerMiStackSec setter should refer to an uncompressed version paceMi
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "0.75");
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.75");
 });
 
 test('speedKmHr can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4511)});
   // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "7.67490545454545454545");
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454545");
 
   run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510)});
   // http://keisan.casio.com/calculator results in 7.6748727272727272727272727
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "7.67487272727272727273");
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.67487272727272727273");
 
   run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.121)});
   // http://keisan.casio.com/calculator results in 3.9668727272727272727272727
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "3.96687272727272727273");
+  assert.strictEqual(run.get("speedKmHr").toString(), "3.96687272727272727273");
 });
 
 test('speedKmHr can round down', function(assert) {
   var run = this.subject({timeSec : new BigNumber(49), lengthM : new BigNumber(12.9912)});
   // http://keisan.casio.com/calculator results in 0.9544555102040816326531
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "0.95445551020408163265");
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.95445551020408163265");
 
   run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912)});
   // http://keisan.casio.com/calculator results in 4.2516654545454545454545455
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "4.25166545454545454545");
+  assert.strictEqual(run.get("speedKmHr").toString(), "4.25166545454545454545");
 
   run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912)});
   // http://keisan.casio.com/calculator results in 7.8516654545454545454545455
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "7.85166545454545454545");
+  assert.strictEqual(run.get("speedKmHr").toString(), "7.85166545454545454545");
 });
 
 test('speedKmHr setter changes speedKmHr', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", "21");
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "21");
+	assert.strictEqual(run.get("speedKmHr").toString(), "21");
 });
 
 test('speedKmHr setter also works with integer', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", 2);
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2");
 });
 
 test('speedKmHr setter can handle floats', function(assert) {
 	var run = this.subject({lengthM : new BigNumber(1000)});
 	run.set("speedKmHr", 2.2);
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2.2");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.2");
 	run.set("speedKmHr", "2.5");
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2.5");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.5");
 	run.set("speedKmHr", 2.21234);
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2.21234");
+	assert.strictEqual(run.get("speedKmHr").toString(), "2.21234");
 });
 
 test('speedKmHr setter changes timeSec', function(assert) {
@@ -1110,7 +1110,7 @@ test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', 
 		"speedKmHrStackKm" : "12",
 		"speedKmHrStackDecimal" : "05"
 	});
-	assert.strictEqual(run.get("speedKmHr").round(20).toString(), "12.05");
+	assert.strictEqual(run.get("speedKmHr").toString(), "12.05");
 });
 
 // speedMiHr
@@ -1320,7 +1320,7 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
   // older version of speedKmHr getter resulted in 2.81413200000000000113
   // problem was fixed by optmizing the calculation by eleminating a dividedBy call
-  assert.strictEqual(run.get("speedKmHr").round(20).toString(), "2.814132");
+  assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
 });
 
 // helper methods
