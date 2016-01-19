@@ -557,14 +557,18 @@ export default DS.Model.extend({
 	 */
   speedMiHr : Ember.computed("lengthM", "timeHr", {
     get: function() {
-      return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+      return this.get("speedMiHrRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeHr",this.get("lengthMiRaw").dividedBy(value));
 
-      return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+			return this.get("speedMiHrRaw").round(20);
     }
+	}),
+
+	speedMiHrRaw : Ember.computed("lengthM", "timeHr", function(){
+		return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
 	}),
 
 	/**
@@ -577,14 +581,14 @@ export default DS.Model.extend({
 	 */
   speedMiHrStackMi : Ember.computed("speedMiHr", {
     get: function() {
-      return this.get("speedMiHr").floor();
+      return this.get("speedMiHrRaw").floor();
     },
     set: function(propertyName, value) {
       var previousValue = this.get("speedMiHrStackMi");
       value = this._ensureBigNumber(value).round();
-      this.set("speedMiHr", this.get("speedMiHr").plus(value.minus(previousValue)));
+      this.set("speedMiHr", this.get("speedMiHrRaw").plus(value.minus(previousValue)));
 
-      return this.get("speedMiHr").floor();
+      return this.get("speedMiHrRaw").floor();
     }
 	}),
 
@@ -598,7 +602,7 @@ export default DS.Model.extend({
 	 */
   speedMiHrStackDecimal : Ember.computed("speedMiHr", {
     get: function() {
-      var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
     set: function(propertyName, value) {
@@ -616,7 +620,7 @@ export default DS.Model.extend({
 
       this.set("speedMiHr", this.get("speedMiHrStackMi").plus(decimalSpeed.dividedBy(1000)));
 
-      var speedMiHrStackDecimal = this.get("speedMiHr").round(2).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     }
 	}),
