@@ -60,14 +60,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeMin
 	 * @return {BigNumber} 														minutes
 	 */
-  timeMin : Ember.computed("timeSec", {
+  timeMin : Ember.computed("timeSec", "timeMinRaw", {
     get: function() {
       return this.get("timeMinRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(60));
-      return this.get("timeMinRaw");
+      return this.get("timeMinRaw").round(60);
     }
 	}),
 
