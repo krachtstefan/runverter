@@ -382,7 +382,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
 	 * @return {BigNumber} 														min stack of the pace
 	 */
-  paceMinPerKmStackMin : Ember.computed("paceMinPerKm", {
+  paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
     get: function() {
       return this.get("paceMinPerKmStackMinRaw");
     },
@@ -400,7 +400,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKm", function(){
+	paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
 		return this.get("paceMinPerKmRaw").floor();
 	}),
 
