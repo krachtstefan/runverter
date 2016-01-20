@@ -719,22 +719,6 @@ export default DS.Model.extend({
 		return output;
 	},
 
-	/**
-	 * optimied version of the .toFixed method which has a lag of precision
-	 * 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
-	 * found some issues with this fix as well f.e. 2.21235 results in 2.2124
-	 *
-	 * @param  {float} 	number 		input value
-	 * @param  {number} precision desired precision
-	 * @return {string}       		output string with desired precision
-	 */
-	_toFixed : function(number, precision){
-		number = parseFloat(number);
-		precision = +Math.round(precision) || 0; // convert to number or set to 0
-		var precisionHelper = Math.pow(10,precision);
-		return (Math.round(number * precisionHelper) / precisionHelper).toFixed(precision);
-	},
-
   /**
    * will convert the input to BigNumber if necessary. If input is BigNumber already
    * it will be left unchanged. This method is handy for setter methods of this class.
