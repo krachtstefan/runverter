@@ -266,14 +266,14 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMi
 	 * @return {BigNumber} 														miles
 	 */
-  lengthMi : Ember.computed("lengthM", {
+  lengthMi : Ember.computed("lengthM", "lengthMiRaw", {
     get: function() {
       return this.get("lengthMiRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(this.miToM));
-      return this.get("lengthMiRaw");
+      return this.get("lengthMiRaw").round(20);
     }
 	}),
 
