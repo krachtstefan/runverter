@@ -321,7 +321,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
 	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
-  lengthMiStackDecimal : Ember.computed("lengthMi", {
+  lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
     get: function() {
       var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
