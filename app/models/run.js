@@ -354,7 +354,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
 	 * @return {BigNumber}              							min/km
 	 */
-  paceMinPerKm : Ember.computed("timeSec", "lengthM", "paceMinPerKmRaw", {
+  paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
     get: function() {
       return this.get("paceMinPerKmRaw").round(20);
     },
@@ -362,7 +362,7 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
 
-      return this.get("paceMinPerKmRaw");
+      return this.get("paceMinPerKmRaw").round(20);
     }
 	}),
 
@@ -371,7 +371,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	paceMinPerKmRaw : Ember.computed("lengthM", "timeSec", "paceMinPerKmStackSec", function(){
+	paceMinPerKmRaw : Ember.computed("timeMinRaw", "lengthKmRaw", function(){
 		return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
 	}),
 
