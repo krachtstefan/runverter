@@ -1324,28 +1324,6 @@ test('_getLeadingZerosFromString returns the amount of leading zeros a string ha
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
 });
 
-test('_removeEndingZeros removes all zeros at the end of a string', function(assert) {
- 	assert.strictEqual(this.subject()._removeEndingZeros("1000"), "1");
-});
-
-test('_removeEndingZeros removes all zeros at the end of a number', function(assert) {
- 	assert.strictEqual(this.subject()._removeEndingZeros(1000), "1");
-});
-
-test('_removeEndingZeros returns an empty string if the parameter only contains zeros ', function(assert) {
-	assert.strictEqual(this.subject()._removeEndingZeros(0), "");
- 	assert.strictEqual(this.subject()._removeEndingZeros("0"), "");
- 	assert.strictEqual(this.subject()._removeEndingZeros("000"), "");
-});
-
-test('_removeEndingZeros returns an empty string if the parameter is undefined', function(assert) {
-	assert.strictEqual(this.subject()._removeEndingZeros(), "");
-});
-
-test('_removeEndingZeros returns an empty string if the parameter is an empty string', function(assert) {
-	assert.strictEqual(this.subject()._removeEndingZeros(""), "");
-});
-
 test('_ensureBigNumber can handle numeric strings', function(assert) {
   var ensureBigNumber = this.subject()._ensureBigNumber("1");
   assert.strictEqual(ensureBigNumber instanceof BigNumber, true);

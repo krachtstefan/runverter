@@ -706,19 +706,6 @@ export default DS.Model.extend({
 		return leadingZeros;
 	},
 
-	/**
-	 * removes all zeros from the end of a string
-	 * @param  {string} input input string
-	 * @return {string}       output string
-	 */
-	_removeEndingZeros : function(input){
-		var output = (typeof input === "undefined") ? "" : input.toString();
-		while (output[output.length-1]==="0") {
-			output = output.slice(0,-1);
-		}
-		return output;
-	},
-
   /**
    * will convert the input to BigNumber if necessary. If input is BigNumber already
    * it will be left unchanged. This method is handy for setter methods of this class.
