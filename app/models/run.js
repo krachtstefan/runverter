@@ -35,7 +35,7 @@ export default DS.Model.extend({
 	 */
   timeHr: Ember.computed("timeSec", {
     get: function() {
-      return this.get("timeHrRaw").round("20");
+      return this.get("timeHrRaw").round(20);
     },
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
