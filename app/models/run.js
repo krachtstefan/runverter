@@ -207,7 +207,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
 	 * @return {BigNumber} 														km stack of the run
 	 */
-  lengthKmStackKm : Ember.computed("lengthKm", {
+  lengthKmStackKm : Ember.computed("lengthM", "lengthKmStackKmRaw", {
     get: function() {
       return this.get("lengthKmStackKmRaw");
     },
@@ -224,7 +224,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	lengthKmStackKmRaw : Ember.computed("lengthM", function(){
+	lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
 		return this.get("lengthKmRaw").floor();
 	}),
 
