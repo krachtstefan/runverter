@@ -521,7 +521,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
 	 * @return {BigNumber} 														km/hr
 	 */
-  speedKmHr : Ember.computed("lengthM", "timeSec", {
+  speedKmHr : Ember.computed("speedKmHrRaw", "lengthM", {
     get: function() {
       return this.get("speedKmHrRaw").round(20);
     },
@@ -538,7 +538,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	speedKmHrRaw : Ember.computed("lengthM", "timeSec", function(){
+	speedKmHrRaw : Ember.computed("lengthKmRaw", "timeHrRaw", function(){
 		return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
 	}),
 
