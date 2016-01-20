@@ -433,7 +433,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
 	 * @return {BigNumber}              							min/mi
 	 */
-  paceMinPerMi : Ember.computed("timeMin", "lengthMi", "paceMinPerMiStackSec", {
+  paceMinPerMi : Ember.computed("paceMinPerMiRaw", "lengthMiRaw", {
     get: function() {
       return this.get("paceMinPerMiRaw").round(20);
     },
@@ -441,7 +441,7 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
 
-			return this.get("paceMinPerMiRaw");
+			return this.get("paceMinPerMiRaw").round(20);
     }
 	}),
 
@@ -450,7 +450,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	paceMinPerMiRaw : Ember.computed("timeSec", "lengthM", function(){
+	paceMinPerMiRaw : Ember.computed("timeMinRaw", "lengthMiRaw", function(){
 		return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
 	}),
 
