@@ -179,7 +179,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthKm
 	 * @return {BigNumber}														km
 	 */
-  lengthKm : Ember.computed("lengthM", {
+  lengthKm : Ember.computed("lengthM", "lengthKmRaw", {
     get: function() {
       return this.get("lengthKmRaw").round(20);
     },
