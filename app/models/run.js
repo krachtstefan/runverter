@@ -17,15 +17,6 @@ export default DS.Model.extend({
 	 */
 	timeSec : new BigNumber(0),
 
-  /**
-   * Checks if a division with miToM as the divisor ends up in a quotient with repeating digits
-   *
-   * @type {Boolean}
-   */
-  miToMHasRepeatingDigits: Ember.computed("miToM", function() {
-    return this._hasRepeatingDecimals(this.miToM);
-  }),
-
 	/**
 	 * time of the run in hours
 	 *
@@ -756,66 +747,5 @@ export default DS.Model.extend({
    */
   _ensureBigNumber : function(input){
     return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
-  },
-
-
-  /**
-   * searches an input array for e specific element and returns
-   * a new array with all of the found elements removed
-   *
-   * @param  {array}    srcArr    source array
-   * @param  {any}      element   element to search for
-   * @return {array}              new array
-   */
-  _removeElementFromArray : function(srcArr, element){
-    var arr = srcArr.slice();
-    while (arr.indexOf(element)>=0) {
-      arr.splice(arr.indexOf(element), 1);
-    }
-    return arr;
-  },
-
-  /**
-   * detects all prime factors of a given number and returns it as an array
-   * source:
-   * http://www.coderenaissance.com/2011/06/finding-prime-factors-in-javascript.html
-   *
-   * @param  {number}    num    source array
-   * @return {array}            all prime factors
-   */
-  _returnPrimeFactors : function(num){
-    var root = Math.sqrt(num),
-    result = arguments[1] || [],  //get unnamed paremeter from recursive calls
-    x = 2;
-
-    if(num % x){//if not divisible by 2
-     x = 3;//assign first odd
-     while((num % x) && ((x = x + 2) < root)){}//iterate odds
-    }
-    //if no factor found then num is prime
-    x = (x <= root) ? x : num;
-    result.push(x);//push latest prime factor
-
-    //if num isn't prime factor make recursive call
-    return (x === num) ? result : this._returnPrimeFactors(num/x, result) ;
-  },
-
-  /**
-   * This method detects if a fraction has repeating decimals
-   * A fraction N/D has no repeating decimals when D is equal to 1 or D's prime factors only consist of 2's and/or 5's
-   * http://math.stackexchange.com/questions/197478/detecting-that-a-fraction-is-a-repeating-decimal
-   *
-   * @param  {BigNumber}   value      denominator
-   * @return {Boolean}                answer to "has repeating decimals?"
-   */
-  _hasRepeatingDecimals : function(denominator){
-    // handle floating points by shifting the comma (turn 3.456 to 3456)
-    if(denominator.decimalPlaces() > 0){
-      denominator = denominator.shift(denominator.decimalPlaces());
-    }
-    var denominatorPrimeFactors = this._returnPrimeFactors(denominator.toNumber());
-    denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 2);
-    denominatorPrimeFactors = this._removeElementFromArray(denominatorPrimeFactors, 5);
-    return (denominator.equals(1) || denominatorPrimeFactors.length === 0) ? false : true;
   }
 });
