@@ -235,7 +235,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
 	 * @return {string}              									up to 2 digits of the decimal place of the run in km
 	 */
-  lengthKmStackDecimal : Ember.computed("lengthKm", {
+  lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
     get: function() {
       var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
