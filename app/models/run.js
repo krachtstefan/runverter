@@ -44,6 +44,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of timeHr, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	timeHrRaw : Ember.computed("timeSec", function(){
 	  return this.get("timeSec").dividedBy(3600);
 	}),
@@ -66,6 +71,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of timeMin, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	timeMinRaw : Ember.computed("timeSec", function(){
 		return this.get("timeSec").dividedBy(60);
 	}),
@@ -89,6 +99,11 @@ export default DS.Model.extend({
 	   }
 	 }),
 
+	 /**
+	  * uncompressed value of timeStackHr, used for lossless calculation
+	  *
+	  * @return {BigNumber}
+	  */
 	 timeStackHrRaw : Ember.computed("timeHr", function(){
 	   return this.get("timeHr").floor();
 	 }),
@@ -112,6 +127,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of timeStackMin, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	timeStackMinRaw : Ember.computed("timeSec", "timeMin", "timeStackHr", function(){
 		return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
 	}),
@@ -135,6 +155,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of timeStackSec, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
 		return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
 	}),
@@ -165,6 +190,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of lengthKm, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	lengthKmRaw : Ember.computed("lengthM", function(){
 		return this.get("lengthM").dividedBy(1000);
 	}),
@@ -189,6 +219,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of lengthKmStackKm, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	lengthKmStackKmRaw : Ember.computed("lengthM", function(){
 		return this.get("lengthKmRaw").floor();
 	}),
@@ -242,6 +277,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of lengthMi, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	lengthMiRaw : Ember.computed("lengthM", function(){
 		return this.get("lengthM").dividedBy(this.miToM);
 	}),
@@ -265,6 +305,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of lengthMiStackMi, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	lengthMiStackMiRaw : Ember.computed("lengthM", function(){
 		return this.get("lengthMiRaw").floor();
 	}),
@@ -321,6 +366,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerKm, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerKmRaw : Ember.computed("lengthM", "timeSec", "paceMinPerKmStackSec", function(){
 		return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
 	}),
@@ -345,6 +395,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerKmStackMin, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKm", function(){
 		return this.get("paceMinPerKmRaw").floor();
 	}),
@@ -370,6 +425,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerKmStackSec, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerKmStackSecRaw : Ember.computed("paceMinPerKm", function(){
 		return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
 	}),
@@ -394,6 +454,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerMi, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerMiRaw : Ember.computed("timeSec", "lengthM", function(){
 		return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
 	}),
@@ -418,6 +483,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerMiStackMin, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMi", function(){
 		return this.get("paceMinPerMiRaw").floor();
 	}),
@@ -443,6 +513,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of paceMinPerMiStackSec, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	paceMinPerMiStackSecRaw : Ember.computed("paceMinPerMi", "paceMinPerMiStackMin", function(){
 		return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
 	}),
@@ -467,6 +542,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of speedKmHrRaw, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	speedKmHrRaw : Ember.computed("lengthM", "timeSec", function(){
 		return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
 	}),
@@ -491,6 +571,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of speedKmHrStackKmRaw, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	speedKmHrStackKmRaw : Ember.computed("speedKmHr", function(){
 		return this.get("speedKmHrRaw").floor();
 	}),
@@ -502,7 +587,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
-  speedKmHrStackDecimal : Ember.computed("speedKmHr", {
+	 speedKmHrStackDecimal : Ember.computed("speedKmHr", {
     get: function() {
       var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(2).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
@@ -546,6 +631,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of speedMiHr, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	speedMiHrRaw : Ember.computed("lengthM", "timeHr", function(){
 		return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
 	}),
@@ -570,6 +660,11 @@ export default DS.Model.extend({
     }
 	}),
 
+	/**
+	 * uncompressed value of speedMiHrStackMi, used for lossless calculation
+	 *
+	 * @return {BigNumber}
+	 */
 	speedMiHrStackMiRaw : Ember.computed("speedMiHr", function(){
 		return this.get("speedMiHrRaw").floor();
 	}),
