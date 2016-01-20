@@ -87,7 +87,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackHr
 	 * @return {BigNumber} 													  hours stack of the run time
 	 */
-	 timeStackHr : Ember.computed("timeHr" ,{
+	 timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
 	   get: function() {
 	     return this.get("timeStackHrRaw");
 	   },
