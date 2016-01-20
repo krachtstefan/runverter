@@ -1228,7 +1228,7 @@ test('speedMiHrStackMi setter doesn\'t change lengthM', function(assert) {
 // speedMiHrStackDecimal
 test('speedMiHrStackDecimal property is calculated from timeSec and lengthM and can round down', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(2500.920576)}); // 1.554 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "55");
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "55");
 });
 
 test('speedMiHrStackDecimal property can round up', function(assert) {
@@ -1238,47 +1238,47 @@ test('speedMiHrStackDecimal property can round up', function(assert) {
 
 test('speedMiHrStackDecimal can have 1 digit', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(2414.02)}); // 1.5 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "5");
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "5");
 });
 
 test('speedMiHrStackDecimal supports leading zero', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1689.811)}); // 1.05 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "05");
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "05");
 });
 
 test('speedMiHrStackDecimal can be zero', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1609.34)}); // 1.00 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "0");
+ 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
 });
 
 test('speedMiHrStackDecimal setter changes speedMiHrStackDecimal', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
 	run.set("speedMiHrStackDecimal", "9");
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "9");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter also works with integer', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
 	run.set("speedMiHrStackDecimal", 9);
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "9");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter can handle floats', function(assert) {
 	var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
 	run.set("speedMiHrStackDecimal", "8.2");
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "8");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "8");
 	run.set("speedMiHrStackDecimal", 8.5);
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "9");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter works with leading zeros', function(assert) {
 	var run = this.subject({timeSec :  new BigNumber(3600), lengthM :  new BigNumber(12000)});
 	run.set("speedMiHrStackDecimal", "09");
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "09");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "09");
 	run.set("speedMiHrStackDecimal", "002");
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "0");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
 	run.set("speedMiHrStackDecimal", "009");
-	assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "01");
+	assert.strictEqual(run.get("speedMiHrStackDecimal"), "01");
 });
 
 test('speedMiHrStackDecimal setter changes timeSec', function(assert) {
