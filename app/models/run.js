@@ -578,9 +578,9 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
 	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
 	 */
-	 speedKmHrStackDecimal : Ember.computed("speedKmHr", {
+	 speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
     get: function() {
-      var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(2).toString().split(".")[1];
+      var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     },
     set: function(propertyName, value) {
