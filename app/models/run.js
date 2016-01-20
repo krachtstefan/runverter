@@ -89,7 +89,7 @@ export default DS.Model.extend({
 	 */
 	 timeStackHr : Ember.computed("timeHr" ,{
 	   get: function() {
-	     return this.get("timeStackHrRaw").round(20);
+	     return this.get("timeStackHrRaw");
 	   },
 	   set: function(propertyName, value) {
 	     var previousValue = this.get("timeStackHrRaw");
@@ -100,7 +100,7 @@ export default DS.Model.extend({
 	 }),
 
 	 /**
-	  * uncompressed value of timeStackHr, used for lossless calculation
+	  *  calculates the value of timeStackHr
 	  *
 	  * @return {BigNumber}
 	  */
@@ -209,7 +209,7 @@ export default DS.Model.extend({
 	 */
   lengthKmStackKm : Ember.computed("lengthKm", {
     get: function() {
-      return this.get("lengthKmStackKmRaw").round(20);
+      return this.get("lengthKmStackKmRaw");
     },
     set: function(propertyName, value) {
       var previousValue = this.get("lengthKmStackKmRaw");
@@ -220,7 +220,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of lengthKmStackKm, used for lossless calculation
+	 * calculates the value of lengthKmStackKm
 	 *
 	 * @return {BigNumber}
 	 */
@@ -295,7 +295,7 @@ export default DS.Model.extend({
 	 */
   lengthMiStackMi : Ember.computed("lengthMi", {
     get: function() {
-      return this.get("lengthMiStackMiRaw").round(20);
+      return this.get("lengthMiStackMiRaw");
     },
     set: function(propertyName, value) {
       var previousValue = this.get("lengthMiStackMiRaw");
@@ -306,7 +306,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of lengthMiStackMi, used for lossless calculation
+	 * calculates the value of lengthMiStackMi
 	 *
 	 * @return {BigNumber}
 	 */
@@ -384,7 +384,7 @@ export default DS.Model.extend({
 	 */
   paceMinPerKmStackMin : Ember.computed("paceMinPerKm", {
     get: function() {
-      return this.get("paceMinPerKmStackMinRaw").round(20);
+      return this.get("paceMinPerKmStackMinRaw");
     },
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerKmStackMinRaw");
@@ -396,7 +396,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerKmStackMin, used for lossless calculation
+	 * calculates the value of paceMinPerKmStackMin
 	 *
 	 * @return {BigNumber}
 	 */
