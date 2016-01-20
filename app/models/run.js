@@ -143,15 +143,15 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackSec
 	 * @return {BigNumber} 														second stack of the run time, betweeen 0 and 59
 	 */
-  timeStackSec : Ember.computed("timeSec", "timeMin",{
+  timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
     get: function() {
       return this.get("timeStackSecRaw").round(20);
     },
     set: function(propertyName, value) {
-      var previousValue = this.get("timeStackSec");
+      var previousValue = this.get("timeStackSecRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
-      return this.get("timeStackSecRaw");
+      return this.get("timeStackSecRaw").round(20);
     }
 	}),
 
