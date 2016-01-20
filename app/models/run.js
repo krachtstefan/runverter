@@ -33,7 +33,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeHr
 	 * @return {BigNumber} 														hours
 	 */
-  timeHr: Ember.computed("timeSec", "timeHrRaw", {
+  timeHr: Ember.computed("timeHrRaw", {
     get: function() {
       return this.get("timeHrRaw").round(20);
     },
