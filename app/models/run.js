@@ -28,7 +28,6 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in hours
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeHr
 	 * @param  {Object|string|number} value						new value of timeHr
@@ -51,7 +50,6 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in minutes
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeMin
 	 * @param  {Object|string|number} value						new value of timeMin
@@ -74,7 +72,6 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackHr is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackHr
 	 * @param  {Object|string|number} value						new value of timeStackHr
@@ -98,7 +95,6 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackMin is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackMin
 	 * @param  {Object|string|number} value						new value of timeStackMin
@@ -122,7 +118,6 @@ export default DS.Model.extend({
 
 	/**
 	 * timeStackSec is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be timeStackSec
 	 * @param  {Object|string|number} value						new value of timeStackSec
@@ -154,7 +149,6 @@ export default DS.Model.extend({
 
 	/**
 	 * length of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKm
 	 * @param  {Object|string|number} value						new value of lengthKm
@@ -178,7 +172,6 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
 	 * @param  {Object|string|number} value						new value of lengthKmStackKm
@@ -202,7 +195,6 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
@@ -234,7 +226,6 @@ export default DS.Model.extend({
 
 	/**
 	 * length of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMi
 	 * @param  {Object|string|number} value						new value of lengthMi
@@ -257,7 +248,6 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
@@ -281,7 +271,6 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be lengthMiStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
@@ -315,7 +304,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKm represents the pace of the run in min/km
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
@@ -339,7 +327,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKmStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
@@ -364,7 +351,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerKmStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackSec
 	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
@@ -391,7 +377,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerMi represents the pace of the run in min/mi
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerMi
 	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
@@ -415,7 +400,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerMiStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackMin
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
@@ -441,7 +425,6 @@ export default DS.Model.extend({
 
 	/**
 	 * paceMinPerMiStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
 	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
@@ -467,7 +450,6 @@ export default DS.Model.extend({
 
 	/**
 	 * speedKmHr represents the speed of the run in km per hour
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHr
 	 * @param  {Object|string|number} 	value        	new value of speedKmHr
@@ -491,7 +473,6 @@ export default DS.Model.extend({
 
 	/**
 	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackKm
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
@@ -516,7 +497,6 @@ export default DS.Model.extend({
 
 	/**
 	 * speedKmHrStackDecimal is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
@@ -549,7 +529,6 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHr represents the speed of the run in miles per hour
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHr
 	 * @param  {Object|string|number} 	value        	new value of speedMiHr
@@ -573,7 +552,6 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHrStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackMi
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
@@ -598,7 +576,6 @@ export default DS.Model.extend({
 
 	/**
 	 * speedMiHrStackDecimal is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
