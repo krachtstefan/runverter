@@ -257,7 +257,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of lengthMi
 	 * @return {BigNumber} 														miles
 	 */
-  lengthMi : Ember.computed("lengthM", "lengthMiRaw", {
+  lengthMi : Ember.computed("lengthMiRaw", {
     get: function() {
       return this.get("lengthMiRaw").round(20);
     },
