@@ -18,9 +18,9 @@ export default DS.Model.extend({
 	timeSec : new BigNumber(0),
 
   /**
-   * Checkes if a division with miToM as the divisor ends up in a quotient with repeating digits
+   * Checks if a division with miToM as the divisor ends up in a quotient with repeating digits
    *
-   * @type {Boolean} is the
+   * @type {Boolean}
    */
   miToMHasRepeatingDigits: Ember.computed("miToM", function() {
     return this._hasRepeatingDecimals(this.miToM);
