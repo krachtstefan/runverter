@@ -115,7 +115,7 @@ export default DS.Model.extend({
 	 * @param  {Object|string|number} value						new value of timeStackMin
 	 * @return {BigNumber} 														minutes stack of the run time
 	 */
-  timeStackMin : Ember.computed("timeMin", "timeStackHr",{
+  timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
     get: function() {
       return this.get("timeStackMinRaw").round(20);
     },
@@ -123,7 +123,7 @@ export default DS.Model.extend({
       var previousValue = this.get("timeStackMinRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
-      return this.get("timeStackMinRaw");
+      return this.get("timeStackMinRaw").round(20);
     }
 	}),
 
@@ -132,7 +132,7 @@ export default DS.Model.extend({
 	 *
 	 * @return {BigNumber}
 	 */
-	timeStackMinRaw : Ember.computed("timeSec", "timeMin", "timeStackHr", function(){
+	timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
 		return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
 	}),
 
