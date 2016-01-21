@@ -204,15 +204,23 @@ export default DS.Model.extend({
 
 	/**
 	 * length of the run in km
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthKm
-	 * @param  {Object|string|number} value						new value of lengthKm
-	 * @return {BigNumber}														km
 	 */
   lengthKm : Ember.computed("lengthKmRaw", {
+    /**
+     * returns lengthKm, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("lengthKmRaw").round(20);
     },
+    /**
+     * sets a new lengthKm
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKm"
+     * @param  {Object|string|number} value new lengthKm value
+     * @return {BigNumber} new lengthKm value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(1000));
@@ -231,16 +239,24 @@ export default DS.Model.extend({
 
 
 	/**
-	 * lengthKmStackKm is used to create a view like 12,34
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
-	 * @param  {Object|string|number} value						new value of lengthKmStackKm
-	 * @return {BigNumber} 														km stack of the run
+	 * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
 	 */
   lengthKmStackKm : Ember.computed("lengthM", "lengthKmStackKmRaw", {
+    /**
+     * returns lengthKmStackKm, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("lengthKmStackKmRaw");
     },
+    /**
+     * sets a new lengthKmStackKm
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKmStackKm"
+     * @param  {Object|string|number} value new lengthKmStackKm value
+     * @return {BigNumber} new lengthKmStackKm value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("lengthKmStackKmRaw");
       value = this._ensureBigNumber(value).round();
@@ -259,17 +275,26 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
-	 * @return {string}              									up to 2 digits of the decimal place of the run in km
+   * lengthKmStackDecimal is used to display the length like 12,34
+   * and represents up to decimal places of the kilometers value
 	 */
   lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+    /**
+     * returns lengthKmStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
     get: function() {
       var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
+    /**
+     * sets a new lengthKmStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKmStackDecimal"
+     * @param  {Object|string|number} value new lengthKmStackDecimal value
+     * @return {string} new lengthKmStackDecimal value
+     */
     set: function(propertyName, value) {
       var leadingZeros = this._getLeadingZerosFromString(value);
       value = this._ensureBigNumber(value).round();
@@ -291,15 +316,23 @@ export default DS.Model.extend({
 
 	/**
 	 * length of the run in miles
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthMi
-	 * @param  {Object|string|number} value						new value of lengthMi
-	 * @return {BigNumber} 														miles
 	 */
   lengthMi : Ember.computed("lengthMiRaw", {
+    /**
+     * returns lengthMi, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("lengthMiRaw").round(20);
     },
+    /**
+     * sets a new lengthMi
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMi"
+     * @param  {Object|string|number} value new lengthMi value
+     * @return {BigNumber} new lengthMi value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(this.miToM));
@@ -317,16 +350,28 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * lengthMiStackMi is used to create a view like 12,34
+   * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
 	 * @param  {Object|string|number} value						new value of lengthMiStackMi
 	 * @return {BigNumber} 													  miles	stack of the run
 	 */
   lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
+    /**
+     * returns lengthMiStackMi, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("lengthMiStackMiRaw");
     },
+    /**
+     * sets a new lengthMiStackMi
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMiStackMi"
+     * @param  {Object|string|number} value new lengthMiStackMi value
+     * @return {BigNumber} new lengthMiStackMi value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("lengthMiStackMiRaw");
       value = this._ensureBigNumber(value).round();
@@ -345,17 +390,30 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
+   * lengthMiStackDecimal is used to display the length like 12,34
+   * and represents up to decimal places of the miles value
 	 *
 	 * @param  {string} 								propertyName 	if defined, it will be lengthMiStackDecimal
 	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
 	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
 	 */
   lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
+    /**
+     * returns lengthMiStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
     get: function() {
       var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     },
+    /**
+     * sets a new lengthMiStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMiStackDecimal"
+     * @param  {Object|string|number} value new lengthMiStackDecimal value
+     * @return {string} new lengthMiStackDecimal value
+     */
     set: function(propertyName, value) {
       var leadingZeros = this._getLeadingZerosFromString(value);
 
