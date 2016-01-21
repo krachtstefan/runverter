@@ -3,23 +3,23 @@ import Ember from 'ember';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
-	/**
-	 * MiToM the length of a mile in meters
-	 *
-	 * @type {BigNumber} length of a mile in meters
-	 */
-	miToM : new BigNumber(1609.344),
+  /**
+   * MiToM the length of a mile in meters
+   *
+   * @type {BigNumber} length of a mile in meters
+   */
+  miToM : new BigNumber(1609.344),
 
-	/**
-	 * timeSec represents the time of a run, should be set on create
-	 *
-	 * @type {BigNumber} time of the run in seconds
-	 */
-	timeSec : new BigNumber(0),
+  /**
+   * timeSec represents the time of a run, should be set on create
+   *
+   * @type {BigNumber} time of the run in seconds
+   */
+  timeSec : new BigNumber(0),
 
-	/**
-	 * time of the run in hours
-	 */
+  /**
+   * time of the run in hours
+   */
   timeHr: Ember.computed("timeHrRaw", {
 
     /**
@@ -42,20 +42,20 @@ export default DS.Model.extend({
       this.set("timeSec", value.times(3600));
       return this.get("timeHrRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of timeHr, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	timeHrRaw : Ember.computed("timeSec", function(){
-	  return this.get("timeSec").dividedBy(3600);
-	}),
+  /**
+   * calculates the uncompressed value of timeHr, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  timeHrRaw : Ember.computed("timeSec", function(){
+    return this.get("timeSec").dividedBy(3600);
+  }),
 
-	/**
-	 * time of the run in minutes
-	 */
+  /**
+   * time of the run in minutes
+   */
   timeMin : Ember.computed("timeMinRaw", {
 
     /**
@@ -79,20 +79,20 @@ export default DS.Model.extend({
       this.set("timeSec", value.times(60));
       return this.get("timeMinRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of timeMin, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	timeMinRaw : Ember.computed("timeSec", function(){
-		return this.get("timeSec").dividedBy(60);
-	}),
+  /**
+   * calculates the uncompressed value of timeMin, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  timeMinRaw : Ember.computed("timeSec", function(){
+    return this.get("timeSec").dividedBy(60);
+  }),
 
-	/**
-	 * timeStackHr is used to display the time like 12:34:56 and represents the hours value
-	 */
+  /**
+   * timeStackHr is used to display the time like 12:34:56 and represents the hours value
+   */
   timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
 
     /**
@@ -113,24 +113,24 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackHrRaw");
-	    value = this._ensureBigNumber(value).round();
-	    this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
-	    return this.get("timeStackHrRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
+      return this.get("timeStackHrRaw");
     }
   }),
 
-	 /**
-	  * calculates the value of timeStackHr
-	  *
-	  * @return {BigNumber}
-	  */
-	 timeStackHrRaw : Ember.computed("timeHr", function(){
-	   return this.get("timeHr").floor();
-	 }),
+   /**
+    * calculates the value of timeStackHr
+    *
+    * @return {BigNumber}
+    */
+   timeStackHrRaw : Ember.computed("timeHr", function(){
+     return this.get("timeHr").floor();
+   }),
 
-	/**
+  /**
    * timeStackMin is used to display the time like 12:34:56 and represents the minutes value
-	 */
+   */
   timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
 
     /**
@@ -155,20 +155,20 @@ export default DS.Model.extend({
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
       return this.get("timeStackMinRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of timeStackMin
-	 *
-	 * @return {BigNumber}
-	 */
-	timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
-		return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
-	}),
+  /**
+   * calculates the value of timeStackMin
+   *
+   * @return {BigNumber}
+   */
+  timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
+    return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
+  }),
 
-	/**
-	 * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
-	 */
+  /**
+   * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
+   */
   timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
 
     /**
@@ -193,27 +193,27 @@ export default DS.Model.extend({
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
       return this.get("timeStackSecRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of timeStackSec
-	 *
-	 * @return {BigNumber}
-	 */
-	timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
-		return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
-	}),
+  /**
+   * calculates the value of timeStackSec
+   *
+   * @return {BigNumber}
+   */
+  timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
+    return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
+  }),
 
-	/**
-	 * lengthM represents the length of a run in meter, should be set on create
-	 *
-	 * @type {BigNumber} length of the run in meter
-	 */
-	lengthM : new BigNumber(0),
+  /**
+   * lengthM represents the length of a run in meter, should be set on create
+   *
+   * @type {BigNumber} length of the run in meter
+   */
+  lengthM : new BigNumber(0),
 
-	/**
-	 * length of the run in km
-	 */
+  /**
+   * length of the run in km
+   */
   lengthKm : Ember.computed("lengthKmRaw", {
 
     /**
@@ -235,23 +235,23 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(1000));
-			return this.get("lengthKmRaw").round(20);
+      return this.get("lengthKmRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of lengthKm, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	lengthKmRaw : Ember.computed("lengthM", function(){
-		return this.get("lengthM").dividedBy(1000);
-	}),
+  /**
+   * calculates the uncompressed value of lengthKm, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  lengthKmRaw : Ember.computed("lengthM", function(){
+    return this.get("lengthM").dividedBy(1000);
+  }),
 
 
-	/**
-	 * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
-	 */
+  /**
+   * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
+   */
   lengthKmStackKm : Ember.computed("lengthM", "lengthKmStackKmRaw", {
 
     /**
@@ -276,21 +276,21 @@ export default DS.Model.extend({
       this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(1000)));
       return this.get("lengthKmStackKmRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of lengthKmStackKm
-	 *
-	 * @return {BigNumber}
-	 */
-	lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
-		return this.get("lengthKmRaw").floor();
-	}),
+  /**
+   * calculates the value of lengthKmStackKm
+   *
+   * @return {BigNumber}
+   */
+  lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
+    return this.get("lengthKmRaw").floor();
+  }),
 
-	/**
+  /**
    * lengthKmStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the kilometers value
-	 */
+   */
   lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
 
     /**
@@ -327,11 +327,11 @@ export default DS.Model.extend({
       var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     }
-	}),
+  }),
 
-	/**
-	 * length of the run in miles
-	 */
+  /**
+   * length of the run in miles
+   */
   lengthMi : Ember.computed("lengthMiRaw", {
 
     /**
@@ -355,20 +355,20 @@ export default DS.Model.extend({
       this.set("lengthM", value.times(this.miToM));
       return this.get("lengthMiRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of lengthMi, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	lengthMiRaw : Ember.computed("lengthM", function(){
-		return this.get("lengthM").dividedBy(this.miToM);
-	}),
+  /**
+   * calculates the uncompressed value of lengthMi, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  lengthMiRaw : Ember.computed("lengthM", function(){
+    return this.get("lengthM").dividedBy(this.miToM);
+  }),
 
-	/**
+  /**
    * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
-	 */
+   */
   lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
 
     /**
@@ -393,21 +393,21 @@ export default DS.Model.extend({
       this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(this.miToM)));
       return this.get("lengthMiStackMiRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of lengthMiStackMi
-	 *
-	 * @return {BigNumber}
-	 */
-	lengthMiStackMiRaw : Ember.computed("lengthMiRaw", function(){
-		return this.get("lengthMiRaw").floor();
-	}),
+  /**
+   * calculates the value of lengthMiStackMi
+   *
+   * @return {BigNumber}
+   */
+  lengthMiStackMiRaw : Ember.computed("lengthMiRaw", function(){
+    return this.get("lengthMiRaw").floor();
+  }),
 
-	/**
+  /**
    * lengthMiStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the miles value
-	 */
+   */
   lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
 
     /**
@@ -446,11 +446,11 @@ export default DS.Model.extend({
       var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     }
-	}),
+  }),
 
-	/**
-	 * pace of the run in min/km
-	 */
+  /**
+   * pace of the run in min/km
+   */
   paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
 
     /**
@@ -475,20 +475,20 @@ export default DS.Model.extend({
 
       return this.get("paceMinPerKmRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of paceMinPerKm, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerKmRaw : Ember.computed("timeMinRaw", "lengthKmRaw", function(){
-		return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
-	}),
+  /**
+   * calculates the uncompressed value of paceMinPerKm, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmRaw : Ember.computed("timeMinRaw", "lengthKmRaw", function(){
+    return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
+  }),
 
-	/**
-	 * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
-	 */
+  /**
+   * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
+   */
   paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
 
     /**
@@ -514,20 +514,20 @@ export default DS.Model.extend({
 
       return this.get("paceMinPerKmStackMinRaw");
     }
-	}),
-
-	/**
-	 * calculates the value of paceMinPerKmStackMin
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
-		return this.get("paceMinPerKmRaw").floor();
-	}),
+  }),
 
   /**
-	 * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
-	 */
+   * calculates the value of paceMinPerKmStackMin
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
+    return this.get("paceMinPerKmRaw").floor();
+  }),
+
+  /**
+   * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
+   */
   paceMinPerKmStackSec : Ember.computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
 
     /**
@@ -547,28 +547,28 @@ export default DS.Model.extend({
      * @return {BigNumber} new paceMinPerKmStackSec value
      */
     set: function(propertyName, value) {
-			var previousValue = this.get("paceMinPerKmStackSecRaw");
+      var previousValue = this.get("paceMinPerKmStackSecRaw");
 
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue).dividedBy(60)));
 
       return this.get("paceMinPerKmStackSecRaw").round();
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of paceMinPerKmStackSec, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerKmStackSecRaw : Ember.computed("paceMinPerKmRaw", "paceMinPerKmStackMinRaw", function(){
-		return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
-	}),
+  /**
+   * calculates the uncompressed value of paceMinPerKmStackSec, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmStackSecRaw : Ember.computed("paceMinPerKmRaw", "paceMinPerKmStackMinRaw", function(){
+    return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
+  }),
 
 
   /**
-	 * pace of the run in min/mi
-	 */
+   * pace of the run in min/mi
+   */
   paceMinPerMi : Ember.computed("paceMinPerMiRaw", "lengthMiRaw", {
 
     /**
@@ -591,22 +591,22 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
 
-			return this.get("paceMinPerMiRaw").round(20);
+      return this.get("paceMinPerMiRaw").round(20);
     }
-	}),
-
-	/**
-	 * calculates the uncompressed value of paceMinPerMi, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerMiRaw : Ember.computed("timeMinRaw", "lengthMiRaw", function(){
-		return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
-	}),
+  }),
 
   /**
-	 * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
-	 */
+   * calculates the uncompressed value of paceMinPerMi, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiRaw : Ember.computed("timeMinRaw", "lengthMiRaw", function(){
+    return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+  }),
+
+  /**
+   * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
+   */
   paceMinPerMiStackMin : Ember.computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
 
     /**
@@ -632,21 +632,21 @@ export default DS.Model.extend({
 
       return this.get("paceMinPerMiStackMinRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of paceMinPerMiStackMin
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
-		return this.get("paceMinPerMiRaw").floor();
-	}),
+  /**
+   * calculates the value of paceMinPerMiStackMin
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
+    return this.get("paceMinPerMiRaw").floor();
+  }),
 
 
   /**
-	 * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
-	 */
+   * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
+   */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
 
     /**
@@ -672,21 +672,21 @@ export default DS.Model.extend({
 
       return this.get("paceMinPerMiStackSecRaw").round();
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of paceMinPerMiStackSec, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	paceMinPerMiStackSecRaw : Ember.computed("paceMinPerMiRaw", "paceMinPerMiStackMinRaw", function(){
-		return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
-	}),
+  /**
+   * calculates the uncompressed value of paceMinPerMiStackSec, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiStackSecRaw : Ember.computed("paceMinPerMiRaw", "paceMinPerMiStackMinRaw", function(){
+    return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
+  }),
 
 
-	/**
-	 * speed of the run in km/h
-	 */
+  /**
+   * speed of the run in km/h
+   */
   speedKmHr : Ember.computed("speedKmHrRaw", "lengthM", {
 
     /**
@@ -711,20 +711,20 @@ export default DS.Model.extend({
 
       return this.get("speedKmHrRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of speedKmHrRaw, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	speedKmHrRaw : Ember.computed("lengthKmRaw", "timeHrRaw", function(){
-		return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
-	}),
+  /**
+   * calculates the uncompressed value of speedKmHrRaw, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  speedKmHrRaw : Ember.computed("lengthKmRaw", "timeHrRaw", function(){
+    return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
+  }),
 
-	/**
-	 * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
-	 */
+  /**
+   * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
+   */
   speedKmHrStackKm : Ember.computed("speedKmHrStackKmRaw", "speedKmHrRaw", {
 
     /**
@@ -750,24 +750,24 @@ export default DS.Model.extend({
 
       return this.get("speedKmHrStackKmRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of speedKmHrStackKmRaw
-	 *
-	 * @return {BigNumber}
-	 */
-	speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
-		return this.get("speedKmHrRaw").floor();
-	}),
+  /**
+   * calculates the value of speedKmHrStackKmRaw
+   *
+   * @return {BigNumber}
+   */
+  speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
+    return this.get("speedKmHrRaw").floor();
+  }),
 
   /**
    * speedKmHrStackDecimal is used to display the speed like 12,34
    * and represents up to two decimal places of the kilometers value
    */
-	 speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
+  speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
 
-     /**
+    /**
      * returns speedKmHrStackDecimal, no decimal places
      *
      * @return {string}
@@ -802,11 +802,11 @@ export default DS.Model.extend({
       var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(2).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     }
-	}),
+  }),
 
   /**
-	 * speed of the run in mi/h
-	 */
+   * speed of the run in mi/h
+   */
   speedMiHr : Ember.computed("speedMiHrRaw", "lengthMiRaw", {
 
     /**
@@ -819,28 +819,28 @@ export default DS.Model.extend({
     },
 
     /**
-    * sets a new speedMiHr
-    *
-    * @param  {string} propertyName name of the changed property, always "speedMiHr"
-    * @param  {BigNumber|string|number} value new speedMiHr value
-    * @return {BigNumber} new speedMiHr value
-    */
+     * sets a new speedMiHr
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHr"
+     * @param  {BigNumber|string|number} value new speedMiHr value
+     * @return {BigNumber} new speedMiHr value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeHr",this.get("lengthMiRaw").dividedBy(value));
 
-			return this.get("speedMiHrRaw").round(20);
+      return this.get("speedMiHrRaw").round(20);
     }
-	}),
+  }),
 
-	/**
-	 * calculates the uncompressed value of speedMiHr, used for lossless calculation
-	 *
-	 * @return {BigNumber}
-	 */
-	speedMiHrRaw : Ember.computed("lengthMiRaw", "timeHrRaw", function(){
-		return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
-	}),
+  /**
+   * calculates the uncompressed value of speedMiHr, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  speedMiHrRaw : Ember.computed("lengthMiRaw", "timeHrRaw", function(){
+    return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+  }),
 
   /**
    * speedMiHrStackMi is used to display the speed like 12,34 and represents the miles value
@@ -870,16 +870,16 @@ export default DS.Model.extend({
 
       return this.get("speedMiHrStackMiRaw");
     }
-	}),
+  }),
 
-	/**
-	 * calculates the value of speedMiHrStackMi
-	 *
-	 * @return {BigNumber}
-	 */
-	speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
-		return this.get("speedMiHrRaw").floor();
-	}),
+  /**
+   * calculates the value of speedMiHrStackMi
+   *
+   * @return {BigNumber}
+   */
+  speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
+    return this.get("speedMiHrRaw").floor();
+  }),
 
   /**
    * speedMiHrStackDecimal is used to display the speed like 12,34
@@ -887,12 +887,11 @@ export default DS.Model.extend({
    *
    */
   speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
-
     /**
     * returns speedMiHrStackDecimal, no decimal places
-    *
-    * @return {string}
-    */
+     *
+     * @return {string}
+     */
     get: function() {
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
@@ -923,22 +922,22 @@ export default DS.Model.extend({
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     }
-	}),
+  }),
 
-	/**
-	 * returns the number of leading zeros from a string
+  /**
+   * returns the number of leading zeros from a string
    *
-	 * @param  {string} string string that should be analyzed for leading zeros
-	 * @return {number}        number of leading zeros
-	 */
-	_getLeadingZerosFromString : function(string){
-		var leadingZeros = 0;
+   * @param  {string} string string that should be analyzed for leading zeros
+   * @return {number}        number of leading zeros
+   */
+  _getLeadingZerosFromString : function(string){
+    var leadingZeros = 0;
    	while (string[0]==="0") {
-			string = string.substring(1);
+      string = string.substring(1);
     	leadingZeros ++;
-		}
-		return leadingZeros;
-	},
+    }
+    return leadingZeros;
+  },
 
   /**
    * will convert the input to BigNumber if necessary. If input is BigNumber already
