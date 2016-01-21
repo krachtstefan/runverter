@@ -368,10 +368,6 @@ export default DS.Model.extend({
 
 	/**
    * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
-	 * @param  {BigNumber|string|number} value						new value of lengthMiStackMi
-	 * @return {BigNumber} 													  miles	stack of the run
 	 */
   lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
 
