@@ -19,15 +19,23 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in hours
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeHr
-	 * @param  {Object|string|number} value						new value of timeHr
-	 * @return {BigNumber} 														hours
 	 */
   timeHr: Ember.computed("timeHrRaw", {
+    /**
+  	 * returns timeHr, rounded to 20 digits
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("timeHrRaw").round(20);
     },
+
+    /**
+     * sets a new timeHr
+     *
+     * @param  {string} propertyName name of the changed property, always "timeHr"
+  	 * @param  {Object|string|number} value new timeHr value
+  	 * @return {BigNumber} new timeHr value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(3600));
@@ -46,15 +54,23 @@ export default DS.Model.extend({
 
 	/**
 	 * time of the run in minutes
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeMin
-	 * @param  {Object|string|number} value						new value of timeMin
-	 * @return {BigNumber} 														minutes
 	 */
   timeMin : Ember.computed("timeMinRaw", {
+    /**
+  	 * returns timeMin, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("timeMinRaw").round(20);
     },
+    /**
+     * sets a new timeMin
+     *
+     * @param  {string} propertyName name of the changed property, always "timeMin"
+  	 * @param  {Object|string|number} value new timeMin value
+  	 * @return {BigNumber} new timeMin value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(60));
@@ -72,26 +88,34 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * timeStackHr is used to create a view like 12:34:56
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackHr
-	 * @param  {Object|string|number} value						new value of timeStackHr
-	 * @return {BigNumber} 													  hours stack of the run time
+	 * timeStackHr is used to display the time like 12:34:56 and represents the hours value
 	 */
-	 timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
-	   get: function() {
-	     return this.get("timeStackHrRaw");
-	   },
-	   set: function(propertyName, value) {
-	     var previousValue = this.get("timeStackHrRaw");
-	     value = this._ensureBigNumber(value).round();
-	     this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
-	     return this.get("timeStackHrRaw");
-	   }
-	 }),
+  timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
+    /**
+     * returns timeStackHr, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeStackHrRaw");
+    },
+    /**
+     * sets a new timeStackHr
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackHr"
+   	 * @param  {Object|string|number} value new timeStackHr value
+   	 * @return {BigNumber} new timeStackHr value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackHrRaw");
+	    value = this._ensureBigNumber(value).round();
+	    this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
+	    return this.get("timeStackHrRaw");
+    }
+  }),
 
 	 /**
-	  *  calculates the value of timeStackHr
+	  * calculates the value of timeStackHr
 	  *
 	  * @return {BigNumber}
 	  */
@@ -100,21 +124,29 @@ export default DS.Model.extend({
 	 }),
 
 	/**
-	 * timeStackMin is used to create a view like 12:34:56
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackMin
-	 * @param  {Object|string|number} value						new value of timeStackMin
-	 * @return {BigNumber} 														minutes stack of the run time
+   * timeStackMin is used to display the time like 12:34:56 and represents the minutes value
 	 */
   timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
+    /**
+     * returns timeStackMin, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
-      return this.get("timeStackMinRaw").round(20);
+      return this.get("timeStackMinRaw");
     },
+    /**
+     * sets a new timeStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackMin"
+     * @param  {Object|string|number} value new timeStackMin value
+     * @return {BigNumber} new timeStackMin value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackMinRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
-      return this.get("timeStackMinRaw").round(20);
+      return this.get("timeStackMinRaw");
     }
 	}),
 
@@ -128,21 +160,29 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * timeStackSec is used to create a view like 12:34:56
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackSec
-	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {BigNumber} 														second stack of the run time, betweeen 0 and 59
+	 * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
 	 */
   timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
+    /**
+     * returns timeStackSec, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
-      return this.get("timeStackSecRaw").round(20);
+      return this.get("timeStackSecRaw");
     },
+    /**
+     * sets a new timeStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackSec"
+     * @param  {Object|string|number} value new timeStackSec value
+     * @return {BigNumber} new timeStackSec value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("timeStackSecRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
-      return this.get("timeStackSecRaw").round(20);
+      return this.get("timeStackSecRaw");
     }
 	}),
 
@@ -154,7 +194,6 @@ export default DS.Model.extend({
 	timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
 		return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
 	}),
-
 
 	/**
 	 * lengthM represents the length of a run in meter, should be set on create
