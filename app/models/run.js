@@ -1,507 +1,955 @@
 import DS from 'ember-data';
+import Ember from 'ember';
+BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
-	/**
-	 * MtoMi the lenght of a meter in miles
-	 *
-	 * @type {number}	lenght of a meter in miles
-	 */
-	mToMi : 0.000621371,
+  /**
+   * MiToM the length of a mile in meters
+   *
+   * @type {BigNumber} length of a mile in meters
+   */
+  miToM : new BigNumber(1609.344),
 
-	/**
-	 * MitoM the lenght of a mile in meters
-	 *
-	 * @type {number}	lenght of a mile in meters
-	 */
-	miToM : 1609.344,
+  /**
+   * timeSec represents the time of a run, should be set on create
+   *
+   * @type {BigNumber} time of the run in seconds
+   */
+  timeSec : new BigNumber(0),
 
-	/**
-	 * timeSec represents the time of a run, should be set on create
-	 *
-	 * @type {number}	time of the run in seconds
-	 */
-	timeSec : null,
+  /**
+   * time of the run in hours
+   */
+  timeHr: Ember.computed("timeHrRaw", {
 
-	/**
-	 * time of the run in hours
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeHr
-	 * @param  {Object|string|number} value						new value of timeHr
-	 * @return {string} 															hours with 4 digits precision
-	 */
-	timeHr : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("timeSec", value*60*60);
-		}
-		return this._toFixed(this.get('timeSec')/60/60,4);
-	}.property('timeSec'),
+    /**
+  	 * returns timeHr, rounded to 20 digits
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeHrRaw").round(20);
+    },
 
-	/**
-	 * time of the run in minutes
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeMin
-	 * @param  {Object|string|number} value						new value of timeMin
-	 * @return {string} 															minutes with 4 digits precision
-	 */
-	timeMin : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("timeSec", value*60);
-		}
-		return this._toFixed(this.get('timeSec')/60,4);
-	}.property('timeSec'),
+    /**
+     * sets a new timeHr
+     *
+     * @param  {string} propertyName name of the changed property, always "timeHr"
+  	 * @param  {BigNumber|string|number} value new timeHr value
+  	 * @return {BigNumber} new timeHr value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeSec", value.times(3600));
+      return this.get("timeHrRaw").round(20);
+    }
+  }),
 
-	/**
-	 * timeStackHr is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackHr
-	 * @param  {Object|string|number} value						new value of timeStackHr
-	 * @return {number} 															hours stack of the run time
-	 */
-	timeStackHr : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("timeStackHr");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60*60);
-		}
-		return parseInt(this.get("timeHr"));
-	}.property('timeHr'),
+  /**
+   * calculates the uncompressed value of timeHr, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  timeHrRaw : Ember.computed("timeSec", function(){
+    return this.get("timeSec").dividedBy(3600);
+  }),
 
-	/**
-	 * timeStackMin is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackMin
-	 * @param  {Object|string|number} value						new value of timeStackMin
-	 * @return {number} 															minutes stack of the run time
-	 */
-	timeStackMin : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("timeStackMin");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue)*60);
-		}
-		return parseInt(this.get("timeMin"))-(this.get("timeStackHr")*60);
-	}.property('timeMin', 'timeStackHr'),
+  /**
+   * time of the run in minutes
+   */
+  timeMin : Ember.computed("timeMinRaw", {
 
-	/**
-	 * timeStackSec is used to create a view like 12:34:56
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be timeStackSec
-	 * @param  {Object|string|number} value						new value of timeStackSec
-	 * @return {number} 															second stack of the run time, betweeen 0 and 59
-	 */
-	timeStackSec : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("timeStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("timeSec", this.get('timeSec')+(value-previousValue));
-		}
-		return this.get("timeSec")-(parseInt(this.get("timeMin"))*60);
-	}.property('timeSec', 'timeMin'),
+    /**
+  	 * returns timeMin, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeMinRaw").round(20);
+    },
 
+    /**
+     * sets a new timeMin
+     *
+     * @param  {string} propertyName name of the changed property, always "timeMin"
+  	 * @param  {BigNumber|string|number} value new timeMin value
+  	 * @return {BigNumber} new timeMin value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeSec", value.times(60));
+      return this.get("timeMinRaw").round(20);
+    }
+  }),
 
-	/**
-	 * lengthM represents the length of a run in meter, should be set on create
-	 *
-	 * @type {number} length of the run in meter
-	 */
-	lengthM : null,
+  /**
+   * calculates the uncompressed value of timeMin, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  timeMinRaw : Ember.computed("timeSec", function(){
+    return this.get("timeSec").dividedBy(60);
+  }),
 
-	/**
-	 * lenght of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthKm
-	 * @param  {Object|string|number} value						new value of lengthKm
-	 * @return {string}																km with 4 digits precision
-	 */
-	lengthKm : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("lengthM", value*1000);
-		}
-		return this._toFixed(this.get('lengthM')/1000,4);
-	}.property('lengthM'),
+  /**
+   * timeStackHr is used to display the time like 12:34:56 and represents the hours value
+   */
+  timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
 
-	/**
-	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthKmStackKm
-	 * @param  {Object|string|number} value						new value of lengthKmStackKm
-	 * @return {number} 															km stack of the run
-	 */
-	lengthKmStackKm : function(propertyName, value) {
-    if (arguments.length > 1) {
-    	var previousValue = this.get("lengthKmStackKm");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("lengthM", this.get('lengthM')+(value-previousValue)*1000);
-		}
-		return parseInt(this.get("lengthKm"));
-	}.property('lengthKm'),
+    /**
+     * returns timeStackHr, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeStackHrRaw");
+    },
 
-	/**
-	 * lengthKmStackDecimal represents the decimal place of the length of the run in km
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be lengthKmStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of lengthKmStackDecimal
-	 * @return {string}              									up to 2 digits of the decimal place of the run in km
-	 */
-	lengthKmStackDecimal : function(propertyName, value) {
-   	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);
+    /**
+     * sets a new timeStackHr
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackHr"
+   	 * @param  {BigNumber|string|number} value new timeStackHr value
+   	 * @return {BigNumber} new timeStackHr value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackHrRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
+      return this.get("timeStackHrRaw");
+    }
+  }),
 
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	var valueLenght = value.toString().length;
+   /**
+    * calculates the value of timeStackHr
+    *
+    * @return {BigNumber}
+    */
+   timeStackHrRaw : Ember.computed("timeHr", function(){
+     return this.get("timeHr").floor();
+   }),
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+  /**
+   * timeStackMin is used to display the time like 12:34:56 and represents the minutes value
+   */
+  timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
 
-    	// calulate the meters from decimal place
-			var decimalMeters = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-			this.set("lengthM", this.get('lengthKmStackKm')*1000+decimalMeters);
-		}
-		var kmDecimalPlace = this._toFixed(parseFloat(this.get("lengthKm")),2);
-		kmDecimalPlace = this._removeEndingZeros(kmDecimalPlace.split(".")[1]);
-		return kmDecimalPlace ? kmDecimalPlace : "0";
-	}.property('lengthKm'),
+    /**
+     * returns timeStackMin, between 0 and 59, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeStackMinRaw");
+    },
 
-	/**
-	 * lenght of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthMi
-	 * @param  {Object|string|number} value						new value of lengthMi
-	 * @return {string} 															miles with 4 digits precision
-	 */
-	lengthMi : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-			this.set("lengthM", value*this.miToM);
-		}
-		return this._toFixed(this.get('lengthM')*this.mToMi,4);
-	}.property('lengthM'),
+    /**
+     * sets a new timeStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackMin"
+     * @param  {BigNumber|string|number} value new timeStackMin value
+     * @return {BigNumber} new timeStackMin value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackMinRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
+      return this.get("timeStackMinRaw");
+    }
+  }),
 
-	/**
-	 * lengthMiStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
-	 * @param  {Object|string|number} value						new value of lengthMiStackMi
-	 * @return {number} 															miles	stack of the run
-	 */
-	lengthMiStackMi : function(propertyName, value) {
-    if (arguments.length > 1) {
-    	var previousValue = this.get("lengthMiStackMi");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("lengthM", this.get('lengthM')+(value-previousValue)*this.miToM);
-		}
-		return parseInt(this.get("lengthMi"));
-	}.property('lengthMi'),
+  /**
+   * calculates the value of timeStackMin
+   *
+   * @return {BigNumber}
+   */
+  timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
+    return this.get("timeMinRaw").floor().minus(this.get("timeStackHrRaw")*60);
+  }),
 
-	/**
-	 * lengthMiStackDecimal represents the decimal place of the length of the run in miles
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be lengthMiStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of lengthMiStackDecimal
-	 * @return {string} 															up to 4 digits of the decimal place of the run in miles
-	 */
-	lengthMiStackDecimal : function(propertyName, value) {
-   	if (arguments.length > 1) {
-   		var leadingZeros = this._getLeadingZerosFromString(value);
+  /**
+   * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
+   */
+  timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
 
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	var valueLenght = value.toString().length;
+    /**
+     * returns timeStackSec, between 0 and 59, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("timeStackSecRaw");
+    },
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+    /**
+     * sets a new timeStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackSec"
+     * @param  {BigNumber|string|number} value new timeStackSec value
+     * @return {BigNumber} new timeStackSec value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("timeStackSecRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
+      return this.get("timeStackSecRaw");
+    }
+  }),
 
-    	// calulate the meters from decimal place
-			var decimalMiles = (value*decimalPrecision)/Math.pow(10, leadingZeros);
-    	var decimalMeters = decimalMiles/1000*this.miToM;
+  /**
+   * calculates the value of timeStackSec
+   *
+   * @return {BigNumber}
+   */
+  timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
+    return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
+  }),
 
-			this.set("lengthM", this.get('lengthMiStackMi')*this.miToM+decimalMeters);
-		}
-		var miDecimalPlace = this._toFixed(parseFloat(this.get("lengthMi")),2);
-		miDecimalPlace = this._removeEndingZeros(miDecimalPlace.split(".")[1]);
-		return miDecimalPlace ? miDecimalPlace : "0";
-	}.property('lengthMi'),
+  /**
+   * lengthM represents the length of a run in meter, should be set on create
+   *
+   * @type {BigNumber} length of the run in meter
+   */
+  lengthM : new BigNumber(0),
 
-	/**
-	 * paceMinPerKm represents the pace of the run in min/km
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
-	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
-	 * @return {string}              									min/km with 4 digits precision
-	 */
-	paceMinPerKm : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',value*this.get('lengthKm')*60);
-		}
-		return this._toFixed(this.get('timeMin')/this.get('lengthKm'),4);
-	}.property('timeMin', 'lengthKm'),
+  /**
+   * length of the run in km
+   */
+  lengthKm : Ember.computed("lengthKmRaw", {
 
-	/**
-	 * paceMinPerKmStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
-	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
-	 * @return {number} 															min stack of the pace
-	 */
-	paceMinPerKmStackMin : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("paceMinPerKmStackMin");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerKm", parseFloat(this.get('paceMinPerKm'))+(value-previousValue));
-		}
-		return parseInt(this.get("paceMinPerKm"));
-	}.property('paceMinPerKm'),
+    /**
+     * returns lengthKm, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("lengthKmRaw").round(20);
+    },
 
-	/**
-	 * paceMinPerKmStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackSec
-	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
-	 * @return {number} 															second stack of the pace
-	 */
-	paceMinPerKmStackSec : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("paceMinPerKmStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerKm", parseFloat(this.get('paceMinPerKm'))+(value-previousValue)/60);
-		}
-		var decimalPlace = this.get("paceMinPerKm")-this.get("paceMinPerKmStackMin");
-		return Math.round(decimalPlace*60);
-	}.property('paceMinPerKm'),
+    /**
+     * sets a new lengthKm
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKm"
+     * @param  {BigNumber|string|number} value new lengthKm value
+     * @return {BigNumber} new lengthKm value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("lengthM", value.times(1000));
+      return this.get("lengthKmRaw").round(20);
+    }
+  }),
 
-	/**
-	 * paceMinPerMi represents the pace of the run in min/mi
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerMi
-	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
-	 * @return {string}              									min/mi with 4 digits precision
-	 */
-	paceMinPerMi : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',value*this.get('lengthMi')*60);
-		}
-		return this._toFixed(this.get('timeMin')/this.get('lengthMi'),4);
-	}.property('timeMin', 'lengthMi'),
-
-	/**
-	 * paceMinPerMiStackMin is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackMin
-	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
-	 * @return {number} 															min stack of the pace
-	 */
-	paceMinPerMiStackMin : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("paceMinPerMiStackMin");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerMi", parseFloat(this.get('paceMinPerMi'))+(value-previousValue));
-		}
-		return parseInt(this.get("paceMinPerMi"));
-	}.property('paceMinPerMi'),
-
-	/**
-	 * paceMinPerMiStackSec is used to create a view like 12:34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
-	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
-	 * @return {number} 															second stack of the pace, betweeen 0 and 59
-	 */
-	paceMinPerMiStackSec : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var previousValue = this.get("paceMinPerMiStackSec");
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			this.set("paceMinPerMi", parseFloat(this.get('paceMinPerMi'))+(value-previousValue)/60);
-		}
-		var decimalPlace = this.get("paceMinPerMi")-this.get("paceMinPerMiStackMin");
-		return Math.round(decimalPlace*60);
-	}.property('paceMinPerMi', 'paceMinPerMiStackMin'),
+  /**
+   * calculates the uncompressed value of lengthKm, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  lengthKmRaw : Ember.computed("lengthM", function(){
+    return this.get("lengthM").dividedBy(1000);
+  }),
 
 
-	/**
-	 * speedKmHr represents the speed of the run in km per hour
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHr
-	 * @param  {Object|string|number} 	value        	new value of speedKmHr
-	 * @return {string} 															km/hr with 4 digits precision
-	 */
-	speedKmHr : function(propertyName, value) {
-   	if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',(this.get('lengthM')/1000)/value*(60*60));
-		}
-		return this._toFixed((this.get('lengthM')/1000)/(this.get('timeSec')/60/60), 4);
-	}.property('lengthM', 'timeSec'),
+  /**
+   * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
+   */
+  lengthKmStackKm : Ember.computed("lengthM", "lengthKmStackKmRaw", {
 
-	/**
-	 * lengthKmStackKm is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackKm
-	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
-	 * @return {number} 															km stack of the speed
-	 */
-	speedKmHrStackKm : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("speedKmHrStackKm");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	this.set("speedKmHr", parseFloat(this.get('speedKmHr'))+(value-previousValue));
-		}
-		return parseInt(this.get("speedKmHr"));
-	}.property('speedKmHr'),
+    /**
+     * returns lengthKmStackKm, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("lengthKmStackKmRaw");
+    },
 
-	/**
-	 * speedKmHrStackDecimal is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
-	 * @return {number} 															up to 2 digits of the decimal place of the speed in km/hr
-	 */
-	speedKmHrStackDecimal : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);
+    /**
+     * sets a new lengthKmStackKm
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKmStackKm"
+     * @param  {BigNumber|string|number} value new lengthKmStackKm value
+     * @return {BigNumber} new lengthKmStackKm value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("lengthKmStackKmRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(1000)));
+      return this.get("lengthKmStackKmRaw");
+    }
+  }),
 
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			var valueLenght = value.toString().length;
+  /**
+   * calculates the value of lengthKmStackKm
+   *
+   * @return {BigNumber}
+   */
+  lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
+    return this.get("lengthKmRaw").floor();
+  }),
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+  /**
+   * lengthKmStackDecimal is used to display the length like 12,34
+   * and represents up to two decimal places of the kilometers value
+   */
+  lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
 
-     	// calulate the speed from decimal place
-			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
- 			this.set("speedKmHr", this.get("speedKmHrStackKm")+(decimalSpeed/1000)) ;
-		}
-		var kmHrDecimalPlace = this._toFixed(parseFloat(this.get("speedKmHr")),2);
-		kmHrDecimalPlace = this._removeEndingZeros(kmHrDecimalPlace.split(".")[1]);
-		return kmHrDecimalPlace ? kmHrDecimalPlace : "0";
-	}.property('speedKmHr'),
+    /**
+     * returns lengthKmStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
+    },
 
-	/**
-	 * speedMiHr represents the speed of the run in miles per hour
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHr
-	 * @param  {Object|string|number} 	value        	new value of speedMiHr
-	 * @return {string}																mi/hr with 4 digits precision
-	 */
-	speedMiHr : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	value = +this._toFixed(value,4) || 0; // convert to number or set to 0
-    	this.set('timeSec',(this.get('lengthM')/this.miToM)/value*(60*60));
-		}
-		return this._toFixed((this.get('lengthM')/this.miToM)/(this.get('timeMin')/60), 4);
-	}.property('lengthM', 'timeHr'),
+    /**
+     * sets a new lengthKmStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthKmStackDecimal"
+     * @param  {BigNumber|string|number} value new lengthKmStackDecimal value
+     * @return {string} new lengthKmStackDecimal value
+     */
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
 
-	/**
-	 * speedMiHrStackMi is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackMi
-	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
-	 * @return {number} 															mi stack of the speed
-	 */
-	speedMiHrStackMi : function(propertyName, value) {
-		if (arguments.length > 1) {
-    	var previousValue = this.get("speedMiHrStackMi");
-    	value = +Math.round(value) || 0; // convert to number or set to 0
-    	this.set("speedMiHr", parseFloat(this.get('speedMiHr'))+(value-previousValue));
-		}
-		return parseInt(this.get("speedMiHr"));
-	}.property('speedMiHr'),
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
 
-	/**
-	 * speedMiHrStackDecimal is used to create a view like 12,34
-	 * if arguments are passed, they are used as a setter for this computed property
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
-	 * @return {number} 															up to 2 digits of the decimal place of the speed in mi/hr
-	 */
-	speedMiHrStackDecimal : function(propertyName, value) {
-		if (arguments.length > 1) {
-			var leadingZeros = this._getLeadingZerosFromString(value);
+      // calulate the meters from decimal place
+      var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
 
-			value = +Math.round(value) || 0; // convert to number or set to 0
-			var valueLenght = value.toString().length;
+      this.set("lengthM", this.get("lengthKmStackKmRaw").times(1000).plus(decimalMeters));
 
-    	// reflects the decimal precision of the value
-    	// 1 = 100; 10 = 10
-    	var decimalPrecision = 100/Math.pow(10, valueLenght-1);
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
+    }
+  }),
 
-     	// calulate the speed from decimal place
-			var decimalSpeed = (value*decimalPrecision)/Math.pow(10, leadingZeros);
- 			this.set("speedMiHr", this.get("speedMiHrStackMi")+(decimalSpeed/1000)) ;
-		}
-		var miHrDecimalPlace = this._toFixed(parseFloat(this.get("speedMiHr")),2);
-		miHrDecimalPlace = this._removeEndingZeros(miHrDecimalPlace.split(".")[1]);
-		return miHrDecimalPlace ? miHrDecimalPlace : "0";
-	}.property('speedMiHr'),
+  /**
+   * length of the run in miles
+   */
+  lengthMi : Ember.computed("lengthMiRaw", {
 
-	/**
-	 * returns the number of leading zeros from a string
-	 * @param  {string} string string that should be analyzed for leading zeros
-	 * @return {number}        number of leading zeros
-	 */
-	_getLeadingZerosFromString : function(string){
-		var leadingZeros = 0;
+    /**
+     * returns lengthMi, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("lengthMiRaw").round(20);
+    },
+
+    /**
+     * sets a new lengthMi
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMi"
+     * @param  {BigNumber|string|number} value new lengthMi value
+     * @return {BigNumber} new lengthMi value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("lengthM", value.times(this.miToM));
+      return this.get("lengthMiRaw").round(20);
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of lengthMi, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  lengthMiRaw : Ember.computed("lengthM", function(){
+    return this.get("lengthM").dividedBy(this.miToM);
+  }),
+
+  /**
+   * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
+   */
+  lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
+
+    /**
+     * returns lengthMiStackMi, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("lengthMiStackMiRaw");
+    },
+
+    /**
+     * sets a new lengthMiStackMi
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMiStackMi"
+     * @param  {BigNumber|string|number} value new lengthMiStackMi value
+     * @return {BigNumber} new lengthMiStackMi value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("lengthMiStackMiRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(this.miToM)));
+      return this.get("lengthMiStackMiRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of lengthMiStackMi
+   *
+   * @return {BigNumber}
+   */
+  lengthMiStackMiRaw : Ember.computed("lengthMiRaw", function(){
+    return this.get("lengthMiRaw").floor();
+  }),
+
+  /**
+   * lengthMiStackDecimal is used to display the length like 12,34
+   * and represents up to two decimal places of the miles value
+   */
+  lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
+
+    /**
+     * returns lengthMiStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
+    },
+
+    /**
+     * sets a new lengthMiStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMiStackDecimal"
+     * @param  {BigNumber|string|number} value new lengthMiStackDecimal value
+     * @return {string} new lengthMiStackDecimal value
+     */
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
+
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
+
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+
+      // calulate the Meters from decimal place
+      var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      var decimalMeters = decimalMiles.dividedBy(1000).times(this.miToM);
+
+      this.set("lengthM", this.get("lengthMiStackMiRaw").times(this.miToM).plus(decimalMeters));
+
+      var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
+    }
+  }),
+
+  /**
+   * pace of the run in min/km
+   */
+  paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
+
+    /**
+     * returns paceMinPerKm, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerKmRaw").round(20);
+    },
+
+    /**
+     * sets a new paceMinPerKm
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKm"
+     * @param  {BigNumber|string|number} value new paceMinPerKm value
+     * @return {BigNumber} new paceMinPerKm value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
+
+      return this.get("paceMinPerKmRaw").round(20);
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of paceMinPerKm, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmRaw : Ember.computed("timeMinRaw", "lengthKmRaw", function(){
+    return this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
+  }),
+
+  /**
+   * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
+   */
+  paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
+
+    /**
+     * returns paceMinPerKmStackMin, between 0 and 59, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerKmStackMinRaw");
+    },
+
+    /**
+     * sets a new paceMinPerKmStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackMin"
+     * @param  {BigNumber|string|number} value new paceMinPerKmStackMin value
+     * @return {BigNumber} new paceMinPerKmStackMin value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerKmStackMinRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue)));
+
+      return this.get("paceMinPerKmStackMinRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of paceMinPerKmStackMin
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
+    return this.get("paceMinPerKmRaw").floor();
+  }),
+
+  /**
+   * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
+   */
+  paceMinPerKmStackSec : Ember.computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
+
+    /**
+     * returns paceMinPerKmStackSec, between 0 and 59, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerKmStackSecRaw").round();
+    },
+
+    /**
+     * sets a new paceMinPerKmStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackSec"
+     * @param  {BigNumber|string|number} value new paceMinPerKmStackSec value
+     * @return {BigNumber} new paceMinPerKmStackSec value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerKmStackSecRaw");
+
+      value = this._ensureBigNumber(value).round();
+      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue).dividedBy(60)));
+
+      return this.get("paceMinPerKmStackSecRaw").round();
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of paceMinPerKmStackSec, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerKmStackSecRaw : Ember.computed("paceMinPerKmRaw", "paceMinPerKmStackMinRaw", function(){
+    return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
+  }),
+
+
+  /**
+   * pace of the run in min/mi
+   */
+  paceMinPerMi : Ember.computed("paceMinPerMiRaw", "lengthMiRaw", {
+
+    /**
+     * returns paceMinPerMi, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerMiRaw").round(20);
+    },
+
+    /**
+    * sets a new paceMinPerMi
+    *
+    * @param  {string} propertyName name of the changed property, always "paceMinPerMi"
+    * @param  {BigNumber|string|number} value new paceMinPerMi value
+    * @return {BigNumber} new paceMinPerMi value
+    */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
+
+      return this.get("paceMinPerMiRaw").round(20);
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of paceMinPerMi, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiRaw : Ember.computed("timeMinRaw", "lengthMiRaw", function(){
+    return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+  }),
+
+  /**
+   * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
+   */
+  paceMinPerMiStackMin : Ember.computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
+
+    /**
+     * returns paceMinPerMiStackMin, between 0 and 59, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerMiStackMinRaw");
+    },
+
+    /**
+     * sets a new paceMinPerMiStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackMin"
+     * @param  {BigNumber|string|number} value new paceMinPerMiStackMin value
+     * @return {BigNumber} new paceMinPerMiStackMin value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerMiStackMinRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue)));
+
+      return this.get("paceMinPerMiStackMinRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of paceMinPerMiStackMin
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
+    return this.get("paceMinPerMiRaw").floor();
+  }),
+
+
+  /**
+   * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
+   */
+  paceMinPerMiStackSec : Ember.computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
+
+    /**
+     * returns paceMinPerMiStackSec, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("paceMinPerMiStackSecRaw").round();
+    },
+
+    /**
+     * sets a new paceMinPerMiStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackSec"
+     * @param  {BigNumber|string|number} value new paceMinPerMiStackSec value
+     * @return {BigNumber} new paceMinPerMiStackSec value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("paceMinPerMiStackSecRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
+
+      return this.get("paceMinPerMiStackSecRaw").round();
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of paceMinPerMiStackSec, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  paceMinPerMiStackSecRaw : Ember.computed("paceMinPerMiRaw", "paceMinPerMiStackMinRaw", function(){
+    return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
+  }),
+
+
+  /**
+   * speed of the run in km/h
+   */
+  speedKmHr : Ember.computed("speedKmHrRaw", "lengthM", {
+
+    /**
+     * returns speedKmHr, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("speedKmHrRaw").round(20);
+    },
+
+    /**
+     * sets a new speedKmHr
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHr"
+     * @param  {BigNumber|string|number} value new speedKmHr value
+     * @return {BigNumber} new speedKmHr value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeSec",this.get("lengthM").dividedBy(value).times(3.6));
+
+      return this.get("speedKmHrRaw").round(20);
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of speedKmHrRaw, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  speedKmHrRaw : Ember.computed("lengthKmRaw", "timeHrRaw", function(){
+    return this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
+  }),
+
+  /**
+   * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
+   */
+  speedKmHrStackKm : Ember.computed("speedKmHrStackKmRaw", "speedKmHrRaw", {
+
+    /**
+     * returns speedKmHrStackKm, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("speedKmHrStackKmRaw");
+    },
+
+    /**
+     * sets a new speedKmHrStackKm
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHrStackKm"
+     * @param  {BigNumber|string|number} value new speedKmHrStackKm value
+     * @return {BigNumber} new speedKmHrStackKm value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("speedKmHrStackKmRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("speedKmHr", this.get("speedKmHrRaw").plus(value.minus(previousValue)));
+
+      return this.get("speedKmHrStackKmRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of speedKmHrStackKmRaw
+   *
+   * @return {BigNumber}
+   */
+  speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
+    return this.get("speedKmHrRaw").floor();
+  }),
+
+  /**
+   * speedKmHrStackDecimal is used to display the speed like 12,34
+   * and represents up to two decimal places of the kilometers value
+   */
+  speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
+
+    /**
+     * returns speedKmHrStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
+      return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
+    },
+
+    /**
+     * sets a new speedKmHrStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimal"
+     * @param  {BigNumber|string|number} value new speedKmHrStackDecimal value
+     * @return {string} new speedKmHrStackDecimal value
+     */
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
+
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
+
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+
+      // calulate the speed from decimal place
+      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+
+      this.set("speedKmHr", this.get("speedKmHrStackKmRaw").plus(decimalSpeed.dividedBy(1000)));
+
+      var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(2).toString().split(".")[1];
+      return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
+    }
+  }),
+
+  /**
+   * speed of the run in mi/h
+   */
+  speedMiHr : Ember.computed("speedMiHrRaw", "lengthMiRaw", {
+
+    /**
+     * returns speedMiHr, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("speedMiHrRaw").round(20);
+    },
+
+    /**
+     * sets a new speedMiHr
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHr"
+     * @param  {BigNumber|string|number} value new speedMiHr value
+     * @return {BigNumber} new speedMiHr value
+     */
+    set: function(propertyName, value) {
+      value = this._ensureBigNumber(value);
+      this.set("timeHr",this.get("lengthMiRaw").dividedBy(value));
+
+      return this.get("speedMiHrRaw").round(20);
+    }
+  }),
+
+  /**
+   * calculates the uncompressed value of speedMiHr, used for lossless calculation
+   *
+   * @return {BigNumber}
+   */
+  speedMiHrRaw : Ember.computed("lengthMiRaw", "timeHrRaw", function(){
+    return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+  }),
+
+  /**
+   * speedMiHrStackMi is used to display the speed like 12,34 and represents the miles value
+   */
+  speedMiHrStackMi : Ember.computed("speedMiHrStackMiRaw", "speedMiHrRaw", {
+
+    /**
+     * returns speedMiHrStackMi, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("speedMiHrStackMiRaw");
+    },
+
+    /**
+     * sets a new speedMiHrStackMi
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackMi"
+     * @param  {BigNumber|string|number} value new speedMiHrStackMi value
+     * @return {BigNumber} new speedMiHrStackMi value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("speedMiHrStackMiRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("speedMiHr", this.get("speedMiHrRaw").plus(value.minus(previousValue)));
+
+      return this.get("speedMiHrStackMiRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of speedMiHrStackMi
+   *
+   * @return {BigNumber}
+   */
+  speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
+    return this.get("speedMiHrRaw").floor();
+  }),
+
+  /**
+   * speedMiHrStackDecimal is used to display the speed like 12,34
+   * and represents up to two decimal places of the miles value
+   *
+   */
+  speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
+    /**
+    * returns speedMiHrStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
+    },
+
+    /**
+     * sets a new speedMiHrStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimal"
+     * @param  {BigNumber|string|number} value new speedMiHrStackDecimal value
+     * @return {string} new speedMiHrStackDecimal value
+     */
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
+
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
+
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+
+      // calulate the speed from decimal place
+      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+
+      this.set("speedMiHr", this.get("speedMiHrStackMiRaw").plus(decimalSpeed.dividedBy(1000)));
+
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
+    }
+  }),
+
+  /**
+   * returns the number of leading zeros from a string
+   *
+   * @param  {string} string string that should be analyzed for leading zeros
+   * @return {number}        number of leading zeros
+   */
+  _getLeadingZerosFromString : function(string){
+    var leadingZeros = 0;
    	while (string[0]==="0") {
-			string = string.substring(1);
+      string = string.substring(1);
     	leadingZeros ++;
-		}
-		return leadingZeros;
-	},
+    }
+    return leadingZeros;
+  },
 
-	/**
-	 * removes all zeros from the end of a string
-	 * @param  {string} input input string
-	 * @return {string}       output string
-	 */
-	_removeEndingZeros : function(input){
-		var output = (typeof input === "undefined") ? "" : input.toString();
-		while (output[output.length-1]==="0") {
-			output = output.slice(0,-1);
-		}
-		return output;
-	},
-
-	/**
-	 * optimied version of the .toFixed method which has a lag of precision
-	 * 2.05.toFixed(1) f.e. is 2.0 instead of 2.1
-	 * found some issues with this fix as well f.e. 2.21235 results in 2.2124
-	 *
-	 * @param  {float} 	number 		input value
-	 * @param  {number} precision desired precision
-	 * @return {string}       		output string with desired precision
-	 */
-	_toFixed : function(number, precision){
-		number = parseFloat(number);
-		precision = +Math.round(precision) || 0; // convert to number or set to 0
-		var precisionHelper = Math.pow(10,precision);
-		return (Math.round(number * precisionHelper) / precisionHelper).toFixed(precision);
-	}
+  /**
+   * will convert the input to BigNumber if necessary. If input is BigNumber already
+   * it will be left unchanged. This method is handy for setter methods of this class.
+   * Setter may be called from user input (string) or other methods of this class which
+   * already provide Bignumber. In the second case, it is important to keep the BigNumber
+   * type to prevent precision loss
+   *
+   * @param  {BigNumber|string|number}   input      any number like input
+   * @return {BigNumber}                            output instance of BigNumber
+   */
+  _ensureBigNumber : function(input){
+    return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
+  }
 });

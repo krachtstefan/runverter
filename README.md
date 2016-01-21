@@ -1,6 +1,4 @@
-#Runverter
-
-[Runverter](http://runverter.io) is a web app providing a set of tools to convert different running metrics.
+# Runverter [![Build Status](https://travis-ci.org/krachtstefan/runverter.svg?branch=master)](https://travis-ci.org/krachtstefan/runverter)
 
 ## Installation
 
@@ -34,15 +32,12 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 
 ### Requirements
 
-- The hostname ```runverter.staging```  and ```runverter.production``` need to be added to your ```/etc/hosts``` file to point to the proper deployment server. 
+- The hostname ```runverter.staging```  and ```runverter.production``` need to be added to your ```/etc/hosts``` file to point to the proper deployment server.
 - The assets will be uploaded to Amazon S3, so you need a bucket called ```runverter``` and your access key in a environment variable named ```AWS_ACCESS_KEY```. You may want to add the line ```export AWS_ACCESS_KEY=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
 - Deploying to production server requires a tunnel to access the remote redis instance: ```ssh -f -L 6380:localhost:6379 -N user@runverter.production```
 
 ### Deploy
 
-- ```ember deploy --environment staging``` will compile the app, upload the assets and publish the index page to redis. It will return the key of the deployed version ```runverter:XXXXXXX```. Replace ``` staging```  with ```production``` for production deploy and make sure the remote redis is available on your local port ```6380```. 
+- ```ember deploy --environment staging``` will compile the app, upload the assets and publish the index page to redis. It will return the key of the deployed version ```runverter:XXXXXXX```. Replace ``` staging```  with ```production``` for production deploy and make sure the remote redis is available on your local port ```6380```.
 - preview the deploy on http://runverter.dev/?index_key=XXXXXX
 - activate the version with ```ember deploy:activate --revision runverter:XXXXXXX --environment staging```
-
-
-
