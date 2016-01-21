@@ -436,16 +436,24 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * paceMinPerKm represents the pace of the run in min/km
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerKm
-	 * @param  {Object|string|number} 	value        	new value of paceMinPerKm
-	 * @return {BigNumber}              							min/km
+	 * pace of the run in min/km
 	 */
   paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
+    /**
+     * returns paceMinPerKm, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerKmRaw").round(20);
     },
+    /**
+     * sets a new paceMinPerKm
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKm"
+     * @param  {Object|string|number} value new paceMinPerKm value
+     * @return {BigNumber} new paceMinPerKm value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
@@ -464,16 +472,24 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * paceMinPerKmStackMin is used to create a view like 12:34
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackMin
-	 * @param  {Object|string|number} value						new value of paceMinPerKmStackMin
-	 * @return {BigNumber} 														min stack of the pace
+	 * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
 	 */
   paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
+    /**
+     * returns paceMinPerKmStackMin, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerKmStackMinRaw");
     },
+    /**
+     * sets a new paceMinPerKmStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackMin"
+     * @param  {Object|string|number} value new paceMinPerKmStackMin value
+     * @return {BigNumber} new paceMinPerKmStackMin value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerKmStackMinRaw");
       value = this._ensureBigNumber(value).round();
@@ -492,17 +508,25 @@ export default DS.Model.extend({
 		return this.get("paceMinPerKmRaw").floor();
 	}),
 
-	/**
-	 * paceMinPerKmStackSec is used to create a view like 12:34
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerKmStackSec
-	 * @param  {Object|string|number} value						new value of paceMinPerKmStackSec
-	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
+  /**
+	 * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
 	 */
   paceMinPerKmStackSec : Ember.computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
+    /**
+     * returns paceMinPerKmStackSec, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerKmStackSecRaw").round();
     },
+    /**
+     * sets a new paceMinPerKmStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackSec"
+     * @param  {Object|string|number} value new paceMinPerKmStackSec value
+     * @return {BigNumber} new paceMinPerKmStackSec value
+     */
     set: function(propertyName, value) {
 			var previousValue = this.get("paceMinPerKmStackSecRaw");
 
@@ -523,17 +547,25 @@ export default DS.Model.extend({
 	}),
 
 
-	/**
-	 * paceMinPerMi represents the pace of the run in min/mi
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be paceMinPerMi
-	 * @param  {Object|string|number} 	value        	new value of paceMinPerMi
-	 * @return {BigNumber}              							min/mi
+  /**
+	 * pace of the run in min/mi
 	 */
   paceMinPerMi : Ember.computed("paceMinPerMiRaw", "lengthMiRaw", {
+    /**
+     * returns paceMinPerMi, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerMiRaw").round(20);
     },
+    /**
+    * sets a new paceMinPerMi
+    *
+    * @param  {string} propertyName name of the changed property, always "paceMinPerMi"
+    * @param  {Object|string|number} value new paceMinPerMi value
+    * @return {BigNumber} new paceMinPerMi value
+    */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
@@ -551,17 +583,25 @@ export default DS.Model.extend({
 		return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
 	}),
 
-	/**
-	 * paceMinPerMiStackMin is used to create a view like 12:34
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackMin
-	 * @param  {Object|string|number} value						new value of paceMinPerMiStackMin
-	 * @return {BigNumber} 													  min stack of the pace
+  /**
+	 * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
 	 */
   paceMinPerMiStackMin : Ember.computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
+    /**
+     * returns paceMinPerMiStackMin, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerMiStackMinRaw");
     },
+    /**
+     * sets a new paceMinPerMiStackMin
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackMin"
+     * @param  {Object|string|number} value new paceMinPerMiStackMin value
+     * @return {BigNumber} new paceMinPerMiStackMin value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerMiStackMinRaw");
       value = this._ensureBigNumber(value).round();
@@ -581,17 +621,25 @@ export default DS.Model.extend({
 	}),
 
 
-	/**
-	 * paceMinPerMiStackSec is used to create a view like 12:34
-	 *
-	 * @param  {string}								propertyName		if defined, it will be paceMinPerMiStackSec
-	 * @param  {Object|string|number} value						new value of paceMinPerMiStackSec, betweeen 0 and 59
-	 * @return {BigNumber} 														second stack of the pace, betweeen 0 and 59
+  /**
+	 * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
 	 */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
+    /**
+     * returns paceMinPerMiStackSec, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("paceMinPerMiStackSecRaw").round();
     },
+    /**
+     * sets a new paceMinPerMiStackSec
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackSec"
+     * @param  {Object|string|number} value new paceMinPerMiStackSec value
+     * @return {BigNumber} new paceMinPerMiStackSec value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("paceMinPerMiStackSecRaw");
       value = this._ensureBigNumber(value).round();
