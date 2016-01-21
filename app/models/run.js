@@ -21,7 +21,7 @@ export default DS.Model.extend({
 	 * time of the run in hours
 	 */
   timeHr: Ember.computed("timeHrRaw", {
-    
+
     /**
   	 * returns timeHr, rounded to 20 digits
      * @return {BigNumber}
@@ -34,7 +34,7 @@ export default DS.Model.extend({
      * sets a new timeHr
      *
      * @param  {string} propertyName name of the changed property, always "timeHr"
-  	 * @param  {Object|string|number} value new timeHr value
+  	 * @param  {BigNumber|string|number} value new timeHr value
   	 * @return {BigNumber} new timeHr value
      */
     set: function(propertyName, value) {
@@ -71,7 +71,7 @@ export default DS.Model.extend({
      * sets a new timeMin
      *
      * @param  {string} propertyName name of the changed property, always "timeMin"
-  	 * @param  {Object|string|number} value new timeMin value
+  	 * @param  {BigNumber|string|number} value new timeMin value
   	 * @return {BigNumber} new timeMin value
      */
     set: function(propertyName, value) {
@@ -108,7 +108,7 @@ export default DS.Model.extend({
      * sets a new timeStackHr
      *
      * @param  {string} propertyName name of the changed property, always "timeStackHr"
-   	 * @param  {Object|string|number} value new timeStackHr value
+   	 * @param  {BigNumber|string|number} value new timeStackHr value
    	 * @return {BigNumber} new timeStackHr value
      */
     set: function(propertyName, value) {
@@ -146,7 +146,7 @@ export default DS.Model.extend({
      * sets a new timeStackMin
      *
      * @param  {string} propertyName name of the changed property, always "timeStackMin"
-     * @param  {Object|string|number} value new timeStackMin value
+     * @param  {BigNumber|string|number} value new timeStackMin value
      * @return {BigNumber} new timeStackMin value
      */
     set: function(propertyName, value) {
@@ -184,7 +184,7 @@ export default DS.Model.extend({
      * sets a new timeStackSec
      *
      * @param  {string} propertyName name of the changed property, always "timeStackSec"
-     * @param  {Object|string|number} value new timeStackSec value
+     * @param  {BigNumber|string|number} value new timeStackSec value
      * @return {BigNumber} new timeStackSec value
      */
     set: function(propertyName, value) {
@@ -229,7 +229,7 @@ export default DS.Model.extend({
      * sets a new lengthKm
      *
      * @param  {string} propertyName name of the changed property, always "lengthKm"
-     * @param  {Object|string|number} value new lengthKm value
+     * @param  {BigNumber|string|number} value new lengthKm value
      * @return {BigNumber} new lengthKm value
      */
     set: function(propertyName, value) {
@@ -267,7 +267,7 @@ export default DS.Model.extend({
      * sets a new lengthKmStackKm
      *
      * @param  {string} propertyName name of the changed property, always "lengthKmStackKm"
-     * @param  {Object|string|number} value new lengthKmStackKm value
+     * @param  {BigNumber|string|number} value new lengthKmStackKm value
      * @return {BigNumber} new lengthKmStackKm value
      */
     set: function(propertyName, value) {
@@ -307,7 +307,7 @@ export default DS.Model.extend({
      * sets a new lengthKmStackDecimal
      *
      * @param  {string} propertyName name of the changed property, always "lengthKmStackDecimal"
-     * @param  {Object|string|number} value new lengthKmStackDecimal value
+     * @param  {BigNumber|string|number} value new lengthKmStackDecimal value
      * @return {string} new lengthKmStackDecimal value
      */
     set: function(propertyName, value) {
@@ -347,7 +347,7 @@ export default DS.Model.extend({
      * sets a new lengthMi
      *
      * @param  {string} propertyName name of the changed property, always "lengthMi"
-     * @param  {Object|string|number} value new lengthMi value
+     * @param  {BigNumber|string|number} value new lengthMi value
      * @return {BigNumber} new lengthMi value
      */
     set: function(propertyName, value) {
@@ -370,7 +370,7 @@ export default DS.Model.extend({
    * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
 	 *
 	 * @param  {string}								propertyName		if defined, it will be lengthMiStackMi
-	 * @param  {Object|string|number} value						new value of lengthMiStackMi
+	 * @param  {BigNumber|string|number} value						new value of lengthMiStackMi
 	 * @return {BigNumber} 													  miles	stack of the run
 	 */
   lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
@@ -388,7 +388,7 @@ export default DS.Model.extend({
      * sets a new lengthMiStackMi
      *
      * @param  {string} propertyName name of the changed property, always "lengthMiStackMi"
-     * @param  {Object|string|number} value new lengthMiStackMi value
+     * @param  {BigNumber|string|number} value new lengthMiStackMi value
      * @return {BigNumber} new lengthMiStackMi value
      */
     set: function(propertyName, value) {
@@ -428,7 +428,7 @@ export default DS.Model.extend({
      * sets a new lengthMiStackDecimal
      *
      * @param  {string} propertyName name of the changed property, always "lengthMiStackDecimal"
-     * @param  {Object|string|number} value new lengthMiStackDecimal value
+     * @param  {BigNumber|string|number} value new lengthMiStackDecimal value
      * @return {string} new lengthMiStackDecimal value
      */
     set: function(propertyName, value) {
@@ -470,7 +470,7 @@ export default DS.Model.extend({
      * sets a new paceMinPerKm
      *
      * @param  {string} propertyName name of the changed property, always "paceMinPerKm"
-     * @param  {Object|string|number} value new paceMinPerKm value
+     * @param  {BigNumber|string|number} value new paceMinPerKm value
      * @return {BigNumber} new paceMinPerKm value
      */
     set: function(propertyName, value) {
@@ -508,7 +508,7 @@ export default DS.Model.extend({
      * sets a new paceMinPerKmStackMin
      *
      * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackMin"
-     * @param  {Object|string|number} value new paceMinPerKmStackMin value
+     * @param  {BigNumber|string|number} value new paceMinPerKmStackMin value
      * @return {BigNumber} new paceMinPerKmStackMin value
      */
     set: function(propertyName, value) {
@@ -547,7 +547,7 @@ export default DS.Model.extend({
      * sets a new paceMinPerKmStackSec
      *
      * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackSec"
-     * @param  {Object|string|number} value new paceMinPerKmStackSec value
+     * @param  {BigNumber|string|number} value new paceMinPerKmStackSec value
      * @return {BigNumber} new paceMinPerKmStackSec value
      */
     set: function(propertyName, value) {
@@ -588,7 +588,7 @@ export default DS.Model.extend({
     * sets a new paceMinPerMi
     *
     * @param  {string} propertyName name of the changed property, always "paceMinPerMi"
-    * @param  {Object|string|number} value new paceMinPerMi value
+    * @param  {BigNumber|string|number} value new paceMinPerMi value
     * @return {BigNumber} new paceMinPerMi value
     */
     set: function(propertyName, value) {
@@ -626,7 +626,7 @@ export default DS.Model.extend({
      * sets a new paceMinPerMiStackMin
      *
      * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackMin"
-     * @param  {Object|string|number} value new paceMinPerMiStackMin value
+     * @param  {BigNumber|string|number} value new paceMinPerMiStackMin value
      * @return {BigNumber} new paceMinPerMiStackMin value
      */
     set: function(propertyName, value) {
@@ -666,7 +666,7 @@ export default DS.Model.extend({
      * sets a new paceMinPerMiStackSec
      *
      * @param  {string} propertyName name of the changed property, always "paceMinPerMiStackSec"
-     * @param  {Object|string|number} value new paceMinPerMiStackSec value
+     * @param  {BigNumber|string|number} value new paceMinPerMiStackSec value
      * @return {BigNumber} new paceMinPerMiStackSec value
      */
     set: function(propertyName, value) {
@@ -706,7 +706,7 @@ export default DS.Model.extend({
      * sets a new speedKmHr
      *
      * @param  {string} propertyName name of the changed property, always "speedKmHr"
-     * @param  {Object|string|number} value new speedKmHr value
+     * @param  {BigNumber|string|number} value new speedKmHr value
      * @return {BigNumber} new speedKmHr value
      */
     set: function(propertyName, value) {
@@ -744,7 +744,7 @@ export default DS.Model.extend({
      * sets a new speedKmHrStackKm
      *
      * @param  {string} propertyName name of the changed property, always "speedKmHrStackKm"
-     * @param  {Object|string|number} value new speedKmHrStackKm value
+     * @param  {BigNumber|string|number} value new speedKmHrStackKm value
      * @return {BigNumber} new speedKmHrStackKm value
      */
     set: function(propertyName, value) {
@@ -785,7 +785,7 @@ export default DS.Model.extend({
      * sets a new speedKmHrStackDecimal
      *
      * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimal"
-     * @param  {Object|string|number} value new speedKmHrStackDecimal value
+     * @param  {BigNumber|string|number} value new speedKmHrStackDecimal value
      * @return {string} new speedKmHrStackDecimal value
      */
     set: function(propertyName, value) {
@@ -826,7 +826,7 @@ export default DS.Model.extend({
     * sets a new speedMiHr
     *
     * @param  {string} propertyName name of the changed property, always "speedMiHr"
-    * @param  {Object|string|number} value new speedMiHr value
+    * @param  {BigNumber|string|number} value new speedMiHr value
     * @return {BigNumber} new speedMiHr value
     */
     set: function(propertyName, value) {
@@ -864,7 +864,7 @@ export default DS.Model.extend({
      * sets a new speedMiHrStackMi
      *
      * @param  {string} propertyName name of the changed property, always "speedMiHrStackMi"
-     * @param  {Object|string|number} value new speedMiHrStackMi value
+     * @param  {BigNumber|string|number} value new speedMiHrStackMi value
      * @return {BigNumber} new speedMiHrStackMi value
      */
     set: function(propertyName, value) {
@@ -906,7 +906,7 @@ export default DS.Model.extend({
      * sets a new speedMiHrStackDecimal
      *
      * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimal"
-     * @param  {Object|string|number} value new speedMiHrStackDecimal value
+     * @param  {BigNumber|string|number} value new speedMiHrStackDecimal value
      * @return {string} new speedMiHrStackDecimal value
      */
     set: function(propertyName, value) {
