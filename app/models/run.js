@@ -134,7 +134,7 @@ export default DS.Model.extend({
   timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
 
     /**
-     * returns timeStackMin, no decimal places
+     * returns timeStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
@@ -172,7 +172,7 @@ export default DS.Model.extend({
   timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
 
     /**
-     * returns timeStackSec, no decimal places
+     * returns timeStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
@@ -492,7 +492,7 @@ export default DS.Model.extend({
   paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
 
     /**
-     * returns paceMinPerKmStackMin, no decimal places
+     * returns paceMinPerKmStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
@@ -531,7 +531,7 @@ export default DS.Model.extend({
   paceMinPerKmStackSec : Ember.computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
 
     /**
-     * returns paceMinPerKmStackSec, no decimal places
+     * returns paceMinPerKmStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
@@ -610,7 +610,7 @@ export default DS.Model.extend({
   paceMinPerMiStackMin : Ember.computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
 
     /**
-     * returns paceMinPerMiStackMin, no decimal places
+     * returns paceMinPerMiStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
