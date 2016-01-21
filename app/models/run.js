@@ -44,7 +44,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of timeHr, used for lossless calculation
+	 * calculates the uncompressed value of timeHr, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -79,7 +79,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of timeMin, used for lossless calculation
+	 * calculates the uncompressed value of timeMin, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -151,7 +151,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of timeStackMin, used for lossless calculation
+	 * calculates uncompressed value of timeStackMin, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -187,7 +187,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of timeStackSec, used for lossless calculation
+	 * calculates the uncompressed value of timeStackSec, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -221,7 +221,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of lengthKm, used for lossless calculation
+	 * calculates the uncompressed value of lengthKm, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -308,7 +308,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of lengthMi, used for lossless calculation
+	 * calculates the uncompressed value of lengthMi, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -397,7 +397,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerKm, used for lossless calculation
+	 * calculates the uncompressed value of paceMinPerKm, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -456,7 +456,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerKmStackSec, used for lossless calculation
+	 * calculates the uncompressed value of paceMinPerKmStackSec, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -485,7 +485,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerMi, used for lossless calculation
+	 * calculates the uncompressed value of paceMinPerMi, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -514,7 +514,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerMiStackMin, used for lossless calculation
+	 * calculates the uncompressed value of paceMinPerMiStackMin, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -544,7 +544,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of paceMinPerMiStackSec, used for lossless calculation
+	 * calculates the uncompressed value of paceMinPerMiStackSec, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -573,7 +573,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of speedKmHrRaw, used for lossless calculation
+	 * calculates the uncompressed value of speedKmHrRaw, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -602,7 +602,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of speedKmHrStackKmRaw, used for lossless calculation
+	 * calculates the uncompressed value of speedKmHrStackKmRaw, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -662,7 +662,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of speedMiHr, used for lossless calculation
+	 * calculates the uncompressed value of speedMiHr, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
@@ -691,7 +691,7 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * uncompressed value of speedMiHrStackMi, used for lossless calculation
+	 * calculates the uncompressed value of speedMiHrStackMi, used for lossless calculation
 	 *
 	 * @return {BigNumber}
 	 */
