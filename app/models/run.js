@@ -656,16 +656,24 @@ export default DS.Model.extend({
 
 
 	/**
-	 * speedKmHr represents the speed of the run in km per hour
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHr
-	 * @param  {Object|string|number} 	value        	new value of speedKmHr
-	 * @return {BigNumber} 														km/hr
+	 * speed of the run in km/h
 	 */
   speedKmHr : Ember.computed("speedKmHrRaw", "lengthM", {
+    /**
+     * returns speedKmHr, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("speedKmHrRaw").round(20);
     },
+    /**
+     * sets a new speedKmHr
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHr"
+     * @param  {Object|string|number} value new speedKmHr value
+     * @return {BigNumber} new speedKmHr value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec",this.get("lengthM").dividedBy(value).times(3.6));
@@ -684,16 +692,24 @@ export default DS.Model.extend({
 	}),
 
 	/**
-	 * lengthKmStackKm is used to create a view like 12,34
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackKm
-	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackKm
-	 * @return {number} 															km stack of the speed
+	 * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
 	 */
   speedKmHrStackKm : Ember.computed("speedKmHrStackKmRaw", "speedKmHrRaw", {
+    /**
+     * returns speedKmHrStackKm, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("speedKmHrStackKmRaw");
     },
+    /**
+     * sets a new speedKmHrStackKm
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHrStackKm"
+     * @param  {Object|string|number} value new speedKmHrStackKm value
+     * @return {BigNumber} new speedKmHrStackKm value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("speedKmHrStackKmRaw");
       value = this._ensureBigNumber(value).round();
@@ -712,18 +728,27 @@ export default DS.Model.extend({
 		return this.get("speedKmHrRaw").floor();
 	}),
 
-	/**
-	 * speedKmHrStackDecimal is used to create a view like 12,34
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedKmHrStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of speedKmHrStackDecimal
-	 * @return {string} 															up to 2 digits of the decimal place of the speed in km/hr
-	 */
+  /**
+   * speedKmHrStackDecimal is used to display the speed like 12,34
+   * and represents up to two decimal places of the kilometers value
+   */
 	 speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
+     /**
+     * returns speedKmHrStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
     get: function() {
       var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     },
+    /**
+     * sets a new speedKmHrStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimal"
+     * @param  {Object|string|number} value new speedKmHrStackDecimal value
+     * @return {string} new speedKmHrStackDecimal value
+     */
     set: function(propertyName, value) {
       var leadingZeros = this._getLeadingZerosFromString(value);
 
@@ -744,17 +769,25 @@ export default DS.Model.extend({
     }
 	}),
 
-	/**
-	 * speedMiHr represents the speed of the run in miles per hour
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHr
-	 * @param  {Object|string|number} 	value        	new value of speedMiHr
-	 * @return {BigNumber}														mi/hr
+  /**
+	 * speed of the run in mi/h
 	 */
   speedMiHr : Ember.computed("speedMiHrRaw", "lengthMiRaw", {
+    /**
+     * returns speedMiHr, rounded to 20 digits
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("speedMiHrRaw").round(20);
     },
+    /**
+    * sets a new speedMiHr
+    *
+    * @param  {string} propertyName name of the changed property, always "speedMiHr"
+    * @param  {Object|string|number} value new speedMiHr value
+    * @return {BigNumber} new speedMiHr value
+    */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeHr",this.get("lengthMiRaw").dividedBy(value));
@@ -772,17 +805,25 @@ export default DS.Model.extend({
 		return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
 	}),
 
-	/**
-	 * speedMiHrStackMi is used to create a view like 12,34
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackMi
-	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackMi
-	 * @return {BigNumber} 														mi stack of the speed
-	 */
+  /**
+   * speedMiHrStackMi is used to display the speed like 12,34 and represents the miles value
+   */
   speedMiHrStackMi : Ember.computed("speedMiHrStackMiRaw", "speedMiHrRaw", {
+    /**
+     * returns speedMiHrStackMi, no decimal places
+     *
+     * @return {BigNumber}
+     */
     get: function() {
       return this.get("speedMiHrStackMiRaw");
     },
+    /**
+     * sets a new speedMiHrStackMi
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackMi"
+     * @param  {Object|string|number} value new speedMiHrStackMi value
+     * @return {BigNumber} new speedMiHrStackMi value
+     */
     set: function(propertyName, value) {
       var previousValue = this.get("speedMiHrStackMiRaw");
       value = this._ensureBigNumber(value).round();
@@ -801,18 +842,28 @@ export default DS.Model.extend({
 		return this.get("speedMiHrRaw").floor();
 	}),
 
-	/**
-	 * speedMiHrStackDecimal is used to create a view like 12,34
-	 *
-	 * @param  {string} 								propertyName 	if defined, it will be speedMiHrStackDecimal
-	 * @param  {Object|string|number} 	value        	new value of speedMiHrStackDecimal
-	 * @return {string} 															up to 2 digits of the decimal place of the speed in mi/hr
-	 */
+  /**
+   * speedMiHrStackDecimal is used to display the speed like 12,34
+   * and represents up to two decimal places of the miles value
+   *
+   */
   speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
+    /**
+    * returns speedMiHrStackDecimal, no decimal places
+    *
+    * @return {string}
+    */
     get: function() {
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
+    /**
+     * sets a new speedMiHrStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimal"
+     * @param  {Object|string|number} value new speedMiHrStackDecimal value
+     * @return {string} new speedMiHrStackDecimal value
+     */
     set: function(propertyName, value) {
       var leadingZeros = this._getLeadingZerosFromString(value);
 
