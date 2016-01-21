@@ -74,7 +74,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("timeSec", value.times(60));
-      return this.get("timeMinRaw").round(60);
+      return this.get("timeMinRaw").round(20);
     }
 	}),
 
