@@ -216,7 +216,7 @@ export default DS.Model.extend({
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
       this.set("lengthM", value.times(1000));
-			return this.get("lengthKmRaw");
+			return this.get("lengthKmRaw").round(20);
     }
 	}),
 
