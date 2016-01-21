@@ -21,6 +21,7 @@ export default DS.Model.extend({
 	 * time of the run in hours
 	 */
   timeHr: Ember.computed("timeHrRaw", {
+    
     /**
   	 * returns timeHr, rounded to 20 digits
      * @return {BigNumber}
@@ -56,6 +57,7 @@ export default DS.Model.extend({
 	 * time of the run in minutes
 	 */
   timeMin : Ember.computed("timeMinRaw", {
+
     /**
   	 * returns timeMin, rounded to 20 digits
      *
@@ -64,6 +66,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("timeMinRaw").round(20);
     },
+
     /**
      * sets a new timeMin
      *
@@ -91,6 +94,7 @@ export default DS.Model.extend({
 	 * timeStackHr is used to display the time like 12:34:56 and represents the hours value
 	 */
   timeStackHr : Ember.computed("timeSec", "timeStackHrRaw" ,{
+
     /**
      * returns timeStackHr, no decimal places
      *
@@ -99,6 +103,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("timeStackHrRaw");
     },
+
     /**
      * sets a new timeStackHr
      *
@@ -127,6 +132,7 @@ export default DS.Model.extend({
    * timeStackMin is used to display the time like 12:34:56 and represents the minutes value
 	 */
   timeStackMin : Ember.computed("timeSec", "timeStackMinRaw",{
+
     /**
      * returns timeStackMin, no decimal places
      *
@@ -135,6 +141,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("timeStackMinRaw");
     },
+
     /**
      * sets a new timeStackMin
      *
@@ -163,6 +170,7 @@ export default DS.Model.extend({
 	 * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
 	 */
   timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
+
     /**
      * returns timeStackSec, no decimal places
      *
@@ -171,6 +179,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("timeStackSecRaw");
     },
+
     /**
      * sets a new timeStackSec
      *
@@ -206,6 +215,7 @@ export default DS.Model.extend({
 	 * length of the run in km
 	 */
   lengthKm : Ember.computed("lengthKmRaw", {
+
     /**
      * returns lengthKm, rounded to 20 digits
      *
@@ -214,6 +224,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("lengthKmRaw").round(20);
     },
+
     /**
      * sets a new lengthKm
      *
@@ -242,6 +253,7 @@ export default DS.Model.extend({
 	 * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
 	 */
   lengthKmStackKm : Ember.computed("lengthM", "lengthKmStackKmRaw", {
+
     /**
      * returns lengthKmStackKm, no decimal places
      *
@@ -250,6 +262,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("lengthKmStackKmRaw");
     },
+
     /**
      * sets a new lengthKmStackKm
      *
@@ -279,6 +292,7 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the kilometers value
 	 */
   lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+
     /**
      * returns lengthKmStackDecimal, no decimal places
      *
@@ -288,6 +302,7 @@ export default DS.Model.extend({
       var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
+
     /**
      * sets a new lengthKmStackDecimal
      *
@@ -318,6 +333,7 @@ export default DS.Model.extend({
 	 * length of the run in miles
 	 */
   lengthMi : Ember.computed("lengthMiRaw", {
+
     /**
      * returns lengthMi, rounded to 20 digits
      *
@@ -326,6 +342,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("lengthMiRaw").round(20);
     },
+
     /**
      * sets a new lengthMi
      *
@@ -357,6 +374,7 @@ export default DS.Model.extend({
 	 * @return {BigNumber} 													  miles	stack of the run
 	 */
   lengthMiStackMi : Ember.computed("lengthM", "lengthMiStackMiRaw", {
+
     /**
      * returns lengthMiStackMi, no decimal places
      *
@@ -365,6 +383,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("lengthMiStackMiRaw");
     },
+
     /**
      * sets a new lengthMiStackMi
      *
@@ -394,6 +413,7 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the miles value
 	 */
   lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
+
     /**
      * returns lengthMiStackDecimal, no decimal places
      *
@@ -403,6 +423,7 @@ export default DS.Model.extend({
       var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     },
+
     /**
      * sets a new lengthMiStackDecimal
      *
@@ -435,6 +456,7 @@ export default DS.Model.extend({
 	 * pace of the run in min/km
 	 */
   paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
+
     /**
      * returns paceMinPerKm, rounded to 20 digits
      *
@@ -443,6 +465,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerKmRaw").round(20);
     },
+
     /**
      * sets a new paceMinPerKm
      *
@@ -471,6 +494,7 @@ export default DS.Model.extend({
 	 * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
 	 */
   paceMinPerKmStackMin : Ember.computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
+
     /**
      * returns paceMinPerKmStackMin, no decimal places
      *
@@ -479,6 +503,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerKmStackMinRaw");
     },
+
     /**
      * sets a new paceMinPerKmStackMin
      *
@@ -508,6 +533,7 @@ export default DS.Model.extend({
 	 * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
 	 */
   paceMinPerKmStackSec : Ember.computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
+
     /**
      * returns paceMinPerKmStackSec, no decimal places
      *
@@ -516,6 +542,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerKmStackSecRaw").round();
     },
+
     /**
      * sets a new paceMinPerKmStackSec
      *
@@ -547,6 +574,7 @@ export default DS.Model.extend({
 	 * pace of the run in min/mi
 	 */
   paceMinPerMi : Ember.computed("paceMinPerMiRaw", "lengthMiRaw", {
+
     /**
      * returns paceMinPerMi, rounded to 20 digits
      *
@@ -555,6 +583,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerMiRaw").round(20);
     },
+
     /**
     * sets a new paceMinPerMi
     *
@@ -583,6 +612,7 @@ export default DS.Model.extend({
 	 * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
 	 */
   paceMinPerMiStackMin : Ember.computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
+
     /**
      * returns paceMinPerMiStackMin, no decimal places
      *
@@ -591,6 +621,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerMiStackMinRaw");
     },
+
     /**
      * sets a new paceMinPerMiStackMin
      *
@@ -621,6 +652,7 @@ export default DS.Model.extend({
 	 * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
 	 */
   paceMinPerMiStackSec : Ember.computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
+
     /**
      * returns paceMinPerMiStackSec, no decimal places
      *
@@ -629,6 +661,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("paceMinPerMiStackSecRaw").round();
     },
+
     /**
      * sets a new paceMinPerMiStackSec
      *
@@ -659,6 +692,7 @@ export default DS.Model.extend({
 	 * speed of the run in km/h
 	 */
   speedKmHr : Ember.computed("speedKmHrRaw", "lengthM", {
+
     /**
      * returns speedKmHr, rounded to 20 digits
      *
@@ -667,6 +701,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("speedKmHrRaw").round(20);
     },
+
     /**
      * sets a new speedKmHr
      *
@@ -695,6 +730,7 @@ export default DS.Model.extend({
 	 * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
 	 */
   speedKmHrStackKm : Ember.computed("speedKmHrStackKmRaw", "speedKmHrRaw", {
+
     /**
      * returns speedKmHrStackKm, no decimal places
      *
@@ -703,6 +739,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("speedKmHrStackKmRaw");
     },
+
     /**
      * sets a new speedKmHrStackKm
      *
@@ -733,6 +770,7 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the kilometers value
    */
 	 speedKmHrStackDecimal : Ember.computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
+
      /**
      * returns speedKmHrStackDecimal, no decimal places
      *
@@ -742,6 +780,7 @@ export default DS.Model.extend({
       var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     },
+
     /**
      * sets a new speedKmHrStackDecimal
      *
@@ -773,6 +812,7 @@ export default DS.Model.extend({
 	 * speed of the run in mi/h
 	 */
   speedMiHr : Ember.computed("speedMiHrRaw", "lengthMiRaw", {
+
     /**
      * returns speedMiHr, rounded to 20 digits
      *
@@ -781,6 +821,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("speedMiHrRaw").round(20);
     },
+
     /**
     * sets a new speedMiHr
     *
@@ -809,6 +850,7 @@ export default DS.Model.extend({
    * speedMiHrStackMi is used to display the speed like 12,34 and represents the miles value
    */
   speedMiHrStackMi : Ember.computed("speedMiHrStackMiRaw", "speedMiHrRaw", {
+
     /**
      * returns speedMiHrStackMi, no decimal places
      *
@@ -817,6 +859,7 @@ export default DS.Model.extend({
     get: function() {
       return this.get("speedMiHrStackMiRaw");
     },
+
     /**
      * sets a new speedMiHrStackMi
      *
@@ -848,6 +891,7 @@ export default DS.Model.extend({
    *
    */
   speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
+
     /**
     * returns speedMiHrStackDecimal, no decimal places
     *
@@ -857,6 +901,7 @@ export default DS.Model.extend({
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
+
     /**
      * sets a new speedMiHrStackDecimal
      *
@@ -886,6 +931,7 @@ export default DS.Model.extend({
 
 	/**
 	 * returns the number of leading zeros from a string
+   *
 	 * @param  {string} string string that should be analyzed for leading zeros
 	 * @return {number}        number of leading zeros
 	 */
