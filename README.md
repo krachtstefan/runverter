@@ -1,5 +1,4 @@
-
-# Runverter
+# Runverter [![Build Status](https://travis-ci.org/krachtstefan/runverter.svg?branch=master)](https://travis-ci.org/krachtstefan/runverter)
 
 ## Installation
 
