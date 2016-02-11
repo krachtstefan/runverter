@@ -138,6 +138,13 @@ test('timeStackMin property can be zero', function(assert) {
   assert.strictEqual(run.get("timeStackMin").toString(), "0");
 });
 
+test('timeStackMin rounds properly', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(14400), lengthM : new BigNumber(42195)});
+  run.set("paceMinPerKmStackMin", "5");
+  assert.strictEqual(run.get("timeStackMin").toString(), "0"); // was -1 when calculation was based on raw values
+});
+
+
 test('timeStackMin setter changes timeStackMin', function(assert) {
   var run = this.subject();
   run.set("timeStackMin", "10");
