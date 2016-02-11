@@ -177,7 +177,8 @@ export default DS.Model.extend({
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeStackSecRaw");
+      var timeStackSecRaw = this.get("timeStackSecRaw").round();
+      return timeStackSecRaw.equals(60) ? new BigNumber(0) : timeStackSecRaw;
     },
 
     /**
@@ -191,7 +192,9 @@ export default DS.Model.extend({
       var previousValue = this.get("timeStackSecRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
-      return this.get("timeStackSecRaw");
+
+      var timeStackSecRaw = this.get("timeStackSecRaw").round();
+      return timeStackSecRaw.equals(60) ? new BigNumber(0) : timeStackSecRaw;
     }
   }),
 
