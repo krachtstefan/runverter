@@ -539,7 +539,8 @@ export default DS.Model.extend({
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerKmStackSecRaw").round();
+      var paceMinPerKmStackSec = this.get("paceMinPerKmStackSecRaw").round();
+      return paceMinPerKmStackSec.equals(60) ? new BigNumber(0) : paceMinPerKmStackSec;
     },
 
     /**
@@ -555,7 +556,8 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerKmStackSecRaw").round();
+      var paceMinPerKmStackSec = this.get("paceMinPerKmStackSecRaw").round();
+      return paceMinPerKmStackSec.equals(60) ? new BigNumber(0) : paceMinPerKmStackSec;
     }
   }),
 
