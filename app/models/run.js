@@ -650,7 +650,7 @@ export default DS.Model.extend({
   paceMinPerMiStackSec : Ember.computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
 
     /**
-     * returns paceMinPerMiStackSec, no decimal places
+     * returns paceMinPerMiStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
