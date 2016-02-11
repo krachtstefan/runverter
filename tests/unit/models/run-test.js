@@ -878,6 +878,11 @@ test('paceMinPerMiStackSec property can round up' , function(assert) {
  	assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "34"); // 60 * 0,56 = 33,6 seconds
 });
 
+test('paceMinPerMiStackSec rounds properly', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(1864), lengthM : new BigNumber(10000)});
+  assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "0"); // was 59.9817216 before round()
+});
+
 test('paceMinPerMiStackSec can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
  	assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "0");

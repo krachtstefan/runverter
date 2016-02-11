@@ -660,7 +660,8 @@ export default DS.Model.extend({
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerMiStackSecRaw").round();
+      var paceMinPerMiStackSec = this.get("paceMinPerMiStackSecRaw").round();
+      return paceMinPerMiStackSec.equals(60) ? new BigNumber(0) : paceMinPerMiStackSec;
     },
 
     /**
@@ -675,7 +676,8 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value).round();
       this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
 
-      return this.get("paceMinPerMiStackSecRaw").round();
+      var paceMinPerMiStackSec = this.get("paceMinPerMiStackSecRaw").round();
+      return paceMinPerMiStackSec.equals(60) ? new BigNumber(0) : paceMinPerMiStackSec;
     }
   }),
 
