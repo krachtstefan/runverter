@@ -139,7 +139,7 @@ export default DS.Model.extend({
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeStackMinRaw");
+      return this.get("timeStackMinRaw").round();
     },
 
     /**
@@ -153,7 +153,7 @@ export default DS.Model.extend({
       var previousValue = this.get("timeStackMinRaw");
       value = this._ensureBigNumber(value).round();
       this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
-      return this.get("timeStackMinRaw");
+      return this.get("timeStackMinRaw").round();
     }
   }),
 
