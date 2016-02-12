@@ -525,7 +525,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
-    return this.get("paceMinPerKmRaw").floor(); //TODO: Don't use Raw variables to floor, and round the getter and setter where they are used, just to make sure
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("paceMinPerKmRaw").round(2).floor();
   }),
 
   /**
