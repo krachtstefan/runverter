@@ -125,7 +125,7 @@ export default DS.Model.extend({
     * @return {BigNumber}
     */
    timeStackHrRaw : Ember.computed("timeHr", function(){
-     return this.get("timeHr").floor(); //TODO: Don't use Raw variables to floor, and round the getter and setter where they are used, just to make sure
+     return this.get("timeHr").floor();
    }),
 
   /**
