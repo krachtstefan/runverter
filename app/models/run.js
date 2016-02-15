@@ -888,7 +888,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
-    return this.get("speedMiHrRaw").floor(); //TODO: Don't use Raw variables to floor, and round the getter and setter where they are used, just to make sure
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("speedMiHrRaw").round(2).floor();
   }),
 
   /**

@@ -1229,6 +1229,15 @@ test('speedMiHrStackMi property can be zero', function(assert) {
  	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
+test('speedMiHrStackMi rounds properly', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1602)});
+  assert.strictEqual(run.get("speedMiHr").toString(), "0.99543664996420901933"); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
+ 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "1");
+  run.set("lengthM", new BigNumber(1601));
+  assert.strictEqual(run.get("speedMiHr").toString(), "0.99481527877197168536"); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
+ 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
+});
+
 test('speedMiHrStackMi setter changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
   run.set("speedMiHrStackMi", "18");
