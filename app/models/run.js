@@ -646,7 +646,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
-    return this.get("paceMinPerMiRaw").floor(); //TODO: Don't use Raw variables to floor, and round the getter and setter where they are used, just to make sure
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("paceMinPerMiRaw").round(2).floor();
   }),
 
 
@@ -766,7 +767,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
-    return this.get("speedKmHrRaw").floor(); //TODO: Don't use Raw variables to floor, and round the getter and setter where they are used, just to make sure
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+   return this.get("speedKmHrRaw").round(2).floor();
   }),
 
   /**
