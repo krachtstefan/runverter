@@ -1029,14 +1029,17 @@ test('speedKmHrStackKm property is calculated from timeSec and lengthM', functio
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1989)});
-  assert.strictEqual(run.get("speedKmHr").toString(), "0.9945"); // a speedKmHr of 0.994 results in a speedKmHrStackKm of 0, 0.995 would be a speedKmHrStackKm of 1
+  var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
  	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1990)});
- 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1"); // the speed of 0.995 should result in a paceMinPerMiStackMin of 1, not 0
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.995"); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
+ 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1");
+  run.set("lengthM", new BigNumber(1989));
+  assert.strictEqual(run.get("speedKmHr").toString(), "0.9945"); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
 test('speedKmHrStackKm setter changes speedKmHrStackKm', function(assert) {
