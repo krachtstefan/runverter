@@ -99,12 +99,10 @@ test('timeStackHr property can be zero', function(assert) {
 });
 
 test('timeStackHr rounds properly', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(3582)});
-  assert.strictEqual(run.get("timeHr").toString(), "0.995");
+  var run = this.subject({timeSec : new BigNumber(1)});
+  run.set("timeHr", new BigNumber(0.995));
   assert.strictEqual(run.get("timeStackHr").toString(), "1"); // the timeHr of 0.995 results in a timeStackHr of 1
-
-  run.set("timeSec", new BigNumber(3581));
-  assert.strictEqual(run.get("timeHr").toString(), "0.99472222222222222222");
+  run.set("timeHr", new BigNumber(0.994));
   assert.strictEqual(run.get("timeStackHr").toString(), "0"); // the timeHr of 0.994 results in a timeStackHr of 0
 });
 
@@ -319,12 +317,12 @@ test('lengthKmStackKm property can be zero', function(assert) {
 });
 
 test('lengthKmStackKm rounds properly', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(995)});
-  assert.strictEqual(run.get("lengthKm").toString(), "0.995");
+  var run = this.subject({lengthM : new BigNumber(1)});
+
+  run.set("lengthKm", new BigNumber(0.995));
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "1"); // the lengthKm of 0.995 results in a lengthKmStackKm of 1
 
-  run.set("lengthM", new BigNumber(994));
-  assert.strictEqual(run.get("lengthKm").toString(), "0.994");
+  run.set("lengthKm", new BigNumber(0.994));
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "0"); // the lengthKm of 0.994 results in a lengthKmStackKm of 0
 });
 
@@ -499,12 +497,12 @@ test('lengthMiStackMi property can be zero', function(assert) {
 });
 
 test('lengthMiStackMi rounds properly', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(1602)});
-  assert.strictEqual(run.get("lengthMi").toString(), "0.99543664996420901933");
+  var run = this.subject({lengthM : new BigNumber(1)});
+
+  run.set("lengthMi", new BigNumber(0.995));
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "1"); // the lengthMi of 0.995 results in a lengthMiStackMi of 1
 
-  run.set("lengthM", new BigNumber(1601));
-  assert.strictEqual(run.get("lengthMi").toString(), "0.99481527877197168536");
+  run.set("lengthMi", new BigNumber(0.994));
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "0"); // the lengthMi of 0.994 results in a lengthMiStackMi of 0
 });
 
@@ -685,11 +683,12 @@ test('paceMinPerKmStackMin property can be zero', function(assert) {
 });
 
 test('paceMinPerKmStackMin rounds properly', function(assert) {
-  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1005)});
-  assert.strictEqual(run.get("paceMinPerKm").toString(), "0.99502487562189054726");
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1)});
+
+  run.set("paceMinPerKm", new BigNumber(0.995));
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1"); // the paceMinPerKm of 0.995 results in a paceMinPerKmStackMin of 1
-  run.set("lengthM", new BigNumber(1006));
-  assert.strictEqual(run.get("paceMinPerKm").toString(), "0.99403578528827037773");
+
+  run.set("paceMinPerKm", new BigNumber(0.994));
  	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0"); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
 });
 
@@ -880,12 +879,13 @@ test('paceMinPerMiStackMin property can be zero', function(assert) {
 });
 
 test('paceMinPerMiStackMin rounds properly', function(assert) {
-  var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1.005)});
-  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.99502487562189054726"); // the paceMinPerMi of 0.995 results in a paceMinPerMiStackMin of 1
-  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1");
-  run.set("lengthMi", new BigNumber(1.006));
-  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.99403578528827037773"); // the paceMinPerMi of 0.994 results in a paceMinPerMiStackMin of 0
-  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");
+  var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
+
+  run.set("paceMinPerMi", new BigNumber(0.995));
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1"); // the paceMinPerMi of 0.995 results in a paceMinPerMiStackMin of 1
+
+  run.set("paceMinPerMi", new BigNumber(0.994));
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");  // the paceMinPerMi of 0.994 results in a paceMinPerMiStackMin of 0
 });
 
 test('paceMinPerMiStackMin setter changes paceMinPerMiStackMin', function(assert) {
@@ -1075,11 +1075,12 @@ test('speedKmHrStackKm property can be zero', function(assert) {
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1990)});
-  assert.strictEqual(run.get("speedKmHr").toString(), "0.995"); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
+  var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1)});
+
+  run.set("speedKmHr", new BigNumber(0.995)); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
  	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1");
-  run.set("lengthM", new BigNumber(1989));
-  assert.strictEqual(run.get("speedKmHr").toString(), "0.9945"); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
+
+  run.set("speedKmHr", new BigNumber(0.994)); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
@@ -1274,11 +1275,12 @@ test('speedMiHrStackMi property can be zero', function(assert) {
 });
 
 test('speedMiHrStackMi rounds properly', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1602)});
-  assert.strictEqual(run.get("speedMiHr").toString(), "0.99543664996420901933"); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
+  var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1)});
+
+  run.set("speedMiHr", new BigNumber(0.995)); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
  	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "1");
-  run.set("lengthM", new BigNumber(1601));
-  assert.strictEqual(run.get("speedMiHr").toString(), "0.99481527877197168536"); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
+
+  run.set("speedMiHr", new BigNumber(0.994)); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
  	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
