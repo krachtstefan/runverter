@@ -645,14 +645,17 @@ test('paceMinPerKmStackMin property is calculated from lengthM', function(assert
 });
 
 test('paceMinPerKmStackMin property can be zero', function(assert) {
-  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1006)});
-  assert.strictEqual(run.get("paceMinPerKm").toString(), "0.99403578528827037773"); // a paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0, 0.995 would be a paceMinPerKmStackMin of 1
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1500)});
  	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0");
 });
 
 test('paceMinPerKmStackMin rounds properly', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(12658), lengthM : new BigNumber(42195)});
-  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "5"); // the pace of 4.9998025042461587075877869 should result in a paceMinPerKmStackMin of 5, not 4
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1005)});
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "0.99502487562189054726");
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1"); // the paceMinPerKm of 0.995 results in a paceMinPerKmStackMin of 1
+  run.set("lengthM", new BigNumber(1006));
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "0.99403578528827037773");
+ 	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0"); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
 });
 
 test('paceMinPerKmStackMin setter changes paceMinPerKmStackMin', function(assert) {
