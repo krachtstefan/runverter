@@ -206,6 +206,7 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   timeStackSecRaw : Ember.computed("timeSec", "timeMinRaw",function(){
+    // a combinatin of round and floor is not necessary here, because there is no smaller metric than seconds
     return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
   }),
 
