@@ -287,7 +287,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
-    return this.get("lengthKm").floor();
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("lengthKm").round(2).floor();
   }),
 
   /**

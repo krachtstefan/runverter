@@ -303,6 +303,16 @@ test('lengthKmStackKm property can be zero', function(assert) {
  	assert.strictEqual(run.get("lengthKmStackKm").toString(), "0");
 });
 
+test('lengthKmStackKm rounds properly', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(995)});
+  assert.strictEqual(run.get("lengthKm").toString(), "0.995");
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "1"); // the lengthKm of 0.995 results in a lengthKmStackKm of 1
+
+  run.set("lengthM", new BigNumber(994));
+  assert.strictEqual(run.get("lengthKm").toString(), "0.994");
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "0"); // the lengthKm of 0.994 results in a lengthKmStackKm of 0
+});
+
 test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
   var run = this.subject();
   run.set("lengthKmStackKm", "2");
