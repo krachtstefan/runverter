@@ -94,8 +94,18 @@ test('timeStackHr property is calculated from timeSec', function(assert) {
 });
 
 test('timeStackHr property can be zero', function(assert) {
-  var run = this.subject({timeSec : new BigNumber(3599)});
+  var run = this.subject({timeSec : new BigNumber(2500)});
   assert.strictEqual(run.get("timeStackHr").toString(), "0");
+});
+
+test('timeStackHr rounds properly', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3582)});
+  assert.strictEqual(run.get("timeHr").toString(), "0.995");
+  assert.strictEqual(run.get("timeStackHr").toString(), "1"); // the timeHr of 0.995 results in a timeStackHr of 1
+
+  run.set("timeSec", new BigNumber(3581));
+  assert.strictEqual(run.get("timeHr").toString(), "0.99472222222222222222");
+  assert.strictEqual(run.get("timeStackHr").toString(), "0"); // the timeHr of 0.994 results in a timeStackHr of 0
 });
 
 test('timeStackHr setter changes timeStackHr', function(assert) {
