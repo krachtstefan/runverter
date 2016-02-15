@@ -473,6 +473,16 @@ test('lengthMiStackMi property can be zero', function(assert) {
  	assert.strictEqual(run.get("lengthMiStackMi").toString(), "0");
 });
 
+test('lengthMiStackMi rounds properly', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1602)});
+  assert.strictEqual(run.get("lengthMi").toString(), "0.99543664996420901933");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "1"); // the lengthMi of 0.995 results in a lengthMiStackMi of 1
+
+  run.set("lengthM", new BigNumber(1601));
+  assert.strictEqual(run.get("lengthMi").toString(), "0.99481527877197168536");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "0"); // the lengthMi of 0.994 results in a lengthMiStackMi of 0
+});
+
 test('lengthMiStackMi setter changes lengthMiStackMi', function(assert) {
   var run = this.subject();
   run.set("lengthMiStackMi", "2");

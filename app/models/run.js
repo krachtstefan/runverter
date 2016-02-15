@@ -404,7 +404,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   lengthMiStackMiRaw : Ember.computed("lengthMiRaw", function(){
-    return this.get("lengthMi").floor();
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("lengthMi").round(2).floor();
   }),
 
   /**
