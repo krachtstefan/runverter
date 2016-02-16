@@ -165,7 +165,7 @@ export default DS.Model.extend({
    */
   timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("timeMinRaw").round(2).floor().minus(this.get("timeStackHr")*60);
+    return this.get("timeMin").round(2).floor().minus(this.get("timeStackHr")*60);
   }),
 
   /**
@@ -531,7 +531,7 @@ export default DS.Model.extend({
    */
   paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerKmRaw").round(2).floor();
+    return this.get("paceMinPerKm").round(2).floor();
   }),
 
   /**
@@ -652,7 +652,7 @@ export default DS.Model.extend({
    */
   paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerMiRaw").round(2).floor();
+    return this.get("paceMinPerMi").round(2).floor();  // TODO make test recognize why not using paceMinPerMiRaw
   }),
 
 
@@ -773,7 +773,7 @@ export default DS.Model.extend({
    */
   speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-   return this.get("speedKmHrRaw").round(2).floor();
+   return this.get("speedKmHr").round(2).floor();
   }),
 
   /**
@@ -894,7 +894,7 @@ export default DS.Model.extend({
    */
   speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("speedMiHrRaw").round(2).floor();
+    return this.get("speedMiHr").round(2).floor();
   }),
 
   /**
