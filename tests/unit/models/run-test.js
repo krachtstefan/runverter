@@ -100,10 +100,25 @@ test('timeStackHr property can be zero', function(assert) {
 
 test('timeStackHr rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(1)});
+  run.set("timeSec", new BigNumber(3600));
+  assert.strictEqual(run.get("timeStackHr").toString(), "1"); // 1:00:00
+  assert.strictEqual(run.get("timeStackMin").toString(), "0");
+  assert.strictEqual(run.get("timeStackSec").toString(), "0");
+
+  run.set("timeSec", new BigNumber(3599));
+  assert.strictEqual(run.get("timeStackHr").toString(), "0"); // 0:59:59
+  assert.strictEqual(run.get("timeStackMin").toString(), "59");
+  assert.strictEqual(run.get("timeStackSec").toString(), "59");
+
+  run.set("timeSec", new BigNumber(3599.5));
+  assert.strictEqual(run.get("timeStackHr").toString(), "1"); // 0:59:59.5 will be rounded to 1:00:00
+  assert.strictEqual(run.get("timeStackMin").toString(), "0");
+  assert.strictEqual(run.get("timeStackSec").toString(), "0");
+
   run.set("timeHr", new BigNumber(0.995));
-  assert.strictEqual(run.get("timeStackHr").toString(), "1"); // the timeHr of 0.995 results in a timeStackHr of 1
-  run.set("timeHr", new BigNumber(0.994));
-  assert.strictEqual(run.get("timeStackHr").toString(), "0"); // the timeHr of 0.994 results in a timeStackHr of 0
+  assert.strictEqual(run.get("timeStackHr").toString(), "0"); // the timeHr of 0.995 results in a timeStac of 0:59:42, no need to round up
+  assert.strictEqual(run.get("timeStackMin").toString(), "59");
+  assert.strictEqual(run.get("timeStackSec").toString(), "42");
 });
 
 test('timeStackHr setter changes timeStackHr', function(assert) {

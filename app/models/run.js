@@ -124,9 +124,10 @@ export default DS.Model.extend({
     *
     * @return {BigNumber}
     */
-   timeStackHrRaw : Ember.computed("timeHr", function(){
-     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-     return this.get("timeHr").round(2).floor();
+   timeStackHrRaw : Ember.computed("timeSec", function(){
+    // use .get("timeSec").round() instead of .get("timeHr")
+    // otherwise 3599.5 seconds would result in a timeStackHrRaw of 1
+    return this.get("timeSec").round().dividedBy(3600).floor();
    }),
 
   /**
