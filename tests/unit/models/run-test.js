@@ -172,7 +172,7 @@ test('timeStackMin rounds properly', function(assert) {
   run.set("timeMin", new BigNumber("0.991"));
   assert.strictEqual(run.get("timeStackMin").toString(), "0"); // the timeMin of 0.991 results in a timeStackMin of 1 (59.46 seconds)
 
-  run.setProperties({"paceMinPerKmStackMin": "5", "paceMinPerKmStackSec" : "41"});  // 3:59:48
+  run.setProperties({ paceMinPerKmStackMin : "5", paceMinPerKmStackSec : "41" });
   assert.strictEqual(run.get("timeStackSec").toString(), "48");
   assert.strictEqual(run.get("timeStackMin").toString(), "59");
   assert.strictEqual(run.get("timeStackHr").toString(), "3");
@@ -279,11 +279,11 @@ test('lengthKm can have up to 20 decimal places and can round up', function(asse
   // http://keisan.casio.com/calculator results in 0.0015205761315020566666666667
  	assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 
-  run.setProperties({lengthM : new BigNumber("8.78748598595").dividedBy(3)});
+  run.set("lengthM", new BigNumber("8.78748598595").dividedBy(3));
   // http://keisan.casio.com/calculator results in 0.0029291619953166666666666667
   assert.strictEqual(run.get("lengthKm").toString(), "0.00292916199531666667");
 
-  run.setProperties({lengthM : new BigNumber("8.123455").dividedBy(7)});
+  run.set("lengthM", new BigNumber("8.123455").dividedBy(7));
   // http://keisan.casio.com/calculator results in 0.0011604935714285714285714286
   assert.strictEqual(run.get("lengthKm").toString(), "0.00116049357142857143");
 });
@@ -293,11 +293,11 @@ test('lengthKm can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(9)});
   // http://keisan.casio.com/calculator results in 0.001013717421001371111111
 
- 	run.setProperties({lengthM : new BigNumber("9.3343442341212212212").dividedBy(5)});
+ 	run.set("lengthM", new BigNumber("9.3343442341212212212").dividedBy(5));
   // http://keisan.casio.com/calculator results in 0.00186686884682424424424
   assert.strictEqual(run.get("lengthKm").toString(), "0.00186686884682424424");
 
-  run.setProperties({lengthM : new BigNumber("9.3343442341214223423324212").dividedBy(3)});
+  run.set("lengthM", new BigNumber("9.3343442341214223423324212").dividedBy(3));
   // http://keisan.casio.com/calculator results in 0.0031114480780404741141108071
   assert.strictEqual(run.get("lengthKm").toString(), "0.00311144807804047411");
 });
@@ -441,10 +441,7 @@ test('lengthKmStackDecimal setter changes lengthM', function(assert) {
 
 test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', function(assert) {
   var run = this.subject();
-  run.setProperties({
-    "lengthKmStackKm" : "12",
-    "lengthKmStackDecimal" : "09"
-  });
+  run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimal : "09" });
   assert.strictEqual(run.get("lengthKm").toString(), "12.09");
 });
 
@@ -459,11 +456,11 @@ test('lengthMi can have up to 20 decimal places and can round up', function(asse
   // http://keisan.casio.com/calculator results in 0.0056690532223144026385906307
  	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
 
-  run.setProperties({lengthM : new BigNumber(14232.25)});
+  run.set("lengthM", new BigNumber(14232.25));
   // http://keisan.casio.com/calculator results in 8.8435101507197963890877277
   assert.strictEqual(run.get("lengthMi").toString(), "8.84351015071979638909");
 
-  run.setProperties({lengthM : new BigNumber(123.45)});
+  run.set("lengthM", new BigNumber(123.45));
   // http://keisan.casio.com/calculator results in 0.07670827368169887854927225
   assert.strictEqual(run.get("lengthMi").toString(), "0.07670827368169887855");
 });
@@ -473,11 +470,11 @@ test('lengthMi can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.005669053222314396424879
  	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
 
-  run.setProperties({lengthM : new BigNumber(123)});
+  run.set("lengthM", new BigNumber(123));
   // http://keisan.casio.com/calculator results in 0.076428656645192078262944405
   assert.strictEqual(run.get("lengthMi").toString(), "0.07642865664519207826");
 
-  run.setProperties({lengthM : new BigNumber(12.12)});
+  run.set("lengthM", new BigNumber(12.12));
   // http://keisan.casio.com/calculator results in 0.0075310188499164877117633023
   assert.strictEqual(run.get("lengthMi").toString(), "0.00753101884991648771");
 });
@@ -621,10 +618,7 @@ test('lengthMiStackDecimal setter changes lengthM', function(assert) {
 
 test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi', function(assert) {
   var run = this.subject();
-  run.setProperties({
-    "lengthMiStackMi" : "12",
-    "lengthMiStackDecimal" : "09"
-  });
+  run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimal : "09" });
   assert.strictEqual(run.get("lengthMi").toString(), "12.09");
 });
 
@@ -639,11 +633,11 @@ test('paceMinPerKm can have up to 20 decimal places and can round up', function(
   // http://keisan.casio.com/calculator results in 1.2482853212486666666666667
  	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
 
-  run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93)});
+  run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93) });
   // http://keisan.casio.com/calculator results in 31.279569892473118279569892
   assert.strictEqual(run.get("paceMinPerKm").toString(), "31.27956989247311827957");
 
-  run.setProperties({timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123)});
+  run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123) });
   // http://keisan.casio.com/calculator results in 23.650406504065040650406504
   assert.strictEqual(run.get("paceMinPerKm").toString(), "23.65040650406504065041");
 });
@@ -653,11 +647,11 @@ test('paceMinPerKm can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 1.248285321248222222222
  	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
 
-  run.setProperties({timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921)});
+  run.setProperties({ timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921) });
   // http://keisan.casio.com/calculator results in 2.3055991195698154180238871
   assert.strictEqual(run.get("paceMinPerKm").toString(), "2.30559911956981541802");
 
-  run.setProperties({timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123)});
+  run.setProperties({ timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123) });
   // http://keisan.casio.com/calculator results in 17.26387627951219512195122
   assert.strictEqual(run.get("paceMinPerKm").toString(), "17.26387627951219512195");
 });
@@ -835,11 +829,11 @@ test('paceMinPerMi can have up to 20 decimal places and can round up', function(
   // http://keisan.casio.com/calculator results in 0.0012482853212486666666666667
  	assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
 
-  run.setProperties({timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123)});
+  run.setProperties({ timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123) });
   // http://keisan.casio.com/calculator results in 0.001248285321248666666667
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00913379503352682927");
 
-  run.setProperties({timeMin : new BigNumber(13), lengthMi : new BigNumber(124)});
+  run.setProperties({ timeMin : new BigNumber(13), lengthMi : new BigNumber(124) });
   // http://keisan.casio.com/calculator results in 0.10483870967741935483870968
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.10483870967741935484");
 });
@@ -849,11 +843,11 @@ test('paceMinPerMi can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.0034590630990234444444444444
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00345906309902344444");
 
-  run.setProperties({timeMin : new BigNumber(9), lengthMi : new BigNumber(124)});
+  run.setProperties({ timeMin : new BigNumber(9), lengthMi : new BigNumber(124) });
   // http://keisan.casio.com/calculator results in 0.072580645161290322580645161
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.07258064516129032258");
 
-  run.setProperties({timeMin : new BigNumber(1245), lengthMi : new BigNumber(124)});
+  run.setProperties({ timeMin : new BigNumber(1245), lengthMi : new BigNumber(124) });
   // http://keisan.casio.com/calculator results in 10.04032258064516129032 2581
   assert.strictEqual(run.get("paceMinPerMi").toString(), "10.04032258064516129032");
 });
@@ -1031,11 +1025,11 @@ test('speedKmHr can have up to 20 decimal places and can round up', function(ass
   // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454545");
 
-  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510)});
+  run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510) });
   // http://keisan.casio.com/calculator results in 7.6748727272727272727272727
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67487272727272727273");
 
-  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.121)});
+  run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.121) });
   // http://keisan.casio.com/calculator results in 3.9668727272727272727272727
   assert.strictEqual(run.get("speedKmHr").toString(), "3.96687272727272727273");
 });
@@ -1045,11 +1039,11 @@ test('speedKmHr can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.9544555102040816326531
   assert.strictEqual(run.get("speedKmHr").toString(), "0.95445551020408163265");
 
-  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912)});
+  run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912) });
   // http://keisan.casio.com/calculator results in 4.2516654545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "4.25166545454545454545");
 
-  run.setProperties({timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912)});
+  run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912) });
   // http://keisan.casio.com/calculator results in 7.8516654545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.85166545454545454545");
 });
@@ -1199,8 +1193,7 @@ test('speedKmHrStackDecimal setter works with leading zeros', function(assert) {
 
 test('speedKmHrStackDecimal setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(3000)});
-  run.set("speedKmHrStackKm", "1");
-  run.set("speedKmHrStackDecimal", "5");
+  run.setProperties({ speedKmHrStackKm : "1", speedKmHrStackDecimal : "5" });
   assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3km with 1,5km/hr will take 2 hours (7200 sek)
 });
 
@@ -1212,10 +1205,7 @@ test('speedKmHrStackDecimal setter doesn\'t change lengthM', function(assert) {
 
 test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(4400)});
-  run.setProperties({
-    "speedKmHrStackKm" : "12",
-    "speedKmHrStackDecimal" : "05"
-  });
+  run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimal : "05" });
   assert.strictEqual(run.get("speedKmHr").toString(), "12.05");
 });
 
@@ -1231,11 +1221,11 @@ test('speedMiHr can have up to 20 decimal places and can round up', function(ass
   // http://keisan.casio.com/calculator results in 1.0124399997763063707945598
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01243999977630637079");
 
-  run.setProperties({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380333)});
+  run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380333) });
   // http://keisan.casio.com/calculator results in 1.0124500001242742384474668
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01245000012427423845");
 
-  run.setProperties({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380322)});
+  run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380322) });
   // http://keisan.casio.com/calculator results in 1.0124499932891911238367931
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01244999328919112384");
 });
@@ -1245,11 +1235,11 @@ test('speedMiHr can round up', function(assert) {
   // http://keisan.casio.com/calculator results in 1.0124504139574882685118906
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01245041395748826851");
 
-  run.setProperties({timeSec : new BigNumber(3600), lengthM : new BigNumber(1721)});
+  run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1721) });
   // http://keisan.casio.com/calculator results in 1.0693798218404517617116042
   assert.strictEqual(run.get("speedMiHr").toString(), "1.06937982184045176171");
 
-  run.setProperties({timeSec : new BigNumber(3600), lengthM : new BigNumber(12345.12)});
+  run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(12345.12) });
   // http://keisan.casio.com/calculator results in 7.6709019327129563350035791
   assert.strictEqual(run.get("speedMiHr").toString(), "7.670901932712956335"); // two zeros at the end are falling away
 });
@@ -1399,8 +1389,7 @@ test('speedMiHrStackDecimal setter works with leading zeros', function(assert) {
 
 test('speedMiHrStackDecimal setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4828.032)});
-  run.set("speedMiHrStackMi", "1");
-  run.set("speedMiHrStackDecimal", "5");
+  run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "5" });
   assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3m with 1,5m/hr will take 2 hours (7200 sek)
 });
 
@@ -1412,22 +1401,13 @@ test('speedMiHrStackDecimal setter doesn\'t change lengthM', function(assert) {
 
 test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(4400)});
-  run.setProperties({
-    "speedMiHrStackMi" : "12",
-    "speedMiHrStackDecimal" : "05"
-  });
+  run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "05" });
   assert.strictEqual(run.get("speedMiHr").toString(), "12.05");
 
-  run.setProperties({
-    "speedMiHrStackMi" : "12",
-    "speedMiHrStackDecimal" : "04"
-  });
+  run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "04" });
   assert.strictEqual(run.get("speedMiHr").toString(), "12.04");
 
-  run.setProperties({
-    "speedMiHrStackMi" : "1",
-    "speedMiHrStackDecimal" : "04"
-  });
+  run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "04" });
   assert.strictEqual(run.get("speedMiHr").toString(), "1.04");
 });
 
