@@ -166,11 +166,21 @@ test('timeStackMin rounds properly', function(assert) {
   run.set("paceMinPerKmStackMin", "5");
   assert.strictEqual(run.get("timeStackMin").toString(), "0"); // was -1 when calculation was based on raw values without round()
 
-  run.set("timeMin", new BigNumber("0.995"));
-  assert.strictEqual(run.get("timeStackMin").toString(), "1"); // the timeMin of 0.995 results in a timeStackMin of 1
-
   run.set("timeMin", new BigNumber("0.994"));
-  assert.strictEqual(run.get("timeStackMin").toString(), "0"); // the timeMin of 0.994 results in a timeStackMin of 0
+  assert.strictEqual(run.get("timeStackMin").toString(), "1"); // the timeMin of 0.994 results in a timeStackMin of 1 (59.64 seconds)
+
+  run.set("timeMin", new BigNumber("0.991"));
+  assert.strictEqual(run.get("timeStackMin").toString(), "0"); // the timeMin of 0.991 results in a timeStackMin of 1 (59.46 seconds)
+
+  run.setProperties({"paceMinPerKmStackMin": "5", "paceMinPerKmStackSec" : "41"});  // 3:59:48
+  assert.strictEqual(run.get("timeStackSec").toString(), "48");
+  assert.strictEqual(run.get("timeStackMin").toString(), "59");
+  assert.strictEqual(run.get("timeStackHr").toString(), "3");
+
+  run.set("timeSec", new BigNumber(3599.5)); // 0:59:59.5 will be rounded to 1:00:00
+  assert.strictEqual(run.get("timeStackHr").toString(), "1");
+  assert.strictEqual(run.get("timeStackMin").toString(), "0");
+  assert.strictEqual(run.get("timeStackSec").toString(), "0");
 });
 
 test('timeStackMin setter changes timeStackMin', function(assert) {
