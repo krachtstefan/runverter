@@ -164,7 +164,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  timeStackMinRaw : Ember.computed("timeMinRaw", "timeStackHrRaw", function(){
+  timeStackMinRaw : Ember.computed("timeSec", "timeStackHrRaw", function(){
     // use .get("timeSec").round().dividedBy(60) instead of .get("timeMinRaw")
     // otherwise 3599.5 seconds would result in a timeStackMinRaw of 59 instead of 0
     return this.get("timeSec").round().dividedBy(60).floor().minus(this.get("timeStackHr")*60);
