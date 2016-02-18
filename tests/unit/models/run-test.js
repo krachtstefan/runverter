@@ -1215,7 +1215,6 @@ test('speedMiHr property is calculated from timeSec and lengthM', function(asser
   assert.strictEqual(run.get("speedMiHr").toString(), "1");
 });
 
-
 test('speedMiHr can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.364239)});
   // http://keisan.casio.com/calculator results in 1.0124399997763063707945598
