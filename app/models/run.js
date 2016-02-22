@@ -259,6 +259,48 @@ export default DS.Model.extend({
   }),
 
   /**
+   * lengthMStackDecimal is used to display the length like 12,34
+   * and represents up to two decimal places of the meters value
+   */
+  lengthMStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+
+    /**
+     * returns lengthMStackDecimal, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      var lengthMStackDecimal = this.get("lengthM").round(2).toString().split(".")[1];
+      return lengthMStackDecimal ? lengthMStackDecimal : "0";
+    },
+
+    /**
+     * sets a new lengthMStackDecimal
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMStackDecimal"
+     * @param  {BigNumber|string|number} value new lengthMStackDecimal value
+     * @return {string} new lengthMStackDecimal value
+     */
+    set: function(propertyName, value) {
+      var leadingZeros = this._getLeadingZerosFromString(value);
+      value = this._ensureBigNumber(value).round();
+      var valueLength = value.toString().length;
+
+      // reflects the decimal precision of the value
+      // 1 = 100; 10 = 10
+      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+
+      // calulate the meters from decimal place
+      var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros)).dividedBy(1000);
+
+      this.set("lengthM", this.get("lengthMStackMRaw").plus(decimalMeters));
+
+      var lengthMStackDecimal = this.get("lengthM").round(2).toString().split(".")[1];
+      return lengthMStackDecimal ? lengthMStackDecimal : "0";
+    }
+  }),
+
+  /**
    * length of the run in km
    */
   lengthKm : Ember.computed("lengthKmRaw", {

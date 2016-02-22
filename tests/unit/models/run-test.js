@@ -314,6 +314,77 @@ test('lengthMStackM setter changes lengthM', function(assert) {
   assert.strictEqual(run.get("lengthM").toString(), "2.56");
 });
 
+
+// lengthMStackDecimal
+test('lengthMStackDecimal property is calculated from lengthM and can round down', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10.454)});
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "45");
+});
+
+test('lengthMStackDecimal property can round up', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10.455)});
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "46");
+});
+
+test('lengthMStackDecimal can have 1 digit', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(12.4)});
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "4");
+});
+
+test('lengthMStackDecimal supports leading zero', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(12.05)});
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "05");
+});
+
+test('lengthMStackDecimal can be zero', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(12)});
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "0");
+  run.set("lengthM", new BigNumber(0.004));
+ 	assert.strictEqual(run.get("lengthMStackDecimal"), "0");
+});
+
+test('lengthMStackDecimal setter changes lengthMStackDecimal', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackDecimal", "9");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "9");
+});
+
+test('lengthMStackDecimal setter also works with integer', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackDecimal", 9);
+  assert.strictEqual(run.get("lengthMStackDecimal"), "9");
+});
+
+test('lengthMStackDecimal setter can handle floats', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackDecimal", "8.2");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "8");
+  run.set("lengthMStackDecimal", 9.5);
+  assert.strictEqual(run.get("lengthMStackDecimal"), "1");
+});
+
+test('lengthMStackDecimal setter works with leading zeros', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackDecimal", "09");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "09");
+  run.set("lengthMStackDecimal", "002");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "0");
+  run.set("lengthMStackDecimal", "009");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "01");
+});
+
+test('lengthMStackDecimal setter changes lengthM', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1000)});
+  run.set("lengthMStackDecimal", "09");
+  assert.strictEqual(run.get("lengthM").toString(), "1000.09");
+});
+
+test('lengthMStackM and lengthMStackDecimal setter will define lengthM', function(assert) {
+  var run = this.subject();
+  run.setProperties({ lengthMStackM : "12", lengthMStackDecimal : "09" });
+  assert.strictEqual(run.get("lengthM").toString(), "12.09");
+});
+
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
