@@ -267,6 +267,53 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
   assert.strictEqual(run.get("timeSec").toString(), "12662");
 });
 
+// lengthMStackM
+test('lengthMStackM property is calculated from lengthM', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1800)});
+ 	assert.strictEqual(run.get("lengthMStackM").toString(), "1800");
+});
+
+test('lengthMStackM property can be zero', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(0)});
+ 	assert.strictEqual(run.get("lengthMStackM").toString(), "0");
+
+  run.set("lengthM", new BigNumber(0.3));
+ 	assert.strictEqual(run.get("lengthMStackM").toString(), "0");
+});
+
+test('lengthMStackM rounds properly', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(0.995)});
+  assert.strictEqual(run.get("lengthMStackM").toString(), "1"); // the lengthM of 0.995 results in a lengthMStackM of 1
+  run.set("lengthM", new BigNumber(0.994));
+  assert.strictEqual(run.get("lengthMStackM").toString(), "0"); // the lengthM of 0.994 results in a lengthMStackM of 0
+});
+
+test('lengthMStackM setter changes lengthMStackM', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackM", "2");
+  assert.strictEqual(run.get("lengthMStackM").toString(), "2");
+});
+
+test('lengthMStackM setter can handle floats', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackM", "2.9");
+  assert.strictEqual(run.get("lengthMStackM").toString(), "3");
+  run.set("lengthMStackM", 2.3);
+  assert.strictEqual(run.get("lengthMStackM").toString(), "2");
+});
+
+test('lengthMStackM setter also works with integer', function(assert) {
+  var run = this.subject();
+  run.set("lengthMStackM", 2);
+  assert.strictEqual(run.get("lengthMStackM").toString(), "2");
+});
+
+test('lengthMStackM setter changes lengthM', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1234.56)});
+  run.set("lengthMStackM", "2");
+  assert.strictEqual(run.get("lengthM").toString(), "2.56");
+});
+
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});

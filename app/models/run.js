@@ -220,6 +220,45 @@ export default DS.Model.extend({
   lengthM : new BigNumber(0),
 
   /**
+   * lengthMStackM is used to display the length like 12,34 and represents the Meter value
+   */
+  lengthMStackM : Ember.computed("lengthM", "lengthMStackMRaw", {
+
+    /**
+     * returns lengthMStackM, no decimal places
+     *
+     * @return {BigNumber}
+     */
+    get: function() {
+      return this.get("lengthMStackMRaw");
+    },
+
+    /**
+     * sets a new lengthMStackM
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMStackM"
+     * @param  {BigNumber|string|number} value new lengthMStackM value
+     * @return {BigNumber} new lengthMStackM value
+     */
+    set: function(propertyName, value) {
+      var previousValue = this.get("lengthMStackMRaw");
+      value = this._ensureBigNumber(value).round();
+      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue)));
+      return this.get("lengthMStackMRaw");
+    }
+  }),
+
+  /**
+   * calculates the value of lengthMStackM
+   *
+   * @return {BigNumber}
+   */
+  lengthMStackMRaw : Ember.computed("lengthM", function(){
+    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
+    return this.get("lengthM").round(2).floor();
+  }),
+
+  /**
    * length of the run in km
    */
   lengthKm : Ember.computed("lengthKmRaw", {
@@ -291,7 +330,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthKmStackKmRaw : Ember.computed("lengthKmRaw", function(){
+  lengthKmStackKmRaw : Ember.computed("lengthKm", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
     return this.get("lengthKm").round(2).floor();
   }),
