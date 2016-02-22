@@ -4,7 +4,7 @@
       A pace of &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-      {{input value=model.paceMinPerKmStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerKmStackSec size="2" maxlength="2" type="text"}} min/km
+      {{input value=model.paceMinPerKmStackMin min="0" max="99" step="1" type="number"}} : {{input value=model.paceMinPerKmStackSec min="0" max="60" step="1" type="number"}} min/km
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse tool-line">
@@ -12,7 +12,7 @@
       or &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-      {{input value=model.paceMinPerMiStackMin size="2" maxlength="2" type="text"}} : {{input value=model.paceMinPerMiStackSec size="2" maxlength="2" type="text"}} min/m
+      {{input value=model.paceMinPerMiStackMin min="0" max="99" step="1" type="number"}} : {{input value=model.paceMinPerMiStackSec min="0" max="60" step="1" type="number"}} min/m
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse tool-line">
@@ -20,7 +20,7 @@
       equals a speed of &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-      {{input value=model.speedKmHrStackKm size="2" maxlength="2" type="text"}} , {{input value=model.speedKmHrStackDecimal size="2" maxlength="2" type="text"}} km/h
+      {{input value=model.speedKmHrStackKm min="0" max="99" step="1" type="number"}} , {{input value=model.speedKmHrStackDecimal min="0" max="99" step="1" type="number"}} km/h
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse tool-line">
@@ -28,7 +28,7 @@
       or &nbsp;
     </div>
     <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-      {{input value=model.speedMiHrStackMi size="2" maxlength="2" type="text"}} , {{input value=model.speedMiHrStackDecimal size="2" maxlength="2" type="text"}} mi/h
+      {{input value=model.speedMiHrStackMi min="0" max="99" step="1" type="number"}} , {{input value=model.speedMiHrStackDecimal min="0" max="99" step="1" type="number"}} mi/h
     </div>
   </div>
 </form>
