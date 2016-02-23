@@ -818,6 +818,84 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
   assert.strictEqual(run.get("lengthMi").toString(), "12.09");
 });
 
+// lengthMiStackDecimalFixed
+test('lengthMiStackDecimalFixed property is calculated from lengthMi and can round down', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(10.021)});
+ 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "02");
+});
+
+test('lengthMiStackDecimalFixed property can round up', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(10.025)});
+ 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "03");
+});
+
+test('lengthMiStackDecimalFixed has trailing zero(s)', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(10.1)});
+ 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
+  run.set("lengthMi", new BigNumber(14));
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
+});
+
+test('lengthMiStackDecimalFixed supports leading zero', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(12.09)});
+ 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
+  run.set("lengthMi", new BigNumber(12.005));
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "01");
+});
+
+test('lengthMiStackDecimalFixed can be zero', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(1)});
+ 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
+});
+
+test('lengthMiStackDecimalFixed setter changes lengthMiStackDecimalFixed', function(assert) {
+  var run = this.subject();
+  run.set("lengthMiStackDecimalFixed", "90");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
+});
+
+test('lengthMiStackDecimalFixed setter also works with integer', function(assert) {
+  var run = this.subject();
+  run.set("lengthMiStackDecimalFixed", 9);
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
+});
+
+test('lengthMiStackDecimalFixed setter can handle floats', function(assert) {
+  var run = this.subject();
+  run.set("lengthMiStackDecimalFixed", "8.2");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "80");
+  run.set("lengthMiStackDecimalFixed", 9.5);
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
+});
+
+test('lengthMiStackDecimalFixed setter works with single digit', function(assert) {
+  var run = this.subject();
+  run.set("lengthMiStackDecimalFixed", "9");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
+});
+
+test('lengthMiStackDecimalFixed setter works with leading zero', function(assert) {
+  var run = this.subject();
+  run.set("lengthMiStackDecimalFixed", "09");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
+  run.set("lengthMiStackDecimalFixed", "002");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
+  run.set("lengthMiStackDecimalFixed", "009");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "01");
+});
+
+test('lengthMiStackDecimalFixed setter changes lengthMi', function(assert) {
+  var run = this.subject({lengthMi : new BigNumber(2)});
+  run.set("lengthMiStackDecimalFixed", "09");
+  assert.strictEqual(run.get("lengthMi").toString(), "2.09");
+});
+
+test('lengthMiStackMi and lengthMiStackDecimalFixed setter will define lengthMi', function(assert) {
+  var run = this.subject();
+  run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimalFixed : "9" });
+  assert.strictEqual(run.get("lengthMi").toString(), "12.9");
+});
+
 // paceMinPerKm
 test('paceMinPerKm property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(60), lengthM : new BigNumber(1000)});

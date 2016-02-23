@@ -588,6 +588,47 @@ export default DS.Model.extend({
   }),
 
   /**
+   * lengthMiStackDecimalFixed is a variation of lengthMiStackDecimal with a fixed
+   * length as defined in the digits property. It's basically lengthMiStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  lengthMiStackDecimalFixed : Ember.computed("lengthMiStackDecimalFixedRaw", {
+
+    /**
+     * returns lengthMiStackDecimalFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("lengthMiStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new lengthMiStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMiStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new lengthMiStackDecimalFixed value
+     * @return {string} new lengthMiStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("lengthMiStackDecimal", value);
+      return this.get("lengthMiStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of lengthMiStackDecimalFixed
+   *
+   * @return {string}
+   */
+  lengthMiStackDecimalFixedRaw : Ember.computed("lengthMiStackDecimal", "lengthKmRaw", function(){
+    var lengthMiStackDecimal = this.get("lengthMiStackDecimal");
+    var zerosToAdd = this.get("digits").minus(lengthMiStackDecimal.length);
+    while (zerosToAdd--) { lengthMiStackDecimal += "0";}
+    return lengthMiStackDecimal;
+  }),
+
+  /**
    * pace of the run in min/km
    */
   paceMinPerKm : Ember.computed("paceMinPerKmRaw", "lengthKmRaw", {
