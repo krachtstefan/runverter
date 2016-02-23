@@ -563,6 +563,84 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
   assert.strictEqual(run.get("lengthKm").toString(), "12.09");
 });
 
+// lengthKmStackDecimalFixed
+test('lengthKmStackDecimalFixed property is calculated from lengthM and can round down', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1712)});
+ 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "71");
+});
+
+test('lengthKmStackDecimalFixed property can round up', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1719)});
+ 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "72");
+});
+
+test('lengthKmStackDecimalFixed has trailing zero(s)', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(500)});
+ 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "50");
+  run.set("lengthM", new BigNumber(2));
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
+});
+
+test('lengthKmStackDecimalFixed supports leading zero', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(90)});
+ 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
+  run.set("lengthM", new BigNumber(5));
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "01");
+});
+
+test('lengthKmStackDecimalFixed can be zero', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1000)});
+ 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
+});
+
+test('lengthKmStackDecimalFixed setter changes lengthKmStackDecimalFixed', function(assert) {
+  var run = this.subject();
+  run.set("lengthKmStackDecimalFixed", "90");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
+});
+
+test('lengthKmStackDecimalFixed setter also works with integer', function(assert) {
+  var run = this.subject();
+  run.set("lengthKmStackDecimalFixed", 9);
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
+});
+
+test('lengthKmStackDecimalFixed setter can handle floats', function(assert) {
+  var run = this.subject();
+  run.set("lengthKmStackDecimalFixed", "8.2");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "80");
+  run.set("lengthKmStackDecimalFixed", 9.5);
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "10");
+});
+
+test('lengthKmStackDecimalFixed setter works with single digit', function(assert) {
+  var run = this.subject();
+  run.set("lengthKmStackDecimalFixed", "9");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
+});
+
+test('lengthKmStackDecimalFixed setter works with leading zero', function(assert) {
+  var run = this.subject();
+  run.set("lengthKmStackDecimalFixed", "09");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
+  run.set("lengthKmStackDecimalFixed", "002");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
+  run.set("lengthKmStackDecimalFixed", "009");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "01");
+});
+
+test('lengthKmStackDecimalFixed setter changes lengthM', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1000)});
+  run.set("lengthKmStackDecimalFixed", "09");
+  assert.strictEqual(run.get("lengthM").toString(), "1090");
+});
+
+test('lengthKmStackKm and lengthKmStackDecimalFixed setter will define lengthKm', function(assert) {
+  var run = this.subject();
+  run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimalFixed : "9" });
+  assert.strictEqual(run.get("lengthKm").toString(), "12.9");
+});
+
 // lengthMi
 test('lengthMi property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1609.344)});
