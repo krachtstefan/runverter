@@ -11,6 +11,13 @@ export default DS.Model.extend({
   miToM : new BigNumber(1609.344),
 
   /**
+   * digits the number of digits for decimal values
+   *
+   * @type {BigNumber} number of digits
+   */
+  digits : new BigNumber(2),
+
+  /**
    * timeSec represents the time of a run, should be set on create
    *
    * @type {BigNumber} time of the run in seconds
@@ -255,7 +262,7 @@ export default DS.Model.extend({
    */
   lengthMStackMRaw : Ember.computed("lengthM", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthM").round(2).floor();
+    return this.get("lengthM").round(this.get("digits")).floor();
   }),
 
   /**
@@ -270,7 +277,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthMStackDecimal = this.get("lengthM").round(2).toString().split(".")[1];
+      var lengthMStackDecimal = this.get("lengthM").round(this.get("digits")).toString().split(".")[1];
       return lengthMStackDecimal ? lengthMStackDecimal : "0";
     },
 
@@ -295,7 +302,7 @@ export default DS.Model.extend({
 
       this.set("lengthM", this.get("lengthMStackMRaw").plus(decimalMeters));
 
-      var lengthMStackDecimal = this.get("lengthM").round(2).toString().split(".")[1];
+      var lengthMStackDecimal = this.get("lengthM").round(this.get("digits")).toString().split(".")[1];
       return lengthMStackDecimal ? lengthMStackDecimal : "0";
     }
   }),
@@ -374,7 +381,7 @@ export default DS.Model.extend({
    */
   lengthKmStackKmRaw : Ember.computed("lengthKm", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthKm").round(2).floor();
+    return this.get("lengthKm").round(this.get("digits")).floor();
   }),
 
   /**
@@ -389,7 +396,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(this.get("digits")).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
 
@@ -414,7 +421,7 @@ export default DS.Model.extend({
 
       this.set("lengthM", this.get("lengthKmStackKmRaw").times(1000).plus(decimalMeters));
 
-      var lengthKmStackDecimal = this.get("lengthKmRaw").round(2).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKmRaw").round(this.get("digits")).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     }
   }),
@@ -492,7 +499,7 @@ export default DS.Model.extend({
    */
   lengthMiStackMiRaw : Ember.computed("lengthMiRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthMi").round(2).floor();
+    return this.get("lengthMi").round(this.get("digits")).floor();
   }),
 
   /**
@@ -507,7 +514,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
+      var lengthMiStackDecimal = this.get("lengthMiRaw").round(this.get("digits")).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     },
 
@@ -534,7 +541,7 @@ export default DS.Model.extend({
 
       this.set("lengthM", this.get("lengthMiStackMiRaw").times(this.miToM).plus(decimalMeters));
 
-      var lengthMiStackDecimal = this.get("lengthMiRaw").round(2).toString().split(".")[1];
+      var lengthMiStackDecimal = this.get("lengthMiRaw").round(this.get("digits")).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     }
   }),
@@ -614,7 +621,7 @@ export default DS.Model.extend({
    */
   paceMinPerKmStackMinRaw : Ember.computed("paceMinPerKmRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerKm").round(2).floor();
+    return this.get("paceMinPerKm").round(this.get("digits")).floor();
   }),
 
   /**
@@ -735,7 +742,7 @@ export default DS.Model.extend({
    */
   paceMinPerMiStackMinRaw : Ember.computed("paceMinPerMiRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerMi").round(2).floor();  // TODO make test recognize why not using paceMinPerMiRaw
+    return this.get("paceMinPerMi").round(this.get("digits")).floor();  // TODO make test recognize why not using paceMinPerMiRaw
   }),
 
 
@@ -856,7 +863,7 @@ export default DS.Model.extend({
    */
   speedKmHrStackKmRaw : Ember.computed("speedKmHrRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-   return this.get("speedKmHr").round(2).floor();
+   return this.get("speedKmHr").round(this.get("digits")).floor();
   }),
 
   /**
@@ -871,7 +878,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var speedKmHrStackDecimal = this.get("speedKmHr").round(2).toString().split(".")[1];
+      var speedKmHrStackDecimal = this.get("speedKmHr").round(this.get("digits")).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     },
 
@@ -897,7 +904,7 @@ export default DS.Model.extend({
 
       this.set("speedKmHr", this.get("speedKmHrStackKmRaw").plus(decimalSpeed.dividedBy(1000)));
 
-      var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(2).toString().split(".")[1];
+      var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(this.get("digits")).toString().split(".")[1];
       return speedKmHrStackDecimal ? speedKmHrStackDecimal : "0";
     }
   }),
@@ -977,7 +984,7 @@ export default DS.Model.extend({
    */
   speedMiHrStackMiRaw : Ember.computed("speedMiHrRaw", function(){
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("speedMiHr").round(2).floor();
+    return this.get("speedMiHr").round(this.get("digits")).floor();
   }),
 
   /**
@@ -992,7 +999,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
 
@@ -1018,7 +1025,7 @@ export default DS.Model.extend({
 
       this.set("speedMiHr", this.get("speedMiHrStackMiRaw").plus(decimalSpeed.dividedBy(1000)));
 
-      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(2).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     }
   }),
