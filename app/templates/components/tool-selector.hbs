@@ -1,9 +1,9 @@
 <h1>
-  {{menuLabel}}
-  {{#x-select value=menuItemsSelected action="navigateTo" class="menu"}}
+  {{selectedMenuItem.label}}
+  {{#x-select action="switchTool" class="menu"}}
     {{#each menuItems as |item|}}
-      {{#x-option value=item.route}}{{item.name}}{{/x-option}}
+      {{#x-option value=item.key}}{{item.name}}{{/x-option}}
     {{/each}}
   {{/x-select}}
 </h1>
-<p>{{menuDescription}}</p>
+<p>{{selectedMenuItem.description}}</p>
