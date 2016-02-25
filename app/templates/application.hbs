@@ -1,15 +1,2 @@
 <div class="header">&nbsp;</div>
-<div class="intro">
-  <h1>
-    {{menuLabel}}
-    {{#x-select value=menuItemsSelected action="navigateTo" class="menu"}}
-      {{#each menuItems as |item|}}
-        {{#x-option value=item.route}}{{item.name}}{{/x-option}}
-      {{/each}}
-    {{/x-select}}
-  </h1>
-  <p>{{menuDescription}}</p>
-</div>
-<div class="uk-container uk-container-center">
-  {{outlet "main"}}
-</div>
+{{outlet "main"}}
