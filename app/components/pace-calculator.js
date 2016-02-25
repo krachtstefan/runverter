@@ -34,6 +34,13 @@ export default Ember.Component.extend({
     }
   ],
 
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      $("select.runLength").selectOrDie({customID:"runLength"});
+      $("select.runTempo").selectOrDie({customID:"runTempo"});
+    });
+  },
+
   showRunLengthKm: function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
   }.property('runLengthMetricsSelected'),
