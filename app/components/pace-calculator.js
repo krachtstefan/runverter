@@ -41,6 +41,10 @@ export default Ember.Component.extend({
     });
   },
 
+  visible: function () {
+    return this.get("selectedMenuItem.key") === "paceCalculator" ? true : false;
+  }.property('selectedMenuItem'),
+
   showRunLengthKm: function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
   }.property('runLengthMetricsSelected'),
