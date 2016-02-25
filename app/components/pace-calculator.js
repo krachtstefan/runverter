@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     }
   ],
 
-  didInsertElement: function() {
+  didRender: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select.runLength").selectOrDie({customID:"runLength"});
       $("select.runTempo").selectOrDie({customID:"runTempo"});
