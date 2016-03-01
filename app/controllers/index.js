@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
       key : "lc",
       name : "Lenght Converter",
       label : "This is the",
-      description : "Here you can see the relation of all major length units. And yes, length matters."
+      description : "Here you can see the relation of all common length units. And yes, length matters."
     },
     {
       key : "rp",
