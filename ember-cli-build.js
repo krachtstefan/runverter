@@ -2,6 +2,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = EmberApp.env();
 var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+var stripDebug = require('broccoli-strip-debug');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -24,5 +25,6 @@ module.exports = function(defaults) {
   app.import('bower_components/uikit/js/uikit.min.js');
   app.import('bower_components/SelectOrDie/_src/selectordie.min.js');
   app.import('bower_components/bignumber.js/bignumber.min.js');
-  return app.toTree();
+
+  return isProductionLikeBuild ? stripDebug(app.toTree()) : app.toTree();
 };
