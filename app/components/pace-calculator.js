@@ -2,7 +2,7 @@ import Ember from 'ember';
 import $ from 'jquery';
 export default Ember.Component.extend({
 
-  runLengthMetricsSelected : "km",
+  runLengthMetricsSelected : "km", // may be overwritten when using this component
 
   runLengthMetrics : [
     {
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     }
   ],
 
-  runTempoMetricsSelected : "minkm",
+  runTempoMetricsSelected : "minkm", // may be overwritten when using this component
 
   runTempoMetrics : [
     {

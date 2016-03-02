@@ -1,8 +1,14 @@
 import Ember from 'ember';
 export default Ember.Controller.extend({
   queryParams: {
-    selectedToolKey : 't'
+    selectedToolKey : 't',           // selected tool
+    runLengthMetricsQuery : 'l',     // selected length metric
+    runTempoMetricsQuery : 's',      // selected tempo metric
   },
+
+  selectedToolKey : "pca",
+  runLengthMetricsQuery : "km",     // will be used to overwrite the default of the component
+  runTempoMetricsQuery : "minkm",   // will be used to overwrite the default of the component
 
   tools : [
     {
@@ -36,8 +42,6 @@ export default Ember.Controller.extend({
       description : "This feature will come pretty soon. I promise."
     }
   ],
-
-  selectedToolKey : "pca",
 
   selectedTool : Ember.computed("selectedToolKey", function(){
     var selectedTool = this.get("tools").findBy("key", this.get("selectedToolKey"));
