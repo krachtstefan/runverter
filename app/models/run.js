@@ -25,6 +25,15 @@ export default DS.Model.extend({
   timeSec : new BigNumber(0),
 
   /**
+   * timeSecStorage is the string representation of timeSec for database storage
+   * timeSec will be serialized into this field before stored and deserialized
+   * back after requested
+   *
+   * @type {String} string representation of timeSec
+   */
+  timeSecStorage : DS.attr('string'),
+
+  /**
    * time of the run in hours
    */
   timeHr: Ember.computed("timeHrRaw", {
@@ -225,6 +234,16 @@ export default DS.Model.extend({
    * @type {BigNumber} length of the run in meter
    */
   lengthM : new BigNumber(0),
+
+  /**
+   * lengthMStorage is the string representation of lengthM for database storage
+   * lengthM will be serialized into this field before stored and deserialized
+   * back after requested
+   *
+   * @type {String} string representation of lengthM
+   */
+
+  lengthMStorage : DS.attr('string'),
 
   /**
    * lengthMStackM is used to display the length like 12,34 and represents the Meter value
