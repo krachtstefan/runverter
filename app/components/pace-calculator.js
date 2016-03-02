@@ -39,8 +39,13 @@ export default Ember.Component.extend({
 
   didRender: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
-      $("select.runLength").selectOrDie({customID:"runLength"});
-      $("select.runTempo").selectOrDie({customID:"runTempo"});
+      $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
+        $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
+
+      $("select.runTempo").selectOrDie({customID:"runTempo"}).ready(function() {
+        $("select.runTempo").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
     });
   },
 
