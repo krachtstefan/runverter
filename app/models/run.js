@@ -18,20 +18,17 @@ export default DS.Model.extend({
   digits : new BigNumber(2),
 
   /**
-   * timeSec represents the time of a run, should be set on create
-   *
-   * @type {BigNumber} time of the run in seconds
+   * timeSec represents the time of the run in seconds, will be stored in database
+   * and should be set on create
    */
-  timeSec : new BigNumber(0),
-
-  /**
-   * timeSecStorage is the string representation of timeSec for database storage
-   * timeSec will be serialized into this field before stored and deserialized
-   * back after requested
-   *
-   * @type {String} string representation of timeSec
-   */
-  timeSecStorage : DS.attr('string'),
+  timeSec : DS.attr('bignumber', {
+    /**
+     * @return {BigNumber} time of the run in seconds
+     */
+    defaultValue: function() {
+      return new BigNumber(0);
+    }
+  }),
 
   /**
    * time of the run in hours
@@ -229,21 +226,17 @@ export default DS.Model.extend({
   }),
 
   /**
-   * lengthM represents the length of a run in meter, should be set on create
-   *
-   * @type {BigNumber} length of the run in meter
+   * lengthM represents the length of the run in meter, will be stored in database
+   * and should be set on create
    */
-  lengthM : new BigNumber(0),
-
-  /**
-   * lengthMStorage is the string representation of lengthM for database storage
-   * lengthM will be serialized into this field before stored and deserialized
-   * back after requested
-   *
-   * @type {String} string representation of lengthM
-   */
-
-  lengthMStorage : DS.attr('string'),
+  lengthM : DS.attr('bignumber', {
+    /**
+     * @return {BigNumber} length of the run in meter
+     */
+    defaultValue: function() {
+      return new BigNumber(0);
+    }
+  }),
 
   /**
    * lengthMStackM is used to display the length like 12,34 and represents the Meter value
