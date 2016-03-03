@@ -576,7 +576,7 @@ test('lengthKmStackDecimalFixed property can round up', function(assert) {
 
 test('lengthKmStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({lengthM : new BigNumber(500)});
- 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "50");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "50");
   Ember.run(function(){ run.set("lengthM", new BigNumber(2)); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
 });
@@ -831,7 +831,7 @@ test('lengthMiStackDecimalFixed property can round up', function(assert) {
 
 test('lengthMiStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(10.1)});
- 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
   Ember.run(function(){ run.set("lengthMi", new BigNumber(14)); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
 });
@@ -919,7 +919,7 @@ test('paceMinPerKm can have up to 20 decimal places and can round up', function(
 test('paceMinPerKm can round down', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891234), lengthM : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 1.248285321248222222222
- 	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
 
   Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921) }); });
   // http://keisan.casio.com/calculator results in 2.3055991195698154180238871
