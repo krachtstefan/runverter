@@ -48,6 +48,10 @@ export default Ember.Controller.extend({
     return selectedTool;
   }),
 
+  handlePersistence: function () {
+    this.get("model").save();
+  }.observes("model.timeSec", "model.lengthM"),
+
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
