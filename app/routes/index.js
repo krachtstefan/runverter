@@ -1,5 +1,8 @@
 import Ember from 'ember';
 export default Ember.Route.extend({
+
+  i18n: Ember.inject.service(),
+
   model: function() {
     var self = this;
     return this.store.findRecord('run', "runverter").then(function(run) {
