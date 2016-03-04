@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
   var ENV = {
+    i18n : {
+      defaultLocale: 'en'
+    },
+
     modulePrefix: 'runverter',
     environment: environment,
     baseURL: '/',
