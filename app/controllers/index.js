@@ -1,5 +1,8 @@
 import Ember from 'ember';
 export default Ember.Controller.extend({
+
+  i18n: Ember.inject.service(),
+
   queryParams: {
     selectedToolKey : 't',           // selected tool
     runLengthMetricsQuery : 'l',     // selected length metric
@@ -10,38 +13,23 @@ export default Ember.Controller.extend({
   runLengthMetricsQuery : "km",     // will be used to overwrite the default of the component
   runTempoMetricsQuery : "minkm",   // will be used to overwrite the default of the component
 
-  tools : [
-    {
-      key : "pca",
-      name : "Pace Calculator",
-      label : "You're using the",
-      description : "See which pace you need, to finish a run in your desired time."
-    },
-    {
-      key : "pc",
-      name : "Pace Converter",
-      label : "Hi! I'm the",
-      description : "There a lots of ways to define a tempo. Here you have all in one place."
-    },
-    {
-      key : "lc",
-      name : "Lenght Converter",
-      label : "This is the",
-      description : "Here you can see the relation of all common length units. And yes, length matters."
-    },
-    {
-      key : "rp",
-      name : "Race Predictor",
-      label : "This space is reserved for the",
-      description : "Not quite ready yet..."
-    },
-    {
-      key : "sc",
-      name : "Split Time Calculator",
-      label : "Unfortunately this is not the",
-      description : "This feature will come pretty soon. I promise."
-    }
+  toolsAvailable : [
+    "pca", "pc", "lc", "rp", "sc"
   ],
+
+  tools : Ember.computed("menuItems", function(){
+    var selectItems = [];
+    var self = this;
+    this.get("toolsAvailable").forEach(function(item){
+      selectItems.push({
+        "key" : item,
+        "name" : self.get('i18n').t("tools."+item+".name"),
+        "label" : self.get('i18n').t("tools."+item+".label"),
+        "description" : self.get('i18n').t("tools."+item+".description"),
+      });
+    });
+    return selectItems;
+  }),
 
   selectedTool : Ember.computed("selectedToolKey", function(){
     var selectedTool = this.get("tools").findBy("key", this.get("selectedToolKey"));
