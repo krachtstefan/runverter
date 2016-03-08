@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     this.get("runTempoMetricsAvailable").forEach(function(item){
       runTempoMetrics.push({
         "key" : item,
-        "label" : self.get('i18n').t("metrics.pace."+item),
+        "label" : self.get('i18n').t("metrics.tempo."+item),
       });
     });
     return runTempoMetrics;

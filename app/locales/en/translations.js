@@ -33,7 +33,7 @@ export default {
       "mi" : "mi",
       "m" : "m"
     },
-    "pace" : {
+    "tempo" : {
       "separator" : ":",
       "minkm" : "min/km",
       "minmi" : "min/mi",

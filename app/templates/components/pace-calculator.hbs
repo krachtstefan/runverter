@@ -27,8 +27,8 @@
         requires a pace of &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{#if showRunTempoMinKm}}{{input value=run.paceMinPerKmStackMin min="0" max="99" step="1" type="number"}} {{t "metrics.pace.separator"}} {{input value=run.paceMinPerKmStackSec min="0" max="99" step="1" type="number"}}{{/if}}
-        {{#if showRunTempoMinMi}}{{input value=run.paceMinPerMiStackMin min="0" max="99" step="1" type="number"}} {{t "metrics.pace.separator"}} {{input value=run.paceMinPerMiStackSec min="0" max="99" step="1" type="number"}}{{/if}}
+        {{#if showRunTempoMinKm}}{{input value=run.paceMinPerKmStackMin min="0" max="99" step="1" type="number"}} {{t "metrics.tempo.separator"}} {{input value=run.paceMinPerKmStackSec min="0" max="99" step="1" type="number"}}{{/if}}
+        {{#if showRunTempoMinMi}}{{input value=run.paceMinPerMiStackMin min="0" max="99" step="1" type="number"}} {{t "metrics.tempo.separator"}} {{input value=run.paceMinPerMiStackSec min="0" max="99" step="1" type="number"}}{{/if}}
         {{#if showRunTempoKmH}}{{input value=run.speedKmHrStackKm min="0" max="99" step="1" type="number"}} {{t "metrics.distance.separator"}} {{input value=run.speedKmHrStackDecimal min="0" max="99" step="1" type="number"}}{{/if}}
         {{#if showRunTempoMiH}}{{input value=run.speedMiHrStackMi min="0" max="99" step="1" type="number"}} {{t "metrics.distance.separator"}} {{input value=run.speedMiHrStackDecimal min="0" max="99" step="1" type="number"}}{{/if}}
         {{#x-select value=runTempoMetricsSelected class="runTempo"}}
