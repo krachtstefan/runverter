@@ -2,19 +2,23 @@ import Ember from 'ember';
 import $ from 'jquery';
 export default Ember.Component.extend({
 
+  i18n: Ember.inject.service(),
+
   runLengthMetricsSelected : "km", // may be overwritten when using this component
+  runLengthMetricsAvailable : ["km", "mi"],
 
-  runLengthMetrics : [
-    {
-      id : "km",
-      label : "km"
-    },
-    {
-      id : "mi",
-      label : "mi"
-    }
-  ],
-
+  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
+    var runLengthMetrics = [];
+    var self = this;
+    this.get("runLengthMetricsAvailable").forEach(function(item){
+      runLengthMetrics.push({
+        "id" : item,
+        "label" : self.get('i18n').t("metrics.distance."+item),
+      });
+    });
+    return runLengthMetrics;
+  }),
+  
   runTempoMetricsSelected : "minkm", // may be overwritten when using this component
 
   runTempoMetrics : [
