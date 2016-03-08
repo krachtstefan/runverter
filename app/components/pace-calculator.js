@@ -18,27 +18,22 @@ export default Ember.Component.extend({
     });
     return runLengthMetrics;
   }),
-  
+
   runTempoMetricsSelected : "minkm", // may be overwritten when using this component
 
-  runTempoMetrics : [
-    {
-      id : "minkm",
-      label : "min/km"
-    },
-    {
-      id : "minmi",
-      label : "min/mi"
-    },
-    {
-      id : "kmh",
-      label : "km/h"
-    },
-    {
-      id : "mih",
-      label : "mi/h"
-    }
-  ],
+  runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
+
+  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
+    var runTempoMetrics = [];
+    var self = this;
+    this.get("runTempoMetricsAvailable").forEach(function(item){
+      runTempoMetrics.push({
+        "id" : item,
+        "label" : self.get('i18n').t("metrics.pace."+item),
+      });
+    });
+    return runTempoMetrics;
+  }),
 
   didRender: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
