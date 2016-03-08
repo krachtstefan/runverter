@@ -14,7 +14,7 @@ export default Ember.Component.extend({
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
       runLengthMetrics.push({
-        "id" : item,
+        "key" : item,
         "label" : self.get('i18n').t("metrics.distance."+item),
       });
     });
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
     var self = this;
     this.get("runTempoMetricsAvailable").forEach(function(item){
       runTempoMetrics.push({
-        "id" : item,
+        "key" : item,
         "label" : self.get('i18n').t("metrics.pace."+item),
       });
     });
