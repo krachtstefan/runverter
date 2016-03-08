@@ -25,5 +25,26 @@ export default {
       "label" : "Unfortunately this is not the",
       "description" : "This feature will come pretty soon. I promise."
     }
+  },
+  "metrics" : {
+    "distance" : {
+      "separator" : ".",
+      "km" : "km",
+      "mi" : "mi",
+      "m" : "m"
+    },
+    "pace" : {
+      "separator" : ":",
+      "minkm" : "min/km",
+      "minmi" : "min/mi",
+      "kmh" : "km/h",
+      "mih" : "mi/h",
+    },
+    "time" : {
+      "separator" : ":",
+      "hr" : "hr",
+      "min" : "min",
+      "sec" : "sec",
+    }
   }
 };
