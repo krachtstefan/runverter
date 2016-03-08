@@ -4,9 +4,9 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   queryParams: {
-    selectedToolKey : 't',           // selected tool
-    runLengthMetricsQuery : 'l',     // selected length metric
-    runTempoMetricsQuery : 's',      // selected tempo metric
+    selectedToolKey : 't',          // selected tool
+    runLengthMetricsQuery : 'l',    // selected length metric
+    runTempoMetricsQuery : 's',     // selected tempo metric
   },
 
   selectedToolKey : "pca",
