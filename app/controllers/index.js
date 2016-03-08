@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
     "pca", "pc", "lc", "rp", "sc"
   ],
 
-  tools : Ember.computed("menuItems", function(){
+  tools : Ember.computed("toolsAvailable", function(){
     var selectItems = [];
     var self = this;
     this.get("toolsAvailable").forEach(function(item){
