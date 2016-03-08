@@ -6,6 +6,8 @@ export default Ember.Component.extend({
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
+  runTempoMetricsSelected : "minkm", // may be overwritten when using this component
+  runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
   runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
     var runLengthMetrics = [];
@@ -18,10 +20,6 @@ export default Ember.Component.extend({
     });
     return runLengthMetrics;
   }),
-
-  runTempoMetricsSelected : "minkm", // may be overwritten when using this component
-
-  runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
   runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
     var runTempoMetrics = [];
