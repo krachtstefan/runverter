@@ -20,7 +20,10 @@ export default {
     "lc" : {
       "name" : "Lenght Converter",
       "label" : "This is the",
-      "description" : "Here you can see the relation of all common length units. And yes, length matters."
+      "description" : "Here you can see the relation of all common length units. And yes, length matters.",
+      "kmLabel" : "A distance of",
+      "miLabel" : "equals a distance of",
+      "mLabel" : "or"
     },
     "rp" : {
       "name" : "Race Predictor",
