@@ -3,7 +3,10 @@ export default {
     "pca" : {
       "name" : "Pace Calculator",
       "label" : "You're using the",
-      "description" : "See which pace you need, to finish a run in your desired time."
+      "description" : "See which pace you need, to finish a run in your desired time.",
+      "distanceLabel" : "Running a distance of",
+      "timeLabel" : "in",
+      "paceLabel" : "requires a pace of"
     },
     "pc" : {
       "name" : "Pace Converter",

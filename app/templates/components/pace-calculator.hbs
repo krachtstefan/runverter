@@ -2,7 +2,7 @@
   <form class="uk-form">
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        Running a distance of &nbsp;
+        {{t "tools.pca.distanceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
         {{#if showRunLengthKm}}<span>{{input value=run.lengthKmStackKm min="0" max="999" step="1" type="number"}} {{t "metrics.distance.separator"}} {{input value=run.lengthKmStackDecimalFixed min="0" max="99" step="1" type="number"}}</span>{{/if}}
@@ -16,7 +16,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        in &nbsp;
+        {{t "tools.pca.timeLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
         {{input value=run.timeStackHr  min="0" max="99" step="1" type="number"}} {{t "metrics.time.hr"}} {{input value=run.timeStackMin min="0" max="60" step="1" type="number"}} {{t "metrics.time.min"}} {{input value=run.timeStackSec min="0" max="60" step="1" type="number"}} {{t "metrics.time.sec"}}
@@ -24,7 +24,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        requires a pace of &nbsp;
+        {{t "tools.pca.paceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
         {{#if showRunTempoMinKm}}{{input value=run.paceMinPerKmStackMin min="0" max="99" step="1" type="number"}} {{t "metrics.tempo.separator"}} {{input value=run.paceMinPerKmStackSec min="0" max="99" step="1" type="number"}}{{/if}}
