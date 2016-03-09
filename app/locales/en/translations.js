@@ -11,7 +11,11 @@ export default {
     "pc" : {
       "name" : "Pace Converter",
       "label" : "Hi! I'm the",
-      "description" : "There a lots of ways to define a tempo. Here you have all in one place."
+      "description" : "There a lots of ways to define a tempo. Here you have all in one place.",
+      "minkmLabel" : "Running a distance of",
+      "minmiLabel" : "in",
+      "kmhLabel" : "requires a pace of",
+      "mihLabel" : "requires a pace of"
     },
     "lc" : {
       "name" : "Lenght Converter",
