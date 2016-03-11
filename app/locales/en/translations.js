@@ -2,7 +2,7 @@ export default {
   "tools" : {
     "pca" : {
       "name" : "Pace Calculator",
-      "label" : "You're using the",
+      "label" : "Hi! I'm the",
       "description" : "See which pace you need, to finish a run in your desired time.",
       "distanceLabel" : "Running a distance of",
       "timeLabel" : "in",
@@ -10,7 +10,7 @@ export default {
     },
     "pc" : {
       "name" : "Pace Converter",
-      "label" : "Hi! I'm the",
+      "label" : "You're using the",
       "description" : "There a lots of ways to define a tempo. Here you have all in one place.",
       "minkmLabel" : "A pace of",
       "minmiLabel" : "or",
