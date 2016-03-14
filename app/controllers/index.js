@@ -45,6 +45,11 @@ export default Ember.Controller.extend({
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
+    },
+
+    toggleControlPanel: function() {
+      this.toggleProperty("controlPanelEnabled");
     }
+
   }
 });
