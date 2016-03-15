@@ -13,8 +13,6 @@ export default Ember.Controller.extend({
   runLengthMetricsQuery : "km",     // will be used to overwrite the default of the component
   runTempoMetricsQuery : "minkm",   // will be used to overwrite the default of the component
 
-  controlPanelEnabled : false,
-
   toolsAvailable : [
     "pca", "pc", "lc", "rp", "sc"
   ],
@@ -45,11 +43,6 @@ export default Ember.Controller.extend({
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
-    },
-
-    toggleControlPanel: function() {
-      this.toggleProperty("controlPanelEnabled");
     }
-
   }
 });

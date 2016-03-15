@@ -1,8 +1,9 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
+  visible : false,
   actions: {
     toggleControlPanel: function() {
-      this.sendAction('toggleControlPanelAction');
+      this.toggleProperty("visible");
     }
   }
 });
