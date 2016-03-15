@@ -1,4 +1,7 @@
 export default {
+  "controlPanel" : {
+    "switchLanguage" : "switch to english"
+  },
   "tools" : {
     "pca" : {
       "name" : "Tempo ermittlen",

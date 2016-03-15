@@ -1,4 +1,7 @@
 export default {
+  "controlPanel" : {
+    "switchLanguage" : "Deutsche Version",
+  },
   "tools" : {
     "pca" : {
       "name" : "Pace Calculator",
