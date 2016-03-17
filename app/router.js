@@ -6,7 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('tools', { path: '/' });
+  this.resource('tools', { path: '/' }, function(){
+    this.route('locale', { path: '/:locale' });
+  });
 });
 
 export default Router;
