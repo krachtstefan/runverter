@@ -5,7 +5,9 @@ export default Ember.Route.extend({
 
 
   model: function(params) {
-    if(params.locale) this.set('i18n.locale', params.locale);
+    if(params.locale){
+      this.set('i18n.locale', params.locale);
+    }
     var self = this;
     return this.store.findRecord('run', "runverter").then(function(run) {
       return run;

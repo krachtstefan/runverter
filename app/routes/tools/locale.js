@@ -5,6 +5,8 @@ export default Ember.Route.extend({
 
 
   model: function(params) {
-    if(params.locale) this.set('i18n.locale', params.locale);
+    if(params.locale){
+      this.set('i18n.locale', params.locale);
+    }
   }
 });
