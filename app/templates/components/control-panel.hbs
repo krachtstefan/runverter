@@ -1,9 +1,7 @@
-<button class="menu-toggle" {{action "toggleControlPanel"}}></button>
-<nav>
-  <ul class="menu">
-    <li data-text="{{t "controlPanel.switchLanguage"}}"><a href="#" {{action "toggleLanguage"}}>{{t "controlPanel.switchLanguage"}}</a></li>
-    <li data-text="Projects">Projects</li>
-    <li data-text="About">About</li>
-    <li data-text="Contact">Contact</li>
-  </ul>
-</nav>
+{{#if visible}}
+  <a href="#" {{action "toggleControlPanel"}}>hide control panel</a>
+
+  <a href="#" {{action "toggleLanguage"}}>{{t "controlPanel.switchLanguage"}}</a>
+{{else}}
+  <a href="#" {{action "toggleControlPanel"}}>show control panel</a>
+{{/if}}
