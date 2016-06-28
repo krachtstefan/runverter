@@ -3,7 +3,9 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
+  classNameBindings: ['visible:open'],
   visible : false,
+
   actions: {
     toggleControlPanel: function() {
       this.toggleProperty("visible");
