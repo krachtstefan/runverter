@@ -64,3 +64,36 @@
   width: 0%;
   left: 50%;
 }
+
+ul.settings {
+  position:absolute;
+  right:10px;
+  top:0px;
+  width:300px;
+  margin:0;
+  opacity: 0;
+  padding:50px 10px 50px 10px;
+  list-style:none;
+  border-radius: 2px;
+  background:white;
+  z-index: 9999;
+
+  outline: 5px solid rgba(140,183,197,0.2);
+  @include transition(0.25s ease-in-out);
+}
+
+.open ul.settings{
+  top:10px;
+  opacity: 1; // just for layout check, it's still in the dom and always on the wrong position
+}
+
+ul.settings li {
+  padding:10px;
+  border-bottom: solid 1px #ccc;
+}
+
+ul.settings li:hover {
+  border-bottom:1px solid grey;
+}
+
+ul.settings li:last-child { border:none }
