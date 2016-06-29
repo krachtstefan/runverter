@@ -1,6 +1,6 @@
 #toggle-panel{
-  width: 60px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   position: absolute;
   top:0;
   right:0;
@@ -15,11 +15,12 @@
 #toggle-panel span{
   display: block;
   position: absolute;
-  height: 9px;
-  width: 9px;
+  height: 8px;
+  width: 8px;
+  margin-left: 40%;
   background: white;
   border: 1px solid $color-form-text;
-  border-radius: 9px;
+  border-radius: 8px;
   opacity: 1;
   left: 0;
   -webkit-transform: rotate(0deg);
@@ -45,8 +46,11 @@
 }
 
 .open #toggle-panel span{
+  height: 5px;
+  width: 5px;
   width: 100%;
   background: $color-form-text;
+  margin-left: 0;
 }
 
 .open #toggle-panel span:nth-child(1) {
