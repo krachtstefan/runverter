@@ -1,4 +1,4 @@
-.nav-icon{
+#toggle-panel{
   width: 60px;
   height: 45px;
   position: absolute;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.nav-icon span{
+#toggle-panel span{
   display: block;
   position: absolute;
   height: 9px;
@@ -32,44 +32,44 @@
   transition: .25s ease-in-out;
 }
 
-.nav-icon span:nth-child(1) {
+#toggle-panel span:nth-child(1) {
   top: 0px;
 }
 
-.nav-icon span:nth-child(2),.nav-icon span:nth-child(3) {
+#toggle-panel span:nth-child(2),#toggle-panel span:nth-child(3) {
   top: 18px;
 }
 
-.nav-icon span:nth-child(4) {
+#toggle-panel span:nth-child(4) {
   top: 36px;
 }
 
-.open .nav-icon span{
+.open #toggle-panel span{
   width: 100%;
   background: $color-form-text;
 }
 
-.open .nav-icon span:nth-child(1) {
+.open #toggle-panel span:nth-child(1) {
   top: 18px;
   width: 0%;
   left: 50%;
 }
 
-.open .nav-icon span:nth-child(2) {
+.open #toggle-panel span:nth-child(2) {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-.open .nav-icon span:nth-child(3) {
+.open #toggle-panel span:nth-child(3) {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 
-.open .nav-icon span:nth-child(4) {
+.open #toggle-panel span:nth-child(4) {
   top: 18px;
   width: 0%;
   left: 50%;
