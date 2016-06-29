@@ -5,14 +5,10 @@
   top:0;
   right:0;
   margin: 30px;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
   cursor: pointer;
 }
 
@@ -20,7 +16,7 @@
   display: block;
   position: absolute;
   height: 9px;
-  width: 100%;
+  width: 9px;
   background: white;
   border: 1px solid $color-form-text;
   border-radius: 9px;
@@ -46,6 +42,11 @@
 
 .nav-icon span:nth-child(4) {
   top: 36px;
+}
+
+.open .nav-icon span{
+  width: 100%;
+  background: $color-form-text;
 }
 
 .open .nav-icon span:nth-child(1) {
