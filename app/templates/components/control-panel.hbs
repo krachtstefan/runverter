@@ -1,7 +1,10 @@
-{{#if visible}}
-  <a href="#" {{action "toggleControlPanel"}}>hide control panel</a>
+<div class="nav-icon" {{action "toggleControlPanel"}}>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 
+{{#if visible}}
   <a href="#" {{action "toggleLanguage"}}>{{t "controlPanel.switchLanguage"}}</a>
-{{else}}
-  <a href="#" {{action "toggleControlPanel"}}>show control panel</a>
 {{/if}}
