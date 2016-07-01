@@ -85,13 +85,7 @@ ul.settings {
   z-index: 9999;
 }
 
-ul.settings li {
+ul.settings li a{
+  display: block;
   padding:10px;
-  border-bottom: solid 1px #ccc;
 }
-
-ul.settings li:hover {
-  border-bottom:1px solid grey;
-}
-
-ul.settings li:last-child { border:none }
