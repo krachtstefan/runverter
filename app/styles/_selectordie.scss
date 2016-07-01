@@ -94,9 +94,7 @@
 
 /* When the entire SoD is disabled, go crazy! */
 .sod_select.disabled{
-  border-color: #828282;
-  color: #b2b2b2;
-  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 /* The "label", or whatever we should call it. Keep the first three lines for truncating. */
