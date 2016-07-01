@@ -80,8 +80,9 @@ ul.settings {
 }
 
 .open ul.settings{
-  top:10px;
-  opacity: 1; // just for layout check, it's still in the dom and always on the wrong position
+  top:20px;
+  opacity: 1;
+  z-index: 9999;
 }
 
 ul.settings li {
