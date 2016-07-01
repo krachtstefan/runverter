@@ -131,7 +131,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   color:$color-main-text;
   background-color: $color-form-background;
   z-index: 1;
-  outline: 5px solid rgba(140,183,197,0.2);
+  outline: 5px solid $color-overlay-border;
 }
 /* Shows the option list (don't edit) */
 .sod_select.open .sod_list_wrapper { display: block;  }
