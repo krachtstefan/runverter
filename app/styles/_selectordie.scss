@@ -163,7 +163,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 .sod_select .sod_option.optgroup,
 .sod_select .sod_option.optgroup.disabled{
   background: inherit;
-  color: #939393;
+  color: $color-main-text;
   font-size: 10px;
   font-style: italic;
 }
