@@ -136,7 +136,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 .sod_select.above .sod_list_wrapper{
   top: auto;
   bottom: 100%;
-  border-top: 3px solid #000000;
+  border-top: 3px solid $color-form-background;
   border-bottom: none;
 }
 
@@ -154,7 +154,6 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
   position: relative;
   padding: 10px 10px;
   list-style-type: none;
