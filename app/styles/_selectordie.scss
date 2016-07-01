@@ -179,7 +179,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 /* Disabled option */
 .sod_select .sod_option.disabled{
   background: inherit;
-  color: #cccccc;
+  opacity: 0.5;
 }
 
 /* Hover state for options, also used when a user uses his/hers up/down keys */
