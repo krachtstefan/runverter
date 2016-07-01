@@ -198,9 +198,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   right: 10px;
   top: 50%;
   content: "";
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  @include transform(translateY(-50%));
   display: inline-block;
   height: 9px;
   width: 10px;
