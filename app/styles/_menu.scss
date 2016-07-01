@@ -1,3 +1,11 @@
+.control-panel{
+  position:relative;
+  background:red;
+  height: 0;
+  max-width:$width-container;
+  margin:0 auto;
+}
+
 #toggle-panel{
   width: 46px;
   height: 46px;
