@@ -1,14 +1,13 @@
 .control-panel{
   position:relative;
-  background:red;
   height: 0;
   max-width:$width-container;
   margin:0 auto;
 }
 
 #toggle-panel{
-  width: 46px;
-  height: 46px;
+  width: 35px;
+  height: 40px;
   z-index: 99999;
   position: absolute;
   top:0;
@@ -23,10 +22,10 @@
   position: absolute;
   height: 8px;
   width: 8px;
-  margin-left: 40%;
+  margin-left: 13px;
   background: white;
   border: 1px solid $color-form-text;
-  border-radius: 8px;
+  border-radius: 5px;
   opacity: 1;
   left: 0;
   @include transform(rotate(0deg));
@@ -38,11 +37,11 @@
 }
 
 #toggle-panel span:nth-child(2),#toggle-panel span:nth-child(3) {
-  top: 18px;
+  top: 15px;
 }
 
 #toggle-panel span:nth-child(4) {
-  top: 36px;
+  top: 30px;
 }
 
 .open #toggle-panel span{
