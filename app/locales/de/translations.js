@@ -1,6 +1,10 @@
 export default {
   "controlPanel" : {
-    "switchLanguage" : "switch to english"
+    "switchLanguage" : "Switch to english",
+    "enableExpertMode" : "Expertenmodus aktivieren",
+    "disableExpertMode" : "Expertenmodus deaktivieren",
+    "share" : "Erzähle es deiner Laufcrew",
+    "learnMore" : "Mehr über Runverter erfahren"
   },
   "tools" : {
     "pca" : {

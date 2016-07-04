@@ -1,6 +1,10 @@
 export default {
   "controlPanel" : {
     "switchLanguage" : "Deutsche Version",
+    "enableExpertMode" : "Enable expert mode",
+    "disableExpertMode" : "Disable expert mode",
+    "share" : "Share with your running crew",
+    "learnMore" : "Learn more"
   },
   "tools" : {
     "pca" : {
