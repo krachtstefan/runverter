@@ -93,9 +93,44 @@ ul.settings {
 ul.settings li a{
   color: $color-form-text;
   display: block;
-  padding:25px 25px;
+  padding:25px 25px 25px 65px;
 }
 
-ul.settings li a:hover{
-  background:$color-main-background;
+ul.settings li a:hover, {
+  background-color:$color-main-background;
+}
+
+#panel-share{
+  background-image: url('/assets/images/share.svg');
+  background-position: 24px center;
+  background-repeat: no-repeat;
+  background-size: 23px;
+}
+
+#panel-expertmode{
+  background-image: url('/assets/images/expertmode-off.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+#panel-language-en{
+  background-image: url('/assets/images/german.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+#panel-language-de{
+  background-image: url('/assets/images/english.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+#panel-more{
+  background-image: url('/assets/images/more.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
 }
