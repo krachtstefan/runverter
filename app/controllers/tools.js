@@ -17,6 +17,8 @@ export default Ember.Controller.extend({
     "pca", "pc", "lc", "rp", "sc"
   ],
 
+  expertMode : false,
+
   tools : Ember.computed("toolsAvailable", function(){
     var selectItems = [];
     var self = this;
