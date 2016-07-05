@@ -96,7 +96,8 @@ ul.settings li a{
   padding:25px 25px 25px 65px;
 }
 
-ul.settings li a:hover, {
+ul.settings li a:hover {
+  text-decoration:none;
   background-color:$color-main-background;
 }
 
