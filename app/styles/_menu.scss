@@ -94,7 +94,7 @@ ul.settings li a{
   font-size:1.5em;
   color: $color-form-text;
   display: block;
-  padding:25px 25px 25px 65px;
+  padding:25px 25px 25px 70px;
 }
 
 ul.settings li a:hover {
@@ -102,44 +102,57 @@ ul.settings li a:hover {
   background-color:$color-main-background;
 }
 
-#panel-language-en{
+#panel-share::before,
+#panel-language-en::before,
+#panel-language-de::before,
+#panel-expertmode-true::before,
+#panel-expertmode-false::before,
+#panel-share::before,
+#panel-more::before{
+  content: "";
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin: -10px 0 0 -50px;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
+
+#panel-share:hover::before,
+#panel-language-en:hover::before,
+#panel-language-de:hover::before,
+#panel-expertmode-true:hover::before,
+#panel-expertmode-false:hover::before,
+#panel-share:hover::before,
+#panel-more:hover::before{
+  width: 40px;
+  height: 40px;
+  margin: -15px 0 0 -55px;
+  @include transition(0.25s ease-in-out);
+}
+
+#panel-language-en::before{
   background-image: url('/assets/images/german.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
 
-#panel-language-de{
+#panel-language-de::before{
   background-image: url('/assets/images/english.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
 
-#panel-expertmode-true{
+#panel-expertmode-true::before{
   background-image: url('/assets/images/expertmode-off.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
 
-#panel-expertmode-false{
+#panel-expertmode-false::before{
   background-image: url('/assets/images/expertmode-on.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
 
-#panel-share{
+#panel-share::before{
   background-image: url('/assets/images/share.svg');
-  background-position: 24px center;
-  background-repeat: no-repeat;
-  background-size: 23px;
 }
 
-#panel-more{
+#panel-more::before{
   background-image: url('/assets/images/more.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
