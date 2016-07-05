@@ -14,6 +14,9 @@ export default Ember.Component.extend({
     toggleLanguage: function() {
       const newLanguage = this.get('i18n.locale') === "en" ? "de" : "en";
       this.set("i18n.locale", newLanguage);
+    },
+    toggleExpertMode: function(){
+      this.toggleProperty("expertMode")
     }
   }
 });
