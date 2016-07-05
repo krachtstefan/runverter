@@ -74,7 +74,7 @@ ul.settings {
   position:absolute;
   right: 20px;
   top:40px;
-  width:300px;
+  width:400px;
   opacity: 0;
   padding:0px 0px 0px 0px;
   list-style:none;
@@ -91,6 +91,7 @@ ul.settings {
 }
 
 ul.settings li a{
+  font-size:1.5em;
   color: $color-form-text;
   display: block;
   padding:25px 25px 25px 65px;
