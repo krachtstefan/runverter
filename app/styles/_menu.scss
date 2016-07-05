@@ -102,11 +102,18 @@ ul.settings li a:hover {
   background-color:$color-main-background;
 }
 
-#panel-share{
-  background-image: url('/assets/images/share.svg');
-  background-position: 24px center;
+#panel-language-en{
+  background-image: url('/assets/images/german.svg');
+  background-position: 20px center;
   background-repeat: no-repeat;
-  background-size: 23px;
+  background-size: 30px;
+}
+
+#panel-language-de{
+  background-image: url('/assets/images/english.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
 }
 
 #panel-expertmode-true{
@@ -123,18 +130,11 @@ ul.settings li a:hover {
   background-size: 30px;
 }
 
-#panel-language-en{
-  background-image: url('/assets/images/german.svg');
-  background-position: 20px center;
+#panel-share{
+  background-image: url('/assets/images/share.svg');
+  background-position: 24px center;
   background-repeat: no-repeat;
-  background-size: 30px;
-}
-
-#panel-language-de{
-  background-image: url('/assets/images/english.svg');
-  background-position: 20px center;
-  background-repeat: no-repeat;
-  background-size: 30px;
+  background-size: 23px;
 }
 
 #panel-more{
