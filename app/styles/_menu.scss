@@ -107,8 +107,15 @@ ul.settings li a:hover, {
   background-size: 23px;
 }
 
-#panel-expertmode{
+#panel-expertmode-true{
   background-image: url('/assets/images/expertmode-off.svg');
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+#panel-expertmode-false{
+  background-image: url('/assets/images/expertmode-on.svg');
   background-position: 20px center;
   background-repeat: no-repeat;
   background-size: 30px;
