@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="100px" height="39px" viewBox="0 0 100 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="100px" height="38px" viewBox="0 0 100 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
     <title>german</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="noun_434710_cc" fill="#000000">
+        <g id="german" transform="translate(0.000000, -1.000000)" fill="#0088CC">
             <g id="Group">
                 <path d="M49.884,38.081 C40.997,38.081 32.586,36.681 26.199,34.14 C25.491,33.858 25.145,33.056 25.427,32.347 C25.709,31.64 26.513,31.29 27.219,31.576 C33.289,33.991 41.338,35.321 49.884,35.321 C50.646,35.321 51.263,35.938 51.263,36.701 C51.263,37.464 50.646,38.081 49.884,38.081 L49.884,38.081 Z" id="Shape"></path>
                 <path d="M26.708,34.237 C26.52,34.237 26.327,34.198 26.144,34.116 C14.647,28.963 8.162,20.732 10.372,14.101 C12.749,6.972 23.273,4.038 33.84,7.56 C36.298,8.38 46.601,11.481 50.06,11.634 C50.821,11.668 51.412,12.312 51.378,13.073 C51.345,13.835 50.671,14.434 49.939,14.391 C45.47,14.194 33.087,10.218 32.967,10.178 C23.846,7.137 14.885,9.287 12.989,14.972 C11.516,19.392 15.949,26.521 27.273,31.597 C27.968,31.909 28.279,32.725 27.967,33.42 C27.739,33.935 27.235,34.237 26.708,34.237 L26.708,34.237 Z" id="Shape"></path>
