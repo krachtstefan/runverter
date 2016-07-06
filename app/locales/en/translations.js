@@ -4,7 +4,7 @@ export default {
     "enableExpertMode" : "Enable expert mode",
     "disableExpertMode" : "Disable expert mode",
     "share" : "Share with your running crew",
-    "learnMore" : "Learn more",
+    "learnMore" : "Learn more about runverter",
     "feedback" : "Tweet me your feedback"
   },
   "tools" : {
