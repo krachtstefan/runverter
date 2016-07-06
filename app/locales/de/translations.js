@@ -4,7 +4,8 @@ export default {
     "enableExpertMode" : "Expertenmodus aktivieren",
     "disableExpertMode" : "Expertenmodus deaktivieren",
     "share" : "Erzähle es deiner Laufcrew",
-    "learnMore" : "Mehr über Runverter erfahren"
+    "learnMore" : "Mehr über Runverter erfahren",
+    "feedback" : "Twitter mir dein Feedback"
   },
   "tools" : {
     "pca" : {
