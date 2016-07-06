@@ -107,6 +107,8 @@ ul.settings li a:hover {
 #panel-language-de::before,
 #panel-expertmode-true::before,
 #panel-expertmode-false::before,
+#panel-expertmode-true span::before,
+#panel-expertmode-false span::before,
 #panel-share::before,
 #panel-more::before,
 #panel-feedback::before{
@@ -130,12 +132,22 @@ ul.settings li a:hover {
   @include scaleX(-1);
 }
 
-#panel-expertmode-true::before{
-  background-image: url('/assets/images/expertmode-off.svg');
+#panel-expertmode-true::before,
+#panel-expertmode-false::before{
+  background-image: url('/assets/images/face.svg');
 }
 
-#panel-expertmode-false::before{
-  background-image: url('/assets/images/expertmode-on.svg');
+#panel-expertmode-false span::before,
+#panel-expertmode-true span::before{
+  width: 40px;
+  margin-left:-55px;
+  background-image: url('/assets/images/glasses.svg');
+  opacity: 1;
+}
+
+#panel-expertmode-false span::before{
+  background-position: top;
+  opacity: 0;
 }
 
 #panel-share::before{
