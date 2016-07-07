@@ -18,6 +18,8 @@ module.exports = function(defaults) {
 
     tests: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
     hinting: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
+
+    compassOptions: { imagesDir: "assets/images" }
   });
 
   app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js");
