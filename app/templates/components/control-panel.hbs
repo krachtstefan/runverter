@@ -1,4 +1,4 @@
-{{#click-outside action=(action "toggleControlPanel")}}
+{{#click-outside action=(action "closeControlPanel")}}
   <ul class="settings">
     <li><a href="#" id="panel-language-{{i18n.locale}}" {{action "toggleLanguage"}}>{{t "controlPanel.switchLanguage"}}</a></li>
     <li><a href="#" id="panel-expertmode-{{expertMode}}" {{action "toggleExpertMode"}}><span></span> {{#if expertMode}} {{t "controlPanel.disableExpertMode"}} {{else}} {{t "controlPanel.enableExpertMode"}} {{/if}}</a></li>

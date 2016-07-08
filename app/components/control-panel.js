@@ -11,6 +11,9 @@ export default Ember.Component.extend({
     toggleControlPanel: function() {
       this.toggleProperty("visible");
     },
+    closeControlPanel: function() {
+      this.set("visible", false);
+    },
     toggleLanguage: function() {
       const newLanguage = this.get('i18n.locale') === "en" ? "de" : "en";
       this.set("i18n.locale", newLanguage);
