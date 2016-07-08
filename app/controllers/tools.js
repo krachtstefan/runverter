@@ -18,9 +18,14 @@ export default Ember.Controller.extend({
     "pca", "pc", "lc", "rp", "sc"
   ],
 
+  didInitAttrs() {
+    // if not accessed once, i18n changes are not recognized by computed properties or observers
+    this.get('i18n');
+  },
+
   expertMode : false,
 
-  tools : Ember.computed("toolsAvailable", function(){
+  tools : Ember.computed("toolsAvailablem", "i18n.locale", function(){
     var selectItems = [];
     var self = this;
     this.get("toolsAvailable").forEach(function(item){
@@ -34,7 +39,7 @@ export default Ember.Controller.extend({
     return selectItems;
   }),
 
-  selectedTool : Ember.computed("selectedToolKey", function(){
+  selectedTool : Ember.computed("selectedToolKey", "i18n.locale", function(){
     var selectedTool = this.get("tools").findBy("key", this.get("selectedToolKey"));
     return selectedTool;
   }),
