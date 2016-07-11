@@ -19,7 +19,7 @@ export default Ember.Component.extend({
       this.set("i18n.locale", newLanguage);
     },
     toggleExpertMode: function(){
-      this.toggleProperty("expertMode")
+      this.toggleProperty("expertMode");
     }
   }
 });
