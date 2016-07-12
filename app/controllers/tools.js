@@ -4,10 +4,11 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   queryParams: {
-    selectedToolKey : 't',          // selected tool
-    runLengthMetricsQuery : 'l',    // selected length metric
-    runTempoMetricsQuery : 's',     // selected tempo metric
-    expertMode : 'nerd',            // selected tool
+    'i18n.locale' : 'l',            // selected locale
+    'selectedToolKey' : 't',        // selected tool
+    'runLengthMetricsQuery' : 'lm', // selected length metric
+    'runTempoMetricsQuery' : 's',   // selected tempo metric
+    'expertMode' : 'nerd'           // selected display mode
   },
 
   selectedToolKey : "pca",
