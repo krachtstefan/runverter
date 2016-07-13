@@ -109,6 +109,8 @@ ul.settings li a:hover {
 #panel-expertmode-false::before,
 #panel-expertmode-true span::before,
 #panel-expertmode-false span::before,
+#panel-language-de span::before,
+#panel-language-en span::before,
 #panel-share::before,
 #panel-more::before,
 #panel-feedback::before{
@@ -130,6 +132,17 @@ ul.settings li a:hover {
 #panel-language-de::before{
   background-image: inline-image("language.svg");
   @include scaleX(-1);
+}
+
+#panel-language-de span::before,
+#panel-language-en span::before{
+  width: 14px;
+  margin-left:-42px;
+  background-image: inline-image("dots.svg");
+}
+
+#panel-language-en span::before{
+  @include transform(rotate(180deg));
 }
 
 #panel-expertmode-true::before,
