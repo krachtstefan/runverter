@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="44px" height="14px" viewBox="0 0 44 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>dots</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="dots" transform="translate(1.000000, 2.000000)" stroke="#0088CC" stroke-width="3" fill="#0088CC">
+            <path d="M36.566,9.807 C33.917,9.807 31.759,7.655 31.759,4.994 C31.759,2.339 33.916,0.191 36.566,0.191 C39.226,0.191 41.383,2.338 41.383,4.994 C41.384,7.655 39.227,9.807 36.566,9.807 L36.566,9.807 Z" id="Path"></path>
+            <path d="M21.061,9.807 C18.401,9.807 16.244,7.655 16.244,4.994 C16.244,2.339 18.401,0.191 21.061,0.191 C23.711,0.191 25.868,2.338 25.868,4.994 C25.868,7.655 23.711,9.807 21.061,9.807 L21.061,9.807 Z" id="Path"></path>
+            <path d="M5.545,9.807 C2.885,9.807 0.738,7.655 0.738,4.994 C0.738,2.339 2.885,0.191 5.545,0.191 C8.205,0.191 10.353,2.338 10.353,4.994 C10.353,7.655 8.206,9.807 5.545,9.807 L5.545,9.807 Z" id="Path"></path>
+        </g>
+    </g>
+</svg>
