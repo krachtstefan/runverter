@@ -1041,7 +1041,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   speedMiHrRaw : Ember.computed("lengthMiRaw", "timeHrRaw", function(){
-    return this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+    var speedMiHrRaw = this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
+    return speedMiHrRaw.isFinite() ? speedMiHrRaw : new BigNumber(0);
   }),
 
   /**

@@ -1532,6 +1532,11 @@ test('speedMiHr can round up', function(assert) {
   assert.strictEqual(run.get("speedMiHr").toString(), "7.670901932712956335"); // two zeros at the end are falling away
 });
 
+test('speedMiHr is not getting infinite when time is zero', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(0), lengthM : new BigNumber(123456)});
+  assert.strictEqual(run.get("speedMiHr").toString(), "0");
+});
+
 test('speedMiHr setter changes speedMiHr', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
   Ember.run(function(){ run.set("speedMiHr", "2"); });
