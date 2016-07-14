@@ -930,6 +930,11 @@ test('paceMinPerKm can round down', function(assert) {
   assert.strictEqual(run.get("paceMinPerKm").toString(), "17.26387627951219512195");
 });
 
+test('paceMinPerKm is not getting infinite when length is zero', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(0)});
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "0");
+});
+
 test('paceMinPerKm setter changes paceMinPerKm', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
   Ember.run(function(){ run.set("paceMinPerKm", "21"); });
