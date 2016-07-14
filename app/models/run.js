@@ -797,7 +797,8 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   paceMinPerMiRaw : Ember.computed("timeMinRaw", "lengthMiRaw", function(){
-    return this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+    var paceMinPerMiRaw = this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
+    return paceMinPerMiRaw.isFinite() ? paceMinPerMiRaw : new BigNumber(0);
   }),
 
   /**

@@ -1131,6 +1131,11 @@ test('paceMinPerMi can round down', function(assert) {
   assert.strictEqual(run.get("paceMinPerMi").toString(), "10.04032258064516129032");
 });
 
+test('paceMinPerMi is not getting infinite when length is zero', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(0)});
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0");
+});
+
 test('paceMinPerMi setter changes paceMinPerMi', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
   Ember.run(function(){ run.set("paceMinPerMi", "21"); });
