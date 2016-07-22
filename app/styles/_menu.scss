@@ -73,12 +73,8 @@
 ul.settings {
   position:absolute;
   top:40px;
-  width:100%;
-  @include respond-to("small"){
-    width:400px;
-    right: 20px;
-  }
-
+  width:80%;
+  right:10%;
   opacity: 0;
   padding:0px 0px 0px 0px;
   list-style:none;
@@ -86,6 +82,10 @@ ul.settings {
   z-index: -9999;
   outline: 5px solid $color-overlay-border;
   @include transition(0.25s ease-in-out);
+  @include respond-to("small"){
+    width:400px;
+    right: 20px;
+  }
 }
 
 .open ul.settings{
@@ -95,10 +95,13 @@ ul.settings {
 }
 
 ul.settings li a{
-  font-size:1.5em;
+  font-size:1em;
   color: $color-form-text;
   display: block;
   padding:25px 25px 25px 70px;
+  @include respond-to("small"){
+    font-size:1.5em;
+  }
 }
 
 ul.settings li a:hover {
