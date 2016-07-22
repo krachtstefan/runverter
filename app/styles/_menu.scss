@@ -72,9 +72,13 @@
 
 ul.settings {
   position:absolute;
-  right: 20px;
   top:40px;
-  width:400px;
+  width:100%;
+  @include respond-to("small"){
+    width:400px;
+    right: 20px;
+  }
+
   opacity: 0;
   padding:0px 0px 0px 0px;
   list-style:none;
