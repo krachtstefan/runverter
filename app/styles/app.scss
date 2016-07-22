@@ -72,6 +72,19 @@ body{
     }
   }
 
+  .digits-2{
+    width: 2.2em;
+  }
+
+  .digits-3{
+    width: 2.8em;
+  }
+
+  .digits-6{
+    width: 4.4em;
+  }
+
+
   .tool-line{
     margin-bottom: 50px;
     @include respond-to("medium"){
