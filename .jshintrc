@@ -3,7 +3,8 @@
     "document",
     "window",
     "-Promise",
-    "BigNumber"
+    "BigNumber",
+    "ga"
   ],
   "browser": true,
   "boss": true,
