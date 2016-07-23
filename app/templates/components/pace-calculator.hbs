@@ -13,6 +13,12 @@
           {{/each}}
         {{/x-select}}
       </div>
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
+        {{t "tools.pca.distanceLabel"}} &nbsp;
+      </div>
+      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
+        <span>{{number-input value=run.lengthKmStackKm maxlength="2" min="0" max="999" step="1" class="digits-3"}} {{t "metrics.distance.separator"}} {{number-input value=run.lengthKmStackDecimalFixed maxlength="2" min="0" max="99" step="1" class="digits-2"}}</span>
+      </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
