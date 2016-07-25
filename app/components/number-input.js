@@ -14,9 +14,11 @@ export default Ember.Component.extend({
   keyDown(event) {
     switch(event.keyCode) {
     case 38:
+        event.preventDefault();
         this.send('increaseValue');
         break;
     case 40:
+        event.preventDefault();
         this.send('decreaseValue');
         break;
     }
