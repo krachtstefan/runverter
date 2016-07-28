@@ -45,31 +45,31 @@ export default Ember.Component.extend({
     });
   },
 
-  visible: function () {
+  visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "pca" ? true : false;
-  }.property('selectedMenuItem'),
+  }),
 
-  showRunLengthKm: function () {
+  showRunLengthKm: Ember.computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
-  }.property('runLengthMetricsSelected'),
+  }),
 
-  showRunLengthMi: function () {
+  showRunLengthMi: Ember.computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "mi" ? true : false;
-  }.property('runLengthMetricsSelected'),
+  }),
 
-  showRunTempoMinKm: function () {
+  showRunTempoMinKm: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "minkm" ? true : false;
-  }.property('runTempoMetricsSelected'),
+  }),
 
-  showRunTempoMinMi: function () {
+  showRunTempoMinMi: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "minmi" ? true : false;
-  }.property('runTempoMetricsSelected'),
+  }),
 
-  showRunTempoKmH: function () {
+  showRunTempoKmH: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "kmh" ? true : false;
-  }.property('runTempoMetricsSelected'),
+  }),
 
-  showRunTempoMiH: function () {
+  showRunTempoMiH: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "mih" ? true : false;
-  }.property('runTempoMetricsSelected'),
+  })
 });

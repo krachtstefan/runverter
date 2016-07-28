@@ -1,6 +1,6 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-  visible: function () {
+  visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "lc" ? true : false;
-  }.property('selectedMenuItem')
+  })
 });
