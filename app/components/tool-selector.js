@@ -17,11 +17,11 @@ export default Ember.Component.extend({
     this.get('i18n');
   },
 
-  updateSelectOrDieOnLanguageChange: function () {
+  updateSelectOrDieOnLanguageChange: Ember.observer("i18n.locale", function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       $(".menu").selectOrDie("update"); // need to trigger update to select the correct initial value
     });
-  }.observes("i18n.locale"),
+  }),
 
   actions: {
     switchTool: function(toolKey) {
