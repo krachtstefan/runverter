@@ -1,5 +1,6 @@
 {{#if visible}}
   <form class="uk-form">
+      <div class="uk-grid uk-grid-collapse tool-line">{{run.lengthM}}</div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
         {{t "tools.pca.distanceLabel"}} &nbsp;
@@ -17,7 +18,15 @@
         {{t "tools.pca.distanceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        <span>{{number-input value=run.lengthKmStackKm maxlength="2" min="0" max="999" step="1" class="digits-3"}} {{t "metrics.distance.separator"}} {{number-input value=run.lengthKmStackDecimalFixed maxlength="2" min="0" max="99" step="1" class="digits-2"}}</span>
+        <span>{{number-input value=run.lengthKmStackKm maxlength="3" min="0" max="999" step="1" class="digits-3"}} {{t "metrics.distance.separator"}} {{number-input value=run.lengthKmStackDecimalFixed maxlength="2" min="0" max="99" step="1" class="digits-2"}}</span>
+      </div>
+    </div>
+    <div class="uk-grid uk-grid-collapse tool-line">
+      <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
+        {{t "tools.lc.mLabel"}}&nbsp;
+      </div>
+      <div class="uk-width-1-1 uk-width-medium-3-5">
+        {{number-input value=run.lengthMStackM maxlength="6" min="0" max="999999" step="1" class="digits-6"}} {{t "metrics.distance.separator"}} {{input value=run.lengthMStackDecimal min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.m"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
