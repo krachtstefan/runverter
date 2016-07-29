@@ -34,6 +34,7 @@ export default Ember.Component.extend({
   }),
 
   didRender: function() {
+    this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
         $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value
