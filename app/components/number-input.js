@@ -2,9 +2,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: "input",
   classNameBindings: ["class"],
-  attributeBindings: ['value:value', 'type', 'autocomplete'],
+  attributeBindings: ['value:value', 'type', 'autocomplete', 'cursorPosition:cursor'],
   type: "tel", // inputs with the type "tel" have the advantage of only allowing numeric values without showing spin buttons as the "number" input does
   autocomplete: "off",
+  cursorPosition: false,
 
   input(event) {
     var newValue = event.target.value;
@@ -19,6 +20,7 @@ export default Ember.Component.extend({
       newValue = newValueArr.join('');
     }
     this.set("value", parseInt(newValue));
+    this.set("cursorPosition", this.element.selectionStart);
     return true;
   },
 
@@ -33,8 +35,22 @@ export default Ember.Component.extend({
         this.send('decreaseValue');
         break;
     }
+    this.set("cursorPosition", this.element.selectionStart);
     return true;
   },
+
+  updateCursorPosition: Ember.observer("cursorPosition", function() {
+
+    // var test = this.get("cursorPosition");
+    // console.log("...");
+    // Ember.run.scheduleOnce('afterRender', this, function() {
+    console.log(this.$());
+    this.$().focus();
+    this.$().get(0).setSelectionRange(0,0);
+
+    //   $("#"+this.get('elementId')).get(0).setSelectionRange(0,0);
+    // });
+  }),
 
   actions: {
     increaseValue() {
