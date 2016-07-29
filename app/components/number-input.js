@@ -1,8 +1,7 @@
-import OneWayInput from './one-way-input';
-export default OneWayInput.extend({
+import OneWayTel from './one-way-tel';
+export default OneWayTel.extend({
   classNameBindings: ["class"],
   attributeBindings: ['autocomplete'],
-  type: "tel", // inputs with the type "tel" have the advantage of only allowing numeric values without showing spin buttons as the "number" input does
   autocomplete: "off",
 
   input(event) {
