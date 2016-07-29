@@ -35,6 +35,12 @@ export default OneWayInput.extend({
     return true;
   },
 
+  // remove maxlength attribute binding that is defined in the Ember.TextField component
+  // instead of the native maxlength attibute, the input event listener will take care of maxlenght interpretation
+  removeMaxLengthBindings: Ember.on('init', function() {
+    this.get('attributeBindings').removeObject("maxlength");
+  }),
+
   actions: {
     increaseValue() {
       this.set("value", parseInt(this.get("value"))+1);
