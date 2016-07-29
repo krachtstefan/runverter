@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   didInsertElement: function() {
+    this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie({customID:"menu"}).ready(function() {
         $(".menu").selectOrDie("update"); // need to trigger update to select the correct initial value
@@ -13,6 +14,7 @@ export default Ember.Component.extend({
   },
 
   didInitAttrs() {
+    this._super(...arguments);
     // if not accessed once, i18n changes are not recognized by computed properties or observers
     this.get('i18n');
   },
