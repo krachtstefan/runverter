@@ -1,6 +1,5 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
-  tagName: "input",
+import OneWayInput from './one-way-input';
+export default OneWayInput.extend({
   classNameBindings: ["class"],
   attributeBindings: ['value:value', 'type', 'autocomplete'],
   type: "tel", // inputs with the type "tel" have the advantage of only allowing numeric values without showing spin buttons as the "number" input does
