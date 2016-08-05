@@ -34,14 +34,17 @@ export default Ember.TextField.extend({
   },
 
   keyDown(event) {
+    var hotkeyPressed = event.ctrlKey === true || event.shiftKey === true || event.altKey === true ? true : false;
     switch(event.keyCode) {
       case 38:
         event.preventDefault();
-        this.send('increaseValue');
+        var steppSize = hotkeyPressed === true ? 10 : 1
+        this.send('increaseValue', steppSize);
         break;
       case 40:
         event.preventDefault();
-        this.send('decreaseValue');
+        var steppSize = hotkeyPressed === true ? 10 : 1
+        this.send('decreaseValue', steppSize);
         break;
     }
     return true;
