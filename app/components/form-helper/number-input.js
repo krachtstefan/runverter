@@ -35,15 +35,14 @@ export default Ember.TextField.extend({
 
   keyDown(event) {
     var hotkeyPressed = event.ctrlKey === true || event.shiftKey === true || event.altKey === true ? true : false;
+    var steppSize = hotkeyPressed === true ? 10 : 1;
     switch(event.keyCode) {
       case 38:
         event.preventDefault();
-        var steppSize = hotkeyPressed === true ? 10 : 1
         this.send('increaseValue', steppSize);
         break;
       case 40:
         event.preventDefault();
-        var steppSize = hotkeyPressed === true ? 10 : 1
         this.send('decreaseValue', steppSize);
         break;
     }
@@ -58,13 +57,13 @@ export default Ember.TextField.extend({
 
   actions: {
     increaseValue(value) {
-      var value = value || 1;
-      this.set("value", parseInt(this.get("value"))+parseInt(value));
+      var increaseValue = value || 1;
+      this.set("value", parseInt(this.get("value"))+parseInt(increaseValue));
     },
 
     decreaseValue(value) {
-      var value = value || 1;
-      this.set("value", parseInt(this.get("value"))-parseInt(value));
+      var increaseValue = value || 1;
+      this.set("value", parseInt(this.get("value"))-parseInt(increaseValue));
     }
   }
 });
