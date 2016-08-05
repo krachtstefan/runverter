@@ -6,7 +6,8 @@ export default OneWayTel.extend({
 
   input(event) {
     this._super(...arguments);
-    var newValue = event.target.value;
+    var oldValue = this.readDOMAttr('value');
+    var newValue = oldValue;
     var cursorPosition = event.target.selectionStart; // cursor position starts with 1
     var maxLength = parseInt(this.get("maxlength"));
 
@@ -24,8 +25,8 @@ export default OneWayTel.extend({
     // Example: If the Input contains "112", the max length is 3 and the cursor is at the very end
     // if you type a "2" the new value would still be "112" and ember won't update the value attribute even if there is a binding
     // So the value would still be "112" but the DOM value would be "1122". In this case remove every character that would exceed the max length
-    if(parseInt(this.get("value"))===parseInt(newValue) && this.readDOMAttr('value').length > maxLength){
-      this.$().val(this.readDOMAttr('value').slice(0,maxLength));
+    if(parseInt(this.get("value"))===parseInt(newValue) && oldValue.length > maxLength){
+      this.$().val(oldValue.slice(0,maxLength));
     }
 
     this.set("value", parseInt(newValue));
