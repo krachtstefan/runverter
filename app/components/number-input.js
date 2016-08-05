@@ -5,6 +5,7 @@ export default OneWayTel.extend({
   autocomplete: "off",
 
   input(event) {
+    this._super(...arguments);
     var newValue = event.target.value;
     var cursorPosition = event.target.selectionStart; // cursor position starts with 1
     // if the inputs new value would exceed the allowed maxlength
