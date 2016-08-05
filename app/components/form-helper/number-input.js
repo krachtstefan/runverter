@@ -54,12 +54,14 @@ export default Ember.TextField.extend({
   }),
 
   actions: {
-    increaseValue() {
-      this.set("value", parseInt(this.get("value"))+1);
+    increaseValue(value) {
+      var value = value || 1;
+      this.set("value", parseInt(this.get("value"))+parseInt(value));
     },
 
-    decreaseValue() {
-      this.set("value", parseInt(this.get("value"))-1);
+    decreaseValue(value) {
+      var value = value || 1;
+      this.set("value", parseInt(this.get("value"))-parseInt(value));
     }
   }
 });
