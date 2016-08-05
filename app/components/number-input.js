@@ -17,6 +17,15 @@ export default OneWayTel.extend({
       newValueArr.splice(parseInt(this.get("maxlength"))); // make sure not to exceed the maxlength (fe. if someone pastes multiple characters at once)
       newValue = newValueArr.join('');
     }
+
+    // Prevent input value from exceeding max length if ember doesn't update the value attribute
+    // Example: If the Input contains "112", the max length is 3 and the cursor is at the very end
+    // if you type a "2" the new value would still be "112" and ember won't update the value attribute even if there is a binding
+    // So the value would still be "112" but the DOM value would be "1122". In this case remove every character that would exceed the max length
+    if(parseInt(this.get("value"))===parseInt(newValue) && this.readDOMAttr('value').length > parseInt(this.get("maxlength"))){
+      this.$().val(this.readDOMAttr('value').slice(0,parseInt(this.get("maxlength"))));
+    }
+
     this.set("value", parseInt(newValue));
     return true;
   },
