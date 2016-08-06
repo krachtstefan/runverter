@@ -250,6 +250,27 @@ test('timeStackSec setter also works with integer', function(assert) {
   assert.strictEqual(run.get("timeStackSec").toString(), "2");
 });
 
+test('timeStackSec setter handles negative values and changes timeStackMin', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 50); });
+  Ember.run(function(){ run.set("timeStackSec", -10); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "4");
+  assert.strictEqual(run.get("timeStackSec").toString(), "50");
+});
+
+test('timeStackSec setter handles values over 59 and changes timeStackMin', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 60); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "6");
+  assert.strictEqual(run.get("timeStackSec").toString(), "0");
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 80); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "6");
+  assert.strictEqual(run.get("timeStackSec").toString(), "20");
+});
+
 test('timeStackSec setter influences all time related properties', function(assert) {
   var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
   Ember.run(function(){ run.set("timeStackSec", "20"); }); // 3,5 hours and 20 seconds
