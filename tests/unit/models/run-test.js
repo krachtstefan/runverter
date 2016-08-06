@@ -1063,6 +1063,26 @@ test('paceMinPerKmStackSec setter also works with integer', function(assert) {
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "2");
 });
 
+test('paceMinPerKmStackSec setter handles negative values and changes paceMinPerKmStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", -10); });
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "4");
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "50");
+});
+
+test('paceMinPerKmStackSec setter handles values over 59 and changes paceMinPerKmStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 60); });
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "0");
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 80); });
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "20");
+});
+
 test('paceMinPerKmStackSec setter influences all pace related properties', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthM : new BigNumber(2000)}); // 6 min/km
   Ember.run(function(){ run.set("paceMinPerKmStackSec", "20"); }); // 6.3333 min/km
