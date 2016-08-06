@@ -45,9 +45,9 @@ export default Ember.Controller.extend({
     return selectedTool;
   }),
 
-  handlePersistence: function () {
+  handlePersistence: Ember.observer("model.timeSec", "model.lengthM", function () {
     this.get("model").save();
-  }.observes("model.timeSec", "model.lengthM"),
+  }),
 
   actions: {
     navigateTo: function(selection) {

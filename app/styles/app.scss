@@ -57,7 +57,7 @@ body{
     padding:30px 25px 40px 25px;
   }
 
-  .uk-form input[type="text"], .uk-form input[type="number"]{
+  .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
     text-align: center;
     color:$color-form-text;
     border-color:$color-form-border;

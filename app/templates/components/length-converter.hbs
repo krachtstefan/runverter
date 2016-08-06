@@ -5,7 +5,7 @@
         {{t "tools.lc.kmLabel"}}&nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5">
-        {{input value=run.lengthKmStackKm min="0" max="999" step="1" type="number" class="digits-3"}} {{t "metrics.distance.separator"}} {{input value=run.lengthKmStackDecimalFixed min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.km"}}
+        {{form-helper/number-input value=run.lengthKmStackKm maxlength="3" class="digits-3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed maxlength="2" class="digits-2"}} {{t "metrics.distance.km"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -13,7 +13,7 @@
         {{t "tools.lc.miLabel"}}&nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5">
-        {{input value=run.lengthMiStackMi min="0" max="999" step="1" type="number" class="digits-3"}} {{t "metrics.distance.separator"}} {{input value=run.lengthMiStackDecimalFixed min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.mi"}}
+        {{form-helper/number-input value=run.lengthMiStackMi maxlength="3" class="digits-3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed maxlength="2" class="digits-2"}} {{t "metrics.distance.mi"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -21,7 +21,7 @@
         {{t "tools.lc.mLabel"}}&nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5">
-        {{input value=run.lengthMStackM min="0" max="999999" step="1" type="number" class="digits-6"}} {{t "metrics.distance.separator"}} {{input value=run.lengthMStackDecimal min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.m"}}
+        {{form-helper/number-input value=run.lengthMStackM maxlength="6" class="digits-6"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimal maxlength="2" class="digits-2"}} {{t "metrics.distance.m"}}
       </div>
     </div>
   </form>

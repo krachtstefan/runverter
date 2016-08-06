@@ -5,8 +5,8 @@
         {{t "tools.pca.distanceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{#if showRunLengthKm}}<span>{{input value=run.lengthKmStackKm min="0" max="999" step="1" type="number" class="digits-3"}} {{t "metrics.distance.separator"}} {{input value=run.lengthKmStackDecimalFixed min="0" max="99" step="1" type="number" class="digits-2"}}</span>{{/if}}
-        {{#if showRunLengthMi}}<span>{{input value=run.lengthMiStackMi min="0" max="999" step="1" type="number" class="digits-3"}} {{t "metrics.distance.separator"}} {{input value=run.lengthMiStackDecimalFixed min="0" max="99" step="1" type="number" class="digits-2"}}</span>{{/if}}
+        {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxlength="3" class="digits-3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed maxlength="2" class="digits-2"}}</span>{{/if}}
+        {{#if showRunLengthMi}}<span>{{form-helper/number-input value=run.lengthMiStackMi maxlength="3" class="digits-3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed maxlength="2" class="digits-2"}}</span>{{/if}}
         {{#x-select value=runLengthMetricsSelected class="runLength"}}
           {{#each runLengthMetrics as |item|}}
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
@@ -19,7 +19,7 @@
         {{t "tools.pca.timeLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{input value=run.timeStackHr  min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.time.hr"}} {{input value=run.timeStackMin min="0" max="60" step="1" type="number" class="digits-2"}} {{t "metrics.time.min"}} {{input value=run.timeStackSec min="0" max="60" step="1" type="number" class="digits-2"}} {{t "metrics.time.sec"}}
+        {{form-helper/number-input value=run.timeStackHr maxlength="2" class="digits-2"}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMin maxlength="2" class="digits-2"}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSec maxlength="2" class="digits-2"}} {{t "metrics.time.sec"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -27,10 +27,10 @@
         {{t "tools.pca.paceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{#if showRunTempoMinKm}}{{input value=run.paceMinPerKmStackMin min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.tempo.separator"}} {{input value=run.paceMinPerKmStackSec min="0" max="99" step="1" type="number" class="digits-2"}}{{/if}}
-        {{#if showRunTempoMinMi}}{{input value=run.paceMinPerMiStackMin min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.tempo.separator"}} {{input value=run.paceMinPerMiStackSec min="0" max="99" step="1" type="number" class="digits-2"}}{{/if}}
-        {{#if showRunTempoKmH}}{{input value=run.speedKmHrStackKm min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.separator"}} {{input value=run.speedKmHrStackDecimal min="0" max="99" step="1" type="number" class="digits-2"}}{{/if}}
-        {{#if showRunTempoMiH}}{{input value=run.speedMiHrStackMi min="0" max="99" step="1" type="number" class="digits-2"}} {{t "metrics.distance.separator"}} {{input value=run.speedMiHrStackDecimal min="0" max="99" step="1" type="number" class="digits-2"}}{{/if}}
+        {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin maxlength="2" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSec maxlength="2" class="digits-2"}}{{/if}}
+        {{#if showRunTempoMinMi}}{{form-helper/number-input value=run.paceMinPerMiStackMin maxlength="2" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSec maxlength="2" class="digits-2"}}{{/if}}
+        {{#if showRunTempoKmH}}{{form-helper/number-input value=run.speedKmHrStackKm maxlength="2" class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimal maxlength="2" class="digits-2"}}{{/if}}
+        {{#if showRunTempoMiH}}{{form-helper/number-input value=run.speedMiHrStackMi maxlength="2" class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimal maxlength="2" class="digits-2"}}{{/if}}
         {{#x-select value=runTempoMetricsSelected class="runTempo"}}
           {{#each runTempoMetrics as |item|}}
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
