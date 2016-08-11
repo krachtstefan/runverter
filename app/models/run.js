@@ -990,7 +990,8 @@ export default DS.Model.extend({
       var leadingZeros = this._getLeadingZerosFromString(value);
 
       value = this._ensureBigNumber(value).round();
-      var valueLength = value.toString().length;
+
+      var valueLength = value.abs().toString().length;
 
       // reflects the decimal precision of the value
       // 1 = 100; 10 = 10
