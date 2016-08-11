@@ -859,6 +859,27 @@ test('lengthMiStackDecimal setter also works with integer', function(assert) {
   assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
 });
 
+test('lengthMiStackDecimal setter handles negative values and changes lengthMiStackMi', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", -10); });
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
+  assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "9");
+});
+
+test('lengthMiStackDecimal setter handles values over 99 and changes lengthMiStackMi', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 100); });
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
+  assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "1");
+
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 123); });
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
+  assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "12");
+});
+
 test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
   Ember.run(function(){ run.set("lengthMiStackDecimal", "09"); });
