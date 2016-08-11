@@ -1773,6 +1773,27 @@ test('speedMiHrStackDecimal setter also works with integer', function(assert) {
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
+test('speedMiHrStackDecimal setter handles negative values and changes speedMiHrStackMi', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", -10); });
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
+  assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "9");
+});
+
+test('speedMiHrStackDecimal setter handles values over 99 and changes speedMiHrStackMi', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 100); });
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
+  assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "1");
+
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 123); });
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
+  assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "12");
+});
+
 test('speedMiHrStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject({timeSec :  new BigNumber(3600), lengthM :  new BigNumber(12000)});
   Ember.run(function(){ run.set("speedMiHrStackDecimal", "09"); });
