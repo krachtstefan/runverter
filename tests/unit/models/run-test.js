@@ -405,6 +405,27 @@ test('lengthMStackDecimal setter also works with integer', function(assert) {
   assert.strictEqual(run.get("lengthMStackDecimal"), "9");
 });
 
+test('lengthMStackDecimal setter handles negative values and changes lengthMStackM', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", -10); });
+  assert.strictEqual(run.get("lengthMStackM").toString(), "4");
+  assert.strictEqual(run.get("lengthMStackDecimal").toString(), "9");
+});
+
+test('lengthMStackDecimal setter handles values over 99 and changes lengthMStackM', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 100); });
+  assert.strictEqual(run.get("lengthMStackM").toString(), "5");
+  assert.strictEqual(run.get("lengthMStackDecimal").toString(), "1");
+
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 123); });
+  assert.strictEqual(run.get("lengthMStackM").toString(), "5");
+  assert.strictEqual(run.get("lengthMStackDecimal").toString(), "12");
+});
+
 test('lengthMStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
   Ember.run(function(){ run.set("lengthMStackDecimal", "09"); });
