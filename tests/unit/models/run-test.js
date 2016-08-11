@@ -583,6 +583,27 @@ test('lengthKmStackDecimal setter also works with integer', function(assert) {
   assert.strictEqual(run.get("lengthKmStackDecimal"), "9");
 });
 
+test('lengthKmStackDecimal setter handles negative values and changes lengthKmStackKm', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", -10); });
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "4");
+  assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "9");
+});
+
+test('lengthKmStackDecimal setter handles values over 99 and changes lengthKmStackKm', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 100); });
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "5");
+  assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "1");
+
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 123); });
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "5");
+  assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "12");
+});
+
 test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
   Ember.run(function(){ run.set("lengthKmStackDecimal", "09"); });
