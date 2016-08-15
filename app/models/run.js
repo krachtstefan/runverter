@@ -320,6 +320,47 @@ export default DS.Model.extend({
   }),
 
   /**
+   * lengthMStackDecimalFixed is a variation of lengthMStackDecimal with a fixed
+   * length as defined in the digits property. It's basically lengthMStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  lengthMStackDecimalFixed : Ember.computed("lengthMStackDecimalFixedRaw", "lengthM", {
+
+    /**
+     * returns lengthMStackDecimalFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("lengthMStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new lengthMStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new lengthMStackDecimalFixed value
+     * @return {string} new lengthMStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("lengthMStackDecimal", value);
+      return this.get("lengthMStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of lengthMStackDecimalFixed
+   *
+   * @return {string}
+   */
+  lengthMStackDecimalFixedRaw : Ember.computed("lengthMStackDecimal", "lengthM", function(){
+    var lengthMStackDecimal = this.get("lengthMStackDecimal");
+    var zerosToAdd = this.get("digits").minus(lengthMStackDecimal.length);
+    while (zerosToAdd--) { lengthMStackDecimal += "0";}
+    return lengthMStackDecimal;
+  }),
+
+  /**
    * length of the run in km
    */
   lengthKm : Ember.computed("lengthKmRaw", {
