@@ -281,7 +281,7 @@ export default DS.Model.extend({
    * lengthMStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the meters value
    */
-  lengthMStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+  lengthMStackDecimal : Ember.computed("lengthM", "lengthMStackMRaw", {
 
     /**
      * returns lengthMStackDecimal, no decimal places
