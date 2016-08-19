@@ -1805,6 +1805,111 @@ test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', 
   assert.strictEqual(run.get("speedKmHr").toString(), "12.05");
 });
 
+// speedKmHrStackDecimalFixed
+test('speedKmHrStackDecimalFixed property is calculated from speedKmHr and can round down', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.121) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "12");
+});
+
+test('speedKmHrStackDecimalFixed property can round up', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.715) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "72");
+});
+
+test('speedKmHrStackDecimalFixed has trailing zero(s)', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.5) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "50");
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(5) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
+});
+
+test('speedKmHrStackDecimalFixed supports leading zero', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.09) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "09");
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.005) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "01");
+});
+
+test('speedKmHrStackDecimalFixed can be zero', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(99) }); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
+});
+
+test('speedKmHrStackDecimalFixed setter changes speedKmHrStackDecimalFixed', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "90"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
+});
+
+test('speedKmHrStackDecimalFixed setter can handle floats', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "8.2"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "80");
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 9.5); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "10");
+});
+
+test('speedKmHrStackDecimalFixed setter also works with integer', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 9); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
+});
+
+test('speedKmHrStackDecimalFixed setter works with single digit', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "9"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
+});
+
+test('speedKmHrStackDecimalFixed setter handles negative values and changes speedKmHrStackKm', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", -10); });
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "4");
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "90");
+});
+
+test('speedKmHrStackDecimalFixed setter handles values over 99 and changes speedKmHrStackKm', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 100); });
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "5");
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "10");
+
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 123); });
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "5");
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "12");
+});
+
+test('speedKmHrStackDecimalFixed setter works with leading zero', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "09");
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "002"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "009"); });
+  assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "01");
+});
+
+test('speedKmHrStackDecimalFixed setter changes speedKmHr', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("speedKmHr", "1000"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
+  assert.strictEqual(run.get("speedKmHr").toString(), "1000.09");
+});
+
+test('speedKmHrStackKm and speedKmHrStackDecimalFixed setter will define speedKmHr', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimalFixed : "9" }); });
+  assert.strictEqual(run.get("speedKmHr").toString(), "12.9");
+});
+
 // speedMiHr
 test('speedMiHr property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1609.344)});
