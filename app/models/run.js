@@ -1176,7 +1176,7 @@ export default DS.Model.extend({
    */
   speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
     /**
-    * returns speedMiHrStackDecimal, no decimal places
+     * returns speedMiHrStackDecimal, no decimal places
      *
      * @return {string}
      */
