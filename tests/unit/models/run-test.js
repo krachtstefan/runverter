@@ -960,7 +960,7 @@ test('lengthMiStackDecimal property is calculated from lengthM and can round dow
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "68");
 });
 
-test('lengthMiStackDecimal can round up', function(assert) {
+test('lengthMiStackDecimal property can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2712)});
  	assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
 });
@@ -1930,7 +1930,7 @@ test('speedMiHr can have up to 20 decimal places and can round up', function(ass
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01244999328919112384");
 });
 
-test('speedMiHr can round up', function(assert) {
+test('speedMiHr property can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380999)});
   // http://keisan.casio.com/calculator results in 1.0124504139574882685118906
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01245041395748826851");
