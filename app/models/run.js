@@ -441,7 +441,7 @@ export default DS.Model.extend({
    * lengthKmStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the kilometers value
    */
-  lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+  lengthKmStackDecimal : Ember.computed("lengthKm", "lengthKmStackKmRaw", {
 
     /**
      * returns lengthKmStackDecimal, no decimal places
@@ -449,7 +449,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthKmStackDecimal = this.get("lengthKmRaw").round(this.get("digits")).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKm").round(this.get("digits")).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
 
