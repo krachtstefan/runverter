@@ -1212,6 +1212,48 @@ export default DS.Model.extend({
     }
   }),
 
+
+  /**
+   * speedMiHrStackDecimalFixed is a variation of speedMiHrStackDecimal with a fixed
+   * length as defined in the digits property. It's basically speedMiHrStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  speedMiHrStackDecimalFixed : Ember.computed("speedMiHrStackDecimalFixedRaw", "speedMiHr", {
+
+    /**
+     * returns speedMiHrStackDecimalFixedRaw, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("speedMiHrStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new speedMiHrStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new speedMiHrStackDecimalFixed value
+     * @return {string} new speedMiHrStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("speedMiHrStackDecimal", value);
+      return this.get("speedMiHrStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of speedMiHrStackDecimalFixed
+   *
+   * @return {string}
+   */
+  speedMiHrStackDecimalFixedRaw : Ember.computed("speedMiHrStackDecimal", "speedMiHr", function(){
+    var speedMiHrStackDecimal = this.get("speedMiHrStackDecimal");
+    var zerosToAdd = this.get("digits").minus(speedMiHrStackDecimal.length);
+    while (zerosToAdd--) { speedMiHrStackDecimal += "0";}
+    return speedMiHrStackDecimal;
+  }),
+
   /**
    * returns the number of leading zeros from a string
    *
