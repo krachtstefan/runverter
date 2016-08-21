@@ -601,7 +601,7 @@ export default DS.Model.extend({
    * lengthMiStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the miles value
    */
-  lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
+  lengthMiStackDecimal : Ember.computed("lengthMi", "lengthMiStackMiRaw", {
 
     /**
      * returns lengthMiStackDecimal, no decimal places
@@ -609,7 +609,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthMiStackDecimal = this.get("lengthMiRaw").round(this.get("digits")).toString().split(".")[1];
+      var lengthMiStackDecimal = this.get("lengthMi").round(this.get("digits")).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     },
 
