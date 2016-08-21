@@ -1174,14 +1174,14 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the miles value
    *
    */
-  speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
+  speedMiHrStackDecimal : Ember.computed("speedMiHr", "speedMiHrStackMiRaw", {
     /**
      * returns speedMiHrStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHr").round(this.get("digits")).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
 
