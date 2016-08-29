@@ -29,7 +29,7 @@ export default Ember.TextField.extend({
       this.$().val(oldValue.slice(0,maxLength));
     }
 
-    this.set("value", parseInt(newValue));
+    this.set("value", newValue);
     return true;
   },
 

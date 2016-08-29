@@ -281,7 +281,7 @@ export default DS.Model.extend({
    * lengthMStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the meters value
    */
-  lengthMStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+  lengthMStackDecimal : Ember.computed("lengthM", "lengthMStackMRaw", {
 
     /**
      * returns lengthMStackDecimal, no decimal places
@@ -317,6 +317,47 @@ export default DS.Model.extend({
       var lengthMStackDecimal = this.get("lengthM").round(this.get("digits")).toString().split(".")[1];
       return lengthMStackDecimal ? lengthMStackDecimal : "0";
     }
+  }),
+
+  /**
+   * lengthMStackDecimalFixed is a variation of lengthMStackDecimal with a fixed
+   * length as defined in the digits property. It's basically lengthMStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  lengthMStackDecimalFixed : Ember.computed("lengthMStackDecimalFixedRaw", "lengthM", {
+
+    /**
+     * returns lengthMStackDecimalFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("lengthMStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new lengthMStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "lengthMStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new lengthMStackDecimalFixed value
+     * @return {string} new lengthMStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("lengthMStackDecimal", value);
+      return this.get("lengthMStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of lengthMStackDecimalFixed
+   *
+   * @return {string}
+   */
+  lengthMStackDecimalFixedRaw : Ember.computed("lengthMStackDecimal", "lengthM", function(){
+    var lengthMStackDecimal = this.get("lengthMStackDecimal");
+    var zerosToAdd = this.get("digits").minus(lengthMStackDecimal.length);
+    while (zerosToAdd--) { lengthMStackDecimal += "0";}
+    return lengthMStackDecimal;
   }),
 
   /**
@@ -400,7 +441,7 @@ export default DS.Model.extend({
    * lengthKmStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the kilometers value
    */
-  lengthKmStackDecimal : Ember.computed("lengthKmRaw", "lengthKmStackKmRaw", {
+  lengthKmStackDecimal : Ember.computed("lengthKm", "lengthKmStackKmRaw", {
 
     /**
      * returns lengthKmStackDecimal, no decimal places
@@ -408,7 +449,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthKmStackDecimal = this.get("lengthKmRaw").round(this.get("digits")).toString().split(".")[1];
+      var lengthKmStackDecimal = this.get("lengthKm").round(this.get("digits")).toString().split(".")[1];
       return lengthKmStackDecimal ? lengthKmStackDecimal : "0";
     },
 
@@ -560,7 +601,7 @@ export default DS.Model.extend({
    * lengthMiStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the miles value
    */
-  lengthMiStackDecimal : Ember.computed("lengthMiRaw", "lengthMiStackMiRaw", {
+  lengthMiStackDecimal : Ember.computed("lengthMi", "lengthMiStackMiRaw", {
 
     /**
      * returns lengthMiStackDecimal, no decimal places
@@ -568,7 +609,7 @@ export default DS.Model.extend({
      * @return {string}
      */
     get: function() {
-      var lengthMiStackDecimal = this.get("lengthMiRaw").round(this.get("digits")).toString().split(".")[1];
+      var lengthMiStackDecimal = this.get("lengthMi").round(this.get("digits")).toString().split(".")[1];
       return lengthMiStackDecimal ? lengthMiStackDecimal : "0";
     },
 
@@ -1009,6 +1050,47 @@ export default DS.Model.extend({
   }),
 
   /**
+   * speedKmHrStackDecimalFixed is a variation of speedKmHrStackDecimal with a fixed
+   * length as defined in the digits property. It's basically speedKmHrStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  speedKmHrStackDecimalFixed : Ember.computed("speedKmHrStackDecimalFixedRaw", "speedKmHr", {
+
+    /**
+     * returns speedKmHrStackDecimalFixedRaw, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("speedKmHrStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new speedKmHrStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new speedKmHrStackDecimalFixed value
+     * @return {string} new speedKmHrStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("speedKmHrStackDecimal", value);
+      return this.get("speedKmHrStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of speedKmHrStackDecimalFixed
+   *
+   * @return {string}
+   */
+  speedKmHrStackDecimalFixedRaw : Ember.computed("speedKmHrStackDecimal", "speedKmHr", function(){
+    var speedKmHrStackDecimal = this.get("speedKmHrStackDecimal");
+    var zerosToAdd = this.get("digits").minus(speedKmHrStackDecimal.length);
+    while (zerosToAdd--) { speedKmHrStackDecimal += "0";}
+    return speedKmHrStackDecimal;
+  }),
+
+  /**
    * speed of the run in mi/h
    */
   speedMiHr : Ember.computed("speedMiHrRaw", "lengthMiRaw", {
@@ -1092,14 +1174,14 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the miles value
    *
    */
-  speedMiHrStackDecimal : Ember.computed("speedMiHrRaw", "speedMiHrStackMiRaw", {
+  speedMiHrStackDecimal : Ember.computed("speedMiHr", "speedMiHrStackMiRaw", {
     /**
-    * returns speedMiHrStackDecimal, no decimal places
+     * returns speedMiHrStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
+      var speedMiHrStackDecimal = this.get("speedMiHr").round(this.get("digits")).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     },
 
@@ -1128,6 +1210,48 @@ export default DS.Model.extend({
       var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
       return speedMiHrStackDecimal ? speedMiHrStackDecimal : "0";
     }
+  }),
+
+
+  /**
+   * speedMiHrStackDecimalFixed is a variation of speedMiHrStackDecimal with a fixed
+   * length as defined in the digits property. It's basically speedMiHrStackDecimal
+   * with trailing zero(s) to make it possible to display 12,3 as 12,30
+   */
+  speedMiHrStackDecimalFixed : Ember.computed("speedMiHrStackDecimalFixedRaw", "speedMiHr", {
+
+    /**
+     * returns speedMiHrStackDecimalFixedRaw, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("speedMiHrStackDecimalFixedRaw");
+    },
+
+    /**
+     * sets a new speedMiHrStackDecimalFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimalFixed"
+     * @param  {BigNumber|string|number} value new speedMiHrStackDecimalFixed value
+     * @return {string} new speedMiHrStackDecimalFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("speedMiHrStackDecimal", value);
+      return this.get("speedMiHrStackDecimalFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of speedMiHrStackDecimalFixed
+   *
+   * @return {string}
+   */
+  speedMiHrStackDecimalFixedRaw : Ember.computed("speedMiHrStackDecimal", "speedMiHr", function(){
+    var speedMiHrStackDecimal = this.get("speedMiHrStackDecimal");
+    var zerosToAdd = this.get("digits").minus(speedMiHrStackDecimal.length);
+    while (zerosToAdd--) { speedMiHrStackDecimal += "0";}
+    return speedMiHrStackDecimal;
   }),
 
   /**
