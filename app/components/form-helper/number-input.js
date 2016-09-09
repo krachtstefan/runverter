@@ -70,12 +70,14 @@ export default Ember.TextField.extend({
   actions: {
     increaseValue(value) {
       var increaseValue = value || 1;
-      this.set("value", parseInt(this.get("value"))+parseInt(increaseValue));
+      var newValue = parseInt(this.get("value"))+parseInt(increaseValue);
+      this.set("value", this._addLeadingZeros(newValue));
     },
 
     decreaseValue(value) {
       var increaseValue = value || 1;
-      this.set("value", parseInt(this.get("value"))-parseInt(increaseValue));
+      var newValue = parseInt(this.get("value"))-parseInt(increaseValue);
+      this.set("value", this._addLeadingZeros(newValue));
     }
   }
 });
