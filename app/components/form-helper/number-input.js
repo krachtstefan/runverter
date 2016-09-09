@@ -56,6 +56,17 @@ export default Ember.TextField.extend({
     this.get('attributeBindings').removeObject("maxlength");
   }),
 
+  _addLeadingZeros: function(value){
+    var maxLength = parseInt(this.get("maxlength"));
+    var missingLeadingZeros = maxLength - value.toString().length;
+    if(this.leadingZeros === true && missingLeadingZeros > 0){
+      for (var i = 0; i < missingLeadingZeros; i++) {
+        value = "0"+value;
+      }
+    }
+    return value;
+  },
+
   actions: {
     increaseValue(value) {
       var increaseValue = value || 1;
