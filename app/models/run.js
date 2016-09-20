@@ -504,7 +504,15 @@ export default DS.Model.extend({
      * @return {string} new lengthKmStackDecimalFixed value
      */
     set: function(propertyName, value) {
-      this.set("lengthKmStackDecimal", value);
+      var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
+
+      // a value like 104 should result in 04 and increment the pre-decimal point position
+      // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
+      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
+        this.set("lengthM", this.get("lengthKmStackKm").times(1000).plus(valueBigNumber.times(10)));
+      }else{
+        this.set("lengthKmStackDecimal", value);
+      }
       return this.get("lengthKmStackDecimalFixedRaw");
     },
   }),
