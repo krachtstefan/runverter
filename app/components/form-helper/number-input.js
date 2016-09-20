@@ -1,6 +1,7 @@
 import OneWayTel from './../one-way-tel';
 import Ember from 'ember';
 export default OneWayTel.extend({
+  attributeBindings: ['autocomplete'],
   autocomplete: "off",
   leadingZeros: false,
 
