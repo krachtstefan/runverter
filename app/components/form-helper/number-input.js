@@ -1,7 +1,6 @@
+import OneWayTel from './../one-way-tel';
 import Ember from 'ember';
-export default Ember.TextField.extend({
-  attributeBindings: ['value:value'], // behaves different than the default "value"
-  type: "tel", // inputs with the type "tel" have the advantage of only allowing numeric values without showing spin buttons as the "number" input does
+export default OneWayTel.extend({
   autocomplete: "off",
   leadingZeros: false,
 
