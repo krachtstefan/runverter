@@ -2224,19 +2224,24 @@ test('speedMiHrStackDecimalFixed setter handles negative values and changes spee
   Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", -10); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "90");
+
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.0")); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", -1); });
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
+  assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "99");
 });
 
 test('speedMiHrStackDecimalFixed setter handles values over 99 and changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
   Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
   Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 100); });
-  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
-  assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "10");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
+  assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "00");
 
   Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
   Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 123); });
-  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
-  assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "12");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
+  assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "23");
 });
 
 test('speedMiHrStackDecimalFixed setter works with leading zero', function(assert) {
