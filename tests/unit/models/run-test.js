@@ -1115,19 +1115,24 @@ test('lengthMiStackDecimalFixed setter handles negative values and changes lengt
   Ember.run(function(){ run.set("lengthMiStackDecimalFixed", -10); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
   assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "90");
+
+  Ember.run(function(){ run.set("lengthMi", "5.0"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", -1); });
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "99");
 });
 
 test('lengthMiStackDecimalFixed setter handles values over 99 and changes lengthMiStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
   Ember.run(function(){ run.set("lengthMi", "5.5"); });
   Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 100); });
-  assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
-  assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "10");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "6");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "00");
 
   Ember.run(function(){ run.set("lengthMi", "5.5"); });
   Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 123); });
-  assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
-  assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "12");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "6");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "23");
 });
 
 test('lengthMiStackDecimalFixed setter works with leading zero', function(assert) {
