@@ -1269,7 +1269,15 @@ export default DS.Model.extend({
      * @return {string} new speedMiHrStackDecimalFixed value
      */
     set: function(propertyName, value) {
-      this.set("speedMiHrStackDecimal", value);
+      var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
+
+      // a value like 104 should result in 04 and increment the pre-decimal point position
+      // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
+      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
+        this.set("speedMiHr", this.get("speedMiHrStackMi").plus(valueBigNumber.dividedBy(100)));
+      }else{
+        this.set("speedMiHrStackDecimal", value);
+      }
       return this.get("speedMiHrStackDecimalFixedRaw");
     },
   }),
