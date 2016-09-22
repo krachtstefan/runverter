@@ -262,7 +262,7 @@ export default DS.Model.extend({
     var timeStackSec = this.get("timeStackSec");
     var zerosToAdd = this.get("digits").minus(timeStackSec.toString().length);
     while (zerosToAdd--) { timeStackSec = "0"+timeStackSec; }
-    return timeStackSec;
+    return timeStackSec.toString();
   }),
 
   /**
