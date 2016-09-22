@@ -226,6 +226,46 @@ export default DS.Model.extend({
   }),
 
   /**
+   * timeStackSecFixed is a variation of timeStackSec with a fixed length as
+   * defined in the digits property to make it possible to display 15:1 as 15:01
+   */
+  timeStackSecFixed : Ember.computed("timeStackSecFixedRaw", "timeSec", {
+
+    /**
+     * returns timeStackSecFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("timeStackSecFixedRaw");
+    },
+
+    /**
+     * sets a new timeStackSecFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackSecFixed"
+     * @param  {BigNumber|string|number} value new timeStackSecFixed value
+     * @return {string} new timeStackSecFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("timeStackSec", value);
+      return this.get("timeStackSecFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of timeStackSecFixed
+   *
+   * @return {string}
+   */
+  timeStackSecFixedRaw : Ember.computed("timeStackSec", "timeSec", function(){
+    var timeStackSec = this.get("timeStackSec");
+    var zerosToAdd = this.get("digits").minus(timeStackSec.toString().length);
+    while (zerosToAdd--) { timeStackSec = "0"+timeStackSec; }
+    return timeStackSec;
+  }),
+
+  /**
    * lengthM represents the length of the run in meter, will be stored in database
    * and should be set on create
    */
