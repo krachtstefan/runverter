@@ -310,6 +310,103 @@ test('timeStackSec setter handles values bigger than 59', function(assert) {
   assert.strictEqual(run.get("timeSec").toString(), "12662");
 });
 
+// timeStackSecFixed
+test('timeStackSecFixed property is calculated from timeSec and can round down', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(59.4)});
+  assert.strictEqual(run.get("timeStackSecFixed"), "59");
+});
+
+test('timeStackSecFixed property can round up', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(59.6)});
+  assert.strictEqual(run.get("timeStackSecFixed"), "00");
+});
+
+test('timeStackSecFixed has leading zero(s)', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(2)});
+  assert.strictEqual(run.get("timeStackSecFixed"), "02");
+  Ember.run(function(){ run.set("timeSec", new BigNumber("60")); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "00");
+});
+
+test('timeStackSecFixed can be zero', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(120)});
+  assert.strictEqual(run.get("timeStackSecFixed"), "00");
+});
+
+test('timeStackSecFixed setter changes timeStackSecFixed', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackSecFixed", "30"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "30");
+});
+
+test('timeStackSecFixed setter can handle floats', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackSecFixed", "8.2"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "08");
+  Ember.run(function(){ run.set("timeStackSecFixed", 9.5); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "10");
+});
+
+test('timeStackSecFixed setter also works with integer', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackSecFixed", 20); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "20");
+});
+
+test('timeStackSecFixed setter works with single digit', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackSecFixed", "9"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "09");
+});
+
+test('timeStackSecFixed setter handles negative values and changes timeStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", -40); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "5");
+  assert.strictEqual(run.get("timeStackSecFixed").toString(), "20");
+
+  Ember.run(function(){ run.set("timeMin", new BigNumber("5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", -1); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "4");
+  assert.strictEqual(run.get("timeStackSecFixed").toString(), "59");
+});
+
+test('timeStackSecFixed setter handles values over 59 and changes timeStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 60); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "7");
+  assert.strictEqual(run.get("timeStackSecFixed").toString(), "00");
+
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 90); });
+  assert.strictEqual(run.get("timeStackMin").toString(), "7");
+  assert.strictEqual(run.get("timeStackSecFixed").toString(), "30");
+});
+
+test('timeStackSecFixed setter works with leading zero', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackSecFixed", "09"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "09");
+  Ember.run(function(){ run.set("timeStackSecFixed", "002"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "02");
+  Ember.run(function(){ run.set("timeStackSecFixed", "009"); });
+  assert.strictEqual(run.get("timeStackSecFixed"), "09");
+});
+
+test('timeStackSecFixed setter changes timeMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(5)});
+  Ember.run(function(){ run.set("timeStackSecFixed", "30"); });
+  assert.strictEqual(run.get("timeMin").toString(), "5.5");
+});
+
+test('timeStackMin and timeStackSecFixed setter will define timeMin', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.setProperties({ timeStackMin : "6", timeStackSecFixed : "20" }); });
+  assert.strictEqual(run.get("timeMin").toString(), "6.33333333333333333333");
+});
+
 // lengthMStackM
 test('lengthMStackM property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
