@@ -234,6 +234,95 @@ test('timeStackMin setter influences all time related properties', function(asse
   assert.strictEqual(run.get("timeSec").toString(), "630");
 });
 
+// timeStackMinFixed
+test('timeStackMinFixed property is calculated from timeSec', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(240)});
+  assert.strictEqual(run.get("timeStackMinFixed"), "04");
+});
+
+test('timeStackMinFixed has leading zero(s)', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(120)});
+  assert.strictEqual(run.get("timeStackMinFixed"), "02");
+  Ember.run(function(){ run.set("timeSec", new BigNumber("2")); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "00");
+});
+
+test('timeStackMinFixed can be zero', function(assert) {
+  var run = this.subject({timeSec  : new BigNumber(2)});
+  assert.strictEqual(run.get("timeStackMinFixed"), "00");
+});
+
+test('timeStackMinFixed setter changes timeStackMinFixed', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMinFixed", "30"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "30");
+});
+
+test('timeStackMinFixed setter can handle floats', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMinFixed", "8.2"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "08");
+  Ember.run(function(){ run.set("timeStackMinFixed", 9.5); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "10");
+});
+
+test('timeStackMinFixed setter also works with integer', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMinFixed", 20); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "20");
+});
+
+test('timeStackMinFixed setter works with single digit', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMinFixed", "9"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "09");
+});
+
+test('timeStackMinFixed setter handles negative values and changes timeStackHr', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", -40); });
+  assert.strictEqual(run.get("timeStackHr").toString(), "5");
+  assert.strictEqual(run.get("timeStackMinFixed").toString(), "20");
+
+  Ember.run(function(){ run.set("timeHr", new BigNumber("5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", -1); });
+  assert.strictEqual(run.get("timeStackHr").toString(), "4");
+  assert.strictEqual(run.get("timeStackMinFixed").toString(), "59");
+});
+
+test('timeStackMinFixed setter handles values over 59 and changes timeStackHr', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 60); });
+  assert.strictEqual(run.get("timeStackHr").toString(), "7");
+  assert.strictEqual(run.get("timeStackMinFixed").toString(), "00");
+
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 90); });
+  assert.strictEqual(run.get("timeStackHr").toString(), "7");
+  assert.strictEqual(run.get("timeStackMinFixed").toString(), "30");
+});
+
+test('timeStackMinFixed setter works with leading zero', function(assert) {
+  var run = this.subject();
+  Ember.run(function(){ run.set("timeStackMinFixed", "09"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "09");
+  Ember.run(function(){ run.set("timeStackMinFixed", "002"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "02");
+  Ember.run(function(){ run.set("timeStackMinFixed", "009"); });
+  assert.strictEqual(run.get("timeStackMinFixed"), "09");
+});
+
+test('timeStackMinFixed setter influences all time related properties', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(90)}); // 1 minute, 30 seconds
+  Ember.run(function(){ run.set("timeStackMinFixed", "10"); }); // 10 minutes, 30 seconds
+  assert.strictEqual(run.get("timeStackHr").toString(), "0");
+  assert.strictEqual(run.get("timeStackMin").toString(), "10");
+  assert.strictEqual(run.get("timeStackSec").toString(), "30");
+  assert.strictEqual(run.get("timeSec").toString(), "630");
+});
+
 // timeStackSec
 test('timeStackSec property is calculated from timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(62)});
