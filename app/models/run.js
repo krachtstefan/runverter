@@ -184,6 +184,47 @@ export default DS.Model.extend({
   }),
 
   /**
+   * timeStackMinFixed is a variation of timeStackMin with a fixed length as
+   * defined in the digits property to make it possible to display 2:1:12 as 2:01:12
+   */
+  timeStackMinFixed : Ember.computed("timeStackMinFixedRaw", "timeSec", {
+
+    /**
+     * returns timeStackMinFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("timeStackMinFixedRaw");
+    },
+
+    /**
+     * sets a new timeStackMinFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "timeStackMinFixed"
+     * @param  {BigNumber|string|number} value new timeStackMinFixed value
+     * @return {string} new timeStackMinFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("timeStackMin", value);
+      return this.get("timeStackMinFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of timeStackMinFixed
+   *
+   * @return {string}
+   */
+  timeStackMinFixedRaw : Ember.computed("timeStackMin", "timeSec", function(){
+    var timeStackMin = this.get("timeStackMin");
+    var zerosToAdd = this.get("digits").minus(timeStackMin.toString().length);
+    while (zerosToAdd--) { timeStackMin = "0"+timeStackMin; }
+    return timeStackMin.toString();
+  }),
+
+
+  /**
    * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
    */
   timeStackSec : Ember.computed("timeSec", "timeStackSecRaw",{
