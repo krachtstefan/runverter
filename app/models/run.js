@@ -1488,4 +1488,10 @@ export default DS.Model.extend({
       this.set("lengthM", new BigNumber(0));
     }
   }),
+
+  preventNegativeTimeSec : Ember.observer("timeSec", function() {
+    if(this.get("timeSec").isNegative() === true){
+      this.set("timeSec", new BigNumber(0));
+    }
+  })
 });
