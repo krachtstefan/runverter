@@ -1882,6 +1882,103 @@ test('paceMinPerMiStackSec setter should refer to an uncompressed version paceMi
   assert.strictEqual(run.get("paceMinPerMi").toString(), "9");
 });
 
+// paceMinPerMiStackSecFixed
+test('paceMinPerMiStackSecFixed property property is calculated from timeMin and lengthM and can round down', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.54), lengthM : new BigNumber(1609.344)});
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "32"); // 60 * 0,54 = 32,4 seconds
+});
+
+test('paceMinPerMiStackSecFixed property can round up', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.56), lengthM : new BigNumber(1609.344)});
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "34"); // 60 * 0,56 = 33,6 seconds
+});
+
+test('paceMinPerMiStackSecFixed has leading zero(s)', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(75.083), lengthMi : new BigNumber(1)});
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "05");
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(75), lengthMi : new BigNumber(1) }); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "00");
+});
+
+test('paceMinPerMiStackSecFixed can be zero', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(60), lengthMi : new BigNumber(1)});
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "00");
+});
+
+test('paceMinPerMiStackSecFixed setter changes paceMinPerMiStackSecFixed', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "10"); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "10");
+});
+
+test('paceMinPerMiStackSecFixed setter can handle floats', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "2.2"); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "02");
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 2.5); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "03");
+});
+
+test('paceMinPerMiStackSecFixed setter also works with integer', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 12); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "12");
+});
+
+test('paceMinPerMiStackSecFixed setter works with single digit', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 2); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "02");
+});
+
+test('paceMinPerMiStackSecFixed setter handles negative values and changes paceMinPerMiStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", -10); });
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "4");
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "50");
+
+  Ember.run(function(){ run.set("paceMinPerMi", "5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", -1); });
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "4");
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "59");
+});
+
+test('paceMinPerMiStackSecFixed setter handles values over 59 and changes paceMinPerMiStackMin', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 60); });
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "00");
+
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 80); });
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "20");
+});
+
+test('paceMinPerMiStackSecFixed setter works with leading zero', function(assert) {
+  var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "09"); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "09");
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "002"); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "02");
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "009"); });
+  assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "09");
+});
+
+test('paceMinPerMiStackSecFixed setter changes timeSec', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600), lengthMi : new BigNumber(1)});
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "30"); });
+  assert.strictEqual(run.get("timeSec").toString(), "3630");
+});
+
+test('paceMinPerMiStackMin and paceMinPerMiStackSecFixed setter will define paceMinPerMi', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(3600), lengthMi : new BigNumber(1)});
+  Ember.run(function(){ run.setProperties({ paceMinPerMiStackMin : "5", paceMinPerMiStackSecFixed : "30" }); });
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "5.5");
+});
+
 // speedKmHr
 test('speedKmHr property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
