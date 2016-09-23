@@ -908,6 +908,45 @@ export default DS.Model.extend({
     return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
   }),
 
+  /**
+   * paceMinPerKmStackSecFixed is a variation of paceMinPerKmStackSec with a fixed length as
+   * defined in the digits property to make it possible to display 12:4 as 12:04
+   */
+  paceMinPerKmStackSecFixed : Ember.computed("paceMinPerKmStackSecFixedRaw", {
+
+    /**
+     * returns paceMinPerKmStackSecFixed, no decimal places
+     *
+     * @return {string}
+     */
+    get: function() {
+      return this.get("paceMinPerKmStackSecFixedRaw");
+    },
+
+    /**
+     * sets a new paceMinPerKmStackSecFixed
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerKmStackSecFixed"
+     * @param  {BigNumber|string|number} value new paceMinPerKmStackSecFixed value
+     * @return {string} new paceMinPerKmStackSecFixed value
+     */
+    set: function(propertyName, value) {
+      this.set("paceMinPerKmStackSec", value);
+      return this.get("paceMinPerKmStackSecFixedRaw");
+    },
+  }),
+
+  /**
+   * calculates the value of paceMinPerKmStackSec
+   *
+   * @return {string}
+   */
+  paceMinPerKmStackSecFixedRaw : Ember.computed("paceMinPerKmStackSec", function(){
+    var paceMinPerKmStackSec = this.get("paceMinPerKmStackSec");
+    var zerosToAdd = this.get("digits").minus(paceMinPerKmStackSec.toString().length);
+    while (zerosToAdd--) { paceMinPerKmStackSec = "0"+paceMinPerKmStackSec; }
+    return paceMinPerKmStackSec.toString();
+  }),
 
   /**
    * pace of the run in min/mi
