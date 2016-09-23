@@ -496,6 +496,18 @@ test('timeStackMin and timeStackSecFixed setter will define timeMin', function(a
   assert.strictEqual(run.get("timeMin").toString(), "6.33333333333333333333");
 });
 
+// lengthM
+test('lengthM property can not be negative', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1800)});
+  assert.strictEqual(run.get("lengthM").toString(), "1800");
+
+  Ember.run(function(){ run.set("lengthM", "-10"); });
+  assert.strictEqual(run.get("lengthM").toString(), "0");
+
+  Ember.run(function(){ run.set("lengthMi", "-10"); });
+  assert.strictEqual(run.get("lengthM").toString(), "0");
+});
+
 // lengthMStackM
 test('lengthMStackM property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
@@ -541,7 +553,6 @@ test('lengthMStackM setter changes lengthM', function(assert) {
   Ember.run(function(){ run.set("lengthMStackM", "2"); });
   assert.strictEqual(run.get("lengthM").toString(), "2.56");
 });
-
 
 // lengthMStackDecimal
 test('lengthMStackDecimal property is calculated from lengthM and can round down', function(assert) {
