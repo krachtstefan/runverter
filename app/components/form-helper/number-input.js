@@ -7,8 +7,9 @@ export default OneWayTel.extend({
 
   input(event) {
     this._super(...arguments);
-    var currentValue = this.readDOMAttr('value');
-    var nextValue = currentValue;
+    var lastValue = this.get("value"); // current value in model
+    var currentValue = this.readDOMAttr('value'); // current value in DOM
+    var nextValue = currentValue; // future value in DOM
     var cursorPosition = event.target.selectionStart; // cursor position starts with 1
     var maxLength = parseInt(this.get("maxlength"));
 
@@ -30,6 +31,10 @@ export default OneWayTel.extend({
       this.$().val(currentValue.slice(0,maxLength));
     }
 
+    if(currentValue.length > maxLength && lastValue[0] === "0"){
+      // nextValue.length < maxLength
+      nextValue = parseInt(lastValue)+""+parseInt(nextValue);
+    }
     this.set("value", nextValue);
     return true;
   },
