@@ -10,6 +10,18 @@ test('run is a valid ember data Model', function(assert) {
   assert.ok(run instanceof DS.Model);
 });
 
+// timeSec
+test('timeSec property can not be negative', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(1800)});
+  assert.strictEqual(run.get("timeSec").toString(), "1800");
+
+  Ember.run(function(){ run.set("timeSec", "-10"); });
+  assert.strictEqual(run.get("timeSec").toString(), "0");
+
+  Ember.run(function(){ run.set("timeHr", "-10"); });
+  assert.strictEqual(run.get("timeSec").toString(), "0");
+});
+
 // timeHr
 test('timeHr property is calculated from timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(14400)});
