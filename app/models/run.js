@@ -1481,5 +1481,11 @@ export default DS.Model.extend({
    */
   _ensureBigNumber : function(input){
     return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
-  }
+  },
+
+  preventNegativeLengthM : Ember.observer("lengthM", function() {
+    if(this.get("lengthM").isNegative() === true){
+      this.set("lengthM", new BigNumber(0));
+    }
+  }),
 });
