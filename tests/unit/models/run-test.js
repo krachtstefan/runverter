@@ -15,7 +15,7 @@ test('timeSec property can not be negative', function(assert) {
   var run = this.subject({timeSec : new BigNumber(1800)});
   assert.strictEqual(run.get("timeSec").toString(), "1800");
 
-  Ember.run(function(){ run.set("timeSec", "-10"); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber(-10)); });
   assert.strictEqual(run.get("timeSec").toString(), "0");
 
   Ember.run(function(){ run.set("timeHr", "-10"); });
@@ -513,7 +513,7 @@ test('lengthM property can not be negative', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
   assert.strictEqual(run.get("lengthM").toString(), "1800");
 
-  Ember.run(function(){ run.set("lengthM", "-10"); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(-10)); });
   assert.strictEqual(run.get("lengthM").toString(), "0");
 
   Ember.run(function(){ run.set("lengthMi", "-10"); });
