@@ -27,8 +27,8 @@
         {{t "tools.pca.paceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin minLength="1"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed}}{{/if}}
-        {{#if showRunTempoMinMi}}{{form-helper/number-input value=run.paceMinPerMiStackMin minLength="1"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed}}{{/if}}
+        {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed}}{{/if}}
+        {{#if showRunTempoMinMi}}{{form-helper/number-input value=run.paceMinPerMiStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed}}{{/if}}
         {{#if showRunTempoKmH}}{{form-helper/number-input value=run.speedKmHrStackKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true}}{{/if}}
         {{#if showRunTempoMiH}}{{form-helper/number-input value=run.speedMiHrStackMi minLength="1"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true}}{{/if}}
         {{#x-select value=runTempoMetricsSelected class="runTempo"}}
