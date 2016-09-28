@@ -4,6 +4,7 @@ export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   autocomplete: "off",
   leadingZeros: false,
+  lastCursorPosition: null,
 
   input(event) {
     this._super(...arguments);
@@ -31,11 +32,19 @@ export default OneWayTel.extend({
       this.$().val(currentValue.slice(0,maxLength));
     }
 
-    if(currentValue.length > maxLength && lastValue[0] === "0"){
-      // nextValue.length < maxLength
+    // Prevent an issue for values that autmatically get a leading zero
+    // Example: after selecting the whole input value and typing a number like 12, the value would become 02 instead of 12 (first 01 and then 02)
+    if(
+      this.lastCursorPosition && // if the cursor changed
+      cursorPosition === parseInt(this.get("maxlength"))+1 && // and is placed at the last position
+      cursorPosition !== this.lastCursorPosition && // for the first time
+      lastValue[0] === "0" // and the previous value started with a zero
+    ){
       nextValue = parseInt(lastValue)+""+parseInt(nextValue);
     }
+
     this.set("value", nextValue);
+    this.lastCursorPosition = cursorPosition;
     return true;
   },
 
