@@ -5,8 +5,8 @@ export default OneWayTel.extend({
   classNameBindings: ['widthClassName'],
   autocomplete: "off",
   addLeadingZeros: false,
-  minLength: 1, // used for input width
-  maxLength: 4, // used for input width and value handling
+  minLength: 2, // used for input width
+  maxLength: 2, // used for input width and value handling
   lastCursorPosition: null,
   widthClassName: null, // class name that handles the with via css
 
