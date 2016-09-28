@@ -78,7 +78,7 @@ export default OneWayTel.extend({
     var valueLength = this.get("value").toString().length;
     valueLength = valueLength > this.get("maxLength") ? this.get("maxLength") : valueLength;
     valueLength = valueLength < this.get("minLength") ? this.get("minLength") : valueLength;
-    this.set("widthClassName", "width-"+valueLength);
+    this.set("widthClassName", "digits-"+valueLength);
   })),
 
   _addLeadingZeros: function(value){
