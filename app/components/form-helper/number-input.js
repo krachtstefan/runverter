@@ -4,7 +4,7 @@ export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   autocomplete: "off",
   addLeadingZeros: false,
-  minlength: 1, // used for input width
+  minLength: 1, // used for input width
   maxLength: 4, // used for input width and value handling
   lastCursorPosition: null,
 
