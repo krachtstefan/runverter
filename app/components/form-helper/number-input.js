@@ -2,11 +2,13 @@ import OneWayTel from './../one-way-tel';
 import Ember from 'ember';
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
+  classNameBindings: ['widthClassName'],
   autocomplete: "off",
   addLeadingZeros: false,
   minLength: 1, // used for input width
   maxLength: 4, // used for input width and value handling
   lastCursorPosition: null,
+  widthClassName: null, // class name that handles the with via css
 
   input(event) {
     this._super(...arguments);
