@@ -5,7 +5,7 @@
         {{t "tools.pc.minkmLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.paceMinPerKmStackMin maxLength="2" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed maxLength="2" class="digits-2"}} {{t "metrics.tempo.minkm"}}
+        {{form-helper/number-input value=run.paceMinPerKmStackMin minLength="1" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed class="digits-2"}} {{t "metrics.tempo.minkm"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -13,7 +13,7 @@
         {{t "tools.pc.minmiLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.paceMinPerMiStackMin maxLength="2" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed maxLength="2" class="digits-2"}} {{t "metrics.tempo.minmi"}}
+        {{form-helper/number-input value=run.paceMinPerMiStackMin minLength="1" class="digits-2"}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed class="digits-2"}} {{t "metrics.tempo.minmi"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -21,7 +21,7 @@
         {{t "tools.pc.kmhLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.speedKmHrStackKm maxLength="2" class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed maxLength="2" addLeadingZeros=true class="digits-2"}} {{t "metrics.tempo.kmh"}}
+        {{form-helper/number-input value=run.speedKmHrStackKm class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true class="digits-2"}} {{t "metrics.tempo.kmh"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -29,7 +29,7 @@
         {{t "tools.pc.mihLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.speedMiHrStackMi maxLength="2" class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed maxLength="2" addLeadingZeros=true class="digits-2"}} {{t "metrics.tempo.mih"}}
+        {{form-helper/number-input value=run.speedMiHrStackMi minLength="1" class="digits-2"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true class="digits-2"}} {{t "metrics.tempo.mih"}}
       </div>
     </div>
   </form>
