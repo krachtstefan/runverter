@@ -5,7 +5,7 @@ export default OneWayTel.extend({
   autocomplete: "off",
   addLeadingZeros: false,
   minlength: 1, // used for input width
-  maxlength: 4, // used for input width and value handling
+  maxLength: 4, // used for input width and value handling
   lastCursorPosition: null,
 
   input(event) {
@@ -14,15 +14,15 @@ export default OneWayTel.extend({
     var currentValue = this.readDOMAttr('value'); // current value in DOM
     var nextValue = currentValue; // future value in DOM
     var cursorPosition = event.target.selectionStart; // cursor position starts with 1
-    var maxLength = parseInt(this.get("maxlength"));
+    var maxLength = parseInt(this.get("maxLength"));
 
-    // if the inputs new value would exceed the allowed maxlength
+    // if the inputs new value would exceed the allowed maxLength
     if(nextValue.length > maxLength){
       var nextValueArr = nextValue.split('');
       var spaceLeft = maxLength-cursorPosition; // defines how many positions the curser has left before exceeding the max value
       var offset = spaceLeft < 0 ? spaceLeft-1 : 0; // use spaceLeft to calculate the offset for the splice function
       nextValueArr.splice(cursorPosition+offset, 1); // extract the part of the old value that, should be overwritten by the new value
-      nextValueArr.splice(maxLength); // make sure not to exceed the maxlength (fe. if someone pastes multiple characters at once)
+      nextValueArr.splice(maxLength); // make sure not to exceed the maxLength (fe. if someone pastes multiple characters at once)
       nextValue = nextValueArr.join('');
     }
 
@@ -38,7 +38,7 @@ export default OneWayTel.extend({
     // Example: after selecting the whole input value and typing a number like 12, the value would become 02 instead of 12 (first 01 and then 02)
     if(
       this.lastCursorPosition && // if the cursor changed
-      cursorPosition === parseInt(this.get("maxlength"))+1 && // and is placed at the last position
+      cursorPosition === parseInt(this.get("maxLength"))+1 && // and is placed at the last position
       cursorPosition !== this.lastCursorPosition && // for the first time
       lastValue[0] === "0" // and the previous value started with a zero
     ){
@@ -66,14 +66,14 @@ export default OneWayTel.extend({
     return true;
   },
 
-  // remove maxlength attribute binding that is defined in the Ember.TextField component
-  // instead of the native maxlength attibute, the input event listener will take care of maxlenght interpretation
+  // remove maxLength attribute binding that is defined in the Ember.TextField component
+  // instead of the native maxlength attibute, the input event listener will take care of maxLength interpretation
   removeMaxLengthBindings: Ember.on('init', function() {
-    this.get('attributeBindings').removeObject("maxlength");
+    this.get('attributeBindings').removeObject("maxLength");
   }),
 
   _addLeadingZeros: function(value){
-    var maxLength = parseInt(this.get("maxlength"));
+    var maxLength = parseInt(this.get("maxLength"));
     var missingLeadingZeros = maxLength - value.toString().length;
     if(this.addLeadingZeros === true && missingLeadingZeros > 0){
       for (var i = 0; i < missingLeadingZeros; i++) {
