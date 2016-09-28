@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   autocomplete: "off",
-  leadingZeros: false,
+  addLeadingZeros: false,
   lastCursorPosition: null,
 
   input(event) {
@@ -73,7 +73,7 @@ export default OneWayTel.extend({
   _addLeadingZeros: function(value){
     var maxLength = parseInt(this.get("maxlength"));
     var missingLeadingZeros = maxLength - value.toString().length;
-    if(this.leadingZeros === true && missingLeadingZeros > 0){
+    if(this.addLeadingZeros === true && missingLeadingZeros > 0){
       for (var i = 0; i < missingLeadingZeros; i++) {
         value = "0"+value;
       }
