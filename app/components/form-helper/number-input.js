@@ -6,7 +6,7 @@ export default OneWayTel.extend({
   autocomplete: "off",
   addLeadingZeros: false,
   minLength: 2, // used for input width
-  maxLength: 2, // used for input width and value handling
+  maxLength: 2, // used for value handling
   lastCursorPosition: null,
   widthClassName: null, // class name that handles the with via css
 
@@ -76,7 +76,6 @@ export default OneWayTel.extend({
 
   handleWidthClassName: Ember.on('init', Ember.observer('value', function() {
     var valueLength = this.get("value").toString().length;
-    valueLength = valueLength > this.get("maxLength") ? this.get("maxLength") : valueLength;
     valueLength = valueLength < this.get("minLength") ? this.get("minLength") : valueLength;
     this.set("widthClassName", "digits-"+valueLength);
   })),
