@@ -64,5 +64,14 @@ export default {
       "min" : "min",
       "sec" : "sec",
     }
+  },
+  "races" : {
+    "5k" : "5k",
+    "10k" : "10k",
+    "hm" : "Half Marathon",
+    "m" : "Marathon",
+    "50k" : "50k",
+    "100k" : "100k",
+    "100m" : "100 Miles",
   }
 };
