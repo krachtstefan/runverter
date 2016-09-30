@@ -24,7 +24,7 @@ export default Ember.Service.extend({
         'lengthM' : new BigNumber(50000)
       },
       {
-        'name' : this.get('i18n').t("races.10k"),
+        'name' : this.get('i18n').t("races.100k"),
         'lengthM' : new BigNumber(100000)},
       {
         'name' : this.get('i18n').t("races.100m"),
