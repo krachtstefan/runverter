@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie({customID:"menu"}).ready(function() {
-        $(".menu").selectOrDie("update"); // need to trigger update to select the correct initial value
+        $("select.menu").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
     });
   },
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 
   updateSelectOrDieOnLanguageChange: Ember.observer("i18n.locale", function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
-      $(".menu").selectOrDie("update"); // need to trigger update to select the correct initial value
+      $("select.menu").selectOrDie("update");
     });
   }),
 
