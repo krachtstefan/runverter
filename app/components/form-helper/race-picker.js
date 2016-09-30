@@ -9,5 +9,9 @@ export default Ember.Component.extend({
         $(".menu").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
     });
+  actions: {
+    switchRace: function(toolKey) {
+      this.sendAction('action', toolKey);
+    }
   }
 });
