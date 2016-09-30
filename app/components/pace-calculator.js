@@ -21,6 +21,8 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
+  races : Ember.inject.service('race'),
+
   runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
     var runTempoMetrics = [];
     var self = this;
