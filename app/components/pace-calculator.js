@@ -74,5 +74,11 @@ export default Ember.Component.extend({
 
   showRunTempoMiH: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "mih" ? true : false;
-  })
+  }),
+
+  actions: {
+    setRace: function(race) {
+      this.get("run").set("lengthM",race.lengthM);
+    }
+  }
 });
