@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
-      $("select."+this.get("id")).selectOrDie({customID: this.get("id") });
+      $("select."+this.get("identifier")).selectOrDie({customID: this.get("identifier") });
     });
   },
 
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
 
   updateSelectOrDieOnLanguageChange: Ember.observer("i18n.locale", function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
-      $("select."+this.get("id")).selectOrDie("update"); // need to trigger update after every render, language may have changed
+      $("select."+this.get("identifier")).selectOrDie("update"); // need to trigger update after every render, language may have changed
     });
   }),
 
