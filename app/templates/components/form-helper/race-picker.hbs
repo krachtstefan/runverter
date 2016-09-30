@@ -1,0 +1,5 @@
+{{#x-select action="switchRace" class=id}}
+  {{#each races.templates as |item|}}
+    {{#x-option value=item}}{{item.name}}{{/x-option}}
+  {{/each}}
+{{/x-select}}
