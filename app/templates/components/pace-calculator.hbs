@@ -4,7 +4,7 @@
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
         {{t "tools.pca.distanceLabel"}} &nbsp;
       </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 race-picker-container">
+      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 race-picker-container {{racePickerVisibleClass}}">
         {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible}}</span>{{/if}}
         {{#if showRunLengthMi}}<span>{{form-helper/number-input value=run.lengthMiStackMi maxLength="3" focus=racePickerVisible}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true focus=racePickerVisible}}</span>{{/if}}
         {{#x-select value=runLengthMetricsSelected class="runLength"}}
