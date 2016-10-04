@@ -9,6 +9,7 @@ export default OneWayTel.extend({
   maxLength: 2, // used for value handling
   lastCursorPosition: null,
   widthClassName: null, // class name that handles the with via css
+  focus: false,
 
   input(event) {
     this._super(...arguments);
@@ -66,6 +67,14 @@ export default OneWayTel.extend({
         break;
     }
     return true;
+  },
+
+  focusIn() {
+    this.set("focus", true);
+  },
+
+  focusOut() {
+    this.set("focus", false);
   },
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
