@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   runTempoMetricsSelected : "minkm", // may be overwritten when using this component
   runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
+  racePickerVisible : false,
+
   runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
     var runLengthMetrics = [];
     var self = this;
@@ -74,6 +76,10 @@ export default Ember.Component.extend({
 
   showRunTempoMiH: Ember.computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "mih" ? true : false;
+  }),
+
+  racePickerVisibleClass: Ember.computed('racePickerVisible', function () {
+    return this.get("racePickerVisible") === true ? "racePickerVisible" : "racePickerInvisible";
   }),
 
   actions: {
