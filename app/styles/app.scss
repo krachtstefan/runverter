@@ -122,7 +122,7 @@ body{
     display: none;
   }
 
-  .race-picker-container:hover{
+  .race-picker-container:hover, .racePickerVisible{
     .race-picker{
       display: inline;
     }
