@@ -30,6 +30,18 @@
   }
 }
 
+#race-picker-pace-calc{
+  width: 20px;
+
+  .sod_list_wrapper{
+    width: 350px;
+  }
+
+  .sod_label{
+    opacity: 0;
+  }
+}
+
 #menu{
   border:none;
   background:$color-secondary-background;
