@@ -4,6 +4,8 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
+  classNames: ["race-picker"],
+
   didInsertElement: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
