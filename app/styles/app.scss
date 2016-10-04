@@ -117,4 +117,14 @@ body{
       text-align: right;
     }
   }
+
+  .race-picker{
+    display: none;
+  }
+
+  .race-picker-container:hover{
+    .race-picker{
+      display: inline;
+    }
+  }
 }
