@@ -119,12 +119,15 @@ body{
   }
 
   .race-picker{
-    display: none;
+    display: inline;
+    @include transition(0.25s ease-in-out);
+    opacity: 0;
   }
 
   .race-picker-container:hover, .racePickerVisible{
     .race-picker{
-      display: inline;
+      @include transition(0.25s ease-in-out);
+      opacity: 1;
     }
   }
 }
