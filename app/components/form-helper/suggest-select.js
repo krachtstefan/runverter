@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    switchRace: function(toolKey) {
+    changeSelection: function(toolKey) {
       this.sendAction('action', toolKey);
     }
   }
