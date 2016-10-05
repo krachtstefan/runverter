@@ -33,13 +33,16 @@
 
 .suggest-select{
   display: inline;
-  @include transition(0.25s ease-in-out);
-  opacity: 0;
-
   .sod_label{
     opacity: 0;
   }
   .sod_select {
+    opacity: 0;
+    @include transition(0.25s ease-in-out);
+    &.open{
+      opacity: 1; // always visible when select is open
+    }
+
     background-position: center center;
     background-size: 50% 50%;
     background-repeat: no-repeat;
@@ -66,8 +69,10 @@
 
 .suggest-select-container:hover, .suggestSelectVisible{
   .suggest-select{
-    @include transition(0.25s ease-in-out);
-    opacity: 1;
+    .sod_select {
+      @include transition(0.25s ease-in-out);
+      opacity: 1;
+    }
   }
 }
 
