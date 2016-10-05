@@ -53,6 +53,12 @@
     background-image: inline-image("suggest.svg");
     border:none;
   }
+
+  .sod_select:before,
+  .sod_select:after{
+    display: none;
+    content: "";
+  }
 }
 
 .race-picker-container:hover, .racePickerVisible{
