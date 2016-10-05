@@ -12,7 +12,7 @@
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
           {{/each}}
         {{/x-select}}
-        {{form-helper/suggest-select races=races identifier="race-picker-pace-calc" action="setRace"}}
+        {{form-helper/suggest-select races=races identifier="race-picker-pace-calc" action="setRace" label=(t "races.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
