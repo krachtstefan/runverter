@@ -42,6 +42,25 @@
   }
 }
 
+.race-picker{
+  display: inline;
+  @include transition(0.25s ease-in-out);
+  opacity: 0;
+  .sod_select {
+    background-position: center center;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: inline-image("suggest.svg");
+    border:none;
+  }
+}
+
+.race-picker-container:hover, .racePickerVisible{
+  .race-picker{
+    @include transition(0.25s ease-in-out);
+    opacity: 1;
+  }
+}
 #menu{
   border:none;
   background:$color-secondary-background;
