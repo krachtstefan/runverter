@@ -79,7 +79,7 @@ export default Ember.Component.extend({
   }),
 
   racePickerVisibleClass: Ember.computed('racePickerVisible', function () {
-    return this.get("racePickerVisible") === true ? "racePickerVisible" : "racePickerInvisible";
+    return this.get("racePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   actions: {

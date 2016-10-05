@@ -64,7 +64,7 @@
   }
 }
 
-.suggest-select-container:hover, .racePickerVisible{
+.suggest-select-container:hover, .suggestSelectVisible{
   .suggest-select{
     @include transition(0.25s ease-in-out);
     opacity: 1;
