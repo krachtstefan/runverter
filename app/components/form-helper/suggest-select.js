@@ -4,7 +4,7 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
-  classNames: ["race-picker"],
+  classNames: ["suggest-select"],
 
   didInsertElement: function() {
     this._super(...arguments);

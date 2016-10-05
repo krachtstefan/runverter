@@ -31,7 +31,7 @@
 }
 
 
-.race-picker{
+.suggest-select{
   display: inline;
   @include transition(0.25s ease-in-out);
   opacity: 0;
@@ -64,8 +64,8 @@
   }
 }
 
-.race-picker-container:hover, .racePickerVisible{
-  .race-picker{
+.suggest-select-container:hover, .racePickerVisible{
+  .suggest-select{
     @include transition(0.25s ease-in-out);
     opacity: 1;
   }
