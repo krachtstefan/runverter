@@ -59,6 +59,10 @@
     display: none;
     content: "";
   }
+
+  .sod_select.focus{
+    background-color:$color-main-background;
+  }
 }
 
 .race-picker-container:hover, .racePickerVisible{
