@@ -45,6 +45,12 @@
     background-repeat: no-repeat;
     background-image: inline-image("suggest.svg");
     border:none;
+    .sod_option.selected{
+      color:inherit;
+      &:before{
+        background:none;
+      }
+    }
   }
 
   .sod_select:before,
