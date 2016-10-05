@@ -1,5 +1,7 @@
 {{#x-select action="changeSelection" class=identifier}}
-  {{#each races.templates as |item|}}
-    {{#x-option value=item}}{{item.name}}{{/x-option}}
-  {{/each}}
+  <optgroup label="{{label}}">
+    {{#each races.templates as |item|}}
+      {{#x-option value=item}}{{item.name}}{{/x-option}}
+    {{/each}}
+  </optgroup>
 {{/x-select}}
