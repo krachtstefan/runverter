@@ -70,6 +70,11 @@
   .sod_list_wrapper{
     width: 450px;
   }
+
+  &.sod_select:before,
+  &.sod_select:after{
+    color:$color-main-text;
+  }
 }
 
 .sod_select,
@@ -99,7 +104,7 @@
 /* Up/Down arrows */
 .sod_select:before,
 .sod_select:after{
-  color:$color-main-text;
+  color:$color-main-text-light;
   font-family: "Arial";
   content: "\25B2";
   position: absolute;
