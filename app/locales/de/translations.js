@@ -66,6 +66,7 @@ export default {
     }
   },
   "races" : {
+    "label" : "Select a race",
     "5k" : "5k",
     "10k" : "10k",
     "hm" : "Halbmarathon",
