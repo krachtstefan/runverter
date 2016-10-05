@@ -30,22 +30,15 @@
   }
 }
 
-#race-picker-pace-calc{
-  width: 40px;
-
-  .sod_list_wrapper{
-    width: 350px;
-  }
-
-  .sod_label{
-    opacity: 0;
-  }
-}
 
 .race-picker{
   display: inline;
   @include transition(0.25s ease-in-out);
   opacity: 0;
+
+  .sod_label{
+    opacity: 0;
+  }
   .sod_select {
     background-position: center center;
     background-size: 50% 50%;
@@ -71,6 +64,14 @@
     opacity: 1;
   }
 }
+
+#race-picker-pace-calc{
+  width: 40px;
+  .sod_list_wrapper{
+    width: 350px;
+  }
+}
+
 #menu{
   border:none;
   background:$color-secondary-background;
