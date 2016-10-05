@@ -4,24 +4,27 @@
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.kmLabel"}}&nbsp;
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5">
+      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerKmVisible}}">
         {{form-helper/number-input value=run.lengthKmStackKm maxLength="3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.km"}}
+        {{form-helper/suggest-select races=races identifier="race-picker-length-km" action="setRace"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.miLabel"}}&nbsp;
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5">
+      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMiVisible}}">
         {{form-helper/number-input value=run.lengthMiStackMi maxLength="3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.mi"}}
+        {{form-helper/suggest-select races=races identifier="race-picker-length-mi" action="setRace"}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.mLabel"}}&nbsp;
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5">
+      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMVisible}}">
         {{form-helper/number-input value=run.lengthMStackM minLength="3" maxLength="6"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.m"}}
+        {{form-helper/suggest-select races=races identifier="race-picker-length-m" action="setRace"}}
       </div>
     </div>
   </form>
