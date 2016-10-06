@@ -71,6 +71,7 @@ export default OneWayTel.extend({
 
   focusIn() {
     this.set("focus", true);
+    event.target.select();
   },
 
   focusOut() {
