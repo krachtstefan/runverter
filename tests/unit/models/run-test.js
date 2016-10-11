@@ -2678,7 +2678,7 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
   assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
 });
 
-// helper methods
+// private helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
