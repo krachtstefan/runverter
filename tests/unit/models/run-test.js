@@ -2678,6 +2678,30 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
   assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
 });
 
+// isInRange
+test('isInRange returns true if the run is in the specific range', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
+  assert.strictEqual(run.isInRange(23, 24), true);
+});
+
+test('isInRange returns false if the run is not in the specific range', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
+  assert.strictEqual(run.isInRange(25, 28), false);
+});
+
+test('isInRange can deal with BigNumber input', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
+  assert.strictEqual(run.isInRange(new BigNumber(12), new BigNumber(23.5)), true);
+  assert.strictEqual(run.isInRange(new BigNumber(32), new BigNumber(43)), false);
+});
+
+test('isInRange only returns true if the range is given in the right order', function(assert) {
+  var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(12)});
+  assert.strictEqual(run.isInRange(new BigNumber(11), new BigNumber(13)), true);
+  assert.strictEqual(run.isInRange(new BigNumber(13), new BigNumber(11)), false);
+
+});
+
 // private helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
  	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
