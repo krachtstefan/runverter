@@ -28,6 +28,10 @@ export default Ember.Component.extend({
   actions: {
     changeSelection: function(toolKey) {
       this.sendAction('action', toolKey);
+      if(toolKey !== null){
+        // always change back to the invisible empty value to make it possible to select the same value twice in a row (including the change event)
+        $("select."+this.get("identifier")).val("").change();
+      }
     }
   }
 });

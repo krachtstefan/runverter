@@ -91,7 +91,9 @@ export default Ember.Component.extend({
 
   actions: {
     setRace: function(race) {
-      this.get("run").set("lengthM",race.lengthM);
+      if(race !== null){
+        this.get("run").set("lengthM",race.lengthM);
+      }
     }
   }
 });
