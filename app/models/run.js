@@ -1455,6 +1455,21 @@ export default DS.Model.extend({
   }),
 
   /**
+   * check if the run is in a given distance range
+   *
+   * @param  {BigNumber|string|number} start start of the range in meter
+   * @param  {BigNumber|string|number} end end of the range in meter
+   * @return {boolean}
+   */
+  isInRange : function(startM, endM){
+    if(this.get("lengthM").greaterThan(startM) && this.get("lengthM").lessThan(endM)){
+      return true;
+    }else{
+      return false;
+    }
+  },
+
+  /**
    * returns the number of leading zeros from a string
    *
    * @param  {string} string string that should be analyzed for leading zeros
