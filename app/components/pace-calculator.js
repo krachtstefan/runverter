@@ -96,6 +96,11 @@ export default Ember.Component.extend({
       if(race !== null){
         this.get("run").set("lengthM",race.lengthM);
       }
+    },
+    setTargetTime: function(targetTime) {
+      if(targetTime !== null){
+        this.get("run").set("timeSec",targetTime.timeSec);
+      }
     }
   }
 });
