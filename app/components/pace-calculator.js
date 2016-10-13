@@ -92,6 +92,10 @@ export default Ember.Component.extend({
     return this.get("racePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
+  timePickerVisibleClass: Ember.computed('timePickerVisible', function () {
+    return this.get("timePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  }),
+
   actions: {
     setRace: function(race) {
       if(race !== null){
