@@ -6,7 +6,7 @@
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerKmVisible}}">
         {{form-helper/number-input value=run.lengthKmStackKm maxLength="3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.km"}}
-        {{form-helper/suggest-select races=races identifier="race-picker-length-km" action="setRace" label=(t "races.label")}}
+        {{form-helper/suggest-select items=races identifier="race-picker-length-km" action="setRace" label=(t "races.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -15,7 +15,7 @@
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMiVisible}}">
         {{form-helper/number-input value=run.lengthMiStackMi maxLength="3"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.mi"}}
-        {{form-helper/suggest-select races=races identifier="race-picker-length-mi" action="setRace" label=(t "races.label")}}
+        {{form-helper/suggest-select items=races identifier="race-picker-length-mi" action="setRace" label=(t "races.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
@@ -24,7 +24,7 @@
       </div>
       <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMVisible}}">
         {{form-helper/number-input value=run.lengthMStackM minLength="3" maxLength="6"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimalFixed addLeadingZeros=true}} {{t "metrics.distance.m"}}
-        {{form-helper/suggest-select races=races identifier="race-picker-length-m" action="setRace" label=(t "races.label")}}
+        {{form-helper/suggest-select items=races identifier="race-picker-length-m" action="setRace" label=(t "races.label")}}
       </div>
     </div>
   </form>
