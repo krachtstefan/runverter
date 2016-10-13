@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
   racePickerVisible : false,
+  timePickerVisible : false,
 
   runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
     var runLengthMetrics = [];
