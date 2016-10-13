@@ -4,10 +4,6 @@ export default Ember.Service.extend({
   templates : Ember.computed("i18n.locale", function(){
     return [
       {
-        'name' : this.get('i18n').t("races.5k"),
-        'lengthM' : new BigNumber(5000)
-      },
-      {
         'name' : this.get('i18n').t("races.10k"),
         'lengthM' : new BigNumber(10000)
       },
