@@ -25,6 +25,8 @@ export default Ember.Component.extend({
 
   races : Ember.inject.service('race'),
 
+  targetTimes : Ember.inject.service('best-time'),
+
   runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
     var runTempoMetrics = [];
     var self = this;
