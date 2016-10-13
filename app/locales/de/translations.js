@@ -77,6 +77,11 @@ export default {
   },
   "targetTimes" : {
     "label" : "Wähle eine Wunschzeit:",
+    "sub210" : "unter 2:10",
+    "sub2" : "unter 2 Stunden",
+    "sub150" : "unter 1:50",
+    "sub140" : "unter 1:40",
+    "sub130" : "unter 1:30",
     "sub430" : "unter 4:30",
     "sub415" : "unter 4:15",
     "sub4" : "unter 4 Stunden",
