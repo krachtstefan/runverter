@@ -76,6 +76,13 @@ export default {
     "100m" : "100 Miles",
   },
   "targetTimes" : {
-    "label" : "Select a time goal:"
+    "label" : "Select a time goal:",
+    "sub430" : "sub 4:30",
+    "sub415" : "sub 4:15",
+    "sub4" : "sub 4 hours",
+    "sub345" : "sub 3:45",
+    "sub330" : "sub 3:30",
+    "sub315" : "sub 3:15",
+    "sub3" : "sub 3 hours"
   }
 };

@@ -76,6 +76,13 @@ export default {
     "100m" : "100 Meilen",
   },
   "targetTimes" : {
-    "label" : "Wähle eine Wunschzeit:"
+    "label" : "Wähle eine Wunschzeit:",
+    "sub430" : "unter 4:30",
+    "sub415" : "unter 4:15",
+    "sub4" : "unter 4 Stunden",
+    "sub345" : "unter 3:45",
+    "sub330" : "unter 3:30",
+    "sub315" : "unter 3:15",
+    "sub3" : "unter 3 Stunden"
   }
 };
