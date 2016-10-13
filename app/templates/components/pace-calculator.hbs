@@ -19,8 +19,8 @@
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
         {{t "tools.pca.timeLabel"}} &nbsp;
       </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.timeStackHr minLength="1"}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed}} {{t "metrics.time.sec"}}
+      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{timePickerVisibleClass}}">
+        {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible}} {{t "metrics.time.sec"}}
         {{form-helper/suggest-select races=races identifier="best-time-pace-calc" action="setRace" label=(t "targetTimes.label")}}
       </div>
     </div>
