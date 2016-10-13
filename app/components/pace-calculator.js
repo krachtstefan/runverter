@@ -28,6 +28,13 @@ export default Ember.Component.extend({
 
   targetTimes : Ember.inject.service('target-time'),
 
+  targetTimesSuggestions  : Ember.computed("run.lengthM", function(){
+    var self = this;
+    return this.get("targetTimes.templates").filter(function(item) {
+      return self.get("run").isInRange(item.startM, item.endM);
+    });
+  }),
+
   runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
     var runTempoMetrics = [];
     var self = this;

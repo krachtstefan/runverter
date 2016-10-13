@@ -21,7 +21,7 @@
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{timePickerVisibleClass}}">
         {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible}} {{t "metrics.time.sec"}}
-        {{form-helper/suggest-select items=targetTimes.templates identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
+        {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
