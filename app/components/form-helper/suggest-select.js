@@ -6,6 +6,12 @@ export default Ember.Component.extend({
 
   classNames: ["suggest-select"],
 
+  attributeBindings: ['style'],
+
+  style: Ember.computed('items', function () {
+    return this.get("items").length === 0 ? "display:none" : null;
+  }),
+
   didInsertElement: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
