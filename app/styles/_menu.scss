@@ -8,7 +8,7 @@
 #toggle-panel{
   width: 23px;
   height: 40px;
-  z-index: 99999;
+  z-index: 9; // 1 less than select or die
   position: absolute;
   top:0;
   right:0;

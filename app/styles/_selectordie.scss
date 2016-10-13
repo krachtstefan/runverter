@@ -184,7 +184,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   margin: 0;
   color:$color-main-text;
   background-color: $color-form-background;
-  z-index: 1;
+  z-index: 10;
   outline: 5px solid $color-overlay-border;
 }
 /* Shows the option list (don't edit) */
@@ -289,5 +289,5 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   height: 100%;
   width: 100%;
   opacity: 0;
-  z-index: 1;
+  z-index: 10;
 }
