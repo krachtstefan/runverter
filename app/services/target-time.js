@@ -3,6 +3,43 @@ export default Ember.Service.extend({
   i18n: Ember.inject.service(),
   templates : Ember.computed("i18n.locale", function(){
     return [
+      // 10k
+      {
+        'name' : this.get('i18n').t("targetTimes.sub1"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(3599)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub55"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(3299)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub50"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(2999)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub45"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(2699)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub40"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(2399)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub35"),
+        'startM' : "9000",
+        'endM' : "11000",
+        'timeSec' : new BigNumber(2099)
+      },
       // half marathon
       {
         'name' : this.get('i18n').t("targetTimes.sub210"),
