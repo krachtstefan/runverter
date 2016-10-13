@@ -71,35 +71,35 @@ export default Ember.Service.extend({
         'endM' : "22000",
         'timeSec' : new BigNumber(5399)
       },
-      // marathon
+      // marathon (and 50k)
       {
         'name' : this.get('i18n').t("targetTimes.sub430"),
         'startM' : "40000",
-        'endM' : "45000",
+        'endM' : "51000",
         'timeSec' : new BigNumber(16199)
       },
       {
         'name' : this.get('i18n').t("targetTimes.sub415"),
         'startM' : "40000",
-        'endM' : "45000",
+        'endM' : "51000",
         'timeSec' : new BigNumber(15299)
       },
       {
         'name' : this.get('i18n').t("targetTimes.sub4"),
         'startM' : "40000",
-        'endM' : "45000",
+        'endM' : "51000",
         'timeSec' : new BigNumber(14399)
       },
       {
         'name' : this.get('i18n').t("targetTimes.sub345"),
         'startM' : "40000",
-        'endM' : "45000",
+        'endM' : "51000",
         'timeSec' : new BigNumber(13499)
       },
       {
         'name' : this.get('i18n').t("targetTimes.sub330"),
         'startM' : "40000",
-        'endM' : "45000",
+        'endM' : "51000",
         'timeSec' : new BigNumber(12599)
       },
       {
