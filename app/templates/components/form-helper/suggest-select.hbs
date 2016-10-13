@@ -1,7 +1,7 @@
 {{#x-select action="changeSelection" class=identifier}}
   <option value="" disabled="disabled" selected="selected" style="display:none"> </option> {{! use an invisible default value, otherwise selecting the first option would not trigger the change event}}
   <optgroup label="{{label}}">
-    {{#each items.templates as |item|}}
+    {{#each items as |item|}}
       {{#x-option value=item}}{{item.name}}{{/x-option}}
     {{/each}}
   </optgroup>
