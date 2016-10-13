@@ -74,5 +74,8 @@ export default {
     "50k" : "50k",
     "100k" : "100k",
     "100m" : "100 Meilen",
+  },
+  "targetTimes" : {
+    "label" : "Wähle eine Wunschzeit:"
   }
 };
