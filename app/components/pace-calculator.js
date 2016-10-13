@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 
   targetTimes : Ember.inject.service('target-time'),
 
-  targetTimesSuggestions  : Ember.computed("run.lengthM", function(){
+  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
       return self.get("run").isInRange(item.startM, item.endM);
