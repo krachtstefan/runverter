@@ -71,6 +71,7 @@ export default {
     "hm" : "Halbmarathon",
     "m" : "Marathon",
     "50k" : "50k",
+    "50m" : "50 Meilen",
     "100k" : "100k",
     "100m" : "100 Meilen",
   },

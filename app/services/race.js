@@ -20,6 +20,10 @@ export default Ember.Service.extend({
         'lengthM' : new BigNumber(50000)
       },
       {
+        'name' : this.get('i18n').t("races.50m"),
+        'lengthM' : new BigNumber(80467.2)
+      },
+      {
         'name' : this.get('i18n').t("races.100k"),
         'lengthM' : new BigNumber(100000)
       },
