@@ -77,6 +77,12 @@ export default {
   },
   "targetTimes" : {
     "label" : "Wähle eine Wunschzeit:",
+    "sub1" : "unter 1 Stunde",
+    "sub55" : "unter 55 Minuten",
+    "sub50" : "unter 50 Minuten",
+    "sub45" : "unter 45 Minuten",
+    "sub40" : "unter 40 Minuten",
+    "sub35" : "unter 35 Minuten",
     "sub210" : "unter 2:10",
     "sub2" : "unter 2 Stunden",
     "sub150" : "unter 1:50",

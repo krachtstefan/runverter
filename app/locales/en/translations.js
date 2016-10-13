@@ -77,6 +77,12 @@ export default {
   },
   "targetTimes" : {
     "label" : "Select a time goal:",
+    "sub1" : "sub 1 hour",
+    "sub55" : "sub 55 minutes",
+    "sub50" : "sub 50 minutes",
+    "sub45" : "sub 45 minutes",
+    "sub40" : "sub 40 minutes",
+    "sub35" : "sub 35 minutes",
     "sub210" : "sub 2:10",
     "sub2" : "sub 2 hours",
     "sub150" : "sub 1:50",
