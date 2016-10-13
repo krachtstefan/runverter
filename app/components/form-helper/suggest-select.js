@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     this.get('i18n');
   },
 
-  updateSelectOrDieOnLanguageChange: Ember.observer("i18n.locale", function() {
+  updateSelectOrDieOn: Ember.observer("i18n.locale", "items", function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select."+this.get("identifier")).selectOrDie("update"); // need to trigger update after every render, language may have changed
     });
