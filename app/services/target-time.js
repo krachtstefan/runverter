@@ -114,6 +114,117 @@ export default Ember.Service.extend({
         'endM' : "45000",
         'timeSec' : new BigNumber(10799)
       },
+      // 50 miles
+      {
+        'name' : this.get('i18n').t("targetTimes.sub10h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(35999)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub9h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(32399)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub8h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(28799)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub7h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(25199)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub6h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(21599)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub5h"),
+        'startM' : "75000",
+        'endM' : "85000",
+        'timeSec' : new BigNumber(17999)
+      },
+      // 100k
+      {
+        'name' : this.get('i18n').t("targetTimes.sub15h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(53999)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub14h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(50399)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub13h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(46799)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub12h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(43199)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub11h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(39599)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub10h"),
+        'startM' : "95000",
+        'endM' : "105000",
+        'timeSec' : new BigNumber(35999)
+      },
+      // 100 miles
+      {
+        'name' : this.get('i18n').t("targetTimes.sub23h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(82799)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub22h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(79199)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub21h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(75599)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub20h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(71999)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub19h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(68399)
+      },
+      {
+        'name' : this.get('i18n').t("targetTimes.sub18h"),
+        'startM' : "155000",
+        'endM' : "165000",
+        'timeSec' : new BigNumber(64799)
+      },
     ];
   })
 });
