@@ -45,6 +45,7 @@ export default {
     }
   },
   "metrics" : {
+    "separator" : ".",
     "distance" : {
       "separator" : ".",
       "km" : "km",
