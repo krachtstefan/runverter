@@ -5,8 +5,8 @@
         {{t "tools.pca.distanceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{racePickerVisibleClass}}">
-        {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible}}</span>{{/if}}
-        {{#if showRunLengthMi}}<span>{{form-helper/number-input value=run.lengthMiStackMi maxLength="3" focus=racePickerVisible}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true focus=racePickerVisible}}</span>{{/if}}
+        {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthKm}}</span>{{/if}}
+        {{#if showRunLengthMi}}<span>{{form-helper/number-input value=run.lengthMiStackMi maxLength="3" focus=racePickerVisible title=tooltipLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthMi}}</span>{{/if}}
         {{#x-select value=runLengthMetricsSelected class="runLength"}}
           {{#each runLengthMetrics as |item|}}
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
@@ -20,7 +20,7 @@
         {{t "tools.pca.timeLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{timePickerVisibleClass}}">
-        {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible}} {{t "metrics.time.sec"}}
+        {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible title=tooltipTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible title=tooltipTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible title=tooltipTimeSec}} {{t "metrics.time.sec"}}
         {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
       </div>
     </div>
@@ -29,10 +29,10 @@
         {{t "tools.pca.paceLabel"}} &nbsp;
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed}}{{/if}}
-        {{#if showRunTempoMinMi}}{{form-helper/number-input value=run.paceMinPerMiStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed}}{{/if}}
-        {{#if showRunTempoKmH}}{{form-helper/number-input value=run.speedKmHrStackKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true}}{{/if}}
-        {{#if showRunTempoMiH}}{{form-helper/number-input value=run.speedMiHrStackMi minLength="1"}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true}}{{/if}}
+        {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}}{{/if}}
+        {{#if showRunTempoMinMi}}{{form-helper/number-input value=run.paceMinPerMiStackMin title=tooltipPaceMinPerMi}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed title=tooltipPaceMinPerMi}}{{/if}}
+        {{#if showRunTempoKmH}}{{form-helper/number-input value=run.speedKmHrStackKm title=tooltipSpeedKmHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedKmHr}}{{/if}}
+        {{#if showRunTempoMiH}}{{form-helper/number-input value=run.speedMiHrStackMi minLength="1" title=tooltipSpeedMiHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedMiHr}}{{/if}}
         {{#x-select value=runTempoMetricsSelected class="runTempo"}}
           {{#each runTempoMetrics as |item|}}
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
