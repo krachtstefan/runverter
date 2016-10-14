@@ -46,6 +46,42 @@ export default Ember.Component.extend({
     return runTempoMetrics;
   }),
 
+  tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+    return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
+  tooltipLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+    return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
+  }),
+
+  tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
+    return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
+  }),
+
+  tooltipTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
+    return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
+  }),
+
+  tooltipTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
+    return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
+  }),
+
+  tooltipPaceMinPerKm : Ember.computed("run.paceMinPerKm", "i18n.locale", function(){
+    return this.get("run.paceMinPerKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minkm");
+  }),
+
+  tooltipPaceMinPerMi : Ember.computed("run.paceMinPerMi", "i18n.locale", function(){
+    return this.get("run.paceMinPerMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minmi");
+  }),
+
+  tooltipSpeedKmHr : Ember.computed("run.speedKmHr", "i18n.locale", function(){
+    return this.get("run.speedKmHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.kmh");
+  }),
+
+  tooltipSpeedMiHr : Ember.computed("run.speedMiHr", "i18n.locale", function(){
+    return this.get("run.speedMiHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.mih");
+  }),
+
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
