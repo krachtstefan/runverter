@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
+  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
+  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", "i18n.locale", function(){
     var runTempoMetrics = [];
     var self = this;
     this.get("runTempoMetricsAvailable").forEach(function(item){
