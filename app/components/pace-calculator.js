@@ -12,6 +12,16 @@ export default Ember.Component.extend({
   racePickerVisible : false,
   timePickerVisible : false,
 
+  races : Ember.inject.service('race'),
+  targetTimes : Ember.inject.service('target-time'),
+
+  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+    var self = this;
+    return this.get("targetTimes.templates").filter(function(item) {
+      return self.get("run").isInRange(item.startM, item.endM);
+    });
+  }),
+
   runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
     var runLengthMetrics = [];
     var self = this;
@@ -22,17 +32,6 @@ export default Ember.Component.extend({
       });
     });
     return runLengthMetrics;
-  }),
-
-  races : Ember.inject.service('race'),
-
-  targetTimes : Ember.inject.service('target-time'),
-
-  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
-    var self = this;
-    return this.get("targetTimes.templates").filter(function(item) {
-      return self.get("run").isInRange(item.startM, item.endM);
-    });
   }),
 
   runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
