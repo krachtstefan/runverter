@@ -20,8 +20,12 @@
 #toggle-panel span{
   display: block;
   position: absolute;
-  height: 8px;
-  width: 8px;
+  height: 6px;
+  width: 6px;
+  @include respond-to("small"){
+    height: 8px;
+    width: 8px;
+  }
   margin-left: 7px;
   background: $color-secondary-background;
   border: 1px solid $color-form-text;
@@ -33,7 +37,10 @@
 }
 
 #toggle-panel span:nth-child(1) {
-  top: 0px;
+  top: 4px;
+  @include respond-to("small"){
+    top: 0px;
+  }
 }
 
 #toggle-panel span:nth-child(2),#toggle-panel span:nth-child(3) {
@@ -41,7 +48,10 @@
 }
 
 #toggle-panel span:nth-child(4) {
-  top: 30px;
+  top: 26px;
+  @include respond-to("small"){
+    top: 30px;
+  }
 }
 
 .open #toggle-panel span{
