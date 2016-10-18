@@ -44,9 +44,22 @@ body{
   }
 
   .header{
-    background: inline-image("runverter-logo.svg") no-repeat center;
+    a{
+      display: block;
+      margin: 60px auto 0 auto;
+      background: inline-image("runverter-logo.svg") no-repeat center;
+      background-size:contain;
+      width: 340px;
+      height: 60px;
+      &:hover{
+        width: 320px;
+        text-decoration: none;
+        @include transition(0.1s linear);
+      }
+      @include transition(0.1s linear);
+    }
+    border:1px solid $color-secondary-background;
     background-color:$color-secondary-background;
-    background-size:250px;
     height: 100px;
     @include respond-to("small"){
       background-size:350px;

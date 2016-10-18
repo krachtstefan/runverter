@@ -1,5 +1,7 @@
 {{control-panel expertMode=expertMode}}
-<div class="header">&nbsp;</div>
+<div class="header">
+  {{#link-to "tools.index" (query-params selectedToolKey="pca") }}&nbsp;{{/link-to}}
+</div>
 
 <div class="intro">
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
