@@ -71,7 +71,10 @@ body{
     color:$color-form-text;
     border-color:$color-form-border;
     background-color:$color-main-background;
-    height:84px;
+    height:46px;
+    @include respond-to("small"){
+      height: 84px;
+    }
     padding: 0px 6px 6px 6px;
     border-top:none; border-left:none; border-right:none;
     &:focus{
