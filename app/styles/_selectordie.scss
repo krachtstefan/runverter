@@ -125,7 +125,10 @@
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
   color:$color-form-text;
-  font-size: 42px;
+  font-size: 24px;
+  @include respond-to("small"){
+    font-size: 42px;
+  }
   text-align: left;
   outline: 0;
   outline-offset: -2px; /* Opera */
