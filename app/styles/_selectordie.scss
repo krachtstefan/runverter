@@ -121,14 +121,16 @@
   @include inline-block;
   position: relative;
   line-height:35px;
-  padding: 8px 10px 30px 6px;
+  padding:0;
+  font-size: 24px;
+  @include respond-to("small"){
+    padding: 8px 10px 30px 6px;
+    font-size: 42px;
+  }
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
   color:$color-form-text;
-  font-size: 24px;
-  @include respond-to("small"){
-    font-size: 42px;
-  }
+
   text-align: left;
   outline: 0;
   outline-offset: -2px; /* Opera */
@@ -143,15 +145,23 @@
   content: "\25B2";
   position: absolute;
   right: 10px;
-  top: 16px;
-  font-size: 10px;
+  top: -2px;
+  font-size:8px;
+  @include respond-to("small"){
+    font-size:10px;
+    top:16px;
+  }
 }
 
 /* Down arrow */
 .sod_select:after{
   content: "\25BC";
   top: auto;
-  bottom: 18px;
+  top: auto;
+  bottom: 2px;
+  @include respond-to("small"){
+    bottom: 18px;
+  }
 }
 
 /* Change the border color on hover, focus and when open */
@@ -175,7 +185,10 @@
   text-overflow: ellipsis;
   position: relative;
   text-align: center;
-  top:12px;
+  top:3px;
+  @include respond-to("small"){
+    top:12px;
+  }
   padding-right: 15px;
   padding-bottom:10px;
 }
