@@ -13,6 +13,7 @@
 
 html{
   background-color:$color-main-background;
+  font-family: 'Open Sans', Georgia, sans-serif;
 }
 
 body{
@@ -37,7 +38,6 @@ body{
   form{
     font-size:42px;
     padding:50px 0;
-    font-family: 'Open Sans', Georgia, sans-serif;
   }
 
   .header{
