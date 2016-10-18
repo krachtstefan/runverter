@@ -17,14 +17,20 @@
  /* Remove, change to fit your needs */
 
 #runTempo{
-  width: 200px;
+  width: 120px;
+  @include respond-to("small"){
+    width: 200px;
+  }
   .sod_list_wrapper{
     width: 200px;
   }
 }
 
 #runLength{
-  width: 114px;
+  width: 70px;
+  @include respond-to("small"){
+    width: 114px;
+  }
   .sod_list_wrapper{
     width: 114px;
   }
