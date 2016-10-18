@@ -36,7 +36,10 @@ body{
   }
 
   form{
-    font-size:42px;
+    font-size:24px;
+    @include respond-to("small"){
+      font-size:42px;
+    }
     padding:50px 0;
   }
 
@@ -114,7 +117,10 @@ body{
   }
 
   .tool-label{
-    font-size:21px;
+    font-size:14px;
+    @include respond-to("small"){
+      font-size:21px;
+    }
     color:$color-main-text-light;
     padding:0 0 10px 0;
     // separate column
