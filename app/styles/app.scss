@@ -46,23 +46,39 @@ body{
   .header{
     a{
       display: block;
-      margin: 60px auto 0 auto;
-      background: inline-image("runverter-logo.svg") no-repeat center;
-      background-size:contain;
-      width: 340px;
-      height: 60px;
+      margin: 10px auto 0 auto;
+      background: inline-image("runverter-logo.svg") no-repeat;
+      background-size:cover;
+      background-position:left;
+      width: 62px;
+      height: 50px;
+      @include respond-to("small"){
+        background-size:contain;
+        background-position:center;
+        margin: 60px auto 0 auto;
+        width: 340px;
+        height: 60px;
+      }
       &:hover{
-        width: 320px;
         text-decoration: none;
+      }
+      &:active{
+        width: 50px;
+        height: 40px;
+        margin-top:15px;
         @include transition(0.1s linear);
+        @include respond-to("small"){
+          margin-top:60px;
+          width: 310px;
+          height: 60px;
+        }
       }
       @include transition(0.1s linear);
     }
     border:1px solid $color-secondary-background;
     background-color:$color-secondary-background;
-    height: 100px;
+    height: 60px;
     @include respond-to("small"){
-      background-size:350px;
       height: 180px;
     }
   }
