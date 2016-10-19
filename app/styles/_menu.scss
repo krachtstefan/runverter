@@ -107,9 +107,12 @@ ul.settings {
 }
 
 .open ul.settings{
-  top:47px;
   opacity: 1;
   z-index: 9999;
+  top:65px;
+  @include respond-to("small"){
+    top:47px;
+  }
 }
 
 ul.settings li a{
