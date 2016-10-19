@@ -143,7 +143,7 @@ body{
   }
 
   .tool-line{
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     @include respond-to("medium"){
       margin-bottom: 20px;
     }
