@@ -59,12 +59,16 @@
 }
 
 .open #toggle-panel span{
-  top: 17px;
-  height: 3px;
+  top: 15px;
+  height: 1px;
   width: 3px;
   width: 100%;
   background: $color-form-text;
-  margin-left: 0;
+  margin-left: -3px;
+  @include respond-to("small"){
+    top: 18px;
+    margin-left: 0px;
+  }
 }
 
 .open #toggle-panel span:nth-child(1) {
