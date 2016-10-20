@@ -143,15 +143,20 @@ ul.settings li a:hover {
 #panel-share::before,
 #panel-more::before,
 #panel-feedback::before{
+  @include transition(0.25s ease-in-out);
+  width: 20px;
+  height: 20px;
+  margin: -5px 0 0 -35px;
+  @include respond-to("small"){
+    width: 30px;
+    height: 30px;
+    margin: -10px 0 0 -50px;
+  }
   content: "";
-  width: 30px;
-  height: 30px;
   position: absolute;
-  margin: -10px 0 0 -50px;
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
-  @include transition(0.25s ease-in-out);
 }
 
 #panel-language-en::before{
@@ -165,8 +170,12 @@ ul.settings li a:hover {
 
 #panel-language-de span::before,
 #panel-language-en span::before{
-  width: 14px;
-  margin-left:-42px;
+  width: 10px;
+  margin-left:-30px;
+  @include respond-to("small"){
+    width: 14px;
+    margin-left:-42px;
+  }
   background-image: inline-image("dots.svg");
 }
 
@@ -181,8 +190,12 @@ ul.settings li a:hover {
 
 #panel-expertmode-false span::before,
 #panel-expertmode-true span::before{
-  width: 40px;
-  margin-left:-55px;
+  width: 27px;
+  margin-left:-39px;
+  @include respond-to("small"){
+    width: 40px;
+    margin-left:-55px;
+  }
   background-image: inline-image("glasses.svg");
   opacity: 1;
 }
