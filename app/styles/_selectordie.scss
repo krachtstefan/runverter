@@ -19,20 +19,20 @@
 #runTempo{
   width: 120px;
   @include respond-to("small"){
-    width: 200px;
+    width: 190px;
   }
   .sod_list_wrapper{
-    width: 200px;
+    width: 190px;
   }
 }
 
 #runLength{
   width: 70px;
   @include respond-to("small"){
-    width: 114px;
+    width: 100px;
   }
   .sod_list_wrapper{
-    width: 114px;
+    width: 100px;
   }
 }
 
@@ -94,7 +94,7 @@
 #race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m{
   width: 20px;
   @include respond-to("small"){
-    width: 40px;
+    width: 30px;
   }
   .sod_list_wrapper{
     width: 350px;
@@ -103,7 +103,7 @@
 #target-time-pace-calc{
   width: 20px;
   @include respond-to("small"){
-    width: 40px;
+    width: 30px;
   }
   .sod_list_wrapper{
     width: 285px;
