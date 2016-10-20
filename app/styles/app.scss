@@ -151,6 +151,8 @@ body{
 
   .tool-line{
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
     @include respond-to("medium"){
       margin-bottom: 20px;
     }
@@ -158,6 +160,7 @@ body{
 
   .tool-label{
     font-size:14px;
+
     @include respond-to("small"){
       font-size:21px;
     }
@@ -165,7 +168,8 @@ body{
     padding:0 0 10px 0;
     // separate column
     @include respond-to("medium"){
-      padding:37px 0 0 0;
+      line-height: 30px;
+      padding:0 10px 0px 0;
       text-align: right;
     }
   }
