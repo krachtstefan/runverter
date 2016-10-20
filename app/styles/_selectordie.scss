@@ -40,10 +40,16 @@
 .suggest-select{
   display: inline;
   .sod_label{
-    opacity: 0;
+    opacity: 1;
+    @include respond-to("small"){
+      opacity: 0;
+    }
   }
   .sod_select {
-    opacity: 0;
+    opacity: 1;
+    @include respond-to("small"){
+      opacity: 0;
+    }
     @include transition(0.25s ease-in-out);
     &.open{
       opacity: 1; // always visible when select is open
@@ -86,13 +92,19 @@
 }
 
 #race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m{
-  width: 40px;
+  width: 20px;
+  @include respond-to("small"){
+    width: 40px;
+  }
   .sod_list_wrapper{
     width: 350px;
   }
 }
 #target-time-pace-calc{
-  width: 40px;
+  width: 20px;
+  @include respond-to("small"){
+    width: 40px;
+  }
   .sod_list_wrapper{
     width: 285px;
   }
