@@ -172,14 +172,20 @@ ul.settings li a:hover {
 #panel-language-en span::before{
   width: 10px;
   margin-left:-30px;
+  margin-top: -6px;
   @include respond-to("small"){
     width: 14px;
     margin-left:-42px;
+    margin-top: -10px;
   }
   background-image: inline-image("dots.svg");
 }
 
 #panel-language-en span::before{
+  margin-top: -5px;
+  @include respond-to("small"){
+    margin-top: -10px;
+  }
   @include transform(rotate(180deg));
 }
 
