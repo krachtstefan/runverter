@@ -153,23 +153,32 @@ body{
     margin-bottom: 30px;
     display: flex;
     align-items: center;
+    max-width: 280px;
+    margin-left:auto;
+    margin-right:auto;
+    @include respond-to("small"){
+      max-width: 440px;
+    }
     @include respond-to("medium"){
+      max-width: inherit;
+      margin-left: inherit;
+      margin-right: inherit;
       margin-bottom: 20px;
     }
   }
 
   .tool-label{
     font-size:14px;
-
     @include respond-to("small"){
       font-size:21px;
     }
     color:$color-main-text-light;
-    padding:0 0 10px 0;
+    padding:0;
+    line-height: 20px;
     // separate column
     @include respond-to("medium"){
       line-height: 30px;
-      padding:0 10px 0px 0;
+      padding:0 10px 0 0;
       text-align: right;
     }
   }
