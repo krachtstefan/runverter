@@ -153,14 +153,9 @@ body{
     margin-bottom: 30px;
     display: flex;
     align-items: center;
-    max-width: 280px;
     margin-left:auto;
     margin-right:auto;
-    @include respond-to("small"){
-      max-width: 440px;
-    }
     @include respond-to("medium"){
-      max-width: inherit;
       margin-left: inherit;
       margin-right: inherit;
       margin-bottom: 20px;
@@ -180,6 +175,26 @@ body{
       line-height: 30px;
       padding:0 10px 0 0;
       text-align: right;
+    }
+  }
+
+  .container-pca .tool-line{
+    max-width: 280px;
+    @include respond-to("small"){
+      max-width: 480px;
+    }
+    @include respond-to("medium"){
+      max-width: inherit;
+    }
+  }
+
+  .container-pc .tool-line, .container-lc .tool-line{
+    max-width: 200px;
+    @include respond-to("small"){
+      max-width: 350px;
+    }
+    @include respond-to("medium"){
+      max-width: inherit;
     }
   }
 }
