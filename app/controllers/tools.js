@@ -45,6 +45,10 @@ export default Ember.Controller.extend({
     return selectedTool;
   }),
 
+  selectedToolClass : Ember.computed("selectedTool", function(){
+    return "container-"+this.get("selectedTool.key");
+  }),
+
   handlePersistence: Ember.observer("model.timeSec", "model.lengthM", function () {
     this.get("model").save();
   }),
