@@ -25,6 +25,7 @@ export default Ember.Controller.extend({
   },
 
   expertMode : false,
+  imprintVisible : false,
 
   tools : Ember.computed("toolsAvailablem", "i18n.locale", function(){
     var selectItems = [];
