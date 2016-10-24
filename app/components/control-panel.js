@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   classNames: ["control-panel"],
   classNameBindings: ['visible:open'],
   visible : false,
+  imprintVisible : false,
 
   actions: {
     toggleControlPanel: function() {
