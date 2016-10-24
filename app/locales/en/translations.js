@@ -113,5 +113,8 @@ export default {
     "sub45" : "sub 0:45",
     "sub40" : "sub 0:40",
     "sub35" : "sub 0:35",
+  },
+  "imprint" : {
+    "title" : "Impressum"
   }
 };
