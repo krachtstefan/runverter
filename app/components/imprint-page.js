@@ -6,4 +6,10 @@ export default Ember.Component.extend({
   classNames: ["imprint"],
   classNameBindings: ['visible:open'],
   visible : false,
+
+  actions: {
+    closeImprintPage: function() {
+      this.set("visible", false);
+    }
+  }
 });
