@@ -21,6 +21,10 @@ export default Ember.Component.extend({
     },
     toggleExpertMode: function(){
       this.toggleProperty("expertMode");
-    }
+    },
+    openImprintPage: function() {
+      this.send('closeControlPanel');
+      this.set("imprintVisible", true);
+    },
   }
 });
