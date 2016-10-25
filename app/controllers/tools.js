@@ -8,7 +8,8 @@ export default Ember.Controller.extend({
     'selectedToolKey' : 't',        // selected tool
     'runLengthMetricsQuery' : 'lm', // selected length metric
     'runTempoMetricsQuery' : 's',   // selected tempo metric
-    'expertMode' : 'nerd'           // selected display mode
+    'expertMode' : 'nerd',          // selected display mode
+    'imprintVisible' : 'info'       // selected display mode
   },
 
   selectedToolKey : "pca",
