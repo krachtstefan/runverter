@@ -19,4 +19,8 @@
     }
     @include transition(0.25s ease-in-out);
   }
+
+  .uk-container{
+    background-color:$color-secondary-background; // make it untransparent, when content extends the 100% height
+  }
 }
