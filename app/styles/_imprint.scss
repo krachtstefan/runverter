@@ -11,6 +11,9 @@
   left:0;
   right:0;
   @include transition(0.25s ease-in-out);
+  p{
+    line-height:1.9em;
+  }
   &.open{
     opacity: 1;
     z-index: 5;
