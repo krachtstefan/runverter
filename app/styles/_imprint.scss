@@ -1,8 +1,8 @@
 .imprint{
   opacity: 0;
-  z-index: 5;
+  z-index: -5;
   position: absolute;
-  display: block;
+  overflow: hidden;
   background-color:$color-secondary-background;
   width: 100%;
   height:auto;
@@ -13,6 +13,8 @@
   @include transition(0.25s ease-in-out);
   &.open{
     opacity: 1;
+    z-index: 5;
+    overflow: visible;
     margin-top:100px;
     @include respond-to("small"){
       margin-top:220px;
