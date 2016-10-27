@@ -3,13 +3,17 @@
   z-index: -5;
   position: absolute;
   overflow: hidden;
-  background-color:$color-secondary-background;
-  width: 100%;
   height:auto;
-  bottom:0;
   top:0;
-  left:0;
-  right:0;
+  bottom:0;
+  width: 90%;
+  left:5%;
+  right:5%;
+  @include respond-to("xlarge"){
+    width: 100%;
+    left:0;
+    right:0;
+  }
   @include transition(0.25s ease-in-out);
   p{
     line-height:1.9em;
@@ -25,8 +29,11 @@
     @include transition(0.25s ease-in-out);
   }
 
-  .uk-container{
+  .uk-container-center{
     background-color:$color-secondary-background; // make it untransparent, when content extends the 100% height
-    padding-bottom: 25px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    outline: 5px solid $color-overlay-border;
+    margin-bottom: 5%;
   }
 }
