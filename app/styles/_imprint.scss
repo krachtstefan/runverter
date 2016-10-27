@@ -36,4 +36,16 @@
     outline: 5px solid $color-overlay-border;
     margin-bottom: 5%;
   }
+
+  // base definitin of #close-imprint-page in _menu.scss
+  #close-imprint-page{
+    position:relative;
+    float: right;
+    left: 4px;
+    top: -51px;
+    @include respond-to("small"){
+      left: 30px;
+      top: -41px;
+    }
+  }
 }

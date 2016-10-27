@@ -5,7 +5,7 @@
   margin:0 auto;
 }
 
-#toggle-panel{
+#toggle-panel, #close-imprint-page{
   width: 23px;
   height: 40px;
   z-index: 9; // 1 less than select or die
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-#toggle-panel span{
+#toggle-panel span, #close-imprint-page span{
   display: block;
   position: absolute;
   height: 2px;
@@ -40,25 +40,25 @@
   @include transition(0.25s ease-in-out);
 }
 
-#toggle-panel span:nth-child(1) {
+#toggle-panel span:nth-child(1), #close-imprint-page span:nth-child(1) {
   top: 8px;
   @include respond-to("small"){
     top: 0px;
   }
 }
 
-#toggle-panel span:nth-child(2),#toggle-panel span:nth-child(3) {
+#toggle-panel span:nth-child(2), #toggle-panel span:nth-child(3), #close-imprint-page span:nth-child(2),#close-imprint-page span:nth-child(3) {
   top: 15px;
 }
 
-#toggle-panel span:nth-child(4) {
+#toggle-panel span:nth-child(4), #close-imprint-page, span:nth-child(4){
   top: 22px;
   @include respond-to("small"){
     top: 30px;
   }
 }
 
-.open #toggle-panel span{
+.open #toggle-panel span, .open #close-imprint-page span{
   top: 15px;
   height: 1px;
   width: 3px;
@@ -71,19 +71,19 @@
   }
 }
 
-.open #toggle-panel span:nth-child(1) {
+.open #toggle-panel span:nth-child(1), .open #close-imprint-page span:nth-child(1) {
   width: 0%;
   left: 50%;
 }
-.open #toggle-panel span:nth-child(2) {
+.open #toggle-panel span:nth-child(2), .open #close-imprint-page span:nth-child(2) {
   @include transform(rotate(45deg));
 }
 
-.open #toggle-panel span:nth-child(3) {
+.open #toggle-panel span:nth-child(3), .open #close-imprint-page span:nth-child(3) {
   @include transform(rotate(-45deg));
 }
 
-.open #toggle-panel span:nth-child(4) {
+.open #toggle-panel span:nth-child(4), .open #close-imprint-page span:nth-child(4) {
   width: 0%;
   left: 50%;
 }
