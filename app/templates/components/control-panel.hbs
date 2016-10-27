@@ -2,8 +2,8 @@
   <ul class="settings">
     <li><a href="#" id="panel-language-{{i18n.locale}}" {{action "toggleLanguage"}}><span></span>{{t "controlPanel.switchLanguage"}}</a></li>
     <li><a href="#" id="panel-expertmode-{{expertMode}}" {{action "toggleExpertMode"}}><span></span> {{#if expertMode}} {{t "controlPanel.disableExpertMode"}} {{else}} {{t "controlPanel.enableExpertMode"}} {{/if}}</a></li>
-    <li><a href="#" id="panel-share">{{t "controlPanel.share"}}</a></li>
     <li><a href="#" id="panel-more" {{action "openImprintPage"}}>{{t "controlPanel.learnMore"}}</a></li>
+    <li><a href="#" id="panel-share">{{t "controlPanel.share"}}</a></li>
     <li><a id="panel-feedback" href="https://twitter.com/stefan_kracht" target="_blank">{{t "controlPanel.feedback"}}</a></li>
   </ul>
   <div id="toggle-panel" {{action "toggleControlPanel"}}>
