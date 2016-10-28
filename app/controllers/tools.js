@@ -51,6 +51,10 @@ export default Ember.Controller.extend({
     return "container-"+this.get("selectedTool.key");
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
+  }),
+
   handlePersistence: Ember.observer("model.timeSec", "model.lengthM", function () {
     this.get("model").save();
   }),
