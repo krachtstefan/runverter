@@ -30,6 +30,7 @@
   }
 
   .uk-container-center{
+    position:relative; // needed for #close-imprint-page positioning
     background-color:$color-secondary-background; // make it untransparent, when content extends the 100% height
     padding-bottom: 50px;
     padding-top: 50px;
@@ -39,13 +40,11 @@
 
   // base definitin of #close-imprint-page in _menu.scss
   #close-imprint-page{
-    position:relative;
-    float: right;
-    left: 4px;
-    top: -51px;
+    top: 0px;
+    right:7px;
     @include respond-to("small"){
-      left: 30px;
-      top: -41px;
+      top: 9px;
+      right:-5px;
     }
   }
 }
