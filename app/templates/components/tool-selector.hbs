@@ -1,5 +1,5 @@
 <h1>
-  {{selectedMenuItem.label}}
+  <span class="toolLabel">{{selectedMenuItem.label}}</span>
   {{#x-select value=defaultValue action="switchTool" class="menu"}}
     {{#each menuItems as |item|}}
       {{#x-option value=item.key}}{{item.name}}{{/x-option}}

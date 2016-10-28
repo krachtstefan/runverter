@@ -3,7 +3,7 @@
   {{#link-to "tools.index" (query-params selectedToolKey="pca" imprintVisible=false) }}&nbsp;{{/link-to}}
 </div>
 
-<div class="intro">
+<div class="intro {{expertModeClass}}">
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
 </div>
 <div class="uk-container uk-container-center {{selectedToolClass}}">

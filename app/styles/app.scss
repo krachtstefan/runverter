@@ -96,6 +96,13 @@ body{
     }
     background:$color-secondary-background;
     padding:30px 25px 40px 25px;
+
+    &.expertModeOn{
+      p, .toolLabel{
+        display : none;
+      }
+    }
+
   }
 
   .uk-container-center{
