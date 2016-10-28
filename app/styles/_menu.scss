@@ -51,7 +51,7 @@
   top: 15px;
 }
 
-#toggle-panel span:nth-child(4), #close-imprint-page, span:nth-child(4){
+#toggle-panel span:nth-child(4), #close-imprint-page span:nth-child(4){
   top: 22px;
   @include respond-to("small"){
     top: 30px;
