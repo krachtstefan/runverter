@@ -9,16 +9,16 @@ export default {
   },
   'tools' : {
     'pca' : {
-      'name' : 'Tempo ermittlen',
-      'label' : 'Hi! Hier kannst du dein optimales',
+      'name' : 'Pace-Rechner',
+      'label' : 'Hi! ich bin der',
       'description' : 'Finde heraus wie schnell du sein musst, um eine Strecke in gewünschter Zeit zu schaffen.',
       'distanceLabel' : 'Für eine Strecke von',
       'timeLabel' : 'in',
       'paceLabel' : 'benötigst du eine Geschwindigkeit von'
     },
     'pc' : {
-      'name' : 'Tempo umrechnen',
-      'label' : 'Ich helfe dir beim',
+      'name' : 'Pace-Umrechner',
+      'label' : 'Hier siehst du den',
       'description' : 'Es gibt viele Arten deine Geschwindigkeit anzugeben. Hier hast du alle im Blick.',
       'minkmLabel' : 'Eine Pace von',
       'minmiLabel' : 'oder',
@@ -26,8 +26,8 @@ export default {
       'mihLabel' : 'bzw.'
     },
     'lc' : {
-      'name' : 'Länge umrechnen',
-      'label' : 'Du kannst hier die',
+      'name' : 'Längen-Umrechner',
+      'label' : 'Das ist der ',
       'description' : 'Hier findest du die wichtigsten Längenangaben. Und ja, die Länge ist entscheidend.',
       'kmLabel' : 'Eine Strecke von',
       'miLabel' : 'entspricht',
