@@ -45,6 +45,10 @@ body{
     padding:50px 0;
   }
 
+  .expertModeOn form{
+    padding:10px 0;
+  }
+
   .header{
     a{
       display: block;
@@ -81,6 +85,9 @@ body{
     border:1px solid $color-secondary-background;
     background-color:$color-secondary-background;
     height: 60px;
+    &.expertModeOn{
+      display:none
+    }
     @include respond-to("small"){
       height: 180px;
     }
@@ -90,6 +97,7 @@ body{
     text-align: center;
     h1{
       font-size: 24px;
+      padding-bottom:7px;
       @include respond-to("small"){
         font-size: 42px;
       }
@@ -98,6 +106,7 @@ body{
     padding:30px 25px 40px 25px;
 
     &.expertModeOn{
+      padding:0;
       p, .toolLabel{
         display : none;
       }

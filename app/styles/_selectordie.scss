@@ -126,6 +126,12 @@
   }
 }
 
+.expertModeOn{
+  #menu{
+    margin-top:10px;
+  }
+}
+
 .sod_select,
 .sod_select *{
   @include box-sizing(border-box);
