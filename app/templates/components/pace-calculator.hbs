@@ -2,9 +2,7 @@
   <form class="uk-form">
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{#unless expertMode}}
-          {{t "tools.pca.distanceLabel"}}
-        {{/unless}}
+        {{t "tools.pca.distanceLabel"}}
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{racePickerVisibleClass}}">
         {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthKm}}</span>{{/if}}
@@ -19,9 +17,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{#unless expertMode}}
-          {{t "tools.pca.timeLabel"}}
-        {{/unless}}
+        {{t "tools.pca.timeLabel"}}
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5 suggest-select-container {{timePickerVisibleClass}}">
         {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible title=tooltipTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible title=tooltipTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible title=tooltipTimeSec}} {{t "metrics.time.sec"}}
@@ -30,9 +26,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse tool-line">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{#unless expertMode}}
-          {{t "tools.pca.paceLabel"}}
-        {{/unless}}
+        {{t "tools.pca.paceLabel"}}
       </div>
       <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
         {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}}{{/if}}
