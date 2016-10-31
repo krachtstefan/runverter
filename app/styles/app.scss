@@ -200,6 +200,12 @@ body{
     }
   }
 
+  .expertModeOn{
+    .tool-label{
+      display: none;
+    }
+  }
+
   .container-pca .tool-line{
     max-width: 280px;
     @include respond-to("small"){
