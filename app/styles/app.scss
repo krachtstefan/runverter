@@ -197,6 +197,13 @@ body{
     }
   }
 
+  .container-pca.expertModeOn .tool-line{
+    @include respond-to("medium"){
+      position: relative;
+      right: 70px;
+    }
+  }
+
   .container-pc .tool-line, .container-lc .tool-line{
     max-width: 200px;
     @include respond-to("small"){
@@ -204,6 +211,13 @@ body{
     }
     @include respond-to("medium"){
       max-width: inherit;
+    }
+  }
+
+  .container-pc.expertModeOn .tool-line, .container-lc.expertModeOn .tool-line{
+    @include respond-to("medium"){
+      position: relative;
+      right: 50px;
     }
   }
 }
