@@ -3,12 +3,12 @@
   {{#link-to "tools.index" (query-params selectedToolKey="pca" imprintVisible=false) }}&nbsp;{{/link-to}}
 </div>
 
-<div class="intro {{expertModeClass}}">
+<div class="intro {{selectedToolClass}} {{expertModeClass}}">
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
 </div>
 <div class="uk-container uk-container-center {{selectedToolClass}} {{expertModeClass}}">
-  {{pace-calculator run=model selectedMenuItem=selectedTool runLengthMetricsSelected=runLengthMetricsQuery runLengthMetricsSelected=runLengthMetricsQuery runTempoMetricsSelected=runTempoMetricsQuery}}
-  {{pace-converter run=model selectedMenuItem=selectedTool}}
-  {{length-converter run=model selectedMenuItem=selectedTool}}
+  {{pace-calculator expertMode=expertMode run=model selectedMenuItem=selectedTool runLengthMetricsSelected=runLengthMetricsQuery runLengthMetricsSelected=runLengthMetricsQuery runTempoMetricsSelected=runTempoMetricsQuery}}
+  {{pace-converter expertMode=expertMode run=model selectedMenuItem=selectedTool}}
+  {{length-converter expertMode=expertMode run=model selectedMenuItem=selectedTool}}
 </div>
 {{imprint-page run=model visible=imprintVisible}}

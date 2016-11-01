@@ -37,6 +37,10 @@ export default Ember.Component.extend({
     return this.get("racePickerMVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
+  }),
+
   actions: {
     setRace: function(race) {
       if(race !== null){

@@ -4,7 +4,7 @@
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.kmLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerKmVisible}}">
+      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerKmVisible}}">
         {{form-helper/number-input value=run.lengthKmStackKm maxLength="3" title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true title=tooltipLengthKm}} {{t "metrics.distance.km"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-km" action="setRace" label=(t "races.label")}}
       </div>
@@ -13,7 +13,7 @@
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.miLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMiVisible}}">
+      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerMiVisible}}">
         {{form-helper/number-input value=run.lengthMiStackMi maxLength="3" title=tooltipLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true title=tooltipLengthMi}} {{t "metrics.distance.mi"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-mi" action="setRace" label=(t "races.label")}}
       </div>
@@ -22,7 +22,7 @@
       <div class="uk-width-1-1 uk-width-medium-2-5 tool-label">
         {{t "tools.lc.mLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-3-5 suggest-select-container {{racePickerMVisible}}">
+      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerMVisible}}">
         {{form-helper/number-input value=run.lengthMStackM minLength="3" maxLength="6" title=tooltipLengthM}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimalFixed addLeadingZeros=true title=tooltipLengthM}} {{t "metrics.distance.m"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-m" action="setRace" label=(t "races.label")}}
       </div>

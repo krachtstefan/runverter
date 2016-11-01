@@ -82,6 +82,10 @@ export default Ember.Component.extend({
     return this.get("run.speedMiHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.mih");
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-3-5";
+  }),
+
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
