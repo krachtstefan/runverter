@@ -196,7 +196,7 @@ body{
     }
   }
 
-  .tool-label{
+  .tools .toolLabel{
     font-size:14px;
     @include respond-to("small"){
       font-size:21px;
@@ -213,7 +213,7 @@ body{
   }
 
   .expertModeOn{
-    .tool-label{
+    .toolLabel{
       display: none;
     }
   }
