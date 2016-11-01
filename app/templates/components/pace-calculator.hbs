@@ -1,6 +1,6 @@
 {{#if visible}}
   <form class="uk-form uk-container-center">
-    <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
         {{t "tools.pca.distanceLabel"}}
       </div>
@@ -15,7 +15,7 @@
         {{form-helper/suggest-select items=races.templates identifier="race-picker-pace-calc" action="setRace" label=(t "races.label")}}
       </div>
     </div>
-    <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
         {{t "tools.pca.timeLabel"}}
       </div>
@@ -24,7 +24,7 @@
         {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
       </div>
     </div>
-    <div class="uk-grid uk-grid-collapse tool-line">
+    <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
         {{t "tools.pca.paceLabel"}}
       </div>
