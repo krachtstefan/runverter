@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   classNames: ["imprint"],
-  classNameBindings: ['visible:open'],
+  classNameBindings: ['visible:open', 'expertModeClass'],
   visible : false,
 
   actions: {

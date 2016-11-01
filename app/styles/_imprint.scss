@@ -26,6 +26,13 @@
     @include respond-to("small"){
       margin-top:180px;
     }
+    &.expertModeOn{
+     margin-top:66px;
+     @include respond-to("small"){
+        margin-top:50px;
+      }
+    }
+
     @include transition(0.25s ease-in-out);
   }
 
