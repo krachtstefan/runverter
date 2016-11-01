@@ -216,6 +216,18 @@ body{
     }
   }
 
+  .expertModeOn.container-pca .tool-line{
+    @include respond-to("medium"){
+      max-width: 500px;
+    }
+  }
+
+  .expertModeOn.container-pc .tool-line, .expertModeOn.container-lc .tool-line{
+    @include respond-to("medium"){
+      max-width: 400px;
+    }
+  }
+
   .container-pc .tool-line, .container-lc .tool-line{
     max-width: 200px;
     @include respond-to("small"){
