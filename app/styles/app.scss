@@ -218,7 +218,7 @@ body{
     }
   }
 
-  .container-pca .tool-line{
+  .tools.container-pca .tool-line, .expertModeOn.container-pca .tool-line{
     max-width: 280px;
     @include respond-to("small"){
       max-width: 480px;
@@ -234,19 +234,19 @@ body{
     }
   }
 
-  .expertModeOn.container-pc .tool-line, .expertModeOn.container-lc .tool-line{
-    @include respond-to("medium"){
-      max-width: 400px;
-    }
-  }
-
-  .container-pc .tool-line, .container-lc .tool-line{
+  .tools.container-pc .tool-line, .tools.container-lc .tool-line, .expertModeOn.container-pc .tool-line, .expertModeOn.container-lc .tool-line{
     max-width: 200px;
     @include respond-to("small"){
       max-width: 350px;
     }
     @include respond-to("medium"){
       max-width: inherit;
+    }
+  }
+
+  .expertModeOn.container-pc .tool-line, .expertModeOn.container-lc .tool-line{
+    @include respond-to("medium"){
+      max-width: 400px;
     }
   }
 }
