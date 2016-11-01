@@ -119,9 +119,11 @@ body{
   }
 
   .uk-container-center{
-    padding:0 10px;
+    padding-left:10px;
+    padding-right:10px;
     @include respond-to("xsmall"){
-      padding:0 25px;
+      padding-left:25px;
+      padding-right:25px;
     }
   }
 
