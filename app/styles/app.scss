@@ -202,7 +202,7 @@ body{
       font-size:21px;
     }
     color:$color-main-text-light;
-    padding:0 0 10px 0;
+    padding:0 0 4px 0;
     line-height: 20px;
     // separate column
     @include respond-to("medium"){
