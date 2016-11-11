@@ -27,5 +27,8 @@ export default Ember.Component.extend({
       this.send('closeControlPanel');
       this.set("imprintVisible", true);
     },
+    toggleShareButtons: function() {
+      this.toggleProperty("shareButtonsVisible");
+    },
   }
 });
