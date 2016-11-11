@@ -115,7 +115,7 @@ ul.settings {
   }
 }
 
-ul.settings li>a{
+ul.settings li>a, ul.settings li #share-container{
   font-size:1em;
   color: $color-form-text;
   display: block;
@@ -221,4 +221,46 @@ ul.settings li>a:hover {
 
 #panel-feedback::before{
   background-image: inline-image("feedback.svg");
+}
+
+ul.settings li #share-container{
+  z-index: -99;
+  opacity: 0;
+  position: absolute;
+  padding-left:0;
+  padding-top:20px;
+  padding-bottom:21px;
+  right:0;
+  @include transition(0.25s ease-in-out);
+}
+
+ul.settings li.shareButtonsVisible #share-container{
+  z-index:99;
+  opacity: 1;
+  @include transition(0.25s ease-in-out);
+}
+
+#facebook, #twitter{
+  @include inline-block;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size: contain;
+  padding-left:10px;
+  width: 20px;
+  height: 20px;
+  text-decoration: none;
+  @include transition(0.25s ease-in-out);
+}
+
+.shareButtonsInvisible #facebook, .shareButtonsInvisible #twitter{
+  height: 0;
+  @include transition(0.25s ease-in-out);
+}
+
+#facebook{
+  background-image: inline-image("facebook.svg");
+}
+
+#twitter{
+  background-image: inline-image("twitter.svg");
 }
