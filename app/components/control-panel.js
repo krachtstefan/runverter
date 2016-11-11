@@ -9,6 +9,10 @@ export default Ember.Component.extend({
   shareButtonsVisible : false,
   imprintVisible : false,
 
+  shareButtonsVisibleClass : Ember.computed("shareButtonsVisible", function(){
+    return this.get("shareButtonsVisible") === true ? "shareButtonsVisible" : "shareButtonsInvisible";
+  }),
+
   actions: {
     toggleControlPanel: function() {
       this.toggleProperty("visible");
