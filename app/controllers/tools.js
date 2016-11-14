@@ -60,6 +60,9 @@ export default Ember.Controller.extend({
     this.get("model").save();
   }),
 
+  metaDataManagement: Ember.on('init', Ember.observer("selectedToolKey", "imprintVisible", function () {
+  })),
+
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
