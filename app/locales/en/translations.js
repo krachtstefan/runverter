@@ -117,7 +117,7 @@ export default {
   },
   'imprint' : {
     'about' : 'About',
-    'aboutText' : 'Runverter.io is a pet project of <a href="http://stefankracht.de/" target="_blank">Stefan Kracht</a>. Check out the <a href="http://stefankracht.de/news/runverter" target="_blank">detailed blog post</a> for more information.',
+    'aboutText' : 'Runverter.io is a pet project by <a href="http://stefankracht.de/" target="_blank">Stefan Kracht</a>. Check out the <a href="http://stefankracht.de/news/runverter" target="_blank">detailed blog post</a> for more information.',
     'thanks' : 'Special thanks ♥',
     'thanksText' : 'This app is powered by <a href="http://emberjs.com/" target="_blank">Ember.js</a>. Most of the icons are from <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> creators <a href="https://thenounproject.com/term/speech-bubble/358344/" target="_blank">lipi</a>, <a href="https://thenounproject.com/term/happy/350362/" target="_blank">Bernadette Little</a>, <a href="https://thenounproject.com/term/glasses/31753/" target="_blank">Simon Child</a>, <a href="https://thenounproject.com/term/share/375368/" target="_blank">Aysgl Avcu</a> and <a href="https://thenounproject.com/term/information/222828/" target="_blank">Douglas Santos</a>.',
     'responsible' :'Responsible for the content',
