@@ -2,6 +2,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
+  meta: Ember.inject.service(),
 
   queryParams: {
     'i18n.locale' : 'l',            // selected locale
