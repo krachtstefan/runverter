@@ -75,6 +75,7 @@ export default Ember.Controller.extend({
       description: description,
       'og:title': title,
       'og:description': description,
+      'og:image': 'og-image.png',
     });
 
   })),
