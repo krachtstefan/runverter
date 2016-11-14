@@ -61,6 +61,22 @@ export default Ember.Controller.extend({
   }),
 
   metaDataManagement: Ember.on('init', Ember.observer("selectedToolKey", "imprintVisible", function () {
+    var title, description;
+    if(this.get("imprintVisible") === true){
+      title = this.get('i18n').t("imprint.about");
+      description = this.get('i18n').t("imprint.DescriptionTag");
+    }else{
+      title = this.get('i18n').t("tools."+this.get("selectedToolKey")+".name");
+      description = this.get('i18n').t("tools."+this.get("selectedToolKey")+".description");
+    }
+
+    this.get('meta').update({
+      title: title,
+      description: description,
+      'og:title': title,
+      'og:description': description,
+    });
+
   })),
 
   actions: {
