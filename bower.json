@@ -8,8 +8,14 @@
     "ember-load-initializers": "0.1.7",
     "ember-qunit": "0.4.16",
     "ember-qunit-notifications": "0.1.0",
-    "jquery": "^1.11.3",
+    "jquery": "1.11.3",
     "loader.js": "ember-cli/loader.js#3.2.1",
-    "qunit": "~1.20.0"
+    "qunit": "~1.20.0",
+
+    "ember-resolver": "~0.1.18",
+    "ember-localstorage-adapter": "0.5.3",
+    "uikit": "2.20.3",
+    "SelectOrDie": "0.1.8",
+    "bignumber.js": "2.0.8"
   }
 }
