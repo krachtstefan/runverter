@@ -1,43 +1,53 @@
-# Runverter [![Build Status](https://travis-ci.org/krachtstefan/runverter.svg?branch=master)](https://travis-ci.org/krachtstefan/runverter)
+# Runverter
+
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
+
+## Prerequisites
+
+You will need the following things properly installed on your computer.
+
+* [Git](http://git-scm.com/)
+* [Node.js](http://nodejs.org/) (with NPM)
+* [Bower](http://bower.io/)
+* [Ember CLI](http://www.ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
 
 ## Installation
 
-```
-$ git clone https://github.com/krachtstefan/runverter.git
-$ cd runverter
-$ npm install && bower install
-```
+* `git clone <repository-url>` this repository
+* change into the new directory
+* `npm install`
+* `bower install`
 
-## Start the app
+## Running / Development
 
-Run `ember server` and open [http://localhost:8000](http://localhost:8000).
+* `ember server`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Run Tests
+### Code Generators
 
-Run `ember test` for a one time test and `ember test --server` to trigger tests on every file change.
+Make use of the many generators for code, try `ember help generate` for more details
 
-## Deploy
+### Running Tests
 
-The server setup is maintained in the [runverter-server repository](https://github.com/krachtstefan/runverter-server) and the deploy process is done with [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy).
+* `ember test`
+* `ember test --server`
 
-### Workflow of a deploy
+### Building
 
-As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment process is a combination of the following steps:
+* `ember build` (development)
+* `ember build --environment production` (production)
 
-- Compile the ember app locally.
-- Upload all files to Amazon S3 asset server.
-- Publish the index.html page in a dedicated Redis key (like runverter:XXXXXX)
-- Preview the version with a secret url like http://runverter.io/?index_key=XXXXXX
-- Activate the deployed version by copying the value of runverter:XXXXXX key to runverter:current
+### Deploying
 
-### Requirements
+Specify what it takes to deploy your app.
 
-- The hostname ```runverter.staging```  and ```runverter.production``` need to be added to your ```/etc/hosts``` file to point to the proper deployment server.
-- The assets will be uploaded to Amazon S3, so you need a bucket called ```runverter``` and your access key in a environment variable named ```AWS_ACCESS_KEY```. You may want to add the line ```export AWS_ACCESS_KEY=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
-- Deploying to production server requires a tunnel to access the remote redis instance: ```ssh -f -L 6380:localhost:6379 -N user@runverter.production```
+## Further Reading / Useful Links
 
-### Deploy
+* [ember.js](http://emberjs.com/)
+* [ember-cli](http://www.ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
 
-- ```ember deploy --environment staging``` will compile the app, upload the assets and publish the index page to redis. It will return the key of the deployed version ```runverter:XXXXXXX```. Replace ``` staging```  with ```production``` for production deploy and make sure the remote redis is available on your local port ```6380```.
-- preview the deploy on http://runverter.dev/?index_key=XXXXXX
-- activate the version with ```ember deploy:activate --revision runverter:XXXXXXX --environment staging```
