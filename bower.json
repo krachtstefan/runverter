@@ -6,7 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
 
-    "ember-localstorage-adapter": "0.5.3",
+    "ember-localstorage-adapter": "0.5.5",
     "uikit": "2.20.3",
     "SelectOrDie": "0.1.8",
     "bignumber.js": "2.0.8"
