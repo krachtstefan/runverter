@@ -12,6 +12,7 @@
     "exists",
     "fillIn",
     "click",
+    "select",
     "keyEvent",
     "triggerEvent",
     "find",
@@ -21,7 +22,8 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "BigNumber"
   ],
   "node": false,
   "browser": false,
