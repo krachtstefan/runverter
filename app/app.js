@@ -1,18 +1,18 @@
 import Ember from 'ember';
-import Resolver from 'ember-resolver';
+import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
-let App;
+var Runverter;
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
-App = Ember.Application.extend({
+Runverter = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver
+  Resolver: Resolver
 });
 
-loadInitializers(App, config.modulePrefix);
+loadInitializers(Runverter, config.modulePrefix);
 
-export default App;
+export default Runverter;
