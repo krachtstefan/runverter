@@ -1,32 +1,24 @@
+/*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var env = EmberApp.env();
-var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
-var stripDebug = require('broccoli-strip-debug');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    fingerprint: {
-      enabled: isProductionLikeBuild,
-      prepend: 'http://runverter.s3-website-eu-west-1.amazonaws.com/'
-    },
-    sourcemaps: {
-      enabled: !isProductionLikeBuild,
-    },
-    minifyCSS: { enabled: isProductionLikeBuild },
-    minifyJS: { enabled: isProductionLikeBuild },
-
-    tests: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
-    hinting: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
-
-    compassOptions: { imagesDir: "public/images" }
+    // Add options here
   });
 
-  app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js");
-  app.import('bower_components/uikit/css/uikit.min.css');
-  app.import('bower_components/uikit/js/uikit.min.js');
-  app.import('bower_components/SelectOrDie/_src/selectordie.min.js');
-  app.import('bower_components/bignumber.js/bignumber.min.js');
+  // Use `app.import` to add additional libraries to the generated
+  // output files.
+  //
+  // If you need to use different assets in different
+  // environments, specify an object as the first parameter. That
+  // object's keys should be the environment name and the values
+  // should be the asset to use in that environment.
+  //
+  // If the library that you are including contains AMD or ES6
+  // modules that you would like to import into your application
+  // please specify an object with the list of modules as keys
+  // along with the exports of each module as its value.
 
-  return isProductionLikeBuild ? stripDebug(app.toTree()) : app.toTree();
+  return app.toTree();
 };

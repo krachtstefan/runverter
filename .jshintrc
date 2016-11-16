@@ -2,9 +2,7 @@
   "predef": [
     "document",
     "window",
-    "-Promise",
-    "BigNumber",
-    "ga"
+    "-Promise"
   ],
   "browser": true,
   "boss": true,
