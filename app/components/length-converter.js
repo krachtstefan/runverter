@@ -38,7 +38,7 @@ export default Ember.Component.extend({
   }),
 
   expertModeClass : Ember.computed("expertMode", function(){
-    return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
+    return this.get("expertMode") === true ? "" : "uk-width-medium-3-5";
   }),
 
   actions: {
