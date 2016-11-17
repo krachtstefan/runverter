@@ -13,7 +13,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('tools', { path: '/' }, function(){
+  this.route('tools', { path: '/' }, function(){
     this.route('locale', { path: '/:locale' });
   });
 });
