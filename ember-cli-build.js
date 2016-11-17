@@ -23,7 +23,6 @@ module.exports = function(defaults) {
     compassOptions: { imagesDir: "public/images" }
   });
 
-  app.import("bower_components/ember-localstorage-adapter/localstorage_adapter.js");
   app.import('bower_components/uikit/css/uikit.min.css');
   app.import('bower_components/uikit/js/uikit.min.js');
   app.import('bower_components/SelectOrDie/_src/selectordie.min.js');

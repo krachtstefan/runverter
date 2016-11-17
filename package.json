@@ -47,7 +47,7 @@
     "ember-deploy-redis": "0.0.7",
     "ember-deploy-s3": "0.0.2",
     "ember-i18n": "4.2.0",
-    "ember-localstorage-adapter": "0.5.5",
+    "ember-localstorage-adapter": "1.0.0-rc.1",
     "ember-meta-meta": "0.3.1",
     "ember-one-way-controls": "1.1.1",
     "emberx-select": "2.0.1"
