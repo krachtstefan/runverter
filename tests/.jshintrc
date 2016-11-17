@@ -23,6 +23,7 @@
     "currentURL",
     "currentPath",
     "currentRouteName",
+    "require",
     "BigNumber"
   ],
   "node": false,
