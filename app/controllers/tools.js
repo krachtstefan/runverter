@@ -44,8 +44,7 @@ export default Ember.Controller.extend({
   }),
 
   selectedTool : Ember.computed("selectedToolKey", "i18n.locale", function(){
-    var selectedTool = this.get("tools").findBy("key", this.get("selectedToolKey"));
-    return selectedTool;
+    return Ember.A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
   }),
 
   selectedToolClass : Ember.computed("selectedTool", function(){
