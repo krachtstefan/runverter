@@ -29,7 +29,8 @@ module.exports = function(environment) {
       'connect-src': "'self'",
       'img-src': "'self' data:",
       'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
-      'media-src': "'self'"
+      'media-src': "'self'",
+      'manifest-src': "'self'"
     }
   };
 
