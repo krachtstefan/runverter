@@ -7,7 +7,8 @@ export default Ember.Component.extend({
   attributeBindings: ['style'],
 
   style: Ember.computed('items', function () {
-    return this.get("items").length === 0 ? "display:none" : null;
+    var Style = this.get("items").length === 0 ? "display:none" : null;
+    return Ember.String.htmlSafe(Style);
   }),
 
   didInsertElement: function() {
