@@ -40,4 +40,5 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 
 - ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will return the key of the deployed version ```runverter:XXXXXXX```. Replace ``` staging```  with ```production``` for production deploy and make sure the remote redis is available on your local port ```6380```.
 - preview the deploy on http://runverter.dev/?index_key=XXXXXX
-- activate the version with ```ember deploy:activate staging --revision=XXXXXXX```
+- ```ember deploy:list production``` lists all available revisions in redis
+- activate the version with ```ember deploy:activate production --revision=XXXXXXX```
