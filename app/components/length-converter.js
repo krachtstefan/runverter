@@ -1,11 +1,25 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
 
+  i18n: Ember.inject.service(),
+
   racePickerKmVisible : false,
   racePickerMiVisible : false,
   racePickerMVisible : false,
 
   races : Ember.inject.service('race'),
+
+  tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+    return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
+  tooltipLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+    return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
+  }),
+
+  tooltipLengthM : Ember.computed("run.lengthM", "i18n.locale", function(){
+    return this.get("run.lengthM").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.m");
+  }),
 
   visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "lc" ? true : false;
@@ -23,9 +37,15 @@ export default Ember.Component.extend({
     return this.get("racePickerMVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-3-5";
+  }),
+
   actions: {
     setRace: function(race) {
-      this.get("run").set("lengthM",race.lengthM);
+      if(race !== null){
+        this.get("run").set("lengthM",race.lengthM);
+      }
     }
   }
 });

@@ -1,34 +1,33 @@
-module.exports = {
-  staging: {
-    buildEnv: 'staging',
-    store: {
-      type: 'redis',
-      host: 'runverter.staging',
-      port: 6379
-    },
-    assets: {
-      type: 's3',
-      exclude: ['.DS_Store', '*-test.js'],
-      accessKeyId: 'AKIAJQH4RE42AHIISVXQ',
-      secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'runverter',
-      region: "eu-west-1"
-    }
-  },
-  production: {
-    buildEnv: 'production',
-    store: {
-      type: 'redis',
-      host: 'localhost',
-      port: 6380
-    },
-    assets: {
-      type: 's3',
-      exclude: ['.DS_Store', '*-test.js'],
-      accessKeyId: 'AKIAJQH4RE42AHIISVXQ',
-      secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'runverter',
-      region: "eu-west-1"
-    }
+var VALID_DEPLOY_TARGETS = [
+  'production',
+  'staging',
+];
+
+module.exports = function(deployTarget) {
+
+  if(deployTarget === 'production') {
+    var redisUrl = 'redis://runverter.production:6380'
+  }else if(deployTarget === 'staging') {
+    var redisUrl = 'redis://runverter.staging:6379'
   }
+
+  var ENV = {
+    build: {},
+    redis : {
+      allowOverwrite: true,
+      keyPrefix: 'runverter:index',
+      url: redisUrl,
+    },
+    s3 : {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      bucket: 'runverter',
+      region: 'eu-west-1'
+    }
+  };
+
+  if (VALID_DEPLOY_TARGETS.indexOf(deployTarget) === -1) {
+    throw new Error('Invalid deployTarget ' + deployTarget);
+  }
+  return ENV;
 };

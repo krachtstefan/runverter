@@ -1,9 +1,15 @@
-<h1>
-  {{selectedMenuItem.label}}
-  {{#x-select value=defaultValue action="switchTool" class="menu"}}
-    {{#each menuItems as |item|}}
-      {{#x-option value=item.key}}{{item.name}}{{/x-option}}
-    {{/each}}
-  {{/x-select}}
-</h1>
-<p>{{selectedMenuItem.description}}</p>
+<div class="uk-container uk-container-center">
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1">
+      <h1>
+        <span class="toolLabel">{{selectedMenuItem.label}}</span>
+        {{#x-select value=defaultValue action="switchTool" class="menu"}}
+          {{#each menuItems as |item|}}
+            {{#x-option value=item.key}}{{item.name}}{{/x-option}}
+          {{/each}}
+        {{/x-select}}
+      </h1>
+      <p>{{selectedMenuItem.description}}</p>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   classNames: ["control-panel"],
   classNameBindings: ['visible:open'],
   visible : false,
+  shareButtonsVisible : false,
+  imprintVisible : false,
+
+  shareButtonsVisibleClass : Ember.computed("shareButtonsVisible", function(){
+    return this.get("shareButtonsVisible") === true ? "shareButtonsVisible" : "shareButtonsInvisible";
+  }),
 
   actions: {
     toggleControlPanel: function() {
@@ -20,6 +26,13 @@ export default Ember.Component.extend({
     },
     toggleExpertMode: function(){
       this.toggleProperty("expertMode");
-    }
+    },
+    openImprintPage: function() {
+      this.send('closeControlPanel');
+      this.set("imprintVisible", true);
+    },
+    toggleShareButtons: function() {
+      this.toggleProperty("shareButtonsVisible");
+    },
   }
 });

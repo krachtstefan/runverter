@@ -81,7 +81,7 @@ export default OneWayTel.extend({
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
   // native maxLength/minLength attibute, the input event listener will take care of maxLength/minLength interpretation
   removeLengthBindings: Ember.on('init', function() {
-    this.get('attributeBindings').removeObject("maxLength").removeObject("minLength");
+    this.set('attributeBindings', Ember.A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
   }),
 
   handleWidthClassName: Ember.on('init', Ember.observer('value', function() {

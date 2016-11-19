@@ -17,16 +17,22 @@
  /* Remove, change to fit your needs */
 
 #runTempo{
-  width: 200px;
+  width: 120px;
+  @include respond-to("small"){
+    width: 190px;
+  }
   .sod_list_wrapper{
-    width: 200px;
+    width: 190px;
   }
 }
 
 #runLength{
-  width: 114px;
+  width: 70px;
+  @include respond-to("small"){
+    width: 100px;
+  }
   .sod_list_wrapper{
-    width: 114px;
+    width: 100px;
   }
 }
 
@@ -34,10 +40,16 @@
 .suggest-select{
   display: inline;
   .sod_label{
-    opacity: 0;
+    opacity: 1;
+    @include respond-to("small"){
+      opacity: 0;
+    }
   }
   .sod_select {
-    opacity: 0;
+    opacity: 1;
+    @include respond-to("small"){
+      opacity: 0;
+    }
     @include transition(0.25s ease-in-out);
     &.open{
       opacity: 1; // always visible when select is open
@@ -80,9 +92,21 @@
 }
 
 #race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m{
-  width: 40px;
+  width: 20px;
+  @include respond-to("small"){
+    width: 30px;
+  }
   .sod_list_wrapper{
     width: 350px;
+  }
+}
+#target-time-pace-calc{
+  width: 20px;
+  @include respond-to("small"){
+    width: 30px;
+  }
+  .sod_list_wrapper{
+    width: 285px;
   }
 }
 
@@ -102,6 +126,12 @@
   }
 }
 
+.expertModeOn{
+  #menu{
+    margin-top:10px;
+  }
+}
+
 .sod_select,
 .sod_select *{
   @include box-sizing(border-box);
@@ -115,11 +145,16 @@
   @include inline-block;
   position: relative;
   line-height:35px;
-  padding: 8px 10px 30px 6px;
+  padding:0;
+  font-size: 24px;
+  @include respond-to("small"){
+    padding: 8px 10px 30px 6px;
+    font-size: 42px;
+  }
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
   color:$color-form-text;
-  font-size: 42px;
+
   text-align: left;
   outline: 0;
   outline-offset: -2px; /* Opera */
@@ -134,15 +169,23 @@
   content: "\25B2";
   position: absolute;
   right: 10px;
-  top: 16px;
-  font-size: 10px;
+  top: -2px;
+  font-size:8px;
+  @include respond-to("small"){
+    font-size:10px;
+    top:16px;
+  }
 }
 
 /* Down arrow */
 .sod_select:after{
   content: "\25BC";
   top: auto;
-   bottom: 18px;
+  top: auto;
+  bottom: 2px;
+  @include respond-to("small"){
+    bottom: 18px;
+  }
 }
 
 /* Change the border color on hover, focus and when open */
@@ -166,7 +209,10 @@
   text-overflow: ellipsis;
   position: relative;
   text-align: center;
-  top:12px;
+  top:3px;
+  @include respond-to("small"){
+    top:12px;
+  }
   padding-right: 15px;
   padding-bottom:10px;
 }
@@ -184,7 +230,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   margin: 0;
   color:$color-main-text;
   background-color: $color-form-background;
-  z-index: 1;
+  z-index: 10;
   outline: 5px solid $color-overlay-border;
 }
 /* Shows the option list (don't edit) */
@@ -205,7 +251,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 .sod_select .sod_list{
   display: block;
   overflow-y: auto;
-  padding: 0;
+  padding: 10px 0;
   margin: 0;
 }
 
@@ -226,7 +272,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   background: inherit;
   color: $color-main-text-light;
   font-size: 16px;
-  padding: 10px 20px 0px 20px;
+  padding: 0px 20px 0px 20px;
 }
 
 /* Children of an optgroup */
@@ -289,5 +335,5 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
   height: 100%;
   width: 100%;
   opacity: 0;
-  z-index: 1;
+  z-index: 10;
 }

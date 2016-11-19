@@ -1,35 +1,35 @@
 {{#if visible}}
-  <form class="uk-form">
-    <div class="uk-grid uk-grid-collapse tool-line">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{t "tools.pc.minkmLabel"}} &nbsp;
+  <form class="uk-form uk-container-center">
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+        {{t "tools.pc.minkmLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.paceMinPerKmStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed}} {{t "metrics.tempo.minkm"}}
-      </div>
-    </div>
-    <div class="uk-grid uk-grid-collapse tool-line">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{t "tools.pc.minmiLabel"}} &nbsp;
-      </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.paceMinPerMiStackMin}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed}} {{t "metrics.tempo.minmi"}}
+      <div class="uk-width-1-1 {{expertModeClass}}">
+        {{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}} {{t "metrics.tempo.minkm"}}
       </div>
     </div>
-    <div class="uk-grid uk-grid-collapse tool-line">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{t "tools.pc.kmhLabel"}} &nbsp;
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+        {{t "tools.pc.minmiLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.speedKmHrStackKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true}} {{t "metrics.tempo.kmh"}}
+      <div class="uk-width-1-1 {{expertModeClass}}">
+        {{form-helper/number-input value=run.paceMinPerMiStackMin title=tooltipPaceMinPerMi}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed title=tooltipPaceMinPerMi}} {{t "metrics.tempo.minmi"}}
       </div>
     </div>
-    <div class="uk-grid uk-grid-collapse tool-line">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 tool-label">
-        {{t "tools.pc.mihLabel"}} &nbsp;
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+        {{t "tools.pc.kmhLabel"}}
       </div>
-      <div class="uk-width-1-1 uk-width-medium-4-6 uk-width-large-3-5">
-        {{form-helper/number-input value=run.speedMiHrStackMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true}} {{t "metrics.tempo.mih"}}
+      <div class="uk-width-1-1 {{expertModeClass}}">
+        {{form-helper/number-input value=run.speedKmHrStackKm title=tooltipSpeedKmHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedKmHr}} {{t "metrics.tempo.kmh"}}
+      </div>
+    </div>
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+        {{t "tools.pc.mihLabel"}}
+      </div>
+      <div class="uk-width-1-1 {{expertModeClass}}">
+        {{form-helper/number-input value=run.speedMiHrStackMi title=tooltipSpeedMiHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedMiHr}} {{t "metrics.tempo.mih"}}
       </div>
     </div>
   </form>

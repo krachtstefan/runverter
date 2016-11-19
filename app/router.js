@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import config from './config/environment';
 
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
   location: config.locationType,
+  rootURL: config.rootURL,
    didTransition: function() {
     this._super(...arguments);
     return ga('send', 'pageview', {
@@ -13,7 +14,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('tools', { path: '/' }, function(){
+  this.route('tools', { path: '/' }, function(){
     this.route('locale', { path: '/:locale' });
   });
 });

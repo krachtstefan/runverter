@@ -10,8 +10,19 @@ export default Ember.Component.extend({
   runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
   racePickerVisible : false,
+  timePickerVisible : false,
 
-  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", function(){
+  races : Ember.inject.service('race'),
+  targetTimes : Ember.inject.service('target-time'),
+
+  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+    var self = this;
+    return this.get("targetTimes.templates").filter(function(item) {
+      return self.get("run").isInRange(item.startM, item.endM);
+    });
+  }),
+
+  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -23,9 +34,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  races : Ember.inject.service('race'),
-
-  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", function(){
+  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", "i18n.locale", function(){
     var runTempoMetrics = [];
     var self = this;
     this.get("runTempoMetricsAvailable").forEach(function(item){
@@ -35,6 +44,46 @@ export default Ember.Component.extend({
       });
     });
     return runTempoMetrics;
+  }),
+
+  tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+    return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
+  tooltipLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+    return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
+  }),
+
+  tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
+    return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
+  }),
+
+  tooltipTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
+    return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
+  }),
+
+  tooltipTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
+    return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
+  }),
+
+  tooltipPaceMinPerKm : Ember.computed("run.paceMinPerKm", "i18n.locale", function(){
+    return this.get("run.paceMinPerKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minkm");
+  }),
+
+  tooltipPaceMinPerMi : Ember.computed("run.paceMinPerMi", "i18n.locale", function(){
+    return this.get("run.paceMinPerMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minmi");
+  }),
+
+  tooltipSpeedKmHr : Ember.computed("run.speedKmHr", "i18n.locale", function(){
+    return this.get("run.speedKmHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.kmh");
+  }),
+
+  tooltipSpeedMiHr : Ember.computed("run.speedMiHr", "i18n.locale", function(){
+    return this.get("run.speedMiHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.mih");
+  }),
+
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-3-5";
   }),
 
   didRender: function() {
@@ -89,10 +138,19 @@ export default Ember.Component.extend({
     return this.get("racePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
+  timePickerVisibleClass: Ember.computed('timePickerVisible', function () {
+    return this.get("timePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  }),
+
   actions: {
     setRace: function(race) {
       if(race !== null){
         this.get("run").set("lengthM",race.lengthM);
+      }
+    },
+    setTargetTime: function(targetTime) {
+      if(targetTime !== null){
+        this.get("run").set("timeSec",targetTime.timeSec);
       }
     }
   }
