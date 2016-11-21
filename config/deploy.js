@@ -6,7 +6,7 @@ var VALID_DEPLOY_TARGETS = [
 module.exports = function(deployTarget) {
 
   if(deployTarget === 'production') {
-    var redisUrl = 'redis://runverter.production:6380'
+    var redisUrl = 'redis://localhost:6380'
   }else if(deployTarget === 'staging') {
     var redisUrl = 'redis://runverter.staging:6379'
   }
