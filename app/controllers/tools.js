@@ -10,7 +10,8 @@ export default Ember.Controller.extend({
     'runLengthMetricsQuery' : 'lm', // selected length metric
     'runTempoMetricsQuery' : 's',   // selected tempo metric
     'expertMode' : 'nerd',          // selected display mode
-    'imprintVisible' : 'info'       // selected display mode
+    'imprintVisible' : 'info',      // selected display mode
+    'index_key' : "index_key"       // keep the index_key param provided by ember-cli-deploy
   },
 
   selectedToolKey : "pca",
