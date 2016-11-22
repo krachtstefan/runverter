@@ -38,9 +38,12 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 - The assets will be uploaded to Amazon S3, so you need a bucket called ```runverter```, your Access key ID in an environment variable named ```AWS_ACCESS_KEY_ID``` and your access key in an environment variable named ```AWS_SECRET_ACCESS_KEY```. You may want to add the lines ```export AWS_SECRET_ACCESS_KEY=XXXXXX``` and ```export AWS_ACCESS_KEY_ID=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
 - It's also required to create a SSH tunnel to access the redis instance: ```ssh -f -L 6380:localhost:6379 -N user@runverter.staging``` or ```ssh -f -L 6381:localhost:6379 -N user@runverter.production```.
 
-### Deploy
+### Staging deploy
+- ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will display the key of the deployed version like ```XXXXXXX```.
+- preview the build on http://runverter.staging/?index_key=XXXXXX.
+- 
+- ```ember deploy:list staging``` lists all available revisions from redis.
+- activate the version with ```ember deploy:activate staging --revision=XXXXXXX```.
 
-- ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will return the key of the deployed version ```runverter:XXXXXXX```. Replace ``` staging```  with ```production``` for production deploy and make sure the remote redis is available on your local port ```6380```.
-- preview the deploy on http://runverter.dev/?index_key=XXXXXX
-- ```ember deploy:list production``` lists all available revisions in redis
-- activate the version with ```ember deploy:activate production --revision=XXXXXXX```
+### Production deploy
+- Repeat the steps described for staging but replace ```staging``` with ```production```.
