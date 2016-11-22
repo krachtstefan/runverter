@@ -28,9 +28,9 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 
 - Compile the ember app locally.
 - Upload all files to Amazon S3 asset server.
-- Publish the index.html page in a dedicated Redis key (like runverter:XXXXXX)
-- Preview the version with a secret url like http://runverter.io/?index_key=XXXXXX
-- Activate the deployed version by copying the value of runverter:XXXXXX key to runverter:current
+- Publish the index.html page in a dedicated Redis key (like runverter:index:XXXXXX).
+- Preview the version with a secret url like http://runverter.io/?index_key=XXXXXX.
+- Activate the deployed version by copying the value of runverter:index:XXXXXX key to runverter:index:current-content.
 
 ### Requirements
 
