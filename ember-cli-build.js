@@ -10,7 +10,7 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       prepend: 'http://runverter.s3-website-eu-west-1.amazonaws.com/',
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'json', 'svg']
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'json', 'svg', 'ico']
     },
     sourcemaps: {
       enabled: !isProductionLikeBuild,
