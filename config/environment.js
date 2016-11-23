@@ -35,6 +35,14 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
       'media-src': "'self'",
       'manifest-src': "'self'"
+    },
+    manifest : {
+      enabled: true,
+      appcacheFile: "/manifest.appcache",
+      excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
+      includePaths: ['http://fonts.googleapis.com/css?family=Open+Sans:400,700'],
+      pathPrefix: function(file){ return file.startsWith("http") ? file : 'http://runverter.s3-website-eu-west-1.amazonaws.com/'+file; },
+      showCreateDate: true
     }
   };
 
