@@ -52,7 +52,7 @@
     "ember-meta-meta": "0.3.1",
     "ember-one-way-controls": "1.1.2",
     "emberx-select": "2.0.1",
-    "broccoli-manifest": "0.0.7"
+    "broccoli-manifest": "git://github.com/racido/broccoli-manifest.git#pathprefix"
   },
   "dependencies": {
     "broccoli-merge-trees": "^1.1.5"
