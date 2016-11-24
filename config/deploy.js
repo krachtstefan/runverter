@@ -21,8 +21,8 @@ module.exports = function(deployTarget) {
     s3 : {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      bucket: 'runverter',
-      region: 'eu-west-1',
+      bucket: 's.runverter.io',
+      region: 'eu-central-1',
       filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache}'
     }
   };
