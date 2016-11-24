@@ -41,7 +41,7 @@ module.exports = function(environment) {
       appcacheFile: "/manifest.appcache",
       excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
       includePaths: ['http://fonts.googleapis.com/css?family=Open+Sans:400,700'],
-      pathPrefix: "http://runverter.s3-website-eu-west-1.amazonaws.com/",
+      pathPrefix: "http://s.runverter.io/",
       showCreateDate: true
     }
   };
