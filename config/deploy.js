@@ -6,11 +6,9 @@ var VALID_DEPLOY_TARGETS = [
 module.exports = function(deployTarget) {
 
   if(deployTarget === 'production') {
-    var redisUrl = 'redis://localhost:6380'
     var deployUser = 'root'
     var deployHost = 'runverter.production'
   }else if(deployTarget === 'staging') {
-    var redisUrl = 'redis://localhost:6381'
     var deployUser = 'docker'
     var deployHost = 'runverter.staging'
   }
@@ -19,8 +17,7 @@ module.exports = function(deployTarget) {
     build: {},
     redis : {
       allowOverwrite: true,
-      keyPrefix: 'runverter:index',
-      url: redisUrl,
+      keyPrefix: 'runverter:index'
     },
     s3 : {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -33,6 +30,10 @@ module.exports = function(deployTarget) {
       username: deployUser,
       host: deployHost,
       path: '~/runverter/'
+    },
+    'ssh-tunnel' : {
+      username: deployUser,
+      host: deployHost,
     }
   };
 
