@@ -7,8 +7,12 @@ module.exports = function(deployTarget) {
 
   if(deployTarget === 'production') {
     var redisUrl = 'redis://localhost:6380'
+    var scpUsername = 'root'
+    var scpHost = 'runverter.production'
   }else if(deployTarget === 'staging') {
     var redisUrl = 'redis://localhost:6381'
+    var scpUsername = 'docker'
+    var scpHost = 'runverter.staging'
   }
 
   var ENV = {
@@ -24,6 +28,11 @@ module.exports = function(deployTarget) {
       bucket: 's.runverter.io',
       region: 'eu-central-1',
       filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache}'
+    },
+    scp : {
+      username: scpUsername,
+      host: scpHost,
+      path: '~/runverter/'
     }
   };
 
