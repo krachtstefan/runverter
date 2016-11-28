@@ -41,7 +41,6 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 ### Staging deploy
 - ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will display the key of the deployed version like ```XXXXXXX```.
 - preview the build on http://runverter.staging/?index_key=XXXXXX.
-- 
 - ```ember deploy:list staging``` lists all available revisions from redis.
 - activate the version with ```ember deploy:activate staging --revision=XXXXXXX```.
 
