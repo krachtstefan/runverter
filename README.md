@@ -35,7 +35,14 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 ### Requirements
 
 - The hostname ```runverter.staging``` and ```runverter.production``` need to be added to your ```/etc/hosts``` file and point to the proper deployment server running the docker setup described in [runverter-server repository](https://github.com/krachtstefan/runverter-server).
-- The assets will be uploaded to Amazon S3, so you need a bucket called ```s.runverter.io```, your Access key ID in an environment variable named ```AWS_ACCESS_KEY_ID``` and your access key in an environment variable named ```AWS_SECRET_ACCESS_KEY```. You may want to add the lines ```export AWS_SECRET_ACCESS_KEY=XXXXXX``` and ```export AWS_ACCESS_KEY_ID=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
+- The assets will be uploaded to Amazon S3, so you need a bucket called ```s.runverter.io```.
+- There are a bunch of environment variables that need to be present to deploy the app. Environment variables can be defined by adding lines like ```export AWS_SECRET_ACCESS_KEY=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
+  - ```RUNVERTER_AWS_ACCESS_KEY_ID```: Access key ID to access ```s.runverter.io``` bucket.
+  - ```RUNVERTER_AWS_SECRET_ACCESS_KEY```: Access key to access ```s.runverter.io``` bucket.
+  - ```RUNVERTER_DEPLOY_USER_STAGING```: SSH user to deploy on ```runverter.staging```.
+  - ```RUNVERTER_DEPLOY_USER_PRODUCTION```: SSH user to deploy on ```runverter.production```.
+
+
 
 ### Staging deploy
 - ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will display the key of the deployed version like ```XXXXXXX```.
