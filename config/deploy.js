@@ -6,10 +6,10 @@ var VALID_DEPLOY_TARGETS = [
 module.exports = function(deployTarget) {
 
   if(deployTarget === 'production') {
-    var deployUser = 'root'
+    var deployUser = process.env.RUNVERTER_DEPLOY_USER_PRODUCTION
     var deployHost = 'runverter.production'
   }else if(deployTarget === 'staging') {
-    var deployUser = 'docker'
+    var deployUser = process.env.RUNVERTER_DEPLOY_USER_STAGING
     var deployHost = 'runverter.staging'
   }
 
