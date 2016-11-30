@@ -41,7 +41,7 @@ module.exports = function(environment) {
       appcacheFile: "/manifest.appcache",
       excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
       includePaths: ['http://fonts.googleapis.com/css?family=Open+Sans:400,700', 'http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf '],
-      pathPrefix: "http://s.runverter.io/",
+      pathPrefix: "//s.runverter.io/",
       showCreateDate: true
     }
   };
