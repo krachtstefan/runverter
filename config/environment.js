@@ -40,7 +40,7 @@ module.exports = function(environment) {
       enabled: true,
       appcacheFile: "/manifest.appcache",
       excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
-      includePaths: ['https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf '],
+      includePaths: ['https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'],
       prepend: "https://s.runverter.io/",
       showCreateDate: true
     }
