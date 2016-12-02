@@ -1,20 +1,23 @@
 var VALID_DEPLOY_TARGETS = [
   'production',
   'staging',
+  'production-appcache',
+  'staging-appcache',
 ];
 
 module.exports = function(deployTarget) {
 
-  if(deployTarget === 'production') {
+  if(deployTarget === 'production' || deployTarget === 'production-appcache') {
     var deployUser = process.env.RUNVERTER_DEPLOY_USER_PRODUCTION
     var deployHost = 'runverter.production'
-  }else if(deployTarget === 'staging') {
+  }else if(deployTarget === 'staging' || deployTarget === 'staging-appcache') {
     var deployUser = process.env.RUNVERTER_DEPLOY_USER_STAGING
     var deployHost = 'runverter.staging'
   }
 
   var ENV = {
     build: {},
+    plugins: (deployTarget === 'production' || deployTarget === 'staging') ? ['build', 'display-revisions', 'gzip', 'manifest', 's3', 'redis', 'revision-data', 'ssh-tunnel'] : ['build', 'gzip', 'manifest', 'scp'],
     redis : {
       allowOverwrite: true,
       keyPrefix: 'runverter:index'
