@@ -31,6 +31,7 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 - Publish the index.html page in a dedicated Redis key (like runverter:index:XXXXXX).
 - Preview the version with a secret url like https://runverter.io/?index_key=XXXXXX.
 - Activate the deployed version by copying the value of runverter:index:XXXXXX key to runverter:index:current-content.
+- Since the ```manifest.appcache``` can not be delivered via CDN and must be available under the same origin as the app, we additionally upload the static files to the docker machine.
 
 ### Requirements
 
@@ -49,6 +50,7 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 - preview the build on http://runverter.staging/?index_key=XXXXXX.
 - ```ember deploy:list staging``` lists all available revisions from redis.
 - activate the version with ```ember deploy:activate staging --revision=XXXXXXX```.
+- at last we deploy the ```manifest.appcache file``` with ```ember deploy staging-appcache```
 
 ### Production deploy
 - Repeat the steps described for staging but replace ```staging``` with ```production```.
