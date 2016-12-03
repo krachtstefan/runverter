@@ -32,7 +32,8 @@ module.exports = function(deployTarget) {
     scp : {
       username: deployUser,
       host: deployHost,
-      path: '~/runverter/'
+      path: '~/runverter/',
+      exclude: '{*.html,*.png,*.svg,*.txt,*.xml,*.ico,assets,images}',
     },
     'ssh-tunnel' : {
       username: deployUser,
