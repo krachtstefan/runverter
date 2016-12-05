@@ -2,7 +2,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
-  meta: Ember.inject.service(),
 
   queryParams: {
     'i18n.locale' : 'l',            // selected locale
@@ -59,26 +58,6 @@ export default Ember.Controller.extend({
   handlePersistence: Ember.observer("model.timeSec", "model.lengthM", function () {
     this.get("model").save();
   }),
-
-  metaDataManagement: Ember.on('init', Ember.observer("selectedToolKey", "imprintVisible", function () {
-    var title, description;
-    if(this.get("imprintVisible") === true){
-      title = this.get('i18n').t("imprint.about");
-      description = this.get('i18n').t("imprint.DescriptionTag");
-    }else{
-      title = this.get('i18n').t("tools."+this.get("selectedToolKey")+".name");
-      description = this.get('i18n').t("tools."+this.get("selectedToolKey")+".description");
-    }
-
-    this.get('meta').update({
-      title: title,
-      description: description,
-      'og:title': title,
-      'og:description': description,
-      'og:image': 'og-image.png',
-    });
-
-  })),
 
   actions: {
     navigateTo: function(selection) {
