@@ -218,7 +218,7 @@ body{
     }
   }
 
-  .tools.container-pca .toolLine, .expertModeOn.container-pca .toolLine{
+  .tools.container-pca .toolLine, .expertModeOn.container-pca .toolLine, .expertModeOn.container-sc .toolLine{
     max-width: 280px;
     @include respond-to("small"){
       max-width: 480px;
@@ -228,13 +228,13 @@ body{
     }
   }
 
-  .expertModeOn.container-pca .toolLine{
+  .expertModeOn.container-pca .toolLine, .expertModeOn.container-sc .toolLine{
     @include respond-to("medium"){
       max-width: 500px;
     }
   }
 
-  .tools.container-pc .toolLine, .tools.container-lc .toolLine, .expertModeOn.container-pc .toolLine, .expertModeOn.container-lc .toolLine{
+  .tools.container-pc .toolLine, .tools.container-lc .toolLine, .expertModeOn.container-pc .toolLine, .expertModeOn.container-lc .toolLine, .expertModeOn.container-rp .toolLine{
     max-width: 200px;
     @include respond-to("small"){
       max-width: 350px;
@@ -244,7 +244,7 @@ body{
     }
   }
 
-  .expertModeOn.container-pc .toolLine, .expertModeOn.container-lc .toolLine{
+  .expertModeOn.container-pc .toolLine, .expertModeOn.container-lc .toolLine, .expertModeOn.container-rp .toolLine{
     @include respond-to("medium"){
       max-width: 400px;
     }
