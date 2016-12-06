@@ -16,7 +16,7 @@ export default {
     'pca' : {
       'name' : 'Pace Calculator',
       'label' : 'Hi! I\'m the',
-      'description' : 'See which pace you need, to finish a run in your desired time.',
+      'description' : 'See which pace you need to finish a run in your desired time.',
       'distanceLabel' : 'Running a distance of',
       'timeLabel' : 'in',
       'paceLabel' : 'requires a pace of'
