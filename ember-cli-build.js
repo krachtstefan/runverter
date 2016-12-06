@@ -21,7 +21,16 @@ module.exports = function(defaults) {
     tests: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
     hinting: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
 
-    compassOptions: { imagesDir: "public/images" }
+    compassOptions: { imagesDir: "public/images" },
+
+    emberCliConcat: {
+      js: {
+        concat: isProductionLikeBuild
+      },
+      css: {
+        concat: isProductionLikeBuild
+      }
+    }
   });
 
   app.import('bower_components/uikit/css/uikit.min.css');
