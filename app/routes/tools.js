@@ -2,7 +2,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   i18n: Ember.inject.service(),
-
+  headData: Ember.inject.service(),
 
   model: function(params) {
     if(params.locale){
@@ -18,5 +18,9 @@ export default Ember.Route.extend({
         lengthM : new BigNumber(42195)
       });
     });
-  }
+  },
+
+  recognizeUrlChange : Ember.observer("router.url", function() {
+    this.set('headData.url', window.location.href);
+  }),
 });
