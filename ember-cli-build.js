@@ -9,7 +9,7 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     fingerprint: {
       enabled: isProductionLikeBuild,
-      prepend: '//s.runverter.io/',
+      prepend: 'https://s.runverter.io/',
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'json', 'svg', 'ico']
     },
     sourcemaps: {
