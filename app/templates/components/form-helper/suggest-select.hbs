@@ -1,4 +1,4 @@
-{{#x-select action="changeSelection" class=identifier}}
+{{#x-select action="changeSelection" class=identifier tabindex=-1}}
   <option value="" disabled="disabled" selected="selected" style="display:none"> </option> {{! use an invisible default value, otherwise selecting the first option would not trigger the change event}}
   <optgroup label="{{label}}">
     {{#each items as |item|}}
