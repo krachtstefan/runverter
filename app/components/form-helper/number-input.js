@@ -69,13 +69,25 @@ export default OneWayTel.extend({
     return true;
   },
 
-  focusIn() {
-    this.set("focus", true);
-    event.target.select();
+  focusIn(event) {
+    Ember.run.later(this, function() {
+      this.selectAll(event);
+    }, 0); // add a delay to ensure to be fired after a possible click event
+  },
+
+  // a click on this input field is always introduced by an focusIn event
+  // select all on click works on iOS only if the focusIn event was NOT fired before
+  click(event) {
+    this.selectAll(event);
   },
 
   focusOut() {
     this.set("focus", false);
+  },
+
+  selectAll : function(event){
+    event.target.setSelectionRange(0,999);
+    this.set("focus", true);
   },
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
