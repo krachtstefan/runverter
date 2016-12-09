@@ -11,6 +11,32 @@ export default OneWayTel.extend({
   widthClassName: null, // class name that handles the with via css
   focus: false,
 
+  inputField : Ember.computed(function(){
+    // since this is an volatile computed property, trigger a property change to notify all observers
+    this.notifyPropertyChange("inputField");
+    return this.$();
+  }).volatile(),
+
+  inputValue : Ember.computed("inputField", function(){
+    return this.get("inputField").val();
+  }),
+
+  inputFieldLength : Ember.computed("inputField", function(){
+    return this.get("inputField").val().length;
+  }),
+
+  selectionStart : Ember.computed("inputField", function(){
+    return this.get("inputField").prop('selectionStart');
+  }),
+
+  selectionEnd : Ember.computed("inputField", function(){
+    return this.get("inputField").prop('selectionEnd');
+  }),
+
+  allSelected : Ember.computed("inputField", function(){
+    return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("inputFieldLength");
+  }),
+
   input(event) {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
@@ -94,23 +120,9 @@ export default OneWayTel.extend({
   },
 
   handleBackspace : function(event){
-    var inputField = this.$();
-    var inputFieldLength = inputField.val().length;
-    var selectionStart = inputField.prop('selectionStart');
-    var selectionEnd = inputField.prop('selectionEnd');
-    var allSelected = (selectionEnd-selectionStart)>=inputFieldLength;
-
-    // inputField.selectionStart;
-    // inputField.selectionEnd;
-    console.log(inputField);
-    console.log("inputFieldLength "+inputFieldLength);
-    console.log("selectionStart "+selectionStart);
-    console.log("selectionEnd "+selectionEnd);
-    console.log("allSelected "+allSelected);
-
-    if(allSelected === true){
+    if(this.get("allSelected") === true){
       event.preventDefault();
-      inputField.val("");
+      this.get("inputField").val("");
     }
   },
 
