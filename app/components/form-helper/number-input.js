@@ -12,30 +12,28 @@ export default OneWayTel.extend({
   focus: false,
 
   inputField : Ember.computed(function(){
-    // since this is an volatile computed property, trigger a property change to notify all observers
-    this.notifyPropertyChange("inputField");
     return this.$();
   }).volatile(),
 
-  inputValue : Ember.computed("inputField", function(){
+  inputValue : Ember.computed(function(){
     return this.get("inputField").val();
-  }),
+  }).volatile(),
 
-  inputFieldLength : Ember.computed("inputField", function(){
+  inputFieldLength : Ember.computed(function(){
     return this.get("inputField").val().length;
-  }),
+  }).volatile(),
 
-  selectionStart : Ember.computed("inputField", function(){
+  selectionStart : Ember.computed(function(){
     return this.get("inputField").prop('selectionStart');
-  }),
+  }).volatile(),
 
-  selectionEnd : Ember.computed("inputField", function(){
+  selectionEnd : Ember.computed(function(){
     return this.get("inputField").prop('selectionEnd');
-  }),
+  }).volatile(),
 
-  allSelected : Ember.computed("inputField", function(){
+  allSelected : Ember.computed(function(){
     return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("inputFieldLength");
-  }),
+  }).volatile(),
 
   input(event) {
     this._super(...arguments);
