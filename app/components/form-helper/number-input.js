@@ -35,6 +35,10 @@ export default OneWayTel.extend({
     return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("inputFieldLength");
   }).volatile(),
 
+  somethingSelected : Ember.computed(function(){
+    return (this.get("selectionEnd")-this.get("selectionStart"))>0;
+  }).volatile(),
+
   input(event) {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
