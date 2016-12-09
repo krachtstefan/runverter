@@ -11,28 +11,28 @@ export default OneWayTel.extend({
   widthClassName: null, // class name that handles the with via css
   focus: false,
 
-  inputField : Ember.computed(function(){
+  DOMinputField : Ember.computed(function(){
     return this.$();
   }).volatile(),
 
-  inputValue : Ember.computed(function(){
-    return this.get("inputField").val();
+  DOMinputValue : Ember.computed(function(){
+    return this.get("DOMinputField").val();
   }).volatile(),
 
-  inputFieldLength : Ember.computed(function(){
-    return this.get("inputField").val().length;
+  DOMinputFieldLength : Ember.computed(function(){
+    return this.get("DOMinputField").val().length;
   }).volatile(),
 
   selectionStart : Ember.computed(function(){
-    return this.get("inputField").prop('selectionStart');
+    return this.get("DOMinputField").prop('selectionStart');
   }).volatile(),
 
   selectionEnd : Ember.computed(function(){
-    return this.get("inputField").prop('selectionEnd');
+    return this.get("DOMinputField").prop('selectionEnd');
   }).volatile(),
 
   allSelected : Ember.computed(function(){
-    return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("inputFieldLength");
+    return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("DOMinputFieldLength");
   }).volatile(),
 
   somethingSelected : Ember.computed(function(){
@@ -108,7 +108,7 @@ export default OneWayTel.extend({
     this.set("focus", false);
     // in most cases the input field reflects the model value, but in rare cases like after the using the backspace button
     // the value of the model is not instantly updated. So make sure that it will be updated at least on focus out.
-    this.set("value", this.get("inputValue"));
+    this.set("value", this.get("DOMinputValue"));
   },
 
   selectAll : function(event){
@@ -119,7 +119,7 @@ export default OneWayTel.extend({
   handleBackspace : function(event){
     if(this.get("allSelected") === true){
       event.preventDefault();
-      this.get("inputField").val("");
+      this.get("DOMinputField").val("");
     }else if(this.get("somethingSelected") === true){
       console.log("something selected");
     }else{
