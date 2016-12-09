@@ -104,6 +104,9 @@ export default OneWayTel.extend({
 
   focusOut() {
     this.set("focus", false);
+    // in most cases the input field reflects the model value, but in rare cases like after the using the backspace button
+    // the value of the model is not instantly updated. So make sure that it will be updated at least on focus out.
+    this.set("value", this.get("inputValue"));
   },
 
   selectAll : function(event){
