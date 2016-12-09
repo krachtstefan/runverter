@@ -65,6 +65,9 @@ export default OneWayTel.extend({
         event.preventDefault();
         this.send('decreaseValue', steppSize);
         break;
+      case 8: // backspace
+        this.handleBackspace(event);
+        break;
     }
     return true;
   },
@@ -88,6 +91,27 @@ export default OneWayTel.extend({
   selectAll : function(event){
     event.target.setSelectionRange(0,999);
     this.set("focus", true);
+  },
+
+  handleBackspace : function(event){
+    var inputField = this.$();
+    var inputFieldLength = inputField.val().length;
+    var selectionStart = inputField.prop('selectionStart');
+    var selectionEnd = inputField.prop('selectionEnd');
+    var allSelected = (selectionEnd-selectionStart)>=inputFieldLength;
+
+    // inputField.selectionStart;
+    // inputField.selectionEnd;
+    console.log(inputField);
+    console.log("inputFieldLength "+inputFieldLength);
+    console.log("selectionStart "+selectionStart);
+    console.log("selectionEnd "+selectionEnd);
+    console.log("allSelected "+allSelected);
+
+    if(allSelected === true){
+      event.preventDefault();
+      inputField.val("");
+    }
   },
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
