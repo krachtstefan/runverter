@@ -63,7 +63,7 @@ export default OneWayTel.extend({
       this.$().val(currentValue.slice(0,maxLength));
     }
 
-    // Prevent an issue for values that autmatically get a leading zero
+    // Prevent an issue for values that automatically get a leading zero
     // Example: after selecting the whole input value and typing a number like 12, the value would become 02 instead of 12 (first 01 and then 02)
     if(
       this.lastCursorPosition && // if the cursor changed
