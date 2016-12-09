@@ -120,6 +120,10 @@ export default OneWayTel.extend({
     if(this.get("allSelected") === true){
       event.preventDefault();
       this.get("inputField").val("");
+    }else if(this.get("somethingSelected") === true){
+      console.log("something selected");
+    }else{
+      console.log("nothing selected");
     }
   },
 
