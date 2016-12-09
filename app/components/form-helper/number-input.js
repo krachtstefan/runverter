@@ -55,14 +55,6 @@ export default OneWayTel.extend({
       nextValue = nextValueArr.join('');
     }
 
-    // Prevent input value from exceeding max length if ember doesn't update the value attribute
-    // Example: If the Input contains "112", the max length is 3 and the cursor is at the very end
-    // if you type a "2" the new value would still be "112" and ember won't update the value attribute even if there is a binding
-    // So the value would still be "112" but the DOM value would be "1122". In this case remove every character that would exceed the max length
-    if(parseInt(this.get("value"))===parseInt(nextValue) && currentValue.length > maxLength){
-      this.$().val(currentValue.slice(0,maxLength));
-    }
-
     // Prevent an issue for values that automatically get a leading zero
     // Example: after selecting the whole input value and typing a number like 12, the value would become 02 instead of 12 (first 01 and then 02)
     if(
