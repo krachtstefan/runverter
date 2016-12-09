@@ -57,11 +57,11 @@ export default OneWayTel.extend({
     var hotkeyPressed = event.ctrlKey === true || event.shiftKey === true || event.altKey === true ? true : false;
     var steppSize = hotkeyPressed === true ? 10 : 1;
     switch(event.keyCode) {
-      case 38:
+      case 38: // up
         event.preventDefault();
         this.send('increaseValue', steppSize);
         break;
-      case 40:
+      case 40: // down
         event.preventDefault();
         this.send('decreaseValue', steppSize);
         break;
