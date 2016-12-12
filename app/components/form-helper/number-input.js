@@ -54,7 +54,7 @@ export default OneWayTel.extend({
     return valueStr.slice(this.get("selectionEnd"), valueStr.length);
   }).volatile(),
 
-  input(event) {
+  input() {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
     var currentValue = this.readDOMAttr('value'); // current value in DOM
