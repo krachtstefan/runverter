@@ -136,9 +136,10 @@ export default OneWayTel.extend({
       event.preventDefault();
       this.get("DOMinputField").val("");
     }else if(this.get("somethingSelected") === true){
-      console.log("something selected");
-    }else{
-      console.log("nothing selected");
+      this.get("DOMinputField").val(this.get("preSelection")+this.get("postSelection")+" "); // since preventDefault() is not called, add an exta whitespace that will be deletd.
+    }else{ // nothing is selected
+      var preCursorTextWithoutLastChar = this.get("preSelection").slice(0, this.get("preSelection").length-1);
+      this.get("DOMinputField").val(preCursorTextWithoutLastChar+this.get("postSelection")+" "); // since preventDefault() is not called, add an exta whitespace that will be deletd.
     }
   },
 
