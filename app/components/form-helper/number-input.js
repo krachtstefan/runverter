@@ -40,18 +40,15 @@ export default OneWayTel.extend({
   }).volatile(),
 
   selection : Ember.computed(function(){
-    var valueStr = this.get("value").c[0].toString();
-    return valueStr.slice(this.get("selectionStart"), this.get("selectionEnd"));
+    return this.get("DOMinputValue").slice(this.get("selectionStart"), this.get("selectionEnd"));
   }).volatile(),
 
   preSelection : Ember.computed(function(){
-    var valueStr = this.get("value").c[0].toString();
-    return valueStr.slice(0, this.get("selectionStart"));
+    return this.get("DOMinputValue").slice(0, this.get("selectionStart"));
   }).volatile(),
 
   postSelection : Ember.computed(function(){
-    var valueStr = this.get("value").c[0].toString();
-    return valueStr.slice(this.get("selectionEnd"), valueStr.length);
+    return this.get("DOMinputValue").slice(this.get("selectionEnd"), this.get("DOMinputValue").length);
   }).volatile(),
 
   input() {
