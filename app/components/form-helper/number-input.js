@@ -132,14 +132,19 @@ export default OneWayTel.extend({
   },
 
   handleBackspace : function(event){
+    var cursorPosition = this.get("selectionStart");
     if(this.get("allSelected") === true){
       event.preventDefault();
       this.get("DOMinputField").val("");
     }else if(this.get("somethingSelected") === true){
-      this.get("DOMinputField").val(this.get("preSelection")+this.get("postSelection")+" "); // since preventDefault() is not called, add an exta whitespace that will be deletd.
+      event.preventDefault();
+      this.get("DOMinputField").val(this.get("preSelection")+this.get("postSelection"));
+      this.get("DOMinputField")[0].setSelectionRange(cursorPosition, cursorPosition);
     }else{ // nothing is selected
+      event.preventDefault();
       var preCursorTextWithoutLastChar = this.get("preSelection").slice(0, this.get("preSelection").length-1);
-      this.get("DOMinputField").val(preCursorTextWithoutLastChar+this.get("postSelection")+" "); // since preventDefault() is not called, add an exta whitespace that will be deletd.
+      this.get("DOMinputField").val(preCursorTextWithoutLastChar+this.get("postSelection"));
+      this.get("DOMinputField")[0].setSelectionRange(cursorPosition-1, cursorPosition-1);
     }
   },
 
