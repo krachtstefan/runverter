@@ -51,6 +51,10 @@ export default OneWayTel.extend({
     return this.get("DOMinputValue").slice(this.get("selectionEnd"), this.get("DOMinputValue").length);
   }).volatile(),
 
+  isTouchDevice : Ember.computed(function(){
+    return 'ontouchstart' in document.documentElement;
+  }),
+
   input() {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
@@ -113,7 +117,7 @@ export default OneWayTel.extend({
   // a click on this input field is always introduced by an focusIn event
   // select all on click works on iOS only if the focusIn event was NOT fired before
   click(event) {
-    this.selectAll(event);
+    if(this.get("isTouchDevice") === true) this.selectAll(event);
   },
 
   focusOut() {
