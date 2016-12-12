@@ -59,7 +59,7 @@ export default OneWayTel.extend({
     var lastValue = this.get("value"); // current value in model
     var currentValue = this.readDOMAttr('value'); // current value in DOM
     var nextValue = currentValue; // future value in DOM
-    var cursorPosition = event.target.selectionStart; // cursor position starts with 1
+    var cursorPosition = this.get("selectionStart");
     var maxLength = parseInt(this.get("maxLength"));
 
     // if the inputs new value would exceed the allowed maxLength
