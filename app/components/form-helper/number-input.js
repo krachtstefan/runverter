@@ -39,6 +39,21 @@ export default OneWayTel.extend({
     return (this.get("selectionEnd")-this.get("selectionStart"))>0;
   }).volatile(),
 
+  selection : Ember.computed(function(){
+    var valueStr = this.get("value").c[0].toString();
+    return valueStr.slice(this.get("selectionStart"), this.get("selectionEnd"));
+  }).volatile(),
+
+  preSelection : Ember.computed(function(){
+    var valueStr = this.get("value").c[0].toString();
+    return valueStr.slice(0, this.get("selectionStart"));
+  }).volatile(),
+
+  postSelection : Ember.computed(function(){
+    var valueStr = this.get("value").c[0].toString();
+    return valueStr.slice(this.get("selectionEnd"), valueStr.length);
+  }).volatile(),
+
   input(event) {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
