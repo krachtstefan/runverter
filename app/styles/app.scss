@@ -235,9 +235,9 @@ body{
   }
 
   .tools.container-pc .toolLine, .tools.container-lc .toolLine, .expertModeOn.container-pc .toolLine, .expertModeOn.container-lc .toolLine, .expertModeOn.container-rp .toolLine{
-    max-width: 200px;
+    max-width: 210px;
     @include respond-to("small"){
-      max-width: 350px;
+      max-width: 355px;
     }
     @include respond-to("medium"){
       max-width: inherit;
