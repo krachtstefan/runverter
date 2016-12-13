@@ -146,7 +146,7 @@ body{
     @include respond-to("small"){
       height: 84px;
     }
-    padding: 0px 6px 6px 6px;
+    padding: 0px 0px 6px 0px;
     border-top:none; border-left:none; border-right:none;
     &:focus{
       color:$color-main-text;
