@@ -116,7 +116,9 @@ export default OneWayTel.extend({
   // a click on this input field is always introduced by an focusIn event
   // select all on click works on iOS only if the focusIn event was NOT fired before
   click(event) {
-    if(this.get("isTouchDevice") === true) this.selectAll(event);
+    if(this.get("isTouchDevice") === true){
+      this.selectAll(event);
+    }
   },
 
   focusOut() {
