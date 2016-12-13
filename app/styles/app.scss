@@ -220,7 +220,7 @@ body{
   }
 
   .tools.container-pca .toolLine, .expertModeOn.container-pca .toolLine, .expertModeOn.container-sc .toolLine{
-    max-width: 280px;
+    max-width: 300px;
     @include respond-to("small"){
       max-width: 480px;
     }
