@@ -4,6 +4,22 @@ BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
   /**
+   * createdAt represents the creation date of the run, will be stored in database
+   * and should be set on create
+   */
+  createdAt: DS.attr('date', {
+    defaultValue() { return new Date(); }
+  }),
+
+  /**
+   * updatedAt represents the updating date of the run, will be stored in database
+   * and should be set on create on on every page visit
+   */
+  updatedAt: DS.attr('date', {
+    defaultValue() { return new Date(); }
+  }),
+
+  /**
    * MiToM the length of a mile in meters
    *
    * @type {BigNumber} length of a mile in meters
