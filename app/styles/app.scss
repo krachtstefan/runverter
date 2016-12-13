@@ -143,6 +143,7 @@ body{
     border-color:$color-form-border;
     background-color:$color-main-background;
     height:46px;
+    line-height: 46px; // for IE <= 10
     @include respond-to("small"){
       height: 84px;
     }
