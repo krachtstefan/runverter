@@ -10,6 +10,7 @@ export default Ember.Route.extend({
     }
     var self = this;
     return this.store.findRecord('run', "runverter").then(function(run) {
+      run.set("updatedAt", new Date());
       return run;
     }, function() {
       return self.store.createRecord('run', {
