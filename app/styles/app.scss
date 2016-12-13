@@ -68,7 +68,7 @@ body{
         background-size:contain;
         background-position:center;
         margin: 60px auto 0 auto;
-        width: 340px;
+        width: 342px;
         height: 60px;
       }
       &:hover{
@@ -81,7 +81,7 @@ body{
         @include transition(0.1s linear);
         @include respond-to("small"){
           margin-top:60px;
-          width: 310px;
+          width: 312px;
           height: 60px;
         }
       }
