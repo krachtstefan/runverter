@@ -10,6 +10,30 @@ test('run is a valid ember data Model', function(assert) {
   assert.ok(run instanceof DS.Model);
 });
 
+// createdAt
+test('createdAt is from type Date', function(assert) {
+  var run = this.subject();
+  assert.strictEqual(run.get("createdAt").constructor.name , "Date");
+});
+
+test('createdAt equals current date', function(assert) {
+  var run = this.subject();
+  var today = new Date();
+  assert.strictEqual(run.get("createdAt").toString() , today.toString());
+});
+
+// updatedAt
+test('updatedAt is from type Date', function(assert) {
+  var run = this.subject();
+  assert.strictEqual(run.get("createdAt").constructor.name , "Date");
+});
+
+test('updatedAt equals current date', function(assert) {
+  var run = this.subject();
+  var today = new Date();
+  assert.strictEqual(run.get("updatedAt").toString() , today.toString());
+});
+
 // timeSec
 test('timeSec property can not be negative', function(assert) {
   var run = this.subject({timeSec : new BigNumber(1800)});
