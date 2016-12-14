@@ -140,7 +140,10 @@
     padding-right: 25px !important;
   }
   .sod_list_wrapper{
-    width: 450px;
+    width: 290px;
+    @include respond-to("small"){
+      width: 460px;
+    }
   }
 
   &.sod_select:before,
