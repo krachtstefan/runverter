@@ -2,7 +2,7 @@
   <form class="uk-form uk-container-center">
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        {{t "tools.pca.distanceLabel"}}
+        <span>{{t "tools.pca.distanceLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerVisibleClass}}">
         {{#if showRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthKm}}</span>{{/if}}
@@ -17,7 +17,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        {{t "tools.pca.timeLabel"}}
+        <span>{{t "tools.pca.timeLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{timePickerVisibleClass}}">
         {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible title=tooltipTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible title=tooltipTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible title=tooltipTimeSec}} {{t "metrics.time.sec"}}
@@ -26,7 +26,7 @@
     </div>
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        {{t "tools.pca.paceLabel"}}
+        <span>{{t "tools.pca.paceLabel"}}</span>
       </div>
       <div class="uk-width-1-1 {{expertModeClass}}">
         {{#if showRunTempoMinKm}}{{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}}{{/if}}
