@@ -39,8 +39,7 @@
   .uk-container-center{
     position:relative; // needed for #close-imprint-page positioning
     background-color:$color-secondary-background; // make it untransparent, when content extends the 100% height
-    padding-bottom: 50px;
-    padding-top: 50px;
+    padding:50px;
     outline: 5px solid $color-overlay-border;
     margin-bottom: 5%;
   }
