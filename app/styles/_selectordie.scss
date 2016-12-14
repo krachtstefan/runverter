@@ -97,16 +97,39 @@
     width: 30px;
   }
   .sod_list_wrapper{
-    width: 350px;
+    width: 210px;
+    left: -100px;
+    @include respond-to("small"){
+      width: 350px;
+      left: -220px;
+    }
+    @include respond-to("medium"){
+      left: -180px;
+    }
+    @include respond-to("large"){
+      left: -110px;
+    }
   }
 }
+
 #target-time-pace-calc{
   width: 20px;
   @include respond-to("small"){
     width: 30px;
   }
   .sod_list_wrapper{
-    width: 285px;
+    width: 230px;
+    left: -190px;
+    @include respond-to("small"){
+      width: 285px;
+      left: -250px;
+    }
+    @include respond-to("medium"){
+      left: -240px;
+    }
+    @include respond-to("large"){
+      left: -190px;
+    }
   }
 }
 
