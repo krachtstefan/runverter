@@ -40,16 +40,10 @@
 .suggest-select{
   display: inline;
   .sod_label{
-    opacity: 1;
-    @include respond-to("small"){
-      opacity: 0;
-    }
+    opacity: 0;
   }
   .sod_select {
-    opacity: 1;
-    @include respond-to("small"){
-      opacity: 0;
-    }
+    opacity: 0;
     @include transition(0.25s ease-in-out);
     &.open{
       opacity: 1; // always visible when select is open
