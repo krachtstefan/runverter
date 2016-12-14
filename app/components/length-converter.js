@@ -5,6 +5,10 @@ export default Ember.Component.extend({
 
   races : Ember.inject.service('race'),
 
+  isTouchDevice : Ember.computed(function(){
+    return 'ontouchstart' in document.documentElement;
+  }),
+
   tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
@@ -21,16 +25,16 @@ export default Ember.Component.extend({
     return this.get("selectedMenuItem.key") === "lc" ? true : false;
   }),
 
-  racePickerKmVisibleClass: Ember.computed('racePickerKmVisible', function () {
-    return this.get("racePickerKmVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  racePickerKmVisibleClass: Ember.computed('isTouchDevice', function () {
+    return this.get("isTouchDevice") ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  racePickerMiVisibleClass: Ember.computed('racePickerMiVisible', function () {
-    return this.get("racePickerMiVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  racePickerMiVisibleClass: Ember.computed('isTouchDevice', function () {
+    return this.get("isTouchDevice") ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  racePickerMVisibleClass: Ember.computed('racePickerMVisible', function () {
-    return this.get("racePickerMVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  racePickerMVisibleClass: Ember.computed('isTouchDevice', function () {
+    return this.get("isTouchDevice") ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   expertModeClass : Ember.computed("expertMode", function(){
