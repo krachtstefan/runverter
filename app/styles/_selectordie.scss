@@ -50,7 +50,7 @@
     }
 
     background-position: center center;
-    background-size: 50%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-image: inline-image("suggest.svg");
     border:none;
@@ -87,9 +87,6 @@
 
 #race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m{
   width: 20px;
-  @include respond-to("small"){
-    width: 30px;
-  }
   .sod_list_wrapper{
     width: 210px;
     left: -100px;
@@ -108,9 +105,6 @@
 
 #target-time-pace-calc{
   width: 20px;
-  @include respond-to("small"){
-    width: 30px;
-  }
   .sod_list_wrapper{
     width: 230px;
     left: -190px;
