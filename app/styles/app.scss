@@ -131,10 +131,7 @@ body{
   }
 
   .uk-container-center{
-    padding:0 10px;
-    @include respond-to("xsmall"){
-      padding:0 25px;
-    }
+    padding:0;
   }
 
   .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
