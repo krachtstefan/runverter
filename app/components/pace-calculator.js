@@ -15,6 +15,10 @@ export default Ember.Component.extend({
   races : Ember.inject.service('race'),
   targetTimes : Ember.inject.service('target-time'),
 
+  isTouchDevice : Ember.computed(function(){
+    return 'ontouchstart' in document.documentElement;
+  }),
+
   targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
@@ -135,11 +139,11 @@ export default Ember.Component.extend({
   }),
 
   racePickerVisibleClass: Ember.computed('racePickerVisible', function () {
-    return this.get("racePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+    return this.get("racePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   timePickerVisibleClass: Ember.computed('timePickerVisible', function () {
-    return this.get("timePickerVisible") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   actions: {
