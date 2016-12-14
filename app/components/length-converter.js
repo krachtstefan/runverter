@@ -3,10 +3,6 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
-  racePickerKmVisible : false,
-  racePickerMiVisible : false,
-  racePickerMVisible : false,
-
   races : Ember.inject.service('race'),
 
   tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
