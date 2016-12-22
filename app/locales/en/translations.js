@@ -10,7 +10,8 @@ export default {
     'share' : 'Share with your running crew',
     'shareThanks' : 'Thank you ♡',
     'learnMore' : 'Learn more about runverter',
-    'feedback' : 'Tweet me your feedback'
+    'feedback' : 'Tweet me your feedback',
+    'imprint' : 'Imprint',
   },
   'tools' : {
     'pca' : {
