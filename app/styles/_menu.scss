@@ -142,7 +142,8 @@ ul.settings li>a:hover {
 #panel-language-en span::before,
 #panel-share::before,
 #panel-more::before,
-#panel-feedback::before{
+#panel-feedback::before,
+#panel-imprint::before{
   @include transition(0.25s ease-in-out);
   width: 20px;
   height: 20px;
@@ -215,7 +216,7 @@ ul.settings li>a:hover {
   background-image: inline-image("share.svg");
 }
 
-#panel-more::before{
+#panel-imprint::before{
   background-image: inline-image("imprint.svg");
 }
 
