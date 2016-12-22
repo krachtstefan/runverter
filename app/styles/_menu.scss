@@ -220,6 +220,10 @@ ul.settings li>a:hover {
   background-image: inline-image("imprint.svg");
 }
 
+#panel-more::before{
+  background-image: inline-image("more.svg");
+}
+
 #panel-feedback::before{
   background-image: inline-image("feedback.svg");
 }
