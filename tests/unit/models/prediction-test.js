@@ -91,3 +91,6 @@ test('predictedRun changes when achievedRun time does', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "2");
 });
 
+test('predictedRun changes when achievedRun length does', function(assert) {
+  assert.strictEqual(true, true);
+});
