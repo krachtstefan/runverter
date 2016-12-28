@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   },
 
   didRender: function(){
+    this._super(...arguments);
     // ensure selectOrDie update on language change
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie("update");
