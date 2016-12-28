@@ -55,3 +55,8 @@ test('predictedRun behaves like run model', function(assert) {
   });
   assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "4");
 });
+
+test('predictedRun has a default value', function(assert) {
+  var prediction = this.subject();
+  assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "0");
+});

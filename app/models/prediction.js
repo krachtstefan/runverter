@@ -3,6 +3,14 @@ import DS from 'ember-data';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
+  ready: function() {
+    this._super(...arguments);
+    this.set("predictedRun", this.store.createRecord('run',{
+      timeSec : new BigNumber(0),
+      lengthM : new BigNumber(0)
+    }));
+  },
+
   /**
    * achievedRun represents the achieved run, needed to calcuate the predicted run
    */
