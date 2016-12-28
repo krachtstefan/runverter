@@ -60,3 +60,18 @@ test('predictedRun has a default value', function(assert) {
   var prediction = this.subject();
   assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "0");
 });
+
+test('predictedRun changes when achievedRun was created', function(assert) {
+  var prediction = this.subject(), self = this;
+  var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
+  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
+  Ember.run(function(){
+    prediction.set('achievedRun',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(42195)
+      })
+    );
+  });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
+});
