@@ -75,3 +75,19 @@ test('predictedRun changes when achievedRun was created', function(assert) {
   });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
 });
+
+test('predictedRun changes when achievedRun time does', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.set('achievedRun',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(42195)
+      })
+    );
+  });
+  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "3600");
+  Ember.run(function(){ prediction.set('achievedRun.timeSec', 2); });
+  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "2");
+});
+
