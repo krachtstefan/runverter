@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-// import Ember from 'ember';
+import Ember from 'ember';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -19,6 +19,14 @@ export default DS.Model.extend({
   /**
    * predictedRun represents the predicted run, calculated from achieved run
    */
-  predictedRun: DS.belongsTo('run')
+  predictedRun: DS.belongsTo('run'),
+
+  /**
+   * update predictedRun on achievedRun change
+   */
+  onAchievedRunChange : Ember.observer("achievedRun", "achievedRun.timeSec", "achievedRun.lengthM", function() {
+    this.get("achievedRun.timeSec");
+    this.get("predictedRun").set("timeSec", this.get("achievedRun.timeSec"));
+  }),
 
 });
