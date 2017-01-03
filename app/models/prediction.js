@@ -30,6 +30,23 @@ export default DS.Model.extend({
   }),
 
   /**
+   * Peter Riegels mathematical formula for predicting race times for runners and other athletes given
+   * a certain performance at another distance T2=T1×(D2÷D1)^1.06
+   *
+   * @param {BigNumber} d1 distance over which the initial time is achieved
+   * @param {BigNumber} d2 distance for which the time is to be predicted.
+   * @param {BigNumber} t1 is the time achieved for d1
+   */
+  peterRiegelMethod : function(d1, d2, t1){
+    d1 = this._ensureBigNumber(d1);
+    d2 = this._ensureBigNumber(d2);
+    t1 = this._ensureBigNumber(t1);
+
+    var test = String(Math.pow(d2.dividedBy(d1).toNumber(), 1.06));
+    return t1.times(new BigNumber(test));
+  },
+
+  /**
    * will convert the input to BigNumber if necessary. If input is BigNumber already
    * it will be left unchanged. This method is handy for setter methods of this class.
    * Setter may be called from user input (string) or other methods of this class which
