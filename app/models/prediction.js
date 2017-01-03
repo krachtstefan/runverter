@@ -41,6 +41,20 @@ export default DS.Model.extend({
    */
   _ensureBigNumber : function(input){
     return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
+  },
+
+  /**
+   * will convert the input to Decimal if necessary. If input is Decimal already
+   * it will be left unchanged. This method is handy for setter methods of this class.
+   * Setter may be called from user input (string) or other methods of this class which
+   * already provide Decimal. In the second case, it is important to keep the Decimal
+   * type to prevent precision loss
+   *
+   * @param  {Decimal|string|number} input  any number like input
+   * @return {Decimal} output instance of Decimal
+   */
+  _ensureDecimal : function(input){
+    return (input instanceof Decimal) ? input : new Decimal(+input || 0);
   }
 
 });
