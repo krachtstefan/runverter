@@ -4,6 +4,7 @@
     "window",
     "-Promise",
     "BigNumber",
+    "Decimal",
     "ga"
   ],
   "browser": true,
