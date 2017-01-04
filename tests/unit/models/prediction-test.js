@@ -117,3 +117,9 @@ test('peterRiegelMethod will predict the same time if input and output length ar
   var prediction = this.subject();
   assert.strictEqual(prediction.peterRiegelMethod("1.2345", "1.2345", "5.6789" ).toString(), "5.6789");
 });
+
+test('peterRiegelMethod works (with String)', function(assert) {
+  var prediction = this.subject();
+  // 1 mi in 0:08:15, 5 mi? = 45:26
+  assert.strictEqual(prediction.peterRiegelMethod("1.609344", "8.04672", "8.25" ).toString(), "45.432031118731957482"); // 45.43203111873195748203
+});
