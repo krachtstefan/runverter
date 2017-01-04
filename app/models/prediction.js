@@ -45,13 +45,6 @@ export default DS.Model.extend({
   },
 
   /**
-   * peterRiegelMethod in vanilla js
-   */
-  peterRiegelMethodVanilla : function(e,n,t){
-    return t*Math.pow(n/e,1.06);
-  },
-
-  /**
    * will convert the input to BigNumber if necessary. If input is BigNumber already
    * it will be left unchanged. This method is handy for setter methods of this class.
    * Setter may be called from user input (string) or other methods of this class which

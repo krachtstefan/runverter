@@ -100,8 +100,3 @@ test('test peterRiegelMethod', function(assert) {
   var prediction = this.subject();
   assert.strictEqual(prediction.peterRiegelMethod(10, 20, 50).toString(), "104.2465760841121391"); // 1:44:15
 });
-
-test('test peterRiegelMethodVanilla', function(assert) {
-  var prediction = this.subject();
-  assert.strictEqual(prediction.peterRiegelMethodVanilla(10, 20, 50).toString(), "104.24657608411214"); // 1:44:15
-});
