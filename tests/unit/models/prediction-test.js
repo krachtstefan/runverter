@@ -145,6 +145,29 @@ test('predictedRun works with a marathon example', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
 });
 
+
+test('predictedRun works with a when defining the run with lengthKm and timeMin setter', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.set('achievedRun',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    prediction.setProperties({
+      "achievedRun.lengthKm" : new BigNumber(42.195),
+      "achievedRun.timeMin" : new BigNumber(44).div(60).plus(206),
+      "predictedRun.lengthKm" : new BigNumber(21.0975)
+    });
+  });
+
+  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
+
 // peterRiegelMethod
 test('peterRiegelMethod works (with integers)', function(assert) {
   var prediction = this.subject();
