@@ -38,12 +38,10 @@ export default DS.Model.extend({
    * @param {BigNumber} t1 is the time achieved for d1
    */
   peterRiegelMethod : function(d1, d2, t1){
-    d1 = this._ensureBigNumber(d1);
-    d2 = this._ensureBigNumber(d2);
-    t1 = this._ensureBigNumber(t1);
-
-    var test = String(Math.pow(d2.dividedBy(d1).toNumber(), 1.06));
-    return t1.times(new BigNumber(test));
+    d1 = this._ensureDecimal(d1);
+    d2 = this._ensureDecimal(d2);
+    t1 = this._ensureDecimal(t1);
+    return t1.times(d2.dividedBy(d1).pow(1.06));
   },
 
   /**
