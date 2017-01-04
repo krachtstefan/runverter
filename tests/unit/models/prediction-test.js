@@ -115,21 +115,6 @@ test('predictedRun works with a 10k example', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "15");
 });
 
-test('predictedRun works with a marathon example', function(assert) {
-  var prediction = this.subject(), self = this;
-  Ember.run(function(){
-    prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) }),
-      "predictedRun.lengthM" : new BigNumber(21097.5)
-    });
-  });
-
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
-  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
-  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
-  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
-});
-
 test('predictedRun works with a mile example', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
@@ -145,11 +130,32 @@ test('predictedRun works with a mile example', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "26");
 });
 
+test('predictedRun works with a marathon example', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) }),
+      "predictedRun.lengthM" : new BigNumber(21097.5)
+    });
+  });
+
+  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
+
 // peterRiegelMethod
 test('peterRiegelMethod works (with integers)', function(assert) {
   var prediction = this.subject();
   // 10k in 50 minutes, 20k? = 1:44:15
   assert.strictEqual(prediction.peterRiegelMethod(10, 20, 50).toString(), "104.2465760841121391"); // 104.2465760841121390955
+});
+
+test('peterRiegelMethod works (with String)', function(assert) {
+  var prediction = this.subject();
+  // 1 mi in 0:08:15, 5 mi? = 45:26
+  assert.strictEqual(prediction.peterRiegelMethod("1.609344", "8.04672", "8.25" ).toString(), "45.432031118731957482"); // 45.43203111873195748203
 });
 
 test('peterRiegelMethod works (with BigNumber)', function(assert) {
@@ -161,10 +167,4 @@ test('peterRiegelMethod works (with BigNumber)', function(assert) {
 test('peterRiegelMethod will predict the same time if input and output length are equal ', function(assert) {
   var prediction = this.subject();
   assert.strictEqual(prediction.peterRiegelMethod("1.2345", "1.2345", "5.6789" ).toString(), "5.6789");
-});
-
-test('peterRiegelMethod works (with String)', function(assert) {
-  var prediction = this.subject();
-  // 1 mi in 0:08:15, 5 mi? = 45:26
-  assert.strictEqual(prediction.peterRiegelMethod("1.609344", "8.04672", "8.25" ).toString(), "45.432031118731957482"); // 45.43203111873195748203
 });
