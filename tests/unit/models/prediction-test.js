@@ -113,5 +113,3 @@ test('peterRiegelMethod works (with String)', function(assert) {
   // 1 mi in 0:08:15, 5 mi? = 45:26
   assert.strictEqual(prediction.peterRiegelMethod("1.609344", "8.04672", "8.25" ).toString(), "45.432031118731957482"); // 45.43203111873195748203
 });
-
-// test bignumbers
