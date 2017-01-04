@@ -96,7 +96,22 @@ test('predictedRun changes when achievedRun length does', function(assert) {
 });
 
 // peterRiegelMethod
-test('test peterRiegelMethod', function(assert) {
+test('peterRiegelMethod works (with integers)', function(assert) {
   var prediction = this.subject();
-  assert.strictEqual(prediction.peterRiegelMethod(10, 20, 50).toString(), "104.2465760841121391"); // 1:44:15
+  // 10k in 50 minutes, 20k? = 1:44:15
+  assert.strictEqual(prediction.peterRiegelMethod(10, 20, 50).toString(), "104.2465760841121391"); // 104.2465760841121390955
 });
+
+test('peterRiegelMethod works (with BigNumber)', function(assert) {
+  var prediction = this.subject();
+  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  assert.strictEqual(prediction.peterRiegelMethod(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(44).div(60).plus(206)).toString(), "99.155934467588156066"); // 99.15593446758816246001 (does not match precisely but good enoguh)
+});
+
+test('peterRiegelMethod works (with String)', function(assert) {
+  var prediction = this.subject();
+  // 1 mi in 0:08:15, 5 mi? = 45:26
+  assert.strictEqual(prediction.peterRiegelMethod("1.609344", "8.04672", "8.25" ).toString(), "45.432031118731957482"); // 45.43203111873195748203
+});
+
+// test bignumbers
