@@ -66,12 +66,10 @@ test('predictedRun changes when achievedRun was created', function(assert) {
   var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
   assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
   Ember.run(function(){
-    prediction.set('achievedRun',
-      self.store().createRecord('run',{
-        timeSec : new BigNumber(3600),
-        lengthM : new BigNumber(42195)
-      })
-    );
+    prediction.setProperties({
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
+      "predictedRun.lengthM" : new BigNumber(20000)
+    });
   });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
 });
@@ -79,20 +77,27 @@ test('predictedRun changes when achievedRun was created', function(assert) {
 test('predictedRun changes when achievedRun time does', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
-    prediction.set('achievedRun',
-      self.store().createRecord('run',{
-        timeSec : new BigNumber(3600),
-        lengthM : new BigNumber(42195)
-      })
-    );
+    prediction.setProperties({
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
+      "predictedRun.lengthM" : new BigNumber(20000)
+    });
   });
-  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "3600");
-  Ember.run(function(){ prediction.set('achievedRun.timeSec', 2); });
-  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "2");
+  var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
+  Ember.run(function(){ prediction.set('achievedRun.timeSec', 3060); });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
-test('predictedRun changes when achievedRun length does', function(assert) {
-  assert.strictEqual(true, true);
+test('predictedRun changes when achievedRun time does', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
+      "predictedRun.lengthM" : new BigNumber(20000)
+    });
+  });
+  var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
+  Ember.run(function(){ prediction.set('achievedRun.lengthM', 20000); });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
 // peterRiegelMethod
