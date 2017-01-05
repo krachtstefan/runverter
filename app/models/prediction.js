@@ -33,9 +33,10 @@ export default DS.Model.extend({
    * Peter Riegels mathematical formula for predicting race times for runners and other athletes given
    * a certain performance at another distance T2=T1×(D2÷D1)^1.06
    *
-   * @param {BigNumber} d1 distance over which the initial time is achieved
-   * @param {BigNumber} d2 distance for which the time is to be predicted.
-   * @param {BigNumber} t1 is the time achieved for d1
+   * @param {Decimal} d1 distance over which the initial time is achieved
+   * @param {Decimal} d2 distance for which the time is to be predicted.
+   * @param {Decimal} t1 is the time achieved for d1
+   * @return {Decimal} predicted time
    */
   peterRiegelMethod : function(d1, d2, t1){
     d1 = this._ensureDecimal(d1);
