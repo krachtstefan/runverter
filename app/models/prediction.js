@@ -45,20 +45,6 @@ export default DS.Model.extend({
   },
 
   /**
-   * will convert the input to BigNumber if necessary. If input is BigNumber already
-   * it will be left unchanged. This method is handy for setter methods of this class.
-   * Setter may be called from user input (string) or other methods of this class which
-   * already provide Bignumber. In the second case, it is important to keep the BigNumber
-   * type to prevent precision loss
-   *
-   * @param  {BigNumber|string|number} input  any number like input
-   * @return {BigNumber} output instance of BigNumber
-   */
-  _ensureBigNumber : function(input){
-    return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
-  },
-
-  /**
    * will convert the input to Decimal if necessary. If input is Decimal already
    * it will be left unchanged. This method is handy for setter methods of this class.
    * Setter may be called from user input (string) or other methods of this class which
