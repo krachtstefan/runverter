@@ -147,14 +147,8 @@ test('predictedRun works with a marathon example', function(assert) {
 
 
 test('predictedRun works when the run is definied with lengthKm and timeMin setter', function(assert) {
-  var prediction = this.subject(), self = this;
+  var prediction = this.subject();
   Ember.run(function(){
-    prediction.set('achievedRun',
-      self.store().createRecord('run',{
-        timeSec : new BigNumber(3600*4),
-        lengthM : new BigNumber(42195)
-      })
-    );
     prediction.setProperties({
       "achievedRun.lengthKm" : new BigNumber(42.195),
       "achievedRun.timeMin" : new BigNumber(44).div(60).plus(206),
