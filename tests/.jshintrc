@@ -24,7 +24,8 @@
     "currentPath",
     "currentRouteName",
     "require",
-    "BigNumber"
+    "BigNumber",
+    "Decimal"
   ],
   "node": false,
   "browser": false,
