@@ -5,10 +5,10 @@ export default DS.Model.extend({
 
   ready: function() {
     this._super(...arguments);
-    this.set("predictedRun", this.store.createRecord('run',{
-      timeSec : new BigNumber(0),
-      lengthM : new BigNumber(0)
-    }));
+    this.setProperties({
+      "predictedRun" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}),
+      "achievedRun" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)})
+    });
   },
 
   /**
