@@ -191,3 +191,35 @@ test('peterRiegelMethod will predict the same time if input and output length ar
   var prediction = this.subject();
   assert.strictEqual(prediction.peterRiegelMethod("1.2345", "1.2345", "5.6789" ).toString(), "5.6789");
 });
+
+// private helper methods
+test('_ensureDecimal can handle numeric strings', function(assert) {
+  var ensureDecimal = this.subject()._ensureDecimal("1");
+  assert.strictEqual(ensureDecimal instanceof Decimal, true);
+  assert.strictEqual(ensureDecimal.toString(), "1");
+
+  ensureDecimal = this.subject()._ensureDecimal("1.1");
+  assert.strictEqual(ensureDecimal instanceof Decimal, true);
+  assert.strictEqual(ensureDecimal.toString(), "1.1");
+});
+
+test('_ensureDecimal can handle floats', function(assert) {
+  var ensureDecimal = this.subject()._ensureDecimal(1.1);
+  assert.strictEqual(ensureDecimal instanceof Decimal, true);
+  assert.strictEqual(ensureDecimal.toString(), "1.1");
+});
+
+test('_ensureDecimal will leave Decimal input unchanged', function(assert) {
+  var bigNumber = new Decimal(1.23456);
+  var ensureDecimal = this.subject()._ensureDecimal(bigNumber);
+  assert.strictEqual(ensureDecimal instanceof Decimal, true);
+  assert.strictEqual(ensureDecimal.toString(), "1.23456");
+  assert.strictEqual(ensureDecimal, bigNumber);
+});
+
+test('_ensureDecimal will treat non numeric input as 0', function(assert) {
+  var ensureDecimal = this.subject()._ensureDecimal("dumb user input from a random hacker kid");
+  assert.strictEqual(ensureDecimal instanceof Decimal, true);
+  assert.strictEqual(ensureDecimal.toString(), "0");
+});
+
