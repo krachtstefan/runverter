@@ -34,6 +34,11 @@ test('achievedRun behaves like run model', function(assert) {
   assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "4");
 });
 
+test('achievedRun has a default value', function(assert) {
+  var prediction = this.subject();
+  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
+});
+
 // predictedRun
 test('predictedRun is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
