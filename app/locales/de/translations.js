@@ -33,7 +33,7 @@ export default {
     },
     'lc' : {
       'name' : 'Längen-Umrechner',
-      'label' : 'Das ist der ',
+      'label' : 'Das ist der',
       'description' : 'Hier findest du die wichtigsten Längenangaben. Und ja, die Länge ist entscheidend.',
       'kmLabel' : 'Eine Strecke von',
       'miLabel' : 'entspricht',
