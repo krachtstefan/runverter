@@ -41,8 +41,8 @@ export default {
     },
     'rp' : {
       'name' : 'Race Predictor',
-      'label' : 'This space is reserved for the',
-      'description' : 'Not quite ready yet...'
+      'label' : 'Get ready for the',
+      'description' : 'Use a previous race result to estimate an upcomming one.'
     },
     'sc' : {
       'name' : 'Split Time Calculator',

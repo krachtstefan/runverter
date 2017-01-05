@@ -41,8 +41,8 @@ export default {
     },
     'rp' : {
       'name' : 'Wettkampfprognose',
-      'label' : 'Dieser Platz ist reserviert für die',
-      'description' : 'Noch nicht ganz fertig...'
+      'label' : 'Zeit für eine',
+      'description' : 'Nutze ein vorhandenes Rennergebnis um dein nächstes Rennen zu prognostizieren.'
     },
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',
