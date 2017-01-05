@@ -192,6 +192,11 @@ test('peterRiegelMethod will predict the same time if input and output length ar
   assert.strictEqual(prediction.peterRiegelMethod("1.2345", "1.2345", "5.6789" ).toString(), "5.6789");
 });
 
+test('peterRiegelMethod will handle division by zero', function(assert) {
+  var prediction = this.subject();
+  assert.strictEqual(prediction.peterRiegelMethod("0", "1234", "5678" ).toString(), "0");
+});
+
 // private helper methods
 test('_ensureDecimal can handle numeric strings', function(assert) {
   var ensureDecimal = this.subject()._ensureDecimal("1");
