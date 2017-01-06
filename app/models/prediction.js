@@ -46,6 +46,22 @@ export default DS.Model.extend({
   },
 
   /**
+   * Reverse function of the Peter Riegel method to estimate the the time of an archieved run based
+   * on the predicted run
+   *
+   * @param {Decimal} d1 distance over which the initial time is achieved
+   * @param {Decimal} d2 distance for which the time is to be predicted.
+   * @param {Decimal} t2 is the time predicted for d2
+   * @return {Decimal} predicted time
+   */
+  peterRiegelMethodReversed : function(d1, d2, t2){
+    d1 = this._ensureDecimal(d1);
+    d2 = this._ensureDecimal(d2);
+    t2 = this._ensureDecimal(t2);
+    return d1.isZero() ? d1 : t2.dividedBy(d2.dividedBy(d1).pow(1.06));
+  },
+
+  /**
    * will convert the input to Decimal if necessary. If input is Decimal already
    * it will be left unchanged. This method is handy for setter methods of this class.
    * Setter may be called from user input (string) or other methods of this class which
