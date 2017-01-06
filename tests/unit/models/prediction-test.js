@@ -200,19 +200,19 @@ test('peterRiegelMethod will handle division by zero', function(assert) {
 test('peterRiegelMethodReversed works (with integers)', function(assert) {
   var prediction = this.subject();
   // 10k in 50 minutes, 20k? = 1:44:15
-  assert.strictEqual(prediction.peterRiegelMethodReversed(10, 20, 104.25).toString(), "50.001642219829406336"); // 50.00164221982940633565
+  assert.strictEqual(prediction.peterRiegelMethodReversed(10, 20, 6255).toString(), "3000.0985331897643802"); // 3000.098533189764380139 (does not match precisely but good enough)
 });
 
 test('peterRiegelMethodReversed works (with String)', function(assert) {
   var prediction = this.subject();
   // 1 mi in 0:08:15, 5 mi? = 45:26
-  assert.strictEqual(prediction.peterRiegelMethodReversed("1.609344", "8.04672", new BigNumber(26).div(60).plus(45)).toString(), "8.2502364690769216731"); // 8.250236469076922278399 (does not match precisely but good enough)
+  assert.strictEqual(prediction.peterRiegelMethodReversed("1.609344", "8.04672", "2715").toString(), "493.01669875738468054"); // 493.0166987573846805397
 });
 
 test('peterRiegelMethodReversed works (with BigNumbers)', function(assert) {
   var prediction = this.subject();
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
-  assert.strictEqual(prediction.peterRiegelMethodReversed(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(10).div(60).plus(99)).toString(), "206.75570923348908282"); // 206.7557092334890758727 (does not match precisely but good enough)
+  // Marathon in 3:26:44, Half Marathon? = 1:39:10
+  assert.strictEqual(prediction.peterRiegelMethodReversed(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(5950)).toString(), "12405.342554009344552"); // 12405.34255400934455236
 });
 
 // private helper methods
