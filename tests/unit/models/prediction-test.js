@@ -144,7 +144,7 @@ test('predictedRun works with a marathon example', function(assert) {
     });
   });
 
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
   assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
   assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
@@ -161,7 +161,7 @@ test('predictedRun works when the run is definied with lengthKm and timeMin sett
     });
   });
 
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
   assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
   assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
@@ -182,7 +182,7 @@ test('peterRiegelMethod works (with Strings)', function(assert) {
 
 test('peterRiegelMethod works (with BigNumbers)', function(assert) {
   var prediction = this.subject();
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10 (runcalc.net says 1:39:09 but it's not rounded properly)
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
   assert.strictEqual(prediction.peterRiegelMethod(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(12404)).toString(), "5949.3560680552897476"); // 5949.3560680552897476
 });
 
@@ -211,8 +211,8 @@ test('peterRiegelMethodReversed works (with String)', function(assert) {
 
 test('peterRiegelMethodReversed works (with BigNumbers)', function(assert) {
   var prediction = this.subject();
-  // Marathon in 3:26:44, Half Marathon? = 1:39:10
-  assert.strictEqual(prediction.peterRiegelMethodReversed(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(5950)).toString(), "12405.342554009344552"); // 12405.34255400934455236
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
+  assert.strictEqual(prediction.peterRiegelMethodReversed(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(5949)).toString(), "12403.257622487662309"); // 12403.25762248766230958 (does not match precisely but good enough)
 });
 
 // private helper methods
