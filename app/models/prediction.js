@@ -24,9 +24,9 @@ export default DS.Model.extend({
   /**
    * update predictedRun on achievedRun change
    */
-  onAchievedRunChange : Ember.observer("achievedRun", "achievedRun.timeSec", "achievedRun.lengthM", function() {
     var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
     this.get("predictedRun").set("timeSec", predictedSeconds.toSignificantDigits(15)); // needs to be converted to 15 significant digits to be compatible to BigNumber
+  onAchievedRunChange : Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", function() {
   }),
 
   /**
