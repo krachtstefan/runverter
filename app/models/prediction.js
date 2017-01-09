@@ -6,7 +6,7 @@ export default DS.Model.extend({
   ready: function() {
     this._super(...arguments);
     this.setProperties({
-      "predictedRun" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}),
+      "predictedRunRaw" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}),
       "achievedRunRaw" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)})
     });
   },
@@ -46,9 +46,38 @@ export default DS.Model.extend({
   }),
 
   /**
-   * predictedRunRaw represents the predicted run, calculated from achieved run
+   * predictedRunRaw represents the predicted run and is calculated from achieved run
+   * changing the predicted run will also effect the achieved run
    */
-  predictedRun: DS.belongsTo('run'),
+  predictedRunRaw: DS.belongsTo('run'),
+
+  /**
+   * predictedRun is a proxy to predictedRunRaw to handle dependencies with
+   * using Ember.observer would end in an infinite loop
+   */
+  predictedRun : Ember.computed("predictedRun.timeSec", "predictedRun.lengthM" ,{
+
+    /**
+     * returns predictedRun
+     *
+     * @return {Run}
+     */
+    get: function() {
+      return this.get("predictedRunRaw");
+    },
+
+    /**
+     * sets a new predictedRun and updates the achieved run
+     *
+     * @param  {string} propertyName name of the changed property, always "predictedRun"
+     * @param  {Run} value new predictedRun value
+     * @return {Run} new predictedRun value
+     */
+    set: function(propertyName, value) {
+      this.set("predictedRunRaw", value);
+      return this.get("predictedRun");
+    }
+  }),
 
   /**
    * update predictedRun on achievedRun change
