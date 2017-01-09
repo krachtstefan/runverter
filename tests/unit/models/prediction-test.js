@@ -74,8 +74,8 @@ test('predictedRun changes when achievedRun was created', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
-      "predictedRun.lengthM" : new BigNumber(20000)
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
@@ -85,12 +85,12 @@ test('predictedRun changes when achievedRun time does', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
-      "predictedRun.lengthM" : new BigNumber(20000)
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-  Ember.run(function(){ prediction.set('achievedRun.timeSec', 3060); });
+  Ember.run(function(){ prediction.set('achievedRun', { timeSec : 3060 }); });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
@@ -103,7 +103,7 @@ test('predictedRun changes when achievedRun length does', function(assert) {
     });
   });
   var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-  Ember.run(function(){ prediction.set('achievedRun.lengthM', 20000); });
+  Ember.run(function(){ prediction.set('achievedRun', { lengthM : 20000 }); });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
@@ -111,8 +111,8 @@ test('predictedRun works with a 10k example', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
-      "predictedRun.lengthM" : new BigNumber(20000)
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
 
@@ -126,8 +126,8 @@ test('predictedRun works with a mile example', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) }),
-      "predictedRun.lengthM" : new BigNumber(8046.72)
+      "predictedRun.lengthM" : new BigNumber(8046.72),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) })
     });
   });
 
@@ -141,8 +141,8 @@ test('predictedRun works with a marathon example', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) }),
-      "predictedRun.lengthM" : new BigNumber(21097.5)
+      "predictedRun.lengthM" : new BigNumber(21097.5),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) })
     });
   });
 
@@ -157,9 +157,8 @@ test('predictedRun works when the run is definied with lengthKm and timeMin sett
   var prediction = this.subject();
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun.lengthKm" : new BigNumber(42.195),
-      "achievedRun.timeMin" : new BigNumber(44).div(60).plus(206),
-      "predictedRun.lengthKm" : new BigNumber(21.0975)
+      "predictedRun" : { lengthKm : new BigNumber(21.0975) },
+      "achievedRun" : { lengthKm : new BigNumber(42.195), timeMin : new BigNumber(44).div(60).plus(206) },
     });
   });
 
