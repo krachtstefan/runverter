@@ -12,15 +12,16 @@ test('prediction is a valid ember data Model', function(assert) {
   assert.ok(prediction instanceof DS.Model);
 });
 
-// achievedRun
-test('achievedRun is a relation to run model', function(assert) {
+// achievedRunRaw
+test('achievedRunRaw is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
-  const relationship = Ember.get(prediction, 'relationshipsByName').get('achievedRun');
-  assert.equal(relationship.key, 'achievedRun');
+  const relationship = Ember.get(prediction, 'relationshipsByName').get('achievedRunRaw');
+  assert.equal(relationship.key, 'achievedRunRaw');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'run');
 });
 
+// achievedRun
 test('achievedRun behaves like run model', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
