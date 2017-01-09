@@ -94,7 +94,7 @@ test('predictedRun changes when achievedRun time does', function(assert) {
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
-test('predictedRun changes when achievedRun time does', function(assert) {
+test('predictedRun changes when achievedRun length does', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
