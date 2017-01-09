@@ -74,12 +74,16 @@ export default DS.Model.extend({
      * sets a new predictedRun and updates the achieved run
      *
      * @param  {string} propertyName name of the changed property, always "predictedRun"
-     * @param  {Run} value new predictedRun value
+     * @param  {Run|Object} value new predictedRun value, either defined by a new run object or a hash of properties to change
      * @return {Run} new predictedRun value
      */
     set: function(propertyName, value) {
-      this.set("predictedRunRaw", value);
-      return this.get("predictedRun");
+      if(typeof value === "object" && value.constructor.name === "Object"){
+        this.get("predictedRunRaw").setProperties(value);
+      }else{
+        this.set("predictedRunRaw", value);
+      }
+      return this.get("predictedRunRaw");
     }
   }),
 
