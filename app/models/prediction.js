@@ -45,6 +45,8 @@ export default DS.Model.extend({
       }else{
         this.set("achievedRunRaw", value);
       }
+      var predictedSeconds = this.peterRiegelMethod(this.get("achievedRunRaw.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRunRaw.timeSec"));
+      this.set("predictedRun", {timeSec : predictedSeconds.toSignificantDigits(15)}); // needs to be converted to 15 significant digits to be compatible to BigNumber
       return this.get("achievedRunRaw");
     }
   }),
