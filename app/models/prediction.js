@@ -18,7 +18,7 @@ export default DS.Model.extend({
   achievedRunRaw: DS.belongsTo('run'),
 
   /**
-   * achievedRun is a proxy to achievedRunRaw to handle dependencies with
+   * achievedRun is a proxy to achievedRunRaw to handle dependencies with predictedRun
    * using Ember.observer would end in an infinite loop
    */
   achievedRun : Ember.computed("achievedRunRaw.timeSec", "achievedRunRaw.lengthM" ,{
@@ -52,7 +52,7 @@ export default DS.Model.extend({
   predictedRunRaw: DS.belongsTo('run'),
 
   /**
-   * predictedRun is a proxy to predictedRunRaw to handle dependencies with
+   * predictedRun is a proxy to predictedRunRaw to handle dependencies with achievedRun
    * using Ember.observer would end in an infinite loop
    */
   predictedRun : Ember.computed("predictedRun.timeSec", "predictedRun.lengthM" ,{
