@@ -12,13 +12,14 @@ export default DS.Model.extend({
   },
 
   /**
-   * achievedRunRaw represents the achieved run, needed to calcuate the predicted run
+   * achievedRunRaw represents the achieved run and is needed to calcuate the predicted run,
+   * changing the predicted run will also effect the achieved run
    */
   achievedRunRaw: DS.belongsTo('run'),
 
   /**
    * achievedRun is a proxy to achievedRunRaw to handle dependencies with
-   * (observer would end in an endless loop)
+   * using Ember.observer would end in an infinite loop
    */
   achievedRun : Ember.computed("achievedRunRaw.timeSec", "achievedRunRaw.lengthM" ,{
 
