@@ -32,18 +32,6 @@ export default DS.Model.extend({
   }),
 
   /**
-   * update achievedRun on predictedRun change
-   */
-  onPredictedRunChange : Ember.observer("predictedRun.timeSec", "predictedRun.lengthM", function() {
-    Ember.run.once(this, function() {
-      var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("predictedRun.timeSec"));
-      console.log(achievedSeconds);
-      // INFINITE LOOP :(
-      // this.set("achievedRun.timeSec", achievedSeconds.toSignificantDigits(15)); // needs to be converted to 15 significant digits to be compatible to BigNumber
-    });
-  }),
-
-  /**
    * Peter Riegels mathematical formula for predicting race times for runners and other athletes given
    * a certain performance at another distance T2=T1×(D2÷D1)^1.06
    *
