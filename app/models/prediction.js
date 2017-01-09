@@ -7,17 +7,45 @@ export default DS.Model.extend({
     this._super(...arguments);
     this.setProperties({
       "predictedRun" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}),
-      "achievedRun" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)})
+      "achievedRunRaw" : this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)})
     });
   },
 
   /**
-   * achievedRun represents the achieved run, needed to calcuate the predicted run
+   * achievedRunRaw represents the achieved run, needed to calcuate the predicted run
    */
-  achievedRun: DS.belongsTo('run'),
+  achievedRunRaw: DS.belongsTo('run'),
 
   /**
-   * predictedRun represents the predicted run, calculated from achieved run
+   * achievedRun is a proxy to achievedRunRaw to handle dependencies with
+   * (observer would end in an endless loop)
+   */
+  achievedRun : Ember.computed("achievedRunRaw.timeSec", "achievedRunRaw.lengthM" ,{
+
+    /**
+     * returns achievedRun
+     *
+     * @return {Run}
+     */
+    get: function() {
+      return this.get("achievedRunRaw");
+    },
+
+    /**
+     * sets a new achievedRun and updates the predicted run
+     *
+     * @param  {string} propertyName name of the changed property, always "achievedRun"
+     * @param  {Run} value new achievedRun value
+     * @return {Run} new achievedRun value
+     */
+    set: function(propertyName, value) {
+      this.set("achievedRunRaw", value);
+      return this.get("achievedRunRaw");
+    }
+  }),
+
+  /**
+   * predictedRunRaw represents the predicted run, calculated from achieved run
    */
   predictedRun: DS.belongsTo('run'),
 
