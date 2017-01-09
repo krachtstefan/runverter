@@ -40,15 +40,16 @@ test('achievedRun has a default value', function(assert) {
   assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
 });
 
-// predictedRun
-test('predictedRun is a relation to run model', function(assert) {
+// predictedRunRaw
+test('predictedRunRaw is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
-  const relationship = Ember.get(prediction, 'relationshipsByName').get('predictedRun');
-  assert.equal(relationship.key, 'predictedRun');
+  const relationship = Ember.get(prediction, 'relationshipsByName').get('predictedRunRaw');
+  assert.equal(relationship.key, 'predictedRunRaw');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'run');
 });
 
+// predictedRun
 test('predictedRun behaves like run model', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
