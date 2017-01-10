@@ -40,6 +40,15 @@ test('achievedRun has a default value', function(assert) {
   assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
 });
 
+test('achievedRun can be changed with a hash', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set('achievedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
+  });
+  assert.strictEqual(prediction.get("achievedRun.timeSec").toString(), "1234");
+  assert.strictEqual(prediction.get("achievedRun.lengthM").toString(), "12");
+});
+
 // predictedRunRaw
 test('predictedRunRaw is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
