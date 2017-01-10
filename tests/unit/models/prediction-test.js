@@ -79,8 +79,8 @@ test('predictedRun changes when achievedRun length does', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
     prediction.setProperties({
-      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
-      "predictedRun.lengthM" : new BigNumber(20000)
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
