@@ -42,7 +42,11 @@ export default {
     'rp' : {
       'name' : 'Wettkampfprognose',
       'label' : 'Zeit für eine',
-      'description' : 'Nutze ein vorhandenes Rennergebnis um dein nächstes Rennen zu prognostizieren.'
+      'description' : 'Nutze ein vorhandenes Rennergebnis um dein nächstes Rennen zu prognostizieren.',
+      'achievedRunLabel' : 'Eine Lauf von',
+      'achievedTimeLabel' : 'in',
+      'predictedRunLabel' : 'ermöglicht dir ein Rennen von',
+      'predictrdTimeLabel' : 'in'
     },
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',

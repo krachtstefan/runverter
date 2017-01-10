@@ -42,7 +42,11 @@ export default {
     'rp' : {
       'name' : 'Race Predictor',
       'label' : 'Get ready for the',
-      'description' : 'Use a previous race result to estimate an upcomming one.'
+      'description' : 'Use a previous race result to estimate an upcomming one.',
+      'achievedRunLabel' : 'Running',
+      'achievedTimeLabel' : 'in',
+      'predictedRunLabel' : 'enables you to run a race of',
+      'predictrdTimeLabel' : 'in'
     },
     'sc' : {
       'name' : 'Split Time Calculator',
