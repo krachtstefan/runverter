@@ -12,43 +12,6 @@ test('prediction is a valid ember data Model', function(assert) {
   assert.ok(prediction instanceof DS.Model);
 });
 
-// achievedRunRaw
-test('achievedRunRaw is a relation to run model', function(assert) {
-  const prediction = this.store().modelFor('prediction');
-  const relationship = Ember.get(prediction, 'relationshipsByName').get('achievedRunRaw');
-  assert.equal(relationship.key, 'achievedRunRaw');
-  assert.equal(relationship.kind, 'belongsTo');
-  assert.equal(relationship.type, 'run');
-});
-
-// achievedRun
-test('achievedRun behaves like run model', function(assert) {
-  var prediction = this.subject(), self = this;
-  Ember.run(function(){
-    prediction.set('achievedRun',
-      self.store().createRecord('run',{
-        timeSec : new BigNumber(3600*4),
-        lengthM : new BigNumber(42195)
-      })
-    );
-  });
-  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "4");
-});
-
-test('achievedRun has a default value', function(assert) {
-  var prediction = this.subject();
-  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
-});
-
-test('achievedRun can be changed with a hash', function(assert) {
-  var prediction = this.subject();
-  Ember.run(function(){
-    prediction.set('achievedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
-  });
-  assert.strictEqual(prediction.get("achievedRun.timeSec").toString(), "1234");
-  assert.strictEqual(prediction.get("achievedRun.lengthM").toString(), "12");
-});
-
 // predictedRunRaw
 test('predictedRunRaw is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
@@ -184,6 +147,43 @@ test('predictedRun works when the run is definied with lengthKm and timeMin sett
   assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
   assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
+
+// achievedRunRaw
+test('achievedRunRaw is a relation to run model', function(assert) {
+  const prediction = this.store().modelFor('prediction');
+  const relationship = Ember.get(prediction, 'relationshipsByName').get('achievedRunRaw');
+  assert.equal(relationship.key, 'achievedRunRaw');
+  assert.equal(relationship.kind, 'belongsTo');
+  assert.equal(relationship.type, 'run');
+});
+
+// achievedRun
+test('achievedRun behaves like run model', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.set('achievedRun',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+  });
+  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "4");
+});
+
+test('achievedRun has a default value', function(assert) {
+  var prediction = this.subject();
+  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
+});
+
+test('achievedRun can be changed with a hash', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set('achievedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
+  });
+  assert.strictEqual(prediction.get("achievedRun.timeSec").toString(), "1234");
+  assert.strictEqual(prediction.get("achievedRun.lengthM").toString(), "12");
 });
 
 // peterRiegelMethod
