@@ -77,6 +77,15 @@ test('predictedRun has a default value', function(assert) {
   assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "0");
 });
 
+test('predictedRun can be changed with a hash', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set('predictedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
+  });
+  assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "1234");
+  assert.strictEqual(prediction.get("predictedRun.lengthM").toString(), "12");
+});
+
 test('predictedRun changes when achievedRun was created', function(assert) {
   var prediction = this.subject(), self = this;
   var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
