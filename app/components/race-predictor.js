@@ -2,6 +2,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
+
+  achievedRunMetricsSelected : "km", // may be overwritten when using this component
+  predictedRunMetricsSelected : "km", // may be overwritten when using this component
+  runLengthMetricsAvailable : ["km", "mi"],
+
   achievedRacePickerVisible: false,
   achievedTimePickerVisible: false,
   predictedRacePickerVisible: false,
