@@ -227,6 +227,7 @@ body{
   }
 
   .tools.container-pca .toolLine, .expertModeOn.container-pca .toolLine,
+  .tools.container-rp .toolLine, .expertModeOn.container-rp .toolLine,
   .tools.container-sc .toolLine, .expertModeOn.container-sc .toolLine{
     max-width: 300px;
     @include respond-to("small"){
@@ -238,6 +239,7 @@ body{
   }
 
   .expertModeOn.container-pca .toolLine,
+  .expertModeOn.container-rp .toolLine,
   .expertModeOn.container-sc .toolLine{
     @include respond-to("medium"){
       max-width: 500px;
@@ -247,8 +249,7 @@ body{
   .tools.container-pc .toolLine,
   .tools.container-lc .toolLine,
   .expertModeOn.container-pc .toolLine,
-  .expertModeOn.container-lc .toolLine,
-  .expertModeOn.container-rp .toolLine{
+  .expertModeOn.container-lc .toolLine{
     max-width: 210px;
     @include respond-to("small"){
       max-width: 355px;
@@ -259,8 +260,7 @@ body{
   }
 
   .expertModeOn.container-pc .toolLine,
-  .expertModeOn.container-lc .toolLine,
-  .expertModeOn.container-rp .toolLine{
+  .expertModeOn.container-lc .toolLine{
     @include respond-to("medium"){
       max-width: 400px;
     }
