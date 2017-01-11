@@ -14,6 +14,12 @@ export default Ember.Component.extend({
     return 'ontouchstart' in document.documentElement;
   }),
 
+  predictedTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+    var self = this;
+    return this.get("targetTimes.templates").filter(function(item) {
+      return self.get("run").isInRange(item.startM, item.endM);
+    });
+  }),
   visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "rp" ? true : false;
   }),
