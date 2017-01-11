@@ -7,6 +7,9 @@ export default Ember.Component.extend({
   predictedRacePickerVisible: false,
   predictedTimePickerVisible: false,
 
+  races : Ember.inject.service('race'),
+  targetTimes : Ember.inject.service('target-time'),
+
   isTouchDevice : Ember.computed(function(){
     return 'ontouchstart' in document.documentElement;
   }),
