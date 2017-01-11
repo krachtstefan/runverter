@@ -56,4 +56,12 @@ export default Ember.Component.extend({
   expertModeClass : Ember.computed("expertMode", function(){
     return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
+
+  actions: {
+    setPredictedTime: function(targetTime) {
+      if(targetTime !== null){
+        this.get("run").set("timeSec",targetTime.timeSec);
+      }
+    }
+  }
 });
