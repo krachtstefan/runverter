@@ -38,6 +38,14 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
+  tooltipPredictedLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+    return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
+  tooltipPredictedLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+    return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
+  }),
+
   tooltipPredictedTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
