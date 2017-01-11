@@ -19,6 +19,14 @@
         <span>{{t "tools.rp.predictedDistanceLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedRacePickerVisibleClass}}">
+        {{#if showPredictedRunLengthKm}}<span>{{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerVisible title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthKm}}</span>{{/if}}
+        {{#if showPredictedRunLengthMi}}<span>{{form-helper/number-input value=run.lengthMiStackMi maxLength="3" focus=racePickerVisible title=tooltipLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true focus=racePickerVisible title=tooltipLengthMi}}</span>{{/if}}
+        {{#x-select value=predictedRunMetricsSelected class="runLength"}}
+          {{#each predictedRunLengthMetrics as |item|}}
+            {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+          {{/each}}
+        {{/x-select}}
+        {{!-- {{form-helper/suggest-select items=races.templates identifier="race-picker-pace-calc" action="setRace" label=(t "races.label")}} --}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse toolLine">
