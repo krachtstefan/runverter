@@ -42,6 +42,14 @@ export default Ember.Component.extend({
     return this.get("selectedMenuItem.key") === "rp" ? true : false;
   }),
 
+  showPredictedRunLengthKm: Ember.computed('predictedRunMetricsSelected', function () {
+    return this.get("predictedRunMetricsSelected") === "km" ? true : false;
+  }),
+
+  showPredictedRunLengthMi: Ember.computed('predictedRunMetricsSelected', function () {
+    return this.get("predictedRunMetricsSelected") === "mi" ? true : false;
+  }),
+
   achievedRacePickerVisibleClass: Ember.computed('achievedRacePickerVisible', function () {
     return this.get("achievedRacePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
