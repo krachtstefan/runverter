@@ -26,6 +26,8 @@
         <span>{{t "tools.rp.predictrdTimeLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedTimePickerVisibleClass}}">
+        {{form-helper/number-input value=run.timeStackHr minLength="1" focus=predictedTimePickerVisible title=tooltipPredictedTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=predictedTimePickerVisible title=tooltipPredictedTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=predictedTimePickerVisible title=tooltipPredictedTimeSec}} {{t "metrics.time.sec"}}
+        {{form-helper/suggest-select items=predictedTimesSuggestions identifier="predicted-time-race-predictor" action="setPredictedTime" label=(t "targetTimes.label")}}
       </div>
     </div>
   </form>
