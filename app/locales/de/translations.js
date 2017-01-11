@@ -43,9 +43,9 @@ export default {
       'name' : 'Wettkampfprognose',
       'label' : 'Zeit für eine',
       'description' : 'Nutze ein vorhandenes Rennergebnis um dein nächstes Rennen zu prognostizieren.',
-      'achievedRunLabel' : 'Eine Lauf von',
+      'achievedDistanceLabel' : 'Eine Lauf von',
       'achievedTimeLabel' : 'in',
-      'predictedRunLabel' : 'ermöglicht dir ein Rennen von',
+      'predictedDistanceLabel' : 'ermöglicht dir ein Rennen von',
       'predictedTimeLabel' : 'in'
     },
     'sc' : {

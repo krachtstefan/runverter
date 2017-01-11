@@ -43,9 +43,9 @@ export default {
       'name' : 'Race Predictor',
       'label' : 'Get ready for the',
       'description' : 'Use a previous race result to estimate an upcomming one.',
-      'achievedRunLabel' : 'Running',
+      'achievedDistanceLabel' : 'Running',
       'achievedTimeLabel' : 'in',
-      'predictedRunLabel' : 'enables you to run a race of',
+      'predictedDistanceLabel' : 'enables you to run a race of',
       'predictedTimeLabel' : 'in'
     },
     'sc' : {
