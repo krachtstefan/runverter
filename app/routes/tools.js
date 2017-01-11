@@ -13,7 +13,10 @@ export default Ember.Route.extend({
     return this.store.findRecord('run', "runverter").then(function(run) {
       run.set("updatedAt", new Date());
       return RSVP.hash({
-        run: run
+        run: run,
+        prediction: self.store.createRecord('prediction', {
+
+        })
       });
     }, function() {
       return RSVP.hash({
