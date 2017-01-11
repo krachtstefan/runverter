@@ -20,6 +20,19 @@ export default Ember.Component.extend({
       return self.get("run").isInRange(item.startM, item.endM);
     });
   }),
+
+  tooltipPredictedTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
+    return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
+  }),
+
+  tooltipPredictedTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
+    return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
+  }),
+
+  tooltipPredictedTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
+    return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
+  }),
+
   visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "rp" ? true : false;
   }),
