@@ -46,7 +46,7 @@ export default {
       'achievedRunLabel' : 'Eine Lauf von',
       'achievedTimeLabel' : 'in',
       'predictedRunLabel' : 'ermöglicht dir ein Rennen von',
-      'predictrdTimeLabel' : 'in'
+      'predictedTimeLabel' : 'in'
     },
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',

@@ -46,7 +46,7 @@ export default {
       'achievedRunLabel' : 'Running',
       'achievedTimeLabel' : 'in',
       'predictedRunLabel' : 'enables you to run a race of',
-      'predictrdTimeLabel' : 'in'
+      'predictedTimeLabel' : 'in'
     },
     'sc' : {
       'name' : 'Split Time Calculator',
