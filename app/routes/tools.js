@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 export default Ember.Route.extend({
 
   i18n: Ember.inject.service(),
@@ -11,12 +12,16 @@ export default Ember.Route.extend({
     var self = this;
     return this.store.findRecord('run', "runverter").then(function(run) {
       run.set("updatedAt", new Date());
-      return run;
+      return RSVP.hash({
+        run: run
+      });
     }, function() {
-      return self.store.createRecord('run', {
-        id : "runverter",
-        timeSec : new BigNumber(3600*4),
-        lengthM : new BigNumber(42195)
+      return RSVP.hash({
+        run : self.store.createRecord('run', {
+          id : "runverter",
+          timeSec : new BigNumber(3600*4),
+          lengthM : new BigNumber(42195)
+        })
       });
     });
   },

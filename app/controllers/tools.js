@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
   }),
 
   handlePersistence: Ember.observer("model.timeSec", "model.lengthM", function () {
-    this.get("model").save();
+    this.get("model.run").save();
   }),
 
   actions: {
