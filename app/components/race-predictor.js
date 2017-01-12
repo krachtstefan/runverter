@@ -58,6 +58,10 @@ export default Ember.Component.extend({
     return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
+  }),
+
   visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "rp" ? true : false;
   }),
@@ -84,10 +88,6 @@ export default Ember.Component.extend({
 
   predictedTimePickerVisibleClass: Ember.computed('predictedTimePickerVisible', function () {
     return this.get("predictedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
-  }),
-
-  expertModeClass : Ember.computed("expertMode", function(){
-    return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
 
   actions: {
