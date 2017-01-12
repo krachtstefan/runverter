@@ -4,18 +4,22 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   queryParams: {
-    'i18n.locale' : 'l',                  // selected locale
-    'selectedToolKey' : 't',              // selected tool
-    'paceCalcLengthMetricsQuery' : 'lm',  // selected length metric
-    'paceCalcTempoMetricsQuery' : 's',    // selected tempo metric
-    'expertMode' : 'nerd',                // selected display mode
-    'imprintVisible' : 'info',            // selected display mode
-    'index_key' : "index_key"             // keep the index_key param provided by ember-cli-deploy
+    'i18n.locale' : 'l',                                        // selected locale
+    'selectedToolKey' : 't',                                    // selected tool
+    'paceCalcLengthMetricsQuery' : 'lm',                        // selected length metric for pace calculator
+    'paceCalcTempoMetricsQuery' : 's',                          // selected tempo metric for pace calculator
+    'racePredictorAchievedRunLengthMetricsQuery' : 'lm-p-a',    // selected length metric for pace calculator
+    'racePredictorPredictedRunLengthMetricsQuery' : 'lm-rp-p',  // selected length metric for pace calculator
+    'expertMode' : 'nerd',                                      // selected display mode
+    'imprintVisible' : 'info',                                  // selected display mode
+    'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
   selectedToolKey : "pca",
-  paceCalcLengthMetricsQuery : "km",      // will be used to overwrite the default of the component
-  paceCalcTempoMetricsQuery : "minkm",    // will be used to overwrite the default of the component
+  paceCalcLengthMetricsQuery : "km",                            // will be used to overwrite the default of the component
+  paceCalcTempoMetricsQuery : "minkm",                          // will be used to overwrite the default of the component
+  racePredictorAchievedRunLengthMetricsQuery : "km",            // will be used to overwrite the default of the component
+  racePredictorPredictedRunLengthMetricsQuery : "km",           // will be used to overwrite the default of the component
 
   toolsAvailable : [
     "pca", "pc", "lc", "rp", "sc"
