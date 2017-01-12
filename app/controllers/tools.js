@@ -4,18 +4,18 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   queryParams: {
-    'i18n.locale' : 'l',            // selected locale
-    'selectedToolKey' : 't',        // selected tool
-    'runLengthMetricsQuery' : 'lm', // selected length metric
-    'runTempoMetricsQuery' : 's',   // selected tempo metric
-    'expertMode' : 'nerd',          // selected display mode
-    'imprintVisible' : 'info',      // selected display mode
-    'index_key' : "index_key"       // keep the index_key param provided by ember-cli-deploy
+    'i18n.locale' : 'l',                  // selected locale
+    'selectedToolKey' : 't',              // selected tool
+    'paceCalcLengthMetricsQuery' : 'lm',  // selected length metric
+    'paceCalcTempoMetricsQuery' : 's',    // selected tempo metric
+    'expertMode' : 'nerd',                // selected display mode
+    'imprintVisible' : 'info',            // selected display mode
+    'index_key' : "index_key"             // keep the index_key param provided by ember-cli-deploy
   },
 
   selectedToolKey : "pca",
-  runLengthMetricsQuery : "km",     // will be used to overwrite the default of the component
-  runTempoMetricsQuery : "minkm",   // will be used to overwrite the default of the component
+  paceCalcLengthMetricsQuery : "km",      // will be used to overwrite the default of the component
+  paceCalcTempoMetricsQuery : "minkm",    // will be used to overwrite the default of the component
 
   toolsAvailable : [
     "pca", "pc", "lc", "rp", "sc"

@@ -7,7 +7,7 @@
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
 </div>
 <div class="tools uk-container uk-container-center {{selectedToolClass}} {{expertModeClass}}">
-  {{pace-calculator expertMode=expertMode run=model.run selectedMenuItem=selectedTool runLengthMetricsSelected=runLengthMetricsQuery runTempoMetricsSelected=runTempoMetricsQuery}}
+  {{pace-calculator expertMode=expertMode run=model.run selectedMenuItem=selectedTool runLengthMetricsSelected=paceCalcLengthMetricsQuery runTempoMetricsSelected=paceCalcTempoMetricsQuery}}
   {{pace-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}}
   {{length-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}}
   {{race-predictor expertMode=expertMode run=model.run prediction=model.prediction selectedMenuItem=selectedTool}}
