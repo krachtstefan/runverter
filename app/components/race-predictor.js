@@ -91,6 +91,11 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    setPredictedRace: function(race) {
+      if(race !== null){
+        this.get("run").set("lengthM",race.lengthM);
+      }
+    },
     setPredictedTime: function(targetTime) {
       if(targetTime !== null){
         this.get("run").set("timeSec",targetTime.timeSec);
