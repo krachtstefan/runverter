@@ -27,7 +27,7 @@
             {{#x-option value=item.key}}{{item.label}}{{/x-option}}
           {{/each}}
         {{/x-select}}
-        {{!-- {{form-helper/suggest-select items=races.templates identifier="race-picker-pace-calc" action="setRace" label=(t "races.label")}} --}}
+        {{form-helper/suggest-select items=races.templates identifier="race-picker-race-predictor" action="setPredictedRace" label=(t "races.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse toolLine">
