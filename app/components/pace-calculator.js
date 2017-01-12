@@ -50,6 +50,26 @@ export default Ember.Component.extend({
     return runTempoMetrics;
   }),
 
+  didRender: function() {
+    this._super(...arguments);
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      var self = this;
+      $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
+        $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value
+        $("#runLength").focusin(function() {
+          self.set("racePickerVisible", true);
+        });
+        $("#runLength").focusout(function() {
+          self.set("racePickerVisible", false);
+        });
+      });
+
+      $("select.runTempo").selectOrDie({customID:"runTempo"}).ready(function() {
+        $("select.runTempo").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
+    });
+  },
+
   tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
@@ -89,26 +109,6 @@ export default Ember.Component.extend({
   expertModeClass : Ember.computed("expertMode", function(){
     return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
-
-  didRender: function() {
-    this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      var self = this;
-      $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
-        $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value
-        $("#runLength").focusin(function() {
-          self.set("racePickerVisible", true);
-        });
-        $("#runLength").focusout(function() {
-          self.set("racePickerVisible", false);
-        });
-      });
-
-      $("select.runTempo").selectOrDie({customID:"runTempo"}).ready(function() {
-        $("select.runTempo").selectOrDie("update"); // need to trigger update to select the correct initial value
-      });
-    });
-  },
 
   visible: Ember.computed('selectedMenuItem', function () {
     return this.get("selectedMenuItem.key") === "pca" ? true : false;
