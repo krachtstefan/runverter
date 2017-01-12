@@ -15,15 +15,19 @@ export default Ember.Route.extend({
       return RSVP.hash({
         run: run,
         prediction: self.store.createRecord('prediction', {
-
+          predictedRunRaw: run
         })
       });
     }, function() {
+      var run = self.store.createRecord('run', {
+        id : "runverter",
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      });
       return RSVP.hash({
-        run : self.store.createRecord('run', {
-          id : "runverter",
-          timeSec : new BigNumber(3600*4),
-          lengthM : new BigNumber(42195)
+        run : run,
+        prediction: self.store.createRecord('prediction', {
+          predictedRunRaw: run
         })
       });
     });
