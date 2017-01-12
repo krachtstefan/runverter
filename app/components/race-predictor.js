@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import $ from 'jquery';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
@@ -37,6 +38,22 @@ export default Ember.Component.extend({
     });
     return runLengthMetrics;
   }),
+
+  didRender: function() {
+    this._super(...arguments);
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      var self = this;
+      $("select.predictedRunLength").selectOrDie({customID:"predictedRunLength"}).ready(function() {
+        $("select.predictedRunLength").selectOrDie("update"); // need to trigger update to select the correct initial value
+        $("#predictedRunLength").focusin(function() {
+          self.set("predictedRacePickerVisible", true);
+        });
+        $("#predictedRunLength").focusout(function() {
+          self.set("predictedRacePickerVisible", false);
+        });
+      });
+    });
+  },
 
   tooltipPredictedLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
