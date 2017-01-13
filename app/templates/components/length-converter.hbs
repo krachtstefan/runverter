@@ -5,7 +5,7 @@
         <span>{{t "tools.lc.kmLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerKmVisibleClass}}">
-        {{form-helper/number-input value=run.lengthKmStackKm maxLength="3" title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true title=tooltipLengthKm}} {{t "metrics.distance.km"}}
+        {{form-helper/number-input value=run.lengthKmStackKm maxLength="3" focus=racePickerKmVisible title=tooltipLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthKmStackDecimalFixed addLeadingZeros=true focus=racePickerKmVisible title=tooltipLengthKm}} {{t "metrics.distance.km"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-km" action="setRace" label=(t "races.label")}}
       </div>
     </div>
@@ -14,7 +14,7 @@
         <span>{{t "tools.lc.miLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerMiVisibleClass}}">
-        {{form-helper/number-input value=run.lengthMiStackMi maxLength="3" title=tooltipLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true title=tooltipLengthMi}} {{t "metrics.distance.mi"}}
+        {{form-helper/number-input value=run.lengthMiStackMi maxLength="3" focus=racePickerMiVisible title=tooltipLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMiStackDecimalFixed addLeadingZeros=true focus=racePickerMiVisible title=tooltipLengthMi}} {{t "metrics.distance.mi"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-mi" action="setRace" label=(t "races.label")}}
       </div>
     </div>
@@ -23,7 +23,7 @@
         <span>{{t "tools.lc.mLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{racePickerMVisibleClass}}">
-        {{form-helper/number-input value=run.lengthMStackM minLength="3" maxLength="6" title=tooltipLengthM}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimalFixed addLeadingZeros=true title=tooltipLengthM}} {{t "metrics.distance.m"}}
+        {{form-helper/number-input value=run.lengthMStackM minLength="3" maxLength="6" focus=racePickerMVisible title=tooltipLengthM}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.lengthMStackDecimalFixed addLeadingZeros=true focus=racePickerMVisible title=tooltipLengthM}} {{t "metrics.distance.m"}}
         {{form-helper/suggest-select items=races.templates identifier="race-picker-length-m" action="setRace" label=(t "races.label")}}
       </div>
     </div>
