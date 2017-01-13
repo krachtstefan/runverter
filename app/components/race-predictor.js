@@ -91,6 +91,14 @@ export default Ember.Component.extend({
     return this.get("selectedMenuItem.key") === "rp" ? true : false;
   }),
 
+  showAchievedRunLengthKm: Ember.computed('achievedRunMetricsSelected', function () {
+    return this.get("achievedRunMetricsSelected") === "km" ? true : false;
+  }),
+
+  showAchievedRunLengthMi: Ember.computed('achievedRunMetricsSelected', function () {
+    return this.get("achievedRunMetricsSelected") === "mi" ? true : false;
+  }),
+
   showPredictedRunLengthKm: Ember.computed('predictedRunMetricsSelected', function () {
     return this.get("predictedRunMetricsSelected") === "km" ? true : false;
   }),
