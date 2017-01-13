@@ -52,6 +52,15 @@ export default Ember.Component.extend({
           self.set("predictedRacePickerVisible", false);
         });
       });
+      $("select.achievedRunLength").selectOrDie({customID:"achievedRunLength"}).ready(function() {
+        $("select.achievedRunLength").selectOrDie("update"); // need to trigger update to select the correct initial value
+        $("#achievedRunLength").focusin(function() {
+          self.set("achievedRacePickerVisible", true);
+        });
+        $("#achievedRunLength").focusout(function() {
+          self.set("achievedRacePickerVisible", false);
+        });
+      });
     });
   },
 
