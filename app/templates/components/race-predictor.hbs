@@ -9,6 +9,14 @@
         <span>{{t "tools.rp.achievedDistanceLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedRacePickerVisibleClass}}">
+        {{#if showAchievedRunLengthKm}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthKmStackKm maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthKmStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}}</span>{{/if}}
+        {{#if showAchievedRunLengthMi}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthMiStackMi maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthMiStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}}</span>{{/if}}
+        {{#x-select value=achievedRunMetricsSelected class="achievedRunLength"}}
+          {{#each predictedRunLengthMetrics as |item|}}
+            {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+          {{/each}}
+        {{/x-select}}
+        {{form-helper/suggest-select items=races.templates identifier="race-picker-achieved-race" action="setAchievedRace" label=(t "races.label")}}
       </div>
     </div>
     <div class="uk-grid uk-grid-collapse toolLine">
