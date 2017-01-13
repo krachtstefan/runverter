@@ -63,7 +63,7 @@ export default DS.Model.extend({
    * predictedRun is a proxy to predictedRunRaw to handle dependencies with achievedRun
    * using Ember.observer would end in an infinite loop
    */
-  predictedRun : Ember.computed("predictedRun.timeSec", "predictedRun.lengthM" ,{
+  predictedRun : Ember.computed("predictedRunRaw.timeSec", "predictedRunRaw.lengthM" ,{
 
     /**
      * returns predictedRun
