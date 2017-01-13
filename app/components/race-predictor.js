@@ -116,6 +116,16 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    setAchievedRace: function(race) {
+      if(race !== null){
+        this.get("prediction.achievedRun").set("lengthM",race.lengthM);
+      }
+    },
+    setAchievedTime: function(targetTime) {
+      if(targetTime !== null){
+        this.get("prediction.achievedRun").set("timeSec",targetTime.timeSec);
+      }
+    },
     setPredictedRace: function(race) {
       if(race !== null){
         this.get("run").set("lengthM",race.lengthM);
