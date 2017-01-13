@@ -55,6 +55,14 @@ export default Ember.Component.extend({
     });
   },
 
+  tooltipAchievedLengthKm : Ember.computed("prediction.achievedRun.lengthKm", "i18n.locale", function(){
+    return this.get("prediction.achievedRun.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
+  tooltipAchievedLengthMi : Ember.computed("prediction.achievedRun.lengthMi", "i18n.locale", function(){
+    return this.get("prediction.achievedRun.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  }),
+
   tooltipPredictedLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
