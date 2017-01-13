@@ -20,6 +20,13 @@ export default Ember.Component.extend({
     return 'ontouchstart' in document.documentElement;
   }),
 
+  achievedTimesSuggestions  : Ember.computed("prediction.achievedRun.lengthM", "i18n.locale", function(){
+    var self = this;
+    return this.get("targetTimes.templates").filter(function(item) {
+      return self.get("prediction.achievedRun.content").isInRange(item.startM, item.endM);
+    });
+  }),
+
   predictedTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
