@@ -116,19 +116,19 @@ export default Ember.Component.extend({
     return this.get("predictedRunMetricsSelected") === "mi" ? true : false;
   }),
 
-  achievedRacePickerVisibleClass: Ember.computed('achievedRacePickerVisible', function () {
+  achievedRacePickerVisibleClass: Ember.computed('achievedRacePickerVisible', 'isTouchDevice', function () {
     return this.get("achievedRacePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  achievedTimePickerVisibleClass: Ember.computed('achievedTimePickerVisible', function () {
+  achievedTimePickerVisibleClass: Ember.computed('achievedTimePickerVisible', 'isTouchDevice', function () {
     return this.get("achievedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  predictedRacePickerVisibleClass: Ember.computed('predictedRacePickerVisible', function () {
+  predictedRacePickerVisibleClass: Ember.computed('predictedRacePickerVisible', 'isTouchDevice', function () {
     return this.get("predictedRacePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  predictedTimePickerVisibleClass: Ember.computed('predictedTimePickerVisible', function () {
+  predictedTimePickerVisibleClass: Ember.computed('predictedTimePickerVisible', 'isTouchDevice', function () {
     return this.get("predictedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 

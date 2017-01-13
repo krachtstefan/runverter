@@ -138,11 +138,11 @@ export default Ember.Component.extend({
     return this.get("runTempoMetricsSelected") === "mih" ? true : false;
   }),
 
-  racePickerVisibleClass: Ember.computed('racePickerVisible', function () {
+  racePickerVisibleClass: Ember.computed('racePickerVisible', 'isTouchDevice', function () {
     return this.get("racePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  timePickerVisibleClass: Ember.computed('timePickerVisible', function () {
+  timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
     return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
