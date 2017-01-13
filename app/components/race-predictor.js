@@ -72,6 +72,18 @@ export default Ember.Component.extend({
     return this.get("prediction.achievedRun.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
 
+  tooltipAchievedTimeHr : Ember.computed("prediction.achievedRun.timeHr", "i18n.locale", function(){
+    return this.get("prediction.achievedRun.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
+  }),
+
+  tooltipAchievedTimeMin : Ember.computed("prediction.achievedRun.timeMin", "i18n.locale", function(){
+    return this.get("prediction.achievedRun.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
+  }),
+
+  tooltipAchievedTimeSec : Ember.computed("prediction.achievedRun.timeSec", "i18n.locale", function(){
+    return this.get("prediction.achievedRun.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
+  }),
+
   tooltipPredictedLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
