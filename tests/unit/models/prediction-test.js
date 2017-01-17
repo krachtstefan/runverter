@@ -149,6 +149,20 @@ test('predictedRun works when the run is definied with lengthKm and timeMin sett
   assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
 });
 
+test('predictedRun works when the achieved run run is defined on the run model layer', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.lengthKm", new BigNumber(21.0975));
+    prediction.set("achievedRun.lengthKm", new BigNumber(42.195));
+    prediction.set("achievedRun.timeMin", new BigNumber(44).div(60).plus(206));
+
+  });
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
+
 // achievedRunRaw
 test('achievedRunRaw is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
