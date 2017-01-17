@@ -26,7 +26,7 @@
   }
 }
 
-#runLength{
+#runLength, #achievedRunLength, #predictedRunLength{
   width: 70px;
   @include respond-to("small"){
     width: 100px;
