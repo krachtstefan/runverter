@@ -37,7 +37,7 @@ test('predictedRun behaves like run model', function(assert) {
 
 test('predictedRun has a default value', function(assert) {
   var prediction = this.subject();
-  assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "0");
+  assert.strictEqual(prediction.get("predictedRun.timeHrRaw") instanceof BigNumber, true);
 });
 
 test('predictedRun can be changed with a hash', function(assert) {
@@ -174,7 +174,7 @@ test('achievedRun behaves like run model', function(assert) {
 
 test('achievedRun has a default value', function(assert) {
   var prediction = this.subject();
-  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "0");
+  assert.strictEqual(prediction.get("achievedRun.timeHrRaw") instanceof BigNumber, true);
 });
 
 test('achievedRun can be changed with a hash', function(assert) {
