@@ -22,35 +22,13 @@ export default DS.Model.extend({
   /**
    * achievedRun is a proxy to achievedRunRaw to handle dependencies with predictedRun
    * using Ember.observer would end in an infinite loop
+   *
+   * @return {Run}
    */
-  achievedRun : Ember.computed("achievedRunRaw.timeSec", "achievedRunRaw.lengthM" ,{
-
-    /**
-     * returns achievedRun
-     *
-     * @return {Run}
-     */
-    get: function() {
-      return this.get("achievedRunRaw");
-    },
-
-    /**
-     * sets a new achievedRun and updates the predicted run
-     *
-     * @param  {string} propertyName name of the changed property, always "achievedRun"
-     * @param  {Run|Object} value new predictedRun value, either defined by a new run object or a hash of properties to change
-     * @return {Run} new achievedRun value
-     */
-    set: function(propertyName, value) {
-      if(typeof value === "object" && value.constructor.name === "Object"){
-        this.get("achievedRunRaw").setProperties(value);
-      }else{
-        this.set("achievedRunRaw", value);
-      }
-      var predictedSeconds = this.peterRiegelMethod(this.get("achievedRunRaw.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRunRaw.timeSec"));
-      this.set("predictedRunRaw.timeSec", predictedSeconds.toSignificantDigits(15)); // needs to be converted to 15 significant digits to be compatible to BigNumber
-      return this.get("achievedRunRaw");
-    }
+  achievedRun : Ember.computed("achievedRunRaw.lengthM", "predictedRunRaw.lengthM", "predictedRunRaw.timeSec", function(){
+    var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("predictedRunRaw.timeSec"));
+    this.set("achievedRunRaw.timeSec", achievedSeconds.toSignificantDigits(15)); // needs to be converted to 15 significant digits to be compatible to BigNumber
+    return this.get("achievedRunRaw");
   }),
 
   /**
