@@ -287,16 +287,14 @@ test('achievedRun time changes with a marathon example', function(assert) {
 test('achievedRun time changes when the run is definied with lengthKm and timeMin setter', function(assert) {
   var prediction = this.subject();
   Ember.run(function(){
-    prediction.setProperties({
-      "achievedRun" : { lengthKm : new BigNumber(21.0975) },
-      "predictedRun" : { lengthKm : new BigNumber(42.195), timeMin : new BigNumber(44).div(60).plus(206) },
-    });
-  });
+    prediction.set("achievedRun.lengthKm", new BigNumber(21.0975));
+    prediction.set("predictedRun.lengthKm", new BigNumber(42.195));
+    prediction.set("predictedRun.timeMin", new BigNumber(44).div(60).plus(206));
 
-  // Marathon in 3:26:44, Half Marathon? = 1:39:09
-  assert.strictEqual(prediction.get("achievedRun.timeStackHr").toString(), "1");
-  assert.strictEqual(prediction.get("achievedRun.timeStackMin").toString(), "39");
-  assert.strictEqual(prediction.get("achievedRun.timeStackSec").toString(), "9");
+    assert.strictEqual(prediction.get("achievedRun.timeStackHr").toString(), "1");
+    assert.strictEqual(prediction.get("achievedRun.timeStackMin").toString(), "39");
+    assert.strictEqual(prediction.get("achievedRun.timeStackSec").toString(), "9");
+  });
 });
 
 // peterRiegelMethod
