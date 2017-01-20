@@ -42,14 +42,6 @@ test('predictedRun has a default value', function(assert) {
   });
 });
 
-// test('predictedRun can be changed with a hash', function(assert) {
-//   var prediction = this.subject();
-//   Ember.run(function(){
-//     prediction.set('predictedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
-//   });
-//   assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), "1234");
-//   assert.strictEqual(prediction.get("predictedRun.lengthM").toString(), "12");
-// });
 
 // test('predictedRun changes when achievedRun was created', function(assert) {
 //   var prediction = this.subject(), self = this;
@@ -179,14 +171,6 @@ test('achievedRun has a default value', function(assert) {
   });
 });
 
-// test('achievedRun can be changed with a hash', function(assert) {
-//   var prediction = this.subject();
-//   Ember.run(function(){
-//     prediction.set('achievedRun', {timeSec : new BigNumber(1234), lengthM : new BigNumber(12)});
-//   });
-//   assert.strictEqual(prediction.get("achievedRun.timeSec").toString(), "1234");
-//   assert.strictEqual(prediction.get("achievedRun.lengthM").toString(), "12");
-// });
 
 // test('achievedRun time changes when predictedRun was created', function(assert) {
 //   var prediction = this.subject(), self = this;
