@@ -27,10 +27,10 @@ export default Ember.Component.extend({
     });
   }),
 
-  predictedTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+  predictedTimesSuggestions  : Ember.computed("prediction.predictedRun.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
-      return self.get("run").isInRange(item.startM, item.endM);
+      return self.get("prediction.predictedRun.content").isInRange(item.startM, item.endM);
     });
   }),
 
@@ -91,24 +91,24 @@ export default Ember.Component.extend({
     return this.get("prediction.achievedRun.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
-  tooltipPredictedLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
-    return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
+  tooltipPredictedLengthKm : Ember.computed("prediction.predictedRun.lengthKm", "i18n.locale", function(){
+    return this.get("prediction.predictedRun.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
 
-  tooltipPredictedLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
-    return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
+  tooltipPredictedLengthMi : Ember.computed("prediction.predictedRun.lengthMi", "i18n.locale", function(){
+    return this.get("prediction.predictedRun.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
   }),
 
-  tooltipPredictedTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
-    return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
+  tooltipPredictedTimeHr : Ember.computed("prediction.predictedRun.timeHr", "i18n.locale", function(){
+    return this.get("prediction.predictedRun.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
 
-  tooltipPredictedTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
-    return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
+  tooltipPredictedTimeMin : Ember.computed("prediction.predictedRun.timeMin", "i18n.locale", function(){
+    return this.get("prediction.predictedRun.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
   }),
 
-  tooltipPredictedTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
-    return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
+  tooltipPredictedTimeSec : Ember.computed("prediction.predictedRun.timeSec", "i18n.locale", function(){
+    return this.get("prediction.predictedRun.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
   expertModeClass : Ember.computed("expertMode", function(){
@@ -164,12 +164,12 @@ export default Ember.Component.extend({
     },
     setPredictedRace: function(race) {
       if(race !== null){
-        this.get("run").set("lengthM",race.lengthM);
+        this.get("prediction.predictedRun").set("lengthM",race.lengthM);
       }
     },
     setPredictedTime: function(targetTime) {
       if(targetTime !== null){
-        this.get("run").set("timeSec",targetTime.timeSec);
+        this.get("prediction.predictedRun").set("timeSec",targetTime.timeSec);
       }
     }
   }
