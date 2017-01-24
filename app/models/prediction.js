@@ -6,10 +6,10 @@ export default DS.Model.extend({
   ready: function() {
     this._super(...arguments);
     if(this.get("predictedRunRaw.content") === null){
-      this.set( "predictedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}) );
+      this.set( "predictedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(60), lengthM : new BigNumber(3400)}) );
     }
     if(this.get("achievedRunRaw.content") === null){
-      this.set( "achievedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(0), lengthM : new BigNumber(0)}) );
+      this.set( "achievedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(120), lengthM : new BigNumber(6000)}) );
     }
   },
 
