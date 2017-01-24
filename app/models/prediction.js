@@ -27,10 +27,8 @@ export default DS.Model.extend({
    */
   achievedRun : Ember.computed("achievedRunRaw.lengthM", "predictedRunRaw.lengthM", "predictedRunRaw.timeSec", function(){
     var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("predictedRunRaw.timeSec"));
-    return this.store.createRecord('run', {
-      timeSec : new BigNumber(achievedSeconds.toSignificantDigits(15)), // needs to be converted to 15 significant digits to be compatible to BigNumber
-      lengthM : this.get("achievedRunRaw.lengthM")
-    });
+    this.set("achievedRunRaw.timeSec", new BigNumber(achievedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+    return this.get("achievedRunRaw");
   }),
 
   /**
@@ -47,10 +45,8 @@ export default DS.Model.extend({
    */
   predictedRun : Ember.computed("predictedRunRaw.lengthM", "achievedRunRaw.timeSec", "achievedRunRaw.lengthM", function() {
     var predictedSeconds = this.peterRiegelMethod(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("achievedRunRaw.timeSec"));
-    return this.store.createRecord('run', {
-      timeSec : new BigNumber(predictedSeconds.toSignificantDigits(15)), // needs to be converted to 15 significant digits to be compatible to BigNumber
-      lengthM : this.get("predictedRunRaw.lengthM")
-    });
+    this.set("predictedRunRaw.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+    return this.get("predictedRunRaw");
   }),
 
   /**
