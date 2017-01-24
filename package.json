@@ -2,22 +2,18 @@
   "name": "runverter",
   "version": "0.0.0",
   "description": "Small description for runverter goes here",
-  "private": true,
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
+  "repository": "",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 0.12.0"
-  },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
@@ -59,5 +55,9 @@
   },
   "dependencies": {
     "broccoli-merge-trees": "^1.1.5"
-  }
+  },
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "private": true
 }
