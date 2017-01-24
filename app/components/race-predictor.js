@@ -23,14 +23,14 @@ export default Ember.Component.extend({
   achievedTimesSuggestions  : Ember.computed("prediction.achievedRun.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
-      return self.get("prediction.achievedRun.content").isInRange(item.startM, item.endM);
+      return self.get("prediction.achievedRun").isInRange(item.startM, item.endM);
     });
   }),
 
   predictedTimesSuggestions  : Ember.computed("prediction.predictedRun.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
-      return self.get("prediction.predictedRun.content").isInRange(item.startM, item.endM);
+      return self.get("prediction.predictedRun").isInRange(item.startM, item.endM);
     });
   }),
 
