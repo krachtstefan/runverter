@@ -25,7 +25,7 @@ export default DS.Model.extend({
    *
    * @return {Run}
    */
-  achievedRun : Ember.computed("achievedRunRaw.lengthM", "predictedRunRaw.lengthM", "predictedRun.timeSec", function(){
+  achievedRun : Ember.computed("achievedRunRaw.lengthM", "predictedRun.lengthM", "predictedRun.timeSec", function(){
     var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("predictedRunRaw.timeSec"));
     this.set("achievedRunRaw.timeSec", new BigNumber(achievedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
     return this.get("achievedRunRaw");
@@ -43,7 +43,7 @@ export default DS.Model.extend({
    *
    * @return {Run}
    */
-  predictedRun : Ember.computed("predictedRunRaw.lengthM", "achievedRun.timeSec", "achievedRunRaw.lengthM", function() {
+  predictedRun : Ember.computed("predictedRunRaw.lengthM", "achievedRun.timeSec", "achievedRun.lengthM", function() {
     var predictedSeconds = this.peterRiegelMethod(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("achievedRunRaw.timeSec"));
     this.set("predictedRunRaw.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
     return this.get("predictedRunRaw");
