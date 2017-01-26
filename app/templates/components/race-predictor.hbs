@@ -55,8 +55,7 @@
         <span>{{t "tools.rp.predictedTimeLabel"}}</span>
       </div>
       <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedTimePickerVisibleClass}}">
-        {{form-helper/number-input value=prediction.predictedRun.timeStackHr minLength="1" focus=predictedTimePickerVisible title=tooltipPredictedTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=prediction.predictedRun.timeStackMinFixed focus=predictedTimePickerVisible title=tooltipPredictedTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=prediction.predictedRun.timeStackSecFixed focus=predictedTimePickerVisible title=tooltipPredictedTimeSec}} {{t "metrics.time.sec"}}
-        {{form-helper/suggest-select items=predictedTimesSuggestions identifier="predicted-time-predicted-race-predictor" action="setPredictedTime" label=(t "targetTimes.label")}}
+        {{prediction.predictedRun.timeStackHr}} {{t "metrics.time.hr"}} {{prediction.predictedRun.timeStackMinFixed}} {{t "metrics.time.min"}} {{prediction.predictedRun.timeStackSecFixed}} {{t "metrics.time.sec"}}
       </div>
     </div>
   </form>
