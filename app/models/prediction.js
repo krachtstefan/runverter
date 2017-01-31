@@ -22,16 +22,16 @@ export default DS.Model.extend({
   /**
    * achievedRun is a proxy to achievedRunRaw to handle dependencies with predictedRun
    *
-   * @return {Run}
+   * @return {Run} achieved run
    */
   achievedRun : Ember.computed("achievedRunRaw.lengthM", "achievedRunRaw.timeSec", function(){
     return this.get("achievedRunRaw");
   }),
 
   /**
-   * updateAchievedRunSec updates the time of the predicted run, should have been an observer but would end up in an infinite loop
+   * updateAchievedRunSec updates the time of the achieved run, should have been an observer but would end up in an infinite loop
    *
-   * @return {Run}
+   * @return {Run} achieved run
    */
   updateAchievedRunSec: function() {
     var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("predictedRun.timeSec"));
@@ -47,7 +47,7 @@ export default DS.Model.extend({
   /**
    * predictedRun is a proxy to predictedRunRaw to handle dependencies with achievedRun
    *
-   * @return {Run}
+   * @return {Run} predicted run
    */
   predictedRun : Ember.computed(function() {
     return this.get("predictedRunRaw");
