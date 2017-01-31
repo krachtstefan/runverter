@@ -63,6 +63,11 @@ export default Ember.Controller.extend({
     this.get("model.run").save();
   }),
 
+  handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRunRaw.lengthM", "model.prediction.achievedRunRaw.timeSec", function () {
+    console.log("handleAchievedRunPersistence called");
+    this.get("model.prediction.achievedRunRaw.content").save();
+  }),
+
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
