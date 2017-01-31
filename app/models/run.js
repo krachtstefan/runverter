@@ -1514,12 +1514,18 @@ export default DS.Model.extend({
     return (input instanceof BigNumber) ? input : new BigNumber(+input || 0);
   },
 
+  /**
+   * observer to prevent the length to be negative
+   */
   preventNegativeLengthM : Ember.observer("lengthM", function() {
     if(this._ensureBigNumber(this.get("lengthM")).isNegative() === true){
       this.set("lengthM", new BigNumber(0));
     }
   }),
 
+  /**
+   * observer to prevent the time to be negative
+   */
   preventNegativeTimeSec : Ember.observer("timeSec", function() {
     if(this._ensureBigNumber(this.get("timeSec")).isNegative() === true){
       this.set("timeSec", new BigNumber(0));
