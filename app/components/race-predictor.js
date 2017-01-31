@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     return 'ontouchstart' in document.documentElement;
   }),
 
-  achievedTimesSuggestions  : Ember.computed("prediction.achievedRun.lengthM", "i18n.locale", function(){
+  achievedTimesSuggestions : Ember.computed("prediction.achievedRun.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
       return self.get("prediction.achievedRun.content").isInRange(item.startM, item.endM);
@@ -70,6 +70,15 @@ export default Ember.Component.extend({
       });
     });
   },
+
+  /**
+   * update the achieved run time when entering the race predictor component
+   */
+  handleAchievedRunUpdate : Ember.on('init', Ember.observer("visible", function(){
+    if(this.get("visible") === true ){
+      this.get("prediction").updateAchievedRunSec();
+    }
+  })),
 
   tooltipAchievedLengthKm : Ember.computed("prediction.achievedRun.lengthKm", "i18n.locale", function(){
     return this.get("prediction.achievedRun.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
