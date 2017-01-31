@@ -21,13 +21,10 @@ export default DS.Model.extend({
 
   /**
    * achievedRun is a proxy to achievedRunRaw to handle dependencies with predictedRun
-   * using Ember.observer would end in an infinite loop
    *
    * @return {Run}
    */
-  achievedRun : Ember.computed("achievedRunRaw.lengthM", "predictedRun.lengthM", "predictedRun.timeSec", function(){
-    var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("predictedRunRaw.timeSec"));
-    this.set("achievedRunRaw.timeSec", new BigNumber(achievedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+  achievedRun : Ember.computed("achievedRunRaw.lengthM", "achievedRunRaw.timeSec", function(){
     return this.get("achievedRunRaw");
   }),
 
@@ -39,14 +36,23 @@ export default DS.Model.extend({
 
   /**
    * predictedRun is a proxy to predictedRunRaw to handle dependencies with achievedRun
-   * using Ember.observer would end in an infinite loop
    *
    * @return {Run}
    */
-  predictedRun : Ember.computed("predictedRunRaw.lengthM", "achievedRun.timeSec", "achievedRun.lengthM", function() {
-    var predictedSeconds = this.peterRiegelMethod(this.get("achievedRunRaw.lengthM"), this.get("predictedRunRaw.lengthM"), this.get("achievedRunRaw.timeSec"));
-    this.set("predictedRunRaw.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+  predictedRun : Ember.computed(function() {
     return this.get("predictedRunRaw");
+  }),
+
+  /**
+   * update updatePredictedRunSec updates the time of the predicted run when necessary
+   *
+   * @return {Run}
+   */
+  updatePredictedRunSec : Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
+    Ember.run.once(this, function() {
+      var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
+      this.set("predictedRun.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+    });
   }),
 
   /**
