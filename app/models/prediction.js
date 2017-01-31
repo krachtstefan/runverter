@@ -24,7 +24,7 @@ export default DS.Model.extend({
    *
    * @return {Run} achieved run
    */
-  achievedRun : Ember.computed("achievedRunRaw.lengthM", "achievedRunRaw.timeSec", function(){
+  achievedRun: Ember.computed("achievedRunRaw.lengthM", "achievedRunRaw.timeSec", function(){
     return this.get("achievedRunRaw");
   }),
 
@@ -49,14 +49,14 @@ export default DS.Model.extend({
    *
    * @return {Run} predicted run
    */
-  predictedRun : Ember.computed(function() {
+  predictedRun: Ember.computed(function() {
     return this.get("predictedRunRaw");
   }),
 
   /**
    * updatePredictedRunSec updates the time of the predicted run when necessary
    */
-  updatePredictedRunSec : Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
+  updatePredictedRunSec: Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
     Ember.run.once(this, function() {
       var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
       this.set("predictedRun.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
@@ -72,7 +72,7 @@ export default DS.Model.extend({
    * @param {Decimal} t1 is the time achieved for d1
    * @return {Decimal} predicted time
    */
-  peterRiegelMethod : function(d1, d2, t1){
+  peterRiegelMethod: function(d1, d2, t1){
     d1 = this._ensureDecimal(d1);
     d2 = this._ensureDecimal(d2);
     t1 = this._ensureDecimal(t1);
@@ -88,7 +88,7 @@ export default DS.Model.extend({
    * @param {Decimal} t2 is the time predicted for d2
    * @return {Decimal} predicted time
    */
-  peterRiegelMethodReversed : function(d1, d2, t2){
+  peterRiegelMethodReversed: function(d1, d2, t2){
     d1 = this._ensureDecimal(d1);
     d2 = this._ensureDecimal(d2);
     t2 = this._ensureDecimal(t2);
@@ -105,7 +105,7 @@ export default DS.Model.extend({
    * @param  {Decimal|string|number} input  any number like input
    * @return {Decimal} output instance of Decimal
    */
-  _ensureDecimal : function(input){
+  _ensureDecimal: function(input){
     return (input instanceof Decimal) ? input : new Decimal(+input || 0);
   }
 
