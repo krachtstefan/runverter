@@ -54,9 +54,7 @@ export default DS.Model.extend({
   }),
 
   /**
-   * update updatePredictedRunSec updates the time of the predicted run when necessary
-   *
-   * @return {Run}
+   * updatePredictedRunSec updates the time of the predicted run when necessary
    */
   updatePredictedRunSec : Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
     Ember.run.once(this, function() {
