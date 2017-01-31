@@ -29,6 +29,16 @@ export default DS.Model.extend({
   }),
 
   /**
+   * updateAchievedRunSec updates the time of the predicted run, should have been an observer but would end up in an infinite loop
+   *
+   * @return {Run}
+   */
+  updateAchievedRunSec: function() {
+    var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("predictedRun.timeSec"));
+    return this.set("achievedRun.timeSec", new BigNumber(achievedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+  },
+
+  /**
    * predictedRunRaw represents the predicted run and is calculated from achieved run
    * changing the predicted run will also effect the achieved run
    */
