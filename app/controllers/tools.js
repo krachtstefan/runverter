@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
     return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
   }),
 
-  handlePersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
+  handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),
 
