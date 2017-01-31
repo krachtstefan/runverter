@@ -11,11 +11,18 @@ export default Ember.Route.extend({
     }
     var self = this;
     return this.store.findRecord('run', "runverter").then(function(run) {
+      var achievedRun = self.store.createRecord('run', {
+        id : "achievedRun",
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      });
+
       run.set("updatedAt", new Date());
       return RSVP.hash({
         run: run,
         prediction: self.store.createRecord('prediction', {
-          predictedRunRaw: run
+          achievedRunRaw: achievedRun,
+          predictedRunRaw: run,
         })
       });
     }, function() {
