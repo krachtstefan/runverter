@@ -10,33 +10,37 @@ export default Ember.Route.extend({
       this.set('i18n.locale', params.locale);
     }
     var self = this;
-    return this.store.findRecord('run', "runverter").then(function(run) {
-      var achievedRun = self.store.createRecord('run', {
-        id : "achievedRun",
-        timeSec : new BigNumber(3600*4),
-        lengthM : new BigNumber(42195)
-      });
+    var prediction = self.store.createRecord('prediction', {
+      id : "prediction"
+    });
 
-      run.set("updatedAt", new Date());
-      return RSVP.hash({
-        run: run,
-        prediction: self.store.createRecord('prediction', {
-          achievedRunRaw: achievedRun,
-          predictedRunRaw: run,
-        })
-      });
+    var run = this.store.findRecord('run', "runverter").then(function(run){
+      return run;
     }, function() {
-      var run = self.store.createRecord('run', {
+      return self.store.createRecord('run', {
         id : "runverter",
         timeSec : new BigNumber(3600*4),
         lengthM : new BigNumber(42195)
       });
-      return RSVP.hash({
-        run : run,
-        prediction: self.store.createRecord('prediction', {
-          predictedRunRaw: run
-        })
+    }).then(function(run){
+      self.store.findRecord('run', "achievedRun").then(function(achievedRun){
+        prediction.set('achievedRunRaw', achievedRun);
+        prediction.set('predictedRunRaw', run);
+      }, function() {
+        var achievedRun = self.store.createRecord('run', {
+          id : "achievedRun",
+          timeSec : new BigNumber(3600*4),
+          lengthM : new BigNumber(42195)
+        });
+        prediction.set('achievedRunRaw', achievedRun);
+        prediction.set('predictedRunRaw', run);
       });
+      return run;
+    });
+
+    return RSVP.hash({
+      run: run,
+      prediction: prediction
     });
   },
 
