@@ -64,8 +64,10 @@ export default Ember.Controller.extend({
   }),
 
   handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRunRaw.lengthM", "model.prediction.achievedRunRaw.timeSec", function () {
-    console.log("handleAchievedRunPersistence called");
-    this.get("model.prediction.achievedRunRaw.content").save();
+    // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRunRaw would be saved to
+    if(this.get("model.prediction.achievedRunRaw.id") === "achievedRun"){
+      this.get("model.prediction.achievedRunRaw.content").save();
+    }
   }),
 
   actions: {
