@@ -49,7 +49,7 @@ export default DS.Model.extend({
    *
    * @return {Run} predicted run
    */
-  predictedRun: Ember.computed(function() {
+  predictedRun: Ember.computed("predictedRunRaw", function() {
     return this.get("predictedRunRaw");
   }),
 
