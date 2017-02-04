@@ -59,6 +59,14 @@ export default Ember.Controller.extend({
     return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
   }),
 
+  test: Ember.computed("selectedToolKey", function () {
+    if(this.get("selectedToolKey") === "pca"){
+      return true
+    }else{
+      return false
+    }
+  }),
+
   handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),

@@ -25,7 +25,6 @@ export default Ember.Route.extend({
     }).then(function(run){
       self.store.findRecord('run', "achievedRun").then(function(achievedRun){
         prediction.set('achievedRunRaw', achievedRun);
-        prediction.set('predictedRunRaw', run);
       }, function() {
         var achievedRun = self.store.createRecord('run', {
           id : "achievedRun",
@@ -33,7 +32,6 @@ export default Ember.Route.extend({
           lengthM : new BigNumber(42195)
         });
         prediction.set('achievedRunRaw', achievedRun);
-        prediction.set('predictedRunRaw', run);
       });
       return run;
     });

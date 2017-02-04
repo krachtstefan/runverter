@@ -46,6 +46,23 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
+  /**
+   * import the predicted run when initializing this component
+   */
+  importPredictedRun: Ember.on('init', function(){
+    this.set("prediction.predictedRun.lengthM", this.get("run.lengthM"));
+    this.set("prediction.predictedRun.timeSec", this.get("run.timeSec"));
+    this.get("prediction").updateAchievedRunSec();
+  }),
+
+  /**
+   * export the predicted run before destroying this component
+   */
+  exportPredictedRun : Ember.on('willDestroyElement', function(){
+    this.set("run.lengthM", this.get("prediction.predictedRun.lengthM"));
+    this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
+  }),
+
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
@@ -70,15 +87,6 @@ export default Ember.Component.extend({
       });
     });
   },
-
-  /**
-   * update the achieved run time when entering the race predictor component
-   */
-  handleAchievedRunUpdate : Ember.on('init', Ember.observer("visible", function(){
-    if(this.get("visible") === true ){
-      this.get("prediction").updateAchievedRunSec();
-    }
-  })),
 
   tooltipAchievedLengthKm : Ember.computed("prediction.achievedRun.lengthKm", "i18n.locale", function(){
     return this.get("prediction.achievedRun.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
