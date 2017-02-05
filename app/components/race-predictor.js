@@ -56,9 +56,10 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * export the predicted run before destroying this component
+   * export the predicted run everytime it changes,
+   * data need to be consistent as soon as possible since the user can leave or reload the page any time
    */
-  exportPredictedRun : Ember.on('willDestroyElement', function(){
+  exportPredictedRun : Ember.observer('prediction.predictedRun.lengthM', 'prediction.predictedRun.timeSec', function(){
     this.set("run.lengthM", this.get("prediction.predictedRun.lengthM"));
     this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
   }),
