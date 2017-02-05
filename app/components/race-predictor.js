@@ -133,10 +133,6 @@ export default Ember.Component.extend({
     return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
 
-  visible: Ember.computed('selectedMenuItem', function () {
-    return this.get("selectedMenuItem.key") === "rp" ? true : false;
-  }),
-
   showAchievedRunLengthKm: Ember.computed('achievedRunMetricsSelected', function () {
     return this.get("achievedRunMetricsSelected") === "km" ? true : false;
   }),

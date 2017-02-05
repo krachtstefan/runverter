@@ -1,51 +1,49 @@
-{{#if visible}}
-  <form class="uk-form uk-container-center">
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.rp.achievedDistanceLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedRacePickerVisibleClass}}">
-        {{#if showAchievedRunLengthKm}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthKmStackKm maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthKmStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}}</span>{{/if}}
-        {{#if showAchievedRunLengthMi}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthMiStackMi maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthMiStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}}</span>{{/if}}
-        {{#x-select value=achievedRunMetricsSelected class="achievedRunLength"}}
-          {{#each predictedRunLengthMetrics as |item|}}
-            {{#x-option value=item.key}}{{item.label}}{{/x-option}}
-          {{/each}}
-        {{/x-select}}
-        {{form-helper/suggest-select items=races.templates identifier="race-picker-achieved-race" action="setAchievedRace" label=(t "races.label")}}
-      </div>
+<form class="uk-form uk-container-center">
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.rp.achievedDistanceLabel"}}</span>
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.rp.achievedTimeLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedTimePickerVisibleClass}}">
-        {{form-helper/number-input value=prediction.achievedRun.timeStackHr minLength="1" focus=achievedTimePickerVisible title=tooltipAchievedTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=prediction.achievedRun.timeStackMinFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=prediction.achievedRun.timeStackSecFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeSec}} {{t "metrics.time.sec"}}
-        {{form-helper/suggest-select items=achievedTimesSuggestions identifier="predicted-time-achieved-race-predictor" action="setAchievedTime" label=(t "targetTimes.label")}}
-      </div>
+    <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedRacePickerVisibleClass}}">
+      {{#if showAchievedRunLengthKm}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthKmStackKm maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthKmStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthKm}}</span>{{/if}}
+      {{#if showAchievedRunLengthMi}}<span>{{form-helper/number-input value=prediction.achievedRun.lengthMiStackMi maxLength="3" focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.achievedRun.lengthMiStackDecimalFixed addLeadingZeros=true focus=achievedRacePickerVisible title=tooltipAchievedLengthMi}}</span>{{/if}}
+      {{#x-select value=achievedRunMetricsSelected class="achievedRunLength"}}
+        {{#each predictedRunLengthMetrics as |item|}}
+          {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
+      {{form-helper/suggest-select items=races.templates identifier="race-picker-achieved-race" action="setAchievedRace" label=(t "races.label")}}
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.rp.predictedDistanceLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedRacePickerVisibleClass}}">
-        {{#if showPredictedRunLengthKm}}<span>{{form-helper/number-input value=prediction.predictedRun.lengthKmStackKm maxLength="3" focus=predictedRacePickerVisible title=tooltipPredictedLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.predictedRun.lengthKmStackDecimalFixed addLeadingZeros=true focus=predictedRacePickerVisible title=tooltipPredictedLengthKm}}</span>{{/if}}
-        {{#if showPredictedRunLengthMi}}<span>{{form-helper/number-input value=prediction.predictedRun.lengthMiStackMi maxLength="3" focus=predictedRacePickerVisible title=tooltipPredictedLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.predictedRun.lengthMiStackDecimalFixed addLeadingZeros=true focus=predictedRacePickerVisible title=tooltipPredictedLengthMi}}</span>{{/if}}
-        {{#x-select value=predictedRunMetricsSelected class="predictedRunLength"}}
-          {{#each predictedRunLengthMetrics as |item|}}
-            {{#x-option value=item.key}}{{item.label}}{{/x-option}}
-          {{/each}}
-        {{/x-select}}
-        {{form-helper/suggest-select items=races.templates identifier="race-picker-predicted-race" action="setPredictedRace" label=(t "races.label")}}
-      </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.rp.achievedTimeLabel"}}</span>
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.rp.predictedTimeLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedTimePickerVisibleClass}}">
-        {{prediction.predictedRun.timeStackHr}} {{t "metrics.time.hr"}} {{prediction.predictedRun.timeStackMinFixed}} {{t "metrics.time.min"}} {{prediction.predictedRun.timeStackSecFixed}} {{t "metrics.time.sec"}}
-      </div>
+    <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedTimePickerVisibleClass}}">
+      {{form-helper/number-input value=prediction.achievedRun.timeStackHr minLength="1" focus=achievedTimePickerVisible title=tooltipAchievedTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=prediction.achievedRun.timeStackMinFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=prediction.achievedRun.timeStackSecFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeSec}} {{t "metrics.time.sec"}}
+      {{form-helper/suggest-select items=achievedTimesSuggestions identifier="predicted-time-achieved-race-predictor" action="setAchievedTime" label=(t "targetTimes.label")}}
     </div>
-  </form>
-{{/if}}
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.rp.predictedDistanceLabel"}}</span>
+    </div>
+    <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedRacePickerVisibleClass}}">
+      {{#if showPredictedRunLengthKm}}<span>{{form-helper/number-input value=prediction.predictedRun.lengthKmStackKm maxLength="3" focus=predictedRacePickerVisible title=tooltipPredictedLengthKm}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.predictedRun.lengthKmStackDecimalFixed addLeadingZeros=true focus=predictedRacePickerVisible title=tooltipPredictedLengthKm}}</span>{{/if}}
+      {{#if showPredictedRunLengthMi}}<span>{{form-helper/number-input value=prediction.predictedRun.lengthMiStackMi maxLength="3" focus=predictedRacePickerVisible title=tooltipPredictedLengthMi}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=prediction.predictedRun.lengthMiStackDecimalFixed addLeadingZeros=true focus=predictedRacePickerVisible title=tooltipPredictedLengthMi}}</span>{{/if}}
+      {{#x-select value=predictedRunMetricsSelected class="predictedRunLength"}}
+        {{#each predictedRunLengthMetrics as |item|}}
+          {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
+      {{form-helper/suggest-select items=races.templates identifier="race-picker-predicted-race" action="setPredictedRace" label=(t "races.label")}}
+    </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.rp.predictedTimeLabel"}}</span>
+    </div>
+    <div class="uk-width-1-1 suggest-select-container {{expertModeClass}} {{predictedTimePickerVisibleClass}}">
+      {{prediction.predictedRun.timeStackHr}} {{t "metrics.time.hr"}} {{prediction.predictedRun.timeStackMinFixed}} {{t "metrics.time.min"}} {{prediction.predictedRun.timeStackSecFixed}} {{t "metrics.time.sec"}}
+    </div>
+  </div>
+</form>

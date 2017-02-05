@@ -25,10 +25,6 @@ export default Ember.Component.extend({
     return this.get("run.lengthM").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.m");
   }),
 
-  visible: Ember.computed('selectedMenuItem', function () {
-    return this.get("selectedMenuItem.key") === "lc" ? true : false;
-  }),
-
   racePickerKmVisibleClass: Ember.computed('racePickerKmVisible', 'isTouchDevice', function () {
     return this.get("racePickerKmVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),

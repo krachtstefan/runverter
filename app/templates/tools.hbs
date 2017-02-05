@@ -7,13 +7,9 @@
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
 </div>
 <div class="tools uk-container uk-container-center {{selectedToolClass}} {{expertModeClass}}">
-  {{#if test}}
-    {{pace-calculator expertMode=expertMode run=model.run selectedMenuItem=selectedTool runLengthMetricsSelected=paceCalcLengthMetricsQuery runTempoMetricsSelected=paceCalcTempoMetricsQuery}}
-  {{else}}
-    {{!-- {{pace-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}}
-    {{length-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}}
-    {{race-predictor expertMode=expertMode prediction=model.prediction selectedMenuItem=selectedTool achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}} --}}
-    {{race-predictor expertMode=expertMode run=model.run prediction=model.prediction selectedMenuItem=selectedTool achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}}
-  {{/if}}
+  {{#if selectedToolPca}} {{pace-calculator expertMode=expertMode run=model.run selectedMenuItem=selectedTool runLengthMetricsSelected=paceCalcLengthMetricsQuery runTempoMetricsSelected=paceCalcTempoMetricsQuery}} {{/if}}
+  {{#if selectedToolPc}} {{pace-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}} {{/if}}
+  {{#if selectedToolLc}} {{length-converter expertMode=expertMode run=model.run selectedMenuItem=selectedTool}} {{/if}}
+  {{#if selectedToolRp}} {{race-predictor expertMode=expertMode run=model.run prediction=model.prediction selectedMenuItem=selectedTool achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}} {{/if}}
 </div>
 {{imprint-page expertModeClass=expertModeClass run=model.run visible=imprintVisible}}

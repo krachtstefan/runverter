@@ -59,12 +59,20 @@ export default Ember.Controller.extend({
     return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
   }),
 
-  test: Ember.computed("selectedToolKey", function () {
-    if(this.get("selectedToolKey") === "pca"){
-      return true
-    }else{
-      return false
-    }
+  selectedToolPca: Ember.computed("selectedToolKey", function () {
+    return this.get("selectedToolKey") === "pca" ? true : false;
+  }),
+
+  selectedToolPc: Ember.computed("selectedToolKey", function () {
+    return this.get("selectedToolKey") === "pc" ? true : false;
+  }),
+
+  selectedToolLc: Ember.computed("selectedToolKey", function () {
+    return this.get("selectedToolKey") === "lc" ? true : false;
+  }),
+
+  selectedToolRp: Ember.computed("selectedToolKey", function () {
+    return this.get("selectedToolKey") === "rp" ? true : false;
   }),
 
   handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
