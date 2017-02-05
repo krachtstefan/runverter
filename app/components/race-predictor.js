@@ -49,9 +49,9 @@ export default Ember.Component.extend({
   /**
    * import the predicted run when initializing this component
    */
-  importPredictedRun: Ember.on('init', function(){
-    this.set("prediction.predictedRun.lengthM", this.get("run.lengthM"));
-    this.set("prediction.predictedRun.timeSec", this.get("run.timeSec"));
+  importPredictedRun : Ember.on("init", function(){
+    this.set("prediction.predictedRunRaw.lengthM", this.get("run.lengthM"));
+    this.set("prediction.predictedRunRaw.timeSec", this.get("run.timeSec"));
     this.get("prediction").updateAchievedRunSec();
   }),
 
