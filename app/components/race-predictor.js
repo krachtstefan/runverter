@@ -175,11 +175,6 @@ export default Ember.Component.extend({
       if(race !== null){
         this.get("prediction.predictedRun").set("lengthM",race.lengthM);
       }
-    },
-    setPredictedTime: function(targetTime) {
-      if(targetTime !== null){
-        this.get("prediction.predictedRun").set("timeSec",targetTime.timeSec);
-      }
     }
   }
 });
