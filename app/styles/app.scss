@@ -195,6 +195,12 @@ body{
       margin-right: inherit;
       margin-bottom: 20px;
     }
+    .form-element{
+      line-height:40px;
+      @include respond-to("small"){
+        line-height:74px;
+      }
+    }
   }
 
   .tools .toolLabel{
