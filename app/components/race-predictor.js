@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   achievedRacePickerVisible: false,
   achievedTimePickerVisible: false,
   predictedRacePickerVisible: false,
-  predictedTimePickerVisible: false,
 
   races : Ember.inject.service('race'),
   targetTimes : Ember.inject.service('target-time'),
@@ -159,10 +158,6 @@ export default Ember.Component.extend({
 
   predictedRacePickerVisibleClass: Ember.computed('predictedRacePickerVisible', 'isTouchDevice', function () {
     return this.get("predictedRacePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
-  }),
-
-  predictedTimePickerVisibleClass: Ember.computed('predictedTimePickerVisible', 'isTouchDevice', function () {
-    return this.get("predictedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   actions: {
