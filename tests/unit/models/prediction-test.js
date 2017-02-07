@@ -41,102 +41,98 @@ test('predictedRun has a default value', function(assert) {
   });
 });
 
-// test('predictedRun changes when achievedRun was created', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
-//     assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(20000),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
-//     });
-//     assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
-//   });
-// });
+test('predictedRun changes when achievedRun was created', function(assert) {
+  var prediction = this.subject(), self = this;
+  var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
+  Ember.run(function(){
+    assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
+    });
+  });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
+});
 
-// test('predictedRun changes when achievedRun time does', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(20000),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
-//     });
-//     var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-//     prediction.set('achievedRun.timeSec', 3060);
-//     assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
-//   });
-// });
+test('predictedRun changes when achievedRun time does', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
+    });
+  });
+  var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
+  Ember.run(function(){ prediction.set('achievedRun.timeSec', 3060); });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
+});
 
-// test('predictedRun changes when achievedRun length does', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(20000),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
-//     });
-//     var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-//     prediction.set('achievedRun.lengthM', 20000);
-//     assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
-//   });
-// });
+test('predictedRun changes when achievedRun length does', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
+    });
+  });
+  var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
+  Ember.run(function(){ prediction.set('achievedRun.lengthM', 20000); });
+  assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
+});
 
-// test('predictedRun works with a 10k example', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(20000),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
-//     });
+test('predictedRun works with a 10k example', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(20000),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
+    });
+  });
+  // 10k in 50 minutes, 20k? = 1:44:15
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "44");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "15");
+});
 
-//     // 10k in 50 minutes, 20k? = 1:44:15
-//     assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "44");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "15");
-//   });
-// });
+test('predictedRun works with a mile example', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(8046.72),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) })
+    });
+  });
+  // 1 mi in 0:08:15, 5 mi? = 45:26
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "0");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "45");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "26");
+});
 
-// test('predictedRun works with a mile example', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(8046.72),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) })
-//     });
+test('predictedRun works with a marathon example', function(assert) {
+  var prediction = this.subject(), self = this;
+  Ember.run(function(){
+    prediction.setProperties({
+      "predictedRun.lengthM" : new BigNumber(21097.5),
+      "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) })
+    });
+  });
+  // Marathon in 3:26:44, Half Marathon? = 1:39:09
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
 
-//     // 1 mi in 0:08:15, 5 mi? = 45:26
-//     assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "0");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "45");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "26");
-//   });
-// });
-
-// test('predictedRun works with a marathon example', function(assert) {
-//   var prediction = this.subject(), self = this;
-//   Ember.run(function(){
-//     prediction.setProperties({
-//       "predictedRun.lengthM" : new BigNumber(21097.5),
-//       "achievedRunRaw" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) })
-//     });
-
-//     // Marathon in 3:26:44, Half Marathon? = 1:39:09
-//     assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
-//   });
-// });
-
-// test('predictedRun works when the run is definied with lengthKm and timeMin setter', function(assert) {
-//   var prediction = this.subject();
-//   Ember.run(function(){
-//     prediction.set("predictedRun.lengthKm", new BigNumber(21.0975));
-//     prediction.set("achievedRun.lengthKm", new BigNumber(42.195));
-//     prediction.set("achievedRun.timeMin", new BigNumber(44).div(60).plus(206));
-
-//     assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
-//     assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
-//   });
-// });
+test('predictedRun works when the run is definied with lengthKm and timeMin setter', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.lengthKm", new BigNumber(21.0975));
+    prediction.set("achievedRun.lengthKm", new BigNumber(42.195));
+    prediction.set("achievedRun.timeMin", new BigNumber(44).div(60).plus(206));
+  });
+  assert.strictEqual(prediction.get("predictedRun.timeStackHr").toString(), "1");
+  assert.strictEqual(prediction.get("predictedRun.timeStackMin").toString(), "39");
+  assert.strictEqual(prediction.get("predictedRun.timeStackSec").toString(), "9");
+});
 
 // achievedRun
 test('achievedRun is a relation to run model', function(assert) {
