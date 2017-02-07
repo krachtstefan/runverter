@@ -5,8 +5,8 @@ export default DS.Model.extend({
 
   ready: function() {
     this._super(...arguments);
-    if(this.get("predictedRunRaw.content") === null){
-      this.set( "predictedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(60), lengthM : new BigNumber(3400)}) );
+    if(this.get("predictedRun.content") === null){
+      this.set( "predictedRun", this.store.createRecord('run', { timeSec : new BigNumber(60), lengthM : new BigNumber(3400)}) );
     }
     if(this.get("achievedRunRaw.content") === null){
       this.set( "achievedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(120), lengthM : new BigNumber(6000)}) );
@@ -39,19 +39,10 @@ export default DS.Model.extend({
   },
 
   /**
-   * predictedRunRaw represents the predicted run and is calculated from achieved run
+   * predictedRun represents the predicted run and is calculated from achieved run
    * changing the predicted run will also effect the achieved run
    */
-  predictedRunRaw: DS.belongsTo('run'),
-
-  /**
-   * predictedRun is a proxy to predictedRunRaw to handle dependencies with achievedRun
-   *
-   * @return {Run} predicted run
-   */
-  predictedRun: Ember.computed("predictedRunRaw", function() {
-    return this.get("predictedRunRaw");
-  }),
+  predictedRun: DS.belongsTo('run'),
 
   /**
    * updatePredictedRunSec updates the time of the predicted run when necessary
