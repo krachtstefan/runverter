@@ -28,8 +28,8 @@ export default Ember.Route.extend({
       }, function() {
         var achievedRun = self.store.createRecord('run', {
           id : "achievedRun",
-          timeSec : new BigNumber(3600*4),
-          lengthM : new BigNumber(42195)
+          timeSec : new BigNumber(3299),
+          lengthM : new BigNumber(10000)
         });
         prediction.set('achievedRun', achievedRun);
       });
