@@ -1471,6 +1471,14 @@ export default DS.Model.extend({
   }),
 
   /**
+   * update updatedAt before saving the run
+   */
+  save: function(){
+    this.set("updatedAt", new Date());
+    this._super(...arguments);
+  },
+
+  /**
    * check if the run is in a given distance range
    *
    * @param  {BigNumber|string|number} start start of the range in meter
