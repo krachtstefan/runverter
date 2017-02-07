@@ -15,7 +15,6 @@ export default DS.Model.extend({
 
   /**
    * achievedRun represents the achieved run and is needed to calcuate the predicted run,
-   * changing the predicted run will also effect the achieved run
    */
   achievedRun: DS.belongsTo('run'),
 
