@@ -8,25 +8,16 @@ export default DS.Model.extend({
     if(this.get("predictedRun.content") === null){
       this.set( "predictedRun", this.store.createRecord('run', { timeSec : new BigNumber(60), lengthM : new BigNumber(3400)}) );
     }
-    if(this.get("achievedRunRaw.content") === null){
-      this.set( "achievedRunRaw", this.store.createRecord('run', { timeSec : new BigNumber(120), lengthM : new BigNumber(6000)}) );
+    if(this.get("achievedRun.content") === null){
+      this.set( "achievedRun", this.store.createRecord('run', { timeSec : new BigNumber(120), lengthM : new BigNumber(6000)}) );
     }
   },
 
   /**
-   * achievedRunRaw represents the achieved run and is needed to calcuate the predicted run,
+   * achievedRun represents the achieved run and is needed to calcuate the predicted run,
    * changing the predicted run will also effect the achieved run
    */
-  achievedRunRaw: DS.belongsTo('run'),
-
-  /**
-   * achievedRun is a proxy to achievedRunRaw to handle dependencies with predictedRun
-   *
-   * @return {Run} achieved run
-   */
-  achievedRun: Ember.computed("achievedRunRaw.lengthM", "achievedRunRaw.timeSec", function(){
-    return this.get("achievedRunRaw");
-  }),
+  achievedRun: DS.belongsTo('run'),
 
   /**
    * updateAchievedRunSec updates the time of the achieved run, should have been an observer but would end up in an infinite loop

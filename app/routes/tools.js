@@ -24,14 +24,14 @@ export default Ember.Route.extend({
       });
     }).then(function(run){
       self.store.findRecord('run', "achievedRun").then(function(achievedRun){
-        prediction.set('achievedRunRaw', achievedRun);
+        prediction.set('achievedRun', achievedRun);
       }, function() {
         var achievedRun = self.store.createRecord('run', {
           id : "achievedRun",
           timeSec : new BigNumber(3600*4),
           lengthM : new BigNumber(42195)
         });
-        prediction.set('achievedRunRaw', achievedRun);
+        prediction.set('achievedRun', achievedRun);
       });
       return run;
     });

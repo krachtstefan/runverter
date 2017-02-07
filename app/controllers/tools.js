@@ -79,10 +79,10 @@ export default Ember.Controller.extend({
     this.get("model.run").save();
   }),
 
-  handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRunRaw.lengthM", "model.prediction.achievedRunRaw.timeSec", function () {
-    // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRunRaw would be saved to
-    if(this.get("model.prediction.achievedRunRaw.id") === "achievedRun"){
-      this.get("model.prediction.achievedRunRaw.content").save();
+  handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
+    // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRun would be saved to
+    if(this.get("model.prediction.achievedRun.id") === "achievedRun"){
+      this.get("model.prediction.achievedRun.content").save();
     }
   }),
 
