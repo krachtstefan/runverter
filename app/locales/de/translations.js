@@ -124,6 +124,9 @@ export default {
     'sub40' : 'unter 0:40',
     'sub35' : 'unter 0:35',
   },
+  'flashMessages' : {
+    'peterRiegelNotSuitable' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.'
+  },
   'imprint' : {
     'about' : 'Über Runverter',
     'aboutText' : 'Runverter.io ist ein Projekt von <a href="https://twitter.com/stefan_kracht" target="_blank">Stefan Kracht</a>. Mehr Infos gibt es in einem <a href="http://stefankracht.de/news/runverter" target="_blank">ausführlichen Blog-Post</a>.',
