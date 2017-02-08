@@ -316,6 +316,91 @@ test('peterRiegelMethodReversed works (with BigNumbers)', function(assert) {
   assert.strictEqual(prediction.peterRiegelMethodReversed(new BigNumber(42.195), new BigNumber(21.0975), new BigNumber(5949)).toString(), "12403.257622487662309"); // 12403.25762248766230958 (does not match precisely but good enough)
 });
 
+// peterRiegelMethodSuitable
+test('peterRiegelMethodSuitable is false when the achieved Run is below 3.5 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("achievedRun.lengthM", new BigNumber(100));
+    prediction.set("achievedRun.timeSec", new BigNumber(209));
+    prediction.set("predictedRun.lengthM", new BigNumber(500));
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), false);
+});
+
+test('peterRiegelMethodSuitable is true when the achieved Run is above 3.5 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("achievedRun.lengthM", new BigNumber(100));
+    prediction.set("achievedRun.timeSec", new BigNumber(210));
+    prediction.set("predictedRun.lengthM", new BigNumber(500));
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), true);
+});
+
+test('peterRiegelMethodSuitable is false when the achieved Run is above 230 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("achievedRun.lengthM", new BigNumber(42195));
+    prediction.set("achievedRun.timeSec", new BigNumber(13801));
+    prediction.set("predictedRun.lengthM", new BigNumber(21098));
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), false);
+});
+
+test('peterRiegelMethodSuitable is true when the achieved Run is below 230 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("achievedRun.lengthM", new BigNumber(42195));
+    prediction.set("achievedRun.timeSec", new BigNumber(13800));
+    prediction.set("predictedRun.lengthM", new BigNumber(21098));
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), true);
+});
+
+test('peterRiegelMethodSuitable is false when the predicted Run is below 3.5 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.timeSec", new BigNumber(209));
+    prediction.set("predictedRun.lengthM", new BigNumber(100));
+    prediction.set("achievedRun.lengthM", new BigNumber(500));
+    prediction.updateAchievedRunSec();
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), false);
+});
+
+test('peterRiegelMethodSuitable is true when the predicted Run is above 3.5 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.timeSec", new BigNumber(210));
+    prediction.set("predictedRun.lengthM", new BigNumber(100));
+    prediction.set("achievedRun.lengthM", new BigNumber(500));
+    prediction.updateAchievedRunSec();
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), true);
+});
+
+test('peterRiegelMethodSuitable is false when the predicted Run is above 230 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.timeSec", new BigNumber(13801));
+    prediction.set("predictedRun.lengthM", new BigNumber(42195));
+    prediction.set("achievedRun.lengthM", new BigNumber(21098));
+    prediction.updateAchievedRunSec();
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), false);
+});
+
+test('peterRiegelMethodSuitable is true when the predicted Run is below 230 minutes', function(assert) {
+  var prediction = this.subject();
+  Ember.run(function(){
+    prediction.set("predictedRun.timeSec", new BigNumber(13800));
+    prediction.set("predictedRun.lengthM", new BigNumber(42195));
+    prediction.set("achievedRun.lengthM", new BigNumber(21098));
+    prediction.updateAchievedRunSec();
+  });
+  assert.strictEqual(prediction.get("peterRiegelMethodSuitable"), true);
+});
+
 // private helper methods
 test('_ensureDecimal can handle numeric strings', function(assert) {
   var ensureDecimal = this.subject()._ensureDecimal("1");
