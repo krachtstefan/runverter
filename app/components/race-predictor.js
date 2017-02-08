@@ -63,7 +63,7 @@ export default Ember.Component.extend({
     this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
   }),
 
-  checkPeterRiegelMethodSuitable : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
+  displayPeterRiegelExlanation : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
     if(this.get("prediction.peterRiegelMethodSuitable")===false){
       this.get("flashMessages").info(this.get('i18n').t("flashMessages.peterRiegelNotSuitable"));
     }
