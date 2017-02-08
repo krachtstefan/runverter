@@ -143,7 +143,6 @@ test('achievedRun is a relation to run model', function(assert) {
   assert.equal(relationship.type, 'run');
 });
 
-// achievedRun
 test('achievedRun behaves like run model', function(assert) {
   var prediction = this.subject(), self = this;
   Ember.run(function(){
