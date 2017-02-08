@@ -77,6 +77,19 @@ export default DS.Model.extend({
   },
 
   /**
+   * Run prediction with the Peter Riegel method is only suitable when the activities are in the "endurance range", lasting between 3.5 and 230 minutes
+   *
+   * @return {Boolean} if Peter Riegel method is suitable for this prediction
+   */
+  peterRiegelMethodSuitable: Ember.computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
+    if(this.get("achievedRun.timeSec").greaterThan(209) && this.get("achievedRun.timeSec").lessThan(13801) && this.get("predictedRun.timeSec").greaterThan(209) && this.get("predictedRun.timeSec").lessThan(13801)){
+      return true;
+    }else{
+      return false;
+    }
+  }),
+
+  /**
    * will convert the input to Decimal if necessary. If input is Decimal already
    * it will be left unchanged. This method is handy for setter methods of this class.
    * Setter may be called from user input (string) or other methods of this class which
