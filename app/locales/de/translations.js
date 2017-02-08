@@ -125,7 +125,7 @@ export default {
     'sub35' : 'unter 0:35',
   },
   'flashMessages' : {
-    'peterRiegelNotSuitable' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.'
+    'peterRiegelExlanation' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.'
   },
   'imprint' : {
     'about' : 'Über Runverter',

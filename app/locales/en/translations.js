@@ -55,7 +55,7 @@ export default {
     }
   },
   'flashMessages' : {
-    'peterRiegelNotSuitable' : 'Please note that the race prediction is only suitable if both races are lasting between 3.5 minutes and 3 hours, 50 minutes.'
+    'peterRiegelExlanation' : 'Please note that the race prediction is only suitable if both races are lasting between 3.5 minutes and 3 hours, 50 minutes.'
   },
   'metrics' : {
     'separator' : '.',
