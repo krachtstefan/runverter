@@ -3,6 +3,7 @@ import $ from 'jquery';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
+  flashMessages: Ember.inject.service(),
 
   achievedRunMetricsSelected : "km",  // may be overwritten when using this component
   predictedRunMetricsSelected : "km", // may be overwritten when using this component
@@ -61,6 +62,12 @@ export default Ember.Component.extend({
     this.set("run.lengthM", this.get("prediction.predictedRun.lengthM"));
     this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
   }),
+
+  checkPeterRiegelMethodSuitable : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
+    if(this.get("prediction.peterRiegelMethodSuitable")===false){
+      this.get("flashMessages").info(this.get('i18n').t("flashMessages.peterRiegelNotSuitable"));
+    }
+  })),
 
   didRender: function() {
     this._super(...arguments);
