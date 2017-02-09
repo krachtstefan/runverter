@@ -66,9 +66,8 @@ export default Ember.Component.extend({
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
       this.get("flashMessages").add({
         message: this.get('i18n').t("flashMessages.peterRiegelExlanation"),
-        type: 'info',
-        sticky: true,
-        showProgress: true
+        type: 'warning',
+        sticky: true
       });
       this.set("settings.displayPeterRiegelExlanation", "false");
     }
