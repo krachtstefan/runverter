@@ -1,0 +1,7 @@
+.notification-messages{
+  max-width: 300px;
+  .alert{
+    border: 1px solid $color-form-border;
+    padding: 20px;
+  }
+}
