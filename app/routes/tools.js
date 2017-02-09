@@ -36,9 +36,18 @@ export default Ember.Route.extend({
       return run;
     });
 
+    var settings = this.store.findRecord('settings', "settings").then(function(settings){
+      return settings;
+    }, function() {
+      return self.store.createRecord('settings', {
+        id : "settings"
+      });
+    });
+
     return RSVP.hash({
       run: run,
-      prediction: prediction
+      prediction: prediction,
+      settings: settings,
     });
   },
 
