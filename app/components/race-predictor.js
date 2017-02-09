@@ -69,6 +69,24 @@ export default Ember.Component.extend({
         type: 'warning',
         sticky: true
       });
+
+      this.get("flashMessages").add({
+        message: "alert",
+        type: 'alert',
+        sticky: true
+      });
+
+      this.get("flashMessages").add({
+        message: "info",
+        type: 'info',
+        sticky: true
+      });
+
+      this.get("flashMessages").add({
+        message: "success",
+        type: 'success',
+        sticky: true
+      });
       this.set("settings.displayPeterRiegelExlanation", "false");
     }
   })),
