@@ -20,3 +20,27 @@ test('displayPeterRiegelExlanation is true by default', function(assert) {
   var settings = this.subject();
   assert.strictEqual(settings.get("displayPeterRiegelExlanation") , true);
 });
+
+// createdAt
+test('createdAt is from type Date', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("createdAt").constructor.name , "Date");
+});
+
+test('createdAt equals current date', function(assert) {
+  var settings = this.subject();
+  var today = new Date();
+  assert.strictEqual(settings.get("createdAt").toString() , today.toString());
+});
+
+// updatedAt
+test('updatedAt is from type Date', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("createdAt").constructor.name , "Date");
+});
+
+test('updatedAt equals current date', function(assert) {
+  var settings = this.subject();
+  var today = new Date();
+  assert.strictEqual(settings.get("updatedAt").toString() , today.toString());
+});
