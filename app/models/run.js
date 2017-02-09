@@ -6,6 +6,8 @@ export default DS.Model.extend({
   /**
    * createdAt represents the creation date of the run, will be stored in database
    * and should be set on create
+   *
+   * @type {Date}
    */
   createdAt: DS.attr('date', {
     defaultValue() { return new Date(); }
@@ -14,6 +16,8 @@ export default DS.Model.extend({
   /**
    * updatedAt represents the updating date of the run, will be stored in database
    * and should be set on create on on every page visit
+   *
+   * @type {Date}
    */
   updatedAt: DS.attr('date', {
     defaultValue() { return new Date(); }
