@@ -75,6 +75,10 @@ export default Ember.Controller.extend({
     return this.get("selectedToolKey") === "rp" ? true : false;
   }),
 
+  flashMessagesAvailable : Ember.computed("flashMessages.queue", function(){
+    return (this.get("flashMessages.queue").length > 0) ? true : false;
+  }),
+
   handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),
