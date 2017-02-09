@@ -29,4 +29,12 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date', {
     defaultValue() { return new Date(); }
   }),
+
+  /**
+   * update updatedAt before saving the settings
+   */
+  save: function(){
+    this.set("updatedAt", new Date());
+    this._super(...arguments);
+  },
 });
