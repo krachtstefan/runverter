@@ -66,7 +66,7 @@ export default Ember.Component.extend({
   displayPeterRiegelExlanation : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
     var self = this;
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
-      this.set("settings.displayPeterRiegelExlanation", "false");
+      this.set("settings.displayPeterRiegelExlanation", false);
       this.get("flashMessages").add({
         message: this.get('i18n').t("flashMessages.peterRiegelExlanation"),
         type: 'warning',
