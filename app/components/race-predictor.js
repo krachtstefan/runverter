@@ -3,6 +3,7 @@ import $ from 'jquery';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
+  flashMessages: Ember.inject.service(),
 
   achievedRunMetricsSelected : "km",  // may be overwritten when using this component
   predictedRunMetricsSelected : "km", // may be overwritten when using this component
