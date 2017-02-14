@@ -64,11 +64,16 @@ export default Ember.Component.extend({
   }),
 
   displayPeterRiegelExlanation : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
+    var self = this;
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
+      this.set("settings.displayPeterRiegelExlanation", "false");
       this.get("flashMessages").add({
         message: this.get('i18n').t("flashMessages.peterRiegelExlanation"),
         type: 'warning',
-        sticky: true
+        sticky: true,
+        onDestroy() {
+          self.get("settings").save();
+        }
       });
 
       this.get("flashMessages").add({
@@ -88,7 +93,6 @@ export default Ember.Component.extend({
         type: 'success',
         sticky: true
       });
-      this.set("settings.displayPeterRiegelExlanation", "false");
     }
   })),
 
