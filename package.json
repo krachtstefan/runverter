@@ -46,7 +46,7 @@
     "ember-cli-deploy-lightning-pack": "0.6.10",
     "ember-cli-deploy-scp": "1.0.7",
     "ember-cli-deploy-ssh-tunnel": "0.2.2",
-    "ember-cli-flash": "https://github.com/poteto/ember-cli-flash.git#fe56fdad5708737618b627aa4f717390afeb23e9",
+    "ember-cli-flash": "1.4.2",
     "ember-cli-head": "0.1.3",
     "ember-click-outside": "0.1.5",
     "ember-i18n": "4.4.0",
