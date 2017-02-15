@@ -17,6 +17,11 @@
       padding: 20px;
       z-index: 999;
       outline: 5px solid $color-overlay-border;
+
+      &.exiting{
+        background-color:red;
+        margin-right: -100%;
+      }
     }
 
     //alert

@@ -71,8 +71,9 @@ export default Ember.Component.extend({
         message: this.get('i18n').t("flashMessages.peterRiegelExlanation"),
         type: 'warning',
         sticky: true,
+        extendedTimeout: 3000,
         onDestroy() {
-          self.get("settings").save();
+          // self.get("settings").save();
         }
       });
 
