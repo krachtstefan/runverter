@@ -9,6 +9,7 @@
   .notification-messages{
     margin: 0 20px;
     .alert{
+      cursor: pointer;
       background-color:$color-secondary-background;
       max-width: 600px;
       margin:5px auto 25px auto;
