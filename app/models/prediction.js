@@ -9,7 +9,7 @@ export default DS.Model.extend({
       this.set( "predictedRun", this.store.createRecord('run', { timeSec : new BigNumber(4950), lengthM : new BigNumber(15000)}) );
     }
     if(this.get("achievedRun.content") === null){
-      this.set( "achievedRun", this.store.createRecord('run', { timeSec : new BigNumber(3299), lengthM : new BigNumber(10000)}) );
+      this.set( "achievedRun", this.store.createRecord('run', { timeSec : new BigNumber(2700), lengthM : new BigNumber(10000)}) );
     }
   },
 

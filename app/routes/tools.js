@@ -19,7 +19,7 @@ export default Ember.Route.extend({
     }, function() {
       return self.store.createRecord('run', {
         id : "runverter",
-        timeSec : new BigNumber(3600*4),
+        timeSec : new BigNumber(13499),
         lengthM : new BigNumber(42195)
       });
     }).then(function(run){
@@ -28,7 +28,7 @@ export default Ember.Route.extend({
       }, function() {
         var achievedRun = self.store.createRecord('run', {
           id : "achievedRun",
-          timeSec : new BigNumber(3299),
+          timeSec : new BigNumber(2700),
           lengthM : new BigNumber(10000)
         });
         prediction.set('achievedRun', achievedRun);
