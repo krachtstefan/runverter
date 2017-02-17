@@ -13,6 +13,7 @@ export default Ember.Component.extend({
         message: this.get('i18n').t("flashMessages.releaseNotesRacePredictor"),
         type: 'info',
         sticky: true,
+        identifier: 'releaseNotesRacePredictor',
         onDestroy() {
           self.get("settings").save();
         }
