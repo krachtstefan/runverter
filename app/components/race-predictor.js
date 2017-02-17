@@ -74,7 +74,7 @@ export default Ember.Component.extend({
         sticky: true,
         extendedTimeout: 3000,
         onDestroy() {
-          // self.get("settings").save();
+          self.get("settings").save();
         }
       });
 
