@@ -30,8 +30,8 @@ test('predictedRun behaves like run model', function(assert) {
         lengthM : new BigNumber(42195)
       })
     );
+    assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "4");
   });
-  assert.strictEqual(prediction.get("predictedRun.timeHrRaw").toString(), "4.2155715556704166666666667"); // TODO: shoud be 4, works on achievedRun
 });
 
 test('predictedRun has a default value', function(assert) {
@@ -152,8 +152,8 @@ test('achievedRun behaves like run model', function(assert) {
         lengthM : new BigNumber(42195)
       })
     );
+    assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "4");
   });
-  assert.strictEqual(prediction.get("achievedRun.timeHrRaw").toString(), "4");
 });
 
 test('achievedRun has a default value', function(assert) {
