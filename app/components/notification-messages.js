@@ -1,7 +1,7 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
   elementId: "notification-container",
-  flashMessages: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
   i18n: Ember.inject.service(),
 
   init() {
@@ -9,12 +9,9 @@ export default Ember.Component.extend({
     var self = this;
     if(this.get("settings.displayReleaseNotesRacePredictor")===true){
       this.set("settings.displayReleaseNotesRacePredictor", false);
-      this.get("flashMessages").add({
-        message: this.get('i18n').t("flashMessages.releaseNotesRacePredictor"),
-        type: 'info',
-        sticky: true,
-        identifier: 'releaseNotesRacePredictor',
-        onDestroy() {
+
+      this.get('notifications').success(this.get('i18n').t("flashMessages.releaseNotesRacePredictor"), {
+        onClick() {
           self.get("settings").save();
         }
       });
