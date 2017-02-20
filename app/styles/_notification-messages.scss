@@ -1,47 +1,4 @@
 #notification-container{
   line-height: 1.5em;
   font-size: 1.5em;
-  max-height: 200px;
-  overflow: hidden;
-  position: fixed;
-  bottom:0;
-  width: 100%;
-  .notification-messages{
-    margin: 0 20px;
-    .alert{
-      cursor: pointer;
-      background-color:$color-secondary-background;
-      max-width: 600px;
-      margin:5px auto 25px auto;
-      border: 1px solid $color-form-border;
-      padding: 20px;
-      z-index: 999;
-      outline: 5px solid $color-overlay-border;
-
-      &.exiting{
-        background-color:red;
-        margin-right: -100%;
-      }
-    }
-
-    //alert
-    .alert-alert{
-      border-left:5px solid $color-alert;
-    }
-
-    // info
-    .alert-info{
-      border-left:5px solid $color-info;
-    }
-
-    // success
-    .alert-success{
-      border-left:5px solid $color-success;
-    }
-
-    // warning
-    .alert-warning{
-      border-left:5px solid $color-warning;
-    }
-  }
 }
