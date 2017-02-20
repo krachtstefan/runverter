@@ -9,7 +9,6 @@ export default Ember.Component.extend({
     var self = this;
     if(this.get("settings.displayReleaseNotesRacePredictor")===true){
       this.set("settings.displayReleaseNotesRacePredictor", false);
-
       this.get('notifications').success(this.get('i18n').t("flashMessages.releaseNotesRacePredictor"), {
         onClick() {
           self.get("settings").save();
@@ -22,12 +21,12 @@ export default Ember.Component.extend({
     // when entering race predictor component, find the race predictor announcement notification and remove it
     // also make sure to not display it again
     if(this.get("selectedMenuItem.key")==="rp"){
-      var relaseNotesMessage = this.get("flashMessages.queue").filterBy('identifier', "releaseNotesRacePredictor");
+      var relaseNotesMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.releaseNotesRacePredictor").string);
       if(relaseNotesMessage.length > 0){
-        relaseNotesMessage[0].destroyMessage();
+        this.get('notifications').removeNotification(relaseNotesMessage[0]);
+        this.set("settings.displayReleaseNotesRacePredictor", false);
+        this.get("settings").save();
       }
-      this.set("settings.displayReleaseNotesRacePredictor", false);
-      this.get("settings").save();
     }
   })),
 });
