@@ -3,7 +3,7 @@ import $ from 'jquery';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
-  flashMessages: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   achievedRunMetricsSelected : "km",  // may be overwritten when using this component
   predictedRunMetricsSelected : "km", // may be overwritten when using this component
@@ -67,33 +67,11 @@ export default Ember.Component.extend({
     var self = this;
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
       this.set("settings.displayPeterRiegelExlanation", false);
-      this.get("flashMessages").add({
-        identifier: 'displayPeterRiegelExlanation',
-        message: this.get('i18n').t("flashMessages.peterRiegelExlanation"),
-        type: 'warning',
-        sticky: true,
-        extendedTimeout: 3000,
-        onDestroy() {
+
+      this.get('notifications').info(this.get('i18n').t("flashMessages.peterRiegelExlanation"), {
+        onClick() {
           self.get("settings").save();
         }
-      });
-
-      this.get("flashMessages").add({
-        message: "alert",
-        type: 'alert',
-        sticky: true
-      });
-
-      this.get("flashMessages").add({
-        message: "info",
-        type: 'info',
-        sticky: true
-      });
-
-      this.get("flashMessages").add({
-        message: "success",
-        type: 'success',
-        sticky: true
       });
     }
   })),
