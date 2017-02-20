@@ -2,6 +2,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   classNames: ["imprint"],
   classNameBindings: ['visible:open', 'expertModeClass'],
@@ -10,6 +11,12 @@ export default Ember.Component.extend({
   actions: {
     closeImprintPage: function() {
       this.set("visible", false);
+    },
+    deleteStorage: function(){
+      localStorage.clear();
+      this.get('notifications').success(this.get('i18n').t("flashMessages.localstorageCleared"), {
+        autoClear: true
+      });
     }
   }
 });

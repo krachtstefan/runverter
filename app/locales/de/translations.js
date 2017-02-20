@@ -126,7 +126,8 @@ export default {
   },
   'flashMessages' : {
     'peterRiegelExlanation' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.',
-    'releaseNotesRacePredictor' : 'Es gibt gute Neuigkeiten. Die Wettkampfprognose ist endlich da. Probier sie gleich aus &#9996;'
+    'releaseNotesRacePredictor' : 'Es gibt gute Neuigkeiten. Die Wettkampfprognose ist endlich da. Probier sie gleich aus &#9996;',
+    'localstorageCleared' : 'Alle lokal gespeicherten Daten wurden entfernt.'
   },
   'imprint' : {
     'about' : 'Über Runverter',
@@ -137,5 +138,7 @@ export default {
     'responsibleText' :'Stefan Kracht<br />Hasencleverstraße 1<br />22111 Hamburg<br />',
     'disclaimer' :'Disclaimer blah blah...',
     'disclaimerText' :'Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. <br />Ich setze Google Analytics, einen Webanalysedienst der Google Inc. („Google“) ein. Google verwendet Cookies. Die durch das Cookie erzeugten Informationen über die Benutzung des Onlineangebotes durch die Nutzer werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.<br />Google wird diese Informationen in unserem Auftrag benutzen, um die Nutzung unseres Onlineangebotes durch die Nutzer auszuwerten, um Reports über die Aktivitäten innerhalb dieses Onlineangebotes zusammenzustellen und um weitere mit der Nutzung dieses Onlineangebotes und der Internetnutzung verbundene Dienstleistungen uns gegenüber zu erbringen. Dabei können aus den verarbeiteten Daten pseudonyme Nutzungsprofile der Nutzer erstellt werden.',
+    'localstorage' : 'Lokale Daten',
+    'deleteData' : 'Alle lokal gespeicherten Daten löschen.'
   }
 };
