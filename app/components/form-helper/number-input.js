@@ -9,6 +9,7 @@ export default OneWayTel.extend({
   maxLength: 2, // used for value handling
   lastCursorPosition: null,
   widthClassName: null, // class name that handles the with via css
+  focus: false,
 
   DOMinputField : Ember.computed(function(){
     return this.$();
@@ -122,6 +123,7 @@ export default OneWayTel.extend({
   },
 
   focusOut() {
+    this.set("focus", false);
     // in most cases the input field reflects the model value, but in rare cases like after the using the backspace button
     // the value of the model is not instantly updated. So make sure that it will be updated at least on focus out.
     this.set("value", this.get("DOMinputValue"));
@@ -129,6 +131,7 @@ export default OneWayTel.extend({
 
   selectAll : function(event){
     event.target.setSelectionRange(0,999);
+    this.set("focus", true);
   },
 
   handleBackspace : function(event){

@@ -1,6 +1,9 @@
 .imprint{
   opacity: 0;
   z-index: -5;
+  a{
+    pointer-events: none; // otherwise links are clickable, even if invisible
+  }
   position: absolute;
   overflow: hidden;
   height:auto;
@@ -19,6 +22,9 @@
     line-height:1.9em;
   }
   &.open{
+    a{
+      pointer-events: auto;
+    }
     opacity: 1;
     z-index: 15;
     overflow: visible;

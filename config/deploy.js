@@ -27,7 +27,7 @@ module.exports = function(deployTarget) {
       secretAccessKey: process.env.RUNVERTER_AWS_SECRET_ACCESS_KEY,
       bucket: 's.runverter.io',
       region: 'eu-central-1',
-      filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache}'
+      filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache,json}'
     },
     scp : {
       username: deployUser,

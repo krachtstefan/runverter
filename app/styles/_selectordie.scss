@@ -26,7 +26,7 @@
   }
 }
 
-#runLength{
+#runLength, #achievedRunLength, #predictedRunLength{
   width: 70px;
   @include respond-to("small"){
     width: 100px;
@@ -85,7 +85,7 @@
   }
 }
 
-#race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m{
+#race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m, #race-picker-achieved-race, #race-picker-predicted-race{
   width: 20px;
   .sod_list_wrapper{
     width: 210px;
@@ -103,7 +103,7 @@
   }
 }
 
-#target-time-pace-calc{
+#target-time-pace-calc, #predicted-time-predicted-race-predictor, #predicted-time-achieved-race-predictor{
   width: 20px;
   .sod_list_wrapper{
     width: 230px;

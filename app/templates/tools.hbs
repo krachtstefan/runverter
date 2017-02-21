@@ -7,8 +7,40 @@
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey action="navigateTo"}}
 </div>
 <div class="tools uk-container uk-container-center {{selectedToolClass}} {{expertModeClass}}">
-  {{pace-calculator expertMode=expertMode run=model selectedMenuItem=selectedTool runLengthMetricsSelected=runLengthMetricsQuery runLengthMetricsSelected=runLengthMetricsQuery runTempoMetricsSelected=runTempoMetricsQuery}}
-  {{pace-converter expertMode=expertMode run=model selectedMenuItem=selectedTool}}
-  {{length-converter expertMode=expertMode run=model selectedMenuItem=selectedTool}}
+  {{#if selectedToolPca}}
+    {{pace-calculator
+      expertMode=expertMode
+      run=model.run
+      selectedMenuItem=selectedTool
+      runLengthMetricsSelected=paceCalcLengthMetricsQuery
+      runTempoMetricsSelected=paceCalcTempoMetricsQuery}}
+  {{/if}}
+
+  {{#if selectedToolPc}}
+    {{pace-converter
+      expertMode=expertMode
+      run=model.run
+      selectedMenuItem=selectedTool}}
+  {{/if}}
+
+  {{#if selectedToolLc}}
+    {{length-converter
+      expertMode=expertMode
+      run=model.run
+      selectedMenuItem=selectedTool}}
+  {{/if}}
+
+  {{#if selectedToolRp}}
+    {{race-predictor
+      expertMode=expertMode
+      run=model.run
+      prediction=model.prediction
+      settings=model.settings
+      selectedMenuItem=selectedTool
+      achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery
+      predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}}
+  {{/if}}
 </div>
-{{imprint-page expertModeClass=expertModeClass run=model visible=imprintVisible}}
+
+{{notification-messages settings=model.settings selectedMenuItem=selectedTool}}
+{{imprint-page expertModeClass=expertModeClass run=model.run visible=imprintVisible}}

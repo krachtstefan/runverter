@@ -33,7 +33,7 @@ export default {
     },
     'lc' : {
       'name' : 'Längen-Umrechner',
-      'label' : 'Das ist der ',
+      'label' : 'Das ist der',
       'description' : 'Hier findest du die wichtigsten Längenangaben. Und ja, die Länge ist entscheidend.',
       'kmLabel' : 'Eine Strecke von',
       'miLabel' : 'entspricht',
@@ -41,8 +41,12 @@ export default {
     },
     'rp' : {
       'name' : 'Wettkampfprognose',
-      'label' : 'Dieser Platz ist reserviert für die',
-      'description' : 'Noch nicht ganz fertig...'
+      'label' : 'Zeit für eine',
+      'description' : 'Nutze ein vorhandenes Rennergebnis um dein nächstes Rennen zu prognostizieren.',
+      'achievedDistanceLabel' : 'Eine Lauf von',
+      'achievedTimeLabel' : 'in',
+      'predictedDistanceLabel' : 'ermöglicht dir ein Rennen von',
+      'predictedTimeLabel' : 'in'
     },
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',
@@ -120,6 +124,11 @@ export default {
     'sub40' : 'unter 0:40',
     'sub35' : 'unter 0:35',
   },
+  'flashMessages' : {
+    'peterRiegelExlanation' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.',
+    'releaseNotesRacePredictor' : 'Es gibt gute Neuigkeiten. Die Wettkampfprognose ist endlich da. Probier sie gleich aus &#9996;',
+    'localstorageCleared' : 'Alle lokal gespeicherten Daten wurden entfernt.'
+  },
   'imprint' : {
     'about' : 'Über Runverter',
     'aboutText' : 'Runverter.io ist ein Projekt von <a href="https://twitter.com/stefan_kracht" target="_blank">Stefan Kracht</a>. Mehr Infos gibt es in einem <a href="http://stefankracht.de/news/runverter" target="_blank">ausführlichen Blog-Post</a>.',
@@ -129,5 +138,7 @@ export default {
     'responsibleText' :'Stefan Kracht<br />Hasencleverstraße 1<br />22111 Hamburg<br />',
     'disclaimer' :'Disclaimer blah blah...',
     'disclaimerText' :'Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. <br />Ich setze Google Analytics, einen Webanalysedienst der Google Inc. („Google“) ein. Google verwendet Cookies. Die durch das Cookie erzeugten Informationen über die Benutzung des Onlineangebotes durch die Nutzer werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.<br />Google wird diese Informationen in unserem Auftrag benutzen, um die Nutzung unseres Onlineangebotes durch die Nutzer auszuwerten, um Reports über die Aktivitäten innerhalb dieses Onlineangebotes zusammenzustellen und um weitere mit der Nutzung dieses Onlineangebotes und der Internetnutzung verbundene Dienstleistungen uns gegenüber zu erbringen. Dabei können aus den verarbeiteten Daten pseudonyme Nutzungsprofile der Nutzer erstellt werden.',
+    'localstorage' : 'Lokale Daten',
+    'deleteData' : 'Alle lokal gespeicherten Daten löschen'
   }
 };

@@ -1,36 +1,34 @@
-{{#if visible}}
-  <form class="uk-form uk-container-center">
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.pc.minkmLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 {{expertModeClass}}">
-        {{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}} {{t "metrics.tempo.minkm"}}
-      </div>
+<form class="uk-form uk-container-center">
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.pc.minkmLabel"}}</span>
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.pc.minmiLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 {{expertModeClass}}">
-        {{form-helper/number-input value=run.paceMinPerMiStackMin title=tooltipPaceMinPerMi}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed title=tooltipPaceMinPerMi}} {{t "metrics.tempo.minmi"}}
-      </div>
+    <div class="form-element uk-width-1-1 {{expertModeClass}}">
+      {{form-helper/number-input value=run.paceMinPerKmStackMin title=tooltipPaceMinPerKm}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerKmStackSecFixed title=tooltipPaceMinPerKm}} {{t "metrics.tempo.minkm"}}
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.pc.kmhLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 {{expertModeClass}}">
-        {{form-helper/number-input value=run.speedKmHrStackKm title=tooltipSpeedKmHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedKmHr}} {{t "metrics.tempo.kmh"}}
-      </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.pc.minmiLabel"}}</span>
     </div>
-    <div class="uk-grid uk-grid-collapse toolLine">
-      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        <span>{{t "tools.pc.mihLabel"}}</span>
-      </div>
-      <div class="uk-width-1-1 {{expertModeClass}}">
-        {{form-helper/number-input value=run.speedMiHrStackMi title=tooltipSpeedMiHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedMiHr}} {{t "metrics.tempo.mih"}}
-      </div>
+    <div class="form-element uk-width-1-1 {{expertModeClass}}">
+      {{form-helper/number-input value=run.paceMinPerMiStackMin title=tooltipPaceMinPerMi}} {{t "metrics.tempo.separator"}} {{form-helper/number-input value=run.paceMinPerMiStackSecFixed title=tooltipPaceMinPerMi}} {{t "metrics.tempo.minmi"}}
     </div>
-  </form>
-{{/if}}
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.pc.kmhLabel"}}</span>
+    </div>
+    <div class="form-element uk-width-1-1 {{expertModeClass}}">
+      {{form-helper/number-input value=run.speedKmHrStackKm title=tooltipSpeedKmHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedKmHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedKmHr}} {{t "metrics.tempo.kmh"}}
+    </div>
+  </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      <span>{{t "tools.pc.mihLabel"}}</span>
+    </div>
+    <div class="form-element uk-width-1-1 {{expertModeClass}}">
+      {{form-helper/number-input value=run.speedMiHrStackMi title=tooltipSpeedMiHr}} {{t "metrics.distance.separator"}} {{form-helper/number-input value=run.speedMiHrStackDecimalFixed addLeadingZeros=true title=tooltipSpeedMiHr}} {{t "metrics.tempo.mih"}}
+    </div>
+  </div>
+</form>
