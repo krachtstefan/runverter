@@ -10,12 +10,8 @@ moduleForComponent('pace-calculator', 'Integration | Component | pace calculator
 });
 
 test('it renders', function(assert) {
-
-  this.set('expertMode', true);
   this.set('run', make('run'));
-  this.set('selectedMenuItem', null);
-  this.set('runLengthMetricsSelected', null);
-  this.set('runTempoMetricsSelected', null);
+
   this.render(hbs`{{pace-calculator
     run=run
   }}`);
