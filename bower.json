@@ -5,6 +5,7 @@
     "uikit": "2.27.2",
     "SelectOrDie": "0.1.8",
     "bignumber.js": "v4.0.0",
-    "decimal.js": "v7.0.1"
+    "decimal.js": "v7.0.1",
+    "jquery-mockjax": "2.2.1"
   }
 }
