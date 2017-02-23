@@ -1474,6 +1474,14 @@ export default DS.Model.extend({
     return speedMiHrStackDecimal;
   }),
 
+
+  /**
+   * array of run objects describing the splits of a race
+   *
+   * @return {array}
+   */
+  splits: [],
+
   /**
    * update updatedAt before saving the run
    */
