@@ -2705,6 +2705,15 @@ test('splits is empty by default', function(assert) {
   assert.strictEqual(run.get("splits.length"), 0);
 });
 
+// generateSplits
+test('generateSplits changes splits array length according to the runs kilometer count', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10000)});
+  Ember.run(function(){
+    run.generateSplits();
+    assert.strictEqual(run.get("splits.length"), 10);
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
