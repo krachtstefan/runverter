@@ -2694,6 +2694,17 @@ test('speedMiHrStackMi and speedMiHrStackDecimalFixed setter will define speedMi
   assert.strictEqual(run.get("speedMiHr").toString(), "12.9");
 });
 
+// splits
+test('splits is an array', function(assert) {
+  var run = this.subject();
+  assert.strictEqual(run.get("splits").constructor.name, "Array");
+});
+
+test('splits is empty by default', function(assert) {
+  var run = this.subject();
+  assert.strictEqual(run.get("splits.length"), 0);
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
