@@ -1483,6 +1483,23 @@ export default DS.Model.extend({
   splits: [],
 
   /**
+   *
+   *
+   * @return {boolean}
+   */
+  generateSplits: function(){
+    this.set("splits", []);
+    let splitCount = this.get("lengthKmStackKm").toNumber();
+    let splitDistance = new BigNumber("1000");
+    for (let i = 1; i <= splitCount; i++) {
+      this.get("splits").push(this.store.createRecord('run', {
+        timeSec : new BigNumber(0),
+        lengthM : splitDistance
+      }));
+    }
+  },
+
+  /**
    * update updatedAt before saving the run
    */
   save: function(){
