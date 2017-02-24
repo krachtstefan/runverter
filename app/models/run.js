@@ -1488,7 +1488,7 @@ export default DS.Model.extend({
    * @return {boolean}
    */
   generateSplits: function(){
-    this.set("splits", []);
+    this.get("splits").clear();
     let splitCount = this.get("lengthKmStackKm").toNumber();
     let splitDistance = new BigNumber("1000");
     for (let i = 1; i <= splitCount; i++) {
