@@ -1487,10 +1487,11 @@ export default DS.Model.extend({
    *
    * @return {boolean}
    */
-  generateSplits: function(){
+  generateSplits: function(splitDistance = 1000){
     this.get("splits").clear();
+    splitDistance = this._ensureBigNumber(splitDistance);
     let splitCount = this.get("lengthKmStackKm").toNumber();
-    let splitDistance = new BigNumber("1000");
+
     for (let i = 1; i <= splitCount; i++) {
       this.get("splits").push(this.store.createRecord('run', {
         timeSec : new BigNumber(0),
