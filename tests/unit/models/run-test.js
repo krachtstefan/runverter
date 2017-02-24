@@ -2723,6 +2723,14 @@ test('generateSplits clears splits array before adding new ones', function(asser
   });
 });
 
+test('generateSplits adds an extra split when length is not divisible without remainder', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10001)});
+  Ember.run(function(){
+    run.generateSplits();
+    assert.strictEqual(run.get("splits.length"), 11);
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
