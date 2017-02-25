@@ -75,6 +75,10 @@ export default Ember.Controller.extend({
     return this.get("selectedToolKey") === "rp" ? true : false;
   }),
 
+  selectedToolSc: Ember.computed("selectedToolKey", function () {
+    return this.get("selectedToolKey") === "sc" ? true : false;
+  }),
+
   handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),
