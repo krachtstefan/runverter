@@ -36,6 +36,11 @@
       achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery
       predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}}
   {{/if}}
+  {{#if selectedToolSc}}
+    {{splits-calculator
+      expertMode=expertMode
+      run=model.run}}
+  {{/if}}
 </div>
 
 {{notification-messages settings=model.settings selectedMenuItem=selectedTool}}
