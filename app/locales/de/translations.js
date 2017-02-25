@@ -50,8 +50,8 @@ export default {
     },
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',
-      'label' : 'Das ist nicht der',
-      'description' : 'Aber hier wird es ihn bald geben. Versprochen.'
+      'label' : 'Benutze immer einen',
+      'description' : 'und traue niemals einem GPS-Signal.'
     }
   },
   'metrics' : {

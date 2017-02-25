@@ -50,8 +50,8 @@ export default {
     },
     'sc' : {
       'name' : 'Split Time Calculator',
-      'label' : 'Unfortunately this is not the',
-      'description' : 'This feature will come pretty soon. I promise.'
+      'label' : 'Always use a',
+      'description' : 'Cause never trust a GPS signal.'
     }
   },
   'flashMessages' : {
