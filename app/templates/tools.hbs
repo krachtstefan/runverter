@@ -11,7 +11,6 @@
     {{pace-calculator
       expertMode=expertMode
       run=model.run
-      selectedMenuItem=selectedTool
       runLengthMetricsSelected=paceCalcLengthMetricsQuery
       runTempoMetricsSelected=paceCalcTempoMetricsQuery}}
   {{/if}}
@@ -19,15 +18,13 @@
   {{#if selectedToolPc}}
     {{pace-converter
       expertMode=expertMode
-      run=model.run
-      selectedMenuItem=selectedTool}}
+      run=model.run}}
   {{/if}}
 
   {{#if selectedToolLc}}
     {{length-converter
       expertMode=expertMode
-      run=model.run
-      selectedMenuItem=selectedTool}}
+      run=model.run}}
   {{/if}}
 
   {{#if selectedToolRp}}
@@ -36,7 +33,6 @@
       run=model.run
       prediction=model.prediction
       settings=model.settings
-      selectedMenuItem=selectedTool
       achievedRunMetricsSelected=racePredictorAchievedRunLengthMetricsQuery
       predictedRunMetricsSelected=racePredictorPredictedRunLengthMetricsQuery}}
   {{/if}}
