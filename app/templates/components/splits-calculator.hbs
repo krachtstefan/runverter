@@ -23,4 +23,11 @@
       {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
     </div>
   </div>
+  {{#each run.splits as |split|}}
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+        {{split.lengthKmStackKm}}.{{split.lengthKmStackDecimal}} Km &nbsp;&nbsp;&nbsp;&nbsp; {{split.timeStackHr}}:{{split.timeStackMinFixed}}:{{split.timeStackSecFixed}} &nbsp;&nbsp;&nbsp;&nbsp; {{split.paceMinPerKmStackMin}}:{{split.paceMinPerKmStackSec}} min/Km
+      </div>
+    </div>
+  {{/each}}
 </form>
