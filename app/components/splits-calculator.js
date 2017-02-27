@@ -53,6 +53,10 @@ export default Ember.Component.extend({
     });
   },
 
+  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec" ,function(){
+    this.get("run").calculateSplits();
+  })),
+
   tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
