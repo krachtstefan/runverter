@@ -2705,28 +2705,28 @@ test('splits is empty by default', function(assert) {
   assert.strictEqual(run.get("splits.length"), 0);
 });
 
-// generateSplits
-test('generateSplits changes splits array length according to the runs kilometer count', function(assert) {
+// calculateSplits
+test('calculateSplits changes splits array length according to the runs kilometer count', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10000)});
   Ember.run(function(){
-    run.generateSplits();
+    run.calculateSplits();
     assert.strictEqual(run.get("splits.length"), 10);
   });
 });
 
-test('generateSplits clears splits array before adding new ones', function(assert) {
+test('calculateSplits clears splits array before adding new ones', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10000)});
   run.set("splits", [1, 2, 3]);
   Ember.run(function(){
-    run.generateSplits();
+    run.calculateSplits();
     assert.strictEqual(run.get("splits.length"), 10);
   });
 });
 
-test('generateSplits adds an extra split when length is not divisible without remainder', function(assert) {
+test('calculateSplits adds an extra split when length is not divisible without remainder', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10001)});
   Ember.run(function(){
-    run.generateSplits();
+    run.calculateSplits();
     assert.strictEqual(run.get("splits.length"), 11);
   });
 });
