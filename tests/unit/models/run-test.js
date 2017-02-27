@@ -2731,6 +2731,14 @@ test('calculateSplits adds an extra split when length is not divisible without r
   });
 });
 
+test('calculateSplits will not process when there would only be one split', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(999)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.length"), 0);
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
