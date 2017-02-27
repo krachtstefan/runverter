@@ -61,6 +61,10 @@ export default Ember.Component.extend({
     return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
   }),
 
+  expertModeClass : Ember.computed("expertMode", function(){
+    return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
+  }),
+
   showRunLengthKm: Ember.computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
   }),
