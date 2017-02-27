@@ -85,6 +85,14 @@ export default Ember.Component.extend({
     return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
+  racePickerVisibleClass: Ember.computed('racePickerVisible', 'isTouchDevice', function () {
+    return this.get("racePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  }),
+
+  timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
+    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  }),
+
   actions: {
     setRace: function(race) {
       if(race !== null){
