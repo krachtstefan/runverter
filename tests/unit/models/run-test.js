@@ -2739,6 +2739,20 @@ test('calculateSplits will not process when there would only be one split', func
   });
 });
 
+test('calculateSplits will adjust the last splits length if needed', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(2612)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.lengthM").toString(), "612");
+  });
+
+  Ember.run(function(){
+    run.set("lengthM", new BigNumber(20000));
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.lengthM").toString(), "1000");
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
