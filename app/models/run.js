@@ -1491,12 +1491,13 @@ export default DS.Model.extend({
     this.get("splits").clear();
     splitDistance = this._ensureBigNumber(splitDistance);
     let splitCount = this.get("lengthM").dividedBy(splitDistance).ceil().toNumber();
-
+    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCount-1));
     if(splitCount > 1){
       for (let i = 1; i <= splitCount; i++) {
+        var thisSplitDistance = i === splitCount ? lastSplitDistance : splitDistance;
         this.get("splits").push(this.store.createRecord('run', {
           timeSec : new BigNumber(0),
-          lengthM : splitDistance
+          lengthM : thisSplitDistance
         }));
       }
     }
