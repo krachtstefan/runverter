@@ -2723,6 +2723,22 @@ test('calculateSplits clears splits array before adding new ones', function(asse
   });
 });
 
+test('calculateSplits returns true when at least two split were calculated', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1001)});
+  Ember.run(function(){
+    assert.strictEqual(run.calculateSplits(), true);
+  });
+});
+
+test('calculateSplits returns false when one or less splits were calculated', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(1000)});
+  Ember.run(function(){
+    assert.strictEqual(run.calculateSplits(), false);
+    run.set("lengthM", new BigNumber(900));
+    assert.strictEqual(run.calculateSplits(), false);
+  });
+});
+
 test('calculateSplits adds an extra split when length is not divisible without remainder', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10001)});
   Ember.run(function(){
