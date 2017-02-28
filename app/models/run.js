@@ -1489,12 +1489,13 @@ export default DS.Model.extend({
    */
   calculateSplits: function(splitDistance = 1000){
     this.get("splits").clear();
-    splitDistance = this._ensureBigNumber(splitDistance);
-    let splitCount = this.get("lengthM").dividedBy(splitDistance).ceil().toNumber();
-    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCount-1));
+
+    splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
+    let splitCount = this.get("lengthM").dividedBy(splitDistance).ceil().toNumber(); // how many splits do we need?
+    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCount-1)); // if not even divisible, how long is the last split?
     if(splitCount > 1){
       for (let i = 1; i <= splitCount; i++) {
-        var thisSplitDistance = i === splitCount ? lastSplitDistance : splitDistance;
+        var thisSplitDistance = i === splitCount ? lastSplitDistance : splitDistance; // is it the last split?
         this.get("splits").push(this.store.createRecord('run', {
           timeSec : new BigNumber(0),
           lengthM : thisSplitDistance
