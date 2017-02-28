@@ -1501,6 +1501,9 @@ export default DS.Model.extend({
           lengthM : thisSplitDistance
         }));
       }
+      return true;
+    }else{
+      return false;
     }
   },
 
