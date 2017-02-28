@@ -2701,6 +2701,7 @@ test('splits is an array', function(assert) {
 });
 
 test('splits is empty by default', function(assert) {
+  this.store().unloadAll('run');
   var run = this.subject();
   assert.strictEqual(run.get("splits.length"), 0);
 });
