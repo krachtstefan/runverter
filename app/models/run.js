@@ -1484,6 +1484,7 @@ export default DS.Model.extend({
 
   /**
    *
+   * @param  {BigNumber|string|number} splitDistance distance that each splits will have (last split may differ)
    *
    * @return {boolean}
    */
