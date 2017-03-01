@@ -1496,11 +1496,16 @@ export default DS.Model.extend({
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
 
+    let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance
+    let lastSplitTime = this.get("timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance
+
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
+        var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different length for last split
+
         this.get("splits").push(this.store.createRecord('run', {
-          timeSec : new BigNumber(0),
+          timeSec : thisSplitTime,
           lengthM : thisSplitDistance
         }));
       }
