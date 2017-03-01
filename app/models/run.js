@@ -1494,7 +1494,7 @@ export default DS.Model.extend({
     splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
-    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled-1)); // if not even divisible, how long is the last split?
+    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
 
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
