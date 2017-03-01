@@ -1504,9 +1504,11 @@ export default DS.Model.extend({
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different length for last split
 
-        this.get("splits").push(this.store.createRecord('run', {
-          timeSec : thisSplitTime,
-          lengthM : thisSplitDistance
+        this.get("splits").push(Ember.Object.create({
+          'split' : this.store.createRecord('run', {
+            timeSec : thisSplitTime,
+            lengthM : thisSplitDistance
+          })
         }));
       }
       return true;

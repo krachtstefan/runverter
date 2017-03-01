@@ -2759,13 +2759,13 @@ test('calculateSplits will adjust the last splits length if needed', function(as
   var run = this.subject({lengthM : new BigNumber(2612)});
   Ember.run(function(){
     run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.lengthM").toString(), "612");
+    assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "612");
   });
 
   Ember.run(function(){
     run.set("lengthM", new BigNumber(20000));
     run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.lengthM").toString(), "1000");
+    assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "1000");
   });
 });
 
@@ -2775,7 +2775,7 @@ test('calculateSplits will create splits which sum equals the runs length', func
     run.calculateSplits();
     var splitSum = new BigNumber("0");
     run.get("splits").forEach(function(item){
-      splitSum = splitSum.plus(item.get("lengthM"));
+      splitSum = splitSum.plus(item.get("split.lengthM"));
     });
     assert.strictEqual(splitSum.toString(), "2612");
   });
@@ -2786,7 +2786,7 @@ test('calculateSplits creates even splits with paces like the runs average pace'
   Ember.run(function(){
     run.calculateSplits();
     run.get("splits").forEach(function(item){
-      assert.strictEqual(run.get("paceMinPerKm").toString(), item.get("paceMinPerKm").toString());
+      assert.strictEqual(run.get("paceMinPerKm").toString(), item.get("split.paceMinPerKm").toString());
     });
   });
 });
