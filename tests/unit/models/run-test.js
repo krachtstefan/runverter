@@ -2770,6 +2770,18 @@ test('calculateSplits will adjust the last splits length if needed', function(as
   });
 });
 
+test('calculateSplits will create splits which sum equals the runs length', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(2612)});
+  Ember.run(function(){
+    run.calculateSplits();
+    var splitSum = new BigNumber("0");
+    run.get("splits").forEach(function(item){
+      splitSum = splitSum.plus(item.get("lengthM"));
+    });
+    assert.strictEqual(splitSum.toString(), "2612");
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
