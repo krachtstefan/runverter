@@ -2781,6 +2781,16 @@ test('calculateSplits will create splits which sum equals the runs length', func
   });
 });
 
+test('calculateSplits creates even splits with paces like the runs average pace', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    run.get("splits").forEach(function(item){
+      assert.strictEqual(run.get("paceMinPerKm").toString(), item.get("paceMinPerKm").toString());
+    });
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
