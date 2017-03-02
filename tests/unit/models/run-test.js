@@ -2807,6 +2807,38 @@ test('the last stacked split time equals the time of the run in total', function
   });
 });
 
+test('the progressDistance of the last split equals 100%', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.progressDistance").toString(), "100");
+  });
+});
+
+test('the progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits")[2].get("progressDistance").toString(), "30");
+  });
+});
+
+test('the progressTime of the last split equals 100%', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.progressTime").toString(), "100");
+  });
+});
+
+test('the progressTime of the 3rd split of a 10k run equals 30%', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits")[2].get("progressTime").toString(), "30");
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
