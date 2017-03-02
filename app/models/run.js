@@ -1499,15 +1499,25 @@ export default DS.Model.extend({
     let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance
     let lastSplitTime = this.get("timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance
 
+    var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
+    var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
+
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different length for last split
 
+        lengthMStack = lengthMStack.plus(thisSplitDistance);
+        timeSecStack = timeSecStack.plus(thisSplitTime);
+
         this.get("splits").push(Ember.Object.create({
           'split' : this.store.createRecord('run', {
             timeSec : thisSplitTime,
             lengthM : thisSplitDistance
+          }),
+          'run' : this.store.createRecord('run', {
+            timeSec : timeSecStack,
+            lengthM : lengthMStack
           })
         }));
       }
