@@ -2791,6 +2791,22 @@ test('calculateSplits creates even splits with paces like the runs average pace'
   });
 });
 
+test('the last stacked split length equals the length of the run in total', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.run.lengthM").toString(), "42195");
+  });
+});
+
+test('the last stacked split time equals the time of the run in total', function(assert) {
+  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+  Ember.run(function(){
+    run.calculateSplits();
+    assert.strictEqual(run.get("splits.lastObject.run.timeSec").toString(), "14299");
+  });
+});
+
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
