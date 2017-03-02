@@ -1518,7 +1518,9 @@ export default DS.Model.extend({
           'run' : this.store.createRecord('run', {
             timeSec : timeSecStack,
             lengthM : lengthMStack
-          })
+          }),
+          'progressDistance' : lengthMStack.dividedBy(this.get("lengthM")).times(100).round(2).toString(),
+          'progressTime' : timeSecStack.dividedBy(this.get("timeSec")).times(100).round(2).toString()
         }));
       }
       return true;
