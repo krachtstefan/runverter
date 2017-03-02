@@ -26,7 +26,7 @@
   {{#each run.splits as |splitItem|}}
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
-        {{splitItem.split.lengthKmStackKm}}.{{splitItem.split.lengthKmStackDecimal}} Km &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.split.timeStackHr}}:{{splitItem.split.timeStackMinFixed}}:{{splitItem.split.timeStackSecFixed}} &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km
+        {{splitItem.run.lengthKmStackKm}}.{{splitItem.run.lengthKmStackDecimal}} Km &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.run.timeStackHr}}:{{splitItem.run.timeStackMinFixed}}:{{splitItem.run.timeStackSecFixed}} &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km
       </div>
     </div>
   {{/each}}
