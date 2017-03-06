@@ -1488,10 +1488,12 @@ export default DS.Model.extend({
    *
    * @return {boolean}
    */
-  calculateSplits: function(splitDistance = new BigNumber(1000)){
+  calculateSplits: function(splitDistance = new BigNumber(1000), splittingStategy = new BigNumber(0)){
     this.get("splits").clear();
 
     splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
+    splittingStategy = this._ensureBigNumber(splittingStategy); // what is the spliting strategy? negative, positive or even?
+
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
