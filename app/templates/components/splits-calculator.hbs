@@ -23,6 +23,19 @@
       {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
     </div>
   </div>
+
+  {{#each run.splits as |splitItem|}}
+    <div style="width:100%; background:#eaeaea; height:2px; padding-top:0px;">
+      <div style="width:{{splitItem.progressDistance}}%; background:green; height:2px; "> </div>
+    </div>
+  {{/each}}
+  <p>&nbsp;</p>
+  {{#each run.splits as |splitItem|}}
+    <div style="width:100%; background:#eaeaea; height:2px; padding-top:0px;">
+      <div style="width:{{splitItem.progressTime}}%; background:blue; height:2px; "> </div>
+    </div>
+  {{/each}}
+  <p>&nbsp;</p>
   {{#each run.splits as |splitItem|}}
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
