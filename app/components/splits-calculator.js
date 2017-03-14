@@ -8,6 +8,10 @@ export default Ember.Component.extend({
   runTempoMetricsSelected : "minkm", // may be overwritten when using this component
   runTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
 
+  splitDistancesAvailable : [1, 5, 10],
+  splitMetricsSelected : "km", // may be overwritten when using this component
+  splitMetricsAvailable : ["km", "mi"],
+
   racePickerVisible : false,
   timePickerVisible : false,
 
