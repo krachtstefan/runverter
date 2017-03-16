@@ -27,14 +27,30 @@
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
       <span>{{t "tools.sc.splitLabel"}}</span>
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}}">
-      {{#each run.splits as |splitItem|}}
-        {{splitItem.run.lengthKmStackKm}}.{{splitItem.run.lengthKmStackDecimal}} Km &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.run.timeStackHr}}:{{splitItem.run.timeStackMinFixed}}:{{splitItem.run.timeStackSecFixed}} &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km
-        <div style="width:100%; background:#eaeaea; height:4px; padding-top:1px;">
-          <div style="width:{{splitItem.progressDistance}}%; background:green; height:1px; "> </div>
-          <div style="width:{{splitItem.progressTime}}%; background:blue; height:1px; margin-top:1px;"> </div>
-        </div>
-    {{/each}}
+    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
+      <table class="uk-table uk-table-striped uk-text-nowrap">
+        <thead>
+          <tr>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Pace in min/Km</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each run.splits as |splitItem|}}
+            <tr>
+              <td>{{splitItem.run.lengthKmStackKm}}.{{splitItem.run.lengthKmStackDecimal}} Km<br/>
+                <div style="width:100%; background:#eaeaea; height:4px; padding-top:1px;">
+                  <div style="width:{{splitItem.progressDistance}}%; background:green; height:1px; "> </div>
+                  <div style="width:{{splitItem.progressTime}}%; background:blue; height:1px; margin-top:1px;"> </div>
+                </div>
+              </td>
+              <td>{{splitItem.run.timeStackHr}}:{{splitItem.run.timeStackMinFixed}}:{{splitItem.run.timeStackSecFixed}}</td>
+              <td>{{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
   </div>
 
