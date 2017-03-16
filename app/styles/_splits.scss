@@ -1,3 +1,10 @@
 .splits-container{
-  background-color: red;
+  max-width:500px;
+  table{
+    font-size:21px;
+    border: 1px solid $color-form-border;
+    tr{
+      border-bottom: 1px solid $color-form-border;
+    }
+  }
 }
