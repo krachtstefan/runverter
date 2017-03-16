@@ -51,7 +51,10 @@ export default {
     'sc' : {
       'name' : 'Split Time Calculator',
       'label' : 'Always use a',
-      'description' : 'Cause never trust a GPS signal.'
+      'description' : 'Cause never trust a GPS signal.',
+      'distanceLabel' : 'A run with a distance of',
+      'timeLabel' : 'in',
+      'splitLabel' : 'results in the following splits'
     }
   },
   'flashMessages' : {

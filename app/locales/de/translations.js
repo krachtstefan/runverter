@@ -51,7 +51,10 @@ export default {
     'sc' : {
       'name' : 'Zwischenzeit-Rechner',
       'label' : 'Benutze immer einen',
-      'description' : 'und traue niemals einem GPS-Signal.'
+      'description' : 'und traue niemals einem GPS-Signal.',
+      'distanceLabel' : 'Ein Lauf mit der Distanz von',
+      'timeLabel' : 'in',
+      'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner'
     }
   },
   'metrics' : {
