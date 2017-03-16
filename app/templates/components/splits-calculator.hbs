@@ -39,6 +39,8 @@
   {{#each run.splits as |splitItem|}}
     <div class="uk-grid uk-grid-collapse toolLine">
       <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      </div>
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
         {{splitItem.run.lengthKmStackKm}}.{{splitItem.run.lengthKmStackDecimal}} Km &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.run.timeStackHr}}:{{splitItem.run.timeStackMinFixed}}:{{splitItem.run.timeStackSecFixed}} &nbsp;&nbsp;&nbsp;&nbsp; {{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km
         <div style="width:100%; background:#eaeaea; height:4px; padding-top:1px;">
           <div style="width:{{splitItem.progressDistance}}%; background:green; height:1px; "> </div>
