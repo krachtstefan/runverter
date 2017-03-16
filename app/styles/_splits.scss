@@ -2,9 +2,21 @@
   max-width:500px;
   table{
     font-size:21px;
-    border: 1px solid $color-form-border;
-    tr{
-      border-bottom: 1px solid $color-form-border;
+    thead{
+      tr{
+        background-color:$color-secondary-background;
+        border-bottom: 10px solid $color-main-background;
+      }
+    }
+    tbody{
+      tr{
+        border-bottom: 10px solid $color-main-background;
+        background-color:$color-secondary-background;
+        padding-left: 20px;
+        &:nth-of-type(odd){
+          background-color:$color-tablerow-odd;
+        }
+      }
     }
   }
 }
