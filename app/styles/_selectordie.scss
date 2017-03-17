@@ -36,6 +36,15 @@
   }
 }
 
+#splitDistance{
+  width: 60px;
+  @include respond-to("small"){
+    width: 80px;
+  }
+  .sod_list_wrapper{
+    width: 90px;
+  }
+}
 
 .suggest-select{
   display: inline;
