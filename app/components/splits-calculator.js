@@ -39,6 +39,10 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
+  displayKmSplits : Ember.computed("splitMetricsSelected", function(){
+    return this.get("splitMetricsSelected") === "km" ? true : false;
+  }),
+
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
