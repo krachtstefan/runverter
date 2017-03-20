@@ -52,6 +52,9 @@ export default Ember.Component.extend({
           self.set("racePickerVisible", false);
         });
       });
+      $("select.splitDistance").selectOrDie({customID:"splitDistance"}).ready(function() {
+        $("select.splitDistance").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
     });
   },
 
