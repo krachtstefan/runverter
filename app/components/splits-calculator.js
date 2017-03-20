@@ -54,10 +54,6 @@ export default Ember.Component.extend({
     return splitTempoMetrics;
   }),
 
-  showKmSplits : Ember.computed("splitMetricsSelected", function(){
-    return this.get("splitMetricsSelected") === "km" ? true : false;
-  }),
-
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
@@ -110,6 +106,10 @@ export default Ember.Component.extend({
 
   showRunLengthMi: Ember.computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "mi" ? true : false;
+  }),
+
+  showKmSplits : Ember.computed("splitMetricsSelected", function(){
+    return this.get("splitMetricsSelected") === "km" ? true : false;
   }),
 
   tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
