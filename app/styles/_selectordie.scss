@@ -26,7 +26,7 @@
   }
 }
 
-#runLength, #achievedRunLength, #predictedRunLength{
+#runLength, #achievedRunLength, #predictedRunLength, #splitMetric{
   width: 70px;
   @include respond-to("small"){
     width: 100px;
