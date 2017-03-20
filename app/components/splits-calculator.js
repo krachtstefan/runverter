@@ -55,6 +55,9 @@ export default Ember.Component.extend({
       $("select.splitDistance").selectOrDie({customID:"splitDistance"}).ready(function() {
         $("select.splitDistance").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
+      $("select.splitMetric").selectOrDie({customID:"splitMetric"}).ready(function() {
+        $("select.splitMetric").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
     });
   },
 
