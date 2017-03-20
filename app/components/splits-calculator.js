@@ -54,7 +54,7 @@ export default Ember.Component.extend({
     return splitTempoMetrics;
   }),
 
-  displayKmSplits : Ember.computed("splitMetricsSelected", function(){
+  showKmSplits : Ember.computed("splitMetricsSelected", function(){
     return this.get("splitMetricsSelected") === "km" ? true : false;
   }),
 

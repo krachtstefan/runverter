@@ -65,7 +65,7 @@
           {{#each run.splits as |splitItem|}}
             <tr>
               <td>
-              {{#if displayKmSplits}}
+              {{#if showKmSplits}}
                 {{splitItem.run.lengthKmStackKm}}{{t "metrics.distance.separator"}}{{splitItem.run.lengthKmStackDecimal}} {{t "metrics.distance.km"}}
               {{else}}
                 {{splitItem.run.lengthMiStackMi}}{{t "metrics.distance.separator"}}{{splitItem.run.lengthMiStackDecimal}} {{t "metrics.distance.mi"}}
