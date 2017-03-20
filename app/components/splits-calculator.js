@@ -65,7 +65,7 @@ export default Ember.Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters" ,function(){
+  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitDistancesSelected", "splitMetricsSelected" ,function(){
     this.get("run").calculateSplits(this.get("splitDistancesSelectedMeters"));
   })),
 
