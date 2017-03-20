@@ -33,6 +33,12 @@
           {{#x-option value=item}}{{item}}{{/x-option}}
         {{/each}}
       {{/x-select}}
+
+      {{#x-select value=splitMetricsSelected class="splitMetric"}}
+        {{#each runLengthMetrics as |item|}}
+          {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
     </div>
   </div>
 
