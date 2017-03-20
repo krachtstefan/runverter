@@ -52,7 +52,13 @@
           <tr>
             <th>Distance</th>
             <th>Time</th>
-            <th>Pace in min/Km</th>
+            <th>Pace in
+              {{#x-select value=splitTempoMetricsSelected class="splitTempo"}}
+                {{#each splitTempoMetrics as |item|}}
+                  {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </th>
           </tr>
         </thead>
         <tbody>
