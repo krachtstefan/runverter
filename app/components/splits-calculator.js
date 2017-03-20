@@ -65,6 +65,14 @@ export default Ember.Component.extend({
     this.get("run").calculateSplits();
   })),
 
+  splitDistancesSelectedMeters : Ember.computed("splitDistancesSelected", "splitMetricsSelected", function(){
+    if(this.get("splitMetricsSelected") === "mi"){
+      return new BigNumber(this.get("splitDistancesSelected")).times(this.get("run.miToM"));
+    }else{
+      return new BigNumber(this.get("splitDistancesSelected")).times(1000);
+    }
+  }),
+
   tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
