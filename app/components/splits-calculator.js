@@ -6,6 +6,9 @@ export default Ember.Component.extend({
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
 
+  splitTempoMetricsSelected : "minkm", // may be overwritten when using this component
+  splitTempoMetricsAvailable : ["minkm", "minmi", "kmh", "mih"],
+
   splitDistancesSelected : 1, // may be overwritten when using this component
   splitDistancesAvailable : [1, 5, 10],
   splitMetricsSelected : "km", // may be overwritten when using this component
@@ -37,6 +40,18 @@ export default Ember.Component.extend({
       });
     });
     return runLengthMetrics;
+  }),
+
+  splitTempoMetrics : Ember.computed("splitTempoMetricsAvailable", "i18n.locale", function(){
+    var splitTempoMetrics = [];
+    var self = this;
+    this.get("splitTempoMetricsAvailable").forEach(function(item){
+      splitTempoMetrics.push({
+        "key" : item,
+        "label" : self.get('i18n').t("metrics.tempo."+item),
+      });
+    });
+    return splitTempoMetrics;
   }),
 
   displayKmSplits : Ember.computed("splitMetricsSelected", function(){
