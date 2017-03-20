@@ -77,7 +77,7 @@
                 </div> --}}
               </td>
               <td>{{splitItem.run.timeStackHr}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackMinFixed}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackSecFixed}}</td>
-              <td>{{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} min/Km</td>
+              <td>{{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} {{splitTempoMetricsSelected}}</td>
             </tr>
           {{/each}}
         </tbody>
