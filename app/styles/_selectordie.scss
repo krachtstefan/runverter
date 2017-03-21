@@ -181,6 +181,10 @@
       padding-bottom:inherit;
     }
 
+    &.focus{
+      background-color:inherit;
+    }
+
     /* Up/Down arrows */
     &:before,
     &:after{
