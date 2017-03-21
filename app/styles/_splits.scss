@@ -16,11 +16,14 @@
       tr{
         border-bottom: 10px solid $color-main-background;
         background-color:$color-secondary-background;
-        padding-left: 20px;
         &:nth-of-type(odd){
           background-color:$color-tablerow-odd;
         }
       }
+    }
+    td, th{
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
   }
 }
