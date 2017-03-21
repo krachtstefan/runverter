@@ -112,6 +112,22 @@ export default Ember.Component.extend({
     return this.get("splitMetricsSelected") === "km" ? true : false;
   }),
 
+  showSplitTempoMinKm: Ember.computed('splitTempoMetricsSelected', function () {
+    return this.get("splitTempoMetricsSelected") === "minkm" ? true : false;
+  }),
+
+  showSplitTempoMinMi: Ember.computed('splitTempoMetricsSelected', function () {
+    return this.get("splitTempoMetricsSelected") === "minmi" ? true : false;
+  }),
+
+  showSplitTempoKmH: Ember.computed('splitTempoMetricsSelected', function () {
+    return this.get("splitTempoMetricsSelected") === "kmh" ? true : false;
+  }),
+
+  showSplitTempoMiH: Ember.computed('splitTempoMetricsSelected', function () {
+    return this.get("splitTempoMetricsSelected") === "mih" ? true : false;
+  }),
+
   tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),

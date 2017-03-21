@@ -77,7 +77,12 @@
                 </div> --}}
               </td>
               <td>{{splitItem.run.timeStackHr}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackMinFixed}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackSecFixed}}</td>
-              <td>{{splitItem.split.paceMinPerKmStackMin}}:{{splitItem.split.paceMinPerKmStackSec}} {{splitTempoMetricsSelected}}</td>
+              <td>
+                {{#if showSplitTempoMinKm}}{{splitItem.split.paceMinPerKmStackMin}}{{t "metrics.tempo.separator"}}{{splitItem.split.paceMinPerKmStackSec}} {{t "metrics.tempo.minkm"}}{{/if}}
+                {{#if showSplitTempoMinMi}}{{splitItem.split.paceMinPerMiStackMin}}{{t "metrics.tempo.separator"}}{{splitItem.split.paceMinPerMiStackSec}} {{t "metrics.tempo.minmi"}}{{/if}}
+                {{#if showSplitTempoKmH}}{{splitItem.split.speedKmHrStackKm}}{{t "metrics.distance.separator"}}{{splitItem.split.speedKmHrStackDecimalFixed}} {{t "metrics.tempo.kmh"}}{{/if}}
+                {{#if showSplitTempoMiH}}{{splitItem.split.speedMiHrStackMi}}{{t "metrics.distance.separator"}}{{splitItem.split.speedMiHrStackDecimalFixed}} {{t "metrics.tempo.mih"}}{{/if}}
+              </td>
             </tr>
           {{/each}}
         </tbody>
