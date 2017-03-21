@@ -1,7 +1,12 @@
 .splits-container{
   max-width:500px;
   table{
-    font-size:21px;
+    font-size:14px;
+    line-height: 20px;
+    @include respond-to("small"){
+      font-size:21px;
+      line-height: 30px;
+    }
     thead{
       tr{
         background-color:$color-main-background;
