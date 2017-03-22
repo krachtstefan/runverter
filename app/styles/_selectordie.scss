@@ -47,10 +47,6 @@
 }
 
 #splitTempo{
-  width: 76px;
-  @include respond-to("small"){
-    width: 105px;
-  }
   .sod_list_wrapper{
     width: 125px;
   }
@@ -171,9 +167,9 @@
     line-height: auto;
     line-height: 20px;
     border-bottom:none;
-    padding:0 0 1px 0;
+    padding:0 4px 1px 0;
     @include respond-to("small"){
-      padding:0 0 2px 0;
+      padding:0 8px 2px 0;
     }
     .sod_label{
       top:inherit;
