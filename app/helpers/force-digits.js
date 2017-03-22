@@ -18,7 +18,7 @@ export function forceDigits(params, args) {
   let length = args.length === undefined ? 2 : parseInt(args.length);
   let filler = args.filler === undefined ? "0" : args.filler;
 
-  for (var i = args.value.length; i < length; i++) {
+  for (var i = output.length; i < length; i++) {
     output = mode === "append" ? output+filler : filler+output;
   }
   return output;
