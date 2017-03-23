@@ -29,7 +29,7 @@
     </div>
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
       {{#x-select value=splitDistancesSelected class="splitDistance"}}
-        {{#each splitDistancesAvailable as |item|}}
+        {{#each splitDistancesPossible as |item|}}
           {{#x-option value=item}}{{item}}{{/x-option}}
         {{/each}}
       {{/x-select}}

@@ -83,6 +83,27 @@ export default Ember.Component.extend({
     this.get("run").calculateSplits(this.get("splitDistancesSelectedMeters"));
   })),
 
+  splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", function(){
+    var self = this;
+    var splitDistancesPossible = [];
+    var splitDistanceM;
+    var numberOfPossibleSplits;
+    this.get("splitDistancesAvailable").forEach(function(item, index){
+      if(self.get("splitMetricsSelected") === "mi"){
+        splitDistanceM = new BigNumber(item).times(self.get("run.miToM"));
+      }else{
+        splitDistanceM = new BigNumber(item).times(1000);
+      }
+      numberOfPossibleSplits = self.get("run.lengthM").dividedBy(splitDistanceM).ceil().toString();
+      // add all items that make more than one split
+      // and always add first item to ensure the array is never empty
+      if (numberOfPossibleSplits > 1 || index === 0){
+        splitDistancesPossible.push(item);
+      }
+    });
+    return splitDistancesPossible;
+  }),
+
   splitDistancesSelectedMeters : Ember.computed("splitDistancesSelected", "splitMetricsSelected", function(){
     if(this.get("splitMetricsSelected") === "mi"){
       return new BigNumber(this.get("splitDistancesSelected")).times(this.get("run.miToM"));
