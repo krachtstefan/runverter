@@ -54,7 +54,10 @@ export default {
       'description' : 'Cause never trust a GPS signal.',
       'distanceLabel' : 'A run with a distance of',
       'timeLabel' : 'in',
-      'splitLabel' : 'results in the following splits'
+      'splitLabel' : 'results in the following splits',
+      'distanceHeader' : 'Distance',
+      'timeHeader' : 'Time',
+      'paceHeader' : 'Pace in'
     }
   },
   'flashMessages' : {

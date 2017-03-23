@@ -54,7 +54,10 @@ export default {
       'description' : 'und traue niemals einem GPS-Signal.',
       'distanceLabel' : 'Ein Lauf mit der Distanz von',
       'timeLabel' : 'in',
-      'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner'
+      'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner',
+      'distanceHeader' : 'Distanz',
+      'timeHeader' : 'Zeit',
+      'paceHeader' : 'Pace in'
     }
   },
   'metrics' : {
