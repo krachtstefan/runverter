@@ -49,9 +49,9 @@
       <table class="uk-table uk-table-striped small_sod">
         <thead>
           <tr>
-            <th>{{t "tools.sc.distanceHeader"}}</th>
-            <th>{{t "tools.sc.timeHeader"}}</th>
-            <th>{{t "tools.sc.paceHeader"}}
+            <th class="distance">{{t "tools.sc.distanceHeader"}}</th>
+            <th class="time">{{t "tools.sc.timeHeader"}}</th>
+            <th>
               {{#x-select value=splitTempoMetricsSelected class="splitTempo"}}
                 {{#each splitTempoMetrics as |item|}}
                   {{#x-option value=item.key}}{{item.label}}{{/x-option}}

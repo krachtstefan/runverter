@@ -56,8 +56,7 @@ export default {
       'timeLabel' : 'in',
       'splitLabel' : 'results in the following splits',
       'distanceHeader' : 'Distance',
-      'timeHeader' : 'Time',
-      'paceHeader' : 'Pace in'
+      'timeHeader' : 'Time'
     }
   },
   'flashMessages' : {

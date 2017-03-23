@@ -56,8 +56,7 @@ export default {
       'timeLabel' : 'in',
       'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner',
       'distanceHeader' : 'Distanz',
-      'timeHeader' : 'Zeit',
-      'paceHeader' : 'Pace in'
+      'timeHeader' : 'Zeit'
     }
   },
   'metrics' : {
