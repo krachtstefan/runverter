@@ -1,5 +1,5 @@
 .splits-container{
-  max-width:500px;
+  max-width:430px;
   table{
     font-size:14px;
     line-height: 20px;
@@ -10,6 +10,25 @@
     thead{
       tr{
         background-color:$color-main-background;
+      }
+
+      th.distance{
+        width: 80px;
+        @include respond-to("small"){
+          width: 130px;
+        }
+        @include respond-to("medium"){
+          width: 120px;
+        }
+      }
+      th.time{
+        width: 70px;
+        @include respond-to("small"){
+          width: 110px;
+        }
+        @include respond-to("medium"){
+          width: 100px;
+        }
       }
     }
     tbody{
