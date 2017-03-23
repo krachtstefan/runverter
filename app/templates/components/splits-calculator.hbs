@@ -83,6 +83,12 @@
                 {{#if showSplitTempoMiH}}{{splitItem.split.speedMiHrStackMi}}{{t "metrics.distance.separator"}}{{splitItem.split.speedMiHrStackDecimalFixed}} {{t "metrics.tempo.mih"}}{{/if}}
               </td>
             </tr>
+            <tr class="progress">
+              <td colspan="3">
+                <div class="time-progress" style="left:{{splitItem.progressDistance}}%;"> </div>
+                <div class="distance-progress" style="width:{{splitItem.progressDistance}}%;"> </div>
+              </td>
+            </tr>
           {{/each}}
         </tbody>
       </table>

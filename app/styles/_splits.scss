@@ -35,8 +35,23 @@
       tr{
         border-bottom: 10px solid $color-main-background;
         background-color:$color-secondary-background;
-        &:nth-of-type(odd){
-          background-color:$color-tablerow-odd;
+      }
+      tr.progress{
+        background-color:$color-form-border;
+        td{
+          padding:0;
+          position:relative;
+          div.distance-progress{
+            background-color:$color-form-text;
+            height:1px;
+          }
+          div.time-progress{
+            width: 0;
+            height: 9px;
+            border-right:1px solid $color-form-text;
+            position: absolute;
+            margin-top: -4px;
+          }
         }
       }
     }
