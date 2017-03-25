@@ -1494,10 +1494,14 @@ export default DS.Model.extend({
     splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
     splittingStrategy = this._ensureBigNumber(splittingStrategy); // what is the spliting strategy? negative, positive or even?
 
+    splittingStrategy = new BigNumber(-3); // TEST
+
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPoint = splitCountCeiled.dividedBy(2).ceil();
+
+    console.log("turningPoint: "+turningPoint);
 
     let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance
     let lastSplitTime = this.get("timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance
@@ -1505,10 +1509,17 @@ export default DS.Model.extend({
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
 
+    console.log(this.get("lengthM").dividedBy(2).toString());
+
+
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different length for last split
+
+        var currentSplittingStrategy = (i <= turningPoint) ? splittingStrategy : splittingStrategy.add(1); // splitting strategy of the current split
+        console.log(currentSplittingStrategy.toString());
+
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         timeSecStack = timeSecStack.plus(thisSplitTime);
