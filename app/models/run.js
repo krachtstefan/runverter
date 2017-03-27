@@ -1514,7 +1514,19 @@ export default DS.Model.extend({
 
         var currentSplittingStrategy = turningPoint.greaterThan(i) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
-        thisSplitTime = thisSplitTime.plus(thisSplitTime.times(currentSplittingStrategy).dividedBy(100)); // apply splitting strategy to
+
+        // apply splitting strategy
+        if(turningPoint.equals(i) && lastSplitDiffers === true && true){
+          var turningPointSplitTime1 = lastSplitDistance.dividedBy(2);
+          var turningPointSplitTime2 = splitDistance.minus(turningPointSplitTime1);
+
+          // turningPointSplitTime1
+
+          thisSplitTime = thisSplitTime.plus(thisSplitTime.times(splittingStrategy).dividedBy(100));
+        }else{
+          thisSplitTime = thisSplitTime.plus(thisSplitTime.times(currentSplittingStrategy).dividedBy(100));
+        }
+
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         timeSecStack = timeSecStack.plus(thisSplitTime);
