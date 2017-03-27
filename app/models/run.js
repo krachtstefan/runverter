@@ -1510,8 +1510,8 @@ export default DS.Model.extend({
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
-        var currentSplittingStrategy = (i <= turningPoint) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
 
+        var currentSplittingStrategy = turningPoint.greaterThan(i) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
         thisSplitTime = thisSplitTime.plus(thisSplitTime.times(currentSplittingStrategy).dividedBy(100)); // apply splitting strategy to
 
