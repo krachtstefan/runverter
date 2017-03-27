@@ -1498,6 +1498,7 @@ export default DS.Model.extend({
 
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
+    let lastSplitDiffers = !splitCount.equals(splitCountCeiled) // does the last split have a different length?
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPoint = splitCountCeiled.dividedBy(2).ceil();
 
