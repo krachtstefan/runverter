@@ -1493,8 +1493,8 @@ export default DS.Model.extend({
 
     splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
     splittingStrategy = this._ensureBigNumber(splittingStrategy); // what is the spliting strategy? negative, positive or even?
-
     splittingStrategy = new BigNumber(-3); // TEST
+    var splittingStrategySecondHalf = splittingStrategy.times(-1)
 
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
@@ -1515,11 +1515,8 @@ export default DS.Model.extend({
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
+        var currentSplittingStrategy = (i <= turningPoint) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different length for last split
-
-        var currentSplittingStrategy = (i <= turningPoint) ? splittingStrategy : splittingStrategy.add(1); // splitting strategy of the current split
-        console.log(currentSplittingStrategy.toString());
-
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         timeSecStack = timeSecStack.plus(thisSplitTime);
