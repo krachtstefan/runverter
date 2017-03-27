@@ -1494,7 +1494,7 @@ export default DS.Model.extend({
     splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
     splittingStrategy = this._ensureBigNumber(splittingStrategy); // what is the spliting strategy? negative, positive or even?
     splittingStrategy = new BigNumber(-3); // TEST
-    var splittingStrategySecondHalf = splittingStrategy.times(-1)
+    var splittingStrategySecondHalf = splittingStrategy.times(-1);
 
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
