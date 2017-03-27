@@ -47,6 +47,18 @@
     </div>
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
       <table class="uk-table uk-table-striped small_sod">
+        <tbody>
+          {{#each run.splits as |splitItem|}}
+            <tr class="progress" style="border-bottom-width:0px;">
+              <td colspan="3">
+                <div class="distance-progress" style="width:{{splitItem.progressTime}}%; opacity:0.5; background:blue;"> </div>
+                <div class="distance-progress" style="width:{{splitItem.progressDistance}}%; opacity:0.5; background:grey; position: absolute;"> </div>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <table class="uk-table uk-table-striped small_sod">
         <thead>
           <tr>
             <th class="distance">{{t "tools.sc.distanceHeader"}}</th>
