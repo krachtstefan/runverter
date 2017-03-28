@@ -1500,7 +1500,7 @@ export default DS.Model.extend({
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPointSplit = splitCountCeiled.dividedBy(2).ceil(); // split number of the turning point
-    let turningPointKm = this.get("lengthKm").dividedBy(2); // position of the turning point
+    let turningPointM = this.get("lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
     let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
@@ -1519,7 +1519,7 @@ export default DS.Model.extend({
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         if(turningPointWithinSplit === true && turningPointSplit.equals(i)){
-          var turningPointSplitDistance = turningPointKm.minus(turningPointKm.floor()).times(1000);
+          var turningPointSplitDistance = turningPointM.minus(splitDistance.times(i-1));
           // determine the ratio between pre and post turning point distance
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(splitDistance).times(100);
           var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
