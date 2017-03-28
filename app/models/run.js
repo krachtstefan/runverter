@@ -1501,6 +1501,7 @@ export default DS.Model.extend({
     let lastSplitDiffers = !splitCount.equals(splitCountCeiled); // does the last split have a different length?
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPoint = splitCountCeiled.dividedBy(2).ceil(); // position of the turning point
+    let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
     let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
     let lastSplitTime = this.get("timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
