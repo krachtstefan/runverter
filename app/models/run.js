@@ -1499,7 +1499,7 @@ export default DS.Model.extend({
     let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
     let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
-    let turningPoint = splitCountCeiled.dividedBy(2).ceil(); // position of the turning point
+    let turningPointSplit = splitCountCeiled.dividedBy(2).ceil(); // split number of the turning point
     let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
     let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
@@ -1512,12 +1512,12 @@ export default DS.Model.extend({
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
 
-        var currentSplittingStrategy = turningPoint.greaterThanOrEqualTo(i) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
+        var currentSplittingStrategy = turningPointSplit.greaterThanOrEqualTo(i) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
-        if(turningPointWithinSplit === true && turningPoint.equals(i)){
+        if(turningPointWithinSplit === true && turningPointSplit.equals(i)){
           // if there is a turning point, find out the length from the begin of this split to the turning point
           var turningPointSplitDistance = lastSplitDistance.dividedBy(2);
           // determine the ratio between pre and post turning point distance
