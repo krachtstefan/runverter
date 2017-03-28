@@ -2847,6 +2847,11 @@ test('speedKmHr accuracy edge case was fixed', function(assert) {
   assert.strictEqual(run.get("speedKmHr").toString(), "2.814132");
 });
 
+test('timeStackSecFixed setter changes timeMin', function(assert) {
+  var run = this.subject({timeSec : new BigNumber("3599.9999999999999999999999994")});
+  assert.strictEqual(run.get("timeStackSecFixed").toString(), "00"); // became 0-0 because of missing typecast
+});
+
 // isInRange
 test('isInRange returns true if the run is in the specific range', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});

@@ -237,10 +237,10 @@ export default DS.Model.extend({
    * @return {string}
    */
   timeStackMinFixedRaw: Ember.computed("timeStackMin", "timeSec", function(){
-    var timeStackMin = this.get("timeStackMin");
-    var zerosToAdd = this.get("digits").minus(timeStackMin.toString().length);
+    var timeStackMin = this.get("timeStackMin").toString();
+    var zerosToAdd = this.get("digits").minus(timeStackMin.length);
     while (zerosToAdd--) { timeStackMin = "0"+timeStackMin; }
-    return timeStackMin.toString();
+    return timeStackMin;
   }),
 
 
@@ -320,10 +320,10 @@ export default DS.Model.extend({
    * @return {string}
    */
   timeStackSecFixedRaw: Ember.computed("timeStackSec", "timeSec", function(){
-    var timeStackSec = this.get("timeStackSec");
-    var zerosToAdd = this.get("digits").minus(timeStackSec.toString().length);
-    while (zerosToAdd--) { timeStackSec = "0"+timeStackSec; }
-    return timeStackSec.toString();
+    var timeStackSec = this.get("timeStackSec").toString();
+    var zerosToAdd = this.get("digits").minus(timeStackSec.length);
+    while (zerosToAdd--) { timeStackSec = "0"+timeStackSec;}
+    return timeStackSec;
   }),
 
   /**
@@ -962,10 +962,10 @@ export default DS.Model.extend({
    * @return {string}
    */
   paceMinPerKmStackSecFixedRaw: Ember.computed("paceMinPerKmStackSec", function(){
-    var paceMinPerKmStackSec = this.get("paceMinPerKmStackSec");
-    var zerosToAdd = this.get("digits").minus(paceMinPerKmStackSec.toString().length);
+    var paceMinPerKmStackSec = this.get("paceMinPerKmStackSec").toString();
+    var zerosToAdd = this.get("digits").minus(paceMinPerKmStackSec.length);
     while (zerosToAdd--) { paceMinPerKmStackSec = "0"+paceMinPerKmStackSec; }
-    return paceMinPerKmStackSec.toString();
+    return paceMinPerKmStackSec;
   }),
 
   /**
@@ -1123,10 +1123,10 @@ export default DS.Model.extend({
    * @return {string}
    */
   paceMinPerMiStackSecFixedRaw: Ember.computed("paceMinPerMiStackSec", function(){
-    var paceMinPerMiStackSec = this.get("paceMinPerMiStackSec");
-    var zerosToAdd = this.get("digits").minus(paceMinPerMiStackSec.toString().length);
+    var paceMinPerMiStackSec = this.get("paceMinPerMiStackSec").toString();
+    var zerosToAdd = this.get("digits").minus(paceMinPerMiStackSec.length);
     while (zerosToAdd--) { paceMinPerMiStackSec = "0"+paceMinPerMiStackSec; }
-    return paceMinPerMiStackSec.toString();
+    return paceMinPerMiStackSec;
   }),
 
 
