@@ -1516,17 +1516,22 @@ export default DS.Model.extend({
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         // apply splitting strategy
-        if(turningPoint.equals(i) && lastSplitDiffers === true && true){
-          var turningPointSplitTime1 = lastSplitDistance.dividedBy(2);
-          var turningPointSplitTime2 = splitDistance.minus(turningPointSplitTime1);
-
-          // turningPointSplitTime1
-
-          thisSplitTime = thisSplitTime.plus(thisSplitTime.times(splittingStrategy).dividedBy(100));
+        if(turningPoint.equals(i) && lastSplitDiffers === true){
+          // if there is a turning point, find out the length from the begin of this split to the turning point
+          var turningPointSplitDistance1 = lastSplitDistance.dividedBy(2);
+          // determine the ratio between pre and post turning point distance
+          var turningPointSplitRatio1 = turningPointSplitDistance1.dividedBy(splitDistance).times(100);
+          var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
+          // determine the time of both splitting strategies
+          var thisSplitTime1 = thisSplitTime.plus(thisSplitTime.times(splittingStrategy).dividedBy(100));
+          var thisSplitTime2 = thisSplitTime.plus(thisSplitTime.times(splittingStrategySecondHalf).dividedBy(100));
+          // sum both times according to their ratio
+          var time1 = thisSplitTime1.times(turningPointSplitRatio1).dividedBy(100);
+          var time2 = thisSplitTime2.times(turningPointSplitRatio2).dividedBy(100);
+          thisSplitTime = time1.plus(time2);
         }else{
           thisSplitTime = thisSplitTime.plus(thisSplitTime.times(currentSplittingStrategy).dividedBy(100));
         }
-
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         timeSecStack = timeSecStack.plus(thisSplitTime);
