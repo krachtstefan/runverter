@@ -1517,7 +1517,8 @@ export default DS.Model.extend({
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         // apply splitting strategy
-        if(turningPoint.equals(i) && lastSplitDiffers === true){
+        // check if this run has a turning point somewhere in the middle of a split and if this is the current one
+        if(turningPointWithinSplit === true && turningPoint.equals(i)){
           // if there is a turning point, find out the length from the begin of this split to the turning point
           var turningPointSplitDistance1 = lastSplitDistance.dividedBy(2);
           // determine the ratio between pre and post turning point distance
