@@ -1507,6 +1507,12 @@ export default DS.Model.extend({
 
     var averagePaceFirstHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
     var averagePaceSecondHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
+
+    var a = averagePaceFirstHalf.minus(averagePaceSecondHalf);
+    var b = this.get("lengthM").dividedBy(4).minus(this.get("lengthM").dividedBy(4).times(3));
+    var slope = a.dividedBy(b);
+    console.log(slope.toString());
+
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
 
