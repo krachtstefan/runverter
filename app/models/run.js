@@ -1535,7 +1535,7 @@ export default DS.Model.extend({
           var time2 = thisSplitTime2.times(turningPointSplitRatio2).dividedBy(100);
           thisSplitTime = time1.plus(time2);
         }else{
-          thisSplitTime = thisSplitTime.plus(thisSplitTime.times(currentSplittingStrategy).dividedBy(100));
+          thisSplitTime = averagePaceCurrent.times(60).times(thisSplitDistance.dividedBy(1000));
         }
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
