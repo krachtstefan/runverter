@@ -1535,7 +1535,8 @@ export default DS.Model.extend({
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         timeSecStack = timeSecStack.plus(thisSplitTime);
-
+        var progressDistance = lengthMStack.dividedBy(this.get("lengthM")).times(100);
+        var progressTime = timeSecStack.dividedBy(this.get("timeSec")).times(100);
 
         var test = thisSplitTime.dividedBy(splitTime).times(100);
         var test2 = thisSplitDistance.dividedBy(splitDistance).times(100);
@@ -1549,8 +1550,8 @@ export default DS.Model.extend({
             timeSec : timeSecStack,
             lengthM : lengthMStack
           }),
-          'progressDistance' : lengthMStack.dividedBy(this.get("lengthM")).times(100).round(2).toString(),
-          'progressTime' : timeSecStack.dividedBy(this.get("timeSec")).times(100).round(2).toString(),
+          'progressDistance' : progressDistance.round(2).toString(),
+          'progressTime' : progressTime.round(2).toString(),
           // 'progressSpeed' : thisSplitTime.dividedBy(thisSplitDistance).times(100).dividedBy(splitTime).times(100)
           'progressSpeed' : test3.toString()
         }));
