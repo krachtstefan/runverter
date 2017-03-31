@@ -1512,7 +1512,8 @@ export default DS.Model.extend({
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
 
-        var currentSplittingStrategy = turningPointSplit.greaterThanOrEqualTo(i) ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
+        var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
+        var currentSplittingStrategy = beforeTurningPoint ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         var averageSpeedFirstHalf = this.get("speedKmHrRaw").plus(this.get("speedKmHrRaw").times(splittingStrategy).dividedBy(100));
