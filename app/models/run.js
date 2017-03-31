@@ -1518,6 +1518,7 @@ export default DS.Model.extend({
 
         var averagePaceFirstHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
         var averagePaceSecondHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
+        var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
 
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
