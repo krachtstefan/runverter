@@ -1516,8 +1516,8 @@ export default DS.Model.extend({
         var currentSplittingStrategy = beforeTurningPoint ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
-        var averageSpeedFirstHalf = this.get("speedKmHrRaw").plus(this.get("speedKmHrRaw").times(splittingStrategy).dividedBy(100));
-        var averageSpeedSecondHalf = this.get("speedKmHrRaw").plus(this.get("speedKmHrRaw").times(splittingStrategySecondHalf).dividedBy(100));
+        var averagePaceFirstHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
+        var averagePaceSecondHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
 
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
