@@ -1528,8 +1528,8 @@ export default DS.Model.extend({
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(splitDistance).times(100);
           var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
           // determine the time of both splitting strategies
-          var thisSplitTime1 = thisSplitTime.plus(thisSplitTime.times(splittingStrategy).dividedBy(100));
-          var thisSplitTime2 = thisSplitTime.plus(thisSplitTime.times(splittingStrategySecondHalf).dividedBy(100));
+          var thisSplitTime1 = averagePaceFirstHalf.times(60).times(thisSplitDistance.dividedBy(1000));
+          var thisSplitTime2 = averagePaceSecondHalf.times(60).times(thisSplitDistance.dividedBy(1000));
           // sum both times according to their ratio
           var time1 = thisSplitTime1.times(turningPointSplitRatio1).dividedBy(100);
           var time2 = thisSplitTime2.times(turningPointSplitRatio2).dividedBy(100);
