@@ -1525,7 +1525,7 @@ export default DS.Model.extend({
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
-
+        lengthMStack = lengthMStack.plus(thisSplitDistance);
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         if(turningPointWithinSplit === true && turningPointSplit.equals(i)){
@@ -1544,7 +1544,7 @@ export default DS.Model.extend({
           thisSplitTime = averagePaceCurrent.times(60).times(thisSplitDistance.dividedBy(1000));
         }
 
-        lengthMStack = lengthMStack.plus(thisSplitDistance);
+
         timeSecStack = timeSecStack.plus(thisSplitTime);
         var progressDistance = lengthMStack.dividedBy(this.get("lengthM")).times(100);
         var progressTime = timeSecStack.dividedBy(this.get("timeSec")).times(100);
