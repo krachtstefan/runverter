@@ -1525,7 +1525,8 @@ export default DS.Model.extend({
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         if(evenSlope === true){
-          var averagePaceCurrent = lengthMStack.dividedBy(1000).times(slope).plus(shift);
+          // get the average pace from the middle of the current split
+          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(slope).plus(shift);
         }else{
           var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
         }
