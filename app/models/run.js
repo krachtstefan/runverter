@@ -1524,11 +1524,17 @@ export default DS.Model.extend({
         var currentSplittingStrategy = beforeTurningPoint ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
-        var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
+        if(evenSlope === true){
+          var averagePaceCurrent = lengthMStack.dividedBy(1000).times(slope).plus(shift);
+        }else{
+          var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
+        }
+
         lengthMStack = lengthMStack.plus(thisSplitDistance);
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
-        if(turningPointWithinSplit === true && turningPointSplit.equals(i)){
+        // also check if no evenSlope is requested and the turning point is not needed
+        if(turningPointWithinSplit === true && turningPointSplit.equals(i) && evenSlope === false){
           var turningPointSplitDistance = turningPointM.minus(splitDistance.times(i-1));
           // determine the ratio between pre and post turning point distance
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(splitDistance).times(100);
