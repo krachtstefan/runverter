@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-
+BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
   /**
