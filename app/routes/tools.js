@@ -34,6 +34,16 @@ export default Ember.Route.extend({
         prediction.set('achievedRun', achievedRun);
       });
       return run;
+    }).then(function(run){
+      self.store.findRecord('splits', "splits").then(function(splits){
+        run.set('splits', splits);
+      }, function() {
+        var splits = self.store.createRecord('splits', {
+          id : "splits",
+        });
+        run.set('splits', splits);
+      });
+      return run;
     });
 
     var settings = this.store.findRecord('settings', "settings").then(function(settings){
