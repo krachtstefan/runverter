@@ -98,9 +98,9 @@ export default Ember.Controller.extend({
     }
   }),
 
-  handleSplitPersistence: Ember.observer("model.run.test.content", function () {
-    if(this.get("model.run.test.content")){
-      this.get("model.run.test.content").save();
+  handleSplitPersistence: Ember.observer("model.run.splits.content", function () {
+    if(this.get("model.run.splits.content")){
+      this.get("model.run.splits.content").save();
     }
   }),
 
