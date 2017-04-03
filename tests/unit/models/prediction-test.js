@@ -3,7 +3,7 @@ import Ember from 'ember';
 import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('prediction', 'Prediction Model', {
-  needs: ['model:run']
+  needs: ['model:run', 'model:splits']
 });
 
 test('prediction is a valid ember data Model', function(assert) {
