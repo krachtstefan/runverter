@@ -24,7 +24,7 @@ export default DS.Model.extend({
 
   run: DS.belongsTo('run');
 
-/**
+  /**
    * array of run objects describing the splits of a race
    *
    * @return {array}
