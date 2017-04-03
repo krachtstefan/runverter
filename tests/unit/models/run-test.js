@@ -2,7 +2,9 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import { test, moduleForModel } from 'ember-qunit';
 
-moduleForModel('run', 'Run Model');
+moduleForModel('run', 'Run Model', {
+  needs: ['model:splits']
+});
 
 test('run is a valid ember data Model', function(assert) {
   var run = this.subject();
