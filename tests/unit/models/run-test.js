@@ -2695,149 +2695,149 @@ test('speedMiHrStackMi and speedMiHrStackDecimalFixed setter will define speedMi
 });
 
 // splits
-test('splits is an array', function(assert) {
-  var run = this.subject();
-  assert.strictEqual(run.get("splits").constructor.name, "Array");
-});
+// test('splits is an array', function(assert) {
+//   var run = this.subject();
+//   assert.strictEqual(run.get("splits").constructor.name, "Array");
+// });
 
-test('splits is empty by default', function(assert) {
-  var run = this.subject();
-  assert.strictEqual(run.get("splits.length"), 0);
-});
+// test('splits is empty by default', function(assert) {
+//   var run = this.subject();
+//   assert.strictEqual(run.get("splits.length"), 0);
+// });
 
-// calculateSplits
-test('calculateSplits changes splits array length according to the runs kilometer count', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(10000)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.length"), 10);
-  });
-});
+// // calculateSplits
+// test('calculateSplits changes splits array length according to the runs kilometer count', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(10000)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.length"), 10);
+//   });
+// });
 
-test('calculateSplits clears splits array before adding new ones', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(10000)});
-  run.set("splits", [1, 2, 3]);
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.length"), 10);
-  });
-});
+// test('calculateSplits clears splits array before adding new ones', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(10000)});
+//   run.set("splits", [1, 2, 3]);
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.length"), 10);
+//   });
+// });
 
-test('calculateSplits returns true when at least two split were calculated', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(1001)});
-  Ember.run(function(){
-    assert.strictEqual(run.calculateSplits(), true);
-  });
-});
+// test('calculateSplits returns true when at least two split were calculated', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(1001)});
+//   Ember.run(function(){
+//     assert.strictEqual(run.calculateSplits(), true);
+//   });
+// });
 
-test('calculateSplits returns false when one or less splits were calculated', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(1000)});
-  Ember.run(function(){
-    assert.strictEqual(run.calculateSplits(), false);
-    run.set("lengthM", new BigNumber(900));
-    assert.strictEqual(run.calculateSplits(), false);
-  });
-});
+// test('calculateSplits returns false when one or less splits were calculated', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(1000)});
+//   Ember.run(function(){
+//     assert.strictEqual(run.calculateSplits(), false);
+//     run.set("lengthM", new BigNumber(900));
+//     assert.strictEqual(run.calculateSplits(), false);
+//   });
+// });
 
-test('calculateSplits adds an extra split when length is not divisible without remainder', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(10001)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.length"), 11);
-  });
-});
+// test('calculateSplits adds an extra split when length is not divisible without remainder', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(10001)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.length"), 11);
+//   });
+// });
 
-test('calculateSplits will not process when there would only be one split', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(999)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.length"), 0);
-  });
-});
+// test('calculateSplits will not process when there would only be one split', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(999)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.length"), 0);
+//   });
+// });
 
-test('calculateSplits will adjust the last splits length if needed', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(2612)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "612");
-  });
+// test('calculateSplits will adjust the last splits length if needed', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(2612)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "612");
+//   });
 
-  Ember.run(function(){
-    run.set("lengthM", new BigNumber(20000));
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "1000");
-  });
-});
+//   Ember.run(function(){
+//     run.set("lengthM", new BigNumber(20000));
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.split.lengthM").toString(), "1000");
+//   });
+// });
 
-test('calculateSplits will create splits which sum equals the runs length', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(2612)});
-  Ember.run(function(){
-    run.calculateSplits();
-    var splitSum = new BigNumber("0");
-    run.get("splits").forEach(function(item){
-      splitSum = splitSum.plus(item.get("split.lengthM"));
-    });
-    assert.strictEqual(splitSum.toString(), "2612");
-  });
-});
+// test('calculateSplits will create splits which sum equals the runs length', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(2612)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     var splitSum = new BigNumber("0");
+//     run.get("splits").forEach(function(item){
+//       splitSum = splitSum.plus(item.get("split.lengthM"));
+//     });
+//     assert.strictEqual(splitSum.toString(), "2612");
+//   });
+// });
 
-test('calculateSplits creates even splits with paces like the runs average pace', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    run.get("splits").forEach(function(item){
-      assert.strictEqual(run.get("paceMinPerKm").toString(), item.get("split.paceMinPerKm").toString());
-    });
-  });
-});
+// test('calculateSplits creates even splits with paces like the runs average pace', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     run.get("splits").forEach(function(item){
+//       assert.strictEqual(run.get("paceMinPerKm").toString(), item.get("split.paceMinPerKm").toString());
+//     });
+//   });
+// });
 
-test('the last stacked split length equals the length of the run in total', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.run.lengthM").toString(), "42195");
-  });
-});
+// test('the last stacked split length equals the length of the run in total', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.run.lengthM").toString(), "42195");
+//   });
+// });
 
-test('the last stacked split time equals the time of the run in total', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.run.timeSec").toString(), "14299");
-  });
-});
+// test('the last stacked split time equals the time of the run in total', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.run.timeSec").toString(), "14299");
+//   });
+// });
 
-test('the progressDistance of the last split equals 100%', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.progressDistance").toString(), "100");
-  });
-});
+// test('the progressDistance of the last split equals 100%', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.progressDistance").toString(), "100");
+//   });
+// });
 
-test('the progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits")[2].get("progressDistance").toString(), "30");
-  });
-});
+// test('the progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits")[2].get("progressDistance").toString(), "30");
+//   });
+// });
 
-test('the progressTime of the last split equals 100%', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits.lastObject.progressTime").toString(), "100");
-  });
-});
+// test('the progressTime of the last split equals 100%', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(42195), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits.lastObject.progressTime").toString(), "100");
+//   });
+// });
 
-test('the progressTime of the 3rd split of a 10k run equals 30%', function(assert) {
-  var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
-  Ember.run(function(){
-    run.calculateSplits();
-    assert.strictEqual(run.get("splits")[2].get("progressTime").toString(), "30");
-  });
-});
+// test('the progressTime of the 3rd split of a 10k run equals 30%', function(assert) {
+//   var run = this.subject({lengthM : new BigNumber(10000), timeSec : new BigNumber(14299)});
+//   Ember.run(function(){
+//     run.calculateSplits();
+//     assert.strictEqual(run.get("splits")[2].get("progressTime").toString(), "30");
+//   });
+// });
 
 // some edge cases found during development
 test('speedKmHr accuracy edge case was fixed', function(assert) {
