@@ -22,7 +22,7 @@ export default DS.Model.extend({
     defaultValue() { return new Date(); }
   }),
 
-  run: DS.belongsTo('run');
+  run: DS.belongsTo('run'),
 
   /**
    * array of run objects describing the splits of a race
