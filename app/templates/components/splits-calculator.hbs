@@ -48,7 +48,7 @@
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
       <table class="uk-table uk-table-striped small_sod">
         <tbody>
-          {{#each run.splits as |splitItem|}}
+          {{#each run.splits.splits as |splitItem|}}
             <tr class="progress" style="border-bottom-width:0px;">
               <td colspan="3">
                 <div class="distance-progress" style="width:{{splitItem.progressTime}}%; opacity:0.5; background:blue;"> </div>
@@ -74,7 +74,7 @@
           </tr>
         </thead>
         <tbody>
-          {{#each run.splits as |splitItem|}}
+          {{#each run.splits.splits as |splitItem|}}
             <tr>
               <td>
               {{#if showKmSplits}}
