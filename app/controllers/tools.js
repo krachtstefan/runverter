@@ -98,6 +98,12 @@ export default Ember.Controller.extend({
     }
   }),
 
+  handleSplitPersistence: Ember.observer("model.run.test.content", function () {
+    if(this.get("model.run.test.content")){
+      this.get("model.run.test.content").save();
+    }
+  }),
+
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
