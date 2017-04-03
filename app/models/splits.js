@@ -39,28 +39,27 @@ export default DS.Model.extend({
    */
   calculateSplits: function(splitDistance = new BigNumber(1000), splittingStrategy = new BigNumber(0), evenSlope = false){
     this.get("splits").clear();
-
-    splitDistance = this._ensureBigNumber(splitDistance); // how long is a split?
-    splittingStrategy = this._ensureBigNumber(splittingStrategy).times(-1); // what is the spliting strategy? negative, positive or even?
+    splitDistance = this.get("run.content")._ensureBigNumber(splitDistance); // how long is a split?
+    splittingStrategy = this.get("run.content")._ensureBigNumber(splittingStrategy).times(-1); // what is the spliting strategy? negative, positive or even?
     var splittingStrategySecondHalf = splittingStrategy.times(-1); // reverse splitting strategy on second half
 
-    let splitCount = this.get("lengthM").dividedBy(splitDistance); // how many splits do we need?
+    let splitCount = this.get("run.content.lengthM").dividedBy(splitDistance); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
-    let lastSplitDistance = this.get("lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
+    let lastSplitDistance = this.get("run.content.lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPointSplit = splitCountCeiled.dividedBy(2).ceil(); // split number of the turning point
-    let turningPointM = this.get("lengthM").dividedBy(2); // position of the turning point
+    let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
-    let splitTime = this.get("timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
-    let lastSplitTime = this.get("timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
+    let splitTime = this.get("run.content.timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
+    let lastSplitTime = this.get("run.content.timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
 
-    var averagePaceFirstHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
-    var averagePaceSecondHalf = this.get("paceMinPerKmRaw").plus(this.get("paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
+    var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
+    var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
 
     var a = averagePaceFirstHalf.minus(averagePaceSecondHalf);
-    var b = this.get("lengthKmRaw").dividedBy(4).minus(this.get("lengthKmRaw").dividedBy(4).times(3));
+    var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
     var slope = a.dividedBy(b);
-    var shift = averagePaceFirstHalf.minus(slope.times(this.get("lengthKmRaw").dividedBy(4)));
+    var shift = averagePaceFirstHalf.minus(slope.times(this.get("run.content.lengthKmRaw").dividedBy(4)));
 
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
@@ -102,8 +101,8 @@ export default DS.Model.extend({
 
 
         timeSecStack = timeSecStack.plus(thisSplitTime);
-        var progressDistance = lengthMStack.dividedBy(this.get("lengthM")).times(100);
-        var progressTime = timeSecStack.dividedBy(this.get("timeSec")).times(100);
+        var progressDistance = lengthMStack.dividedBy(this.get("run.content.lengthM")).times(100);
+        var progressTime = timeSecStack.dividedBy(this.get("run.content.timeSec")).times(100);
 
         var test = thisSplitTime.dividedBy(splitTime).times(100);
         var test2 = thisSplitDistance.dividedBy(splitDistance).times(100);
