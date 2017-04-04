@@ -203,6 +203,32 @@ test('turningPointM represents the turning point position of the run', function(
 });
 
 // turningPointWithinSplit
+test('turningPointWithinSplit is true when the turning is somewhere within a split', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    assert.strictEqual(splits.get("turningPointWithinSplit"), true);
+  });
+});
+
+test('turningPointWithinSplit is false when the turning is at the border of two splits', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(20000)
+      })
+    );
+    assert.strictEqual(splits.get("turningPointWithinSplit"), false);
+  });
+});
+
 // splitTime
 // lastSplitTime
 // averagePaceFirstHalf
