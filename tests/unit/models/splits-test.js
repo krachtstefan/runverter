@@ -81,6 +81,32 @@ test('splittingStrategySecondHalf is the positive when splittingStrategy is nega
 });
 
 // splitCount
+test('splitCount represents the number of splits with decimal accuracy', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    assert.strictEqual(splits.get("splitCount").toString(), "42.195");
+  });
+});
+
+test('splitCount dependes on splitDistance', function(assert) {
+  const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(20000)
+      })
+    );
+    assert.strictEqual(splits.get("splitCount").toString(), "4");
+  });
+});
+
 // splitCountCeiled
 // lastSplitDistance
 // turningPointSplit
