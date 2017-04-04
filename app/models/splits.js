@@ -6,65 +6,126 @@ export default DS.Model.extend({
 
   splitDistance : new BigNumber(1000),
 
-  // what is the spliting strategy? negative, positive or even?
-  splittingStrategy : new BigNumber(50),
+  /**
+   * What is the spliting strategy? negative, positive or even?
+   *
+   * @return {BigNumber} percentage value, describing how much faster the first half of the run should be. Can also be negative, which results in a positive split
+   */
+  splittingStrategy : new BigNumber(0),
 
-  // reverse splitting strategy on second half
+  /**
+   * reverse splitting strategy for the second half of the run
+   *
+   * @return {BigNumber} negative percantage value of splittingStrategy
+   */
   splittingStrategySecondHalf: Ember.computed("splittingStrategy", function(){
     return this.get("splittingStrategy").times(-1);
   }),
 
-  // how many splits do we need?
+  /**
+   * Number of splits (decimal)
+   *
+   * @return {BigNumber} number of splits
+   */
   splitCount: Ember.computed("run.content.lengthM", "splitDistance", function(){
     return this.get("run.content.lengthM").dividedBy(this.get("splitDistance"));
   }),
 
-  // how many splits do we need? (ceiled)
+  /**
+   * Number of splits (ceiled)
+   *
+   * @return {BigNumber} ceiled number of splits
+   */
   splitCountCeiled: Ember.computed("splitCount", function(){
     return this.get("splitCount").ceil();
   }),
 
-  // if not even divisible, how long is the last split?
+  /**
+   * Reflects the lenght of the last split if the run is not even divisible by its split count
+   *
+   * @return {BigNumber} lenght of the last split in meter, somewhere between 0 and splitDistance
+   */
   lastSplitDistance: Ember.computed("run.content.lengthM", "splitDistance", "splitCountCeiled", function(){
     return this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
   }),
 
-  // split number of the turning point
+  /**
+   * Split number where the turning point is placed. When the turning point is exactly
+   * between two splits this number will be the first of the two
+   *
+   * @return {BigNumber} number of the turning point split
+   */
   turningPointSplit: Ember.computed("splitCountCeiled", function(){
     return this.get("splitCountCeiled").dividedBy(2).ceil();
   }),
 
-  // position of the turning point
+  /**
+   * Exact turning point position in meter
+   *
+   * @return {BigNumber} position in meter
+   */
   turningPointM: Ember.computed("run.content.lengthM", function(){
     return this.get("run.content.lengthM").dividedBy(2);
   }),
 
-  // is the turning point within a split or exactly at the border between two splits
+  /**
+   * Describes, whether the turning point is placed within a split or exactly at the border between two splits
+   *
+   * @return {Boolean}
+   */
   turningPointWithinSplit: Ember.computed("splitCount", function(){
     return this.get("splitCount")%2 === 0 ? false : true;
   }),
 
-  // how much time for a splitDistance (assume an even pacing)
+  /**
+   * Assuming an even pacing, this property describes the time needed for a whole split
+   *
+   * @return {BigNumber} split time in seconds
+   */
   splitTime: Ember.computed("run.content.timeSec", "splitCount", function(){
     return this.get("run.content.timeSec").dividedBy(this.get("splitCount"));
   }),
 
-  // how much time for the last splitDistance (assume an even pacing)
+  /**
+   * Assuming an even pacing, this property describes the time needed for the last split
+   *
+   * @return {BigNumber} last split time in seconds
+   */
   lastSplitTime: Ember.computed("run.content.timeSec", "splitTime", "splitCountCeiled", function(){
+    console.log(this.get("run.content.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1))).toString());
     return this.get("run.content.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
   }),
 
+  /**
+   * Average pace of the first half
+   *
+   * @return {BigNumber} average pace in min/km
+   */
   averagePaceFirstHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategy", function(){
     return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
   }),
 
+  /**
+   * Average pace of the second half
+   *
+   * @return {BigNumber} average pace in min/km
+   */
   averagePaceSecondHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
     return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
   }),
 
+  /**
+   * Wheter to use a gradually increasing pace (even slope) or just change the pace once at the turning point
+   *
+   * @return {Boolean}
+   */
   evenSlope : false,
 
-  // slope of the pace when evenSlope is requested
+  /**
+   * Slope of the pace when evenSlope is requested
+   *
+   * @return {BigNumber}
+   */
   slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.content.lengthKmRaw", "run.content.lengthKmRaw", function(){
     // like in https://en.wikipedia.org/wiki/Slope
     var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
@@ -80,10 +141,9 @@ export default DS.Model.extend({
   splits: [],
 
   /**
+   * calcluates the splits and sets the splits array
    *
-   * @param  {BigNumber|string|number} splitDistance distance that each splits will have (last split may differ)
-   *
-   * @return {boolean}
+   * @return {undefined}
    */
   calculateSplits: function(){
     this.get("splits").clear();
