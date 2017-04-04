@@ -126,7 +126,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.content.lengthKmRaw", "run.content.lengthKmRaw", function(){
+  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.content.lengthKmRaw", function(){
     // like in https://en.wikipedia.org/wiki/Slope
     var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
     var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
