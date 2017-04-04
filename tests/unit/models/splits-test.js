@@ -37,6 +37,20 @@ test('splitDistance has a default value of 1000', function(assert) {
 });
 
 // splittingStrategy
+test('splittingStrategy is a BigNumber', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategy").isBigNumber, true);
+  });
+});
+
+test('splittingStrategy has a default value of 0', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategy").toString(), "0");
+  });
+});
+
 // splittingStrategySecondHalf
 // splitCount
 // splitCountCeiled
