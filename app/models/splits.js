@@ -169,11 +169,12 @@ export default DS.Model.extend({
         var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
         var thisSplitTime = this.get("splitCountCeiled").equals(i) ? this.get("lastSplitTime") : this.get("splitTime"); // different time for last split
 
+        var averagePaceCurrent;
         if(this.get("evenSlope") === true){
           // get the average pace from the middle of the current split
-          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(this.get("slope")).plus(this.get("shift"));
+          averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(this.get("slope")).plus(this.get("shift"));
         }else{
-          var averagePaceCurrent = beforeTurningPoint ? this.get("averagePaceFirstHalf") : this.get("averagePaceSecondHalf");
+          averagePaceCurrent = beforeTurningPoint ? this.get("averagePaceFirstHalf") : this.get("averagePaceSecondHalf");
         }
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
