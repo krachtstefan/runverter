@@ -189,6 +189,19 @@ test('turningPointSplit is the lower one when the turning point is exactly betwe
 });
 
 // turningPointM
+test('turningPointM represents the turning point position of the run', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    assert.strictEqual(splits.get("turningPointM").toString(), "21097.5");
+  });
+});
+
 // turningPointWithinSplit
 // splitTime
 // lastSplitTime
