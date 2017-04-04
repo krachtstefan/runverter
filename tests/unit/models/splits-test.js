@@ -353,6 +353,46 @@ test('evenSlope is false by default', function(assert) {
 });
 
 // slope
+test('slope is 0 when splittingStrategy is 0', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(0) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("slope").toString(), "0");
+  });
+});
+
+test('slope is negative when splittingStrategy is positive', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(50) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("slope").toString(), "-1.2"); // negative split, the value of the pace is going down (and speed increases)
+  });
+});
+
+
+test('slope is positive when splittingStrategy is negative', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(-50) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("slope").toString(), "1.2"); // positive split, the value of the pace is going up (and speed decreases)
+  });
+});
+
 // shift
 
 // splits
