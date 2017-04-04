@@ -35,6 +35,18 @@ export default DS.Model.extend({
     return this.get("splittingStrategy").times(-1);
   }),
 
+  // how many splits do we need?
+  splitCount: Ember.computed("run.content.lengthM", "splitDistance", function(){
+    return this.get("run.content.lengthM").dividedBy(this.get("splitDistance"));
+  }),
+
+  // how many splits do we need? (ceiled)
+  splitCountCeiled: Ember.computed("splitCount", function(){
+    return this.get("splitCount").ceil();
+  }),
+
+
+
   evenSlope : false,
 
   /**
@@ -52,16 +64,13 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-
-    let splitCount = this.get("run.content.lengthM").dividedBy(this.get("splitDistance")); // how many splits do we need?
-    let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
-    let lastSplitDistance = this.get("run.content.lengthM").minus(this.get("splitDistance").times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
-    let turningPointSplit = splitCountCeiled.dividedBy(2).ceil(); // split number of the turning point
+    let lastSplitDistance = this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1))); // if not even divisible, how long is the last split?
+    let turningPointSplit = this.get("splitCountCeiled").dividedBy(2).ceil(); // split number of the turning point
     let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
-    let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
+    let turningPointWithinSplit = this.get("splitCount")%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
-    let splitTime = this.get("run.content.timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
-    let lastSplitTime = this.get("run.content.timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
+    let splitTime = this.get("run.content.timeSec").dividedBy(this.get("splitCount")); // how much time for a splitDistance (assume an even pacing)
+    let lastSplitTime = this.get("run.content.timeSec").minus(splitTime.times(this.get("splitCountCeiled").minus(1))); // how much time for the last splitDistance (assume an even pacing)
 
     var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
     var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
@@ -74,13 +83,13 @@ export default DS.Model.extend({
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
 
-    if(splitCountCeiled.greaterThan(1) === true){
-      for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
-        var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
+    if(this.get("splitCountCeiled").greaterThan(1) === true){
+      for (let i = 1; this.get("splitCountCeiled").greaterThanOrEqualTo(i); i++) {
+        var thisSplitDistance = this.get("splitCountCeiled").equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
         var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
-        var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
+        var thisSplitTime = this.get("splitCountCeiled").equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         if(this.get("evenSlope") === true){
           // get the average pace from the middle of the current split
