@@ -41,9 +41,9 @@ export default DS.Model.extend({
   }),
 
   /**
-   * Reflects the lenght of the last split if the run is not even divisible by its split count
+   * Reflects the length of the last split if the run is not even divisible by its split count
    *
-   * @return {BigNumber} lenght of the last split in meter, somewhere between 0 and splitDistance
+   * @return {BigNumber} length of the last split in meter, somewhere between 0 and splitDistance
    */
   lastSplitDistance: Ember.computed("run.lengthM", "splitDistance", "splitCountCeiled", function(){
     return this.get("run.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
