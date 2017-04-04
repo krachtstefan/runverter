@@ -108,6 +108,32 @@ test('splitCount dependes on splitDistance', function(assert) {
 });
 
 // splitCountCeiled
+test('splitCountCeiled represents the ceiled number of splits', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    assert.strictEqual(splits.get("splitCountCeiled").toString(), "43");
+  });
+});
+
+test('splitCountCeiled dependes on splitDistance', function(assert) {
+  const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(22000)
+      })
+    );
+    assert.strictEqual(splits.get("splitCountCeiled").toString(), "5");
+  });
+});
+
 // lastSplitDistance
 // turningPointSplit
 // turningPointM
