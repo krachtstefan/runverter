@@ -230,6 +230,19 @@ test('turningPointWithinSplit is false when the turning is at the border of two 
 });
 
 // splitTime
+test('splitTime represents the time needed for a split when the pace is even', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(20500)
+      })
+    );
+    assert.strictEqual(splits.get("splitTime").toString(), "702.4390243902439024390243902"); // 4 hours, 20.5 splits
+  });
+});
+
 // lastSplitTime
 // averagePaceFirstHalf
 // averagePaceSecondHalf
