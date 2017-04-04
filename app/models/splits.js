@@ -55,6 +55,11 @@ export default DS.Model.extend({
     return this.get("splitCountCeiled").dividedBy(2).ceil();
   }),
 
+  // position of the turning point
+  turningPointM: Ember.computed("run.content.lengthM", function(){
+    return this.get("run.content.lengthM").dividedBy(2);
+  }),
+
   evenSlope : false,
 
   /**
@@ -72,7 +77,6 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = this.get("splitCount")%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
     let splitTime = this.get("run.content.timeSec").dividedBy(this.get("splitCount")); // how much time for a splitDistance (assume an even pacing)
@@ -109,7 +113,7 @@ export default DS.Model.extend({
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         // also check if no evenSlope is requested and the turning point is not needed
         if(turningPointWithinSplit === true && this.get("turningPointSplit").equals(i) && this.get("evenSlope") === false){
-          var turningPointSplitDistance = turningPointM.minus(this.get("splitDistance").times(i-1));
+          var turningPointSplitDistance = this.get("turningPointM").minus(this.get("splitDistance").times(i-1));
           // determine the ratio between pre and post turning point distance
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(this.get("splitDistance")).times(100);
           var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
