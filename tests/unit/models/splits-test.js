@@ -353,6 +353,7 @@ test('evenSlope is false by default', function(assert) {
 });
 
 // slope
+// shift
 
 // splits
 test('splits is an array', function(assert) {
