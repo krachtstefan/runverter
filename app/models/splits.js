@@ -27,8 +27,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} number of splits
    */
-  splitCount: Ember.computed("run.content.lengthM", "splitDistance", function(){
-    return this.get("run.content.lengthM").dividedBy(this.get("splitDistance"));
+  splitCount: Ember.computed("run.lengthM", "splitDistance", function(){
+    return this.get("run.lengthM").dividedBy(this.get("splitDistance"));
   }),
 
   /**
@@ -45,8 +45,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} lenght of the last split in meter, somewhere between 0 and splitDistance
    */
-  lastSplitDistance: Ember.computed("run.content.lengthM", "splitDistance", "splitCountCeiled", function(){
-    return this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
+  lastSplitDistance: Ember.computed("run.lengthM", "splitDistance", "splitCountCeiled", function(){
+    return this.get("run.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
   }),
 
   /**
@@ -64,8 +64,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} position in meter
    */
-  turningPointM: Ember.computed("run.content.lengthM", function(){
-    return this.get("run.content.lengthM").dividedBy(2);
+  turningPointM: Ember.computed("run.lengthM", function(){
+    return this.get("run.lengthM").dividedBy(2);
   }),
 
   /**
@@ -82,8 +82,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} split time in seconds
    */
-  splitTime: Ember.computed("run.content.timeSec", "splitCount", function(){
-    return this.get("run.content.timeSec").dividedBy(this.get("splitCount"));
+  splitTime: Ember.computed("run.timeSec", "splitCount", function(){
+    return this.get("run.timeSec").dividedBy(this.get("splitCount"));
   }),
 
   /**
@@ -91,9 +91,9 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} last split time in seconds
    */
-  lastSplitTime: Ember.computed("run.content.timeSec", "splitTime", "splitCountCeiled", function(){
-    console.log(this.get("run.content.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1))).toString());
-    return this.get("run.content.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
+  lastSplitTime: Ember.computed("run.timeSec", "splitTime", "splitCountCeiled", function(){
+    console.log(this.get("run.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1))).toString());
+    return this.get("run.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
   }),
 
   /**
@@ -101,8 +101,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceFirstHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategy", function(){
-    return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
+  averagePaceFirstHalf: Ember.computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategy", function(){
+    return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
   }),
 
   /**
@@ -110,8 +110,8 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceSecondHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
-    return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
+  averagePaceSecondHalf: Ember.computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
+    return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
   }),
 
   /**
@@ -126,10 +126,10 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.content.lengthKmRaw", function(){
+  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthKmRaw", function(){
     // like in https://en.wikipedia.org/wiki/Slope
     var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
-    var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
+    var b = this.get("run.lengthKmRaw").dividedBy(4).minus(this.get("run.lengthKmRaw").dividedBy(4).times(3));
     return a.dividedBy(b);
   }),
 
@@ -138,9 +138,9 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  shift: Ember.computed("averagePaceFirstHalf", "slope", "run.content.lengthKmRaw", function(){
+  shift: Ember.computed("averagePaceFirstHalf", "slope", "run.lengthKmRaw", function(){
     // calculared by using https://en.wikipedia.org/wiki/Equation
-    return this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.content.lengthKmRaw").dividedBy(4)));
+    return this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.lengthKmRaw").dividedBy(4)));
   }),
 
   /**
@@ -198,8 +198,8 @@ export default DS.Model.extend({
 
 
         timeSecStack = timeSecStack.plus(thisSplitTime);
-        var progressDistance = lengthMStack.dividedBy(this.get("run.content.lengthM")).times(100);
-        var progressTime = timeSecStack.dividedBy(this.get("run.content.timeSec")).times(100);
+        var progressDistance = lengthMStack.dividedBy(this.get("run.lengthM")).times(100);
+        var progressTime = timeSecStack.dividedBy(this.get("run.timeSec")).times(100);
 
         var test = thisSplitTime.dividedBy(this.get("splitTime")).times(100);
         var test2 = thisSplitDistance.dividedBy(this.get("splitDistance")).times(100);
