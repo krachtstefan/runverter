@@ -166,7 +166,6 @@ export default DS.Model.extend({
         var thisSplitDistance = this.get("splitCountCeiled").equals(i) ? this.get("lastSplitDistance") : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = this.get("turningPointSplit").greaterThanOrEqualTo(i); // are we in a split that is before the turning point
-        var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
         var thisSplitTime = this.get("splitCountCeiled").equals(i) ? this.get("lastSplitTime") : this.get("splitTime"); // different time for last split
 
         var averagePaceCurrent;
