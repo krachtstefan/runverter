@@ -258,7 +258,85 @@ test('lastSplitTime represents the time needed for the the last split when the p
 });
 
 // averagePaceFirstHalf
+test('averagePaceFirstHalf represents the average pace for the first half of the run', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceFirstHalf").toString(), "6");
+  });
+});
+
+test('averagePaceFirstHalf increases when splittingStrategy does', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceFirstHalf").toString(), "9");
+  });
+});
+
+test('averagePaceFirstHalf decreases when splittingStrategy does', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceFirstHalf").toString(), "3");
+  });
+});
+
 // averagePaceSecondHalf
+test('averagePaceSecondHalf represents the average pace for the first half of the run', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceSecondHalf").toString(), "6");
+  });
+});
+
+test('averagePaceSecondHalf decreases when splittingStrategy increases', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceSecondHalf").toString(), "3");
+  });
+});
+
+test('averagePaceSecondHalf increases when splittingStrategy decreases', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("averagePaceSecondHalf").toString(), "9");
+  });
+});
+
 // evenSlope
 // slope
 // splits
