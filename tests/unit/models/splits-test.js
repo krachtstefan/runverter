@@ -52,6 +52,34 @@ test('splittingStrategy has a default value of 0', function(assert) {
 });
 
 // splittingStrategySecondHalf
+test('splittingStrategySecondHalf is a BigNumber', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategySecondHalf").isBigNumber, true);
+  });
+});
+
+test('splittingStrategySecondHalf has a default value of 0', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "0");
+  });
+});
+
+test('splittingStrategySecondHalf is the negative when splittingStrategy is positive', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(5)});
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "-5");
+  });
+});
+
+test('splittingStrategySecondHalf is the positive when splittingStrategy is negative', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-5)});
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "5");
+  });
+});
+
 // splitCount
 // splitCountCeiled
 // lastSplitDistance
