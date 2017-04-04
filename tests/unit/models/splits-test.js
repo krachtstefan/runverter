@@ -22,6 +22,20 @@ test('run is a relation to run model', function(assert) {
 });
 
 // splitDistance
+test('splitDistance is a BigNumber', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splitDistance").isBigNumber, true);
+  });
+});
+
+test('splitDistance has a default value of 1000', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splitDistance").toString(), "1000");
+  });
+});
+
 // splittingStrategy
 // splittingStrategySecondHalf
 // splitCount
