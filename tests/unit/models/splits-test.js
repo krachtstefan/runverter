@@ -135,6 +135,32 @@ test('splitCountCeiled dependes on splitDistance', function(assert) {
 });
 
 // lastSplitDistance
+test('lastSplitDistance equals the remainder distance when the run is not evenly divisible by splitDistance', function(assert) {
+  const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(21234)
+      })
+    );
+    assert.strictEqual(splits.get("lastSplitDistance").toString(), "1234");
+  });
+});
+
+test('lastSplitDistance equals the splitDistance when the run is evenly divisible by splitDistance', function(assert) {
+  const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(20000)
+      })
+    );
+    assert.strictEqual(splits.get("lastSplitDistance").toString(), "5000");
+  });
+});
+
 // turningPointSplit
 // turningPointM
 // turningPointWithinSplit
