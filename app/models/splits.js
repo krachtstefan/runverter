@@ -30,6 +30,8 @@ export default DS.Model.extend({
   // what is the spliting strategy? negative, positive or even?
   splittingStrategy : new BigNumber(50),
 
+  evenSlope : false,
+
   /**
    * array of run objects describing the splits of a race
    *
@@ -43,7 +45,7 @@ export default DS.Model.extend({
    *
    * @return {boolean}
    */
-  calculateSplits: function(evenSlope = false){
+  calculateSplits: function(){
     this.get("splits").clear();
     var splittingStrategySecondHalf = this.get("splittingStrategy").times(-1); // reverse splitting strategy on second half
 
@@ -76,7 +78,7 @@ export default DS.Model.extend({
         var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
-        if(evenSlope === true){
+        if(this.get("evenSlope") === true){
           // get the average pace from the middle of the current split
           var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(slope).plus(shift);
         }else{
@@ -87,7 +89,7 @@ export default DS.Model.extend({
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         // also check if no evenSlope is requested and the turning point is not needed
-        if(turningPointWithinSplit === true && turningPointSplit.equals(i) && evenSlope === false){
+        if(turningPointWithinSplit === true && turningPointSplit.equals(i) && this.get("evenSlope") === false){
           var turningPointSplitDistance = turningPointM.minus(this.get("splitDistance").times(i-1));
           // determine the ratio between pre and post turning point distance
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(this.get("splitDistance")).times(100);
