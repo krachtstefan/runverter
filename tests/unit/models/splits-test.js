@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-// import Ember from 'ember';
+import Ember from 'ember';
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('splits', 'Splits Model', {
@@ -13,6 +13,14 @@ test('splits is a valid ember data Model', function(assert) {
 });
 
 // run
+test('run is a relation to run model', function(assert) {
+  const splits = this.store().modelFor('splits');
+  const relationship = Ember.get(splits, 'relationshipsByName').get('run');
+  assert.equal(relationship.key, 'run');
+  assert.equal(relationship.kind, 'belongsTo');
+  assert.equal(relationship.type, 'run');
+});
+
 // splitDistance
 // splittingStrategy
 // splittingStrategySecondHalf
