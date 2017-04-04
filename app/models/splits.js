@@ -75,6 +75,14 @@ export default DS.Model.extend({
     return this.get("run.content.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
   }),
 
+  averagePaceFirstHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategy", function(){
+    return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
+  }),
+
+  averagePaceSecondHalf: Ember.computed("run.content.paceMinPerKmRaw", "run.content.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
+    return this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
+  }),
+
   evenSlope : false,
 
   /**
@@ -92,13 +100,10 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
-    var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
-
-    var a = averagePaceFirstHalf.minus(averagePaceSecondHalf);
+    var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
     var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
     var slope = a.dividedBy(b);
-    var shift = averagePaceFirstHalf.minus(slope.times(this.get("run.content.lengthKmRaw").dividedBy(4)));
+    var shift = this.get("averagePaceFirstHalf").minus(slope.times(this.get("run.content.lengthKmRaw").dividedBy(4)));
 
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
@@ -115,7 +120,7 @@ export default DS.Model.extend({
           // get the average pace from the middle of the current split
           var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(slope).plus(shift);
         }else{
-          var averagePaceCurrent = beforeTurningPoint ? averagePaceFirstHalf : averagePaceSecondHalf;
+          var averagePaceCurrent = beforeTurningPoint ? this.get("averagePaceFirstHalf") : this.get("averagePaceSecondHalf");
         }
 
         lengthMStack = lengthMStack.plus(thisSplitDistance);
@@ -128,8 +133,8 @@ export default DS.Model.extend({
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(this.get("splitDistance")).times(100);
           var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
           // determine the time of both splitting strategies
-          var thisSplitTime1 = averagePaceFirstHalf.times(60).times(thisSplitDistance.dividedBy(1000));
-          var thisSplitTime2 = averagePaceSecondHalf.times(60).times(thisSplitDistance.dividedBy(1000));
+          var thisSplitTime1 = this.get("averagePaceFirstHalf").times(60).times(thisSplitDistance.dividedBy(1000));
+          var thisSplitTime2 = this.get("averagePaceSecondHalf").times(60).times(thisSplitDistance.dividedBy(1000));
           // sum both times according to their ratio
           var time1 = thisSplitTime1.times(turningPointSplitRatio1).dividedBy(100);
           var time2 = thisSplitTime2.times(turningPointSplitRatio2).dividedBy(100);
