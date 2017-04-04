@@ -379,7 +379,6 @@ test('slope is negative when splittingStrategy is positive', function(assert) {
   });
 });
 
-
 test('slope is positive when splittingStrategy is negative', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(-50) }); var self = this;
   Ember.run(function(){
@@ -394,6 +393,44 @@ test('slope is positive when splittingStrategy is negative', function(assert) {
 });
 
 // shift
+test('shift equals the pace when splittingStrategy is 0', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(0) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("shift").toString(), splits.get("run.paceMinPerKm").toString());
+  });
+});
+
+test('shift is negative when splittingStrategy is positive', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(50) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("shift").toString(), "12");
+  });
+});
+
+test('shift is 0 when splittingStrategy is negative', function(assert) {
+  const splits = this.subject({ splittingStrategy : new BigNumber(-50) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("shift").toString(), "0");
+  });
+});
 
 // splits
 test('splits is an array', function(assert) {
