@@ -50,7 +50,10 @@ export default DS.Model.extend({
     return this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
   }),
 
-
+  // split number of the turning point
+  turningPointSplit: Ember.computed("splitCountCeiled", function(){
+    return this.get("splitCountCeiled").dividedBy(2).ceil();
+  }),
 
   evenSlope : false,
 
@@ -69,7 +72,6 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    let turningPointSplit = this.get("splitCountCeiled").dividedBy(2).ceil(); // split number of the turning point
     let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = this.get("splitCount")%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
 
@@ -91,7 +93,7 @@ export default DS.Model.extend({
       for (let i = 1; this.get("splitCountCeiled").greaterThanOrEqualTo(i); i++) {
         var thisSplitDistance = this.get("splitCountCeiled").equals(i) ? this.get("lastSplitDistance") : this.get("splitDistance"); // different length for last split
 
-        var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
+        var beforeTurningPoint = this.get("turningPointSplit").greaterThanOrEqualTo(i); // are we in a split that is before the turning point
         var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
         var thisSplitTime = this.get("splitCountCeiled").equals(i) ? lastSplitTime : splitTime; // different time for last split
 
@@ -106,7 +108,7 @@ export default DS.Model.extend({
         // apply splitting strategy
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         // also check if no evenSlope is requested and the turning point is not needed
-        if(turningPointWithinSplit === true && turningPointSplit.equals(i) && this.get("evenSlope") === false){
+        if(turningPointWithinSplit === true && this.get("turningPointSplit").equals(i) && this.get("evenSlope") === false){
           var turningPointSplitDistance = turningPointM.minus(this.get("splitDistance").times(i-1));
           // determine the ratio between pre and post turning point distance
           var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(this.get("splitDistance")).times(100);
