@@ -45,6 +45,11 @@ export default DS.Model.extend({
     return this.get("splitCount").ceil();
   }),
 
+  // if not even divisible, how long is the last split?
+  lastSplitDistance: Ember.computed("run.content.lengthM", "splitDistance", "splitCountCeiled", function(){
+    return this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
+  }),
+
 
 
   evenSlope : false,
@@ -64,7 +69,6 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    let lastSplitDistance = this.get("run.content.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1))); // if not even divisible, how long is the last split?
     let turningPointSplit = this.get("splitCountCeiled").dividedBy(2).ceil(); // split number of the turning point
     let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = this.get("splitCount")%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
@@ -85,7 +89,7 @@ export default DS.Model.extend({
 
     if(this.get("splitCountCeiled").greaterThan(1) === true){
       for (let i = 1; this.get("splitCountCeiled").greaterThanOrEqualTo(i); i++) {
-        var thisSplitDistance = this.get("splitCountCeiled").equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
+        var thisSplitDistance = this.get("splitCountCeiled").equals(i) ? this.get("lastSplitDistance") : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
         var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
