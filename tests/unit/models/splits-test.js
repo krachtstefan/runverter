@@ -162,6 +162,32 @@ test('lastSplitDistance equals the splitDistance when the run is evenly divisibl
 });
 
 // turningPointSplit
+test('turningPointSplit represents the split with the turning point', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(42195)
+      })
+    );
+    assert.strictEqual(splits.get("turningPointSplit").toString(), "22");
+  });
+});
+
+test('turningPointSplit is the lower one when the turning point is exactly between two splits', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600*4),
+        lengthM : new BigNumber(20000)
+      })
+    );
+    assert.strictEqual(splits.get("turningPointSplit").toString(), "10");
+  });
+});
+
 // turningPointM
 // turningPointWithinSplit
 // splitTime
