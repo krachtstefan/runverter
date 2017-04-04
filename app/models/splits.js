@@ -134,6 +134,16 @@ export default DS.Model.extend({
   }),
 
   /**
+   * Shift of the pace when evenSlope is requested
+   *
+   * @return {BigNumber}
+   */
+  shift: Ember.computed("averagePaceFirstHalf", "slope", "run.content.lengthKmRaw", function(){
+    // calculared by using https://en.wikipedia.org/wiki/Equation
+    return this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.content.lengthKmRaw").dividedBy(4)));
+  }),
+
+  /**
    * array of run objects describing the splits of a race
    *
    * @return {array}
@@ -147,7 +157,6 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    var shift = this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.content.lengthKmRaw").dividedBy(4)));
 
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
@@ -162,7 +171,7 @@ export default DS.Model.extend({
 
         if(this.get("evenSlope") === true){
           // get the average pace from the middle of the current split
-          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(this.get("slope")).plus(shift);
+          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(this.get("slope")).plus(this.get("shift"));
         }else{
           var averagePaceCurrent = beforeTurningPoint ? this.get("averagePaceFirstHalf") : this.get("averagePaceSecondHalf");
         }
