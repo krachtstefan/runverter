@@ -353,5 +353,20 @@ test('evenSlope is false by default', function(assert) {
 });
 
 // slope
+
 // splits
+test('splits is an array', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splits").constructor, Array);
+  });
+});
+
+test('splits is empty by default', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("splits").length, 0);
+  });
+});
+
 // calculateSplits
