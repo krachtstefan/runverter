@@ -92,7 +92,6 @@ export default DS.Model.extend({
    * @return {BigNumber} last split time in seconds
    */
   lastSplitTime: Ember.computed("run.timeSec", "splitTime", "splitCountCeiled", function(){
-    console.log(this.get("run.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1))).toString());
     return this.get("run.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
   }),
 
