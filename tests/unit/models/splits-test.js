@@ -338,6 +338,20 @@ test('averagePaceSecondHalf increases when splittingStrategy decreases', functio
 });
 
 // evenSlope
+test('evenSlope is a boolean', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(typeof(splits.get("evenSlope")), "boolean");
+  });
+});
+
+test('evenSlope is false by default', function(assert) {
+  const splits = this.subject();
+  Ember.run(function(){
+    assert.strictEqual(splits.get("evenSlope"), false);
+  });
+});
+
 // slope
 // splits
 // calculateSplits
