@@ -85,6 +85,14 @@ export default DS.Model.extend({
 
   evenSlope : false,
 
+  // slope of the pace when evenSlope is requested
+  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.content.lengthKmRaw", "run.content.lengthKmRaw", function(){
+    // like in https://en.wikipedia.org/wiki/Slope
+    var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
+    var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
+    return a.dividedBy(b);
+  }),
+
   /**
    * array of run objects describing the splits of a race
    *
@@ -100,10 +108,7 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
-    var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
-    var slope = a.dividedBy(b);
-    var shift = this.get("averagePaceFirstHalf").minus(slope.times(this.get("run.content.lengthKmRaw").dividedBy(4)));
+    var shift = this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.content.lengthKmRaw").dividedBy(4)));
 
     var lengthMStack = new BigNumber(0); // how long is the entire run until the current split
     var timeSecStack = new BigNumber(0); // how much time of the entire run until the current split
@@ -118,7 +123,7 @@ export default DS.Model.extend({
 
         if(this.get("evenSlope") === true){
           // get the average pace from the middle of the current split
-          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(slope).plus(shift);
+          var averagePaceCurrent = lengthMStack.plus(thisSplitDistance.dividedBy(2)).dividedBy(1000).times(this.get("slope")).plus(shift);
         }else{
           var averagePaceCurrent = beforeTurningPoint ? this.get("averagePaceFirstHalf") : this.get("averagePaceSecondHalf");
         }
