@@ -80,7 +80,8 @@ export default Ember.Component.extend({
   },
 
   calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitDistancesSelected", "splitMetricsSelected" ,function(){
-    this.get("run.splits.content").calculateSplits(this.get("splitDistancesSelectedMeters"));
+    this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
+    this.get("run.splits.content").calculateSplits();
   })),
 
   splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", function(){

@@ -25,6 +25,8 @@ export default DS.Model.extend({
 
   run: DS.belongsTo('run'),
 
+  splitDistance : new BigNumber(1000),
+
   /**
    * array of run objects describing the splits of a race
    *
@@ -38,15 +40,14 @@ export default DS.Model.extend({
    *
    * @return {boolean}
    */
-  calculateSplits: function(splitDistance = new BigNumber(1000), splittingStrategy = new BigNumber(0), evenSlope = false){
+  calculateSplits: function(splittingStrategy = new BigNumber(0), evenSlope = false){
     this.get("splits").clear();
-    splitDistance = this.get("run.content")._ensureBigNumber(splitDistance); // how long is a split?
     splittingStrategy = this.get("run.content")._ensureBigNumber(splittingStrategy).times(-1); // what is the spliting strategy? negative, positive or even?
     var splittingStrategySecondHalf = splittingStrategy.times(-1); // reverse splitting strategy on second half
 
-    let splitCount = this.get("run.content.lengthM").dividedBy(splitDistance); // how many splits do we need?
+    let splitCount = this.get("run.content.lengthM").dividedBy(this.get("splitDistance")); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
-    let lastSplitDistance = this.get("run.content.lengthM").minus(splitDistance.times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
+    let lastSplitDistance = this.get("run.content.lengthM").minus(this.get("splitDistance").times(splitCountCeiled.minus(1))); // if not even divisible, how long is the last split?
     let turningPointSplit = splitCountCeiled.dividedBy(2).ceil(); // split number of the turning point
     let turningPointM = this.get("run.content.lengthM").dividedBy(2); // position of the turning point
     let turningPointWithinSplit = splitCount%2 === 0 ? false : true; // is the turning point within a split or exactly at the border between two splits
@@ -67,7 +68,7 @@ export default DS.Model.extend({
 
     if(splitCountCeiled.greaterThan(1) === true){
       for (let i = 1; splitCountCeiled.greaterThanOrEqualTo(i); i++) {
-        var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : splitDistance; // different length for last split
+        var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
         var currentSplittingStrategy = beforeTurningPoint ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
@@ -85,9 +86,9 @@ export default DS.Model.extend({
         // check if this run has a turning point somewhere in the middle of a split and if this is the current one
         // also check if no evenSlope is requested and the turning point is not needed
         if(turningPointWithinSplit === true && turningPointSplit.equals(i) && evenSlope === false){
-          var turningPointSplitDistance = turningPointM.minus(splitDistance.times(i-1));
+          var turningPointSplitDistance = turningPointM.minus(this.get("splitDistance").times(i-1));
           // determine the ratio between pre and post turning point distance
-          var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(splitDistance).times(100);
+          var turningPointSplitRatio1 = turningPointSplitDistance.dividedBy(this.get("splitDistance")).times(100);
           var turningPointSplitRatio2 = new BigNumber(100).minus(turningPointSplitRatio1);
           // determine the time of both splitting strategies
           var thisSplitTime1 = averagePaceFirstHalf.times(60).times(thisSplitDistance.dividedBy(1000));
@@ -106,7 +107,7 @@ export default DS.Model.extend({
         var progressTime = timeSecStack.dividedBy(this.get("run.content.timeSec")).times(100);
 
         var test = thisSplitTime.dividedBy(splitTime).times(100);
-        var test2 = thisSplitDistance.dividedBy(splitDistance).times(100);
+        var test2 = thisSplitDistance.dividedBy(this.get("splitDistance")).times(100);
         var test3 = test.dividedBy(test2).times(100);
         this.get("splits").push(Ember.Object.create({
           'split' : this.store.createRecord('run', {
