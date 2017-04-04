@@ -27,6 +27,9 @@ export default DS.Model.extend({
 
   splitDistance : new BigNumber(1000),
 
+  // what is the spliting strategy? negative, positive or even?
+  splittingStrategy : new BigNumber(50),
+
   /**
    * array of run objects describing the splits of a race
    *
@@ -40,10 +43,9 @@ export default DS.Model.extend({
    *
    * @return {boolean}
    */
-  calculateSplits: function(splittingStrategy = new BigNumber(0), evenSlope = false){
+  calculateSplits: function(evenSlope = false){
     this.get("splits").clear();
-    splittingStrategy = this.get("run.content")._ensureBigNumber(splittingStrategy).times(-1); // what is the spliting strategy? negative, positive or even?
-    var splittingStrategySecondHalf = splittingStrategy.times(-1); // reverse splitting strategy on second half
+    var splittingStrategySecondHalf = this.get("splittingStrategy").times(-1); // reverse splitting strategy on second half
 
     let splitCount = this.get("run.content.lengthM").dividedBy(this.get("splitDistance")); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
@@ -55,7 +57,7 @@ export default DS.Model.extend({
     let splitTime = this.get("run.content.timeSec").dividedBy(splitCount); // how much time for a splitDistance (assume an even pacing)
     let lastSplitTime = this.get("run.content.timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
 
-    var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(splittingStrategy).dividedBy(100));
+    var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
     var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
 
     var a = averagePaceFirstHalf.minus(averagePaceSecondHalf);
@@ -71,7 +73,7 @@ export default DS.Model.extend({
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
-        var currentSplittingStrategy = beforeTurningPoint ? splittingStrategy : splittingStrategySecondHalf; // splitting strategy of the current split
+        var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : splittingStrategySecondHalf; // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         if(evenSlope === true){
