@@ -11,3 +11,22 @@ test('splits is a valid ember data Model', function(assert) {
   assert.ok(splits);
   assert.ok(splits instanceof DS.Model);
 });
+
+// run
+// splitDistance
+// splittingStrategy
+// splittingStrategySecondHalf
+// splitCount
+// splitCountCeiled
+// lastSplitDistance
+// turningPointSplit
+// turningPointM
+// turningPointWithinSplit
+// splitTime
+// lastSplitTime
+// averagePaceFirstHalf
+// averagePaceSecondHalf
+// evenSlope
+// slope
+// splits
+// calculateSplits
