@@ -30,6 +30,11 @@ export default DS.Model.extend({
   // what is the spliting strategy? negative, positive or even?
   splittingStrategy : new BigNumber(50),
 
+  // reverse splitting strategy on second half
+  splittingStrategySecondHalf: Ember.computed("splittingStrategy", function(){
+    return this.get("splittingStrategy").times(-1);
+  }),
+
   evenSlope : false,
 
   /**
@@ -47,7 +52,6 @@ export default DS.Model.extend({
    */
   calculateSplits: function(){
     this.get("splits").clear();
-    var splittingStrategySecondHalf = this.get("splittingStrategy").times(-1); // reverse splitting strategy on second half
 
     let splitCount = this.get("run.content.lengthM").dividedBy(this.get("splitDistance")); // how many splits do we need?
     let splitCountCeiled = splitCount.ceil(); // how many splits do we need? (ceiled)
@@ -60,7 +64,7 @@ export default DS.Model.extend({
     let lastSplitTime = this.get("run.content.timeSec").minus(splitTime.times(splitCountCeiled.minus(1))); // how much time for the last splitDistance (assume an even pacing)
 
     var averagePaceFirstHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
-    var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(splittingStrategySecondHalf).dividedBy(100));
+    var averagePaceSecondHalf = this.get("run.content.paceMinPerKmRaw").plus(this.get("run.content.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
 
     var a = averagePaceFirstHalf.minus(averagePaceSecondHalf);
     var b = this.get("run.content.lengthKmRaw").dividedBy(4).minus(this.get("run.content.lengthKmRaw").dividedBy(4).times(3));
@@ -75,7 +79,7 @@ export default DS.Model.extend({
         var thisSplitDistance = splitCountCeiled.equals(i) ? lastSplitDistance : this.get("splitDistance"); // different length for last split
 
         var beforeTurningPoint = turningPointSplit.greaterThanOrEqualTo(i); // are we in a split that is before the turning point
-        var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : splittingStrategySecondHalf; // splitting strategy of the current split
+        var currentSplittingStrategy = beforeTurningPoint ? this.get("splittingStrategy") : this.get("splittingStrategySecondHalf"); // splitting strategy of the current split
         var thisSplitTime = splitCountCeiled.equals(i) ? lastSplitTime : splitTime; // different time for last split
 
         if(this.get("evenSlope") === true){
