@@ -152,7 +152,7 @@ export default DS.Model.extend({
   /**
    * calcluates the splits and sets the splits array
    *
-   * @return {undefined}
+   * @return {Boolean}
    */
   calculateSplits: function(){
     this.get("splits").clear();

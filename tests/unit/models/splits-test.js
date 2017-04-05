@@ -448,3 +448,28 @@ test('splits is empty by default', function(assert) {
 });
 
 // calculateSplits
+test('calculateSplits returns true if more than one split was created', function(assert) {
+  const splits = this.subject(); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(1001)
+      })
+    );
+    assert.strictEqual(splits.calculateSplits(), true);
+  });
+});
+
+test('calculateSplits returns false if distance of the run only lasts for one split', function(assert) {
+  const splits = this.subject(); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(999)
+      })
+    );
+    assert.strictEqual(splits.calculateSplits(), false);
+  });
+});
