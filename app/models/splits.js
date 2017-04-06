@@ -142,6 +142,7 @@ export default DS.Model.extend({
    */
   peakPace: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthM", "slope", "shift", function(){
     if(this.get("evenSlope")===false){
+      // get the average pace of the fastes half
       return this.get("splittingStrategy").greaterThan(0) ? this.get("averagePaceSecondHalf") : this.get("averagePaceFirstHalf");
     }else{
       // get the average pace of first or last meter of the race
