@@ -143,6 +143,36 @@ test('splittingStrategy creates a different middle split when splittingStrategy 
   });
 });
 
+test('splittingStrategy of 50 results in finishing the first half 50% slower than the second half', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.timeSec").plus(splits.get("splits")[1].get("split.timeSec")).toString(), "2700"); // 2700/3600*100 = 75%
+    assert.strictEqual(splits.get("splits")[2].get("split.timeSec").plus(splits.get("splits")[3].get("split.timeSec")).toString(), "900"); // 900/3600*100 = 25%
+  });
+});
+
+test('splittingStrategy of -50 results in finishing the first half 50% faster than the second half', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50)}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.timeSec").plus(splits.get("splits")[1].get("split.timeSec")).toString(), "900"); // 900/3600*100 = 25%
+    assert.strictEqual(splits.get("splits")[2].get("split.timeSec").plus(splits.get("splits")[3].get("split.timeSec")).toString(), "2700"); // 2700/3600*100 = 75%
+  });
+});
+
 // splittingStrategySecondHalf
 test('splittingStrategySecondHalf is a BigNumber', function(assert) {
   const splits = this.subject();
@@ -503,6 +533,36 @@ test('evenSlope=true and a positive split results in splits with an increasing p
     assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), "0.6");
     assert.strictEqual(splits.get("splits")[1].get("split.paceMinPerKm").toString(), "1.8");
     assert.strictEqual(splits.get("splits")[2].get("split.paceMinPerKm").toString(), "3");
+  });
+});
+
+test('evenSlope=true and splittingStrategy of 50 results in finishing the first half 50% slower than the second half', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.timeSec").plus(splits.get("splits")[1].get("split.timeSec")).toString(), "2700"); // 2700/3600*100 = 75%
+    assert.strictEqual(splits.get("splits")[2].get("split.timeSec").plus(splits.get("splits")[3].get("split.timeSec")).toString(), "900"); // 900/3600*100 = 25%
+  });
+});
+
+test('evenSlope=true and splittingStrategy of -50 results in finishing the first half 50% faster than the second half 1', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.timeSec").plus(splits.get("splits")[1].get("split.timeSec")).toString(), "900"); // 900/3600*100 = 25%
+    assert.strictEqual(splits.get("splits")[2].get("split.timeSec").plus(splits.get("splits")[3].get("split.timeSec")).toString(), "2700"); // 2700/3600*100 = 75%
   });
 });
 
