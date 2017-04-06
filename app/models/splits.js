@@ -140,7 +140,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} peak pace in min/km
    */
-  peakPace: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthM", "slope", "shift", function(){
+  peakPace: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "splittingStrategy", "run.lengthKmRaw", "slope", "shift", function(){
     if(this.get("evenSlope")===false){
       // get the average pace of the fastes half
       return this.get("splittingStrategy").greaterThan(0) ? this.get("averagePaceSecondHalf") : this.get("averagePaceFirstHalf");
