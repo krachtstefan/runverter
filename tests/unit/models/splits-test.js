@@ -111,6 +111,38 @@ test('splittingStrategy creates uneven splits when splittingStrategy is a positi
   });
 });
 
+test('splittingStrategy creates a different middle split when splittingStrategy is a negative split and the turning point is within a split', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(1800),
+        lengthM : new BigNumber(3000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), "15");
+    assert.strictEqual(splits.get("splits")[1].get("split.paceMinPerKm").toString(), "10");
+    assert.strictEqual(splits.get("splits")[2].get("split.paceMinPerKm").toString(), "5");
+  });
+});
+
+test('splittingStrategy creates a different middle split when splittingStrategy is a positive split and the turning point is within a split', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50)}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(1800),
+        lengthM : new BigNumber(3000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), "5");
+    assert.strictEqual(splits.get("splits")[1].get("split.paceMinPerKm").toString(), "10");
+    assert.strictEqual(splits.get("splits")[2].get("split.paceMinPerKm").toString(), "15");
+  });
+});
+
 // splittingStrategySecondHalf
 test('splittingStrategySecondHalf is a BigNumber', function(assert) {
   const splits = this.subject();
