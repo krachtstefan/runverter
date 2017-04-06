@@ -460,7 +460,7 @@ test('averagePaceSecondHalf increases when splittingStrategy decreases', functio
 });
 
 // peakPace
-test('peakPace equals the average pace when the splitting strategy is 0 ', function(assert) {
+test('peakPace equals the average pace when the splitting strategy is 0', function(assert) {
   const splits = this.subject(), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -473,7 +473,7 @@ test('peakPace equals the average pace when the splitting strategy is 0 ', funct
   });
 });
 
-test('peakPace equals the average second half pace when the splitting strategy is a negative split ', function(assert) {
+test('peakPace equals the average second half pace when the splitting strategy is a negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -486,7 +486,7 @@ test('peakPace equals the average second half pace when the splitting strategy i
   });
 });
 
-test('peakPace equals the average first half pace when the splitting strategy is a positive split ', function(assert) {
+test('peakPace equals the average first half pace when the splitting strategy is a positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
   Ember.run(function(){
     splits.set('run',
