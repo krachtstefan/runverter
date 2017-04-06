@@ -75,6 +75,42 @@ test('splittingStrategy has a default value of 0', function(assert) {
   });
 });
 
+test('splittingStrategy creates uneven splits when splittingStrategy is a negative split', function(assert) {
+  var splittingStrategy = new BigNumber(50);
+  const splits = this.subject({splittingStrategy : splittingStrategy}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(1800),
+        lengthM : new BigNumber(5000)
+      })
+    );
+    splits.calculateSplits();
+    var averagePaceFirstHalf = splits.get("run.paceMinPerKm").plus(splits.get("run.paceMinPerKm").times(splittingStrategy).dividedBy(100));
+    var averagePaceSecondHalf = splits.get("run.paceMinPerKm").minus(splits.get("run.paceMinPerKm").times(splittingStrategy).dividedBy(100));
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), averagePaceFirstHalf.toString());
+    assert.strictEqual(splits.get("splits")[4].get("split.paceMinPerKm").toString(), averagePaceSecondHalf.toString());
+  });
+});
+
+test('splittingStrategy creates uneven splits when splittingStrategy is a positive split', function(assert) {
+  var splittingStrategy = new BigNumber(-50);
+  const splits = this.subject({splittingStrategy : splittingStrategy}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(1800),
+        lengthM : new BigNumber(5000)
+      })
+    );
+    splits.calculateSplits();
+    var averagePaceFirstHalf = splits.get("run.paceMinPerKm").plus(splits.get("run.paceMinPerKm").times(splittingStrategy).dividedBy(100));
+    var averagePaceSecondHalf = splits.get("run.paceMinPerKm").minus(splits.get("run.paceMinPerKm").times(splittingStrategy).dividedBy(100));
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), averagePaceFirstHalf.toString());
+    assert.strictEqual(splits.get("splits")[4].get("split.paceMinPerKm").toString(), averagePaceSecondHalf.toString());
+  });
+});
+
 // splittingStrategySecondHalf
 test('splittingStrategySecondHalf is a BigNumber', function(assert) {
   const splits = this.subject();
