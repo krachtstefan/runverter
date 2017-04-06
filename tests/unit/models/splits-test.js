@@ -677,3 +677,59 @@ test('The progressTime of the 3rd split of a 10k equals 30%', function(assert) {
     assert.strictEqual(splits.get("splits")[2].get("progressTime").toString(), "30");
   });
 });
+
+test('The progressTime of the 2nd split of a 4k with negative 50% splits equals 75%', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[1].get("progressTime").toString(), "75");
+  });
+});
+
+test('The progressTime of the 2nd split of a 4k with negative 50% splits and even slope equals 75%', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope:true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[1].get("progressTime").toString(), "75");
+  });
+});
+
+test('The progressTime of the 2nd split of a 4k with positive 50% splits equals 25%', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50) }); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[1].get("progressTime").toString(), "25");
+  });
+});
+
+test('The progressTime of the 2nd split of a 4k with positive 50% splits and even slope equals 25%', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope:true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(4000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[1].get("progressTime").toString(), "25");
+  });
+});
