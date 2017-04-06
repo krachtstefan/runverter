@@ -164,9 +164,13 @@ export default DS.Model.extend({
   }),
 
   /**
-   * array of run objects describing the splits of a race
+   * array of objects describing the splits of a run
    *
-   * @return {array}
+   * @return {Array} array of splits
+   * @return {Array.split<Run>} a specific run object containing the split
+   * @return {Array.run<Run>} a specific run object from the beginning of the run to the end of the current split
+   * @return {Array.progressDistance<BigNumber>} distance progress at the end of the current split, in meter
+   * @return {Array.progressTime<BigNumber>} time progress at the end of the current split, in seconds
    */
   splits: [],
 
