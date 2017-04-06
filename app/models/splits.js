@@ -144,7 +144,9 @@ export default DS.Model.extend({
     if(this.get("evenSlope")===false){
       return this.get("splittingStrategy").greaterThan(0) ? this.get("averagePaceSecondHalf") : this.get("averagePaceFirstHalf");
     }else{
-      return this.get("run.lengthM").times(this.get("slope")).plus(this.get("shift"));
+      // get the average pace of first or last meter of the race
+      var x = this.get("splittingStrategy").greaterThan(0) ? new BigNumber(0) : this.get("run.lengthKmRaw");
+      return x.times(this.get("slope")).plus(this.get("shift"));
     }
   }),
 

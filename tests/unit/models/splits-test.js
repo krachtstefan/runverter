@@ -499,6 +499,45 @@ test('peakPace equals the average first half pace when the splitting strategy is
   });
 });
 
+test('peakPace equals works with even pace and negative split', function(assert) {
+  const splits = this.subject(), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("peakPace").toString(), splits.get("run.paceMinPerKm").toString());
+  });
+});
+
+test('peakPace equals works with even slope and negative split', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("peakPace").toString(), "12");
+  });
+});
+
+test('peakPace equals works with even slope and positive split', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}), self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    assert.strictEqual(splits.get("peakPace").toString(), "12");
+  });
+});
+
 // evenSlope
 test('evenSlope is a boolean', function(assert) {
   const splits = this.subject();
