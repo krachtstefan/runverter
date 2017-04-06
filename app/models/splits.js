@@ -186,8 +186,9 @@ export default DS.Model.extend({
    * @return {Array} array of splits
    * @return {Array.split<Run>} a specific run object containing the split
    * @return {Array.run<Run>} a specific run object from the beginning of the run to the end of the current split
-   * @return {Array.progressDistance<BigNumber>} distance progress at the end of the current split, in meter
-   * @return {Array.progressTime<BigNumber>} time progress at the end of the current split, in seconds
+   * @return {Array.progressDistance<String>} distance progress at the end of the current split, in percent
+   * @return {Array.progressTime<String>} time progress at the end of the current split, in percent
+   * @return {Array.progressPace<String>} pace progress at the end of the current split, in percent
    */
   splits: [],
 
