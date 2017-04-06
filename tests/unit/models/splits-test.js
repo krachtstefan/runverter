@@ -459,8 +459,8 @@ test('averagePaceSecondHalf increases when splittingStrategy decreases', functio
   });
 });
 
-// peakPace
-test('peakPace equals the average pace when the splitting strategy is 0', function(assert) {
+// peakPaceValue
+test('peakPaceValue equals the average pace when the splitting strategy is 0', function(assert) {
   const splits = this.subject(), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -469,11 +469,11 @@ test('peakPace equals the average pace when the splitting strategy is 0', functi
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), splits.get("run.paceMinPerKm").toString());
+    assert.strictEqual(splits.get("peakPaceValue").toString(), splits.get("run.paceMinPerKm").toString());
   });
 });
 
-test('peakPace equals the average second half pace when the splitting strategy is a negative split', function(assert) {
+test('peakPaceValue equals the average second half pace when the splitting strategy is a negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -482,11 +482,11 @@ test('peakPace equals the average second half pace when the splitting strategy i
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), splits.get("averagePaceSecondHalf").toString());
+    assert.strictEqual(splits.get("peakPaceValue").toString(), splits.get("averagePaceSecondHalf").toString());
   });
 });
 
-test('peakPace equals the average first half pace when the splitting strategy is a positive split', function(assert) {
+test('peakPaceValue equals the average first half pace when the splitting strategy is a positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -495,11 +495,11 @@ test('peakPace equals the average first half pace when the splitting strategy is
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), splits.get("averagePaceFirstHalf").toString());
+    assert.strictEqual(splits.get("peakPaceValue").toString(), splits.get("averagePaceFirstHalf").toString());
   });
 });
 
-test('peakPace equals works with even pace and negative split', function(assert) {
+test('peakPaceValue equals works with even pace and negative split', function(assert) {
   const splits = this.subject(), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -508,11 +508,11 @@ test('peakPace equals works with even pace and negative split', function(assert)
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), splits.get("run.paceMinPerKm").toString());
+    assert.strictEqual(splits.get("peakPaceValue").toString(), splits.get("run.paceMinPerKm").toString());
   });
 });
 
-test('peakPace equals works with even slope and negative split', function(assert) {
+test('peakPaceValue equals works with even slope and negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -521,11 +521,11 @@ test('peakPace equals works with even slope and negative split', function(assert
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), "12");
+    assert.strictEqual(splits.get("peakPaceValue").toString(), "12");
   });
 });
 
-test('peakPace equals works with even slope and positive split', function(assert) {
+test('peakPaceValue equals works with even slope and positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}), self = this;
   Ember.run(function(){
     splits.set('run',
@@ -534,7 +534,7 @@ test('peakPace equals works with even slope and positive split', function(assert
         lengthM : new BigNumber(10000)
       })
     );
-    assert.strictEqual(splits.get("peakPace").toString(), "12");
+    assert.strictEqual(splits.get("peakPaceValue").toString(), "12");
   });
 });
 
