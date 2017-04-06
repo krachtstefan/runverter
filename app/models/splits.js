@@ -134,6 +134,24 @@ export default DS.Model.extend({
     return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
   }),
 
+
+  /**
+   * peak pace of the race, a lower number means to be faster
+   *
+   * @return {BigNumber} peak pace in min/km
+   */
+  peakPace: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthM", "slope", "shift", function(){
+    if(this.get("evenSlope")===false){
+      if(this.get("splittingStrategy").greaterThan(0)){
+        return this.get("averagePaceSecondHalf");
+      }else{
+        return this.get("averagePaceFirstHalf");
+      }
+    }else{
+      return this.get("run.lengthM").times(this.get("slope")).plus(this.get("shift"));
+    }
+  }),
+
   /**
    * Wheter to use a gradually increasing pace (even slope) or just change the pace once at the turning point
    *
