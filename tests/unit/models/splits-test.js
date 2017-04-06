@@ -808,7 +808,7 @@ test('the last stacked split time equals the time of the run in total', function
       })
     );
     splits.calculateSplits();
-    assert.strictEqual(splits.get("splits.lastObject.run.timeSec").toString(), "14299.00000000000000000000008363"); // TOOD
+    assert.strictEqual(splits.get("splits.lastObject.run.timeSec").toString(), "14299");
   });
 });
 

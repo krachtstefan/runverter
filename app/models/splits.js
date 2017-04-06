@@ -216,7 +216,6 @@ export default DS.Model.extend({
           thisSplitTime = averagePaceCurrent.times(60).times(thisSplitDistance.dividedBy(1000));
         }
 
-
         timeSecStack = timeSecStack.plus(thisSplitTime);
         var progressDistance = lengthMStack.dividedBy(this.get("run.lengthM")).times(100);
         var progressTime = timeSecStack.dividedBy(this.get("run.timeSec")).times(100);
@@ -226,12 +225,12 @@ export default DS.Model.extend({
         var test3 = test.dividedBy(test2).times(100);
         this.get("splits").push(Ember.Object.create({
           'split' : this.store.createRecord('run', {
-            timeSec : thisSplitTime,
-            lengthM : thisSplitDistance
+            timeSec : thisSplitTime.round(20),
+            lengthM : thisSplitDistance.round(20)
           }),
           'run' : this.store.createRecord('run', {
-            timeSec : timeSecStack,
-            lengthM : lengthMStack
+            timeSec : timeSecStack.round(20),
+            lengthM : lengthMStack.round(20)
           }),
           'progressDistance' : progressDistance.round(2).toString(),
           'progressTime' : progressTime.round(2).toString(),
