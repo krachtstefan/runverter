@@ -474,6 +474,38 @@ test('evenSlope=true creates uneven splits when splittingStrategy is a positive 
   });
 });
 
+test('evenSlope=true and a negative split results in splits with an decreasing pace', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), "11.4");
+    assert.strictEqual(splits.get("splits")[1].get("split.paceMinPerKm").toString(), "10.2");
+    assert.strictEqual(splits.get("splits")[2].get("split.paceMinPerKm").toString(), "9");
+  });
+});
+
+test('evenSlope=true and a positive split results in splits with an increasing pace', function(assert) {
+  const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}); var self = this;
+  Ember.run(function(){
+    splits.set('run',
+      self.store().createRecord('run',{
+        timeSec : new BigNumber(3600),
+        lengthM : new BigNumber(10000)
+      })
+    );
+    splits.calculateSplits();
+    assert.strictEqual(splits.get("splits")[0].get("split.paceMinPerKm").toString(), "0.6");
+    assert.strictEqual(splits.get("splits")[1].get("split.paceMinPerKm").toString(), "1.8");
+    assert.strictEqual(splits.get("splits")[2].get("split.paceMinPerKm").toString(), "3");
+  });
+});
+
 // slope
 test('slope is 0 when splittingStrategy is 0', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(0) }); var self = this;
