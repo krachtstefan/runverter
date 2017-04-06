@@ -688,7 +688,7 @@ test('the last stacked split time equals the time of the run in total', function
   });
 });
 
-test('the progressDistance of the last split equals 100%', function(assert) {
+test('progressDistance of the last split equals 100%', function(assert) {
   const splits = this.subject(); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -702,7 +702,7 @@ test('the progressDistance of the last split equals 100%', function(assert) {
   });
 });
 
-test('The progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
+test('progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
   const splits = this.subject(); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -716,7 +716,7 @@ test('The progressDistance of the 3rd split of a 10k equals 30%', function(asser
   });
 });
 
-test('the progressTime of the last split equals 100%', function(assert) {
+test('progressTime of the last split equals 100%', function(assert) {
   const splits = this.subject(); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -730,7 +730,7 @@ test('the progressTime of the last split equals 100%', function(assert) {
   });
 });
 
-test('The progressTime of the 3rd split of a 10k equals 30%', function(assert) {
+test('progressTime of the 3rd split of a 10k equals 30%', function(assert) {
   const splits = this.subject(); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -744,7 +744,7 @@ test('The progressTime of the 3rd split of a 10k equals 30%', function(assert) {
   });
 });
 
-test('The progressTime of the 2nd split of a 4k with negative 50% splits equals 75%', function(assert) {
+test('progressTime of the 2nd split of a 4k with negative 50% splits equals 75%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -758,7 +758,7 @@ test('The progressTime of the 2nd split of a 4k with negative 50% splits equals 
   });
 });
 
-test('The progressTime of the 2nd split of a 4k with negative 50% splits and even slope equals 75%', function(assert) {
+test('progressTime of the 2nd split of a 4k with negative 50% splits and even slope equals 75%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope:true}); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -772,7 +772,7 @@ test('The progressTime of the 2nd split of a 4k with negative 50% splits and eve
   });
 });
 
-test('The progressTime of the 2nd split of a 4k with positive 50% splits equals 25%', function(assert) {
+test('progressTime of the 2nd split of a 4k with positive 50% splits equals 25%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50) }); var self = this;
   Ember.run(function(){
     splits.set('run',
@@ -786,7 +786,7 @@ test('The progressTime of the 2nd split of a 4k with positive 50% splits equals 
   });
 });
 
-test('The progressTime of the 2nd split of a 4k with positive 50% splits and even slope equals 25%', function(assert) {
+test('progressTime of the 2nd split of a 4k with positive 50% splits and even slope equals 25%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope:true}); var self = this;
   Ember.run(function(){
     splits.set('run',
