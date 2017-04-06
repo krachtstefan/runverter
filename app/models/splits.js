@@ -240,10 +240,9 @@ export default DS.Model.extend({
         timeSecStack = timeSecStack.plus(thisSplitTime);
         var progressDistance = lengthMStack.dividedBy(this.get("run.lengthM")).times(100);
         var progressTime = timeSecStack.dividedBy(this.get("run.timeSec")).times(100);
+        var progressSpeed = averagePaceCurrent.dividedBy(this.get("peakPaceValue")).times(100).minus(100).abs();
+        console.log(progressSpeed.toString());
 
-        var test = thisSplitTime.dividedBy(this.get("splitTime")).times(100);
-        var test2 = thisSplitDistance.dividedBy(this.get("splitDistance")).times(100);
-        var test3 = test.dividedBy(test2).times(100);
         this.get("splits").push(Ember.Object.create({
           'split' : this.store.createRecord('run', {
             timeSec : thisSplitTime.round(20),
@@ -255,8 +254,7 @@ export default DS.Model.extend({
           }),
           'progressDistance' : progressDistance.round(2).toString(),
           'progressTime' : progressTime.round(2).toString(),
-          // 'progressSpeed' : thisSplitTime.dividedBy(thisSplitDistance).times(100).dividedBy(splitTime).times(100)
-          'progressSpeed' : test3.toString()
+          'progressSpeed' : progressSpeed.round(2).toString()
         }));
       }
       return true;
