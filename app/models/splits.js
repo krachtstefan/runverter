@@ -142,11 +142,7 @@ export default DS.Model.extend({
    */
   peakPace: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthM", "slope", "shift", function(){
     if(this.get("evenSlope")===false){
-      if(this.get("splittingStrategy").greaterThan(0)){
-        return this.get("averagePaceSecondHalf");
-      }else{
-        return this.get("averagePaceFirstHalf");
-      }
+      return this.get("splittingStrategy").greaterThan(0) ? this.get("averagePaceSecondHalf") : this.get("averagePaceFirstHalf");
     }else{
       return this.get("run.lengthM").times(this.get("slope")).plus(this.get("shift"));
     }
