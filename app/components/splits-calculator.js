@@ -60,7 +60,7 @@ export default Ember.Component.extend({
     return splitTempoMetrics;
   }),
 
-  splitStrategies : Ember.computed("splitStrategiesSelected", "i18n.locale", function(){
+  splitStrategies : Ember.computed("splitStrategiesAvailable", "i18n.locale", function(){
     var splitStrategies = [];
     var self = this;
     this.get("splitStrategiesAvailable").forEach(function(item){
