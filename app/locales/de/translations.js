@@ -58,13 +58,13 @@ export default {
       'distanceHeader' : 'Distanz',
       'timeHeader' : 'Zeit',
       'splitStrategies' : {
-        '3' : 'Negativer Split -3%',
-        '2' : 'Negativer Split -2%',
-        '1' : 'Negativer Split -1%',
-        '0' : 'Gleich',
-        '-1' : 'Negativer Split 1%',
-        '-2' : 'Negativer Split 2%',
-        '-3' : 'Negativer Split 3%'
+        '3' : '3% negative',
+        '2' : '2% negative',
+        '1' : '1% negative',
+        '0' : 'gleichmäßig',
+        '-1' : '1% positive',
+        '-2' : '2% positive',
+        '-3' : '3% positive'
       },
       'evenSlope' : {
         'false' : 'einen Tempowechsel in der Mitte',
