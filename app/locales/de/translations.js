@@ -52,23 +52,25 @@ export default {
       'name' : 'Zwischenzeit-Rechner',
       'label' : 'Benutze immer einen',
       'description' : 'und traue niemals einem GPS-Signal.',
-      'distanceLabel' : 'Ein Lauf mit der Distanz von',
+      'distanceLabel' : 'Zeige Zwischenzeiten für',
       'timeLabel' : 'in',
-      'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner',
+      'splitDistanceLabel' : 'mit einer Split Distanz von',
+      'splitStrategyLabel' : 'Rennstrategie ist',
+      'evenSlopeLabel' : 'und das Tempo wechselt',
       'distanceHeader' : 'Distanz',
       'timeHeader' : 'Zeit',
       'splitStrategies' : {
-        '3' : '3% negative',
-        '2' : '2% negative',
-        '1' : '1% negative',
-        '0' : 'gleichmäßig',
-        '-1' : '1% positive',
-        '-2' : '2% positive',
-        '-3' : '3% positive'
+        '3' : '3% negative Splits',
+        '2' : '2% negative Splits',
+        '1' : '1% negative Splits',
+        '0' : 'gleichmäßige Splits',
+        '-1' : '1% positive Splits',
+        '-2' : '2% positive Splits',
+        '-3' : '3% positive Splits'
       },
       'evenSlope' : {
-        'false' : 'einen Tempowechsel in der Mitte',
-        'true' : 'gleichmäßig ändern des Tempos',
+        'false' : 'in der Mitte',
+        'true' : 'gleichmäßig',
       }
     }
   },

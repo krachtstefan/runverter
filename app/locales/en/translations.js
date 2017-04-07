@@ -52,23 +52,25 @@ export default {
       'name' : 'Split Time Calculator',
       'label' : 'Always use a',
       'description' : 'Cause never trust a GPS signal.',
-      'distanceLabel' : 'A run with a distance of',
+      'distanceLabel' : 'Display splits for',
       'timeLabel' : 'in',
-      'splitLabel' : 'results in the following splits',
+      'splitDistanceLabel' : 'with a split distance of',
+      'splitStrategyLabel' : 'Race strategy should be',
+      'evenSlopeLabel' : 'with the speed changing',
       'distanceHeader' : 'Distance',
       'timeHeader' : 'Time',
       'splitStrategies' : {
-        '3' : '3% negative',
-        '2' : '2% negative',
-        '1' : '1% negative',
-        '0' : 'even',
-        '-1' : '1% positive',
-        '-2' : '2% positive',
-        '-3' : '3% positive'
+        '3' : '3% negative splits',
+        '2' : '2% negative splits',
+        '1' : '1% negative splits',
+        '0' : 'even paced splits',
+        '-1' : '1% positive splits',
+        '-2' : '2% positive splits',
+        '-3' : '3% positive splits'
       },
       'evenSlope' : {
-        'false' : 'one pace change at the middle',
-        'true' : 'gradually changing pace',
+        'false' : 'in the middle',
+        'true' : 'gradually',
       }
     }
   },
