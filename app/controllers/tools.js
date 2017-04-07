@@ -20,16 +20,17 @@ export default Ember.Controller.extend({
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
+  // will be used to overwrite the default of the component
   selectedToolKey : "pca",
-  paceCalcLengthMetricsQuery : "km",                            // will be used to overwrite the default of the component
-  paceCalcTempoMetricsQuery : "minkm",                          // will be used to overwrite the default of the component
-  racePredictorAchievedRunLengthMetricsQuery : "km",            // will be used to overwrite the default of the component
-  racePredictorPredictedRunLengthMetricsQuery : "km",           // will be used to overwrite the default of the component
-  splitsCalcLengthMetricsQuery : "km",                          // will be used to overwrite the default of the component
-  splitsCalcDistanceQuery: 1,                                   // will be used to overwrite the default of the component
-  splitsCalcMetricsQuery: "km",                                 // will be used to overwrite the default of the component
-  splitsCalcStrategyQuery: "0",                                 // will be used to overwrite the default of the component
-  splitsCalcTempoMetricsSelected: "minkm",                      // will be used to overwrite the default of the component
+  paceCalcLengthMetricsQuery : "km",
+  paceCalcTempoMetricsQuery : "minkm",
+  racePredictorAchievedRunLengthMetricsQuery : "km",
+  racePredictorPredictedRunLengthMetricsQuery : "km",
+  splitsCalcLengthMetricsQuery : "km",
+  splitsCalcDistanceQuery: 1,
+  splitsCalcMetricsQuery: "km",
+  splitsCalcStrategyQuery: "0",
+  splitsCalcTempoMetricsSelected: "minkm",
 
   toolsAvailable : [
     "pca", "pc", "lc", "rp", "sc"
