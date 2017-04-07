@@ -56,7 +56,16 @@ export default {
       'timeLabel' : 'in',
       'splitLabel' : 'results in the following splits',
       'distanceHeader' : 'Distance',
-      'timeHeader' : 'Time'
+      'timeHeader' : 'Time',
+      'splitStrategies' : {
+        '3' : 'negative split -3%',
+        '2' : 'negative split -2%',
+        '1' : 'negative split -1%',
+        '0' : 'even',
+        '-1' : 'negative split 1%',
+        '-2' : 'negative split 2%',
+        '-3' : 'negative split 3%'
+      }
     }
   },
   'flashMessages' : {

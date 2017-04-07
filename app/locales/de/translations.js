@@ -56,7 +56,16 @@ export default {
       'timeLabel' : 'in',
       'splitLabel' : 'ergibt folgende Zwischenzeit-Rechner',
       'distanceHeader' : 'Distanz',
-      'timeHeader' : 'Zeit'
+      'timeHeader' : 'Zeit',
+      'splitStrategies' : {
+        '3' : 'Negativer Split -3%',
+        '2' : 'Negativer Split -2%',
+        '1' : 'Negativer Split -1%',
+        '0' : 'Gleich',
+        '-1' : 'Negativer Split 1%',
+        '-2' : 'Negativer Split 2%',
+        '-3' : 'Negativer Split 3%'
+      }
     }
   },
   'metrics' : {
