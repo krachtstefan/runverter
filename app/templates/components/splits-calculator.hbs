@@ -45,6 +45,11 @@
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
         {{/each}}
       {{/x-select}}
+      {{#x-select value=evenSlopeSelected class="evenSlope"}}
+        {{#each evenSlope as |item|}}
+          {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
     </div>
   </div>
 
