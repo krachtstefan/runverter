@@ -191,6 +191,10 @@ export default Ember.Component.extend({
     return this.get("splitTempoMetricsSelected") === "mih" ? true : false;
   }),
 
+  evenSlopeVisible: Ember.computed('splitStrategiesSelected', function () {
+    return this.get("splitStrategiesSelected") === 0 ? false : true;
+  }),
+
   tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
@@ -209,6 +213,10 @@ export default Ember.Component.extend({
 
   timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
     return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+  }),
+
+  evenSlopeVisibleClass: Ember.computed('evenSlopeVisible', function () {
+    return this.get("evenSlopeVisible") === true ? "evenSlopeVisible" : "evenSlopeInvisible";
   }),
 
   actions: {
