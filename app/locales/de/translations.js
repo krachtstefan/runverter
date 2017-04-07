@@ -55,7 +55,7 @@ export default {
       'distanceLabel' : 'Zeige Zwischenzeiten für',
       'timeLabel' : 'in',
       'splitDistanceLabel' : 'mit einer Split Distanz von',
-      'splitStrategyLabel' : 'Rennstrategie ist',
+      'splitStrategyLabel' : 'Gelaufen werden',
       'evenSlopeLabel' : 'und das Tempo wechselt',
       'distanceHeader' : 'Distanz',
       'timeHeader' : 'Zeit',
