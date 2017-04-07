@@ -36,18 +36,8 @@
   }
 }
 
-#splitStrategies{
-  width: 450px;
-  .sod_list_wrapper{
-    width: 425px;
-  }
-}
-
-#evenSlope{
-  width: 450px;
-  .sod_list_wrapper{
-    width: 425px;
-  }
+#splitStrategies, #evenSlope{
+  padding-right:12px;
 }
 
 #splitDistance{
