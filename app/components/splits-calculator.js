@@ -97,8 +97,9 @@ export default Ember.Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitDistancesSelected", "splitMetricsSelected" ,function(){
+  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected" ,function(){
     this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
+    this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
     this.get("run.splits.content").calculateSplits();
   })),
 
