@@ -26,7 +26,7 @@
   }
 }
 
-#runLength, #achievedRunLength, #predictedRunLength, #splitMetric{
+#runLength, #achievedRunLength, #predictedRunLength, #splitMetric, #splitStrategies{
   width: 70px;
   @include respond-to("small"){
     width: 100px;
@@ -49,6 +49,13 @@
 #splitTempo{
   .sod_list_wrapper{
     width: 125px;
+  }
+}
+
+#splitStrategies{
+  width: 160px;
+  .sod_list_wrapper{
+    width: 425px;
   }
 }
 
