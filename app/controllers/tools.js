@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
     'splitsCalcDistanceQuery' : 'sd',                           // selected split distance for splits calculator
     'splitsCalcMetricsQuery' : 'sm',                            // selected split metric for splits calculator
     'splitsCalcStrategyQuery' : 'ss',                           // selected split strategy for splits calculator
+    'splitsCalcSlopeQuery' : 'es',                              // selected even slope option for splits calculator
     'splitsCalcTempoMetricsSelected' : 's-sc',                  // selected tempo metric for splits calculator
     'expertMode' : 'nerd',                                      // selected display mode
     'imprintVisible' : 'info',                                  // selected display mode
@@ -30,6 +31,7 @@ export default Ember.Controller.extend({
   splitsCalcDistanceQuery: 1,
   splitsCalcMetricsQuery: "km",
   splitsCalcStrategyQuery: 0,
+  splitsCalcSlopeQuery : false,
   splitsCalcTempoMetricsSelected: "minkm",
 
   toolsAvailable : [
