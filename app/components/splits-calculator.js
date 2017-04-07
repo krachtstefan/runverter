@@ -13,6 +13,9 @@ export default Ember.Component.extend({
   splitDistancesAvailable : [1, 5, 10],
   splitMetricsSelected : "km", // may be overwritten when using this component
 
+  splitStrategiesSelected : "0", // may be overwritten when using this component
+  splitStrategiesAvailable : ["3", "2", "1", "0", "1", "2", "3"],
+
   racePickerVisible : false,
   timePickerVisible : false,
 
