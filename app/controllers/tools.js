@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   splitsCalcLengthMetricsQuery : "km",
   splitsCalcDistanceQuery: 1,
   splitsCalcMetricsQuery: "km",
-  splitsCalcStrategyQuery: "0",
+  splitsCalcStrategyQuery: 0,
   splitsCalcTempoMetricsSelected: "minkm",
 
   toolsAvailable : [
