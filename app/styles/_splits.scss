@@ -1,3 +1,24 @@
+.evenSlopeInvisible{
+  height: 0;
+  opacity: 0;
+  z-index: -999;
+  pointer-events: none; // otherwise links are clickable, even if invisible
+  @include transition(0.2s ease-out);
+}
+
+
+.evenSlopeVisible{
+  height: 70px;
+  @include respond-to("small"){
+    height: 108px;
+  }
+  @include respond-to("medium"){
+    height: 84px;
+  }
+  opacity: 1;
+  @include transition(0.5s ease-in-out);
+}
+
 .splits-container{
   max-width:430px;
   table{
