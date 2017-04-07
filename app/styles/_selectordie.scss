@@ -36,6 +36,13 @@
   }
 }
 
+#splitStrategies{
+  width: 450px;
+  .sod_list_wrapper{
+    width: 425px;
+  }
+}
+
 #splitDistance{
   width: 60px;
   @include respond-to("small"){
@@ -49,13 +56,6 @@
 #splitTempo{
   .sod_list_wrapper{
     width: 125px;
-  }
-}
-
-#splitStrategies{
-  width: 160px;
-  .sod_list_wrapper{
-    width: 425px;
   }
 }
 
