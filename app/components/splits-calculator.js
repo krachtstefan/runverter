@@ -16,6 +16,9 @@ export default Ember.Component.extend({
   splitStrategiesSelected : 0, // may be overwritten when using this component
   splitStrategiesAvailable : [3, 2, 1, 0, -1, -2, -3],
 
+  evenSlopeSelected : false, // may be overwritten when using this component
+  evenSlopeAvailable : [true, false],
+
   racePickerVisible : false,
   timePickerVisible : false,
 
