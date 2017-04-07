@@ -88,6 +88,9 @@ export default Ember.Component.extend({
       $("select.splitMetric").selectOrDie({customID:"splitMetric"}).ready(function() {
         $("select.splitMetric").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
+      $("select.splitStrategies").selectOrDie({customID:"splitStrategies"}).ready(function() {
+        $("select.splitStrategies").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
       $("select.splitTempo").selectOrDie({customID:"splitTempo"}).ready(function() {
         $("select.splitTempo").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
