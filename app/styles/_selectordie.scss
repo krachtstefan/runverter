@@ -43,6 +43,13 @@
   }
 }
 
+#evenSlope{
+  width: 450px;
+  .sod_list_wrapper{
+    width: 425px;
+  }
+}
+
 #splitDistance{
   width: 60px;
   @include respond-to("small"){
