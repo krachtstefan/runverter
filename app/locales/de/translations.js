@@ -65,6 +65,10 @@ export default {
         '-1' : 'Negativer Split 1%',
         '-2' : 'Negativer Split 2%',
         '-3' : 'Negativer Split 3%'
+      },
+      'evenSlope' : {
+        'false' : 'einen Tempowechsel in der Mitte',
+        'true' : 'gleichmäßig ändern des Tempos',
       }
     }
   },

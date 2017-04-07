@@ -65,6 +65,10 @@ export default {
         '-1' : 'negative split 1%',
         '-2' : 'negative split 2%',
         '-3' : 'negative split 3%'
+      },
+      'evenSlope' : {
+        'false' : 'one pace change at the middle',
+        'true' : 'gradually changing pace',
       }
     }
   },
