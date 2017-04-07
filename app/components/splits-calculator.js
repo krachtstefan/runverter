@@ -72,6 +72,18 @@ export default Ember.Component.extend({
     return splitStrategies;
   }),
 
+  evenSlope : Ember.computed("evenSlopeAvailable", "i18n.locale", function(){
+    var evenSlope = [];
+    var self = this;
+    this.get("evenSlopeAvailable").forEach(function(item){
+      evenSlope.push({
+        "key" : item,
+        "label" : self.get('i18n').t("tools.sc.evenSlope."+item),
+      });
+    });
+    return evenSlope;
+  }),
+
   didRender: function() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
