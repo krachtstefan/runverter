@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
     'splitsCalcLengthMetricsQuery' : 'lm-sc',                   // selected length metric for splits calculator
     'splitsCalcDistanceQuery' : 'sd',                           // selected split distance for splits calculator
     'splitsCalcMetricsQuery' : 'sm',                            // selected split metric for splits calculator
+    'splitsCalcStrategyQuery' : 'ss',                           // selected split strategy for splits calculator
     'splitsCalcTempoMetricsSelected' : 's-sc',                  // selected tempo metric for splits calculator
     'expertMode' : 'nerd',                                      // selected display mode
     'imprintVisible' : 'info',                                  // selected display mode
@@ -27,6 +28,7 @@ export default Ember.Controller.extend({
   splitsCalcLengthMetricsQuery : "km",                          // will be used to overwrite the default of the component
   splitsCalcDistanceQuery: 1,                                   // will be used to overwrite the default of the component
   splitsCalcMetricsQuery: "km",                                 // will be used to overwrite the default of the component
+  splitsCalcStrategyQuery: "0",                                 // will be used to overwrite the default of the component
   splitsCalcTempoMetricsSelected: "minkm",                      // will be used to overwrite the default of the component
 
   toolsAvailable : [
