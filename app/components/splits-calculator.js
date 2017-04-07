@@ -106,6 +106,9 @@ export default Ember.Component.extend({
       $("select.splitStrategies").selectOrDie({customID:"splitStrategies"}).ready(function() {
         $("select.splitStrategies").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
+      $("select.evenSlope").selectOrDie({customID:"evenSlope"}).ready(function() {
+        $("select.evenSlope").selectOrDie("update"); // need to trigger update to select the correct initial value
+      });
       $("select.splitTempo").selectOrDie({customID:"splitTempo"}).ready(function() {
         $("select.splitTempo").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
