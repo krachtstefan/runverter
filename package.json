@@ -39,6 +39,9 @@
 
     "broccoli-manifest": "git://github.com/krachtstefan/broccoli-manifest.git#pathprefix-includePaths-fix",
     "broccoli-strip-debug": "^1.1.0",
+    "chart.js": "^2.2.1",
+    "ember-browserify": "^1.1.13",
+    "ember-cli-chart": "^3.1.0",
     "ember-cli-compass-compiler": "0.5.0",
     "ember-cli-concat": "1.1.2",
     "ember-cli-content-security-policy": "0.5.0",
