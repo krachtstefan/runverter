@@ -54,7 +54,7 @@ export default Ember.Component.extend({
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data : this.get("run.splits.splits").map(function(data) { return data.get("split.paceMinPerKm").toNumber() }),
+          data : this.get("run.splits.splits").map(function(data) { return data.get("split.speedKmHr").toNumber() }),
           spanGaps: false,
         }
       ]
