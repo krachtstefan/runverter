@@ -32,6 +32,14 @@ export default Ember.Component.extend({
   chartOption : {
     legend: {
       display: false
+    },
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }],
     }
   },
 
