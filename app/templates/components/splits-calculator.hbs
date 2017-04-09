@@ -65,6 +65,13 @@
       {{/x-select}}
     </div>
   </div>
+  <div class="uk-grid uk-grid-collapse toolLine">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+    </div>
+    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}}">
+      {{ember-chart type='line' data=chartData options=chartOption height=200}}
+    </div>
+  </div>
 
   <div class="uk-grid uk-grid-collapse toolLine">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
