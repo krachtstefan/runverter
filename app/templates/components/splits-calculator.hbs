@@ -27,7 +27,7 @@
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
       <span>{{t "tools.sc.splitDistanceLabel"}}</span>
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
+    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}}">
       {{#x-select value=splitDistancesSelected class="splitDistance"}}
         {{#each splitDistancesPossible as |item|}}
           {{#x-option value=item}}{{item}}{{/x-option}}
@@ -45,7 +45,7 @@
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
       <span>{{t "tools.sc.splitStrategyLabel"}}</span>
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
+    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}}">
       {{#x-select value=splitStrategiesSelected class="splitStrategies"}}
         {{#each splitStrategies as |item|}}
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
@@ -57,7 +57,7 @@
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
       <span>{{t "tools.sc.evenSlopeLabel"}}</span>
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
+    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}}">
       {{#x-select value=evenSlopeSelected class="evenSlope"}}
         {{#each evenSlope as |item|}}
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
