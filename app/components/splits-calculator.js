@@ -40,6 +40,9 @@ export default Ember.Component.extend({
       yAxes: [{
         display: false
       }],
+    },
+    tooltips: {
+      enabled : false
     }
   },
 
