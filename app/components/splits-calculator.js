@@ -31,7 +31,7 @@ export default Ember.Component.extend({
 
   chartOption : {},
 
-  chartData : Ember.computed("run.splits.splits", function(){
+  chartData : Ember.computed("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
     var data = {
       labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber() }),
       datasets: [
