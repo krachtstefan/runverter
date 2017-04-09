@@ -252,9 +252,9 @@ export default DS.Model.extend({
             timeSec : timeSecStack.round(20),
             lengthM : lengthMStack.round(20)
           }),
-          'progressDistance' : progressDistance.round(2).toString(),
-          'progressTime' : progressTime.round(2).toString(),
-          'progressPace' : progressPace.round(2).toString()
+          'progressDistance' : progressDistance.round(2),
+          'progressTime' : progressTime.round(2),
+          'progressPace' : progressPace.round(2),
         }));
       }
       return true;
