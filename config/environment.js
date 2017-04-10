@@ -1,7 +1,11 @@
-/* eslint-env node */
+/* jshint node: true */
 
 module.exports = function(environment) {
   var ENV = {
+    i18n : {
+      defaultLocale: 'en'
+    },
+
     modulePrefix: 'runverter',
     environment: environment,
     rootURL: '/',
@@ -20,6 +24,25 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' https://www.google-analytics.com",
+      'font-src': "'self' https://fonts.googleapis.com http://fonts.gstatic.com",
+      'connect-src': "'self'",
+      'img-src': "'self' data:",
+      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
+      'media-src': "'self'",
+      'manifest-src': "'self'"
+    },
+    manifest : {
+      enabled: true,
+      appcacheFile: "/manifest.appcache",
+      excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
+      includePaths: ['https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'],
+      prepend: "https://s.runverter.io/",
+      showCreateDate: true
     }
   };
 
