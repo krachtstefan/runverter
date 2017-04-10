@@ -90,7 +90,7 @@ export default OneWayTel.extend({
   },
 
   keyDown(event) {
-    var hotkeyPressed = event.ctrlKey === true || event.shiftKey === true || event.altKey === true ? true : false;
+    var hotkeyPressed = event.ctrlKey === true || event.shiftKey === true || event.altKey === true ? true : false;
     var steppSize = hotkeyPressed === true ? 10 : 1;
     switch(event.keyCode) {
       case 38: // up

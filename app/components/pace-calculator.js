@@ -139,7 +139,7 @@ export default Ember.Component.extend({
   }),
 
   timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
-    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   actions: {

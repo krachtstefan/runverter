@@ -169,7 +169,7 @@ export default Ember.Component.extend({
       numberOfPossibleSplits = self.get("run.lengthM").dividedBy(splitDistanceM).ceil().toString();
       // add all items that make more than one split
       // and always add first item to ensure the array is never empty
-      if (numberOfPossibleSplits > 1 || index === 0){
+      if (numberOfPossibleSplits > 1 || index === 0){
         splitDistancesPossible.push(item);
       }
     });
@@ -245,7 +245,7 @@ export default Ember.Component.extend({
   }),
 
   timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
-    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+    return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   evenSlopeVisibleClass: Ember.computed('evenSlopeVisible', function () {

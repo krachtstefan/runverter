@@ -166,7 +166,7 @@ export default Ember.Component.extend({
   }),
 
   achievedTimePickerVisibleClass: Ember.computed('achievedTimePickerVisible', 'isTouchDevice', function () {
-    return this.get("achievedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
+    return this.get("achievedTimePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
   predictedRacePickerVisibleClass: Ember.computed('predictedRacePickerVisible', 'isTouchDevice', function () {
