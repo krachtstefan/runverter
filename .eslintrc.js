@@ -9,5 +9,10 @@ module.exports = {
     browser: true
   },
   rules: {
+  },
+  globals: {
+    "BigNumber" : true,
+    "Decimal" : true,
+    "ga" : true
   }
 };
