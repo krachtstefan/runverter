@@ -48,17 +48,17 @@ export default Ember.Component.extend({
 
   chartData : Ember.computed("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
     var data = {
-      labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber() }),
+      labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber(); }),
       datasets: [
         {
           label: "",
           backgroundColor: "rgba(0,136,204,0.4)",
           borderColor: "rgba(0,136,204,1)",
-          data : this.get("run.splits.splits").map(function(data) { return data.get("split.speedKmHr").toNumber() }),
+          data : this.get("run.splits.splits").map(function(data) { return data.get("split.speedKmHr").toNumber(); }),
           spanGaps: false,
         }
       ]
-    }
+    };
     return data;
   }),
 
