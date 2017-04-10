@@ -3,7 +3,7 @@
   "dependencies": {
     "uikit": "2.23.0",
     "SelectOrDie": "0.1.8",
-    "bignumber.js": "v4.0.0",
+    "bignumber.js": "v4.0.1",
     "decimal.js": "v7.0.1"
   }
 }
