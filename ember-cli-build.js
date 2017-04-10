@@ -1,6 +1,5 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+/* eslint-env node */
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = EmberApp.env();
 var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 var stripDebug = require('broccoli-strip-debug');
