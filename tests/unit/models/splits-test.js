@@ -733,13 +733,6 @@ test('splits is an array', function(assert) {
   });
 });
 
-test('splits is empty by default', function(assert) {
-  const splits = this.subject();
-  Ember.run(function(){
-    assert.strictEqual(splits.get("splits").length, 0);
-  });
-});
-
 // calculateSplits
 test('calculateSplits returns true if more than one split was created', function(assert) {
   const splits = this.subject(); var self = this;
