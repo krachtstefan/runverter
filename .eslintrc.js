@@ -11,6 +11,7 @@ module.exports = {
   rules: {
   },
   globals: {
+    "require" : true,
     "BigNumber" : true,
     "Decimal" : true,
     "ga" : true
