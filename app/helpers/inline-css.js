@@ -13,7 +13,8 @@ import Ember from 'ember';
 export function inlineCSS(params, args) {
   let pre = args.pre === undefined ? '' : args.pre;
   let post = args.post === undefined ? '' : args.post;
-  return args.value && args.property ? Ember.String.htmlSafe(args.property+':'+pre+args.value+post+';') : '';
+  let output = args.value && args.property ? args.property+':'+pre+args.value+post+';' : '';
+  return Ember.String.htmlSafe(output);
 }
 
 export default Ember.Helper.helper(inlineCSS);
