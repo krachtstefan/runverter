@@ -1,56 +1,52 @@
-# Runverter [![Build Status](https://travis-ci.org/krachtstefan/runverter.svg?branch=master)](https://travis-ci.org/krachtstefan/runverter)
+# runverter
 
-Runverter is a toolset for runners that helps to convert metrics, calculate times and speed and much more. For more information about this project please check out the [detailed blog post](http://stefankracht.de/news/runverter).
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
+
+## Prerequisites
+
+You will need the following things properly installed on your computer.
+
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) (with NPM)
+* [Bower](https://bower.io/)
+* [Ember CLI](https://ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
 
 ## Installation
 
-```
-$ git clone https://github.com/krachtstefan/runverter.git
-$ cd runverter
-$ npm install && bower install
-```
+* `git clone <repository-url>` this repository
+* `cd runverter`
+* `npm install`
+* `bower install`
 
-## Start the app
+## Running / Development
 
-Run `ember server` and open [http://localhost:8000](http://localhost:8000).
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Run Tests
+### Code Generators
 
-Run `ember test` for a one time test and `ember test --server` to trigger tests on every file change.
+Make use of the many generators for code, try `ember help generate` for more details
 
-## Deploy
+### Running Tests
 
-The server setup is maintained in the [runverter-server repository](https://github.com/krachtstefan/runverter-server) and the deploy process is done with [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy).
+* `ember test`
+* `ember test --server`
 
-### Workflow of a deploy
+### Building
 
-As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment process is a combination of the following steps:
+* `ember build` (development)
+* `ember build --environment production` (production)
 
-- Compile the ember app locally.
-- Upload all files to Amazon S3 asset server.
-- Publish the index.html page in a dedicated Redis key (like runverter:index:XXXXXX).
-- Preview the version with a secret url like https://runverter.io/?index_key=XXXXXX.
-- Activate the deployed version by copying the value of runverter:index:XXXXXX key to runverter:index:current-content.
-- Since the ```manifest.appcache``` can not be delivered via CDN and must be available under the same origin as the app, we additionally upload the static files to the docker machine.
+### Deploying
 
-### Requirements
+Specify what it takes to deploy your app.
 
-- The hostname ```runverter.staging``` and ```runverter.production``` need to be added to your ```/etc/hosts``` file and point to the proper deployment server running the docker setup described in [runverter-server repository](https://github.com/krachtstefan/runverter-server).
-- The assets will be uploaded to Amazon S3, so you need a bucket called ```s.runverter.io```.
-- There are a bunch of environment variables that need to be present to deploy the app. Environment variables can be defined by adding lines like ```export AWS_SECRET_ACCESS_KEY=XXXXXX``` to your ```~/.bash_profile``` or ```~/.zshrc```.
-  - ```RUNVERTER_AWS_ACCESS_KEY_ID```: Access key ID to access ```s.runverter.io``` bucket.
-  - ```RUNVERTER_AWS_SECRET_ACCESS_KEY```: Access key to access ```s.runverter.io``` bucket.
-  - ```RUNVERTER_DEPLOY_USER_STAGING```: SSH user to deploy on ```runverter.staging```.
-  - ```RUNVERTER_DEPLOY_USER_PRODUCTION```: SSH user to deploy on ```runverter.production```.
+## Further Reading / Useful Links
 
-
-
-### Staging deploy
-- ```ember deploy staging``` will compile the app, upload the assets and publish the index page to redis. It will display the key of the deployed version like ```XXXXXXX```.
-- preview the build on http://runverter.staging/?index_key=XXXXXX.
-- ```ember deploy:list staging``` lists all available revisions from redis.
-- activate the version with ```ember deploy:activate staging --revision=XXXXXXX```.
-- at last we deploy the ```manifest.appcache file``` with ```ember deploy staging-appcache```
-
-### Production deploy
-- Repeat the steps described for staging but replace ```staging``` with ```production```.
+* [ember.js](http://emberjs.com/)
+* [ember-cli](https://ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
