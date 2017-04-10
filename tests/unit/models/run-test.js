@@ -364,12 +364,12 @@ test('timeStackMinFixed setter influences all time related properties', function
 // timeStackSec
 test('timeStackSec property is calculated from timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(62)});
- 	assert.strictEqual(run.get("timeStackSec").toString(), "2");
+  assert.strictEqual(run.get("timeStackSec").toString(), "2");
 });
 
 test('timeStackSec property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(60)});
- 	assert.strictEqual(run.get("timeStackSec").toString(), "0");
+  assert.strictEqual(run.get("timeStackSec").toString(), "0");
 });
 
 test('timeStackSec rounds properly', function(assert) {
@@ -549,14 +549,14 @@ test('lengthM property can not be negative', function(assert) {
 // lengthMStackM
 test('lengthMStackM property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
- 	assert.strictEqual(run.get("lengthMStackM").toString(), "1800");
+  assert.strictEqual(run.get("lengthMStackM").toString(), "1800");
 });
 
 test('lengthMStackM property can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(0)});
- 	assert.strictEqual(run.get("lengthMStackM").toString(), "0");
+  assert.strictEqual(run.get("lengthMStackM").toString(), "0");
   Ember.run(function(){ run.set("lengthM", new BigNumber(0.3)); });
- 	assert.strictEqual(run.get("lengthMStackM").toString(), "0");
+  assert.strictEqual(run.get("lengthMStackM").toString(), "0");
 });
 
 test('lengthMStackM rounds properly', function(assert) {
@@ -595,29 +595,29 @@ test('lengthMStackM setter changes lengthM', function(assert) {
 // lengthMStackDecimal
 test('lengthMStackDecimal property is calculated from lengthM and can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10.454)});
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "45");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "45");
 });
 
 test('lengthMStackDecimal property can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(10.455)});
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "46");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "46");
 });
 
 test('lengthMStackDecimal can have 1 digit', function(assert) {
   var run = this.subject({lengthM : new BigNumber(12.4)});
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "4");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "4");
 });
 
 test('lengthMStackDecimal supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(12.05)});
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "05");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "05");
 });
 
 test('lengthMStackDecimal can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(12)});
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "0");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "0");
   Ember.run(function(){ run.set("lengthM", new BigNumber(0.004)); });
- 	assert.strictEqual(run.get("lengthMStackDecimal"), "0");
+  assert.strictEqual(run.get("lengthMStackDecimal"), "0");
 });
 
 test('lengthMStackDecimal setter changes lengthMStackDecimal', function(assert) {
@@ -790,14 +790,14 @@ test('lengthMStackM and lengthMStackDecimalFixed setter will define lengthM', fu
 // lengthKm
 test('lengthKm property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
- 	assert.strictEqual(run.get("lengthKm").toString(), "2");
+  assert.strictEqual(run.get("lengthKm").toString(), "2");
 });
 
 test('lengthKm can have up to 20 decimal places and can round up', function(assert) {
   // BigNumber can only be initialized with 15 digit, dividing it will result in more digits
   var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(6)});
   // http://keisan.casio.com/calculator results in 0.0015205761315020566666666667
- 	assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
+  assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 
   Ember.run(function(){ run.set("lengthM", new BigNumber("8.78748598595").dividedBy(3)); });
   // http://keisan.casio.com/calculator results in 0.0029291619953166666666666667
@@ -813,7 +813,7 @@ test('lengthKm can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(9)});
   // http://keisan.casio.com/calculator results in 0.001013717421001371111111
 
- 	Ember.run(function(){ run.set("lengthM", new BigNumber("9.3343442341212212212").dividedBy(5)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("9.3343442341212212212").dividedBy(5)); });
   // http://keisan.casio.com/calculator results in 0.00186686884682424424424
   assert.strictEqual(run.get("lengthKm").toString(), "0.00186686884682424424");
 
@@ -853,12 +853,12 @@ test('lengthKm setter changes lengthM', function(assert) {
 // lengthKmStackKm
 test('lengthKmStackKm property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
- 	assert.strictEqual(run.get("lengthKmStackKm").toString(), "1");
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "1");
 });
 
 test('lengthKmStackKm property can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(12)});
- 	assert.strictEqual(run.get("lengthKmStackKm").toString(), "0");
+  assert.strictEqual(run.get("lengthKmStackKm").toString(), "0");
 });
 
 test('lengthKmStackKm rounds properly', function(assert) {
@@ -900,27 +900,27 @@ test('lengthKmStackKm setter changes lengthM', function(assert) {
 // lengthKmStackDecimal
 test('lengthKmStackDecimal property is calculated from lengthM and can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1712)});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
+  assert.strictEqual(run.get("lengthKmStackDecimal"), "71");
 });
 
 test('lengthKmStackDecimal property can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1719)});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
+  assert.strictEqual(run.get("lengthKmStackDecimal"), "72");
 });
 
 test('lengthKmStackDecimal can have 1 digit', function(assert) {
   var run = this.subject({lengthM : new BigNumber(500)});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "5");
+  assert.strictEqual(run.get("lengthKmStackDecimal"), "5");
 });
 
 test('lengthKmStackDecimal supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(90)});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
+  assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
 });
 
 test('lengthKmStackDecimal can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
+  assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
 });
 
 test('lengthKmStackDecimal setter changes lengthKmStackDecimal', function(assert) {
@@ -989,12 +989,12 @@ test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', fun
 // lengthKmStackDecimalFixed
 test('lengthKmStackDecimalFixed property is calculated from lengthM and can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1712)});
- 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "71");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "71");
 });
 
 test('lengthKmStackDecimalFixed property can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1719)});
- 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "72");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "72");
 });
 
 test('lengthKmStackDecimalFixed has trailing zero(s)', function(assert) {
@@ -1006,14 +1006,14 @@ test('lengthKmStackDecimalFixed has trailing zero(s)', function(assert) {
 
 test('lengthKmStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(90)});
- 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
   Ember.run(function(){ run.set("lengthM", new BigNumber(5)); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "01");
 });
 
 test('lengthKmStackDecimalFixed can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
+  assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
 });
 
 test('lengthKmStackDecimalFixed setter changes lengthKmStackDecimalFixed', function(assert) {
@@ -1093,13 +1093,13 @@ test('lengthKmStackKm and lengthKmStackDecimalFixed setter will define lengthKm'
 // lengthMi
 test('lengthMi property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("lengthMi").toString(), "1");
+  assert.strictEqual(run.get("lengthMi").toString(), "1");
 });
 
 test('lengthMi can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(9.12345678901235)});
   // http://keisan.casio.com/calculator results in 0.0056690532223144026385906307
- 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
+  assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
 
   Ember.run(function(){ run.set("lengthM", new BigNumber(14232.25)); });
   // http://keisan.casio.com/calculator results in 8.8435101507197963890877277
@@ -1113,7 +1113,7 @@ test('lengthMi can have up to 20 decimal places and can round up', function(asse
 test('lengthMi can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber(9.12345678901234)});
   // http://keisan.casio.com/calculator results in 0.005669053222314396424879
- 	assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
+  assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
 
   Ember.run(function(){ run.set("lengthM", new BigNumber(123)); });
   // http://keisan.casio.com/calculator results in 0.076428656645192078262944405
@@ -1155,12 +1155,12 @@ test('lengthMi setter changes lengthM', function(assert) {
 // lengthMiStackMi
 test('lengthMiStackMi property is calculated from lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
- 	assert.strictEqual(run.get("lengthMiStackMi").toString(), "1");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "1");
 });
 
 test('lengthMiStackMi property can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(800)});
- 	assert.strictEqual(run.get("lengthMiStackMi").toString(), "0");
+  assert.strictEqual(run.get("lengthMiStackMi").toString(), "0");
 });
 
 test('lengthMiStackMi rounds properly', function(assert) {
@@ -1202,27 +1202,27 @@ test('lengthMiStackMi setter changes lengthM', function(assert) {
 // lengthMiStackDecimal
 test('lengthMiStackDecimal property is calculated from lengthM and can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2711)});
- 	assert.strictEqual(run.get("lengthMiStackDecimal"), "68");
+  assert.strictEqual(run.get("lengthMiStackDecimal"), "68");
 });
 
 test('lengthMiStackDecimal property can round up', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2712)});
- 	assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
+  assert.strictEqual(run.get("lengthMiStackDecimal"), "69");
 });
 
 test('lengthMiStackDecimal can have 1 digit', function(assert) {
   var run = this.subject({lengthM : new BigNumber(804.672)});
- 	assert.strictEqual(run.get("lengthMiStackDecimal"), "5");
+  assert.strictEqual(run.get("lengthMiStackDecimal"), "5");
 });
 
 test('lengthMiStackDecimal supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(100)});
- 	assert.strictEqual(run.get("lengthMiStackDecimal"), "06");
+  assert.strictEqual(run.get("lengthMiStackDecimal"), "06");
 });
 
 test('lengthMiStackDecimal can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
+  assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
 });
 
 test('lengthMiStackDecimal setter changes lengthMiStackDecimal', function(assert) {
@@ -1291,12 +1291,12 @@ test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi'
 // lengthMiStackDecimalFixed
 test('lengthMiStackDecimalFixed property is calculated from lengthMi and can round down', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(10.021)});
- 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "02");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "02");
 });
 
 test('lengthMiStackDecimalFixed property can round up', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(10.025)});
- 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "03");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "03");
 });
 
 test('lengthMiStackDecimalFixed has trailing zero(s)', function(assert) {
@@ -1308,14 +1308,14 @@ test('lengthMiStackDecimalFixed has trailing zero(s)', function(assert) {
 
 test('lengthMiStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(12.09)});
- 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
   Ember.run(function(){ run.set("lengthMi", new BigNumber(12.005)); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "01");
 });
 
 test('lengthMiStackDecimalFixed can be zero', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(1)});
- 	assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
+  assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
 });
 
 test('lengthMiStackDecimalFixed setter changes lengthMiStackDecimalFixed', function(assert) {
@@ -1395,13 +1395,13 @@ test('lengthMiStackMi and lengthMiStackDecimalFixed setter will define lengthMi'
 // paceMinPerKm
 test('paceMinPerKm property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(60), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKm").toString(), "60");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "60");
 });
 
 test('paceMinPerKm can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthM : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 1.2482853212486666666666667
- 	assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
+  assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
 
   Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93) }); });
   // http://keisan.casio.com/calculator results in 31.279569892473118279569892
@@ -1468,12 +1468,12 @@ test('paceMinPerKm setter doesn\'t change lengthM', function(assert) {
 // paceMinPerKmStackMin
 test('paceMinPerKmStackMin property is calculated from lengthM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.23454), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1");
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1");
 });
 
 test('paceMinPerKmStackMin property can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1500)});
- 	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0");
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0");
 });
 
 test('paceMinPerKmStackMin rounds properly', function(assert) {
@@ -1483,7 +1483,7 @@ test('paceMinPerKmStackMin rounds properly', function(assert) {
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1"); // the paceMinPerKm of 0.995 results in a paceMinPerKmStackMin of 1
 
   Ember.run(function(){ run.set("paceMinPerKm", new BigNumber(0.994)); });
- 	assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0"); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
+  assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0"); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
 });
 
 test('paceMinPerKmStackMin setter changes paceMinPerKmStackMin', function(assert) {
@@ -1521,12 +1521,12 @@ test('paceMinPerKmStackMin setter doesn\'t change lengthM', function(assert) {
 // paceMinPerKmStackSec
 test('paceMinPerKmStackSec property is calculated from timeMin and lengthM and can round down' , function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.54), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "32"); // 60 * 0,54 = 32,4 seconds
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "32"); // 60 * 0,54 = 32,4 seconds
 });
 
 test('paceMinPerKmStackSec property can round up' , function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.56), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "34"); // 60 * 0,56 = 33,6 seconds
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "34"); // 60 * 0,56 = 33,6 seconds
 });
 
 test('paceMinPerKmStackSec rounds properly', function(assert) {
@@ -1536,7 +1536,7 @@ test('paceMinPerKmStackSec rounds properly', function(assert) {
 
 test('paceMinPerKmStackSec can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "0");
+  assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "0");
 });
 
 test('paceMinPerKmStackSec setter changes paceMinPerKmStackSec', function(assert) {
@@ -1713,13 +1713,13 @@ test('paceMinPerKmStackMin and paceMinPerKmStackSecFixed setter will define pace
 // paceMinPerMi
 test('paceMinPerMi property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(60), lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("paceMinPerMi").toString(), "60");
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "60");
 });
 
 test('paceMinPerMi can have up to 20 decimal places and can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(900)});
   // http://keisan.casio.com/calculator results in 0.0012482853212486666666666667
- 	assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
+  assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
 
   Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123) }); });
   // http://keisan.casio.com/calculator results in 0.001248285321248666666667
@@ -1786,12 +1786,12 @@ test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
 // paceMinPerMiStackMin
 test('paceMinPerMiStackMin property is calculated from lengthM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.23454), lengthMi : new BigNumber(1)});
- 	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1");
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1");
 });
 
 test('paceMinPerMiStackMin property can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1.500)});
- 	assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");
+  assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");
 });
 
 test('paceMinPerMiStackMin rounds properly', function(assert) {
@@ -1839,12 +1839,12 @@ test('paceMinPerMiStackMin setter doesn\'t change lengthM', function(assert) {
 // paceMinPerMiStackSec
 test('paceMinPerMiStackSec property is calculated from timeMin and lengthM and can round down' , function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.54), lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "32"); // 60 * 0,54 = 32,4 seconds
+  assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "32"); // 60 * 0,54 = 32,4 seconds
 });
 
 test('paceMinPerMiStackSec property can round up' , function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.56), lengthM : new BigNumber(1609.344)});
- 	assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "34"); // 60 * 0,56 = 33,6 seconds
+  assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "34"); // 60 * 0,56 = 33,6 seconds
 });
 
 test('paceMinPerMiStackSec rounds properly', function(assert) {
@@ -1854,7 +1854,7 @@ test('paceMinPerMiStackSec rounds properly', function(assert) {
 
 test('paceMinPerMiStackSec can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
- 	assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "0");
+  assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "0");
 });
 
 test('paceMinPerMiStackSec setter changes paceMinPerMiStackSec', function(assert) {
@@ -2104,19 +2104,19 @@ test('speedKmHr setter doesn\'t change lengthM', function(assert) {
 // speedKmHrStackKm
 test('speedKmHrStackKm property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(25000)});
- 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "25");
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "25");
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1500)});
- 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
 test('speedKmHrStackKm property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1)});
 
   Ember.run(function(){ run.set("speedKmHr", new BigNumber(0.995)); }); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
- 	assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1");
+  assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1");
 
   Ember.run(function(){ run.set("speedKmHr", new BigNumber(0.994)); }); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
@@ -2157,27 +2157,27 @@ test('speedKmHrStackKm setter doesn\'t change lengthM', function(assert) {
 // speedKmHrStackDecimal
 test('speedKmHrStackDecimal property is calculated from timeSec and lengthM and can round down', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(25123)});
- 	assert.strictEqual(run.get("speedKmHrStackDecimal"), "12");
+  assert.strictEqual(run.get("speedKmHrStackDecimal"), "12");
 });
 
 test('speedKmHrStackDecimal property can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(25125)});
- 	assert.strictEqual(run.get("speedKmHrStackDecimal"), "13");
+  assert.strictEqual(run.get("speedKmHrStackDecimal"), "13");
 });
 
 test('speedKmHrStackDecimal can have 1 digit', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12800)});
- 	assert.strictEqual(run.get("speedKmHrStackDecimal"), "8");
+  assert.strictEqual(run.get("speedKmHrStackDecimal"), "8");
 });
 
 test('speedKmHrStackDecimal supports leading zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12012)});
- 	assert.strictEqual(run.get("speedKmHrStackDecimal"), "01");
+  assert.strictEqual(run.get("speedKmHrStackDecimal"), "01");
 });
 
 test('speedKmHrStackDecimal can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
- 	assert.strictEqual(run.get("speedKmHrStackDecimal"), "0");
+  assert.strictEqual(run.get("speedKmHrStackDecimal"), "0");
 });
 
 test('speedKmHrStackDecimal setter changes speedKmHrStackDecimal', function(assert) {
@@ -2435,22 +2435,22 @@ test('speedMiHr setter doesn\'t change lengthM', function(assert) {
 // speedMiHrStackMi
 test('speedMiHrStackMi property is calculated from timeSec and lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4000)});
- 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
 });
 
 test('speedMiHrStackMi property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1000)});
- 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
 test('speedMiHrStackMi rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1)});
 
   Ember.run(function(){ run.set("speedMiHr", new BigNumber(0.995)); }); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
- 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "1");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "1");
 
   Ember.run(function(){ run.set("speedMiHr", new BigNumber(0.994)); }); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
- 	assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
+  assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
 test('speedMiHrStackMi setter changes speedMiHrStackMi', function(assert) {
@@ -2488,27 +2488,27 @@ test('speedMiHrStackMi setter doesn\'t change lengthM', function(assert) {
 // speedMiHrStackDecimal
 test('speedMiHrStackDecimal property is calculated from timeSec and lengthM and can round down', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(2500.920576)}); // 1.554 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "55");
+  assert.strictEqual(run.get("speedMiHrStackDecimal"), "55");
 });
 
 test('speedMiHrStackDecimal property can round up', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(2502.52992)}); // 1.555 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "56");
+  assert.strictEqual(run.get("speedMiHrStackDecimal"), "56");
 });
 
 test('speedMiHrStackDecimal can have 1 digit', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(2414.02)}); // 1.5 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "5");
+  assert.strictEqual(run.get("speedMiHrStackDecimal"), "5");
 });
 
 test('speedMiHrStackDecimal supports leading zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1689.811)}); // 1.05 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "05");
+  assert.strictEqual(run.get("speedMiHrStackDecimal"), "05");
 });
 
 test('speedMiHrStackDecimal can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1609.34)}); // 1.00 mi
- 	assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
+  assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
 });
 
 test('speedMiHrStackDecimal setter changes speedMiHrStackDecimal', function(assert) {
@@ -2735,8 +2735,8 @@ test('isInRange only returns true if the range is given in the right order', fun
 
 // private helper methods
 test('_getLeadingZerosFromString returns the amount of leading zeros a string has', function(assert) {
- 	assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
- 	assert.strictEqual(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
+  assert.strictEqual(this.subject()._getLeadingZerosFromString("0001"), 3);
+  assert.strictEqual(this.subject()._getLeadingZerosFromString("knkrdngkr"), 0);
 });
 
 test('_ensureBigNumber can handle numeric strings', function(assert) {
