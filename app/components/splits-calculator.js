@@ -149,21 +149,18 @@ export default Ember.Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("init", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
+  calculateSplits : Ember.on("willInsertElement", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
     this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
     this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
     this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
     this.get("run.splits.content").calculateSplits();
   })),
 
-  displayNoSplitsMessage: Ember.on("init", Ember.observer("splitsVisible", function(){
+  displayNoSplitsMessage: Ember.on("willInsertElement", Ember.observer('splitsVisible', function(){
     var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
     if(this.get("splitsVisible") === false){
       if(noSplitsMessage.length == 0){
-        this.get('notifications').info(this.get('i18n').t("flashMessages.noSplits"),{
-          autoClear: true,
-          clearDuration: 3000
-        });
+        this.get('notifications').info(this.get('i18n').t("flashMessages.noSplits"));
       }
     }else{
       this.get('notifications').removeNotification(noSplitsMessage[0]);
