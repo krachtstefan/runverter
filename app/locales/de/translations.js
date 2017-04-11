@@ -59,7 +59,6 @@ export default {
       'evenSlopeLabel' : 'und das Tempo wechselt',
       'distanceHeader' : 'Distanz',
       'timeHeader' : 'Zeit',
-      'noSplits' : 'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.',
       'splitStrategies' : {
         '3' : '3% negative Splits',
         '2' : '2% negative Splits',
@@ -148,7 +147,8 @@ export default {
   'flashMessages' : {
     'peterRiegelExlanation' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.',
     'releaseNotesRacePredictor' : 'Es gibt gute Neuigkeiten. Die Wettkampfprognose ist endlich da. Probier sie gleich aus &#9996;',
-    'localstorageCleared' : 'Alle lokal gespeicherten Daten wurden entfernt.'
+    'localstorageCleared' : 'Alle lokal gespeicherten Daten wurden entfernt.',
+    'noSplits' : 'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.'
   },
   'imprint' : {
     'about' : 'Über Runverter',

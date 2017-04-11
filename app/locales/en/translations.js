@@ -59,7 +59,6 @@ export default {
       'evenSlopeLabel' : 'with the speed changing',
       'distanceHeader' : 'Distance',
       'timeHeader' : 'Time',
-      'noSplits' : 'Oooops. The selected run is shorter than the split distance. Please increase the run distance.',
       'splitStrategies' : {
         '3' : '3% negative splits',
         '2' : '2% negative splits',
@@ -78,7 +77,8 @@ export default {
   'flashMessages' : {
     'peterRiegelExlanation' : 'Please note that the race prediction is only suitable if both races are lasting between 3.5 minutes and 3 hours, 50 minutes.',
     'releaseNotesRacePredictor' : 'Good news you lovely runner. The race predictor has landed. Make sure to check it out &#9996;',
-    'localstorageCleared' : 'All locally stored data have been flushed.'
+    'localstorageCleared' : 'All locally stored data have been flushed.',
+    'noSplits' : 'Oooops. The selected run is shorter than the split distance. Please increase the run distance.'
   },
   'metrics' : {
     'separator' : '.',
