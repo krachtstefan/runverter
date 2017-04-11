@@ -73,12 +73,10 @@
         {{ember-chart type='bar' data=chartData options=chartOption height=50}}
       </div>
     </div>
-  {{/if}}
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5">
+      </div>
 
-  <div class="uk-grid uk-grid-collapse toolLine">
-    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5">
-    </div>
-    {{#if splitsVisible}}
       <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
         <table class="uk-table uk-table-striped small_sod">
           <thead>
@@ -121,10 +119,6 @@
           </tbody>
         </table>
       </div>
-    {{else}}
-      <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} toolLabel">
-        {{t "tools.sc.noSplits"}}
-      </div>
-    {{/if}}
-  </div>
+    </div>
+  {{/if}}
 </form>
