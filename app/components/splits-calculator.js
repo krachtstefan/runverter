@@ -149,7 +149,7 @@ export default Ember.Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("willInsertElement", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
+  calculateSplits : Ember.on("willRender", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
     this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
     this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
     this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
