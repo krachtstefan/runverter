@@ -76,10 +76,10 @@
   {{/if}}
 
   <div class="uk-grid uk-grid-collapse toolLine">
-    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5">
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
-      {{#if splitsVisible}}
+    {{#if splitsVisible}}
+      <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
         <table class="uk-table uk-table-striped small_sod">
           <thead>
             <tr>
@@ -120,9 +120,11 @@
             {{/each}}
           </tbody>
         </table>
-      {{else}}
+      </div>
+    {{else}}
+      <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} toolLabel">
         {{t "tools.sc.noSplits"}}
-      {{/if}}
-    </div>
+      </div>
+    {{/if}}
   </div>
 </form>
