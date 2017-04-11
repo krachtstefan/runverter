@@ -156,7 +156,7 @@ export default Ember.Component.extend({
     this.get("run.splits.content").calculateSplits();
   })),
 
-  displayNoSplitsMessage: Ember.on("willInsertElement", Ember.observer('splitsVisible', function(){
+  displayNoSplitsMessage: Ember.on("didRender", Ember.observer('run.splits.splits', function(){
     var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
     if(this.get("run.splits.splits.length") === 0){
       if(noSplitsMessage.length == 0){
