@@ -59,6 +59,7 @@ export default {
       'evenSlopeLabel' : 'with the speed changing',
       'distanceHeader' : 'Distance',
       'timeHeader' : 'Time',
+      'noSplits' : 'Oooops. The selected run is shorter than the split distance. Please increase the run distance.',
       'splitStrategies' : {
         '3' : '3% negative splits',
         '2' : '2% negative splits',

@@ -59,6 +59,7 @@ export default {
       'evenSlopeLabel' : 'und das Tempo wechselt',
       'distanceHeader' : 'Distanz',
       'timeHeader' : 'Zeit',
+      'noSplits' : 'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.',
       'splitStrategies' : {
         '3' : '3% negative Splits',
         '2' : '2% negative Splits',
