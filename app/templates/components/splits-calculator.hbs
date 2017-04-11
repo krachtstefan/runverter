@@ -65,58 +65,63 @@
       {{/x-select}}
     </div>
   </div>
-  <div class="uk-grid uk-grid-collapse toolLine">
-    <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+  {{#if splitsVisible}}
+    <div class="uk-grid uk-grid-collapse toolLine">
+      <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
+      </div>
+      <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
+        {{ember-chart type='bar' data=chartData options=chartOption height=50}}
+      </div>
     </div>
-    <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
-      {{ember-chart type='bar' data=chartData options=chartOption height=50}}
-    </div>
-  </div>
+  {{/if}}
 
   <div class="uk-grid uk-grid-collapse toolLine">
     <div class="uk-width-1-1 uk-width-medium-2-6 uk-width-large-2-5 toolLabel">
     </div>
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} splits-container">
-      <table class="uk-table uk-table-striped small_sod">
-        <thead>
-          <tr>
-            <th class="distance">{{t "tools.sc.distanceHeader"}}</th>
-            <th class="time">{{t "tools.sc.timeHeader"}}</th>
-            <th>
-              {{#x-select value=splitTempoMetricsSelected class="splitTempo"}}
-                {{#each splitTempoMetrics as |item|}}
-                  {{#x-option value=item.key}}{{item.label}}{{/x-option}}
-                {{/each}}
-              {{/x-select}}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each run.splits.splits as |splitItem|}}
+      {{#if splitsVisible}}
+        <table class="uk-table uk-table-striped small_sod">
+          <thead>
             <tr>
-              <td>
-              {{#if showKmSplits}}
-                {{splitItem.run.lengthKmStackKm}}{{t "metrics.distance.separator"}}{{force-digits value=splitItem.run.lengthKmStackDecimal length=2}} {{t "metrics.distance.km"}}
-              {{else}}
-                {{splitItem.run.lengthMiStackMi}}{{t "metrics.distance.separator"}}{{force-digits value=splitItem.run.lengthMiStackDecimal length=2}} {{t "metrics.distance.mi"}}
-              {{/if}}
-              </td>
-              <td>{{splitItem.run.timeStackHr}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackMinFixed}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackSecFixed}}</td>
-              <td>
-                {{#if showSplitTempoMinKm}}{{splitItem.split.paceMinPerKmStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerKmStackSec length=2}} {{t "metrics.tempo.minkm"}}{{/if}}
-                {{#if showSplitTempoMinMi}}{{splitItem.split.paceMinPerMiStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerMiStackSec length=2}} {{t "metrics.tempo.minmi"}}{{/if}}
-                {{#if showSplitTempoKmH}}{{splitItem.split.speedKmHrStackKm}}{{t "metrics.distance.separator"}}{{splitItem.split.speedKmHrStackDecimalFixed}} {{t "metrics.tempo.kmh"}}{{/if}}
-                {{#if showSplitTempoMiH}}{{splitItem.split.speedMiHrStackMi}}{{t "metrics.distance.separator"}}{{splitItem.split.speedMiHrStackDecimalFixed}} {{t "metrics.tempo.mih"}}{{/if}}
-              </td>
+              <th class="distance">{{t "tools.sc.distanceHeader"}}</th>
+              <th class="time">{{t "tools.sc.timeHeader"}}</th>
+              <th>
+                {{#x-select value=splitTempoMetricsSelected class="splitTempo"}}
+                  {{#each splitTempoMetrics as |item|}}
+                    {{#x-option value=item.key}}{{item.label}}{{/x-option}}
+                  {{/each}}
+                {{/x-select}}
+              </th>
             </tr>
-            <tr class="progress">
-              <td colspan="3">
-                <div class="distance-progress" style="{{inline-css property="width" value=splitItem.progressDistance post="%"}}"> </div>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {{#each run.splits.splits as |splitItem|}}
+              <tr>
+                <td>
+                {{#if showKmSplits}}
+                  {{splitItem.run.lengthKmStackKm}}{{t "metrics.distance.separator"}}{{force-digits value=splitItem.run.lengthKmStackDecimal length=2}} {{t "metrics.distance.km"}}
+                {{else}}
+                  {{splitItem.run.lengthMiStackMi}}{{t "metrics.distance.separator"}}{{force-digits value=splitItem.run.lengthMiStackDecimal length=2}} {{t "metrics.distance.mi"}}
+                {{/if}}
+                </td>
+                <td>{{splitItem.run.timeStackHr}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackMinFixed}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackSecFixed}}</td>
+                <td>
+                  {{#if showSplitTempoMinKm}}{{splitItem.split.paceMinPerKmStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerKmStackSec length=2}} {{t "metrics.tempo.minkm"}}{{/if}}
+                  {{#if showSplitTempoMinMi}}{{splitItem.split.paceMinPerMiStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerMiStackSec length=2}} {{t "metrics.tempo.minmi"}}{{/if}}
+                  {{#if showSplitTempoKmH}}{{splitItem.split.speedKmHrStackKm}}{{t "metrics.distance.separator"}}{{splitItem.split.speedKmHrStackDecimalFixed}} {{t "metrics.tempo.kmh"}}{{/if}}
+                  {{#if showSplitTempoMiH}}{{splitItem.split.speedMiHrStackMi}}{{t "metrics.distance.separator"}}{{splitItem.split.speedMiHrStackDecimalFixed}} {{t "metrics.tempo.mih"}}{{/if}}
+                </td>
+              </tr>
+              <tr class="progress">
+                <td colspan="3">
+                  <div class="distance-progress" style="{{inline-css property="width" value=splitItem.progressDistance post="%"}}"> </div>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+      {{/if}}
     </div>
   </div>
 </form>
