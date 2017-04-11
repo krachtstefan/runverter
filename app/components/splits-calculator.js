@@ -240,10 +240,6 @@ export default Ember.Component.extend({
     return this.get("splitStrategiesSelected") === 0 ? false : true;
   }),
 
-  splitsVisible: Ember.computed('run.lengthM', 'splitDistancesSelectedMeters', function () {
-    return this.get("run.splits.splits.length") === 0 ? false : true;
-  }),
-
   tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
