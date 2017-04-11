@@ -2,6 +2,7 @@ import Ember from 'ember';
 import $ from 'jquery';
 export default Ember.Component.extend({
   i18n: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
@@ -153,6 +154,20 @@ export default Ember.Component.extend({
     this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
     this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
     this.get("run.splits.content").calculateSplits();
+  })),
+
+  displayNoSplitsMessage: Ember.on("init", Ember.observer("splitsVisible", function(){
+    var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
+    if(this.get("splitsVisible") === false){
+      if(noSplitsMessage.length == 0){
+        this.get('notifications').info(this.get('i18n').t("flashMessages.noSplits"),{
+          autoClear: true,
+          clearDuration: 3000
+        });
+      }
+    }else{
+      this.get('notifications').removeNotification(noSplitsMessage[0]);
+    }
   })),
 
   splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", function(){
