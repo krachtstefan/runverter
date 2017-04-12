@@ -34,6 +34,23 @@ export default Ember.Component.extend({
     });
   }),
 
+  achievedRunLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "achievedRunMetricsSelected", function(){
+    var runLengthMetrics = [];
+    var self = this;
+    this.get("runLengthMetricsAvailable").forEach(function(item){
+      runLengthMetrics.push({
+        "key" : item,
+        "label" : self.get('i18n').t("metrics.distance."+item),
+      });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    runLengthMetrics.sort(function(a) {
+      return a.key != self.get("achievedRunMetricsSelected");
+    });
+    return runLengthMetrics;
+  }),
+
   predictedRunLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "predictedRunMetricsSelected", function(){
     var runLengthMetrics = [];
     var self = this;
