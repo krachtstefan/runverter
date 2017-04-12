@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  predictedRunLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", function(){
+  predictedRunLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "predictedRunMetricsSelected", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -42,6 +42,11 @@ export default Ember.Component.extend({
         "key" : item,
         "label" : self.get('i18n').t("metrics.distance."+item),
       });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    runLengthMetrics.sort(function(a) {
+      return a.key != self.get("predictedRunMetricsSelected");
     });
     return runLengthMetrics;
   }),
