@@ -138,7 +138,7 @@ export default Ember.Component.extend({
     return splitStrategies;
   }),
 
-  evenSlope : Ember.computed("evenSlopeAvailable", "i18n.locale", function(){
+  evenSlope : Ember.computed("evenSlopeAvailable", "i18n.locale", "evenSlopeSelected", function(){
     var evenSlope = [];
     var self = this;
     this.get("evenSlopeAvailable").forEach(function(item){
@@ -146,6 +146,11 @@ export default Ember.Component.extend({
         "key" : item,
         "label" : self.get('i18n').t("tools.sc.evenSlope."+item),
       });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    evenSlope.sort(function(a) {
+      return a.key != self.get("evenSlopeSelected");
     });
     return evenSlope;
   }),
