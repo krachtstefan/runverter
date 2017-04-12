@@ -167,7 +167,7 @@ export default Ember.Component.extend({
     }
   })),
 
-  splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", function(){
+  splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", "splitDistancesSelected", function(){
     var self = this;
     var splitDistancesPossible = [];
     var splitDistanceM;
@@ -185,6 +185,12 @@ export default Ember.Component.extend({
         splitDistancesPossible.push(item);
       }
     });
+
+    // make sure the selected split distance is always is there
+    if(splitDistancesPossible.indexOf(this.get("splitDistancesSelected")) == -1){
+      splitDistancesPossible.push(this.get("splitDistancesSelected"));
+    }
+
     return splitDistancesPossible;
   }),
 
