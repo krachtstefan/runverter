@@ -94,7 +94,7 @@ export default Ember.Component.extend({
     return splitTempoMetrics;
   }),
 
-  splitStrategies : Ember.computed("splitStrategiesAvailable", "i18n.locale", function(){
+  splitStrategies : Ember.computed("splitStrategiesAvailable", "i18n.locale", "splitStrategiesSelected", function(){
     var splitStrategies = [];
     var self = this;
     this.get("splitStrategiesAvailable").forEach(function(item){
@@ -102,6 +102,11 @@ export default Ember.Component.extend({
         "key" : item,
         "label" : self.get('i18n').t("tools.sc.splitStrategies."+item),
       });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    splitStrategies.sort(function(a) {
+      return a.key != self.get("splitStrategiesSelected");
     });
     return splitStrategies;
   }),
