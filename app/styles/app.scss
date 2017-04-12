@@ -43,6 +43,10 @@ body{
     color:$color-main-text-light;
   }
 
+  a, a:hover{
+    color:$color-form-text;
+  }
+
   form{
     font-size:24px;
     @include respond-to("small"){
