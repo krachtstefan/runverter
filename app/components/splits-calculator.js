@@ -82,7 +82,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  splitTempoMetrics : Ember.computed("splitTempoMetricsAvailable", "i18n.locale", function(){
+  splitTempoMetrics : Ember.computed("splitTempoMetricsAvailable", "i18n.locale", "splitTempoMetricsSelected", function(){
     var splitTempoMetrics = [];
     var self = this;
     this.get("splitTempoMetricsAvailable").forEach(function(item){
@@ -90,6 +90,11 @@ export default Ember.Component.extend({
         "key" : item,
         "label" : self.get('i18n').t("metrics.tempo."+item),
       });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    splitTempoMetrics.sort(function(a) {
+      return a.key != self.get("splitTempoMetricsSelected");
     });
     return splitTempoMetrics;
   }),
