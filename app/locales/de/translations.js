@@ -148,7 +148,8 @@ export default {
     'peterRiegelExlanation' : 'Bitte beachte, dass die Wettkampfprognose nur geeignet ist, wenn beide Läufe zwischen 3.5 Minuten und 3 Std., 50 Minuten dauern.',
     'releaseNotesRacePredictor' : 'Es gibt gute Neuigkeiten. Die Wettkampfprognose ist endlich da. Probier sie gleich aus &#9996;',
     'localstorageCleared' : 'Alle lokal gespeicherten Daten wurden entfernt.',
-    'noSplits' : 'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.'
+    'noSplits' : 'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.',
+    'donationMessage' : 'Hi, schön dich zu sehen! Dieses Tool ist kostenlos und in vielen Freizeitstunden entstanden. Wenn du mich motivieren willst, <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> spende</a> mir einfach etwas <i class="fa fa-coffee" aria-hidden="true"></i> oder erzähl <i class="fa fa-twitter" aria-hidden="true"></i> und <i class="fa fa-facebook" aria-hidden="true"></i> von #runverter'
   },
   'imprint' : {
     'about' : 'Über Runverter',
