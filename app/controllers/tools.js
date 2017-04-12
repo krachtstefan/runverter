@@ -121,7 +121,7 @@ export default Ember.Controller.extend({
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
     },
-    showDonationMessage: function(selection) {
+    showDonationMessage: function() {
       this.openDonationMessage();
     }
   }
