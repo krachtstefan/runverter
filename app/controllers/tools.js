@@ -2,6 +2,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   queryParams: {
     'i18n.locale' : 'l',                                        // selected locale
@@ -60,6 +61,13 @@ export default Ember.Controller.extend({
     return selectItems;
   }),
 
+  openDonationMessage : function(){
+    var donationMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.donationMessage").string);
+    if(donationMessage.length == 0){
+      this.get('notifications').success("<span>"+this.get('i18n').t("flashMessages.donationMessage")+"</span>",{htmlContent: true});
+    }
+  },
+
   selectedTool : Ember.computed("selectedToolKey", "i18n.locale", function(){
     return Ember.A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
   }),
@@ -112,6 +120,9 @@ export default Ember.Controller.extend({
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
+    },
+    showDonationMessage: function(selection) {
+      this.openDonationMessage();
     }
   }
 });
