@@ -87,6 +87,23 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
+  splitLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "splitMetricsSelected", function(){
+    var runLengthMetrics = [];
+    var self = this;
+    this.get("runLengthMetricsAvailable").forEach(function(item){
+      runLengthMetrics.push({
+        "key" : item,
+        "label" : self.get('i18n').t("metrics.distance."+item),
+      });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    runLengthMetrics.sort(function(a) {
+      return a.key != self.get("splitMetricsSelected");
+    });
+    return runLengthMetrics;
+  }),
+
   splitTempoMetrics : Ember.computed("splitTempoMetricsAvailable", "i18n.locale", "splitTempoMetricsSelected", function(){
     var splitTempoMetrics = [];
     var self = this;

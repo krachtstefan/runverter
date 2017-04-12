@@ -34,7 +34,7 @@
         {{/each}}
       {{/x-select}}&nbsp;
       {{#x-select value=splitMetricsSelected class="splitMetric"}}
-        {{#each runLengthMetrics as |item|}}
+        {{#each splitLengthMetrics as |item|}}
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
         {{/each}}
       {{/x-select}}
