@@ -18,12 +18,16 @@ html{
   background-color:$color-main-background;
   font-family: 'Open Sans', Georgia, sans-serif;
   overflow-y: scroll;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 body{
   line-height:0.8em;
   color:$color-main-text;
-
+  position: relative;
+  margin: 0;
+  min-height: 100%;
   h1{
     font-size:2em;
     line-height:1.5em;
@@ -205,25 +209,28 @@ body{
     }
   }
 
-  .tools .toolLabel{
-    font-size:14px;
-    @include respond-to("small"){
-      font-size:21px;
-    }
-    color:$color-main-text-light;
-    padding:0 0 4px 0;
-    line-height: 20px;
-    // separate column
-    @include respond-to("medium"){
-      line-height: 30px;
-      padding:0 10px 0 0;
-      text-align: right;
-      display: table;
-      height: 84px;
-      vertical-align: middle;
-      span{
-        display: table-cell;
+  .tools{
+    padding-bottom:20px; // safe distance to footer
+    .toolLabel{
+      font-size:14px;
+      @include respond-to("small"){
+        font-size:21px;
+      }
+      color:$color-main-text-light;
+      padding:0 0 4px 0;
+      line-height: 20px;
+      // separate column
+      @include respond-to("medium"){
+        line-height: 30px;
+        padding:0 10px 0 0;
+        text-align: right;
+        display: table;
+        height: 84px;
         vertical-align: middle;
+        span{
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
     }
   }
@@ -274,3 +281,27 @@ body{
     }
   }
 }
+
+#footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  height: 50px;
+  font-size:0.8em;
+  #donateButton{
+    color:$color-main-text-light;
+    opacity: 0.4;
+    @include transition(0.5s ease-out);
+    &:hover{
+      opacity: 1;
+      text-decoration: none;
+      color:$color-form-text;
+      font-size:2.5em;
+      margin-top:-0.3em;
+      @include transition(0.2s ease-out);
+    }
+  }
+}
+
