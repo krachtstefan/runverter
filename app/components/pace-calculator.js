@@ -43,7 +43,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", "i18n.locale", function(){
+  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", "i18n.locale", "runTempoMetricsSelected", function(){
     var runTempoMetrics = [];
     var self = this;
     this.get("runTempoMetricsAvailable").forEach(function(item){
@@ -51,6 +51,11 @@ export default Ember.Component.extend({
         "key" : item,
         "label" : self.get('i18n').t("metrics.tempo."+item),
       });
+    });
+
+    // sort the array to place the selected option on top to avoid jiggling on init
+    runTempoMetrics.sort(function(a) {
+      return a.key != self.get("runTempoMetricsSelected");
     });
     return runTempoMetrics;
   }),
