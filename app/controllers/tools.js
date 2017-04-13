@@ -111,12 +111,6 @@ export default Ember.Controller.extend({
     }
   }),
 
-  handleSplitPersistence: Ember.observer("model.run.splits.content", function () {
-    if(this.get("model.run.splits.content")){
-      this.get("model.run.splits.content").save();
-    }
-  }),
-
   actions: {
     navigateTo: function(selection) {
       this.set("selectedToolKey", selection);
