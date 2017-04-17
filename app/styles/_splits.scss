@@ -53,9 +53,9 @@
       }
     }
     tbody{
-      tr{
+      tr, tr:nth-of-type(odd){
         border-bottom: 10px solid $color-main-background;
-        background-color:$color-secondary-background;
+        background-color:$color-main-background;
       }
       tr.progress{
         background-color:$color-form-border;
