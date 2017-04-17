@@ -4,6 +4,7 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/user-interface";
 @import "compass/css3/box-sizing";
+@import "compass/utilities/print";
 
 @import "config";
 @import "selectordie";
@@ -11,6 +12,6 @@
 @import "notification-messages";
 @import "splits";
 @import "imprint";
-@import "compass";
+@import "print";
 @import "main";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
