@@ -20,6 +20,15 @@ export default DS.Model.extend({
   }),
 
   /**
+   *  Display release notes for splits calculator
+   *
+   * @type {Boolean}
+   */
+  displayReleaseNotesSplitsCalculator: DS.attr('boolean', {
+    defaultValue() { return true; }
+  }),
+
+  /**
    * createdAt represents the creation date of the settings, will be stored in database
    * and should be set on create
    *
