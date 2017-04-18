@@ -228,6 +228,10 @@ export default Ember.Component.extend({
       splitDistancesPossible.push(this.get("splitDistancesSelected"));
     }
 
+    // sort the array to place the selected option on top to avoid jiggling on init
+    splitDistancesPossible.reverse().sort(function(a) {
+      return a != self.get("splitDistancesSelected");
+    });
     return splitDistancesPossible;
   }),
 
