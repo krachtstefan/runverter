@@ -36,7 +36,7 @@ export default Ember.Controller.extend({
   splitsCalcTempoMetricsSelected: "minkm",
 
   toolsAvailable : [
-    "pca", "pc", "lc", "rp", "sc"
+    "pca", "pc", "lc", "rp"
   ],
 
   didInitAttrs() {
