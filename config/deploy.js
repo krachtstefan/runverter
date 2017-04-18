@@ -16,8 +16,6 @@ module.exports = function(deployTarget) {
   }
 
   var ENV = {
-    build: {},
-    plugins: (deployTarget === 'production' || deployTarget === 'staging') ? ['build', 'display-revisions', 'gzip', 'manifest', 's3', 'redis', 'revision-data', 'ssh-tunnel'] : ['build', 'gzip', 'manifest', 'scp'],
     redis : {
       allowOverwrite: true,
       keyPrefix: 'runverter:index'
@@ -40,6 +38,14 @@ module.exports = function(deployTarget) {
       host: deployHost,
     }
   };
+
+  if (deployTarget === 'production-appcache' || deployTarget === 'staging-appcache') {
+    ENV.pipeline = {
+      disabled: {
+        allExcept: ['build', 'gzip', 'manifest', 'scp']
+      }
+    }
+  }
 
   if (VALID_DEPLOY_TARGETS.indexOf(deployTarget) === -1) {
     throw new Error('Invalid deployTarget ' + deployTarget);
