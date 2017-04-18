@@ -33,17 +33,13 @@
       tr{
         border-bottom:none;
         border-bottom: 1px solid $color-main-text-light;
-      }
-      thead tr th{
-        color: $color-main-text-light !important;
-        &.distance, &.time{
-          width: inherit;
+        th{
+          display: none;
         }
-      }
-      th, td{
-
-        padding:0 4px;
-        white-space: nowrap;
+        td{
+          padding:0 4px;
+          white-space: nowrap;
+        }
       }
     }
   }
