@@ -21,6 +21,17 @@ test('displayPeterRiegelExlanation is true by default', function(assert) {
   assert.strictEqual(settings.get("displayPeterRiegelExlanation") , true);
 });
 
+// displayReleaseNotesRacePredictor
+test('displayReleaseNotesRacePredictor is from type Boolean', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayReleaseNotesRacePredictor").constructor.name , "Boolean");
+});
+
+test('displayReleaseNotesRacePredictor is true by default', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayReleaseNotesRacePredictor") , true);
+});
+
 // createdAt
 test('createdAt is from type Date', function(assert) {
   var settings = this.subject();
