@@ -26,13 +26,17 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    googleFonts: [
+      'Open+Sans:400,700'
+    ],
+
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' https://www.google-analytics.com",
       'font-src': "'self' https://fonts.googleapis.com http://fonts.gstatic.com",
       'connect-src': "'self'",
       'img-src': "'self' data:",
-      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
+      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.gstatic.com",
       'media-src': "'self'",
       'manifest-src': "'self'"
     },
