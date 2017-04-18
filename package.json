@@ -48,7 +48,7 @@
     "ember-cli-deploy": "1.0.0",
     "ember-cli-deploy-lightning-pack": "1.0.0",
     "ember-cli-deploy-scp": "1.0.7",
-    "ember-cli-deploy-ssh-tunnel": "0.2.2",
+    "ember-cli-deploy-ssh-tunnel": "1.0.0",
     "ember-cli-google-fonts": "^2.3.1",
     "ember-cli-head": "0.1.4",
     "ember-cli-notifications": "4.1.6",
