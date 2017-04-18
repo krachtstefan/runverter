@@ -77,6 +77,7 @@ export default {
   'flashMessages' : {
     'peterRiegelExlanation' : 'Please note that the race prediction is only suitable if both races are lasting between 3.5 minutes and 3 hours, 50 minutes.',
     'releaseNotesRacePredictor' : 'Good news you lovely runner. The race predictor has landed. Make sure to check it out &#9996;',
+    'releaseNotesSplitsCalculator' : 'Just in time for race season: The split time calculator is ready and waiting for you &#9786;',
     'localstorageCleared' : 'All locally stored data have been flushed.',
     'noSplits' : 'Oooops. The selected run is shorter than the split distance. Please increase the run distance.',
     'donationMessage' : 'Hi there, good to see you! This tool is free and made from lots of spare time. If you like to motivate me, just <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> donate</a> me some <i class="fa fa-coffee" aria-hidden="true"></i> or tell your <i class="fa fa-twitter" aria-hidden="true"></i> and <i class="fa fa-facebook" aria-hidden="true"></i> about #runverter'
