@@ -1,10 +1,50 @@
 @media only print{
-  body{
-    color:red;
+  // hide main container
+  .intro, .header, #toggle-panel, #footer{
+    display: none;
   }
-}
+  .container-sc{
+    .toolLine{
+      display: none;
+    }
+  }
 
+  // don't hide splits container
+  #splits-print-container{
+    display: block;
 
-body .intro h1{
- font-size:40px;
+    // sod
+    .small_sod .sod_select .sod_label{
+      top:2px;
+      color: $color-main-text-light !important;
+    }
+    .small_sod .sod_select:after,
+    .small_sod .sod_select:before{
+      display:none
+    }
+
+    .metric, .progress{
+      display: none;
+    }
+
+    table{
+      font-size: 10px;
+      width: 50px;
+      tr{
+        border-bottom:none;
+        border-bottom: 1px solid $color-main-text-light;
+      }
+      thead tr th{
+        color: $color-main-text-light !important;
+        &.distance, &.time{
+          width: inherit;
+        }
+      }
+      th, td{
+
+        padding:0 4px;
+        white-space: nowrap;
+      }
+    }
+  }
 }
