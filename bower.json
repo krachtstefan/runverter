@@ -3,7 +3,7 @@
   "dependencies": {
     "uikit": "2.22.0",
     "SelectOrDie": "0.1.8",
-    "bignumber.js": "git@github.com:Ka0o0/bignumber.js.git#master",
+    "bignumber.js": "git://github.com/Ka0o0/bignumber.js.git#master",
     "decimal.js": "v7.0.1"
   }
 }
