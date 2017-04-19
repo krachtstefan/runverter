@@ -13,9 +13,6 @@ export default Ember.Route.extend({
     var prediction = self.store.createRecord('prediction', {
       id : "prediction"
     });
-    var splits = self.store.createRecord('splits', {
-      id : "splits",
-    });
 
     var run = this.store.findRecord('run', "runverter").then(function(run){
       return run;
@@ -38,7 +35,14 @@ export default Ember.Route.extend({
       });
       return run;
     }).then(function(run){
-      run.set('splits', splits);
+      self.store.findRecord('splits', "splits").then(function(splits){
+        run.set('splits', splits);
+      }, function() {
+        var splits = self.store.createRecord('splits', {
+          id : "splits",
+        });
+        run.set('splits', splits);
+      });
       return run;
     });
 
