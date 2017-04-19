@@ -187,10 +187,12 @@ export default Ember.Component.extend({
   },
 
   calculateSplits : Ember.on("willRender", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
-    this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
-    this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
-    this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
-    this.get("run.splits.content").calculateSplits();
+    if(this.get("run.splits.content")){
+      this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
+      this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
+      this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
+      this.get("run.splits.content").calculateSplits();
+    }
   })),
 
   displayNoSplitsMessage: Ember.on("didRender", Ember.observer('run.splits.splits', function(){
