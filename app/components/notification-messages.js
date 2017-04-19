@@ -7,6 +7,14 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     var self = this;
+    if(this.get("settings.displayReleaseNotesSplitsCalculator")===true){
+      this.set("settings.displayReleaseNotesSplitsCalculator", false);
+      this.get('notifications').success(this.get('i18n').t("flashMessages.releaseNotesSplitsCalculator"), {
+        onClick() {
+          self.get("settings").save();
+        }
+      });
+    }
   },
 
   clearReleaseNotesRacePredictor : Ember.on("init", Ember.observer('selectedMenuItem', function(){
