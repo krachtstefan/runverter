@@ -47,6 +47,22 @@ export default Ember.Controller.extend({
   expertMode : false,
   imprintVisible : false,
 
+  init() {
+    this._super(...arguments);
+    if(this.get("isIos") === true){
+      this.get("toolsAvailable").pop();
+    }
+  },
+
+  isIos : Ember.computed(function(){
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return true;
+    }else{
+      return false;
+    }
+  }),
+
   tools : Ember.computed("toolsAvailablem", "i18n.locale", function(){
     var selectItems = [];
     var self = this;

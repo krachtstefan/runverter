@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     var self = this;
-    if(this.get("settings.displayReleaseNotesSplitsCalculator")===true){
+    if(this.get("settings.displayReleaseNotesSplitsCalculator")===true && this.get("isIos") === false){
       this.set("settings.displayReleaseNotesSplitsCalculator", false);
       this.get('notifications').success(this.get('i18n').t("flashMessages.releaseNotesSplitsCalculator"), {
         onClick() {
@@ -16,6 +16,15 @@ export default Ember.Component.extend({
       });
     }
   },
+
+  isIos : Ember.computed(function(){
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return true;
+    }else{
+      return false;
+    }
+  }),
 
   clearReleaseNotesRacePredictor : Ember.on("init", Ember.observer('selectedMenuItem', function(){
     // when entering splits calculator component, find the splits calculator announcement notification and remove it
