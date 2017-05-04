@@ -104,8 +104,8 @@
                 </td>
                 <td>{{splitItem.run.timeStackHr}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackMinFixed}}{{t "metrics.time.separator"}}{{splitItem.run.timeStackSecFixed}}</td>
                 <td>
-                  {{#if showSplitTempoMinKm}}{{splitItem.split.paceMinPerKmStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerKmStackSec length=2}} <span class="metric">{{t "metrics.tempo.minkm"}}</span>{{/if}}
-                  {{#if showSplitTempoMinMi}}{{splitItem.split.paceMinPerMiStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerMiStackSec length=2}} <span class="metric">{{t "metrics.tempo.minmi"}}</span>{{/if}}
+                  {{#if showSplitTempoMinKm}}{{splitItem.split.paceMinPerKmStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerKmStackSec length=2 mode="prepend"}} <span class="metric">{{t "metrics.tempo.minkm"}}</span>{{/if}}
+                  {{#if showSplitTempoMinMi}}{{splitItem.split.paceMinPerMiStackMin}}{{t "metrics.tempo.separator"}}{{force-digits value=splitItem.split.paceMinPerMiStackSec length=2 mode="prepend"}} <span class="metric">{{t "metrics.tempo.minmi"}}</span>{{/if}}
                   {{#if showSplitTempoKmH}}{{splitItem.split.speedKmHrStackKm}}{{t "metrics.distance.separator"}}{{splitItem.split.speedKmHrStackDecimalFixed}} <span class="metric">{{t "metrics.tempo.kmh"}}</span>{{/if}}
                   {{#if showSplitTempoMiH}}{{splitItem.split.speedMiHrStackMi}}{{t "metrics.distance.separator"}}{{splitItem.split.speedMiHrStackDecimalFixed}} <span class="metric">{{t "metrics.tempo.mih"}}</span>{{/if}}
                 </td>
