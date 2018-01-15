@@ -2709,6 +2709,15 @@ test('timeStackSecFixed setter changes timeMin', function(assert) {
   assert.strictEqual(run.get("timeStackSecFixed").toString(), "00"); // became 0-0 because of missing typecast
 });
 
+// splits
+test('splits is a relation to splits model', function(assert) {
+  const run = this.store().modelFor('run');
+  const relationship = Ember.get(run, 'relationshipsByName').get('splits');
+  assert.equal(relationship.key, 'splits');
+  assert.equal(relationship.kind, 'belongsTo');
+  assert.equal(relationship.type, 'splits');
+});
+
 // isInRange
 test('isInRange returns true if the run is in the specific range', function(assert) {
   var run = this.subject({timeSec : new BigNumber(30), lengthM : new BigNumber(23.4511)});
