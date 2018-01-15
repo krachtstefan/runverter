@@ -23,8 +23,18 @@ export default DS.Model.extend({
     defaultValue() { return new Date(); }
   }),
 
+  /**
+   * run represents the main run for which the splits are calculated
+   *
+   * @type {Run}
+   */
   run: DS.belongsTo('run'),
 
+  /**
+   * splitDistance represents the distance of a single split
+   *
+   * @type {BigNumber}
+   */
   splitDistance : new BigNumber(1000),
 
   /**
