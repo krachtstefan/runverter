@@ -1,4 +1,6 @@
 /* eslint-env node */
+'use strict';
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = EmberApp.env();
 var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;

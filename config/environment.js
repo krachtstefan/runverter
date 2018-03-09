@@ -1,13 +1,14 @@
 /* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     i18n : {
       defaultLocale: 'en'
     },
 
     modulePrefix: 'runverter',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
