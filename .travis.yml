@@ -12,7 +12,11 @@ addons:
 cache:
   directories:
     - $HOME/.npm
-    - $HOME/.cache # includes bowers cache
+
+env:
+  global:
+    # See https://git.io/vdao3 for details.
+    - JOBS=1
 
 before_install:
   - npm config set spin false
@@ -26,4 +30,5 @@ install:
   - bundle install
 
 script:
+  - npm run lint:js
   - npm test
