@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { get } from '@ember/object';
 import { test, moduleForModel } from 'ember-qunit';
