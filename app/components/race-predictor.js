@@ -3,7 +3,6 @@ import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { on } from '@ember/object/evented';
 import { observer } from '@ember/object';
 export default Component.extend({
 
@@ -76,10 +75,10 @@ export default Component.extend({
   /**
    * import the predicted run when initializing this component
    */
-  importPredictedRun : on("init", function(){
+  importPredictedRun : function(){
     this.get("prediction.predictedRun").setProperties({ lengthM : this.get("run.lengthM"), timeSec : this.get("run.timeSec")});
     this.get("prediction").updateAchievedRunSec();
-  }),
+  },
 
   /**
    * export the predicted run everytime it changes,
@@ -90,18 +89,23 @@ export default Component.extend({
     this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
   }),
 
-  displayPeterRiegelExlanation : on('init', observer('prediction.peterRiegelMethodSuitable', function(){
+  displayPeterRiegelExlanation : observer('prediction.peterRiegelMethodSuitable', function(){
     var self = this;
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
       this.set("settings.displayPeterRiegelExlanation", false);
-
       this.get('notifications').info(this.get('i18n').t("flashMessages.peterRiegelExlanation"), {
         onClick() {
           self.get("settings").save();
         }
       });
     }
-  })),
+  }),
+
+  init: function() {
+    this._super(...arguments);
+    this.importPredictedRun();
+    this.displayPeterRiegelExlanation();
+  },
 
   didRender: function() {
     this._super(...arguments);
