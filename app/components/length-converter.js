@@ -1,15 +1,15 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
 export default Component.extend({
 
-  i18n: Ember.inject.service(),
+  i18n: inject.service(),
 
   racePickerKmVisible : false,
   racePickerMiVisible : false,
   racePickerMVisible : false,
 
-  races : Ember.inject.service('race'),
+  races : inject.service('race'),
 
   isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
