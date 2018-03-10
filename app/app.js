@@ -5,7 +5,7 @@ import config from './config/environment';
 
 let Runverter;
 
-Runverter = Ember.Application.extend({
+Runverter = Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver
