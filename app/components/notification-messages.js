@@ -1,7 +1,7 @@
-import Ember from 'ember';
 import Component from '@ember/component';
+import { inject } from '@ember/service';
 export default Component.extend({
   elementId: "notification-container",
-  notifications: Ember.inject.service('notification-messages'),
-  i18n: Ember.inject.service()
+  notifications: inject.service('notification-messages'),
+  i18n: inject.service()
 });
