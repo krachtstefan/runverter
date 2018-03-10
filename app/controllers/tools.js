@@ -49,6 +49,7 @@ export default Controller.extend({
   },
 
   expertMode : false,
+  darkMode : false,
   imprintVisible : false,
 
   tools : computed("toolsAvailablem", "i18n.locale", function(){
