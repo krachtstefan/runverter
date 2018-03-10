@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 import { run } from '@ember/runloop';
+import { get } from '@ember/object';
 import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('prediction', 'Prediction Model', {
@@ -16,7 +17,7 @@ test('prediction is a valid ember data Model', function(assert) {
 // predictedRun
 test('predictedRun is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
-  const relationship = Ember.get(prediction, 'relationshipsByName').get('predictedRun');
+  const relationship = get(prediction, 'relationshipsByName').get('predictedRun');
   assert.equal(relationship.key, 'predictedRun');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'run');
@@ -138,7 +139,7 @@ test('predictedRun works when the run is definied with lengthKm and timeMin sett
 // achievedRun
 test('achievedRun is a relation to run model', function(assert) {
   const prediction = this.store().modelFor('prediction');
-  const relationship = Ember.get(prediction, 'relationshipsByName').get('achievedRun');
+  const relationship = get(prediction, 'relationshipsByName').get('achievedRun');
   assert.equal(relationship.key, 'achievedRun');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'run');

@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 import { run } from '@ember/runloop';
+import { get } from '@ember/object';
 import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('run', 'Run Model', {
@@ -2713,7 +2714,7 @@ test('timeStackSecFixed setter changes timeMin', function(assert) {
 // splits
 test('splits is a relation to splits model', function(assert) {
   const run = this.store().modelFor('run');
-  const relationship = Ember.get(run, 'relationshipsByName').get('splits');
+  const relationship = get(run, 'relationshipsByName').get('splits');
   assert.equal(relationship.key, 'splits');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'splits');
