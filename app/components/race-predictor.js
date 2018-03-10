@@ -1,12 +1,14 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
+import { inject } from '@ember/service';
+import { on } from '@ember/object/evented';
+import { observer } from '@ember/object';
 export default Component.extend({
 
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  i18n: inject.service(),
+  notifications: inject.service('notification-messages'),
 
   achievedRunMetricsSelected : "km",  // may be overwritten when using this component
   predictedRunMetricsSelected : "km", // may be overwritten when using this component
@@ -16,8 +18,8 @@ export default Component.extend({
   achievedTimePickerVisible: false,
   predictedRacePickerVisible: false,
 
-  races : Ember.inject.service('race'),
-  targetTimes : Ember.inject.service('target-time'),
+  races : inject.service('race'),
+  targetTimes : inject.service('target-time'),
 
   isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
@@ -74,7 +76,7 @@ export default Component.extend({
   /**
    * import the predicted run when initializing this component
    */
-  importPredictedRun : Ember.on("init", function(){
+  importPredictedRun : on("init", function(){
     this.get("prediction.predictedRun").setProperties({ lengthM : this.get("run.lengthM"), timeSec : this.get("run.timeSec")});
     this.get("prediction").updateAchievedRunSec();
   }),
@@ -83,12 +85,12 @@ export default Component.extend({
    * export the predicted run everytime it changes,
    * data need to be consistent as soon as possible since the user can leave or reload the page any time
    */
-  exportPredictedRun : Ember.observer('prediction.predictedRun.lengthM', 'prediction.predictedRun.timeSec', function(){
+  exportPredictedRun : observer('prediction.predictedRun.lengthM', 'prediction.predictedRun.timeSec', function(){
     this.set("run.lengthM", this.get("prediction.predictedRun.lengthM"));
     this.set("run.timeSec", this.get("prediction.predictedRun.timeSec"));
   }),
 
-  displayPeterRiegelExlanation : Ember.on('init', Ember.observer('prediction.peterRiegelMethodSuitable', function(){
+  displayPeterRiegelExlanation : on('init', observer('prediction.peterRiegelMethodSuitable', function(){
     var self = this;
     if(this.get("prediction.peterRiegelMethodSuitable")===false && this.get("settings.displayPeterRiegelExlanation")===true){
       this.set("settings.displayPeterRiegelExlanation", false);
