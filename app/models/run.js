@@ -1,6 +1,6 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 import { computed } from '@ember/object';
+import { observer } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -1535,7 +1535,7 @@ export default DS.Model.extend({
   /**
    * observer to prevent the length to be negative
    */
-  preventNegativeLengthM: Ember.observer("lengthM", function() {
+  preventNegativeLengthM: observer("lengthM", function() {
     if(this._ensureBigNumber(this.get("lengthM")).isNegative() === true){
       this.set("lengthM", new BigNumber(0));
     }
@@ -1544,7 +1544,7 @@ export default DS.Model.extend({
   /**
    * observer to prevent the time to be negative
    */
-  preventNegativeTimeSec: Ember.observer("timeSec", function() {
+  preventNegativeTimeSec: observer("timeSec", function() {
     if(this._ensureBigNumber(this.get("timeSec")).isNegative() === true){
       this.set("timeSec", new BigNumber(0));
     }
