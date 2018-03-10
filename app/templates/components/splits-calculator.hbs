@@ -11,7 +11,7 @@
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
         {{/each}}
       {{/x-select}}
-      {{form-helper/suggest-select items=races.templates identifier="race-picker-pace-calc" action="setRace" label=(t "races.label")}}
+      {{form-helper/suggest-select items=races.templates identifier="race-picker-pace-calc" changeAction=(action 'setRace') label=(t "races.label")}}
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse toolLine">
@@ -20,7 +20,7 @@
     </div>
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} {{timePickerVisibleClass}}">
       {{form-helper/number-input value=run.timeStackHr minLength="1" focus=timePickerVisible title=tooltipTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=run.timeStackMinFixed focus=timePickerVisible title=tooltipTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=run.timeStackSecFixed focus=timePickerVisible title=tooltipTimeSec}} {{t "metrics.time.sec"}}
-      {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" action="setTargetTime" label=(t "targetTimes.label")}}
+      {{form-helper/suggest-select items=targetTimesSuggestions identifier="target-time-pace-calc" changeAction=(action 'setTargetTime') label=(t "targetTimes.label")}}
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse toolLine">
