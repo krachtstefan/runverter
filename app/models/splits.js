@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import Ember from 'ember';
+import Object from '@ember/object';
 import { computed } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
@@ -132,7 +132,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceFirstHalf: computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategy", function(){
+  averagePaceFirstHalf: computed("run.paceMinPerKmRaw", "splittingStrategy", function(){
     return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
   }),
 
@@ -141,7 +141,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceSecondHalf: computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
+  averagePaceSecondHalf: computed("run.paceMinPerKmRaw","splittingStrategySecondHalf", function(){
     return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
   }),
 
@@ -253,7 +253,7 @@ export default DS.Model.extend({
         var progressDistance = lengthMStack.dividedBy(this.get("run.lengthM")).times(100);
         var progressTime = timeSecStack.dividedBy(this.get("run.timeSec")).times(100);
 
-        this.get("splits").push(Ember.Object.create({
+        this.get("splits").push(Object.create({
           'split' : this.store.createRecord('run', {
             timeSec : thisSplitTime.round(20),
             lengthM : thisSplitDistance.round(20)
