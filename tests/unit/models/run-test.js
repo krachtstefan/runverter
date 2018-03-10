@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { run } from '@ember/runloop';
+import Ember from 'ember';
 import { get } from '@ember/object';
 import { test, moduleForModel } from 'ember-qunit';
 
@@ -42,10 +42,10 @@ test('timeSec property can not be negative', function(assert) {
   var run = this.subject({timeSec : new BigNumber(1800)});
   assert.strictEqual(run.get("timeSec").toString(), "1800");
 
-  run(function(){ run.set("timeSec", new BigNumber(-10)); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber(-10)); });
   assert.strictEqual(run.get("timeSec").toString(), "0");
 
-  run(function(){ run.set("timeHr", "-10"); });
+  Ember.run(function(){ run.set("timeHr", "-10"); });
   assert.strictEqual(run.get("timeSec").toString(), "0");
 });
 
@@ -62,29 +62,29 @@ test('timeHr can have up to 20 decimal places', function(assert) {
 
 test('timeHr setter changes timeHr', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeHr", "2"); });
+  Ember.run(function(){ run.set("timeHr", "2"); });
   assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeHr", "2.5"); });
+  Ember.run(function(){ run.set("timeHr", "2.5"); });
   assert.strictEqual(run.get("timeHr").toString(), "2.5");
-  run(function(){ run.set("timeHr", 2.3); });
+  Ember.run(function(){ run.set("timeHr", 2.3); });
   assert.strictEqual(run.get("timeHr").toString(), "2.3");
 });
 
 test('timeHr setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeHr", 2); });
+  Ember.run(function(){ run.set("timeHr", 2); });
   assert.strictEqual(run.get("timeHr").toString(), "2");
 });
 
 test('timeHr setter changes timeSec', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeHr", "2"); });
+  Ember.run(function(){ run.set("timeHr", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "7200");
-  run(function(){ run.set("timeHr", "2.123"); });
+  Ember.run(function(){ run.set("timeHr", "2.123"); });
   assert.strictEqual(run.get("timeSec").toString(), "7642.8");
 });
 
@@ -101,29 +101,29 @@ test('timeMin can have up to 20 decimal places', function(assert) {
 
 test('timeMin setter changes timeMin', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeMin", "100"); });
+  Ember.run(function(){ run.set("timeMin", "100"); });
   assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeMin", "100.5"); });
+  Ember.run(function(){ run.set("timeMin", "100.5"); });
   assert.strictEqual(run.get("timeMin").toString(), "100.5");
-  run(function(){ run.set("timeMin", 50.5); });
+  Ember.run(function(){ run.set("timeMin", 50.5); });
   assert.strictEqual(run.get("timeMin").toString(), "50.5");
 });
 
 test('timeMin setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeMin", 100); });
+  Ember.run(function(){ run.set("timeMin", 100); });
   assert.strictEqual(run.get("timeMin").toString(), "100");
 });
 
 test('timeMin setter changes timeSec', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeMin", "12"); });
+  Ember.run(function(){ run.set("timeMin", "12"); });
   assert.strictEqual(run.get("timeSec").toString(), "720");
-  run(function(){ run.set("timeMin", "12.123"); });
+  Ember.run(function(){ run.set("timeMin", "12.123"); });
   assert.strictEqual(run.get("timeSec").toString(), "727.38");
 });
 
@@ -140,22 +140,22 @@ test('timeStackHr property can be zero', function(assert) {
 
 test('timeStackHr rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(1)});
-  run(function(){ run.set("timeSec", new BigNumber(3600)); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber(3600)); });
   assert.strictEqual(run.get("timeStackHr").toString(), "1"); // 1:00:00
   assert.strictEqual(run.get("timeStackMin").toString(), "0");
   assert.strictEqual(run.get("timeStackSec").toString(), "0");
 
-  run(function(){ run.set("timeSec", new BigNumber(3599)); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber(3599)); });
   assert.strictEqual(run.get("timeStackHr").toString(), "0"); // 0:59:59
   assert.strictEqual(run.get("timeStackMin").toString(), "59");
   assert.strictEqual(run.get("timeStackSec").toString(), "59");
 
-  run(function(){ run.set("timeSec", new BigNumber(3599.5)); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber(3599.5)); });
   assert.strictEqual(run.get("timeStackHr").toString(), "1"); // 0:59:59.5 will be rounded to 1:00:00
   assert.strictEqual(run.get("timeStackMin").toString(), "0");
   assert.strictEqual(run.get("timeStackSec").toString(), "0");
 
-  run(function(){ run.set("timeHr", new BigNumber(0.995)); });
+  Ember.run(function(){ run.set("timeHr", new BigNumber(0.995)); });
   assert.strictEqual(run.get("timeStackHr").toString(), "0"); // the timeHr of 0.995 results in a timeStac of 0:59:42, no need to round up
   assert.strictEqual(run.get("timeStackMin").toString(), "59");
   assert.strictEqual(run.get("timeStackSec").toString(), "42");
@@ -163,27 +163,27 @@ test('timeStackHr rounds properly', function(assert) {
 
 test('timeStackHr setter changes timeStackHr', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackHr", "2"); });
+  Ember.run(function(){ run.set("timeStackHr", "2"); });
   assert.strictEqual(run.get("timeStackHr").toString(), "2");
 });
 
 test('timeStackHr setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackHr", "2.2"); });
+  Ember.run(function(){ run.set("timeStackHr", "2.2"); });
   assert.strictEqual(run.get("timeStackHr").toString(), "2");
-  run(function(){ run.set("timeStackHr", 2.5); });
+  Ember.run(function(){ run.set("timeStackHr", 2.5); });
   assert.strictEqual(run.get("timeStackHr").toString(), "3");
 });
 
 test('timeStackHr setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackHr", 2); });
+  Ember.run(function(){ run.set("timeStackHr", 2); });
   assert.strictEqual(run.get("timeStackHr").toString(), "2");
 });
 
 test('timeStackHr setter influences all time related properties', function(assert) {
   var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
-  run(function(){ run.set("timeStackHr", "2"); }); // 2,5 hours and 12 seconds
+  Ember.run(function(){ run.set("timeStackHr", "2"); }); // 2,5 hours and 12 seconds
   assert.strictEqual(run.get("timeStackHr").toString(), "2");
   assert.strictEqual(run.get("timeStackMin").toString(), "30");
   assert.strictEqual(run.get("timeStackSec").toString(), "12");
@@ -203,21 +203,21 @@ test('timeStackMin property can be zero', function(assert) {
 
 test('timeStackMin rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(14400), lengthM : new BigNumber(42195)});
-  run(function(){ run.set("paceMinPerKmStackMin", "5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", "5"); });
   assert.strictEqual(run.get("timeStackMin").toString(), "0"); // was -1 when calculation was based on raw values without round()
 
-  run(function(){ run.set("timeMin", new BigNumber("0.994")); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("0.994")); });
   assert.strictEqual(run.get("timeStackMin").toString(), "1"); // the timeMin of 0.994 results in a timeStackMin of 1 (59.64 seconds)
 
-  run(function(){ run.set("timeMin", new BigNumber("0.991")); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("0.991")); });
   assert.strictEqual(run.get("timeStackMin").toString(), "0"); // the timeMin of 0.991 results in a timeStackMin of 1 (59.46 seconds)
 
-  run(function(){ run.setProperties({ paceMinPerKmStackMin : "5", paceMinPerKmStackSec : "41" }); });
+  Ember.run(function(){ run.setProperties({ paceMinPerKmStackMin : "5", paceMinPerKmStackSec : "41" }); });
   assert.strictEqual(run.get("timeStackSec").toString(), "48");
   assert.strictEqual(run.get("timeStackMin").toString(), "59");
   assert.strictEqual(run.get("timeStackHr").toString(), "3");
 
-  run(function(){ run.set("timeSec", new BigNumber(3599.5)); }); // 0:59:59.5 will be rounded to 1:00:00
+  Ember.run(function(){ run.set("timeSec", new BigNumber(3599.5)); }); // 0:59:59.5 will be rounded to 1:00:00
   assert.strictEqual(run.get("timeStackHr").toString(), "1");
   assert.strictEqual(run.get("timeStackMin").toString(), "0");
   assert.strictEqual(run.get("timeStackSec").toString(), "0");
@@ -225,48 +225,48 @@ test('timeStackMin rounds properly', function(assert) {
 
 test('timeStackMin setter changes timeStackMin', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMin", "10"); });
+  Ember.run(function(){ run.set("timeStackMin", "10"); });
   assert.strictEqual(run.get("timeStackMin").toString(), "10");
 });
 
 test('timeStackMin setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMin", "2.2"); });
+  Ember.run(function(){ run.set("timeStackMin", "2.2"); });
   assert.strictEqual(run.get("timeStackMin").toString(), "2");
-  run(function(){ run.set("timeStackMin", 2.5); });
+  Ember.run(function(){ run.set("timeStackMin", 2.5); });
   assert.strictEqual(run.get("timeStackMin").toString(), "3");
 });
 
 test('timeStackMin setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMin", 2); });
+  Ember.run(function(){ run.set("timeStackMin", 2); });
   assert.strictEqual(run.get("timeStackMin").toString(), "2");
 });
 
 test('timeStackMin setter handles negative values and changes timeStackHr', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackHr", 5); });
-  run(function(){ run.set("timeStackMin", 55); });
-  run(function(){ run.set("timeStackMin", -10); });
+  Ember.run(function(){ run.set("timeStackHr", 5); });
+  Ember.run(function(){ run.set("timeStackMin", 55); });
+  Ember.run(function(){ run.set("timeStackMin", -10); });
   assert.strictEqual(run.get("timeStackHr").toString(), "4");
   assert.strictEqual(run.get("timeStackMin").toString(), "50");
 });
 
 test('timeStackMin setter handles values over 59 and changes timeStackHr', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackHr", 5); });
-  run(function(){ run.set("timeStackMin", 60); });
+  Ember.run(function(){ run.set("timeStackHr", 5); });
+  Ember.run(function(){ run.set("timeStackMin", 60); });
   assert.strictEqual(run.get("timeStackHr").toString(), "6");
   assert.strictEqual(run.get("timeStackMin").toString(), "0");
-  run(function(){ run.set("timeStackHr", 5); });
-  run(function(){ run.set("timeStackMin", 80); });
+  Ember.run(function(){ run.set("timeStackHr", 5); });
+  Ember.run(function(){ run.set("timeStackMin", 80); });
   assert.strictEqual(run.get("timeStackHr").toString(), "6");
   assert.strictEqual(run.get("timeStackMin").toString(), "20");
 });
 
 test('timeStackMin setter influences all time related properties', function(assert) {
   var run = this.subject({timeSec : new BigNumber(90)}); // 1 minute, 30 seconds
-  run(function(){ run.set("timeStackMin", "10"); }); // 10 minutes, 30 seconds
+  Ember.run(function(){ run.set("timeStackMin", "10"); }); // 10 minutes, 30 seconds
   assert.strictEqual(run.get("timeStackHr").toString(), "0");
   assert.strictEqual(run.get("timeStackMin").toString(), "10");
   assert.strictEqual(run.get("timeStackSec").toString(), "30");
@@ -282,7 +282,7 @@ test('timeStackMinFixed property is calculated from timeSec', function(assert) {
 test('timeStackMinFixed has leading zero(s)', function(assert) {
   var run = this.subject({timeSec  : new BigNumber(120)});
   assert.strictEqual(run.get("timeStackMinFixed"), "02");
-  run(function(){ run.set("timeSec", new BigNumber("2")); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber("2")); });
   assert.strictEqual(run.get("timeStackMinFixed"), "00");
 });
 
@@ -293,69 +293,69 @@ test('timeStackMinFixed can be zero', function(assert) {
 
 test('timeStackMinFixed setter changes timeStackMinFixed', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMinFixed", "30"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "30"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "30");
 });
 
 test('timeStackMinFixed setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMinFixed", "8.2"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "8.2"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "08");
-  run(function(){ run.set("timeStackMinFixed", 9.5); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 9.5); });
   assert.strictEqual(run.get("timeStackMinFixed"), "10");
 });
 
 test('timeStackMinFixed setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMinFixed", 20); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 20); });
   assert.strictEqual(run.get("timeStackMinFixed"), "20");
 });
 
 test('timeStackMinFixed setter works with single digit', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMinFixed", "9"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "9"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "09");
 });
 
 test('timeStackMinFixed setter handles negative values and changes timeStackHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("timeHr", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackMinFixed", -40); });
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", -40); });
   assert.strictEqual(run.get("timeStackHr").toString(), "5");
   assert.strictEqual(run.get("timeStackMinFixed").toString(), "20");
 
-  run(function(){ run.set("timeHr", new BigNumber("5")); });
-  run(function(){ run.set("timeStackMinFixed", -1); });
+  Ember.run(function(){ run.set("timeHr", new BigNumber("5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", -1); });
   assert.strictEqual(run.get("timeStackHr").toString(), "4");
   assert.strictEqual(run.get("timeStackMinFixed").toString(), "59");
 });
 
 test('timeStackMinFixed setter handles values over 59 and changes timeStackHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("timeHr", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackMinFixed", 60); });
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 60); });
   assert.strictEqual(run.get("timeStackHr").toString(), "7");
   assert.strictEqual(run.get("timeStackMinFixed").toString(), "00");
 
-  run(function(){ run.set("timeHr", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackMinFixed", 90); });
+  Ember.run(function(){ run.set("timeHr", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackMinFixed", 90); });
   assert.strictEqual(run.get("timeStackHr").toString(), "7");
   assert.strictEqual(run.get("timeStackMinFixed").toString(), "30");
 });
 
 test('timeStackMinFixed setter works with leading zero', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMinFixed", "09"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "09"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "09");
-  run(function(){ run.set("timeStackMinFixed", "002"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "002"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "02");
-  run(function(){ run.set("timeStackMinFixed", "009"); });
+  Ember.run(function(){ run.set("timeStackMinFixed", "009"); });
   assert.strictEqual(run.get("timeStackMinFixed"), "09");
 });
 
 test('timeStackMinFixed setter influences all time related properties', function(assert) {
   var run = this.subject({timeSec : new BigNumber(90)}); // 1 minute, 30 seconds
-  run(function(){ run.set("timeStackMinFixed", "10"); }); // 10 minutes, 30 seconds
+  Ember.run(function(){ run.set("timeStackMinFixed", "10"); }); // 10 minutes, 30 seconds
   assert.strictEqual(run.get("timeStackHr").toString(), "0");
   assert.strictEqual(run.get("timeStackMin").toString(), "10");
   assert.strictEqual(run.get("timeStackSec").toString(), "30");
@@ -375,54 +375,54 @@ test('timeStackSec property can be zero', function(assert) {
 
 test('timeStackSec rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(14400), lengthM : new BigNumber(42195)});
-  run(function(){ run.set("paceMinPerKmStackMin", "5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", "5"); });
   assert.strictEqual(run.get("timeStackSec").toString(), "0"); // was 59.99999999999999999999993592 before round()
 });
 
 test('timeStackSec setter changes timeStackSec', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSec", "10"); });
+  Ember.run(function(){ run.set("timeStackSec", "10"); });
   assert.strictEqual(run.get("timeStackSec").toString(), "10");
 });
 
 test('timeStackSec setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSec", "2.2"); });
+  Ember.run(function(){ run.set("timeStackSec", "2.2"); });
   assert.strictEqual(run.get("timeStackSec").toString(), "2");
-  run(function(){ run.set("timeStackSec", 2.5); });
+  Ember.run(function(){ run.set("timeStackSec", 2.5); });
   assert.strictEqual(run.get("timeStackSec").toString(), "3");
 });
 
 test('timeStackSec setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSec", 2); });
+  Ember.run(function(){ run.set("timeStackSec", 2); });
   assert.strictEqual(run.get("timeStackSec").toString(), "2");
 });
 
 test('timeStackSec setter handles negative values and changes timeStackMin', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMin", 5); });
-  run(function(){ run.set("timeStackSec", 50); });
-  run(function(){ run.set("timeStackSec", -10); });
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 50); });
+  Ember.run(function(){ run.set("timeStackSec", -10); });
   assert.strictEqual(run.get("timeStackMin").toString(), "4");
   assert.strictEqual(run.get("timeStackSec").toString(), "50");
 });
 
 test('timeStackSec setter handles values over 59 and changes timeStackMin', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackMin", 5); });
-  run(function(){ run.set("timeStackSec", 60); });
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 60); });
   assert.strictEqual(run.get("timeStackMin").toString(), "6");
   assert.strictEqual(run.get("timeStackSec").toString(), "0");
-  run(function(){ run.set("timeStackMin", 5); });
-  run(function(){ run.set("timeStackSec", 80); });
+  Ember.run(function(){ run.set("timeStackMin", 5); });
+  Ember.run(function(){ run.set("timeStackSec", 80); });
   assert.strictEqual(run.get("timeStackMin").toString(), "6");
   assert.strictEqual(run.get("timeStackSec").toString(), "20");
 });
 
 test('timeStackSec setter influences all time related properties', function(assert) {
   var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
-  run(function(){ run.set("timeStackSec", "20"); }); // 3,5 hours and 20 seconds
+  Ember.run(function(){ run.set("timeStackSec", "20"); }); // 3,5 hours and 20 seconds
   assert.strictEqual(run.get("timeStackHr").toString(), "3");
   assert.strictEqual(run.get("timeStackMin").toString(), "30");
   assert.strictEqual(run.get("timeStackSec").toString(), "20");
@@ -431,7 +431,7 @@ test('timeStackSec setter influences all time related properties', function(asse
 
 test('timeStackSec setter handles values bigger than 59', function(assert) {
   var run = this.subject({timeSec : new BigNumber(12612)}); // 3,5 hours and 12 seconds
-  run(function(){ run.set("timeStackSec", "62"); }); // 3,5 hours and 62 seconds
+  Ember.run(function(){ run.set("timeStackSec", "62"); }); // 3,5 hours and 62 seconds
   assert.strictEqual(run.get("timeStackHr").toString(), "3");
   assert.strictEqual(run.get("timeStackMin").toString(), "31"); // 30 flips to 31 because 62 seconds starts another minute
   assert.strictEqual(run.get("timeStackSec").toString(), "2");
@@ -452,7 +452,7 @@ test('timeStackSecFixed property can round up', function(assert) {
 test('timeStackSecFixed has leading zero(s)', function(assert) {
   var run = this.subject({timeSec  : new BigNumber(2)});
   assert.strictEqual(run.get("timeStackSecFixed"), "02");
-  run(function(){ run.set("timeSec", new BigNumber("60")); });
+  Ember.run(function(){ run.set("timeSec", new BigNumber("60")); });
   assert.strictEqual(run.get("timeStackSecFixed"), "00");
 });
 
@@ -463,75 +463,75 @@ test('timeStackSecFixed can be zero', function(assert) {
 
 test('timeStackSecFixed setter changes timeStackSecFixed', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSecFixed", "30"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "30"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "30");
 });
 
 test('timeStackSecFixed setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSecFixed", "8.2"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "8.2"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "08");
-  run(function(){ run.set("timeStackSecFixed", 9.5); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 9.5); });
   assert.strictEqual(run.get("timeStackSecFixed"), "10");
 });
 
 test('timeStackSecFixed setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSecFixed", 20); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 20); });
   assert.strictEqual(run.get("timeStackSecFixed"), "20");
 });
 
 test('timeStackSecFixed setter works with single digit', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSecFixed", "9"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "9"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "09");
 });
 
 test('timeStackSecFixed setter handles negative values and changes timeStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("timeMin", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackSecFixed", -40); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", -40); });
   assert.strictEqual(run.get("timeStackMin").toString(), "5");
   assert.strictEqual(run.get("timeStackSecFixed").toString(), "20");
 
-  run(function(){ run.set("timeMin", new BigNumber("5")); });
-  run(function(){ run.set("timeStackSecFixed", -1); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", -1); });
   assert.strictEqual(run.get("timeStackMin").toString(), "4");
   assert.strictEqual(run.get("timeStackSecFixed").toString(), "59");
 });
 
 test('timeStackSecFixed setter handles values over 59 and changes timeStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("timeMin", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackSecFixed", 60); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 60); });
   assert.strictEqual(run.get("timeStackMin").toString(), "7");
   assert.strictEqual(run.get("timeStackSecFixed").toString(), "00");
 
-  run(function(){ run.set("timeMin", new BigNumber("6.5")); });
-  run(function(){ run.set("timeStackSecFixed", 90); });
+  Ember.run(function(){ run.set("timeMin", new BigNumber("6.5")); });
+  Ember.run(function(){ run.set("timeStackSecFixed", 90); });
   assert.strictEqual(run.get("timeStackMin").toString(), "7");
   assert.strictEqual(run.get("timeStackSecFixed").toString(), "30");
 });
 
 test('timeStackSecFixed setter works with leading zero', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("timeStackSecFixed", "09"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "09"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "09");
-  run(function(){ run.set("timeStackSecFixed", "002"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "002"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "02");
-  run(function(){ run.set("timeStackSecFixed", "009"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "009"); });
   assert.strictEqual(run.get("timeStackSecFixed"), "09");
 });
 
 test('timeStackSecFixed setter changes timeMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(5)});
-  run(function(){ run.set("timeStackSecFixed", "30"); });
+  Ember.run(function(){ run.set("timeStackSecFixed", "30"); });
   assert.strictEqual(run.get("timeMin").toString(), "5.5");
 });
 
 test('timeStackMin and timeStackSecFixed setter will define timeMin', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ timeStackMin : "6", timeStackSecFixed : "20" }); });
+  Ember.run(function(){ run.setProperties({ timeStackMin : "6", timeStackSecFixed : "20" }); });
   assert.strictEqual(run.get("timeMin").toString(), "6.33333333333333333333");
 });
 
@@ -540,10 +540,10 @@ test('lengthM property can not be negative', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1800)});
   assert.strictEqual(run.get("lengthM").toString(), "1800");
 
-  run(function(){ run.set("lengthM", new BigNumber(-10)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(-10)); });
   assert.strictEqual(run.get("lengthM").toString(), "0");
 
-  run(function(){ run.set("lengthMi", "-10"); });
+  Ember.run(function(){ run.set("lengthMi", "-10"); });
   assert.strictEqual(run.get("lengthM").toString(), "0");
 });
 
@@ -556,40 +556,40 @@ test('lengthMStackM property is calculated from lengthM', function(assert) {
 test('lengthMStackM property can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(0)});
   assert.strictEqual(run.get("lengthMStackM").toString(), "0");
-  run(function(){ run.set("lengthM", new BigNumber(0.3)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(0.3)); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "0");
 });
 
 test('lengthMStackM rounds properly', function(assert) {
   var run = this.subject({lengthM : new BigNumber(0.995)});
   assert.strictEqual(run.get("lengthMStackM").toString(), "1"); // the lengthM of 0.995 results in a lengthMStackM of 1
-  run(function(){ run.set("lengthM", new BigNumber(0.994)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(0.994)); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "0"); // the lengthM of 0.994 results in a lengthMStackM of 0
 });
 
 test('lengthMStackM setter changes lengthMStackM', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackM", "2"); });
+  Ember.run(function(){ run.set("lengthMStackM", "2"); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "2");
 });
 
 test('lengthMStackM setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackM", "2.9"); });
+  Ember.run(function(){ run.set("lengthMStackM", "2.9"); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "3");
-  run(function(){ run.set("lengthMStackM", 2.3); });
+  Ember.run(function(){ run.set("lengthMStackM", 2.3); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "2");
 });
 
 test('lengthMStackM setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackM", 2); });
+  Ember.run(function(){ run.set("lengthMStackM", 2); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "2");
 });
 
 test('lengthMStackM setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1234.56)});
-  run(function(){ run.set("lengthMStackM", "2"); });
+  Ember.run(function(){ run.set("lengthMStackM", "2"); });
   assert.strictEqual(run.get("lengthM").toString(), "2.56");
 });
 
@@ -617,70 +617,70 @@ test('lengthMStackDecimal supports leading zero', function(assert) {
 test('lengthMStackDecimal can be zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(12)});
   assert.strictEqual(run.get("lengthMStackDecimal"), "0");
-  run(function(){ run.set("lengthM", new BigNumber(0.004)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(0.004)); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "0");
 });
 
 test('lengthMStackDecimal setter changes lengthMStackDecimal', function(assert) {
   var run = this.subject();
-run(function(){   run.set("lengthMStackDecimal", "9"); });
+Ember.run(function(){   run.set("lengthMStackDecimal", "9"); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "9");
 });
 
 test('lengthMStackDecimal setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimal", "8.2"); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", "8.2"); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "8");
-  run(function(){ run.set("lengthMStackDecimal", 9.5); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 9.5); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "1");
 });
 
 test('lengthMStackDecimal setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimal", 9); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 9); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "9");
 });
 
 test('lengthMStackDecimal setter handles negative values and changes lengthMStackM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimal", -10); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", -10); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "4");
   assert.strictEqual(run.get("lengthMStackDecimal").toString(), "9");
 });
 
 test('lengthMStackDecimal setter handles values over 99 and changes lengthMStackM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimal", 100); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 100); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "5");
   assert.strictEqual(run.get("lengthMStackDecimal").toString(), "1");
 
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimal", 123); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", 123); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "5");
   assert.strictEqual(run.get("lengthMStackDecimal").toString(), "12");
 });
 
 test('lengthMStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "09");
-  run(function(){ run.set("lengthMStackDecimal", "002"); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", "002"); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "0");
-  run(function(){ run.set("lengthMStackDecimal", "009"); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", "009"); });
   assert.strictEqual(run.get("lengthMStackDecimal"), "01");
 });
 
 test('lengthMStackDecimal setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthMStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthM").toString(), "1000.09");
 });
 
 test('lengthMStackM and lengthMStackDecimal setter will define lengthM', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthMStackM : "12", lengthMStackDecimal : "09" }); });
+  Ember.run(function(){ run.setProperties({ lengthMStackM : "12", lengthMStackDecimal : "09" }); });
   assert.strictEqual(run.get("lengthM").toString(), "12.09");
 });
 
@@ -698,14 +698,14 @@ test('lengthMStackDecimalFixed property can round up', function(assert) {
 test('lengthMStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({lengthM : new BigNumber(0.5)});
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "50");
-  run(function(){ run.set("lengthM", new BigNumber("5")); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5")); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "00");
 });
 
 test('lengthMStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(0.09)});
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthM", new BigNumber(0.005)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(0.005)); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "01");
 });
 
@@ -716,75 +716,75 @@ test('lengthMStackDecimalFixed can be zero', function(assert) {
 
 test('lengthMStackDecimalFixed setter changes lengthMStackDecimalFixed', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimalFixed", "90"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "90"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "90");
 });
 
 test('lengthMStackDecimalFixed setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimalFixed", "8.2"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "8.2"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "80");
-  run(function(){ run.set("lengthMStackDecimalFixed", 9.5); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", 9.5); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "10");
 });
 
 test('lengthMStackDecimalFixed setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimalFixed", 9); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", 9); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "90");
 });
 
 test('lengthMStackDecimalFixed setter works with single digit', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimalFixed", "9"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "9"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "90");
 });
 
 test('lengthMStackDecimalFixed setter handles negative values and changes lengthMStackM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimalFixed", -10); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", -10); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "4");
   assert.strictEqual(run.get("lengthMStackDecimalFixed").toString(), "90");
 
-  run(function(){ run.set("lengthM", new BigNumber("5.0")); });
-  run(function(){ run.set("lengthMStackDecimalFixed", -1); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.0")); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", -1); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "4");
   assert.strictEqual(run.get("lengthMStackDecimalFixed").toString(), "99");
 });
 
 test('lengthMStackDecimalFixed setter handles values over 99 and changes lengthMStackM', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimalFixed", 100); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", 100); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "6");
   assert.strictEqual(run.get("lengthMStackDecimalFixed").toString(), "00");
 
-  run(function(){ run.set("lengthM", new BigNumber("5.5")); });
-  run(function(){ run.set("lengthMStackDecimalFixed", 123); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", 123); });
   assert.strictEqual(run.get("lengthMStackM").toString(), "6");
   assert.strictEqual(run.get("lengthMStackDecimalFixed").toString(), "23");
 });
 
 test('lengthMStackDecimalFixed setter works with leading zero', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthMStackDecimalFixed", "002"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "002"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "00");
-  run(function(){ run.set("lengthMStackDecimalFixed", "009"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "009"); });
   assert.strictEqual(run.get("lengthMStackDecimalFixed"), "01");
 });
 
 test('lengthMStackDecimalFixed setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthMStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthM").toString(), "1000.09");
 });
 
 test('lengthMStackM and lengthMStackDecimalFixed setter will define lengthM', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthMStackM : "12", lengthMStackDecimalFixed : "9" }); });
+  Ember.run(function(){ run.setProperties({ lengthMStackM : "12", lengthMStackDecimalFixed : "9" }); });
   assert.strictEqual(run.get("lengthM").toString(), "12.9");
 });
 
@@ -800,11 +800,11 @@ test('lengthKm can have up to 20 decimal places and can round up', function(asse
   // http://keisan.casio.com/calculator results in 0.0015205761315020566666666667
   assert.strictEqual(run.get("lengthKm").toString(), "0.00152057613150205667");
 
-  run(function(){ run.set("lengthM", new BigNumber("8.78748598595").dividedBy(3)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("8.78748598595").dividedBy(3)); });
   // http://keisan.casio.com/calculator results in 0.0029291619953166666666666667
   assert.strictEqual(run.get("lengthKm").toString(), "0.00292916199531666667");
 
-  run(function(){ run.set("lengthM", new BigNumber("8.123455").dividedBy(7)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("8.123455").dividedBy(7)); });
   // http://keisan.casio.com/calculator results in 0.0011604935714285714285714286
   assert.strictEqual(run.get("lengthKm").toString(), "0.00116049357142857143");
 });
@@ -814,40 +814,40 @@ test('lengthKm can round down', function(assert) {
   var run = this.subject({lengthM : new BigNumber("9.12345678901234").dividedBy(9)});
   // http://keisan.casio.com/calculator results in 0.001013717421001371111111
 
-  run(function(){ run.set("lengthM", new BigNumber("9.3343442341212212212").dividedBy(5)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("9.3343442341212212212").dividedBy(5)); });
   // http://keisan.casio.com/calculator results in 0.00186686884682424424424
   assert.strictEqual(run.get("lengthKm").toString(), "0.00186686884682424424");
 
-  run(function(){ run.set("lengthM", new BigNumber("9.3343442341214223423324212").dividedBy(3)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber("9.3343442341214223423324212").dividedBy(3)); });
   // http://keisan.casio.com/calculator results in 0.0031114480780404741141108071
   assert.strictEqual(run.get("lengthKm").toString(), "0.00311144807804047411");
 });
 
 test('lengthKm setter changes lengthKm', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKm", "100"); });
+  Ember.run(function(){ run.set("lengthKm", "100"); });
   assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKm", "100.12345"); });
+  Ember.run(function(){ run.set("lengthKm", "100.12345"); });
   assert.strictEqual(run.get("lengthKm").toString(), "100.12345");
-  run(function(){ run.set("lengthKm", 100.34); });
+  Ember.run(function(){ run.set("lengthKm", 100.34); });
   assert.strictEqual(run.get("lengthKm").toString(), "100.34");
 });
 
 test('lengthKm setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKm", 100); });
+  Ember.run(function(){ run.set("lengthKm", 100); });
   assert.strictEqual(run.get("lengthKm").toString(), "100");
 });
 
 test('lengthKm setter changes lengthM', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKm", "12"); });
+  Ember.run(function(){ run.set("lengthKm", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "12000");
-  run(function(){ run.set("lengthKm", "12.123"); });
+  Ember.run(function(){ run.set("lengthKm", "12.123"); });
   assert.strictEqual(run.get("lengthM").toString(), "12123");
 });
 
@@ -865,36 +865,36 @@ test('lengthKmStackKm property can be zero', function(assert) {
 test('lengthKmStackKm rounds properly', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1)});
 
-  run(function(){ run.set("lengthKm", new BigNumber(0.995)); });
+  Ember.run(function(){ run.set("lengthKm", new BigNumber(0.995)); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "1"); // the lengthKm of 0.995 results in a lengthKmStackKm of 1
 
-  run(function(){ run.set("lengthKm", new BigNumber(0.994)); });
+  Ember.run(function(){ run.set("lengthKm", new BigNumber(0.994)); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "0"); // the lengthKm of 0.994 results in a lengthKmStackKm of 0
 });
 
 test('lengthKmStackKm setter changes lengthKmStackKm', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackKm", "2"); });
+  Ember.run(function(){ run.set("lengthKmStackKm", "2"); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackKm", "2.9"); });
+  Ember.run(function(){ run.set("lengthKmStackKm", "2.9"); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "3");
-  run(function(){ run.set("lengthKmStackKm", 2.3); });
+  Ember.run(function(){ run.set("lengthKmStackKm", 2.3); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackKm", 2); });
+  Ember.run(function(){ run.set("lengthKmStackKm", 2); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "2");
 });
 
 test('lengthKmStackKm setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1234)});
-  run(function(){ run.set("lengthKmStackKm", "2"); });
+  Ember.run(function(){ run.set("lengthKmStackKm", "2"); });
   assert.strictEqual(run.get("lengthM").toString(), "2234");
 });
 
@@ -926,64 +926,64 @@ test('lengthKmStackDecimal can be zero', function(assert) {
 
 test('lengthKmStackDecimal setter changes lengthKmStackDecimal', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimal", "9"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "9"); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "9");
 });
 
 test('lengthKmStackDecimal setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimal", "8.2"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "8.2"); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "8");
-  run(function(){ run.set("lengthKmStackDecimal", 9.5); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 9.5); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "1");
 });
 
 test('lengthKmStackDecimal setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimal", 9); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 9); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "9");
 });
 
 test('lengthKmStackDecimal setter handles negative values and changes lengthKmStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimal", -10); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", -10); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "4");
   assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "9");
 });
 
 test('lengthKmStackDecimal setter handles values over 99 and changes lengthKmStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimal", 100); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 100); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "5");
   assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "1");
 
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimal", 123); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", 123); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "5");
   assert.strictEqual(run.get("lengthKmStackDecimal").toString(), "12");
 });
 
 test('lengthKmStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "09");
-  run(function(){ run.set("lengthKmStackDecimal", "002"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "002"); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "0");
-  run(function(){ run.set("lengthKmStackDecimal", "009"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "009"); });
   assert.strictEqual(run.get("lengthKmStackDecimal"), "01");
 });
 
 test('lengthKmStackDecimal setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKmStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthM").toString(), "1090");
 });
 
 test('lengthKmStackKm and lengthKmStackDecimal setter will define lengthKm', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimal : "09" }); });
+  Ember.run(function(){ run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimal : "09" }); });
   assert.strictEqual(run.get("lengthKm").toString(), "12.09");
 });
 
@@ -1001,14 +1001,14 @@ test('lengthKmStackDecimalFixed property can round up', function(assert) {
 test('lengthKmStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({lengthM : new BigNumber(500)});
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "50");
-  run(function(){ run.set("lengthM", new BigNumber(2)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(2)); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
 });
 
 test('lengthKmStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({lengthM : new BigNumber(90)});
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthM", new BigNumber(5)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(5)); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "01");
 });
 
@@ -1019,75 +1019,75 @@ test('lengthKmStackDecimalFixed can be zero', function(assert) {
 
 test('lengthKmStackDecimalFixed setter changes lengthKmStackDecimalFixed', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimalFixed", "90"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "90"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
 });
 
 test('lengthKmStackDecimalFixed setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimalFixed", "8.2"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "8.2"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "80");
-  run(function(){ run.set("lengthKmStackDecimalFixed", 9.5); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", 9.5); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "10");
 });
 
 test('lengthKmStackDecimalFixed setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimalFixed", 9); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", 9); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
 });
 
 test('lengthKmStackDecimalFixed setter works with single digit', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimalFixed", "9"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "9"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "90");
 });
 
 test('lengthKmStackDecimalFixed setter handles negative values and changes lengthKmStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimalFixed", -10); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", -10); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "4");
   assert.strictEqual(run.get("lengthKmStackDecimalFixed").toString(), "90");
 
-  run(function(){ run.set("lengthKm", "5.0"); });
-  run(function(){ run.set("lengthKmStackDecimalFixed", -1); });
+  Ember.run(function(){ run.set("lengthKm", "5.0"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", -1); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "4");
   assert.strictEqual(run.get("lengthKmStackDecimalFixed").toString(), "99");
 });
 
 test('lengthKmStackDecimalFixed setter handles values over 99 and changes lengthKmStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimalFixed", 100); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", 100); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "6");
   assert.strictEqual(run.get("lengthKmStackDecimalFixed").toString(), "00");
 
-  run(function(){ run.set("lengthKm", "5.5"); });
-  run(function(){ run.set("lengthKmStackDecimalFixed", 123); });
+  Ember.run(function(){ run.set("lengthKm", "5.5"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", 123); });
   assert.strictEqual(run.get("lengthKmStackKm").toString(), "6");
   assert.strictEqual(run.get("lengthKmStackDecimalFixed").toString(), "23");
 });
 
 test('lengthKmStackDecimalFixed setter works with leading zero', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthKmStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthKmStackDecimalFixed", "002"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "002"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "00");
-  run(function(){ run.set("lengthKmStackDecimalFixed", "009"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "009"); });
   assert.strictEqual(run.get("lengthKmStackDecimalFixed"), "01");
 });
 
 test('lengthKmStackDecimalFixed setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthKmStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthKmStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthM").toString(), "1090");
 });
 
 test('lengthKmStackKm and lengthKmStackDecimalFixed setter will define lengthKm', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimalFixed : "9" }); });
+  Ember.run(function(){ run.setProperties({ lengthKmStackKm : "12", lengthKmStackDecimalFixed : "9" }); });
   assert.strictEqual(run.get("lengthKm").toString(), "12.9");
 });
 
@@ -1102,11 +1102,11 @@ test('lengthMi can have up to 20 decimal places and can round up', function(asse
   // http://keisan.casio.com/calculator results in 0.0056690532223144026385906307
   assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231440264");
 
-  run(function(){ run.set("lengthM", new BigNumber(14232.25)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(14232.25)); });
   // http://keisan.casio.com/calculator results in 8.8435101507197963890877277
   assert.strictEqual(run.get("lengthMi").toString(), "8.84351015071979638909");
 
-  run(function(){ run.set("lengthM", new BigNumber(123.45)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(123.45)); });
   // http://keisan.casio.com/calculator results in 0.07670827368169887854927225
   assert.strictEqual(run.get("lengthMi").toString(), "0.07670827368169887855");
 });
@@ -1116,40 +1116,40 @@ test('lengthMi can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.005669053222314396424879
   assert.strictEqual(run.get("lengthMi").toString(), "0.00566905322231439642");
 
-  run(function(){ run.set("lengthM", new BigNumber(123)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(123)); });
   // http://keisan.casio.com/calculator results in 0.076428656645192078262944405
   assert.strictEqual(run.get("lengthMi").toString(), "0.07642865664519207826");
 
-  run(function(){ run.set("lengthM", new BigNumber(12.12)); });
+  Ember.run(function(){ run.set("lengthM", new BigNumber(12.12)); });
   // http://keisan.casio.com/calculator results in 0.0075310188499164877117633023
   assert.strictEqual(run.get("lengthMi").toString(), "0.00753101884991648771");
 });
 
 test('lengthMi setter changes lengthMi', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMi", "100"); });
+  Ember.run(function(){ run.set("lengthMi", "100"); });
   assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMi", "100.55"); });
+  Ember.run(function(){ run.set("lengthMi", "100.55"); });
   assert.strictEqual(run.get("lengthMi").toString(), "100.55");
-  run(function(){ run.set("lengthMi", 100.12); });
+  Ember.run(function(){ run.set("lengthMi", 100.12); });
   assert.strictEqual(run.get("lengthMi").toString(), "100.12");
 });
 
 test('lengthMi setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMi", 100); });
+  Ember.run(function(){ run.set("lengthMi", 100); });
   assert.strictEqual(run.get("lengthMi").toString(), "100");
 });
 
 test('lengthMi setter changes lengthM', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMi", "12"); });
+  Ember.run(function(){ run.set("lengthMi", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "19312.128");
-  run(function(){ run.set("lengthMi", "12.123"); });
+  Ember.run(function(){ run.set("lengthMi", "12.123"); });
   assert.strictEqual(run.get("lengthM").toString(), "19510.077312");
 });
 
@@ -1167,36 +1167,36 @@ test('lengthMiStackMi property can be zero', function(assert) {
 test('lengthMiStackMi rounds properly', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1)});
 
-  run(function(){ run.set("lengthMi", new BigNumber(0.995)); });
+  Ember.run(function(){ run.set("lengthMi", new BigNumber(0.995)); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "1"); // the lengthMi of 0.995 results in a lengthMiStackMi of 1
 
-  run(function(){ run.set("lengthMi", new BigNumber(0.994)); });
+  Ember.run(function(){ run.set("lengthMi", new BigNumber(0.994)); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "0"); // the lengthMi of 0.994 results in a lengthMiStackMi of 0
 });
 
 test('lengthMiStackMi setter changes lengthMiStackMi', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackMi", "2"); });
+  Ember.run(function(){ run.set("lengthMiStackMi", "2"); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
 });
 
 test('lengthMiStackMi setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackMi", "2.2"); });
+  Ember.run(function(){ run.set("lengthMiStackMi", "2.2"); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
-  run(function(){ run.set("lengthMiStackMi", 2.5); });
+  Ember.run(function(){ run.set("lengthMiStackMi", 2.5); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "3");
 });
 
 test('lengthMiStackMi setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackMi", 2); });
+  Ember.run(function(){ run.set("lengthMiStackMi", 2); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "2");
 });
 
 test('lengthMiStackMi setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1234)});
-  run(function(){ run.set("lengthMiStackMi", "2"); });
+  Ember.run(function(){ run.set("lengthMiStackMi", "2"); });
   assert.strictEqual(run.get("lengthM").toString(), "4452.688");
 });
 
@@ -1228,64 +1228,64 @@ test('lengthMiStackDecimal can be zero', function(assert) {
 
 test('lengthMiStackDecimal setter changes lengthMiStackDecimal', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimal", "9"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "9"); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
 });
 
 test('lengthMiStackDecimal setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimal", 9.2); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 9.2); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
-  run(function(){ run.set("lengthMiStackDecimal", "9.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "9.5"); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "1");
 });
 
 test('lengthMiStackDecimal setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimal", 9); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 9); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "9");
 });
 
 test('lengthMiStackDecimal setter handles negative values and changes lengthMiStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimal", -10); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", -10); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
   assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "9");
 });
 
 test('lengthMiStackDecimal setter handles values over 99 and changes lengthMiStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimal", 100); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 100); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
   assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "1");
 
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimal", 123); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", 123); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "5");
   assert.strictEqual(run.get("lengthMiStackDecimal").toString(), "12");
 });
 
 test('lengthMiStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "09");
-  run(function(){ run.set("lengthMiStackDecimal", "002"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "002"); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "0");
-  run(function(){ run.set("lengthMiStackDecimal", "009"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "009"); });
   assert.strictEqual(run.get("lengthMiStackDecimal"), "01");
 });
 
 test('lengthMiStackDecimal setter changes lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)}); // around 1.24 miles
-  run(function(){ run.set("lengthMiStackDecimal", "09"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimal", "09"); });
   assert.strictEqual(run.get("lengthM").toString(), "1754.18496"); // 1.09 miles
 });
 
 test('lengthMiStackDecimal and lengthMiStackDecimal setter will define lengthMi', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimal : "09" }); });
+  Ember.run(function(){ run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimal : "09" }); });
   assert.strictEqual(run.get("lengthMi").toString(), "12.09");
 });
 
@@ -1303,14 +1303,14 @@ test('lengthMiStackDecimalFixed property can round up', function(assert) {
 test('lengthMiStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(10.1)});
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
-  run(function(){ run.set("lengthMi", new BigNumber(14)); });
+  Ember.run(function(){ run.set("lengthMi", new BigNumber(14)); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
 });
 
 test('lengthMiStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(12.09)});
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthMi", new BigNumber(12.005)); });
+  Ember.run(function(){ run.set("lengthMi", new BigNumber(12.005)); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "01");
 });
 
@@ -1321,75 +1321,75 @@ test('lengthMiStackDecimalFixed can be zero', function(assert) {
 
 test('lengthMiStackDecimalFixed setter changes lengthMiStackDecimalFixed', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimalFixed", "90"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "90"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
 });
 
 test('lengthMiStackDecimalFixed setter can handle floats', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimalFixed", "8.2"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "8.2"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "80");
-  run(function(){ run.set("lengthMiStackDecimalFixed", 9.5); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 9.5); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "10");
 });
 
 test('lengthMiStackDecimalFixed setter also works with integer', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimalFixed", 9); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 9); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
 });
 
 test('lengthMiStackDecimalFixed setter works with single digit', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimalFixed", "9"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "9"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "90");
 });
 
 test('lengthMiStackDecimalFixed setter handles negative values and changes lengthMiStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimalFixed", -10); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", -10); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
   assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "90");
 
-  run(function(){ run.set("lengthMi", "5.0"); });
-  run(function(){ run.set("lengthMiStackDecimalFixed", -1); });
+  Ember.run(function(){ run.set("lengthMi", "5.0"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", -1); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "4");
   assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "99");
 });
 
 test('lengthMiStackDecimalFixed setter handles values over 99 and changes lengthMiStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimalFixed", 100); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 100); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "6");
   assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "00");
 
-  run(function(){ run.set("lengthMi", "5.5"); });
-  run(function(){ run.set("lengthMiStackDecimalFixed", 123); });
+  Ember.run(function(){ run.set("lengthMi", "5.5"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", 123); });
   assert.strictEqual(run.get("lengthMiStackMi").toString(), "6");
   assert.strictEqual(run.get("lengthMiStackDecimalFixed").toString(), "23");
 });
 
 test('lengthMiStackDecimalFixed setter works with leading zero', function(assert) {
   var run = this.subject();
-  run(function(){ run.set("lengthMiStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "09");
-  run(function(){ run.set("lengthMiStackDecimalFixed", "002"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "002"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "00");
-  run(function(){ run.set("lengthMiStackDecimalFixed", "009"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "009"); });
   assert.strictEqual(run.get("lengthMiStackDecimalFixed"), "01");
 });
 
 test('lengthMiStackDecimalFixed setter changes lengthMi', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(2)});
-  run(function(){ run.set("lengthMiStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("lengthMiStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("lengthMi").toString(), "2.09");
 });
 
 test('lengthMiStackMi and lengthMiStackDecimalFixed setter will define lengthMi', function(assert) {
   var run = this.subject();
-  run(function(){ run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimalFixed : "9" }); });
+  Ember.run(function(){ run.setProperties({ lengthMiStackMi : "12", lengthMiStackDecimalFixed : "9" }); });
   assert.strictEqual(run.get("lengthMi").toString(), "12.9");
 });
 
@@ -1404,11 +1404,11 @@ test('paceMinPerKm can have up to 20 decimal places and can round up', function(
   // http://keisan.casio.com/calculator results in 1.2482853212486666666666667
   assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124866666667");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(93) }); });
   // http://keisan.casio.com/calculator results in 31.279569892473118279569892
   assert.strictEqual(run.get("paceMinPerKm").toString(), "31.27956989247311827957");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.9090), lengthM : new BigNumber(123) }); });
   // http://keisan.casio.com/calculator results in 23.650406504065040650406504
   assert.strictEqual(run.get("paceMinPerKm").toString(), "23.65040650406504065041");
 });
@@ -1418,11 +1418,11 @@ test('paceMinPerKm can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 1.248285321248222222222
   assert.strictEqual(run.get("paceMinPerKm").toString(), "1.24828532124822222222");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.1234567891238), lengthM : new BigNumber(921) }); });
   // http://keisan.casio.com/calculator results in 2.3055991195698154180238871
   assert.strictEqual(run.get("paceMinPerKm").toString(), "2.30559911956981541802");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(2.12345678238), lengthM : new BigNumber(123) }); });
   // http://keisan.casio.com/calculator results in 17.26387627951219512195122
   assert.strictEqual(run.get("paceMinPerKm").toString(), "17.26387627951219512195");
 });
@@ -1434,35 +1434,35 @@ test('paceMinPerKm is not getting infinite when length is zero', function(assert
 
 test('paceMinPerKm setter changes paceMinPerKm', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKm", "21"); });
+  Ember.run(function(){ run.set("paceMinPerKm", "21"); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "21");
 });
 
 test('paceMinPerKm setter can handle floats', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKm", 2.2); });
+  Ember.run(function(){ run.set("paceMinPerKm", 2.2); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "2.2");
-  run(function(){ run.set("paceMinPerKm", "2.5"); });
+  Ember.run(function(){ run.set("paceMinPerKm", "2.5"); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "2.5");
-  run(function(){ run.set("paceMinPerKm", 2.21234); });
+  Ember.run(function(){ run.set("paceMinPerKm", 2.21234); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "2.21234");
 });
 
 test('paceMinPerKm setter also works with integer', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKm", 21); });
+  Ember.run(function(){ run.set("paceMinPerKm", 21); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "21");
 });
 
 test('paceMinPerKm setter changes timeSec', function(assert) {
   var run = this.subject({lengthM : new BigNumber(8000)});
-  run(function(){ run.set("paceMinPerKm", "2"); });
+  Ember.run(function(){ run.set("paceMinPerKm", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "960"); // 8km with 2min/km will take 16 min (960 sek)
 });
 
 test('paceMinPerKm setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKm", 21); });
+  Ember.run(function(){ run.set("paceMinPerKm", 21); });
   assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
@@ -1480,42 +1480,42 @@ test('paceMinPerKmStackMin property can be zero', function(assert) {
 test('paceMinPerKmStackMin rounds properly', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1)});
 
-  run(function(){ run.set("paceMinPerKm", new BigNumber(0.995)); });
+  Ember.run(function(){ run.set("paceMinPerKm", new BigNumber(0.995)); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "1"); // the paceMinPerKm of 0.995 results in a paceMinPerKmStackMin of 1
 
-  run(function(){ run.set("paceMinPerKm", new BigNumber(0.994)); });
+  Ember.run(function(){ run.set("paceMinPerKm", new BigNumber(0.994)); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "0"); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
 });
 
 test('paceMinPerKmStackMin setter changes paceMinPerKmStackMin', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKmStackMin", "12"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", "12"); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "12");
 });
 
 test('paceMinPerKmStackMin setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKmStackMin", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", "5.5"); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
-  run(function(){ run.set("paceMinPerKmStackMin", 2.3); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", 2.3); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "2");
 });
 
 test('paceMinPerKmStackMin setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKmStackMin", 12); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", 12); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "12");
 });
 
 test('paceMinPerKmStackMin setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(60), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKmStackMin", "2"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "300"); // 2km with 2,5min/km will take 5 minutes (300 sek)
 });
 
 test('paceMinPerKmStackMin setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerKmStackMin", 12); });
+  Ember.run(function(){ run.set("paceMinPerKmStackMin", 12); });
   assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
@@ -1542,47 +1542,47 @@ test('paceMinPerKmStackSec can be zero', function(assert) {
 
 test('paceMinPerKmStackSec setter changes paceMinPerKmStackSec', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSec", "10"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", "10"); });
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "10");
 });
 
 test('paceMinPerKmStackSec setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSec", "2.2"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", "2.2"); });
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "2");
-  run(function(){ run.set("paceMinPerKmStackSec", 2.5); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 2.5); });
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "3");
 });
 
 test('paceMinPerKmStackSec setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSec", 2); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 2); });
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "2");
 });
 
 test('paceMinPerKmStackSec setter handles negative values and changes paceMinPerKmStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSec", -10); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", -10); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "50");
 });
 
 test('paceMinPerKmStackSec setter handles values over 59 and changes paceMinPerKmStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSec", 60); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 60); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "0");
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSec", 80); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", 80); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "20");
 });
 
 test('paceMinPerKmStackSec setter influences all pace related properties', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthM : new BigNumber(2000)}); // 6 min/km
-  run(function(){ run.set("paceMinPerKmStackSec", "20"); }); // 6.3333 min/km
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", "20"); }); // 6.3333 min/km
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "20");
   assert.strictEqual(run.get("paceMinPerKm").toString(), "6.33333333333333333333");
@@ -1590,7 +1590,7 @@ test('paceMinPerKmStackSec setter influences all pace related properties', funct
 
 test('paceMinPerKmStackSec setter handles values bigger than 59', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthM : new BigNumber(2000)}); // 6 min/km
-  run(function(){ run.set("paceMinPerKmStackSec", "90"); }); // 7.5000 min/km
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", "90"); }); // 7.5000 min/km
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "7"); // 6 flips to 7 because a paceMinPerKmStackSec of 90 flips the paceMinPerKmStackMin
   assert.strictEqual(run.get("paceMinPerKmStackSec").toString(), "30");
   assert.strictEqual(run.get("paceMinPerKm").toString(), "7.5");
@@ -1609,7 +1609,7 @@ test('paceMinPerKmStackSec setter should refer to an uncompressed version paceMi
 
   // actually it is 41,272662638 (0.68787771062922147174*60)
   // when setting paceMinPerKmStackSec
-  run(function(){ run.set("paceMinPerKmStackSec", "0"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSec", "0"); });
   // it should refer to 41,272662638 and not 41 to result in 5 (aka 5.00) instead of 5.00454437729588813841
   assert.strictEqual(run.get("paceMinPerKm").toString(), "5");
 });
@@ -1628,7 +1628,7 @@ test('paceMinPerKmStackSecFixed property can round up', function(assert) {
 test('paceMinPerKmStackSecFixed has leading zero(s)', function(assert) {
   var run = this.subject({timeMin : new BigNumber(75.083), lengthM : new BigNumber(1000)});
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed"), "05");
-  run(function(){ run.setProperties({ timeMin : new BigNumber(75), lengthM : new BigNumber(1000) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(75), lengthM : new BigNumber(1000) }); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed"), "00");
 });
 
@@ -1639,75 +1639,75 @@ test('paceMinPerKmStackSecFixed can be zero', function(assert) {
 
 test('paceMinPerKmStackSecFixed setter changes paceMinPerKmStackSecFixed', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "10"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "10"); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "10");
 });
 
 test('paceMinPerKmStackSecFixed setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "2.2"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "2.2"); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "02");
-  run(function(){ run.set("paceMinPerKmStackSecFixed", 2.5); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", 2.5); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "03");
 });
 
 test('paceMinPerKmStackSecFixed setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", 12); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", 12); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "12");
 });
 
 test('paceMinPerKmStackSecFixed setter works with single digit', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", 2); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", 2); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "02");
 });
 
 test('paceMinPerKmStackSecFixed setter handles negative values and changes paceMinPerKmStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSecFixed", -10); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", -10); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "50");
 
-  run(function(){ run.set("paceMinPerKm", "5"); });
-  run(function(){ run.set("paceMinPerKmStackSecFixed", -1); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", -1); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "59");
 });
 
 test('paceMinPerKmStackSecFixed setter handles values over 59 and changes paceMinPerKmStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSecFixed", 60); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", 60); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "00");
 
-  run(function(){ run.set("paceMinPerKm", "5.5"); });
-  run(function(){ run.set("paceMinPerKmStackSecFixed", 80); });
+  Ember.run(function(){ run.set("paceMinPerKm", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", 80); });
   assert.strictEqual(run.get("paceMinPerKmStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed").toString(), "20");
 });
 
 test('paceMinPerKmStackSecFixed setter works with leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "09"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "09"); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed"), "09");
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "002"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "002"); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed"), "02");
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "009"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "009"); });
   assert.strictEqual(run.get("paceMinPerKmStackSecFixed"), "09");
 });
 
 test('paceMinPerKmStackSecFixed setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerKmStackSecFixed", "30"); });
+  Ember.run(function(){ run.set("paceMinPerKmStackSecFixed", "30"); });
   assert.strictEqual(run.get("timeSec").toString(), "3630");
 });
 
 test('paceMinPerKmStackMin and paceMinPerKmStackSecFixed setter will define paceMinPerKm', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ paceMinPerKmStackMin : "5", paceMinPerKmStackSecFixed : "30" }); });
+  Ember.run(function(){ run.setProperties({ paceMinPerKmStackMin : "5", paceMinPerKmStackSecFixed : "30" }); });
   assert.strictEqual(run.get("paceMinPerKm").toString(), "5.5");
 });
 
@@ -1722,11 +1722,11 @@ test('paceMinPerMi can have up to 20 decimal places and can round up', function(
   // http://keisan.casio.com/calculator results in 0.0012482853212486666666666667
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00124828532124866667");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(1.1234567891238), lengthMi : new BigNumber(123) }); });
   // http://keisan.casio.com/calculator results in 0.001248285321248666666667
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00913379503352682927");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(13), lengthMi : new BigNumber(124) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(13), lengthMi : new BigNumber(124) }); });
   // http://keisan.casio.com/calculator results in 0.10483870967741935483870968
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.10483870967741935484");
 });
@@ -1736,11 +1736,11 @@ test('paceMinPerMi can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.0034590630990234444444444444
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.00345906309902344444");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(9), lengthMi : new BigNumber(124) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(9), lengthMi : new BigNumber(124) }); });
   // http://keisan.casio.com/calculator results in 0.072580645161290322580645161
   assert.strictEqual(run.get("paceMinPerMi").toString(), "0.07258064516129032258");
 
-  run(function(){ run.setProperties({ timeMin : new BigNumber(1245), lengthMi : new BigNumber(124) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(1245), lengthMi : new BigNumber(124) }); });
   // http://keisan.casio.com/calculator results in 10.04032258064516129032 2581
   assert.strictEqual(run.get("paceMinPerMi").toString(), "10.04032258064516129032");
 });
@@ -1752,35 +1752,35 @@ test('paceMinPerMi is not getting infinite when length is zero', function(assert
 
 test('paceMinPerMi setter changes paceMinPerMi', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerMi", "21"); });
+  Ember.run(function(){ run.set("paceMinPerMi", "21"); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "21");
 });
 
 test('paceMinPerMi setter can handle floats', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerMi", 2.2); });
+  Ember.run(function(){ run.set("paceMinPerMi", 2.2); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "2.2");
-  run(function(){ run.set("paceMinPerMi", "2.5"); });
+  Ember.run(function(){ run.set("paceMinPerMi", "2.5"); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "2.5");
-  run(function(){ run.set("paceMinPerMi", 2.21234); });
+  Ember.run(function(){ run.set("paceMinPerMi", 2.21234); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "2.21234");
 });
 
 test('paceMinPerMi setter also works with integer', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerMi", 21); });
+  Ember.run(function(){ run.set("paceMinPerMi", 21); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "21");
 });
 
 test('paceMinPerMi setter changes timeSec', function(assert) {
   var run = this.subject({lengthMi : new BigNumber(8)});
-  run(function(){ run.set("paceMinPerMi", "2"); });
+  Ember.run(function(){ run.set("paceMinPerMi", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "960"); // 8mi with 2min/mi will take 16 min (960 sek)
 });
 
 test('paceMinPerMi setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerMi", 21); });
+  Ember.run(function(){ run.set("paceMinPerMi", 21); });
   assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
@@ -1798,42 +1798,42 @@ test('paceMinPerMiStackMin property can be zero', function(assert) {
 test('paceMinPerMiStackMin rounds properly', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
 
-  run(function(){ run.set("paceMinPerMi", new BigNumber(0.995)); });
+  Ember.run(function(){ run.set("paceMinPerMi", new BigNumber(0.995)); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "1"); // the paceMinPerMi of 0.995 results in a paceMinPerMiStackMin of 1
 
-  run(function(){ run.set("paceMinPerMi", new BigNumber(0.994)); });
+  Ember.run(function(){ run.set("paceMinPerMi", new BigNumber(0.994)); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "0");  // the paceMinPerMi of 0.994 results in a paceMinPerMiStackMin of 0
 });
 
 test('paceMinPerMiStackMin setter changes paceMinPerMiStackMin', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
-  run(function(){ run.set("paceMinPerMiStackMin", "12"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", "12"); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "12");
 });
 
 test('paceMinPerMiStackMin setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
-  run(function(){ run.set("paceMinPerMiStackMin", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", "5.5"); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
-  run(function(){ run.set("paceMinPerMiStackMin", 2.3); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", 2.3); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "2");
 });
 
 test('paceMinPerMiStackMin setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthMi : new BigNumber(2)});
-  run(function(){ run.set("paceMinPerMiStackMin", 12); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", 12); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "12");
 });
 
 test('paceMinPerMiStackMin setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(60), lengthMi : new BigNumber(2)});
-  run(function(){ run.set("paceMinPerMiStackMin", "2"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "300"); // 2mi with 2,5min/km will take 5 minutes (300 sek)
 });
 
 test('paceMinPerMiStackMin setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(270), lengthM : new BigNumber(2000)});
-  run(function(){ run.set("paceMinPerMiStackMin", 12); });
+  Ember.run(function(){ run.set("paceMinPerMiStackMin", 12); });
   assert.strictEqual(run.get("lengthM").toString(), "2000");
 });
 
@@ -1860,47 +1860,47 @@ test('paceMinPerMiStackSec can be zero', function(assert) {
 
 test('paceMinPerMiStackSec setter changes paceMinPerMiStackSec', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthMi : new BigNumber(1)});
-  run(function(){ run.set("paceMinPerMiStackSec", "10"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", "10"); });
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "10");
 });
 
 test('paceMinPerMiStackSec setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthMi : new BigNumber(1)});
-  run(function(){ run.set("paceMinPerMiStackSec", "2.2"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", "2.2"); });
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "2");
-  run(function(){ run.set("paceMinPerMiStackSec", 2.5); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", 2.5); });
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "3");
 });
 
 test('paceMinPerMiStackSec setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSec", 2); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", 2); });
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "2");
 });
 
 test('paceMinPerMiStackSec setter handles negative values and changes paceMinPerMiStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSec", -10); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", -10); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "50");
 });
 
 test('paceMinPerMiStackSec setter handles values over 59 and changes paceMinPerMiStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSec", 60); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", 60); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "0");
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSec", 80); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", 80); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "20");
 });
 
 test('paceMinPerMiStackSec setter influences all pace related properties', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthMi : new BigNumber(2)});  // 6 min/mi
-  run(function(){ run.set("paceMinPerMiStackSec", "20"); }); // 6.3333 min/km
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", "20"); }); // 6.3333 min/km
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "20");
   assert.strictEqual(run.get("paceMinPerMi").toString(), "6.33333333333333333333");
@@ -1908,7 +1908,7 @@ test('paceMinPerMiStackSec setter influences all pace related properties', funct
 
 test('paceMinPerMiStackSec setter handles values bigger than 59', function(assert) {
   var run = this.subject({timeMin : new BigNumber(12), lengthMi : new BigNumber(2)});  // 6 min/mi
-  run(function(){ run.set("paceMinPerMiStackSec", "90"); }); // 7.5 min/km
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", "90"); }); // 7.5 min/km
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "7"); // 6 flips to 7 because a paceMinPerMiStackSec of 90 flips the paceMinPerMiStackMin
   assert.strictEqual(run.get("paceMinPerMiStackSec").toString(), "30");
   assert.strictEqual(run.get("paceMinPerMi").toString(), "7.5");
@@ -1927,7 +1927,7 @@ test('paceMinPerMiStackSec setter should refer to an uncompressed version paceMi
 
   // actually it is 9.2251119800924280126 (0.15375186633487380021*60)
   // when setting paceMinPerMiStackSec
-  run(function(){ run.set("paceMinPerMiStackSec", "0"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSec", "0"); });
   // it should refer to 9.2251119800924280126 and not 9 to result in 9 (aka 9.00) instead of 9.00375186633487380021
   assert.strictEqual(run.get("paceMinPerMi").toString(), "9");
 });
@@ -1946,7 +1946,7 @@ test('paceMinPerMiStackSecFixed property can round up', function(assert) {
 test('paceMinPerMiStackSecFixed has leading zero(s)', function(assert) {
   var run = this.subject({timeMin : new BigNumber(75.083), lengthMi : new BigNumber(1)});
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "05");
-  run(function(){ run.setProperties({ timeMin : new BigNumber(75), lengthMi : new BigNumber(1) }); });
+  Ember.run(function(){ run.setProperties({ timeMin : new BigNumber(75), lengthMi : new BigNumber(1) }); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "00");
 });
 
@@ -1957,75 +1957,75 @@ test('paceMinPerMiStackSecFixed can be zero', function(assert) {
 
 test('paceMinPerMiStackSecFixed setter changes paceMinPerMiStackSecFixed', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "10"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "10"); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "10");
 });
 
 test('paceMinPerMiStackSecFixed setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "2.2"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "2.2"); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "02");
-  run(function(){ run.set("paceMinPerMiStackSecFixed", 2.5); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 2.5); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "03");
 });
 
 test('paceMinPerMiStackSecFixed setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", 12); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 12); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "12");
 });
 
 test('paceMinPerMiStackSecFixed setter works with single digit', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1.5), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", 2); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 2); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "02");
 });
 
 test('paceMinPerMiStackSecFixed setter handles negative values and changes paceMinPerMiStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSecFixed", -10); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", -10); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "50");
 
-  run(function(){ run.set("paceMinPerMi", "5"); });
-  run(function(){ run.set("paceMinPerMiStackSecFixed", -1); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", -1); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "4");
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "59");
 });
 
 test('paceMinPerMiStackSecFixed setter handles values over 59 and changes paceMinPerMiStackMin', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthMi : new BigNumber(1)});
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSecFixed", 60); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 60); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "00");
 
-  run(function(){ run.set("paceMinPerMi", "5.5"); });
-  run(function(){ run.set("paceMinPerMiStackSecFixed", 80); });
+  Ember.run(function(){ run.set("paceMinPerMi", "5.5"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", 80); });
   assert.strictEqual(run.get("paceMinPerMiStackMin").toString(), "6");
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed").toString(), "20");
 });
 
 test('paceMinPerMiStackSecFixed setter works with leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "09"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "09"); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "09");
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "002"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "002"); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "02");
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "009"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "009"); });
   assert.strictEqual(run.get("paceMinPerMiStackSecFixed"), "09");
 });
 
 test('paceMinPerMiStackSecFixed setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthMi : new BigNumber(1)});
-  run(function(){ run.set("paceMinPerMiStackSecFixed", "30"); });
+  Ember.run(function(){ run.set("paceMinPerMiStackSecFixed", "30"); });
   assert.strictEqual(run.get("timeSec").toString(), "3630");
 });
 
 test('paceMinPerMiStackMin and paceMinPerMiStackSecFixed setter will define paceMinPerMi', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthMi : new BigNumber(1)});
-  run(function(){ run.setProperties({ paceMinPerMiStackMin : "5", paceMinPerMiStackSecFixed : "30" }); });
+  Ember.run(function(){ run.setProperties({ paceMinPerMiStackMin : "5", paceMinPerMiStackSecFixed : "30" }); });
   assert.strictEqual(run.get("paceMinPerMi").toString(), "5.5");
 });
 
@@ -2040,11 +2040,11 @@ test('speedKmHr can have up to 20 decimal places and can round up', function(ass
   // http://keisan.casio.com/calculator results in 7.6749054545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67490545454545454545");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.4510) }); });
   // http://keisan.casio.com/calculator results in 7.6748727272727272727272727
   assert.strictEqual(run.get("speedKmHr").toString(), "7.67487272727272727273");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.121) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.121) }); });
   // http://keisan.casio.com/calculator results in 3.9668727272727272727272727
   assert.strictEqual(run.get("speedKmHr").toString(), "3.96687272727272727273");
 });
@@ -2054,11 +2054,11 @@ test('speedKmHr can round down', function(assert) {
   // http://keisan.casio.com/calculator results in 0.9544555102040816326531
   assert.strictEqual(run.get("speedKmHr").toString(), "0.95445551020408163265");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(12.9912) }); });
   // http://keisan.casio.com/calculator results in 4.2516654545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "4.25166545454545454545");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(11), lengthM : new BigNumber(23.9912) }); });
   // http://keisan.casio.com/calculator results in 7.8516654545454545454545455
   assert.strictEqual(run.get("speedKmHr").toString(), "7.85166545454545454545");
 });
@@ -2070,35 +2070,35 @@ test('speedKmHr is not getting infinite when time is zero', function(assert) {
 
 test('speedKmHr setter changes speedKmHr', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHr", "21"); });
+  Ember.run(function(){ run.set("speedKmHr", "21"); });
   assert.strictEqual(run.get("speedKmHr").toString(), "21");
 });
 
 test('speedKmHr setter can handle floats', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHr", 2.2); });
+  Ember.run(function(){ run.set("speedKmHr", 2.2); });
   assert.strictEqual(run.get("speedKmHr").toString(), "2.2");
-  run(function(){ run.set("speedKmHr", "2.5"); });
+  Ember.run(function(){ run.set("speedKmHr", "2.5"); });
   assert.strictEqual(run.get("speedKmHr").toString(), "2.5");
-  run(function(){ run.set("speedKmHr", 2.21234); });
+  Ember.run(function(){ run.set("speedKmHr", 2.21234); });
   assert.strictEqual(run.get("speedKmHr").toString(), "2.21234");
 });
 
 test('speedKmHr setter also works with integer', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHr", 2); });
+  Ember.run(function(){ run.set("speedKmHr", 2); });
   assert.strictEqual(run.get("speedKmHr").toString(), "2");
 });
 
 test('speedKmHr setter changes timeSec', function(assert) {
   var run = this.subject({lengthM : new BigNumber(8000)});
-  run(function(){ run.set("speedKmHr", "2"); });
+  Ember.run(function(){ run.set("speedKmHr", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHr setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({lengthM : new BigNumber(2500)});
-  run(function(){ run.set("speedKmHr", "12"); });
+  Ember.run(function(){ run.set("speedKmHr", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
@@ -2116,42 +2116,42 @@ test('speedKmHrStackKm property can be zero', function(assert) {
 test('speedKmHrStackKm property can be zero', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(1)});
 
-  run(function(){ run.set("speedKmHr", new BigNumber(0.995)); }); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber(0.995)); }); // the speedKmHr of 0.995 results in a speedKmHrStackKm of 1
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "1");
 
-  run(function(){ run.set("speedKmHr", new BigNumber(0.994)); }); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber(0.994)); }); // the speedKmHr of 0.994 results in a speedKmHrStackKm of 0
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "0");
 });
 
 test('speedKmHrStackKm setter changes speedKmHrStackKm', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
-  run(function(){ run.set("speedKmHrStackKm", "18"); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", "18"); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "18");
 });
 
 test('speedKmHrStackKm setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
-  run(function(){ run.set("speedKmHrStackKm", "5.5"); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", "5.5"); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "6");
-  run(function(){ run.set("speedKmHrStackKm", 2.3); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", 2.3); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "2");
 });
 
 test('speedKmHrStackKm setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24123)});
-  run(function(){ run.set("speedKmHrStackKm", 12); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", 12); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "12");
 });
 
 test('speedKmHrStackKm setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(8000)});
-  run(function(){ run.set("speedKmHrStackKm", "2"); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "14400"); // 8km with 2km/hr will take 4 hours (14400 sek)
 });
 
 test('speedKmHrStackKm setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(2500)});
-  run(function(){ run.set("speedKmHrStackKm", "12"); });
+  Ember.run(function(){ run.set("speedKmHrStackKm", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
@@ -2183,180 +2183,180 @@ test('speedKmHrStackDecimal can be zero', function(assert) {
 
 test('speedKmHrStackDecimal setter changes speedKmHrStackDecimal', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedKmHrStackDecimal", "9"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "9"); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "9");
 });
 
 test('speedKmHrStackDecimal setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedKmHrStackDecimal", "8.2"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "8.2"); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "8");
-  run(function(){ run.set("speedKmHrStackDecimal", 8.5); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", 8.5); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "9");
 });
 
 test('speedKmHrStackDecimal setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedKmHrStackDecimal", 9); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", 9); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "9");
 });
 
 test('speedKmHrStackDecimal setter handles negative values and changes speedKmHrStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHr", "5.5"); });
-  run(function(){ run.set("speedKmHrStackDecimal", -10); });
+  Ember.run(function(){ run.set("speedKmHr", "5.5"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", -10); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "4");
   assert.strictEqual(run.get("speedKmHrStackDecimal").toString(), "9");
 });
 
 test('speedKmHrStackDecimal setter handles values over 99 and changes speedKmHrStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHr", "5.5"); });
-  run(function(){ run.set("speedKmHrStackDecimal", 100); });
+  Ember.run(function(){ run.set("speedKmHr", "5.5"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", 100); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "5");
   assert.strictEqual(run.get("speedKmHrStackDecimal").toString(), "1");
 
-  run(function(){ run.set("speedKmHr", "5.5"); });
-  run(function(){ run.set("speedKmHrStackDecimal", 123); });
+  Ember.run(function(){ run.set("speedKmHr", "5.5"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", 123); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "5");
   assert.strictEqual(run.get("speedKmHrStackDecimal").toString(), "12");
 });
 
 test('speedKmHrStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedKmHrStackDecimal", "09"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "09"); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "09");
-  run(function(){ run.set("speedKmHrStackDecimal", "002"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "002"); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "0");
-  run(function(){ run.set("speedKmHrStackDecimal", "009"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "009"); });
   assert.strictEqual(run.get("speedKmHrStackDecimal"), "01");
 });
 
 test('speedKmHrStackDecimal setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(3000)});
-  run(function(){ run.setProperties({ speedKmHrStackKm : "1", speedKmHrStackDecimal : "5" }); });
+  Ember.run(function(){ run.setProperties({ speedKmHrStackKm : "1", speedKmHrStackDecimal : "5" }); });
   assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3km with 1,5km/hr will take 2 hours (7200 sek)
 });
 
 test('speedKmHrStackDecimal setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedKmHrStackDecimal", "9"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimal", "9"); });
   assert.strictEqual(run.get("lengthM").toString(), "12000");
 });
 
 test('speedKmHrStackKm and speedKmHrStackDecimal setter will define speedKmHr', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(4400)});
-  run(function(){ run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimal : "05" }); });
+  Ember.run(function(){ run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimal : "05" }); });
   assert.strictEqual(run.get("speedKmHr").toString(), "12.05");
 });
 
 // speedKmHrStackDecimalFixed
 test('speedKmHrStackDecimalFixed property is calculated from speedKmHr and can round down', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.121) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.121) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "12");
 });
 
 test('speedKmHrStackDecimalFixed property can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.715) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(12.715) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "72");
 });
 
 test('speedKmHrStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.5) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.5) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "50");
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(5) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(5) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
 });
 
 test('speedKmHrStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.09) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.09) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "09");
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.005) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(0.005) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "01");
 });
 
 test('speedKmHrStackDecimalFixed can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedKmHr : new BigNumber(99) }); });
+  Ember.run(function(){ run.setProperties({ speedKmHr : new BigNumber(99) }); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
 });
 
 test('speedKmHrStackDecimalFixed setter changes speedKmHrStackDecimalFixed', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "90"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "90"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
 });
 
 test('speedKmHrStackDecimalFixed setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "8.2"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "8.2"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "80");
-  run(function(){ run.set("speedKmHrStackDecimalFixed", 9.5); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 9.5); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "10");
 });
 
 test('speedKmHrStackDecimalFixed setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHrStackDecimalFixed", 9); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 9); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
 });
 
 test('speedKmHrStackDecimalFixed setter works with single digit', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "9"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "9"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "90");
 });
 
 test('speedKmHrStackDecimalFixed setter handles negative values and changes speedKmHrStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedKmHrStackDecimalFixed", -10); });
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", -10); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "4");
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "90");
 
-  run(function(){ run.set("speedKmHr", new BigNumber("5.0")); });
-  run(function(){ run.set("speedKmHrStackDecimalFixed", -1); });
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.0")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", -1); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "4");
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "99");
 });
 
 test('speedKmHrStackDecimalFixed setter handles values over 99 and changes speedKmHrStackKm', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedKmHrStackDecimalFixed", 100); });
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 100); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "6");
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "00");
 
-  run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedKmHrStackDecimalFixed", 123); });
+  Ember.run(function(){ run.set("speedKmHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", 123); });
   assert.strictEqual(run.get("speedKmHrStackKm").toString(), "6");
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed").toString(), "23");
 });
 
 test('speedKmHrStackDecimalFixed setter works with leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "09");
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "002"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "002"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "00");
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "009"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "009"); });
   assert.strictEqual(run.get("speedKmHrStackDecimalFixed"), "01");
 });
 
 test('speedKmHrStackDecimalFixed setter changes speedKmHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedKmHr", "1000"); });
-  run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("speedKmHr", "1000"); });
+  Ember.run(function(){ run.set("speedKmHrStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("speedKmHr").toString(), "1000.09");
 });
 
 test('speedKmHrStackKm and speedKmHrStackDecimalFixed setter will define speedKmHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimalFixed : "9" }); });
+  Ember.run(function(){ run.setProperties({ speedKmHrStackKm : "12", speedKmHrStackDecimalFixed : "9" }); });
   assert.strictEqual(run.get("speedKmHr").toString(), "12.9");
 });
 
@@ -2371,11 +2371,11 @@ test('speedMiHr can have up to 20 decimal places and can round up', function(ass
   // http://keisan.casio.com/calculator results in 1.0124399997763063707945598
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01243999977630637079");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380333) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380333) }); });
   // http://keisan.casio.com/calculator results in 1.0124500001242742384474668
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01245000012427423845");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380322) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1629.380322) }); });
   // http://keisan.casio.com/calculator results in 1.0124499932891911238367931
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01244999328919112384");
 });
@@ -2385,11 +2385,11 @@ test('speedMiHr property can round up', function(assert) {
   // http://keisan.casio.com/calculator results in 1.0124504139574882685118906
   assert.strictEqual(run.get("speedMiHr").toString(), "1.01245041395748826851");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1721) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(1721) }); });
   // http://keisan.casio.com/calculator results in 1.0693798218404517617116042
   assert.strictEqual(run.get("speedMiHr").toString(), "1.06937982184045176171");
 
-  run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(12345.12) }); });
+  Ember.run(function(){ run.setProperties({ timeSec : new BigNumber(3600), lengthM : new BigNumber(12345.12) }); });
   // http://keisan.casio.com/calculator results in 7.6709019327129563350035791
   assert.strictEqual(run.get("speedMiHr").toString(), "7.670901932712956335"); // two zeros at the end are falling away
 });
@@ -2401,35 +2401,35 @@ test('speedMiHr is not getting infinite when time is zero', function(assert) {
 
 test('speedMiHr setter changes speedMiHr', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHr", "2"); });
+  Ember.run(function(){ run.set("speedMiHr", "2"); });
   assert.strictEqual(run.get("speedMiHr").toString(), "2");
 });
 
 test('speedMiHr setter can handle floats', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1609.344)});
-  run(function(){ run.set("speedMiHr", 2.2); });
+  Ember.run(function(){ run.set("speedMiHr", 2.2); });
   assert.strictEqual(run.get("speedMiHr").toString(), "2.2");
-  run(function(){ run.set("speedMiHr", "2.5"); });
+  Ember.run(function(){ run.set("speedMiHr", "2.5"); });
   assert.strictEqual(run.get("speedMiHr").toString(), "2.5");
-  run(function(){ run.set("speedMiHr", 2.21234); });
+  Ember.run(function(){ run.set("speedMiHr", 2.21234); });
   assert.strictEqual(run.get("speedMiHr").toString(), "2.21234");
 });
 
 test('speedMiHr setter also works with integer', function(assert) {
   var run = this.subject({lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHr", 2); });
+  Ember.run(function(){ run.set("speedMiHr", 2); });
   assert.strictEqual(run.get("speedMiHr").toString(), "2");
 });
 
 test('speedMiHr setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(6437.376)});
-  run(function(){ run.set("speedMiHr", "2"); });
+  Ember.run(function(){ run.set("speedMiHr", "2"); });
   assert.strictEqual(run.get("timeSec").toString(), "7200"); // 4mi with 2mi/hr will take 2 hours (7200 sek)
 });
 
 test('speedMiHr setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(6437.376)});
-  run(function(){ run.set("speedMiHr", "12"); });
+  Ember.run(function(){ run.set("speedMiHr", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "6437.376");
 });
 
@@ -2447,42 +2447,42 @@ test('speedMiHrStackMi property can be zero', function(assert) {
 test('speedMiHrStackMi rounds properly', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(1)});
 
-  run(function(){ run.set("speedMiHr", new BigNumber(0.995)); }); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber(0.995)); }); // a speedMiHr of 0.995 results in a speedMiHrStackMi of 1
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "1");
 
-  run(function(){ run.set("speedMiHr", new BigNumber(0.994)); }); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber(0.994)); }); // a speedMiHr of 0.994 results in a speedMiHrStackMi of 0
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "0");
 });
 
 test('speedMiHrStackMi setter changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
-  run(function(){ run.set("speedMiHrStackMi", "18"); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", "18"); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "18");
 });
 
 test('speedMiHrStackMi setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24000)});
-  run(function(){ run.set("speedMiHrStackMi", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", "5.5"); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
-  run(function(){ run.set("speedMiHrStackMi", 2.3); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", 2.3); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "2");
 });
 
 test('speedMiHrStackMi setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(24123)});
-  run(function(){ run.set("speedMiHrStackMi", 12); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", 12); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "12");
 });
 
 test('speedMiHrStackMi setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(6437.376)});
-  run(function(){ run.set("speedMiHrStackMi", "4"); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", "4"); });
   assert.strictEqual(run.get("timeSec").toString(), "3600"); // 4mi with 4mi/hr will take 1 hour (3600 sek)
 });
 
 test('speedMiHrStackMi setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(2500)});
-  run(function(){ run.set("speedMiHrStackMi", "12"); });
+  Ember.run(function(){ run.set("speedMiHrStackMi", "12"); });
   assert.strictEqual(run.get("lengthM").toString(), "2500");
 });
 
@@ -2514,186 +2514,186 @@ test('speedMiHrStackDecimal can be zero', function(assert) {
 
 test('speedMiHrStackDecimal setter changes speedMiHrStackDecimal', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedMiHrStackDecimal", "9"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "9"); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter can handle floats', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedMiHrStackDecimal", "8.2"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "8.2"); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "8");
-  run(function(){ run.set("speedMiHrStackDecimal", 8.5); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 8.5); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter also works with integer', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(12000)});
-  run(function(){ run.set("speedMiHrStackDecimal", 9); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 9); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "9");
 });
 
 test('speedMiHrStackDecimal setter handles negative values and changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHr", "5.5"); });
-  run(function(){ run.set("speedMiHrStackDecimal", -10); });
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", -10); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
   assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "9");
 });
 
 test('speedMiHrStackDecimal setter handles values over 99 and changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHr", "5.5"); });
-  run(function(){ run.set("speedMiHrStackDecimal", 100); });
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 100); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
   assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "1");
 
-  run(function(){ run.set("speedMiHr", "5.5"); });
-  run(function(){ run.set("speedMiHrStackDecimal", 123); });
+  Ember.run(function(){ run.set("speedMiHr", "5.5"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", 123); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "5");
   assert.strictEqual(run.get("speedMiHrStackDecimal").toString(), "12");
 });
 
 test('speedMiHrStackDecimal setter works with leading zeros', function(assert) {
   var run = this.subject({timeSec :  new BigNumber(3600), lengthM :  new BigNumber(12000)});
-  run(function(){ run.set("speedMiHrStackDecimal", "09"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "09"); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "09");
-  run(function(){ run.set("speedMiHrStackDecimal", "002"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "002"); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "0");
-  run(function(){ run.set("speedMiHrStackDecimal", "009"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "009"); });
   assert.strictEqual(run.get("speedMiHrStackDecimal"), "01");
 });
 
 test('speedMiHrStackDecimal setter changes timeSec', function(assert) {
   var run = this.subject({timeSec : new BigNumber(3600), lengthM : new BigNumber(4828.032)});
-  run(function(){ run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "5" }); });
+  Ember.run(function(){ run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "5" }); });
   assert.strictEqual(run.get("timeSec").toString(), "7200"); // 3m with 1,5m/hr will take 2 hours (7200 sek)
 });
 
 test('speedMiHrStackDecimal setter doesn\'t change lengthM', function(assert) {
   var run = this.subject({timeSec :  new BigNumber(3600), lengthM :  new BigNumber(12000)});
-  run(function(){ run.set("speedMiHrStackDecimal", "9"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimal", "9"); });
   assert.strictEqual(run.get("lengthM").toString(), "12000");
 });
 
 test('speedMiHrStackMi and speedMiHrStackDecimal setter will define speedMiHr', function(assert) {
   var run = this.subject({timeSec : new BigNumber(7200), lengthM : new BigNumber(4400)});
-  run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "05" }); });
+  Ember.run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "05" }); });
   assert.strictEqual(run.get("speedMiHr").toString(), "12.05");
 
-  run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "04" }); });
+  Ember.run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimal : "04" }); });
   assert.strictEqual(run.get("speedMiHr").toString(), "12.04");
 
-  run(function(){ run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "04" }); });
+  Ember.run(function(){ run.setProperties({ speedMiHrStackMi : "1", speedMiHrStackDecimal : "04" }); });
   assert.strictEqual(run.get("speedMiHr").toString(), "1.04");
 });
 
 // speedMiHrStackDecimalFixed
 test('speedMiHrStackDecimalFixed property is calculated from speedMiHr and can round down', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(12.121) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(12.121) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "12");
 });
 
 test('speedMiHrStackDecimalFixed property can round up', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(12.715) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(12.715) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "72");
 });
 
 test('speedMiHrStackDecimalFixed has trailing zero(s)', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.5) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.5) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "50");
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(5) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(5) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "00");
 });
 
 test('speedMiHrStackDecimalFixed supports leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.09) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.09) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "09");
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.005) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(0.005) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "01");
 });
 
 test('speedMiHrStackDecimalFixed can be zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.setProperties({ speedMiHr : new BigNumber(99) }); });
+  Ember.run(function(){ run.setProperties({ speedMiHr : new BigNumber(99) }); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "00");
 });
 
 test('speedMiHrStackDecimalFixed setter changes speedMiHrStackDecimalFixed', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "90"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "90"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "90");
 });
 
 test('speedMiHrStackDecimalFixed setter can handle floats', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "8.2"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "8.2"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "80");
-  run(function(){ run.set("speedMiHrStackDecimalFixed", 9.5); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 9.5); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "10");
 });
 
 test('speedMiHrStackDecimalFixed setter also works with integer', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHrStackDecimalFixed", 9); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 9); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "90");
 });
 
 test('speedMiHrStackDecimalFixed setter works with single digit', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "9"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "9"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "90");
 });
 
 test('speedMiHrStackDecimalFixed setter handles negative values and changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedMiHrStackDecimalFixed", -10); });
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", -10); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "90");
 
-  run(function(){ run.set("speedMiHr", new BigNumber("5.0")); });
-  run(function(){ run.set("speedMiHrStackDecimalFixed", -1); });
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.0")); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", -1); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "4");
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "99");
 });
 
 test('speedMiHrStackDecimalFixed setter handles values over 99 and changes speedMiHrStackMi', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedMiHrStackDecimalFixed", 100); });
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 100); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "00");
 
-  run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
-  run(function(){ run.set("speedMiHrStackDecimalFixed", 123); });
+  Ember.run(function(){ run.set("speedMiHr", new BigNumber("5.5")); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", 123); });
   assert.strictEqual(run.get("speedMiHrStackMi").toString(), "6");
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed").toString(), "23");
 });
 
 test('speedMiHrStackDecimalFixed setter works with leading zero', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber(1000)});
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "09");
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "002"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "002"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "00");
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "009"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "009"); });
   assert.strictEqual(run.get("speedMiHrStackDecimalFixed"), "01");
 });
 
 test('speedMiHrStackDecimalFixed setter changes speedMiHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.set("speedMiHr", "123"); });
-  run(function(){ run.set("speedMiHrStackDecimalFixed", "09"); });
+  Ember.run(function(){ run.set("speedMiHr", "123"); });
+  Ember.run(function(){ run.set("speedMiHrStackDecimalFixed", "09"); });
   assert.strictEqual(run.get("speedMiHr").toString(), "123.09");
 });
 
 test('speedMiHrStackMi and speedMiHrStackDecimalFixed setter will define speedMiHr', function(assert) {
   var run = this.subject({timeMin : new BigNumber(1), lengthM : new BigNumber("1000")});
-  run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimalFixed : "9" }); });
+  Ember.run(function(){ run.setProperties({ speedMiHrStackMi : "12", speedMiHrStackDecimalFixed : "9" }); });
   assert.strictEqual(run.get("speedMiHr").toString(), "12.9");
 });
 
