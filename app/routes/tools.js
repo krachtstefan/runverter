@@ -1,9 +1,12 @@
-import Ember from 'ember';
 import RSVP from 'rsvp';
-export default Ember.Route.extend({
+import Route from '@ember/routing/route';
+import { inject } from '@ember/service';
+import { observer } from '@ember/object';
 
-  i18n: Ember.inject.service(),
-  headData: Ember.inject.service(),
+export default Route.extend({
+
+  i18n: inject.service(),
+  headData: inject.service(),
 
   model: function(params) {
     if(params.locale){
@@ -61,7 +64,7 @@ export default Ember.Route.extend({
     });
   },
 
-  recognizeUrlChange : Ember.observer("router.url", function() {
+  recognizeUrlChange : observer("router.url", function() {
     this.set('headData.url', window.location.href);
   }),
 });
