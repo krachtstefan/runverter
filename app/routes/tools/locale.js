@@ -1,9 +1,8 @@
-import Ember from 'ember';
-export default Ember.Route.extend({
+import Route from '@ember/routing/route';
+import { inject } from '@ember/service';
 
-  i18n: Ember.inject.service(),
-
-
+export default Route.extend({
+  i18n: inject.service(),
   model: function(params) {
     if(params.locale){
       this.set('i18n.locale', params.locale);
