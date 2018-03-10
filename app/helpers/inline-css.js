@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/string';
+import { helper } from '@ember/component/helper';
 /**
   * Helper to produce html safe inline css.
   *
@@ -14,7 +15,7 @@ export function inlineCSS(params, args) {
   let pre = args.pre === undefined ? '' : args.pre;
   let post = args.post === undefined ? '' : args.post;
   let output = args.value && args.property ? args.property+':'+pre+args.value+post+';' : '';
-  return Ember.String.htmlSafe(output);
+  return htmlSafe(output);
 }
 
-export default Ember.Helper.helper(inlineCSS);
+export default helper(inlineCSS);

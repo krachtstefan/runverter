@@ -1,5 +1,7 @@
 import DS from 'ember-data';
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import { observer } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -37,8 +39,8 @@ export default DS.Model.extend({
   /**
    * updatePredictedRunSec updates the time of the predicted run when necessary
    */
-  updatePredictedRunSec: Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
-    Ember.run.once(this, function() {
+  updatePredictedRunSec: observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
+    run.once(this, function() {
       var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
       this.set("predictedRun.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
     });
@@ -81,7 +83,7 @@ export default DS.Model.extend({
    *
    * @return {Boolean} if Peter Riegel method is suitable for this prediction
    */
-  peterRiegelMethodSuitable: Ember.computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
+  peterRiegelMethodSuitable: computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
     if(this.get("achievedRun.timeSec").greaterThan(209) && this.get("achievedRun.timeSec").lessThan(13801) && this.get("predictedRun.timeSec").greaterThan(209) && this.get("predictedRun.timeSec").lessThan(13801)){
       return true;
     }else{

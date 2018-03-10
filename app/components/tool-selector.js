@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import $ from 'jquery';
-export default Ember.Component.extend({
+import { run } from '@ember/runloop';
+
+export default Component.extend({
 
   didInsertElement: function() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie({customID:"menu"}).ready(function() {
         $("select.menu").selectOrDie("update"); // need to trigger update to select the correct initial value
       });
@@ -14,14 +16,8 @@ export default Ember.Component.extend({
   didRender: function(){
     this._super(...arguments);
     // ensure selectOrDie update on language change
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie("update");
     });
-  },
-
-  actions: {
-    switchTool: function(toolKey) {
-      this.sendAction('action', toolKey);
-    }
   }
 });

@@ -1,8 +1,12 @@
-import Ember from 'ember';
-export default Ember.Controller.extend({
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
+import { observer } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
+export default Controller.extend({
 
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   queryParams: {
     'i18n.locale' : 'l',                                        // selected locale
@@ -47,7 +51,7 @@ export default Ember.Controller.extend({
   expertMode : false,
   imprintVisible : false,
 
-  tools : Ember.computed("toolsAvailablem", "i18n.locale", function(){
+  tools : computed("toolsAvailablem", "i18n.locale", function(){
     var selectItems = [];
     var self = this;
     this.get("toolsAvailable").forEach(function(item){
@@ -68,59 +72,56 @@ export default Ember.Controller.extend({
     }
   },
 
-  selectedTool : Ember.computed("selectedToolKey", "i18n.locale", function(){
-    return Ember.A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
+  selectedTool : computed("selectedToolKey", "i18n.locale", function(){
+    return A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
   }),
 
-  selectedToolClass : Ember.computed("selectedTool", function(){
+  selectedToolClass : computed("selectedTool", function(){
     return "container-"+this.get("selectedTool.key");
   }),
 
-  expertModeClass : Ember.computed("expertMode", function(){
+  expertModeClass : computed("expertMode", function(){
     return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
   }),
 
-  selectedToolPca: Ember.computed("selectedToolKey", function () {
+  selectedToolPca: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "pca" ? true : false;
   }),
 
-  selectedToolPc: Ember.computed("selectedToolKey", function () {
+  selectedToolPc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "pc" ? true : false;
   }),
 
-  selectedToolLc: Ember.computed("selectedToolKey", function () {
+  selectedToolLc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "lc" ? true : false;
   }),
 
-  selectedToolRp: Ember.computed("selectedToolKey", function () {
+  selectedToolRp: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "rp" ? true : false;
   }),
 
-  selectedToolSc: Ember.computed("selectedToolKey", function () {
+  selectedToolSc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "sc" ? true : false;
   }),
 
-  handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
+  handleRunPersistence: observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),
 
-  handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
+  handleAchievedRunPersistence: observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
     // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRun would be saved too
     if(this.get("model.prediction.achievedRun.id") === "achievedRun"){
       this.get("model.prediction.achievedRun.content").save();
     }
   }),
 
-  handleSplitPersistence: Ember.observer("model.run.splits.content", function () {
+  handleSplitPersistence: observer("model.run.splits.content", function () {
     if(this.get("model.run.splits.content")){
       this.get("model.run.splits.content").save();
     }
   }),
 
   actions: {
-    navigateTo: function(selection) {
-      this.set("selectedToolKey", selection);
-    },
     showDonationMessage: function() {
       this.openDonationMessage();
     }

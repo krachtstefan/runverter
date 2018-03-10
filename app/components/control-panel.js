@@ -1,7 +1,9 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+export default Component.extend({
 
-  i18n: Ember.inject.service(),
+  i18n: service(),
 
   classNames: ["control-panel"],
   classNameBindings: ['visible:open'],
@@ -9,7 +11,7 @@ export default Ember.Component.extend({
   shareButtonsVisible : false,
   imprintVisible : false,
 
-  shareButtonsVisibleClass : Ember.computed("shareButtonsVisible", function(){
+  shareButtonsVisibleClass : computed("shareButtonsVisible", function(){
     return this.get("shareButtonsVisible") === true ? "shareButtonsVisible" : "shareButtonsInvisible";
   }),
 

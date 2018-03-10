@@ -1,8 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import $ from 'jquery';
-export default Ember.Component.extend({
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import { observer } from '@ember/object';
+export default Component.extend({
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
@@ -23,10 +27,10 @@ export default Ember.Component.extend({
   racePickerVisible : false,
   timePickerVisible : false,
 
-  races : Ember.inject.service('race'),
-  targetTimes : Ember.inject.service('target-time'),
+  races : service('race'),
+  targetTimes : service('target-time'),
 
-  isTouchDevice : Ember.computed(function(){
+  isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
   }),
 
@@ -47,7 +51,7 @@ export default Ember.Component.extend({
     }
   },
 
-  chartData : Ember.computed("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
+  chartData : computed("run{lengthM,timeSec}", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
     var data = {
       labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber(); }),
       datasets: [
@@ -63,14 +67,14 @@ export default Ember.Component.extend({
     return data;
   }),
 
-  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+  targetTimesSuggestions  : computed("run.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
       return self.get("run").isInRange(item.startM, item.endM);
     });
   }),
 
-  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "runLengthMetricsSelected", function(){
+  runLengthMetrics : computed("runLengthMetricsAvailable", "i18n.locale", "runLengthMetricsSelected", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -87,7 +91,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  splitLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "splitMetricsSelected", function(){
+  splitLengthMetrics : computed("runLengthMetricsAvailable", "i18n.locale", "splitMetricsSelected", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -104,7 +108,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  splitTempoMetrics : Ember.computed("splitTempoMetricsAvailable", "i18n.locale", "splitTempoMetricsSelected", function(){
+  splitTempoMetrics : computed("splitTempoMetricsAvailable", "i18n.locale", "splitTempoMetricsSelected", function(){
     var splitTempoMetrics = [];
     var self = this;
     this.get("splitTempoMetricsAvailable").forEach(function(item){
@@ -121,7 +125,7 @@ export default Ember.Component.extend({
     return splitTempoMetrics;
   }),
 
-  splitStrategies : Ember.computed("splitStrategiesAvailable", "i18n.locale", "splitStrategiesSelected", function(){
+  splitStrategies : computed("splitStrategiesAvailable", "i18n.locale", "splitStrategiesSelected", function(){
     var splitStrategies = [];
     var self = this;
     this.get("splitStrategiesAvailable").forEach(function(item){
@@ -138,7 +142,7 @@ export default Ember.Component.extend({
     return splitStrategies;
   }),
 
-  evenSlope : Ember.computed("evenSlopeAvailable", "i18n.locale", "evenSlopeSelected", function(){
+  evenSlope : computed("evenSlopeAvailable", "i18n.locale", "evenSlopeSelected", function(){
     var evenSlope = [];
     var self = this;
     this.get("evenSlopeAvailable").forEach(function(item){
@@ -155,9 +159,16 @@ export default Ember.Component.extend({
     return evenSlope;
   }),
 
+  willRender: function() {
+    this._super(...arguments);
+    this.calculateSplits()
+  },
+
   didRender: function() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    this.displayNoSplitsMessage();
+
+    run.scheduleOnce('afterRender', this, function() {
       var self = this;
       $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
         $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value
@@ -186,16 +197,16 @@ export default Ember.Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("willRender", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
+  calculateSplits : observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
     if(this.get("run.splits.content")){
       this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
       this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
       this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
       this.get("run.splits.content").calculateSplits();
     }
-  })),
+  }),
 
-  displayNoSplitsMessage: Ember.on("didRender", Ember.observer('run.splits.splits', function(){
+  displayNoSplitsMessage: observer('run.splits.splits', function(){
     var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
     if(this.get("run.splits.splits.length") === 0){
       if(noSplitsMessage.length == 0){
@@ -204,9 +215,9 @@ export default Ember.Component.extend({
     }else{
       this.get('notifications').removeNotification(noSplitsMessage[0]);
     }
-  })),
+  }),
 
-  splitDistancesPossible : Ember.computed("run.lengthM", "splitMetricsSelected", "splitDistancesSelected", function(){
+  splitDistancesPossible : computed("run.lengthM", "splitMetricsSelected", "splitDistancesSelected", function(){
     var self = this;
     var splitDistancesPossible = [];
     var splitDistanceM;
@@ -237,7 +248,7 @@ export default Ember.Component.extend({
     return splitDistancesPossible;
   }),
 
-  splitDistancesSelectedMeters : Ember.computed("splitDistancesSelected", "splitMetricsSelected", function(){
+  splitDistancesSelectedMeters : computed("splitDistancesSelected", "splitMetricsSelected", function(){
     if(this.get("splitMetricsSelected") === "mi"){
       return new BigNumber(this.get("splitDistancesSelected")).times(this.get("run.miToM"));
     }else{
@@ -245,71 +256,71 @@ export default Ember.Component.extend({
     }
   }),
 
-  tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+  tooltipLengthKm : computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
 
-  tooltipLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+  tooltipLengthMi : computed("run.lengthMi", "i18n.locale", function(){
     return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
   }),
 
-  expertModeClass : Ember.computed("expertMode", function(){
+  expertModeClass : computed("expertMode", function(){
     return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
 
-  showRunLengthKm: Ember.computed('runLengthMetricsSelected', function () {
+  showRunLengthKm: computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
   }),
 
-  showRunLengthMi: Ember.computed('runLengthMetricsSelected', function () {
+  showRunLengthMi: computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "mi" ? true : false;
   }),
 
-  showKmSplits : Ember.computed("splitMetricsSelected", function(){
+  showKmSplits : computed("splitMetricsSelected", function(){
     return this.get("splitMetricsSelected") === "km" ? true : false;
   }),
 
-  showSplitTempoMinKm: Ember.computed('splitTempoMetricsSelected', function () {
+  showSplitTempoMinKm: computed('splitTempoMetricsSelected', function () {
     return this.get("splitTempoMetricsSelected") === "minkm" ? true : false;
   }),
 
-  showSplitTempoMinMi: Ember.computed('splitTempoMetricsSelected', function () {
+  showSplitTempoMinMi: computed('splitTempoMetricsSelected', function () {
     return this.get("splitTempoMetricsSelected") === "minmi" ? true : false;
   }),
 
-  showSplitTempoKmH: Ember.computed('splitTempoMetricsSelected', function () {
+  showSplitTempoKmH: computed('splitTempoMetricsSelected', function () {
     return this.get("splitTempoMetricsSelected") === "kmh" ? true : false;
   }),
 
-  showSplitTempoMiH: Ember.computed('splitTempoMetricsSelected', function () {
+  showSplitTempoMiH: computed('splitTempoMetricsSelected', function () {
     return this.get("splitTempoMetricsSelected") === "mih" ? true : false;
   }),
 
-  evenSlopeVisible: Ember.computed('splitStrategiesSelected', function () {
+  evenSlopeVisible: computed('splitStrategiesSelected', function () {
     return this.get("splitStrategiesSelected") === 0 ? false : true;
   }),
 
-  tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
+  tooltipTimeHr : computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
 
-  tooltipTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
+  tooltipTimeMin : computed("run.timeMin", "i18n.locale", function(){
     return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
   }),
 
-  tooltipTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
+  tooltipTimeSec : computed("run.timeSec", "i18n.locale", function(){
     return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
-  racePickerVisibleClass: Ember.computed('racePickerVisible', 'isTouchDevice', function () {
+  racePickerVisibleClass: computed('racePickerVisible', 'isTouchDevice', function () {
     return this.get("racePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
+  timePickerVisibleClass: computed('timePickerVisible', 'isTouchDevice',  function () {
     return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  evenSlopeVisibleClass: Ember.computed('evenSlopeVisible', function () {
+  evenSlopeVisibleClass: computed('evenSlopeVisible', function () {
     return this.get("evenSlopeVisible") === true ? "evenSlopeVisible" : "evenSlopeInvisible";
   }),
 

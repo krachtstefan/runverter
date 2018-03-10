@@ -11,7 +11,7 @@
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
         {{/each}}
       {{/x-select}}
-      {{form-helper/suggest-select items=races.templates identifier="race-picker-achieved-race" action="setAchievedRace" label=(t "races.label")}}
+      {{form-helper/suggest-select items=races.templates identifier="race-picker-achieved-race" changeAction=(action 'setAchievedRace') label=(t "races.label")}}
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse toolLine">
@@ -20,7 +20,7 @@
     </div>
     <div class="form-element uk-width-1-1 suggest-select-container {{expertModeClass}} {{achievedTimePickerVisibleClass}}">
       {{form-helper/number-input value=prediction.achievedRun.timeStackHr minLength="1" focus=achievedTimePickerVisible title=tooltipAchievedTimeHr}} {{t "metrics.time.hr"}} {{form-helper/number-input value=prediction.achievedRun.timeStackMinFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeMin}} {{t "metrics.time.min"}} {{form-helper/number-input value=prediction.achievedRun.timeStackSecFixed focus=achievedTimePickerVisible title=tooltipAchievedTimeSec}} {{t "metrics.time.sec"}}
-      {{form-helper/suggest-select items=achievedTimesSuggestions identifier="predicted-time-achieved-race-predictor" action="setAchievedTime" label=(t "targetTimes.label")}}
+      {{form-helper/suggest-select items=achievedTimesSuggestions identifier="predicted-time-achieved-race-predictor" changeAction=(action 'setAchievedTime') label=(t "targetTimes.label")}}
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse toolLine">
@@ -35,7 +35,7 @@
           {{#x-option value=item.key}}{{item.label}}{{/x-option}}
         {{/each}}
       {{/x-select}}
-      {{form-helper/suggest-select items=races.templates identifier="race-picker-predicted-race" action="setPredictedRace" label=(t "races.label")}}
+      {{form-helper/suggest-select items=races.templates identifier="race-picker-predicted-race" changeAction=(action 'setPredictedRace') label=(t "races.label")}}
     </div>
   </div>
   <div class="uk-grid uk-grid-collapse toolLine">

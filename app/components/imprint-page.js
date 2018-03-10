@@ -1,8 +1,9 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+export default Component.extend({
 
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   classNames: ["imprint"],
   classNameBindings: ['visible:open', 'expertModeClass'],

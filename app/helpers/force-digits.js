@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 /**
   * Force input string to have a certain length. If the required length is not fullfilled
   * this method will change the string to achieve the required lenght by pre- or appending
@@ -24,4 +24,4 @@ export function forceDigits(params, args) {
   return output;
 }
 
-export default Ember.Helper.helper(forceDigits);
+export default helper(forceDigits);

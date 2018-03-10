@@ -1,5 +1,6 @@
 import DS from 'ember-data';
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import { get } from '@ember/object';
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('splits', 'Splits Model', {
@@ -39,7 +40,7 @@ test('updatedAt equals current date', function(assert) {
 // run
 test('run is a relation to run model', function(assert) {
   const splits = this.store().modelFor('splits');
-  const relationship = Ember.get(splits, 'relationshipsByName').get('run');
+  const relationship = get(splits, 'relationshipsByName').get('run');
   assert.equal(relationship.key, 'run');
   assert.equal(relationship.kind, 'belongsTo');
   assert.equal(relationship.type, 'run');
@@ -48,14 +49,14 @@ test('run is a relation to run model', function(assert) {
 // splitDistance
 test('splitDistance is a BigNumber', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splitDistance").isBigNumber, true);
   });
 });
 
 test('splitDistance has a default value of 1000', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splitDistance").toString(), "1000");
   });
 });
@@ -63,14 +64,14 @@ test('splitDistance has a default value of 1000', function(assert) {
 // splittingStrategy
 test('splittingStrategy is a BigNumber', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategy").isBigNumber, true);
   });
 });
 
 test('splittingStrategy has a default value of 0', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategy").toString(), "0");
   });
 });
@@ -78,7 +79,7 @@ test('splittingStrategy has a default value of 0', function(assert) {
 test('splittingStrategy creates uneven splits when splittingStrategy is a negative split', function(assert) {
   var splittingStrategy = new BigNumber(50);
   const splits = this.subject({splittingStrategy : splittingStrategy}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -96,7 +97,7 @@ test('splittingStrategy creates uneven splits when splittingStrategy is a negati
 test('splittingStrategy creates uneven splits when splittingStrategy is a positive split', function(assert) {
   var splittingStrategy = new BigNumber(-50);
   const splits = this.subject({splittingStrategy : splittingStrategy}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -113,7 +114,7 @@ test('splittingStrategy creates uneven splits when splittingStrategy is a positi
 
 test('splittingStrategy creates a different middle split when splittingStrategy is a negative split and the turning point is within a split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -129,7 +130,7 @@ test('splittingStrategy creates a different middle split when splittingStrategy 
 
 test('splittingStrategy creates a different middle split when splittingStrategy is a positive split and the turning point is within a split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -145,7 +146,7 @@ test('splittingStrategy creates a different middle split when splittingStrategy 
 
 test('splittingStrategy of 50 results in finishing the first half 50% slower than the second half', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -160,7 +161,7 @@ test('splittingStrategy of 50 results in finishing the first half 50% slower tha
 
 test('splittingStrategy of -50 results in finishing the first half 50% faster than the second half', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -176,28 +177,28 @@ test('splittingStrategy of -50 results in finishing the first half 50% faster th
 // splittingStrategySecondHalf
 test('splittingStrategySecondHalf is a BigNumber', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategySecondHalf").isBigNumber, true);
   });
 });
 
 test('splittingStrategySecondHalf has a default value of 0', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "0");
   });
 });
 
 test('splittingStrategySecondHalf is the negative when splittingStrategy is positive', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(5)});
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "-5");
   });
 });
 
 test('splittingStrategySecondHalf is the positive when splittingStrategy is negative', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-5)});
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splittingStrategySecondHalf").toString(), "5");
   });
 });
@@ -205,7 +206,7 @@ test('splittingStrategySecondHalf is the positive when splittingStrategy is nega
 // splitCount
 test('splitCount represents the number of splits with decimal accuracy', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -218,7 +219,7 @@ test('splitCount represents the number of splits with decimal accuracy', functio
 
 test('splitCount dependes on splitDistance', function(assert) {
   const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -232,7 +233,7 @@ test('splitCount dependes on splitDistance', function(assert) {
 // splitCountCeiled
 test('splitCountCeiled represents the ceiled number of splits', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -245,7 +246,7 @@ test('splitCountCeiled represents the ceiled number of splits', function(assert)
 
 test('splitCountCeiled dependes on splitDistance', function(assert) {
   const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -259,7 +260,7 @@ test('splitCountCeiled dependes on splitDistance', function(assert) {
 // lastSplitDistance
 test('lastSplitDistance equals the remainder distance when the run is not evenly divisible by splitDistance', function(assert) {
   const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -272,7 +273,7 @@ test('lastSplitDistance equals the remainder distance when the run is not evenly
 
 test('lastSplitDistance equals the splitDistance when the run is evenly divisible by splitDistance', function(assert) {
   const splits = this.subject({splitDistance : new BigNumber(5000)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -286,7 +287,7 @@ test('lastSplitDistance equals the splitDistance when the run is evenly divisibl
 // turningPointSplit
 test('turningPointSplit represents the split with the turning point', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -299,7 +300,7 @@ test('turningPointSplit represents the split with the turning point', function(a
 
 test('turningPointSplit is the lower one when the turning point is exactly between two splits', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -313,7 +314,7 @@ test('turningPointSplit is the lower one when the turning point is exactly betwe
 // turningPointM
 test('turningPointM represents the turning point position of the run', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -327,7 +328,7 @@ test('turningPointM represents the turning point position of the run', function(
 // turningPointWithinSplit
 test('turningPointWithinSplit is true when the turning is somewhere within a split', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -340,7 +341,7 @@ test('turningPointWithinSplit is true when the turning is somewhere within a spl
 
 test('turningPointWithinSplit is false when the turning is at the border of two splits', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -354,7 +355,7 @@ test('turningPointWithinSplit is false when the turning is at the border of two 
 // splitTime
 test('splitTime represents the time needed for a split when the pace is even', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -368,7 +369,7 @@ test('splitTime represents the time needed for a split when the pace is even', f
 // lastSplitTime
 test('lastSplitTime represents the time needed for the the last split when the pace is even', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -382,7 +383,7 @@ test('lastSplitTime represents the time needed for the the last split when the p
 // averagePaceFirstHalf
 test('averagePaceFirstHalf represents the average pace for the first half of the run', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -395,7 +396,7 @@ test('averagePaceFirstHalf represents the average pace for the first half of the
 
 test('averagePaceFirstHalf increases when splittingStrategy does', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -408,7 +409,7 @@ test('averagePaceFirstHalf increases when splittingStrategy does', function(asse
 
 test('averagePaceFirstHalf decreases when splittingStrategy does', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -422,7 +423,7 @@ test('averagePaceFirstHalf decreases when splittingStrategy does', function(asse
 // averagePaceSecondHalf
 test('averagePaceSecondHalf represents the average pace for the first half of the run', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -435,7 +436,7 @@ test('averagePaceSecondHalf represents the average pace for the first half of th
 
 test('averagePaceSecondHalf decreases when splittingStrategy increases', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -448,7 +449,7 @@ test('averagePaceSecondHalf decreases when splittingStrategy increases', functio
 
 test('averagePaceSecondHalf increases when splittingStrategy decreases', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -462,7 +463,7 @@ test('averagePaceSecondHalf increases when splittingStrategy decreases', functio
 // peakPaceValue
 test('peakPaceValue equals the average pace when the splitting strategy is 0', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -475,7 +476,7 @@ test('peakPaceValue equals the average pace when the splitting strategy is 0', f
 
 test('peakPaceValue equals the average second half pace when the splitting strategy is a negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -488,7 +489,7 @@ test('peakPaceValue equals the average second half pace when the splitting strat
 
 test('peakPaceValue equals the average first half pace when the splitting strategy is a positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50)}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -501,7 +502,7 @@ test('peakPaceValue equals the average first half pace when the splitting strate
 
 test('peakPaceValue equals works with even pace and negative split', function(assert) {
   const splits = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -514,7 +515,7 @@ test('peakPaceValue equals works with even pace and negative split', function(as
 
 test('peakPaceValue equals works with even slope and negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -527,7 +528,7 @@ test('peakPaceValue equals works with even slope and negative split', function(a
 
 test('peakPaceValue equals works with even slope and positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}), self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -541,21 +542,21 @@ test('peakPaceValue equals works with even slope and positive split', function(a
 // evenSlope
 test('evenSlope is a boolean', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(typeof(splits.get("evenSlope")), "boolean");
   });
 });
 
 test('evenSlope is false by default', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("evenSlope"), false);
   });
 });
 
 test('evenSlope=true creates uneven splits when splittingStrategy is a negative split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -570,7 +571,7 @@ test('evenSlope=true creates uneven splits when splittingStrategy is a negative 
 
 test('evenSlope=true creates uneven splits when splittingStrategy is a positive split', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(1800),
@@ -585,7 +586,7 @@ test('evenSlope=true creates uneven splits when splittingStrategy is a positive 
 
 test('evenSlope=true and a negative split results in splits with an decreasing pace', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -601,7 +602,7 @@ test('evenSlope=true and a negative split results in splits with an decreasing p
 
 test('evenSlope=true and a positive split results in splits with an increasing pace', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -617,7 +618,7 @@ test('evenSlope=true and a positive split results in splits with an increasing p
 
 test('evenSlope=true and splittingStrategy of 50 results in finishing the first half 50% slower than the second half', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -632,7 +633,7 @@ test('evenSlope=true and splittingStrategy of 50 results in finishing the first 
 
 test('evenSlope=true and splittingStrategy of -50 results in finishing the first half 50% faster than the second half 1', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope : true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -648,7 +649,7 @@ test('evenSlope=true and splittingStrategy of -50 results in finishing the first
 // slope
 test('slope is 0 when splittingStrategy is 0', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(0) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -661,7 +662,7 @@ test('slope is 0 when splittingStrategy is 0', function(assert) {
 
 test('slope is negative when splittingStrategy is positive', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(50) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -674,7 +675,7 @@ test('slope is negative when splittingStrategy is positive', function(assert) {
 
 test('slope is positive when splittingStrategy is negative', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(-50) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -688,7 +689,7 @@ test('slope is positive when splittingStrategy is negative', function(assert) {
 // shift
 test('shift equals the pace when splittingStrategy is 0', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(0) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -701,7 +702,7 @@ test('shift equals the pace when splittingStrategy is 0', function(assert) {
 
 test('shift is negative when splittingStrategy is positive', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(50) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -714,7 +715,7 @@ test('shift is negative when splittingStrategy is positive', function(assert) {
 
 test('shift is 0 when splittingStrategy is negative', function(assert) {
   const splits = this.subject({ splittingStrategy : new BigNumber(-50) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -728,7 +729,7 @@ test('shift is 0 when splittingStrategy is negative', function(assert) {
 // splits
 test('splits is an array', function(assert) {
   const splits = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(splits.get("splits").constructor, Array);
   });
 });
@@ -736,7 +737,7 @@ test('splits is an array', function(assert) {
 // calculateSplits
 test('calculateSplits returns true if more than one split was created', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -749,7 +750,7 @@ test('calculateSplits returns true if more than one split was created', function
 
 test('calculateSplits returns false if distance of the run only lasts for one split', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -762,7 +763,7 @@ test('calculateSplits returns false if distance of the run only lasts for one sp
 
 test('calculateSplits changes splits array length according to the runs kilometer count', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -776,7 +777,7 @@ test('calculateSplits changes splits array length according to the runs kilomete
 
 test('calculateSplits clears splits array before adding new ones', function(assert) {
   const splits = this.subject({splits : [1, 2, 3]}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -790,7 +791,7 @@ test('calculateSplits clears splits array before adding new ones', function(asse
 
 test('calculateSplits adds an extra split when length is not divisible without remainder', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -804,7 +805,7 @@ test('calculateSplits adds an extra split when length is not divisible without r
 
 test('calculateSplits will adjust the last splits length if needed', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -815,7 +816,7 @@ test('calculateSplits will adjust the last splits length if needed', function(as
     assert.strictEqual(splits.get("splits.lastObject.split.lengthM").toString(), "612");
   });
 
-  Ember.run(function(){
+  run(function(){
     splits.set('run.lengthM',new BigNumber(20000));
     splits.calculateSplits();
     assert.strictEqual(splits.get("splits.lastObject.split.lengthM").toString(), "1000");
@@ -824,7 +825,7 @@ test('calculateSplits will adjust the last splits length if needed', function(as
 
 test('calculateSplits will create splits which sum equals the runs length', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -842,7 +843,7 @@ test('calculateSplits will create splits which sum equals the runs length', func
 
 test('calculateSplits creates even splits with paces like the runs average pace', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(14400),
@@ -858,7 +859,7 @@ test('calculateSplits creates even splits with paces like the runs average pace'
 
 test('the last stacked split length equals the length of the run in total', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(14400),
@@ -872,7 +873,7 @@ test('the last stacked split length equals the length of the run in total', func
 
 test('the last stacked split time equals the time of the run in total', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(14299),
@@ -886,7 +887,7 @@ test('the last stacked split time equals the time of the run in total', function
 
 test('progressDistance of the last split equals 100%', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(14299),
@@ -900,7 +901,7 @@ test('progressDistance of the last split equals 100%', function(assert) {
 
 test('progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -914,7 +915,7 @@ test('progressDistance of the 3rd split of a 10k equals 30%', function(assert) {
 
 test('progressTime of the last split equals 100%', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(14299),
@@ -928,7 +929,7 @@ test('progressTime of the last split equals 100%', function(assert) {
 
 test('progressTime of the 3rd split of a 10k equals 30%', function(assert) {
   const splits = this.subject(); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -942,7 +943,7 @@ test('progressTime of the 3rd split of a 10k equals 30%', function(assert) {
 
 test('progressTime of the 2nd split of a 4k with negative 50% splits equals 75%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50)}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -956,7 +957,7 @@ test('progressTime of the 2nd split of a 4k with negative 50% splits equals 75%'
 
 test('progressTime of the 2nd split of a 4k with negative 50% splits and even slope equals 75%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(50), evenSlope:true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -970,7 +971,7 @@ test('progressTime of the 2nd split of a 4k with negative 50% splits and even sl
 
 test('progressTime of the 2nd split of a 4k with positive 50% splits equals 25%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50) }); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),
@@ -984,7 +985,7 @@ test('progressTime of the 2nd split of a 4k with positive 50% splits equals 25%'
 
 test('progressTime of the 2nd split of a 4k with positive 50% splits and even slope equals 25%', function(assert) {
   const splits = this.subject({splittingStrategy : new BigNumber(-50), evenSlope:true}); var self = this;
-  Ember.run(function(){
+  run(function(){
     splits.set('run',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600),

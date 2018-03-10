@@ -1,5 +1,9 @@
 import OneWayTel from './../one-way-tel';
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import { A } from '@ember/array';
+import { observer } from '@ember/object';
+
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   classNameBindings: ['widthClassName'],
@@ -11,49 +15,55 @@ export default OneWayTel.extend({
   widthClassName: null, // class name that handles the with via css
   focus: false,
 
-  DOMinputField : Ember.computed(function(){
+  DOMinputField : computed(function(){
     return this.$();
   }).volatile(),
 
-  DOMinputValue : Ember.computed(function(){
+  DOMinputValue : computed(function(){
     return this.get("DOMinputField").val();
   }).volatile(),
 
-  DOMinputFieldLength : Ember.computed(function(){
+  DOMinputFieldLength : computed(function(){
     return this.get("DOMinputField").val().length;
   }).volatile(),
 
-  selectionStart : Ember.computed(function(){
+  selectionStart : computed(function(){
     return this.get("DOMinputField").prop('selectionStart');
   }).volatile(),
 
-  selectionEnd : Ember.computed(function(){
+  selectionEnd : computed(function(){
     return this.get("DOMinputField").prop('selectionEnd');
   }).volatile(),
 
-  allSelected : Ember.computed(function(){
+  allSelected : computed(function(){
     return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("DOMinputFieldLength");
   }).volatile(),
 
-  somethingSelected : Ember.computed(function(){
+  somethingSelected : computed(function(){
     return (this.get("selectionEnd")-this.get("selectionStart"))>0;
   }).volatile(),
 
-  selection : Ember.computed(function(){
+  selection : computed(function(){
     return this.get("DOMinputValue").slice(this.get("selectionStart"), this.get("selectionEnd"));
   }).volatile(),
 
-  preSelection : Ember.computed(function(){
+  preSelection : computed(function(){
     return this.get("DOMinputValue").slice(0, this.get("selectionStart"));
   }).volatile(),
 
-  postSelection : Ember.computed(function(){
+  postSelection : computed(function(){
     return this.get("DOMinputValue").slice(this.get("selectionEnd"), this.get("DOMinputValue").length);
   }).volatile(),
 
-  isTouchDevice : Ember.computed(function(){
+  isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
   }),
+
+  init: function() {
+    this._super(...arguments);
+    this.removeLengthBindings()
+    this.handleWidthClassName();
+  },
 
   input() {
     this._super(...arguments);
@@ -109,7 +119,7 @@ export default OneWayTel.extend({
   },
 
   focusIn(event) {
-    Ember.run.later(this, function() {
+    run.later(this, function() {
       this.selectAll(event);
     }, 0); // add a delay to ensure to be fired after a possible click event
   },
@@ -153,15 +163,15 @@ export default OneWayTel.extend({
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
   // native maxLength/minLength attibute, the input event listener will take care of maxLength/minLength interpretation
-  removeLengthBindings: Ember.on('init', function() {
-    this.set('attributeBindings', Ember.A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
-  }),
+  removeLengthBindings: function() {
+    this.set('attributeBindings', A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
+  },
 
-  handleWidthClassName: Ember.on('init', Ember.observer('value', function() {
+  handleWidthClassName: observer('value', function() {
     var valueLength = this.get("value").toString().length;
     valueLength = valueLength < this.get("minLength") ? this.get("minLength") : valueLength;
     this.set("widthClassName", "digits-"+valueLength);
-  })),
+  }),
 
   _addLeadingZeros: function(value){
     var maxLength = parseInt(this.get("maxLength"));
