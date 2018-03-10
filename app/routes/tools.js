@@ -1,12 +1,12 @@
 import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { observer } from '@ember/object';
 
 export default Route.extend({
 
-  i18n: inject.service(),
-  headData: inject.service(),
+  i18n: service(),
+  headData: service(),
 
   model: function(params) {
     if(params.locale){

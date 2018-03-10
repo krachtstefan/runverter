@@ -2,12 +2,12 @@ import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { on } from '@ember/object/evented';
 import { observer } from '@ember/object';
 export default Component.extend({
-  i18n: inject.service(),
-  notifications: inject.service('notification-messages'),
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
@@ -28,8 +28,8 @@ export default Component.extend({
   racePickerVisible : false,
   timePickerVisible : false,
 
-  races : inject.service('race'),
-  targetTimes : inject.service('target-time'),
+  races : service('race'),
+  targetTimes : service('target-time'),
 
   isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;

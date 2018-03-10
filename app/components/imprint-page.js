@@ -1,9 +1,9 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 export default Component.extend({
 
-  i18n: inject.service(),
-  notifications: inject.service('notification-messages'),
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   classNames: ["imprint"],
   classNameBindings: ['visible:open', 'expertModeClass'],

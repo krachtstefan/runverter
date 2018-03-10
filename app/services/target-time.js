@@ -1,9 +1,9 @@
 import Service from '@ember/service';
 import { computed } from '@ember/object';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default Service.extend({
-  i18n: inject.service(),
+  i18n: service(),
   templates : computed("i18n.locale", function(){
     return [
       // 10k

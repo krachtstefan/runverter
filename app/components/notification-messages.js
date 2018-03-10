@@ -1,7 +1,7 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 export default Component.extend({
   elementId: "notification-container",
-  notifications: inject.service('notification-messages'),
-  i18n: inject.service()
+  notifications: service('notification-messages'),
+  i18n: service(),
 });

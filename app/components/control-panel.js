@@ -1,9 +1,9 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 export default Component.extend({
 
-  i18n: inject.service(),
+  i18n: service(),
 
   classNames: ["control-panel"],
   classNameBindings: ['visible:open'],

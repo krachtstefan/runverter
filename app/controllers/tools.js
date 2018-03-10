@@ -1,12 +1,12 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { observer } from '@ember/object';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 export default Controller.extend({
 
-  i18n: inject.service(),
-  notifications: inject.service('notification-messages'),
+  i18n: service(),
+  notifications: service('notification-messages'),
 
   queryParams: {
     'i18n.locale' : 'l',                                        // selected locale
