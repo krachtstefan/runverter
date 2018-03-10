@@ -1,11 +1,13 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
+import { inject } from '@ember/service';
+import { on } from '@ember/object/evented';
+import { observer } from '@ember/object';
 export default Component.extend({
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  i18n: inject.service(),
+  notifications: inject.service('notification-messages'),
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
@@ -26,8 +28,8 @@ export default Component.extend({
   racePickerVisible : false,
   timePickerVisible : false,
 
-  races : Ember.inject.service('race'),
-  targetTimes : Ember.inject.service('target-time'),
+  races : inject.service('race'),
+  targetTimes : inject.service('target-time'),
 
   isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
@@ -50,7 +52,7 @@ export default Component.extend({
     }
   },
 
-  chartData : computed("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
+  chartData : computed("run{lengthM,timeSec}", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
     var data = {
       labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber(); }),
       datasets: [
@@ -189,7 +191,7 @@ export default Component.extend({
     });
   },
 
-  calculateSplits : Ember.on("willRender", Ember.observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
+  calculateSplits : on("willRender", observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
     if(this.get("run.splits.content")){
       this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
       this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
@@ -198,7 +200,7 @@ export default Component.extend({
     }
   })),
 
-  displayNoSplitsMessage: Ember.on("didRender", Ember.observer('run.splits.splits', function(){
+  displayNoSplitsMessage: on("didRender", observer('run.splits.splits', function(){
     var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
     if(this.get("run.splits.splits.length") === 0){
       if(noSplitsMessage.length == 0){
