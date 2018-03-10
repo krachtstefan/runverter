@@ -60,6 +60,12 @@ export default OneWayTel.extend({
     return 'ontouchstart' in document.documentElement;
   }),
 
+  init: function() {
+    this._super(...arguments);
+    this.removeLengthBindings()
+    this.handleWidthClassName();
+  },
+
   input() {
     this._super(...arguments);
     var lastValue = this.get("value"); // current value in model
@@ -158,15 +164,15 @@ export default OneWayTel.extend({
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
   // native maxLength/minLength attibute, the input event listener will take care of maxLength/minLength interpretation
-  removeLengthBindings: on('init', function() {
+  removeLengthBindings: function() {
     this.set('attributeBindings', A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
-  }),
+  },
 
-  handleWidthClassName: on('init', observer('value', function() {
+  handleWidthClassName: observer('value', function() {
     var valueLength = this.get("value").toString().length;
     valueLength = valueLength < this.get("minLength") ? this.get("minLength") : valueLength;
     this.set("widthClassName", "digits-"+valueLength);
-  })),
+  }),
 
   _addLeadingZeros: function(value){
     var maxLength = parseInt(this.get("maxLength"));
