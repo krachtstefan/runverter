@@ -3,7 +3,6 @@ import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { on } from '@ember/object/evented';
 import { observer } from '@ember/object';
 export default Component.extend({
   i18n: service(),
@@ -160,8 +159,15 @@ export default Component.extend({
     return evenSlope;
   }),
 
+  willRender: function() {
+    this._super(...arguments);
+    this.calculateSplits()
+  },
+
   didRender: function() {
     this._super(...arguments);
+    this.displayNoSplitsMessage();
+
     run.scheduleOnce('afterRender', this, function() {
       var self = this;
       $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
@@ -191,16 +197,16 @@ export default Component.extend({
     });
   },
 
-  calculateSplits : on("willRender", observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
+  calculateSplits : observer("run.lengthM", "run.timeSec", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" ,function(){
     if(this.get("run.splits.content")){
       this.set("run.splits.splitDistance", this.get("splitDistancesSelectedMeters"));
       this.set("run.splits.splittingStrategy", new BigNumber(this.get("splitStrategiesSelected")));
       this.set("run.splits.evenSlope", this.get("evenSlopeSelected"));
       this.get("run.splits.content").calculateSplits();
     }
-  })),
+  }),
 
-  displayNoSplitsMessage: on("didRender", observer('run.splits.splits', function(){
+  displayNoSplitsMessage: observer('run.splits.splits', function(){
     var noSplitsMessage = this.get("notifications.content").filterBy('message.string', this.get('i18n').t("flashMessages.noSplits").string);
     if(this.get("run.splits.splits.length") === 0){
       if(noSplitsMessage.length == 0){
@@ -209,7 +215,7 @@ export default Component.extend({
     }else{
       this.get('notifications').removeNotification(noSplitsMessage[0]);
     }
-  })),
+  }),
 
   splitDistancesPossible : computed("run.lengthM", "splitMetricsSelected", "splitDistancesSelected", function(){
     var self = this;
