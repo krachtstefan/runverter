@@ -1,7 +1,10 @@
 import OneWayTel from './../one-way-tel';
-import Ember from 'ember';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import { A } from '@ember/array';
+import { observer } from '@ember/object';
+
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   classNameBindings: ['widthClassName'],
@@ -155,11 +158,11 @@ export default OneWayTel.extend({
 
   // remove maxLength and minLength attribute binding that is defined in the Ember.TextField component. instead of the
   // native maxLength/minLength attibute, the input event listener will take care of maxLength/minLength interpretation
-  removeLengthBindings: Ember.on('init', function() {
-    this.set('attributeBindings', Ember.A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
+  removeLengthBindings: on('init', function() {
+    this.set('attributeBindings', A(this.get('attributeBindings')).removeObject("maxLength").removeObject("minLength"));
   }),
 
-  handleWidthClassName: Ember.on('init', Ember.observer('value', function() {
+  handleWidthClassName: on('init', observer('value', function() {
     var valueLength = this.get("value").toString().length;
     valueLength = valueLength < this.get("minLength") ? this.get("minLength") : valueLength;
     this.set("widthClassName", "digits-"+valueLength);
