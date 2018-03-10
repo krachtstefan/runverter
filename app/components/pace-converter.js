@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
 export default Component.extend({
 
-  i18n: Ember.inject.service(),
+  i18n: inject.service(),
 
   tooltipPaceMinPerKm : computed("run.paceMinPerKm", "i18n.locale", function(){
     return this.get("run.paceMinPerKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minkm");
