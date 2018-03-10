@@ -1,7 +1,7 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
+import { observer } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -39,7 +39,7 @@ export default DS.Model.extend({
   /**
    * updatePredictedRunSec updates the time of the predicted run when necessary
    */
-  updatePredictedRunSec: Ember.observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
+  updatePredictedRunSec: observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
     run.once(this, function() {
       var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
       this.set("predictedRun.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
