@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { computed } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -81,7 +82,7 @@ export default DS.Model.extend({
    *
    * @return {Boolean} if Peter Riegel method is suitable for this prediction
    */
-  peterRiegelMethodSuitable: Ember.computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
+  peterRiegelMethodSuitable: computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
     if(this.get("achievedRun.timeSec").greaterThan(209) && this.get("achievedRun.timeSec").lessThan(13801) && this.get("predictedRun.timeSec").greaterThan(209) && this.get("predictedRun.timeSec").lessThan(13801)){
       return true;
     }else{

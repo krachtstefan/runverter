@@ -1,5 +1,6 @@
 import OneWayTel from './../one-way-tel';
 import Ember from 'ember';
+import { computed } from '@ember/object';
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   classNameBindings: ['widthClassName'],
@@ -11,47 +12,47 @@ export default OneWayTel.extend({
   widthClassName: null, // class name that handles the with via css
   focus: false,
 
-  DOMinputField : Ember.computed(function(){
+  DOMinputField : computed(function(){
     return this.$();
   }).volatile(),
 
-  DOMinputValue : Ember.computed(function(){
+  DOMinputValue : computed(function(){
     return this.get("DOMinputField").val();
   }).volatile(),
 
-  DOMinputFieldLength : Ember.computed(function(){
+  DOMinputFieldLength : computed(function(){
     return this.get("DOMinputField").val().length;
   }).volatile(),
 
-  selectionStart : Ember.computed(function(){
+  selectionStart : computed(function(){
     return this.get("DOMinputField").prop('selectionStart');
   }).volatile(),
 
-  selectionEnd : Ember.computed(function(){
+  selectionEnd : computed(function(){
     return this.get("DOMinputField").prop('selectionEnd');
   }).volatile(),
 
-  allSelected : Ember.computed(function(){
+  allSelected : computed(function(){
     return (this.get("selectionEnd")-this.get("selectionStart"))>=this.get("DOMinputFieldLength");
   }).volatile(),
 
-  somethingSelected : Ember.computed(function(){
+  somethingSelected : computed(function(){
     return (this.get("selectionEnd")-this.get("selectionStart"))>0;
   }).volatile(),
 
-  selection : Ember.computed(function(){
+  selection : computed(function(){
     return this.get("DOMinputValue").slice(this.get("selectionStart"), this.get("selectionEnd"));
   }).volatile(),
 
-  preSelection : Ember.computed(function(){
+  preSelection : computed(function(){
     return this.get("DOMinputValue").slice(0, this.get("selectionStart"));
   }).volatile(),
 
-  postSelection : Ember.computed(function(){
+  postSelection : computed(function(){
     return this.get("DOMinputValue").slice(this.get("selectionEnd"), this.get("DOMinputValue").length);
   }).volatile(),
 
-  isTouchDevice : Ember.computed(function(){
+  isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
   }),
 

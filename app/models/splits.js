@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { computed } from '@ember/object';
 BigNumber.config({DECIMAL_PLACES: 25});
 export default DS.Model.extend({
 
@@ -49,7 +50,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} negative percantage value of splittingStrategy
    */
-  splittingStrategySecondHalf: Ember.computed("splittingStrategy", function(){
+  splittingStrategySecondHalf: computed("splittingStrategy", function(){
     return this.get("splittingStrategy").times(-1);
   }),
 
@@ -58,7 +59,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} number of splits
    */
-  splitCount: Ember.computed("run.lengthM", "splitDistance", function(){
+  splitCount: computed("run.lengthM", "splitDistance", function(){
     return this.get("run.lengthM").dividedBy(this.get("splitDistance"));
   }),
 
@@ -67,7 +68,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} ceiled number of splits
    */
-  splitCountCeiled: Ember.computed("splitCount", function(){
+  splitCountCeiled: computed("splitCount", function(){
     return this.get("splitCount").ceil();
   }),
 
@@ -76,7 +77,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} length of the last split in meter, somewhere between 0 and splitDistance
    */
-  lastSplitDistance: Ember.computed("run.lengthM", "splitDistance", "splitCountCeiled", function(){
+  lastSplitDistance: computed("run.lengthM", "splitDistance", "splitCountCeiled", function(){
     return this.get("run.lengthM").minus(this.get("splitDistance").times(this.get("splitCountCeiled").minus(1)));
   }),
 
@@ -86,7 +87,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} number of the turning point split
    */
-  turningPointSplit: Ember.computed("splitCountCeiled", function(){
+  turningPointSplit: computed("splitCountCeiled", function(){
     return this.get("splitCountCeiled").dividedBy(2).ceil();
   }),
 
@@ -95,7 +96,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} position in meter
    */
-  turningPointM: Ember.computed("run.lengthM", function(){
+  turningPointM: computed("run.lengthM", function(){
     return this.get("run.lengthM").dividedBy(2);
   }),
 
@@ -104,7 +105,7 @@ export default DS.Model.extend({
    *
    * @return {Boolean}
    */
-  turningPointWithinSplit: Ember.computed("splitCount", function(){
+  turningPointWithinSplit: computed("splitCount", function(){
     return this.get("splitCount")%2 === 0 ? false : true;
   }),
 
@@ -113,7 +114,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} split time in seconds
    */
-  splitTime: Ember.computed("run.timeSec", "splitCount", function(){
+  splitTime: computed("run.timeSec", "splitCount", function(){
     return this.get("run.timeSec").dividedBy(this.get("splitCount"));
   }),
 
@@ -122,7 +123,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} last split time in seconds
    */
-  lastSplitTime: Ember.computed("run.timeSec", "splitTime", "splitCountCeiled", function(){
+  lastSplitTime: computed("run.timeSec", "splitTime", "splitCountCeiled", function(){
     return this.get("run.timeSec").minus(this.get("splitTime").times(this.get("splitCountCeiled").minus(1)));
   }),
 
@@ -131,7 +132,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceFirstHalf: Ember.computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategy", function(){
+  averagePaceFirstHalf: computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategy", function(){
     return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategy")).dividedBy(100));
   }),
 
@@ -140,7 +141,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} average pace in min/km
    */
-  averagePaceSecondHalf: Ember.computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
+  averagePaceSecondHalf: computed("run.paceMinPerKmRaw", "run.paceMinPerKmRaw", "splittingStrategySecondHalf", function(){
     return this.get("run.paceMinPerKmRaw").plus(this.get("run.paceMinPerKmRaw").times(this.get("splittingStrategySecondHalf")).dividedBy(100));
   }),
 
@@ -150,7 +151,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber} peak pace in min/km
    */
-  peakPaceValue: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "splittingStrategy", "run.lengthKmRaw", "slope", "shift", function(){
+  peakPaceValue: computed("averagePaceFirstHalf", "averagePaceSecondHalf", "splittingStrategy", "run.lengthKmRaw", "slope", "shift", function(){
     if(this.get("evenSlope")===false){
       // get the average pace of the fastes half
       return this.get("splittingStrategy").greaterThan(0) ? this.get("averagePaceSecondHalf") : this.get("averagePaceFirstHalf");
@@ -173,7 +174,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  slope: Ember.computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthKmRaw", function(){
+  slope: computed("averagePaceFirstHalf", "averagePaceSecondHalf", "run.lengthKmRaw", function(){
     // like in https://en.wikipedia.org/wiki/Slope
     var a = this.get("averagePaceFirstHalf").minus(this.get("averagePaceSecondHalf"));
     var b = this.get("run.lengthKmRaw").dividedBy(4).minus(this.get("run.lengthKmRaw").dividedBy(4).times(3));
@@ -185,7 +186,7 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  shift: Ember.computed("averagePaceFirstHalf", "slope", "run.lengthKmRaw", function(){
+  shift: computed("averagePaceFirstHalf", "slope", "run.lengthKmRaw", function(){
     // calculared by using https://en.wikipedia.org/wiki/Equation
     return this.get("averagePaceFirstHalf").minus(this.get("slope").times(this.get("run.lengthKmRaw").dividedBy(4)));
   }),

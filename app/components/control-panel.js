@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
@@ -9,7 +10,7 @@ export default Ember.Component.extend({
   shareButtonsVisible : false,
   imprintVisible : false,
 
-  shareButtonsVisibleClass : Ember.computed("shareButtonsVisible", function(){
+  shareButtonsVisibleClass : computed("shareButtonsVisible", function(){
     return this.get("shareButtonsVisible") === true ? "shareButtonsVisible" : "shareButtonsInvisible";
   }),
 

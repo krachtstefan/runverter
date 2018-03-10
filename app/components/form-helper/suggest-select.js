@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import $ from 'jquery';
+import { computed } from '@ember/object';
 export default Ember.Component.extend({
 
   classNames: ["suggest-select"],
 
   attributeBindings: ['style'],
 
-  style: Ember.computed('items', function () {
+  style: computed('items', function () {
     var Style = this.get("items").length === 0 ? "display:none" : null;
     return Ember.String.htmlSafe(Style);
   }),

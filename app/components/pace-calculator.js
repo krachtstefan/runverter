@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import $ from 'jquery';
+import { computed } from '@ember/object';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
@@ -15,18 +16,18 @@ export default Ember.Component.extend({
   races : Ember.inject.service('race'),
   targetTimes : Ember.inject.service('target-time'),
 
-  isTouchDevice : Ember.computed(function(){
+  isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
   }),
 
-  targetTimesSuggestions  : Ember.computed("run.lengthM", "i18n.locale", function(){
+  targetTimesSuggestions  : computed("run.lengthM", "i18n.locale", function(){
     var self = this;
     return this.get("targetTimes.templates").filter(function(item) {
       return self.get("run").isInRange(item.startM, item.endM);
     });
   }),
 
-  runLengthMetrics : Ember.computed("runLengthMetricsAvailable", "i18n.locale", "runLengthMetricsSelected", function(){
+  runLengthMetrics : computed("runLengthMetricsAvailable", "i18n.locale", "runLengthMetricsSelected", function(){
     var runLengthMetrics = [];
     var self = this;
     this.get("runLengthMetricsAvailable").forEach(function(item){
@@ -43,7 +44,7 @@ export default Ember.Component.extend({
     return runLengthMetrics;
   }),
 
-  runTempoMetrics : Ember.computed("runTempoMetricsAvailable", "i18n.locale", "runTempoMetricsSelected", function(){
+  runTempoMetrics : computed("runTempoMetricsAvailable", "i18n.locale", "runTempoMetricsSelected", function(){
     var runTempoMetrics = [];
     var self = this;
     this.get("runTempoMetricsAvailable").forEach(function(item){
@@ -80,75 +81,75 @@ export default Ember.Component.extend({
     });
   },
 
-  tooltipLengthKm : Ember.computed("run.lengthKm", "i18n.locale", function(){
+  tooltipLengthKm : computed("run.lengthKm", "i18n.locale", function(){
     return this.get("run.lengthKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.km");
   }),
 
-  tooltipLengthMi : Ember.computed("run.lengthMi", "i18n.locale", function(){
+  tooltipLengthMi : computed("run.lengthMi", "i18n.locale", function(){
     return this.get("run.lengthMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.distance.mi");
   }),
 
-  tooltipTimeHr : Ember.computed("run.timeHr", "i18n.locale", function(){
+  tooltipTimeHr : computed("run.timeHr", "i18n.locale", function(){
     return this.get("run.timeHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.hr");
   }),
 
-  tooltipTimeMin : Ember.computed("run.timeMin", "i18n.locale", function(){
+  tooltipTimeMin : computed("run.timeMin", "i18n.locale", function(){
     return this.get("run.timeMin").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.min");
   }),
 
-  tooltipTimeSec : Ember.computed("run.timeSec", "i18n.locale", function(){
+  tooltipTimeSec : computed("run.timeSec", "i18n.locale", function(){
     return this.get("run.timeSec").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.time.sec");
   }),
 
-  tooltipPaceMinPerKm : Ember.computed("run.paceMinPerKm", "i18n.locale", function(){
+  tooltipPaceMinPerKm : computed("run.paceMinPerKm", "i18n.locale", function(){
     return this.get("run.paceMinPerKm").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minkm");
   }),
 
-  tooltipPaceMinPerMi : Ember.computed("run.paceMinPerMi", "i18n.locale", function(){
+  tooltipPaceMinPerMi : computed("run.paceMinPerMi", "i18n.locale", function(){
     return this.get("run.paceMinPerMi").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.minmi");
   }),
 
-  tooltipSpeedKmHr : Ember.computed("run.speedKmHr", "i18n.locale", function(){
+  tooltipSpeedKmHr : computed("run.speedKmHr", "i18n.locale", function(){
     return this.get("run.speedKmHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.kmh");
   }),
 
-  tooltipSpeedMiHr : Ember.computed("run.speedMiHr", "i18n.locale", function(){
+  tooltipSpeedMiHr : computed("run.speedMiHr", "i18n.locale", function(){
     return this.get("run.speedMiHr").round(5).toString().replace(".", this.get('i18n').t("metrics.separator"))+" "+this.get('i18n').t("metrics.tempo.mih");
   }),
 
-  expertModeClass : Ember.computed("expertMode", function(){
+  expertModeClass : computed("expertMode", function(){
     return this.get("expertMode") === true ? "" : "uk-width-medium-4-6 uk-width-large-3-5";
   }),
 
-  showRunLengthKm: Ember.computed('runLengthMetricsSelected', function () {
+  showRunLengthKm: computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "km" ? true : false;
   }),
 
-  showRunLengthMi: Ember.computed('runLengthMetricsSelected', function () {
+  showRunLengthMi: computed('runLengthMetricsSelected', function () {
     return this.get("runLengthMetricsSelected") === "mi" ? true : false;
   }),
 
-  showRunTempoMinKm: Ember.computed('runTempoMetricsSelected', function () {
+  showRunTempoMinKm: computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "minkm" ? true : false;
   }),
 
-  showRunTempoMinMi: Ember.computed('runTempoMetricsSelected', function () {
+  showRunTempoMinMi: computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "minmi" ? true : false;
   }),
 
-  showRunTempoKmH: Ember.computed('runTempoMetricsSelected', function () {
+  showRunTempoKmH: computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "kmh" ? true : false;
   }),
 
-  showRunTempoMiH: Ember.computed('runTempoMetricsSelected', function () {
+  showRunTempoMiH: computed('runTempoMetricsSelected', function () {
     return this.get("runTempoMetricsSelected") === "mih" ? true : false;
   }),
 
-  racePickerVisibleClass: Ember.computed('racePickerVisible', 'isTouchDevice', function () {
+  racePickerVisibleClass: computed('racePickerVisible', 'isTouchDevice', function () {
     return this.get("racePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 
-  timePickerVisibleClass: Ember.computed('timePickerVisible', 'isTouchDevice',  function () {
+  timePickerVisibleClass: computed('timePickerVisible', 'isTouchDevice',  function () {
     return this.get("timePickerVisible") === true || this.get("isTouchDevice") === true ? "suggestSelectVisible" : "suggestSelectInvisible";
   }),
 

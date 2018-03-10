@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 export default Ember.Service.extend({
   i18n: Ember.inject.service(),
-  templates : Ember.computed("i18n.locale", function(){
+  templates : computed("i18n.locale", function(){
     return [
       {
         'name' : this.get('i18n').t("races.10k"),

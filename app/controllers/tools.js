@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
@@ -47,7 +48,7 @@ export default Ember.Controller.extend({
   expertMode : false,
   imprintVisible : false,
 
-  tools : Ember.computed("toolsAvailablem", "i18n.locale", function(){
+  tools : computed("toolsAvailablem", "i18n.locale", function(){
     var selectItems = [];
     var self = this;
     this.get("toolsAvailable").forEach(function(item){
@@ -68,35 +69,35 @@ export default Ember.Controller.extend({
     }
   },
 
-  selectedTool : Ember.computed("selectedToolKey", "i18n.locale", function(){
+  selectedTool : computed("selectedToolKey", "i18n.locale", function(){
     return Ember.A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
   }),
 
-  selectedToolClass : Ember.computed("selectedTool", function(){
+  selectedToolClass : computed("selectedTool", function(){
     return "container-"+this.get("selectedTool.key");
   }),
 
-  expertModeClass : Ember.computed("expertMode", function(){
+  expertModeClass : computed("expertMode", function(){
     return this.get("expertMode") === true ? "expertModeOn" : "expertModeOff";
   }),
 
-  selectedToolPca: Ember.computed("selectedToolKey", function () {
+  selectedToolPca: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "pca" ? true : false;
   }),
 
-  selectedToolPc: Ember.computed("selectedToolKey", function () {
+  selectedToolPc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "pc" ? true : false;
   }),
 
-  selectedToolLc: Ember.computed("selectedToolKey", function () {
+  selectedToolLc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "lc" ? true : false;
   }),
 
-  selectedToolRp: Ember.computed("selectedToolKey", function () {
+  selectedToolRp: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "rp" ? true : false;
   }),
 
-  selectedToolSc: Ember.computed("selectedToolKey", function () {
+  selectedToolSc: computed("selectedToolKey", function () {
     return this.get("selectedToolKey") === "sc" ? true : false;
   }),
 
