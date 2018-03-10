@@ -19,11 +19,5 @@ export default Component.extend({
     run.scheduleOnce('afterRender', this, function() {
       $("select.menu").selectOrDie("update");
     });
-  },
-
-  actions: {
-    switchTool: function(toolKey) {
-      this.sendAction('action', toolKey);
-    }
   }
 });

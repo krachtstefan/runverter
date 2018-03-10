@@ -122,9 +122,6 @@ export default Controller.extend({
   }),
 
   actions: {
-    navigateTo: function(selection) {
-      this.set("selectedToolKey", selection);
-    },
     showDonationMessage: function() {
       this.openDonationMessage();
     }

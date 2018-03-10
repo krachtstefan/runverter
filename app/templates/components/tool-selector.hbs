@@ -3,7 +3,7 @@
     <div class="uk-width-1-1">
       <h1>
         <span class="toolLabel">{{selectedMenuItem.label}}</span>
-        {{#x-select value=defaultValue action="switchTool" class="menu"}}
+        {{#x-select value=defaultValue class="menu"}}
           {{#each menuItems as |item|}}
             {{#x-option value=item.key}}{{item.name}}{{/x-option}}
           {{/each}}
