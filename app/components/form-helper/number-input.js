@@ -1,7 +1,6 @@
 import OneWayTel from './../one-way-tel';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-import { on } from '@ember/object/evented';
 import { A } from '@ember/array';
 import { observer } from '@ember/object';
 
