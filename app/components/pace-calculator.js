@@ -1,11 +1,11 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
 import { run } from '@ember/runloop';
 export default Component.extend({
 
-  i18n: Ember.inject.service(),
+  i18n: inject.service(),
 
   runLengthMetricsSelected : "km", // may be overwritten when using this component
   runLengthMetricsAvailable : ["km", "mi"],
@@ -15,8 +15,8 @@ export default Component.extend({
   racePickerVisible : false,
   timePickerVisible : false,
 
-  races : Ember.inject.service('race'),
-  targetTimes : Ember.inject.service('target-time'),
+  races : inject.service('race'),
+  targetTimes : inject.service('target-time'),
 
   isTouchDevice : computed(function(){
     return 'ontouchstart' in document.documentElement;
