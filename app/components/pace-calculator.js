@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import $ from 'jquery';
 import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
 export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
@@ -63,7 +64,7 @@ export default Ember.Component.extend({
 
   didRender: function() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       var self = this;
       $("select.runLength").selectOrDie({customID:"runLength"}).ready(function() {
         $("select.runLength").selectOrDie("update"); // need to trigger update to select the correct initial value

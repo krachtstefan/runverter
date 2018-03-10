@@ -1,6 +1,7 @@
 import OneWayTel from './../one-way-tel';
 import Ember from 'ember';
 import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
 export default OneWayTel.extend({
   attributeBindings: ['autocomplete'],
   classNameBindings: ['widthClassName'],
@@ -110,7 +111,7 @@ export default OneWayTel.extend({
   },
 
   focusIn(event) {
-    Ember.run.later(this, function() {
+    run.later(this, function() {
       this.selectAll(event);
     }, 0); // add a delay to ensure to be fired after a possible click event
   },

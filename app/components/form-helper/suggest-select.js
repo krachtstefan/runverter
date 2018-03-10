@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import $ from 'jquery';
 import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
 export default Ember.Component.extend({
 
   classNames: ["suggest-select"],
@@ -14,14 +15,14 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       $("select."+this.get("identifier")).selectOrDie({customID: this.get("identifier") });
     });
   },
 
   didRender: function(){
     // ensure selectOrDie update on language change
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       $("select."+this.get("identifier")).selectOrDie("update");
     });
   },

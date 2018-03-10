@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { run } from '@ember/runloop';
 import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('prediction', 'Prediction Model', {
@@ -23,7 +24,7 @@ test('predictedRun is a relation to run model', function(assert) {
 
 test('predictedRun behaves like run model', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.set('predictedRun',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -36,7 +37,7 @@ test('predictedRun behaves like run model', function(assert) {
 
 test('predictedRun has a default value', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(prediction.get("predictedRun.timeHrRaw").isBigNumber, true);
   });
 });
@@ -44,7 +45,7 @@ test('predictedRun has a default value', function(assert) {
 test('predictedRun changes when achievedRun was created', function(assert) {
   var prediction = this.subject(), self = this;
   var defaultPredictedRunValue = prediction.get("predictedRun.timeSec");
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(prediction.get("predictedRun.timeSec").toString(), defaultPredictedRunValue.toString());
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(20000),
@@ -56,33 +57,33 @@ test('predictedRun changes when achievedRun was created', function(assert) {
 
 test('predictedRun changes when achievedRun time does', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(20000),
       "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-  Ember.run(function(){ prediction.set('achievedRun.timeSec', 3060); });
+  run(function(){ prediction.set('achievedRun.timeSec', 3060); });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
 test('predictedRun changes when achievedRun length does', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(20000),
       "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   var initialPredictedRunValue = prediction.get("predictedRun.timeSec");
-  Ember.run(function(){ prediction.set('achievedRun.lengthM', 20000); });
+  run(function(){ prediction.set('achievedRun.lengthM', 20000); });
   assert.notStrictEqual(prediction.get("predictedRun.timeSec").toString(), initialPredictedRunValue.toString());
 });
 
 test('predictedRun works with a 10k example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(20000),
       "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
@@ -96,7 +97,7 @@ test('predictedRun works with a 10k example', function(assert) {
 
 test('predictedRun works with a mile example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(8046.72),
       "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) })
@@ -110,7 +111,7 @@ test('predictedRun works with a mile example', function(assert) {
 
 test('predictedRun works with a marathon example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "predictedRun.lengthM" : new BigNumber(21097.5),
       "achievedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) })
@@ -124,7 +125,7 @@ test('predictedRun works with a marathon example', function(assert) {
 
 test('predictedRun works when the run is definied with lengthKm and timeMin setter', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("predictedRun.lengthKm", new BigNumber(21.0975));
     prediction.set("achievedRun.lengthKm", new BigNumber(42.195));
     prediction.set("achievedRun.timeMin", new BigNumber(44).div(60).plus(206));
@@ -145,7 +146,7 @@ test('achievedRun is a relation to run model', function(assert) {
 
 test('achievedRun behaves like run model', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.set('achievedRun',
       self.store().createRecord('run',{
         timeSec : new BigNumber(3600*4),
@@ -158,7 +159,7 @@ test('achievedRun behaves like run model', function(assert) {
 
 test('achievedRun has a default value', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(prediction.get("achievedRun.timeHrRaw").isBigNumber, true);
   });
 });
@@ -167,7 +168,7 @@ test('achievedRun has a default value', function(assert) {
 test('updateAchievedRunSec updates achievedRun time when predictedRun was created', function(assert) {
   var prediction = this.subject(), self = this;
   var defaultAchievedRunValue = prediction.get("achievedRun.timeSec");
-  Ember.run(function(){
+  run(function(){
     assert.strictEqual(prediction.get("achievedRun.timeSec").toString(), defaultAchievedRunValue.toString());
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(20000),
@@ -180,14 +181,14 @@ test('updateAchievedRunSec updates achievedRun time when predictedRun was create
 
 test('updateAchievedRunSec updates achievedRun time when predictedRun time changes', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(20000),
       "predictedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
     });
   });
   var initialAchievedRunValue = prediction.get("achievedRun.timeSec");
-  Ember.run(function(){
+  run(function(){
     prediction.set('predictedRun.timeSec', 3060);
     prediction.updateAchievedRunSec();
   });
@@ -196,14 +197,14 @@ test('updateAchievedRunSec updates achievedRun time when predictedRun time chang
 
 test('updateAchievedRunSec updates achievedRun time when predictedRun length changes', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(20000),
       "predictedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) }),
     });
   });
   var initialPredictedRunValue = prediction.get("achievedRun.timeSec");
-  Ember.run(function(){
+  run(function(){
     prediction.set('predictedRun.lengthM', 20000);
     prediction.updateAchievedRunSec();
   });
@@ -212,7 +213,7 @@ test('updateAchievedRunSec updates achievedRun time when predictedRun length cha
 
 test('updateAchievedRunSec updates achievedRun time with a 10k example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(20000),
       "predictedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(3000), lengthM : new BigNumber(10000) })
@@ -227,7 +228,7 @@ test('updateAchievedRunSec updates achievedRun time with a 10k example', functio
 
 test('updateAchievedRunSec updates achievedRun time with a mile example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(8046.72),
       "predictedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(495), lengthM : new BigNumber(1609.344) })
@@ -242,7 +243,7 @@ test('updateAchievedRunSec updates achievedRun time with a mile example', functi
 
 test('updateAchievedRunSec updates achievedRun time with a marathon example', function(assert) {
   var prediction = this.subject(), self = this;
-  Ember.run(function(){
+  run(function(){
     prediction.setProperties({
       "achievedRun.lengthM" : new BigNumber(21097.5),
       "predictedRun" : self.store().createRecord('run',{ timeSec : new BigNumber(12404), lengthM : new BigNumber(42195) })
@@ -257,7 +258,7 @@ test('updateAchievedRunSec updates achievedRun time with a marathon example', fu
 
 test('updateAchievedRunSec updates achievedRun time when the run is definied with lengthKm and timeMin setter', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("achievedRun.lengthKm", new BigNumber(21.0975));
     prediction.set("predictedRun.lengthKm", new BigNumber(42.195));
     prediction.set("predictedRun.timeMin", new BigNumber(44).div(60).plus(206));
@@ -319,7 +320,7 @@ test('peterRiegelMethodReversed works (with BigNumbers)', function(assert) {
 // peterRiegelMethodSuitable
 test('peterRiegelMethodSuitable is false when the achieved Run is below 3.5 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("achievedRun.lengthM", new BigNumber(100));
     prediction.set("achievedRun.timeSec", new BigNumber(209));
     prediction.set("predictedRun.lengthM", new BigNumber(500));
@@ -329,7 +330,7 @@ test('peterRiegelMethodSuitable is false when the achieved Run is below 3.5 minu
 
 test('peterRiegelMethodSuitable is true when the achieved Run is above 3.5 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("achievedRun.lengthM", new BigNumber(100));
     prediction.set("achievedRun.timeSec", new BigNumber(210));
     prediction.set("predictedRun.lengthM", new BigNumber(500));
@@ -339,7 +340,7 @@ test('peterRiegelMethodSuitable is true when the achieved Run is above 3.5 minut
 
 test('peterRiegelMethodSuitable is false when the achieved Run is above 230 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("achievedRun.lengthM", new BigNumber(42195));
     prediction.set("achievedRun.timeSec", new BigNumber(13801));
     prediction.set("predictedRun.lengthM", new BigNumber(21098));
@@ -349,7 +350,7 @@ test('peterRiegelMethodSuitable is false when the achieved Run is above 230 minu
 
 test('peterRiegelMethodSuitable is true when the achieved Run is below 230 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("achievedRun.lengthM", new BigNumber(42195));
     prediction.set("achievedRun.timeSec", new BigNumber(13800));
     prediction.set("predictedRun.lengthM", new BigNumber(21098));
@@ -359,7 +360,7 @@ test('peterRiegelMethodSuitable is true when the achieved Run is below 230 minut
 
 test('peterRiegelMethodSuitable is false when the predicted Run is below 3.5 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("predictedRun.timeSec", new BigNumber(209));
     prediction.set("predictedRun.lengthM", new BigNumber(100));
     prediction.set("achievedRun.lengthM", new BigNumber(500));
@@ -370,7 +371,7 @@ test('peterRiegelMethodSuitable is false when the predicted Run is below 3.5 min
 
 test('peterRiegelMethodSuitable is true when the predicted Run is above 3.5 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("predictedRun.timeSec", new BigNumber(210));
     prediction.set("predictedRun.lengthM", new BigNumber(100));
     prediction.set("achievedRun.lengthM", new BigNumber(500));
@@ -381,7 +382,7 @@ test('peterRiegelMethodSuitable is true when the predicted Run is above 3.5 minu
 
 test('peterRiegelMethodSuitable is false when the predicted Run is above 230 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("predictedRun.timeSec", new BigNumber(13801));
     prediction.set("predictedRun.lengthM", new BigNumber(42195));
     prediction.set("achievedRun.lengthM", new BigNumber(21098));
@@ -392,7 +393,7 @@ test('peterRiegelMethodSuitable is false when the predicted Run is above 230 min
 
 test('peterRiegelMethodSuitable is true when the predicted Run is below 230 minutes', function(assert) {
   var prediction = this.subject();
-  Ember.run(function(){
+  run(function(){
     prediction.set("predictedRun.timeSec", new BigNumber(13800));
     prediction.set("predictedRun.lengthM", new BigNumber(42195));
     prediction.set("achievedRun.lengthM", new BigNumber(21098));
