@@ -7,6 +7,8 @@ export default {
     'switchLanguage' : 'Switch to english',
     'enableExpertMode' : 'Expertenmodus aktivieren',
     'disableExpertMode' : 'Expertenmodus deaktivieren',
+    'enableDarkMode' : 'Dunkles Desgin aktivieren',
+    'disableDarkMode' : 'Helles Desgin aktivieren',
     'share' : 'Erzähle es deiner Laufcrew',
     'shareThanks' : 'Danke ♡',
     'learnMore' : 'Mehr über Runverter erfahren',

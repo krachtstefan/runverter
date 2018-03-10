@@ -7,6 +7,8 @@ export default {
     'switchLanguage' : 'Deutsche Version',
     'enableExpertMode' : 'Enable expert mode',
     'disableExpertMode' : 'Disable expert mode',
+    'enableDarkMode' : 'switch to dark theme',
+    'disableDarkMode' : 'switch to light theme',
     'share' : 'Share with your running crew',
     'shareThanks' : 'Thank you ♡',
     'learnMore' : 'Learn more about runverter',
