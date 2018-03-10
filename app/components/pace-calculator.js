@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-export default Ember.Component.extend({
+export default Component.extend({
 
   i18n: Ember.inject.service(),
 
