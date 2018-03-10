@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
 export default Component.extend({
 
-  i18n: Ember.inject.service(),
+  i18n: inject.service(),
 
   classNames: ["control-panel"],
   classNameBindings: ['visible:open'],
