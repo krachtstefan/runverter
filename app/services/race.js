@@ -1,8 +1,9 @@
-import Ember from 'ember';
 import Service from '@ember/service';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
+
 export default Service.extend({
-  i18n: Ember.inject.service(),
+  i18n: inject.service(),
   templates : computed("i18n.locale", function(){
     return [
       {
