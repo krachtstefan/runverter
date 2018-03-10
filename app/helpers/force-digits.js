@@ -24,4 +24,4 @@ export function forceDigits(params, args) {
   return output;
 }
 
-export default helper.helper(forceDigits);
+export default helper(forceDigits);

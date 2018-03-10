@@ -18,4 +18,4 @@ export function inlineCSS(params, args) {
   return htmlSafe(output);
 }
 
-export default helper.helper(inlineCSS);
+export default helper(inlineCSS);
