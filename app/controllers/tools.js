@@ -1,9 +1,12 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-export default Ember.Controller.extend({
+import { observer } from '@ember/object';
+import { inject } from '@ember/service';
+import { A } from '@ember/array';
+export default Controller.extend({
 
-  i18n: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  i18n: inject.service(),
+  notifications: inject.service('notification-messages'),
 
   queryParams: {
     'i18n.locale' : 'l',                                        // selected locale
@@ -70,7 +73,7 @@ export default Ember.Controller.extend({
   },
 
   selectedTool : computed("selectedToolKey", "i18n.locale", function(){
-    return Ember.A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
+    return A(this.get('tools')).findBy("key", this.get("selectedToolKey"));
   }),
 
   selectedToolClass : computed("selectedTool", function(){
@@ -101,18 +104,18 @@ export default Ember.Controller.extend({
     return this.get("selectedToolKey") === "sc" ? true : false;
   }),
 
-  handleRunPersistence: Ember.observer("model.run.timeSec", "model.run.lengthM", function () {
+  handleRunPersistence: observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
   }),
 
-  handleAchievedRunPersistence: Ember.observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
+  handleAchievedRunPersistence: observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
     // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRun would be saved too
     if(this.get("model.prediction.achievedRun.id") === "achievedRun"){
       this.get("model.prediction.achievedRun.content").save();
     }
   }),
 
-  handleSplitPersistence: Ember.observer("model.run.splits.content", function () {
+  handleSplitPersistence: observer("model.run.splits.content", function () {
     if(this.get("model.run.splits.content")){
       this.get("model.run.splits.content").save();
     }
