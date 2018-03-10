@@ -1,8 +1,10 @@
 import Ember from 'ember';
+import Component from '@ember/component';
 import $ from 'jquery';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-export default Ember.Component.extend({
+import { htmlSafe } from '@ember/string';
+export default Component.extend({
 
   classNames: ["suggest-select"],
 
@@ -10,7 +12,7 @@ export default Ember.Component.extend({
 
   style: computed('items', function () {
     var Style = this.get("items").length === 0 ? "display:none" : null;
-    return Ember.String.htmlSafe(Style);
+    return htmlSafe(Style);
   }),
 
   didInsertElement: function() {
