@@ -22,6 +22,7 @@ export default Controller.extend({
     'splitsCalcSlopeQuery' : 'es',                              // selected even slope option for splits calculator
     'splitsCalcTempoMetricsSelected' : 's-sc',                  // selected tempo metric for splits calculator
     'expertMode' : 'nerd',                                      // expert mode selected
+    'darkMode' : 'darkmode',                                    // dark mode
     'imprintVisible' : 'info',                                  // imprint visible
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
