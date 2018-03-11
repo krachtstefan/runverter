@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import $ from 'jquery';
 import { computed } from '@ember/object';
 import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
