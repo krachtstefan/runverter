@@ -110,6 +110,14 @@ export default Controller.extend({
     this.get("model.run").save();
   }),
 
+  handleDarkModeClass: observer("darkMode", function () {
+    if(this.get("darkMode") == true){
+      $("#root").addClass("darkmode");
+    }else{
+      $("#root").removeClass("darkmode");
+    }
+  }),
+
   handleAchievedRunPersistence: observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
     // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRun would be saved too
     if(this.get("model.prediction.achievedRun.id") === "achievedRun"){
