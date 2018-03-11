@@ -40,7 +40,6 @@
     "ember-welcome-page": "^3.0.0",
     "eslint-plugin-ember": "^5.0.0",
     "loader.js": "^4.2.3",
-
     "broccoli-manifest": "git://github.com/krachtstefan/broccoli-manifest.git#pathprefix-includePaths-fix",
     "broccoli-strip-debug": "^1.1.0",
     "chart.js": "^2.2.1",
