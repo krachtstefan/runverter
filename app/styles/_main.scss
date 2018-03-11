@@ -1,5 +1,4 @@
 html{
-  background-color:$color-main-background;
   font-family: 'Open Sans', Georgia, sans-serif;
   overflow-y: scroll;
   height: 100%;
@@ -9,6 +8,7 @@ html{
 body{
   line-height:0.8em;
   color:$color-main-text;
+  background-color:$color-main-background;
   position: relative;
   margin: 0;
   min-height: 100%;
