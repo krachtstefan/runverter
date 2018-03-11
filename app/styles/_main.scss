@@ -142,6 +142,7 @@ body{
     color:$color-form-text;
     border-color:$color-form-border;
     background-color:$color-main-background;
+    @include transition(0s ease-out);
     height:46px;
     line-height: 46px; // for IE <= 10
     @include respond-to("small"){
