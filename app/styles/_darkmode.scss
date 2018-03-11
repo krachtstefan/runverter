@@ -1,4 +1,9 @@
 body.darkmode{
+  h1, h2, h3, h4, h5{
+    color:$color-darkmode-default;
+  }
+  color:$color-darkmode-default;
+
   // _main.scss overrides
   background-color:$color-darkmode-background;
   .header{
@@ -42,6 +47,10 @@ body.darkmode{
     background:$color-darkmode-background;
   }
   .sod_select{
+    background: $color-darkmode-background;
+  }
+
+  .sod_select .sod_list_wrapper{
     background: $color-darkmode-background;
   }
 
