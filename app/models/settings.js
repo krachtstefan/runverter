@@ -11,20 +11,11 @@ export default DS.Model.extend({
   }),
 
   /**
-   *  Display release notes for race predictor
+   *  Display release notes for dark mode
    *
    * @type {Boolean}
    */
-  displayReleaseNotesRacePredictor: DS.attr('boolean', {
-    defaultValue() { return true; }
-  }),
-
-  /**
-   *  Display release notes for splits calculator
-   *
-   * @type {Boolean}
-   */
-  displayReleaseNotesSplitsCalculator: DS.attr('boolean', {
+  displayReleaseNotesDarkmode: DS.attr('boolean', {
     defaultValue() { return true; }
   }),
 

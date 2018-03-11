@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import $ from 'jquery';
 import { computed } from '@ember/object';
 import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -21,8 +22,9 @@ export default Controller.extend({
     'splitsCalcStrategyQuery' : 'ss',                           // selected split strategy for splits calculator
     'splitsCalcSlopeQuery' : 'es',                              // selected even slope option for splits calculator
     'splitsCalcTempoMetricsSelected' : 's-sc',                  // selected tempo metric for splits calculator
-    'expertMode' : 'nerd',                                      // selected display mode
-    'imprintVisible' : 'info',                                  // selected display mode
+    'expertMode' : 'nerd',                                      // expert mode selected
+    'darkMode' : 'darkmode',                                    // dark mode
+    'imprintVisible' : 'info',                                  // imprint visible
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
@@ -49,6 +51,7 @@ export default Controller.extend({
   },
 
   expertMode : false,
+  darkMode : false,
   imprintVisible : false,
 
   tools : computed("toolsAvailablem", "i18n.locale", function(){
@@ -106,6 +109,14 @@ export default Controller.extend({
 
   handleRunPersistence: observer("model.run.timeSec", "model.run.lengthM", function () {
     this.get("model.run").save();
+  }),
+
+  handleDarkModeClass: observer("darkMode", function () {
+    if(this.get("darkMode") == true){
+      $("#root").addClass("darkmode");
+    }else{
+      $("#root").removeClass("darkmode");
+    }
   }),
 
   handleAchievedRunPersistence: observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {

@@ -29,6 +29,9 @@ export default Component.extend({
     toggleExpertMode: function(){
       this.toggleProperty("expertMode");
     },
+    toggleDarkMode: function(){
+      this.toggleProperty("darkMode");
+    },
     openImprintPage: function() {
       this.send('closeControlPanel');
       this.set("imprintVisible", true);

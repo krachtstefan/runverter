@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="78px" height="77px" viewBox="0 0 78 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>lightmode</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="lightmode" fill-rule="nonzero" fill="#0088CC">
+            <path d="M61.4,43.5 L60,47.5 C56.6,55.6 48.5,61.3 39.2,61.3 C29.9,61.3 21.9,55.6 18.4,47.5 L17.1,43.4 C16.8,41.9 16.6,40.2 16.6,38.6 C16.6,26.2 26.8,16 39.3,16 C51.8,16 61.9,26.2 61.9,38.7 C61.9,40.3 61.7,42 61.4,43.5 Z M53.3565673,41.7387969 C53.5476269,40.7834989 53.675,39.7008278 53.675,38.6818433 C53.675,30.7210265 47.24266,24.225 39.2818433,24.225 C31.3210265,24.225 24.825,30.7210265 24.825,38.6181567 C24.825,39.6371413 24.9523731,40.7198124 25.1434327,41.6751104 L25.9713576,44.2862583 C28.2003863,49.4448675 33.2953091,53.075 39.2181567,53.075 C45.1410044,53.075 50.2996137,49.4448675 52.4649558,44.2862583 L53.3565673,41.7387969 Z" id="Combined-Shape"></path>
+            <rect id="Rectangle-path" fill-opacity="0.5" x="0.9" y="36.5" width="12" height="4.1"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" x="65.7" y="36.5" width="12" height="4.1"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" transform="translate(16.421935, 61.413455) rotate(-45.000000) translate(-16.421935, -61.413455) " x="10.4219925" y="59.3634747" width="11.9998849" height="4.09996068"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" transform="translate(62.182825, 15.556785) rotate(-45.000000) translate(-62.182825, -15.556785) " x="56.1828825" y="13.5068047" width="11.9998849" height="4.09996068"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" x="37.3" y="64.9" width="4.1" height="12"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" x="37.3" y="0.1" width="4.1" height="12"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" transform="translate(62.230215, 61.366465) rotate(-45.000000) translate(-62.230215, -61.366465) " x="60.1802347" y="55.3665225" width="4.09996068" height="11.9998849"></rect>
+            <rect id="Rectangle-path" fill-opacity="0.5" transform="translate(16.374545, 15.606275) rotate(-45.000000) translate(-16.374545, -15.606275) " x="14.3245647" y="9.60633254" width="4.09996068" height="11.9998849"></rect>
+        </g>
+    </g>
+</svg>

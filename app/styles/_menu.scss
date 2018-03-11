@@ -99,7 +99,7 @@ ul.settings {
   background:$color-secondary-background;
   z-index: -9999;
   outline: 5px solid $color-overlay-border;
-  @include transition(0.25s ease-in-out);
+  @include transition(opacity 0.25s ease-in-out);
   @include respond-to("small"){
     width:400px;
     right: 20px;
@@ -131,13 +131,16 @@ ul.settings li>a:hover {
   background-color:$color-main-background;
 }
 
-#panel-share::before,
 #panel-language-en::before,
 #panel-language-de::before,
 #panel-expertmode-true::before,
 #panel-expertmode-false::before,
 #panel-expertmode-true span::before,
 #panel-expertmode-false span::before,
+#panel-darkmode-true::before,
+#panel-darkmode-false::before,
+#panel-darkmode-true span::before,
+#panel-darkmode-false span::before,
 #panel-language-de span::before,
 #panel-language-en span::before,
 #panel-share::before,
@@ -210,6 +213,24 @@ ul.settings li>a:hover {
 #panel-expertmode-false span::before{
   background-position: top;
   opacity: 0;
+}
+
+#panel-darkmode-true::before,
+#panel-darkmode-false::before{
+  background-image: inline-image("lightmode.svg");
+}
+
+#panel-darkmode-true::before{
+  background-position: -40px -40px;
+}
+
+#panel-darkmode-false span::before,
+#panel-darkmode-true span::before{
+  background-image: inline-image("darkmode.svg");
+}
+
+#panel-darkmode-false span::before{
+  background-position: 40px 40px;
 }
 
 #panel-share::before{

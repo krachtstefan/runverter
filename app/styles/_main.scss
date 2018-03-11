@@ -1,5 +1,4 @@
 html{
-  background-color:$color-main-background;
   font-family: 'Open Sans', Georgia, sans-serif;
   overflow-y: scroll;
   height: 100%;
@@ -9,12 +8,17 @@ html{
 body{
   line-height:0.8em;
   color:$color-main-text;
+  background-color:$color-main-background;
   position: relative;
   margin: 0;
   min-height: 100%;
   h1{
+    color:$color-main-text;
     font-size:2em;
     line-height:1.5em;
+  }
+  h2, h3, h4{
+    color:$color-main-text;
   }
 
   p{
@@ -138,6 +142,7 @@ body{
     color:$color-form-text;
     border-color:$color-form-border;
     background-color:$color-main-background;
+    @include transition(0s ease-out);
     height:46px;
     line-height: 46px; // for IE <= 10
     @include respond-to("small"){
