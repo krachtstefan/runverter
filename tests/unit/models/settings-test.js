@@ -21,6 +21,17 @@ test('displayPeterRiegelExlanation is true by default', function(assert) {
   assert.strictEqual(settings.get("displayPeterRiegelExlanation") , true);
 });
 
+// displayReleaseNotesDarkmode
+test('displayReleaseNotesDarkmode is from type Boolean', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayReleaseNotesDarkmode").constructor.name , "Boolean");
+});
+
+test('displayReleaseNotesDarkmode is true by default', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayReleaseNotesDarkmode") , true);
+});
+
 // createdAt
 test('createdAt is from type Date', function(assert) {
   var settings = this.subject();
