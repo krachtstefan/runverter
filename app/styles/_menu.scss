@@ -137,6 +137,8 @@ ul.settings li>a:hover {
 #panel-expertmode-false::before,
 #panel-expertmode-true span::before,
 #panel-expertmode-false span::before,
+#panel-darkmode-true::before,
+#panel-darkmode-false::before,
 #panel-language-de span::before,
 #panel-language-en span::before,
 #panel-share::before,
@@ -209,6 +211,14 @@ ul.settings li>a:hover {
 #panel-expertmode-false span::before{
   background-position: top;
   opacity: 0;
+}
+
+#panel-darkmode-true::before{
+  background-image: inline-image("lightmode.svg");
+}
+
+#panel-darkmode-false::before{
+  background-image: inline-image("darkmode.svg");
 }
 
 #panel-share::before{
