@@ -1,11 +1,15 @@
 body.darkmode{
-  h1, h2, h3, h4, h5{
-    color:$color-darkmode-default;
-  }
-  color:$color-darkmode-default;
-
   // _main.scss overrides
+  color:$color-darkmode-main-text;
   background-color:$color-darkmode-background;
+  h1{
+    color:$color-darkmode-main-text;
+  }
+
+  p{
+    color:$color-darkmode-main-text-light;
+  }
+
   .header{
     border:1px solid $color-darkmode-background;
     background-color:$color-darkmode-background;
@@ -17,6 +21,22 @@ body.darkmode{
 
   .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
     background-color:$color-darkmode-background;
+    &:focus{
+      color:$color-darkmode-main-text;
+    }
+  }
+
+  .tools{
+    .toolLabel{
+      color:$color-darkmode-main-text-light;
+    }
+  }
+
+  #footer #donateButton{
+    color:$color-darkmode-main-text-light;
+    &:hover{
+      color:$color-form-text;
+    }
   }
 
   // _imprint.scss overrides
@@ -45,13 +65,27 @@ body.darkmode{
   }
   #menu{
     background:$color-darkmode-background;
+    &.sod_select:before,
+    &.sod_select:after{
+      color:$color-darkmode-main-text;
+    }
   }
   .sod_select{
     background: $color-darkmode-background;
   }
 
+  .sod_select:before,
+  .sod_select:after{
+    color:$color-darkmode-main-text-light;
+  }
+
   .sod_select .sod_list_wrapper{
+    color:$color-darkmode-main-text;
     background: $color-darkmode-background;
+  }
+  .sod_select .sod_option.optgroup,
+  .sod_select .sod_option.optgroup.disabled{
+    color:$color-darkmode-main-text;
   }
 
   // _splits.scss overrides
