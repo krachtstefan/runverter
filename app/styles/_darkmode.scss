@@ -98,6 +98,9 @@ body.darkmode{
         border-bottom: 10px solid $color-darkmode-background;
         background-color:$color-darkmode-background;
       }
+      tr.progress{
+        background-color:$color-darkmode-main-text;
+      }
     }
   }
 }
