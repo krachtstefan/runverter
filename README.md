@@ -1,4 +1,4 @@
-# Runverter [![Build Status](https://travis-ci.org/krachtstefan/runverter.svg?branch=master)](https://travis-ci.org/krachtstefan/runverter)
+# Runverter
 
 Runverter is a toolset for runners that helps to convert metrics, calculate times and speed and much more. For more information about this project please check out the [detailed blog post](http://stefankracht.de/news/runverter).
 
