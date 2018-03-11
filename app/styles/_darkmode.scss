@@ -1,0 +1,60 @@
+body.darkmode{
+  // _main.scss overrides
+  background-color:$color-darkmode-background;
+  .header{
+    border:1px solid $color-darkmode-background;
+    background-color:$color-darkmode-background;
+  }
+
+  .intro{
+    background:$color-darkmode-background;
+  }
+
+  .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
+    background-color:$color-darkmode-background;
+  }
+
+  // _imprint.scss overrides
+  .uk-container-center{
+    background-color:$color-darkmode-background;
+  }
+
+  // _menu.scss overrides
+  #toggle-panel span, #close-imprint-page span{
+    @include respond-to("small"){
+      background-color:$color-darkmode-background;
+    }
+  }
+
+  ul.settings {
+    background:$color-darkmode-background;
+  }
+
+  ul.settings li>a:hover {
+    background-color:$color-darkmode-background;
+  }
+
+  // _selectordie.scss overrides
+  .sod_select.focus{
+    background-color:$color-darkmode-background;
+  }
+  #menu{
+    background:$color-darkmode-background;
+  }
+  .sod_select{
+    background: $color-darkmode-background;
+  }
+
+  // _splits.scss overrides
+  .splits-container table{
+    tr{
+      background-color:$color-darkmode-background;
+    }
+    tbody{
+      tr, tr:nth-of-type(odd){
+        border-bottom: 10px solid $color-darkmode-background;
+        background-color:$color-darkmode-background;
+      }
+    }
+  }
+}
