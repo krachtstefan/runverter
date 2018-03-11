@@ -64,6 +64,13 @@ body.darkmode{
   }
 
   // _selectordie.scss overrides
+  .suggest-select .sod_select {
+    background-position: center center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: inline-image("suggest.svg");
+  }
+
   .sod_select.focus{
     background-color:$color-darkmode-background;
   }
