@@ -2,7 +2,7 @@ body.darkmode{
   // _main.scss overrides
   color:$color-darkmode-main-text;
   background-color:$color-darkmode-background;
-  h1{
+  h1, h2, h3, h4{
     color:$color-darkmode-main-text;
   }
 
