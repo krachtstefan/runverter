@@ -99,7 +99,7 @@ ul.settings {
   background:$color-secondary-background;
   z-index: -9999;
   outline: 5px solid $color-overlay-border;
-  @include transition(0.25s ease-in-out);
+  @include transition(opacity 0.25s ease-in-out);
   @include respond-to("small"){
     width:400px;
     right: 20px;
