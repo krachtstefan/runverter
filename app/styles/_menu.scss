@@ -146,7 +146,8 @@ ul.settings li>a:hover {
 #panel-share::before,
 #panel-more::before,
 #panel-feedback::before,
-#panel-imprint::before{
+#panel-imprint::before,
+#panel-racedayme::before{
   @include transition(0.25s ease-in-out);
   width: 20px;
   height: 20px;
@@ -239,6 +240,10 @@ ul.settings li>a:hover {
 
 #panel-imprint::before{
   background-image: inline-image("imprint.svg");
+}
+
+#panel-racedayme::before{
+  background-image: inline-image("raceday-icon.svg");
 }
 
 #panel-more::before{
