@@ -13,7 +13,7 @@ export default {
     'shareThanks' : 'Thank you ♡',
     'learnMore' : 'Learn more about runverter',
     'feedback' : 'Tweet me your feedback',
-    'racedayme' : 'Try out Raceday.me',
+    'racedayme' : 'Check out Raceday.me',
     'imprint' : 'Imprint',
   },
   'tools' : {
