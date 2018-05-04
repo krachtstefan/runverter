@@ -21,6 +21,18 @@ test('displayPeterRiegelExlanation is true by default', function(assert) {
   assert.strictEqual(settings.get("displayPeterRiegelExlanation") , true);
 });
 
+
+// displayRacedaymeNote
+test('displayRacedaymeNote is from type Boolean', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayRacedaymeNote").constructor.name , "Boolean");
+});
+
+test('displayRacedaymeNote is true by default', function(assert) {
+  var settings = this.subject();
+  assert.strictEqual(settings.get("displayRacedaymeNote") , true);
+});
+
 // createdAt
 test('createdAt is from type Date', function(assert) {
   var settings = this.subject();
