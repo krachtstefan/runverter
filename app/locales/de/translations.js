@@ -13,6 +13,7 @@ export default {
     'shareThanks' : 'Danke ♡',
     'learnMore' : 'Mehr über Runverter erfahren',
     'feedback' : 'Twitter mir dein Feedback',
+    'racedayme' : 'Raceday.me ausprobieren',
     'imprint' : 'Impressum',
   },
   'tools' : {
