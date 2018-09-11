@@ -1,4 +1,7 @@
-{{control-panel expertMode=expertMode darkMode=darkMode imprintVisible=imprintVisible}}
+{{#unless isEmbedded}}
+  {{control-panel expertMode=expertMode darkMode=darkMode imprintVisible=imprintVisible}}
+{{/unless}}
+
 {{#if displayLogo}}
   <div class="header {{expertModeClass}}">
     {{#link-to "tools.index" (query-params selectedToolKey="pca" imprintVisible=false) }}&nbsp;{{/link-to}}
@@ -55,6 +58,9 @@
 </div>
 {{notification-messages settings=model.settings selectedMenuItem=selectedTool}}
 {{imprint-page expertModeClass=expertModeClass run=model.run visible=imprintVisible}}
-<div id="footer">
-  <a id="donateButton" class="fa fa-heart uk-text-center" aria-hidden="true" {{action "showDonationMessage"}}></a>
-</div>
+
+{{#unless isEmbedded}}
+  <div id="footer">
+    <a id="donateButton" class="fa fa-heart uk-text-center" aria-hidden="true" {{action "showDonationMessage"}}></a>
+  </div>
+{{/unless}}

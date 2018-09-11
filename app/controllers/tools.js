@@ -27,6 +27,7 @@ export default Controller.extend({
     'imprintVisible' : 'info',                                  // imprint visible
     'displayLogo' : 'logo',                                     // display logo?
     'displayToolsMenu' : 'toolselector',                        // display tools menu?
+    'isEmbedded' : 'embedded',                                  // is it embedded in an iframe
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
@@ -56,6 +57,7 @@ export default Controller.extend({
   darkMode : false,
   displayLogo : true,
   displayToolsMenu: true,
+  isEmbedded: false,
   imprintVisible : false,
 
   tools : computed("toolsAvailablem", "i18n.locale", function(){
