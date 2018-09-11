@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="97px" height="89px" viewBox="0 0 97 89" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
     <title>language</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="language" transform="translate(48.500000, 45.000000) scale(-1, 1) translate(-48.500000, -45.000000) translate(3.000000, 3.000000)" stroke-width="6" stroke="#0088CC">
+        <g id="language" transform="translate(48.500000, 45.000000) scale(-1, 1) translate(-48.500000, -45.000000) translate(3.000000, 3.000000)" stroke="#4375A7" stroke-width="6">
             <g id="Group">
-                <path d="M45.061,0.484 C20.195,0.484 0.042,17.279 0.042,37.993 C0.042,51.433 8.522,63.204 21.247,69.83 C19.738,73.976 17.13,77.041 13.738,79.789 C13.106,80.298 13.001,81.233 13.363,81.965 C13.679,82.609 14.334,83.012 15.047,83.012 C22.358,83.012 30.358,79.532 36.907,74.883 C39.551,75.286 42.276,75.508 45.059,75.508 C69.913,75.508 90.077,58.712 90.077,37.993 C90.079,17.28 69.915,0.484 45.061,0.484 L45.061,0.484 Z" id="Shape"></path>
+                <path d="M0.042,37.993 C0.042,51.433 8.522,63.204 21.247,69.83 C19.738,73.976 17.13,77.041 13.738,79.789 C13.106,80.298 13.001,81.233 13.363,81.965 C13.679,82.609 14.334,83.012 15.047,83.012 C22.358,83.012 30.358,79.532 36.907,74.883 C39.551,75.286 42.276,75.508 45.059,75.508 C69.913,75.508 90.077,58.712 90.077,37.993 C90.079,17.28 69.915,0.484 45.061,0.484 C20.195,0.484 0.042,17.279 0.042,37.993 Z" id="Shape"></path>
             </g>
         </g>
     </g>
