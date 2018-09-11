@@ -56,7 +56,7 @@
       }}
   {{/if}}
 </div>
-{{notification-messages settings=model.settings selectedMenuItem=selectedTool}}
+{{notification-messages settings=model.settings isEmbedded=isEmbedded selectedMenuItem=selectedTool}}
 {{imprint-page expertModeClass=expertModeClass run=model.run visible=imprintVisible}}
 
 {{#unless isEmbedded}}
