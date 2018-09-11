@@ -26,6 +26,7 @@ export default Controller.extend({
     'darkMode' : 'darkmode',                                    // dark mode
     'imprintVisible' : 'info',                                  // imprint visible
     'displayLogo' : 'logo',                                     // display logo?
+    'displayToolsMenu' : 'toolselector',                        // display tools menu?
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
@@ -54,6 +55,7 @@ export default Controller.extend({
   expertMode : false,
   darkMode : false,
   displayLogo : true,
+  displayToolsMenu: true,
   imprintVisible : false,
 
   tools : computed("toolsAvailablem", "i18n.locale", function(){

@@ -5,9 +5,11 @@
   </div>
 {{/if}}
 
-<div class="intro {{selectedToolClass}} {{expertModeClass}}">
-  {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey}}
-</div>
+{{#if displayToolsMenu}}
+  <div class="intro {{selectedToolClass}} {{expertModeClass}}">
+    {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey}}
+  </div>
+{{/if}}
 <div class="tools uk-container uk-container-center {{selectedToolClass}} {{expertModeClass}}">
   {{#if selectedToolPca}}
     {{pace-calculator
