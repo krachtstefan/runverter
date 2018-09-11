@@ -57,8 +57,8 @@ export default Component.extend({
       datasets: [
         {
           label: "",
-          backgroundColor: "rgba(0,136,204,0.4)",
-          borderColor: "rgba(0,136,204,1)",
+          backgroundColor: "rgba(67,117,167,1)",
+          borderColor: "rgba(67,117,167,1)",
           data : this.get("run.splits.splits").map(function(data) { return data.get("split.speedKmHr").toNumber(); }),
           spanGaps: false,
         }
