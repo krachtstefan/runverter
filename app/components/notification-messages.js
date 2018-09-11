@@ -8,7 +8,6 @@ export default Component.extend({
     this._super(...arguments);
     var self = this;
 
-    console.log(this.get("isEmbedded"))
     if(this.get("settings.displayRacedaymeNote")===true && this.get("isEmbedded")===false){
       this.set("settings.displayRacedaymeNote", false);
       this.get('notifications').success(this.get('i18n').t("flashMessages.racedayme"), {
