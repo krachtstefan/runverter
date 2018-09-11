@@ -25,6 +25,7 @@ export default Controller.extend({
     'expertMode' : 'nerd',                                      // expert mode selected
     'darkMode' : 'darkmode',                                    // dark mode
     'imprintVisible' : 'info',                                  // imprint visible
+    'displayLogo' : 'logo',                                     // display logo?
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
@@ -52,6 +53,7 @@ export default Controller.extend({
 
   expertMode : false,
   darkMode : false,
+  displayLogo : true,
   imprintVisible : false,
 
   tools : computed("toolsAvailablem", "i18n.locale", function(){

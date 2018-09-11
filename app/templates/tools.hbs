@@ -1,7 +1,9 @@
 {{control-panel expertMode=expertMode darkMode=darkMode imprintVisible=imprintVisible}}
-<div class="header {{expertModeClass}}">
-  {{#link-to "tools.index" (query-params selectedToolKey="pca" imprintVisible=false) }}&nbsp;{{/link-to}}
-</div>
+{{#if displayLogo}}
+  <div class="header {{expertModeClass}}">
+    {{#link-to "tools.index" (query-params selectedToolKey="pca" imprintVisible=false) }}&nbsp;{{/link-to}}
+  </div>
+{{/if}}
 
 <div class="intro {{selectedToolClass}} {{expertModeClass}}">
   {{tool-selector menuItems=tools selectedMenuItem=selectedTool defaultValue=selectedToolKey}}
