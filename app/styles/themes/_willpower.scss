@@ -1,7 +1,7 @@
 $color-willpower-background: #000;
 $color-willpower-main-text-light: #d5d5d5;
 $color-willpower-main-text: #fff;
-$color-willpower-form-text: #999;
+$color-willpower-form-text: #808080;
 
 body.willpower{
   // _main.scss overrides
@@ -15,6 +15,10 @@ body.willpower{
     color:$color-willpower-main-text-light;
   }
 
+  a, a:hover{
+    color:$color-willpower-form-text;
+  }
+
   .header{
     border:1px solid $color-willpower-background;
     background-color:$color-willpower-background;
@@ -25,6 +29,7 @@ body.willpower{
   }
 
   .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
+    color:$color-willpower-form-text;
     background-color:$color-willpower-background;
     &:focus{
       color:$color-willpower-main-text;
@@ -50,17 +55,24 @@ body.willpower{
   }
 
   // _menu.scss overrides
-  .open #toggle-panel span, .open #close-imprint-page span{
-    background: $color-willpower-form-text;
-  }
   #toggle-panel span, #close-imprint-page span{
+    background: $color-willpower-form-text;
+    border: 1px solid $color-willpower-form-text;
     @include respond-to("small"){
       background-color:$color-willpower-background;
     }
   }
 
+  .open #toggle-panel span, .open #close-imprint-page span{
+    background: $color-willpower-form-text;
+  }
+
   ul.settings {
     background:$color-willpower-background;
+  }
+
+  ul.settings li>a, ul.settings li #share-container{
+    color: $color-willpower-form-text;
   }
 
   ul.settings li>a:hover {
@@ -88,6 +100,11 @@ body.willpower{
   }
   .sod_select{
     background: $color-willpower-background;
+    color:$color-willpower-form-text;
+  }
+
+  .sod_select.focus{
+    color:$color-willpower-form-text;
   }
 
   .sod_select:before,
@@ -104,6 +121,10 @@ body.willpower{
     color:$color-willpower-main-text;
   }
 
+  .sod_select .sod_option.active{
+    color:$color-willpower-form-text;
+  }
+
   // _splits.scss overrides
   .splits-container table{
     tr{
@@ -116,6 +137,11 @@ body.willpower{
       }
       tr.progress{
         background-color:$color-willpower-main-text;
+        td{
+          div.distance-progress{
+            background-color:$color-willpower-form-text;
+          }
+        }
       }
     }
   }
