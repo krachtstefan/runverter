@@ -127,6 +127,10 @@ export default Controller.extend({
     }
   }),
 
+  handleThemeClass: observer("theme", function () {
+    $("#root").addClass(this.get("theme"));
+  }),
+
   handleAchievedRunPersistence: observer("model.prediction.achievedRun.lengthM", "model.prediction.achievedRun.timeSec", function () {
     // only save the user generated achieved runs with the dedicated id, otherwise the default value of achievedRun would be saved too
     if(this.get("model.prediction.achievedRun.id") === "achievedRun"){
