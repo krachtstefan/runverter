@@ -28,6 +28,7 @@ export default Controller.extend({
     'displayLogo' : 'logo',                                     // display logo?
     'displayToolsMenu' : 'toolselector',                        // display tools menu?
     'isEmbedded' : 'embedded',                                  // is it embedded in an iframe
+    'theme' : "theme",                                          // enable theme parameter
     'index_key' : "index_key"                                   // keep the index_key param provided by ember-cli-deploy
   },
 
@@ -43,6 +44,7 @@ export default Controller.extend({
   splitsCalcStrategyQuery: 0,
   splitsCalcSlopeQuery : false,
   splitsCalcTempoMetricsSelected: "minkm",
+  theme: null,
 
   toolsAvailable : [
     "pca", "pc", "lc", "rp", "sc"
