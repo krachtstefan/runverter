@@ -51,14 +51,24 @@ export default Component.extend({
     }
   },
 
+
+  color : computed("theme" , function(){
+    if(this.get("theme") === "willpower"){
+      return "rgba(128,128,128,1)";
+    }else{
+      return "rgba(67,117,167,1)";
+    }
+  }),
+
   chartData : computed("run{lengthM,timeSec}", "splitDistancesSelectedMeters", "splitStrategiesSelected", "evenSlopeSelected" , function(){
+
     var data = {
       labels: this.get("run.splits.splits").map(function(data) { return data.get("run.lengthKm").round(2).toNumber(); }),
       datasets: [
         {
           label: "",
-          backgroundColor: "rgba(67,117,167,1)",
-          borderColor: "rgba(67,117,167,1)",
+          backgroundColor: this.get("color"),
+          borderColor: this.get("color"),
           data : this.get("run.splits.splits").map(function(data) { return data.get("split.speedKmHr").toNumber(); }),
           spanGaps: false,
         }
