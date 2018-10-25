@@ -4,11 +4,14 @@ $color-willpower-main-text: #fff;
 $color-willpower-form-text: #808080;
 
 body.willpower{
+  font-family: "Lato",sans-serif;
+
   // _main.scss overrides
   color:$color-willpower-main-text;
   background-color:$color-willpower-background;
   h1, h2, h3, h4{
     color:$color-willpower-main-text;
+    font-family: "Lato",sans-serif;
   }
 
   p{
