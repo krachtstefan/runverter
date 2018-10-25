@@ -40,8 +40,10 @@ body.darkmode{
   }
 
   // _imprint.scss overrides
-  .uk-container-center{
-    background-color:$color-darkmode-background;
+  .imprint{
+    .uk-container-center{
+      background-color:$color-darkmode-background;
+    }
   }
 
   // _menu.scss overrides
