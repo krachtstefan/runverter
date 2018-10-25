@@ -2,6 +2,7 @@ $color-willpower-background: #000;
 $color-willpower-main-text-light: #d5d5d5;
 $color-willpower-main-text: #fff;
 $color-willpower-form-text: #808080;
+$color-willpower-overlay-border: rgba(128,128,128,0.2);;
 
 body.willpower{
   font-family: "Lato",sans-serif;
@@ -53,8 +54,11 @@ body.willpower{
   }
 
   // _imprint.scss overrides
-  .uk-container-center{
-    background-color:$color-willpower-background;
+  .imprint{
+    .uk-container-center{
+      background-color:$color-willpower-background;
+      outline: 5px solid $color-willpower-overlay-border;
+    }
   }
 
   // _menu.scss overrides
@@ -72,6 +76,7 @@ body.willpower{
 
   ul.settings {
     background:$color-willpower-background;
+    outline: 5px solid $color-willpower-overlay-border;
   }
 
   ul.settings li>a, ul.settings li #share-container{
@@ -118,6 +123,7 @@ body.willpower{
   .sod_select .sod_list_wrapper{
     color:$color-willpower-main-text;
     background: $color-willpower-background;
+    outline: 5px solid $color-willpower-overlay-border;
   }
   .sod_select .sod_option.optgroup,
   .sod_select .sod_option.optgroup.disabled{
