@@ -45,13 +45,14 @@ body.darkmode{
   }
 
   // _menu.scss overrides
-  .open #toggle-panel span, .open #close-imprint-page span{
-    background: $color-form-text;
-  }
   #toggle-panel span, #close-imprint-page span{
     @include respond-to("small"){
       background-color:$color-darkmode-background;
     }
+  }
+
+  .open #toggle-panel span, .open #close-imprint-page span{
+    background: $color-form-text;
   }
 
   ul.settings {
