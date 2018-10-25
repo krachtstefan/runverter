@@ -27,7 +27,8 @@ module.exports = function(environment) {
     },
 
     googleFonts: [
-      'Open+Sans:400,700'
+      'Open+Sans:400,700',
+      'Lato'
     ],
 
     contentSecurityPolicy: {
