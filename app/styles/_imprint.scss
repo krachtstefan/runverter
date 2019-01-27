@@ -1,62 +1,62 @@
-.imprint{
+.imprint {
   opacity: 0;
   z-index: -5;
-  a{
+  a {
     pointer-events: none; // otherwise links are clickable, even if invisible
   }
   position: absolute;
   overflow: hidden;
-  height:auto;
-  top:0;
-  bottom:0;
+  height: auto;
+  top: 0;
+  bottom: 0;
   width: 90%;
-  left:5%;
-  right:5%;
-  @include respond-to("xlarge"){
+  left: 5%;
+  right: 5%;
+  @include respond-to('xlarge') {
     width: 100%;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
   }
   @include transition(0.25s ease-in-out);
-  p{
-    line-height:1.9em;
+  p {
+    line-height: 1.9em;
   }
-  &.open{
-    a{
+  &.open {
+    a {
       pointer-events: auto;
     }
     opacity: 1;
     z-index: 15;
     overflow: visible;
-    margin-top:100px;
-    @include respond-to("small"){
-      margin-top:180px;
+    margin-top: 100px;
+    @include respond-to('small') {
+      margin-top: 180px;
     }
-    &.expertModeOn{
-     margin-top:66px;
-     @include respond-to("small"){
-        margin-top:50px;
+    &.expertModeOn {
+      margin-top: 66px;
+      @include respond-to('small') {
+        margin-top: 50px;
       }
     }
 
     @include transition(0.25s ease-in-out);
   }
 
-  .uk-container-center{
-    position:relative; // needed for #close-imprint-page positioning
-    background-color:$color-secondary-background; // make it untransparent, when content extends the 100% height
-    padding:50px;
+  .uk-container-center {
+    position: relative; // needed for #close-imprint-page positioning
+    background-color: $color-secondary-background; // make it untransparent, when content extends the 100% height
+    padding: 50px;
     outline: 5px solid $color-overlay-border;
     margin-bottom: 5%;
   }
 
   // base definitin of #close-imprint-page in _menu.scss
-  #close-imprint-page{
+  #close-imprint-page {
     top: 0px;
-    right:7px;
-    @include respond-to("small"){
+    right: 7px;
+    @include respond-to('small') {
       top: 9px;
-      right:-5px;
+      right: -5px;
     }
   }
 }

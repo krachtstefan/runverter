@@ -10,10 +10,20 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       prepend: 'https://s.runverter.io/',
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'json', 'svg', 'ico']
+      extensions: [
+        'js',
+        'css',
+        'png',
+        'jpg',
+        'gif',
+        'map',
+        'json',
+        'svg',
+        'ico'
+      ]
     },
     sourcemaps: {
-      enabled: !isProductionLikeBuild,
+      enabled: !isProductionLikeBuild
     },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
@@ -21,7 +31,7 @@ module.exports = function(defaults) {
     tests: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
     hinting: process.env.EMBER_CLI_TEST_COMMAND || !isProductionLikeBuild,
 
-    compassOptions: { imagesDir: "public/images" },
+    compassOptions: { imagesDir: 'public/images' },
 
     emberCliConcat: {
       js: {

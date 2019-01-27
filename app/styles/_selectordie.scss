@@ -14,89 +14,94 @@
  *  Oddny | Cogs 'n Kegs
  * =========================================================== */
 
- /* Remove, change to fit your needs */
+/* Remove, change to fit your needs */
 
-#runTempo{
+#runTempo {
   width: 120px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     width: 190px;
   }
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 190px;
   }
 }
 
-#runLength, #achievedRunLength, #predictedRunLength, #splitMetric{
+#runLength,
+#achievedRunLength,
+#predictedRunLength,
+#splitMetric {
   width: 70px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     width: 100px;
   }
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 100px;
   }
 }
 
-#splitStrategies, #evenSlope{
-  padding-right:12px;
+#splitStrategies,
+#evenSlope {
+  padding-right: 12px;
 }
 
-#splitDistance{
+#splitDistance {
   width: 60px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     width: 80px;
   }
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 90px;
   }
 }
 
-#splitTempo{
-  .sod_list_wrapper{
+#splitTempo {
+  .sod_list_wrapper {
     width: 125px;
   }
 }
 
-.suggest-select{
+.suggest-select {
   display: inline;
-  .sod_label{
+  .sod_label {
     opacity: 0;
   }
   .sod_select {
     opacity: 0;
     @include transition(0.25s ease-in-out);
-    &.open{
+    &.open {
       opacity: 1; // always visible when select is open
     }
 
     background-position: center center;
     background-size: 70%;
     background-repeat: no-repeat;
-    background-image: inline-image("suggest.svg");
-    border:none;
-    .sod_option.selected{
-      color:inherit;
-      &:before{
-        background:none;
+    background-image: inline-image('suggest.svg');
+    border: none;
+    .sod_option.selected {
+      color: inherit;
+      &:before {
+        background: none;
       }
     }
-    .sod_option.disabled{
+    .sod_option.disabled {
       display: none;
     }
   }
 
   .sod_select:before,
-  .sod_select:after{
+  .sod_select:after {
     display: none;
-    content: "";
+    content: '';
   }
 
-  .sod_select.focus{
-    background-color:$color-main-background;
+  .sod_select.focus {
+    background-color: $color-main-background;
   }
 }
 
-.suggest-select-container:hover, .suggestSelectVisible{
-  .suggest-select{
+.suggest-select-container:hover,
+.suggestSelectVisible {
+  .suggest-select {
     .sod_select {
       @include transition(0.25s ease-in-out);
       opacity: 1;
@@ -104,104 +109,111 @@
   }
 }
 
-#race-picker-pace-calc, #race-picker-length-km, #race-picker-length-mi, #race-picker-length-m, #race-picker-achieved-race, #race-picker-predicted-race{
+#race-picker-pace-calc,
+#race-picker-length-km,
+#race-picker-length-mi,
+#race-picker-length-m,
+#race-picker-achieved-race,
+#race-picker-predicted-race {
   width: 20px;
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 210px;
     left: -100px;
-    @include respond-to("small"){
+    @include respond-to('small') {
       width: 350px;
       left: -220px;
     }
-    @include respond-to("medium"){
+    @include respond-to('medium') {
       left: -180px;
     }
-    @include respond-to("large"){
+    @include respond-to('large') {
       left: -110px;
     }
   }
 }
 
-#target-time-pace-calc, #predicted-time-predicted-race-predictor, #predicted-time-achieved-race-predictor{
+#target-time-pace-calc,
+#predicted-time-predicted-race-predictor,
+#predicted-time-achieved-race-predictor {
   width: 20px;
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 230px;
     left: -190px;
-    @include respond-to("small"){
+    @include respond-to('small') {
       width: 285px;
       left: -250px;
     }
-    @include respond-to("medium"){
+    @include respond-to('medium') {
       left: -240px;
     }
-    @include respond-to("large"){
+    @include respond-to('large') {
       left: -190px;
     }
   }
 }
 
-#menu{
-  border:none;
-  background:$color-secondary-background;
-  .sod_label{
+#menu {
+  border: none;
+  background: $color-secondary-background;
+  .sod_label {
     padding-right: 25px !important;
   }
-  .sod_list_wrapper{
+  .sod_list_wrapper {
     width: 290px;
-    @include respond-to("small"){
+    @include respond-to('small') {
       width: 460px;
     }
   }
 
   &.sod_select:before,
-  &.sod_select:after{
-    color:$color-main-text;
+  &.sod_select:after {
+    color: $color-main-text;
   }
 }
 
-.expertModeOn{
-  #menu{
-    margin-top:10px;
+.expertModeOn {
+  #menu {
+    margin-top: 10px;
   }
 }
 
-.small_sod{
-  .sod_select{
+.small_sod {
+  .sod_select {
     font-size: inherit;
     line-height: auto;
     line-height: 20px;
-    border-bottom:none;
-    padding:0 4px 1px 0;
-    @include respond-to("small"){
-      padding:0 8px 2px 0;
+    border-bottom: none;
+    padding: 0 4px 1px 0;
+    @include respond-to('small') {
+      padding: 0 8px 2px 0;
     }
-    .sod_label{
-      top:inherit;
+    .sod_label {
+      top: inherit;
       text-align: left;
-      padding-bottom:inherit;
+      padding-bottom: inherit;
     }
 
-    &.focus{
-      background-color:inherit;
+    &.focus {
+      background-color: inherit;
     }
 
     /* Up/Down arrows */
     &:before,
-    &:after{
-      font-size:6px;
+    &:after {
+      font-size: 6px;
       right: 10px;
       top: -4px;
-      @include respond-to("small"){
-        font-size:8px;
-        top:-4px;
+      @include respond-to('small') {
+        font-size: 8px;
+        top: -4px;
       }
     }
 
     /* Down arrow */
-    &:after{
+    &:after {
       top: auto;
       bottom: -1px;
-      @include respond-to("small"){
+      @include respond-to('small') {
         bottom: -2px;
       }
     }
@@ -209,27 +221,26 @@
 }
 
 .sod_select,
-.sod_select *{
+.sod_select * {
   @include box-sizing(border-box);
   -webkit-touch-callout: none;
   @include user-select(none);
-
 }
 
 /* The SoD - Please keep this first three lines intact, otherwise all hell will break looooooose */
-.sod_select{
+.sod_select {
   @include inline-block;
   position: relative;
-  line-height:35px;
-  padding:0;
+  line-height: 35px;
+  padding: 0;
   font-size: 24px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     padding: 8px 10px 30px 6px;
     font-size: 42px;
   }
   border-bottom: 1px solid $color-form-border;
   background: $color-main-background;
-  color:$color-form-text;
+  color: $color-form-text;
 
   text-align: left;
   outline: 0;
@@ -239,84 +250,92 @@
 
 /* Up/Down arrows */
 .sod_select:before,
-.sod_select:after{
-  color:$color-main-text-light;
-  font-family: "Arial";
-  content: "\25B2";
+.sod_select:after {
+  color: $color-main-text-light;
+  font-family: 'Arial';
+  content: '\25B2';
   position: absolute;
   right: 10px;
   top: -2px;
-  font-size:8px;
-  @include respond-to("small"){
-    font-size:10px;
-    top:16px;
+  font-size: 8px;
+  @include respond-to('small') {
+    font-size: 10px;
+    top: 16px;
   }
 }
 
 /* Down arrow */
-.sod_select:after{
-  content: "\25BC";
+.sod_select:after {
+  content: '\25BC';
   top: auto;
   top: auto;
   bottom: 2px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     bottom: 18px;
   }
 }
 
 /* Change the border color on hover, focus and when open */
 
-.sod_select.focus{
-  color:$color-form-text;
+.sod_select.focus {
+  color: $color-form-text;
   background-color: $color-form-background;
   border-color: $color-form-border-active;
 }
 
 /* When the entire SoD is disabled, go crazy! */
-.sod_select.disabled{
+.sod_select.disabled {
   opacity: 0.5;
 }
 
 /* The "label", or whatever we should call it. Keep the first three lines for truncating. */
-.sod_select .sod_label{
+.sod_select .sod_label {
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   position: relative;
   text-align: center;
-  top:3px;
-  @include respond-to("small"){
-    top:12px;
+  top: 3px;
+  @include respond-to('small') {
+    top: 12px;
   }
   padding-right: 15px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
-sod_select .sod_prefix { /* Use this if you're using a prefix and want to style it */ }
-sod_select .sod_placeholder { /* Use this if you're using a placeholder and want to style it */ }
+sod_select .sod_prefix {
+  /* Use this if you're using a prefix and want to style it */
+}
+sod_select .sod_placeholder {
+  /* Use this if you're using a placeholder and want to style it */
+}
 
 /* Options list wrapper */
-.sod_select .sod_list_wrapper{
+.sod_select .sod_list_wrapper {
   position: absolute;
   top: 100%;
   left: 0;
   display: none;
   height: auto;
   margin: 0;
-  color:$color-main-text;
+  color: $color-main-text;
   background-color: $color-form-background;
   z-index: 10;
   outline: 5px solid $color-overlay-border;
 }
 /* Shows the option list (don't edit) */
-.sod_select.open .sod_list_wrapper { display: block;  }
+.sod_select.open .sod_list_wrapper {
+  display: block;
+}
 
 /* Don't display the options when  */
-.sod_select.disabled.open .sod_list_wrapper { display: none;  }
+.sod_select.disabled.open .sod_list_wrapper {
+  display: none;
+}
 
 /* When the option list is displayed above the SoD */
-.sod_select.above .sod_list_wrapper{
+.sod_select.above .sod_list_wrapper {
   top: auto;
   bottom: 100%;
   border-top: 3px solid $color-form-background;
@@ -324,7 +343,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 }
 
 /* Options list container */
-.sod_select .sod_list{
+.sod_select .sod_list {
   display: block;
   overflow-y: auto;
   padding: 10px 0;
@@ -332,7 +351,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 }
 
 /* All the options. Keep the first three lines for truncating... */
-.sod_select .sod_option{
+.sod_select .sod_option {
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -344,7 +363,7 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 
 /* Optgroups */
 .sod_select .sod_option.optgroup,
-.sod_select .sod_option.optgroup.disabled{
+.sod_select .sod_option.optgroup.disabled {
   background: inherit;
   color: $color-main-text-light;
   font-size: 16px;
@@ -352,7 +371,9 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 }
 
 /* Children of an optgroup */
-.sod_select .sod_option.groupchild { padding-left: 20px; }
+.sod_select .sod_option.groupchild {
+  padding-left: 20px;
+}
 
 /* Used together with placeholderOption / data-placeholder-option */
 .sod_select .sod_option.is-placeholder {
@@ -360,27 +381,27 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 }
 
 /* Disabled option */
-.sod_select .sod_option.disabled{
+.sod_select .sod_option.disabled {
   background: inherit;
   opacity: 0.5;
 }
 
 /* Hover state for options, also used when a user uses his/hers up/down keys */
-.sod_select .sod_option.active{
-  color:$color-form-text;
+.sod_select .sod_option.active {
+  color: $color-form-text;
 }
 
 /*Make room for the check mark */
-.sod_select .sod_option.selected{
+.sod_select .sod_option.selected {
   padding-right: 25px;
 }
 
 /* Displays a check mark for the selected option */
-.sod_select .sod_option.selected:before{
+.sod_select .sod_option.selected:before {
   position: absolute;
   right: 10px;
   top: 50%;
-  content: "";
+  content: '';
   @include transform(translateY(-50%));
   @include inline-block;
   height: 9px;
@@ -389,19 +410,27 @@ sod_select .sod_placeholder { /* Use this if you're using a placeholder and want
 }
 
 /* Add a .no_highlight class to you SoD to hide the check mark and don't bold the option */
-.sod_select.no_highlight .sod_option.selected { font-weight: 300; }
-.sod_select.no_highlight .sod_option.selected:before { display: none; }
+.sod_select.no_highlight .sod_option.selected {
+  font-weight: 300;
+}
+.sod_select.no_highlight .sod_option.selected:before {
+  display: none;
+}
 
-.sod_select .sod_option.link { /* If data-link is set on a specific option */ }
-.sod_select .sod_option.linkexternal { /* If data-link-external is set on a specific option */ }
-
-
+.sod_select .sod_option.link {
+  /* If data-link is set on a specific option */
+}
+.sod_select .sod_option.linkexternal {
+  /* If data-link-external is set on a specific option */
+}
 
 /* Hide native select */
-.sod_select select { display: none !important; }
+.sod_select select {
+  display: none !important;
+}
 
 /* The native select in touch mode. Keep this first line. Sorry, keep everything. */
-.sod_select.touch select{
+.sod_select.touch select {
   -webkit-appearance: menulist-button;
 
   position: absolute;

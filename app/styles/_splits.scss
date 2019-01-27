@@ -1,4 +1,4 @@
-.evenSlopeInvisible{
+.evenSlopeInvisible {
   height: 0;
   opacity: 0;
   z-index: -999;
@@ -6,70 +6,71 @@
   @include transition(0.2s ease-out);
 }
 
-
-.evenSlopeVisible{
+.evenSlopeVisible {
   height: 70px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     height: 108px;
   }
-  @include respond-to("medium"){
+  @include respond-to('medium') {
     height: 84px;
   }
   opacity: 1;
   @include transition(0.5s ease-in-out);
 }
 
-.splits-container{
-  max-width:430px;
-  table{
-    font-size:14px;
+.splits-container {
+  max-width: 430px;
+  table {
+    font-size: 14px;
     line-height: 20px;
-    @include respond-to("small"){
-      font-size:21px;
+    @include respond-to('small') {
+      font-size: 21px;
       line-height: 30px;
     }
-    thead{
-      tr{
-        background-color:$color-main-background;
+    thead {
+      tr {
+        background-color: $color-main-background;
       }
 
-      th.distance{
+      th.distance {
         width: 80px;
-        @include respond-to("small"){
+        @include respond-to('small') {
           width: 130px;
         }
-        @include respond-to("medium"){
+        @include respond-to('medium') {
           width: 120px;
         }
       }
-      th.time{
+      th.time {
         width: 70px;
-        @include respond-to("small"){
+        @include respond-to('small') {
           width: 110px;
         }
-        @include respond-to("medium"){
+        @include respond-to('medium') {
           width: 100px;
         }
       }
     }
-    tbody{
-      tr, tr:nth-of-type(odd){
+    tbody {
+      tr,
+      tr:nth-of-type(odd) {
         border-bottom: 10px solid $color-main-background;
-        background-color:$color-main-background;
+        background-color: $color-main-background;
       }
-      tr.progress{
-        background-color:$color-form-border;
-        td{
-          padding:0;
-          position:relative;
-          div.distance-progress{
-            background-color:$color-form-text;
-            height:1px;
+      tr.progress {
+        background-color: $color-form-border;
+        td {
+          padding: 0;
+          position: relative;
+          div.distance-progress {
+            background-color: $color-form-text;
+            height: 1px;
           }
         }
       }
     }
-    td, th{
+    td,
+    th {
       padding-top: 20px;
       padding-bottom: 20px;
     }

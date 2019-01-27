@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    i18n : {
+    i18n: {
       defaultLocale: 'en'
     },
 
@@ -26,27 +26,29 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    googleFonts: [
-      'Open+Sans:400,700',
-      'Lato'
-    ],
+    googleFonts: ['Open+Sans:400,700', 'Lato'],
 
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' https://www.google-analytics.com",
-      'font-src': "'self' https://fonts.googleapis.com http://fonts.gstatic.com",
+      'font-src':
+        "'self' https://fonts.googleapis.com http://fonts.gstatic.com",
       'connect-src': "'self'",
       'img-src': "'self' data:",
-      'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.gstatic.com",
+      'style-src':
+        "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.gstatic.com",
       'media-src': "'self'",
       'manifest-src': "'self'"
     },
-    manifest : {
+    manifest: {
       enabled: true,
-      appcacheFile: "/manifest.appcache",
+      appcacheFile: '/manifest.appcache',
       excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
-      includePaths: ['https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'],
-      prepend: "https://s.runverter.io/",
+      includePaths: [
+        'https://fonts.googleapis.com/css?family=Open+Sans:400,700',
+        'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'
+      ],
+      prepend: 'https://s.runverter.io/',
       showCreateDate: true
     }
   };
@@ -72,7 +74,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
 
   return ENV;

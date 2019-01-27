@@ -1,47 +1,51 @@
-@media only print{
+@media only print {
   // hide main container
-  .intro, .header, #toggle-panel, #footer{
+  .intro,
+  .header,
+  #toggle-panel,
+  #footer {
     display: none;
   }
-  .container-sc{
-    .toolLine{
+  .container-sc {
+    .toolLine {
       display: none;
     }
   }
 
   // don't hide splits container
-  #splits-print-container{
+  #splits-print-container {
     display: block;
 
     // sod
-    .small_sod .sod_select .sod_label{
-      top:2px;
+    .small_sod .sod_select .sod_label {
+      top: 2px;
       color: $color-main-text-light !important;
     }
     .small_sod .sod_select:after,
-    .small_sod .sod_select:before{
-      display:none
-    }
-
-    .metric, .progress{
+    .small_sod .sod_select:before {
       display: none;
     }
 
-    table{
+    .metric,
+    .progress {
+      display: none;
+    }
+
+    table {
       font-size: 10px;
       width: 50px;
-      tr{
+      tr {
         border-top: 1px solid $color-main-text-light;
         border-bottom: 1px solid $color-main-text-light;
-        th{
+        th {
           display: none;
         }
-        td{
-          padding:0 4px;
+        td {
+          padding: 0 4px;
           white-space: nowrap;
         }
       }
-      tr:nth-of-type(4n+1){
+      tr:nth-of-type(4n + 1) {
         background-color: $color-form-border !important;
         -webkit-print-color-adjust: exact;
       }

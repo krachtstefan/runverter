@@ -7,7 +7,9 @@ export default DS.Model.extend({
    * @type {Boolean}
    */
   displayPeterRiegelExlanation: DS.attr('boolean', {
-    defaultValue() { return true; }
+    defaultValue() {
+      return true;
+    }
   }),
 
   /**
@@ -16,9 +18,10 @@ export default DS.Model.extend({
    * @type {Boolean}
    */
   displayRacedaymeNote: DS.attr('boolean', {
-    defaultValue() { return true; }
+    defaultValue() {
+      return true;
+    }
   }),
-
 
   /**
    * createdAt represents the creation date of the settings, will be stored in database
@@ -27,7 +30,9 @@ export default DS.Model.extend({
    * @type {Date}
    */
   createdAt: DS.attr('date', {
-    defaultValue() { return new Date(); }
+    defaultValue() {
+      return new Date();
+    }
   }),
 
   /**
@@ -37,14 +42,16 @@ export default DS.Model.extend({
    * @type {Date}
    */
   updatedAt: DS.attr('date', {
-    defaultValue() { return new Date(); }
+    defaultValue() {
+      return new Date();
+    }
   }),
 
   /**
    * update updatedAt before saving the settings
    */
-  save: function(){
-    this.set("updatedAt", new Date());
+  save: function() {
+    this.set('updatedAt', new Date());
     this._super(...arguments);
-  },
+  }
 });

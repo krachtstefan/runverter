@@ -2,16 +2,27 @@ import DS from 'ember-data';
 import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
 import { observer } from '@ember/object';
-BigNumber.config({DECIMAL_PLACES: 25});
+BigNumber.config({ DECIMAL_PLACES: 25 });
 export default DS.Model.extend({
-
   ready: function() {
     this._super(...arguments);
-    if(this.get("predictedRun.content") === null){
-      this.set( "predictedRun", this.store.createRecord('run', { timeSec : new BigNumber(4950), lengthM : new BigNumber(15000)}) );
+    if (this.get('predictedRun.content') === null) {
+      this.set(
+        'predictedRun',
+        this.store.createRecord('run', {
+          timeSec: new BigNumber(4950),
+          lengthM: new BigNumber(15000)
+        })
+      );
     }
-    if(this.get("achievedRun.content") === null){
-      this.set( "achievedRun", this.store.createRecord('run', { timeSec : new BigNumber(2700), lengthM : new BigNumber(10000)}) );
+    if (this.get('achievedRun.content') === null) {
+      this.set(
+        'achievedRun',
+        this.store.createRecord('run', {
+          timeSec: new BigNumber(2700),
+          lengthM: new BigNumber(10000)
+        })
+      );
     }
   },
 
@@ -26,8 +37,15 @@ export default DS.Model.extend({
    * @return {Run} achieved run
    */
   updateAchievedRunSec: function() {
-    var achievedSeconds = this.peterRiegelMethodReversed(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("predictedRun.timeSec"));
-    return this.set("achievedRun.timeSec", new BigNumber(achievedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
+    var achievedSeconds = this.peterRiegelMethodReversed(
+      this.get('achievedRun.lengthM'),
+      this.get('predictedRun.lengthM'),
+      this.get('predictedRun.timeSec')
+    );
+    return this.set(
+      'achievedRun.timeSec',
+      new BigNumber(achievedSeconds.toSignificantDigits(15))
+    ); // needs to be converted to 15 significant digits to be compatible to BigNumber
   },
 
   /**
@@ -39,12 +57,24 @@ export default DS.Model.extend({
   /**
    * updatePredictedRunSec updates the time of the predicted run when necessary
    */
-  updatePredictedRunSec: observer("achievedRun.timeSec", "achievedRun.lengthM", "predictedRun.lengthM" , function() {
-    run.once(this, function() {
-      var predictedSeconds = this.peterRiegelMethod(this.get("achievedRun.lengthM"), this.get("predictedRun.lengthM"), this.get("achievedRun.timeSec"));
-      this.set("predictedRun.timeSec", new BigNumber(predictedSeconds.toSignificantDigits(15))); // needs to be converted to 15 significant digits to be compatible to BigNumber
-    });
-  }),
+  updatePredictedRunSec: observer(
+    'achievedRun.timeSec',
+    'achievedRun.lengthM',
+    'predictedRun.lengthM',
+    function() {
+      run.once(this, function() {
+        var predictedSeconds = this.peterRiegelMethod(
+          this.get('achievedRun.lengthM'),
+          this.get('predictedRun.lengthM'),
+          this.get('achievedRun.timeSec')
+        );
+        this.set(
+          'predictedRun.timeSec',
+          new BigNumber(predictedSeconds.toSignificantDigits(15))
+        ); // needs to be converted to 15 significant digits to be compatible to BigNumber
+      });
+    }
+  ),
 
   /**
    * Peter Riegels mathematical formula for predicting race times for runners and other athletes given
@@ -55,7 +85,7 @@ export default DS.Model.extend({
    * @param {Decimal} t1 is the time achieved for d1
    * @return {Decimal} predicted time
    */
-  peterRiegelMethod: function(d1, d2, t1){
+  peterRiegelMethod: function(d1, d2, t1) {
     d1 = this._ensureDecimal(d1);
     d2 = this._ensureDecimal(d2);
     t1 = this._ensureDecimal(t1);
@@ -71,7 +101,7 @@ export default DS.Model.extend({
    * @param {Decimal} t2 is the time predicted for d2
    * @return {Decimal} predicted time
    */
-  peterRiegelMethodReversed: function(d1, d2, t2){
+  peterRiegelMethodReversed: function(d1, d2, t2) {
     d1 = this._ensureDecimal(d1);
     d2 = this._ensureDecimal(d2);
     t2 = this._ensureDecimal(t2);
@@ -83,13 +113,22 @@ export default DS.Model.extend({
    *
    * @return {Boolean} if Peter Riegel method is suitable for this prediction
    */
-  peterRiegelMethodSuitable: computed("achievedRun.timeSec", "predictedRun.timeSec", function(){
-    if(this.get("achievedRun.timeSec").greaterThan(209) && this.get("achievedRun.timeSec").lessThan(13801) && this.get("predictedRun.timeSec").greaterThan(209) && this.get("predictedRun.timeSec").lessThan(13801)){
-      return true;
-    }else{
-      return false;
+  peterRiegelMethodSuitable: computed(
+    'achievedRun.timeSec',
+    'predictedRun.timeSec',
+    function() {
+      if (
+        this.get('achievedRun.timeSec').greaterThan(209) &&
+        this.get('achievedRun.timeSec').lessThan(13801) &&
+        this.get('predictedRun.timeSec').greaterThan(209) &&
+        this.get('predictedRun.timeSec').lessThan(13801)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
-  }),
+  ),
 
   /**
    * will convert the input to Decimal if necessary. If input is Decimal already
@@ -101,8 +140,7 @@ export default DS.Model.extend({
    * @param  {Decimal|string|number} input  any number like input
    * @return {Decimal} output instance of Decimal
    */
-  _ensureDecimal: function(input){
-    return (input instanceof Decimal) ? input : new Decimal(+input || 0);
+  _ensureDecimal: function(input) {
+    return input instanceof Decimal ? input : new Decimal(+input || 0);
   }
-
 });

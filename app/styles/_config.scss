@@ -11,23 +11,32 @@ $color-darkmode-background: #002b36;
 $color-darkmode-main-text: #d2d2d2;
 $color-darkmode-main-text-light: #59738e;
 
-$color-overlay-border: rgba(67,117,167,0.2);
+$color-overlay-border: rgba(67, 117, 167, 0.2);
 $width-container: 960px;
 
 @mixin respond-to($size) {
-  @if $size == "xsmall" {
-    @media only screen and (min-width:350px) { @content; }
+  @if $size == 'xsmall' {
+    @media only screen and (min-width: 350px) {
+      @content;
+    }
   }
-  @if $size == "small" {
-    @media only screen and (min-width:480px) { @content; }
+  @if $size == 'small' {
+    @media only screen and (min-width: 480px) {
+      @content;
+    }
+  } @else if $size == 'medium' {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
   }
-  @else if $size == "medium" {
-    @media only screen and (min-width: 768px) { @content; }
+  @if $size == 'large' {
+    @media only screen and (min-width: 960px) {
+      @content;
+    }
   }
-  @if $size == "large" {
-    @media only screen and (min-width: 960px) { @content; }
-  }
-  @if $size == "xlarge" {
-    @media only screen and (min-width: 1220px) { @content; }
+  @if $size == 'xlarge' {
+    @media only screen and (min-width: 1220px) {
+      @content;
+    }
   }
 }

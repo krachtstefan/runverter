@@ -1,23 +1,25 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 export default Component.extend({
-
   i18n: service(),
   notifications: service('notification-messages'),
 
-  classNames: ["imprint"],
+  classNames: ['imprint'],
   classNameBindings: ['visible:open', 'expertModeClass'],
-  visible : false,
+  visible: false,
 
   actions: {
     closeImprintPage: function() {
-      this.set("visible", false);
+      this.set('visible', false);
     },
-    deleteStorage: function(){
+    deleteStorage: function() {
       localStorage.clear();
-      this.get('notifications').success(this.get('i18n').t("flashMessages.localstorageCleared"), {
-        autoClear: true
-      });
+      this.get('notifications').success(
+        this.get('i18n').t('flashMessages.localstorageCleared'),
+        {
+          autoClear: true
+        }
+      );
     }
   }
 });

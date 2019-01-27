@@ -1,32 +1,34 @@
-.control-panel{
-  position:relative;
+.control-panel {
+  position: relative;
   height: 0;
-  max-width:$width-container;
-  margin:0 auto;
+  max-width: $width-container;
+  margin: 0 auto;
 }
 
-#toggle-panel, #close-imprint-page{
+#toggle-panel,
+#close-imprint-page {
   width: 23px;
   height: 40px;
   z-index: 9; // 1 less than select or die
   position: absolute;
-  top:0;
-  right:0;
+  top: 0;
+  right: 0;
   margin: 14px 10px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     margin: 0px 24px;
     @include transform(rotate(90deg));
   }
   cursor: pointer;
 }
 
-#toggle-panel span, #close-imprint-page span{
+#toggle-panel span,
+#close-imprint-page span {
   display: block;
   position: absolute;
   height: 2px;
   width: 2px;
   background: $color-form-text;
-  @include respond-to("small"){
+  @include respond-to('small') {
     height: 8px;
     width: 8px;
     background: $color-secondary-background;
@@ -40,95 +42,106 @@
   @include transition(0.25s ease-in-out);
 }
 
-#toggle-panel span:nth-child(1), #close-imprint-page span:nth-child(1) {
+#toggle-panel span:nth-child(1),
+#close-imprint-page span:nth-child(1) {
   top: 8px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     top: 0px;
   }
 }
 
-#toggle-panel span:nth-child(2), #toggle-panel span:nth-child(3), #close-imprint-page span:nth-child(2),#close-imprint-page span:nth-child(3) {
+#toggle-panel span:nth-child(2),
+#toggle-panel span:nth-child(3),
+#close-imprint-page span:nth-child(2),
+#close-imprint-page span:nth-child(3) {
   top: 15px;
 }
 
-#toggle-panel span:nth-child(4), #close-imprint-page span:nth-child(4){
+#toggle-panel span:nth-child(4),
+#close-imprint-page span:nth-child(4) {
   top: 22px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     top: 30px;
   }
 }
 
-.open #toggle-panel span, .open #close-imprint-page span{
+.open #toggle-panel span,
+.open #close-imprint-page span {
   top: 15px;
   height: 1px;
   width: 3px;
   width: 100%;
   background: $color-form-text;
   margin-left: -3px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     top: 18px;
     margin-left: 0px;
   }
 }
 
-.open #toggle-panel span:nth-child(1), .open #close-imprint-page span:nth-child(1) {
+.open #toggle-panel span:nth-child(1),
+.open #close-imprint-page span:nth-child(1) {
   width: 0%;
   left: 50%;
 }
-.open #toggle-panel span:nth-child(2), .open #close-imprint-page span:nth-child(2) {
+.open #toggle-panel span:nth-child(2),
+.open #close-imprint-page span:nth-child(2) {
   @include transform(rotate(45deg));
 }
 
-.open #toggle-panel span:nth-child(3), .open #close-imprint-page span:nth-child(3) {
+.open #toggle-panel span:nth-child(3),
+.open #close-imprint-page span:nth-child(3) {
   @include transform(rotate(-45deg));
 }
 
-.open #toggle-panel span:nth-child(4), .open #close-imprint-page span:nth-child(4) {
+.open #toggle-panel span:nth-child(4),
+.open #close-imprint-page span:nth-child(4) {
   width: 0%;
   left: 50%;
 }
 
 ul.settings {
-  position:absolute;
-  top:40px;
-  width:90%;
-  right:5%;
+  position: absolute;
+  top: 40px;
+  width: 90%;
+  right: 5%;
   opacity: 0;
-  padding:0px 0px 0px 0px;
-  list-style:none;
-  background:$color-secondary-background;
+  padding: 0px 0px 0px 0px;
+  list-style: none;
+  background: $color-secondary-background;
   z-index: -9999;
   outline: 5px solid $color-overlay-border;
   @include transition(opacity 0.25s ease-in-out);
-  @include respond-to("small"){
-    width:400px;
+  @include respond-to('small') {
+    width: 400px;
     right: 20px;
   }
 }
 
-.open ul.settings{
+.open ul.settings {
   opacity: 1;
   z-index: 9999;
-  top:65px;
-  @include respond-to("small"){
-    top:47px;
+  top: 65px;
+  @include respond-to('small') {
+    top: 47px;
   }
 }
 
-ul.settings li>a, ul.settings li #share-container{
-  font-size:1em;
+ul.settings li > a,
+ul.settings li #share-container {
+  font-size: 1em;
   color: $color-form-text;
   display: block;
-  padding:25px 15px 25px 50px;
-  @include respond-to("small"){
-    font-size:1.5em;
-    padding:25px 25px 25px 70px;
+  padding: 25px 15px 25px 50px;
+  @include respond-to('small') {
+    font-size: 1.5em;
+    padding: 25px 25px 25px 70px;
   }
 }
 
-ul.settings li>a:hover {
-  text-decoration:none;
-  background-color:$color-main-background;
+ul.settings li > a:hover {
+  text-decoration: none;
+  background-color: $color-main-background;
 }
 
 #panel-language-en::before,
@@ -147,151 +160,153 @@ ul.settings li>a:hover {
 #panel-more::before,
 #panel-feedback::before,
 #panel-imprint::before,
-#panel-racedayme::before{
+#panel-racedayme::before {
   @include transition(0.25s ease-in-out);
   width: 20px;
   height: 20px;
   margin: -5px 0 0 -35px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     width: 30px;
     height: 30px;
     margin: -10px 0 0 -50px;
   }
-  content: "";
+  content: '';
   position: absolute;
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-#panel-language-en::before{
-  background-image: inline-image("language.svg");
+#panel-language-en::before {
+  background-image: inline-image('language.svg');
 }
 
-#panel-language-de::before{
-  background-image: inline-image("language.svg");
+#panel-language-de::before {
+  background-image: inline-image('language.svg');
   @include scaleX(-1);
 }
 
 #panel-language-de span::before,
-#panel-language-en span::before{
+#panel-language-en span::before {
   width: 10px;
-  margin-left:-30px;
+  margin-left: -30px;
   margin-top: -6px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     width: 14px;
-    margin-left:-42px;
+    margin-left: -42px;
     margin-top: -10px;
   }
-  background-image: inline-image("dots.svg");
+  background-image: inline-image('dots.svg');
 }
 
-#panel-language-en span::before{
+#panel-language-en span::before {
   margin-top: -5px;
-  @include respond-to("small"){
+  @include respond-to('small') {
     margin-top: -10px;
   }
   @include transform(rotate(180deg));
 }
 
 #panel-expertmode-true::before,
-#panel-expertmode-false::before{
-  background-image: inline-image("face.svg");
+#panel-expertmode-false::before {
+  background-image: inline-image('face.svg');
 }
 
 #panel-expertmode-false span::before,
-#panel-expertmode-true span::before{
+#panel-expertmode-true span::before {
   width: 27px;
-  margin-left:-39px;
-  @include respond-to("small"){
+  margin-left: -39px;
+  @include respond-to('small') {
     width: 40px;
-    margin-left:-55px;
+    margin-left: -55px;
   }
-  background-image: inline-image("glasses.svg");
+  background-image: inline-image('glasses.svg');
   opacity: 1;
 }
 
-#panel-expertmode-false span::before{
+#panel-expertmode-false span::before {
   background-position: top;
   opacity: 0;
 }
 
 #panel-darkmode-true::before,
-#panel-darkmode-false::before{
-  background-image: inline-image("lightmode.svg");
+#panel-darkmode-false::before {
+  background-image: inline-image('lightmode.svg');
 }
 
-#panel-darkmode-true::before{
+#panel-darkmode-true::before {
   background-position: -40px -40px;
 }
 
 #panel-darkmode-false span::before,
-#panel-darkmode-true span::before{
-  background-image: inline-image("darkmode.svg");
+#panel-darkmode-true span::before {
+  background-image: inline-image('darkmode.svg');
 }
 
-#panel-darkmode-false span::before{
+#panel-darkmode-false span::before {
   background-position: 40px 40px;
 }
 
-#panel-share::before{
-  background-image: inline-image("share.svg");
+#panel-share::before {
+  background-image: inline-image('share.svg');
 }
 
-#panel-imprint::before{
-  background-image: inline-image("imprint.svg");
+#panel-imprint::before {
+  background-image: inline-image('imprint.svg');
 }
 
-#panel-racedayme::before{
-  background-image: inline-image("raceday-icon.svg");
+#panel-racedayme::before {
+  background-image: inline-image('raceday-icon.svg');
 }
 
-#panel-more::before{
-  background-image: inline-image("more.svg");
+#panel-more::before {
+  background-image: inline-image('more.svg');
 }
 
-#panel-feedback::before{
-  background-image: inline-image("feedback.svg");
+#panel-feedback::before {
+  background-image: inline-image('feedback.svg');
 }
 
-ul.settings li #share-container{
+ul.settings li #share-container {
   z-index: -99;
   opacity: 0;
   position: absolute;
-  padding-left:0;
-  padding-top:20px;
-  padding-bottom:21px;
-  right:0;
+  padding-left: 0;
+  padding-top: 20px;
+  padding-bottom: 21px;
+  right: 0;
   @include transition(0.25s ease-in-out);
 }
 
-ul.settings li.shareButtonsVisible #share-container{
-  z-index:99;
+ul.settings li.shareButtonsVisible #share-container {
+  z-index: 99;
   opacity: 1;
   @include transition(0.25s ease-in-out);
 }
 
-#facebook, #twitter{
+#facebook,
+#twitter {
   @include inline-block;
-  background-repeat:no-repeat;
-  background-position:center center;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: contain;
-  padding-left:10px;
+  padding-left: 10px;
   width: 20px;
   height: 20px;
   text-decoration: none;
   @include transition(0.25s ease-in-out);
 }
 
-.shareButtonsInvisible #facebook, .shareButtonsInvisible #twitter{
+.shareButtonsInvisible #facebook,
+.shareButtonsInvisible #twitter {
   height: 0;
   @include transition(0.25s ease-in-out);
 }
 
-#facebook{
-  background-image: inline-image("facebook.svg");
+#facebook {
+  background-image: inline-image('facebook.svg');
 }
 
-#twitter{
-  background-image: inline-image("twitter.svg");
+#twitter {
+  background-image: inline-image('twitter.svg');
 }

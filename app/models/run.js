@@ -1,9 +1,8 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
 import { observer } from '@ember/object';
-BigNumber.config({DECIMAL_PLACES: 25});
+BigNumber.config({ DECIMAL_PLACES: 25 });
 export default DS.Model.extend({
-
   /**
    * createdAt represents the creation date of the run, will be stored in database
    * and should be set on create
@@ -11,7 +10,9 @@ export default DS.Model.extend({
    * @type {Date}
    */
   createdAt: DS.attr('date', {
-    defaultValue() { return new Date(); }
+    defaultValue() {
+      return new Date();
+    }
   }),
 
   /**
@@ -21,7 +22,9 @@ export default DS.Model.extend({
    * @type {Date}
    */
   updatedAt: DS.attr('date', {
-    defaultValue() { return new Date(); }
+    defaultValue() {
+      return new Date();
+    }
   }),
 
   /**
@@ -54,27 +57,26 @@ export default DS.Model.extend({
   /**
    * time of the run in hours
    */
-  timeHr: computed("timeHrRaw", {
-
+  timeHr: computed('timeHrRaw', {
     /**
-  	 * returns timeHr, rounded to 20 digits
+     * returns timeHr, rounded to 20 digits
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeHrRaw").round(20);
+      return this.get('timeHrRaw').round(20);
     },
 
     /**
      * sets a new timeHr
      *
      * @param  {string} propertyName name of the changed property, always "timeHr"
-  	 * @param  {BigNumber|string|number} value new timeHr value
-  	 * @return {BigNumber} new timeHr value
+     * @param  {BigNumber|string|number} value new timeHr value
+     * @return {BigNumber} new timeHr value
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec", value.times(3600));
-      return this.get("timeHrRaw").round(20);
+      this.set('timeSec', value.times(3600));
+      return this.get('timeHrRaw').round(20);
     }
   }),
 
@@ -83,35 +85,34 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  timeHrRaw: computed("timeSec", function(){
-    return this.get("timeSec").dividedBy(3600);
+  timeHrRaw: computed('timeSec', function() {
+    return this.get('timeSec').dividedBy(3600);
   }),
 
   /**
    * time of the run in minutes
    */
-  timeMin: computed("timeMinRaw", {
-
+  timeMin: computed('timeMinRaw', {
     /**
-  	 * returns timeMin, rounded to 20 digits
+     * returns timeMin, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeMinRaw").round(20);
+      return this.get('timeMinRaw').round(20);
     },
 
     /**
      * sets a new timeMin
      *
      * @param  {string} propertyName name of the changed property, always "timeMin"
-  	 * @param  {BigNumber|string|number} value new timeMin value
-  	 * @return {BigNumber} new timeMin value
+     * @param  {BigNumber|string|number} value new timeMin value
+     * @return {BigNumber} new timeMin value
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec", value.times(60));
-      return this.get("timeMinRaw").round(20);
+      this.set('timeSec', value.times(60));
+      return this.get('timeMinRaw').round(20);
     }
   }),
 
@@ -120,62 +121,66 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  timeMinRaw: computed("timeSec", function(){
-    return this.get("timeSec").dividedBy(60);
+  timeMinRaw: computed('timeSec', function() {
+    return this.get('timeSec').dividedBy(60);
   }),
 
   /**
    * timeStackHr is used to display the time like 12:34:56 and represents the hours value
    */
-  timeStackHr: computed("timeSec", "timeStackHrRaw" ,{
-
+  timeStackHr: computed('timeSec', 'timeStackHrRaw', {
     /**
      * returns timeStackHr, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeStackHrRaw");
+      return this.get('timeStackHrRaw');
     },
 
     /**
      * sets a new timeStackHr
      *
      * @param  {string} propertyName name of the changed property, always "timeStackHr"
-   	 * @param  {BigNumber|string|number} value new timeStackHr value
-   	 * @return {BigNumber} new timeStackHr value
+     * @param  {BigNumber|string|number} value new timeStackHr value
+     * @return {BigNumber} new timeStackHr value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("timeStackHrRaw");
+      var previousValue = this.get('timeStackHrRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(3600)));
-      return this.get("timeStackHrRaw");
+      this.set(
+        'timeSec',
+        this.get('timeSec').plus(value.minus(previousValue).times(3600))
+      );
+      return this.get('timeStackHrRaw');
     }
   }),
 
-   /**
-    * calculates the value of timeStackHr
-    *
-    * @return {BigNumber}
-    */
-   timeStackHrRaw: computed("timeSec", function(){
+  /**
+   * calculates the value of timeStackHr
+   *
+   * @return {BigNumber}
+   */
+  timeStackHrRaw: computed('timeSec', function() {
     // use .get("timeSec").round() instead of .get("timeHr")
     // otherwise 3599.5 seconds would result in a timeStackHrRaw of 1
-    return this.get("timeSec").round().dividedBy(3600).floor();
-   }),
+    return this.get('timeSec')
+      .round()
+      .dividedBy(3600)
+      .floor();
+  }),
 
   /**
    * timeStackMin is used to display the time like 12:34:56 and represents the minutes value
    */
-  timeStackMin: computed("timeSec", "timeStackMinRaw",{
-
+  timeStackMin: computed('timeSec', 'timeStackMinRaw', {
     /**
      * returns timeStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("timeStackMinRaw").round();
+      return this.get('timeStackMinRaw').round();
     },
 
     /**
@@ -186,10 +191,13 @@ export default DS.Model.extend({
      * @return {BigNumber} new timeStackMin value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("timeStackMinRaw");
+      var previousValue = this.get('timeStackMinRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue).times(60)));
-      return this.get("timeStackMinRaw").round();
+      this.set(
+        'timeSec',
+        this.get('timeSec').plus(value.minus(previousValue).times(60))
+      );
+      return this.get('timeStackMinRaw').round();
     }
   }),
 
@@ -198,25 +206,28 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  timeStackMinRaw: computed("timeSec", "timeStackHrRaw", function(){
+  timeStackMinRaw: computed('timeSec', 'timeStackHrRaw', function() {
     // use .get("timeSec").round().dividedBy(60) instead of .get("timeMinRaw")
     // otherwise 3599.5 seconds would result in a timeStackMinRaw of 59 instead of 0
-    return this.get("timeSec").round().dividedBy(60).floor().minus(this.get("timeStackHr")*60);
+    return this.get('timeSec')
+      .round()
+      .dividedBy(60)
+      .floor()
+      .minus(this.get('timeStackHr') * 60);
   }),
 
   /**
    * timeStackMinFixed is a variation of timeStackMin with a fixed length as
    * defined in the digits property to make it possible to display 2:1:12 as 2:01:12
    */
-  timeStackMinFixed: computed("timeStackMinFixedRaw", "timeSec", {
-
+  timeStackMinFixed: computed('timeStackMinFixedRaw', 'timeSec', {
     /**
      * returns timeStackMinFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("timeStackMinFixedRaw");
+      return this.get('timeStackMinFixedRaw');
     },
 
     /**
@@ -227,9 +238,9 @@ export default DS.Model.extend({
      * @return {string} new timeStackMinFixed value
      */
     set: function(propertyName, value) {
-      this.set("timeStackMin", value);
-      return this.get("timeStackMinFixedRaw");
-    },
+      this.set('timeStackMin', value);
+      return this.get('timeStackMinFixedRaw');
+    }
   }),
 
   /**
@@ -237,27 +248,27 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  timeStackMinFixedRaw: computed("timeStackMin", "timeSec", function(){
-    var timeStackMin = this.get("timeStackMin").toString();
-    var zerosToAdd = this.get("digits").minus(timeStackMin.length);
-    while (zerosToAdd--) { timeStackMin = "0"+timeStackMin; }
+  timeStackMinFixedRaw: computed('timeStackMin', 'timeSec', function() {
+    var timeStackMin = this.get('timeStackMin').toString();
+    var zerosToAdd = this.get('digits').minus(timeStackMin.length);
+    while (zerosToAdd--) {
+      timeStackMin = '0' + timeStackMin;
+    }
     return timeStackMin;
   }),
-
 
   /**
    * timeStackSec is used to display the time like 12:34:56 and represents the seconds value
    */
-  timeStackSec: computed("timeSec", "timeStackSecRaw",{
-
+  timeStackSec: computed('timeSec', 'timeStackSecRaw', {
     /**
      * returns timeStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      var timeStackSecRaw = this.get("timeStackSecRaw").round();
-      return timeStackSecRaw.equals(60) ? new BigNumber(0): timeStackSecRaw;
+      var timeStackSecRaw = this.get('timeStackSecRaw').round();
+      return timeStackSecRaw.equals(60) ? new BigNumber(0) : timeStackSecRaw;
     },
 
     /**
@@ -268,12 +279,12 @@ export default DS.Model.extend({
      * @return {BigNumber} new timeStackSec value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("timeStackSecRaw");
+      var previousValue = this.get('timeStackSecRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("timeSec", this.get("timeSec").plus(value.minus(previousValue)));
+      this.set('timeSec', this.get('timeSec').plus(value.minus(previousValue)));
 
-      var timeStackSecRaw = this.get("timeStackSecRaw").round();
-      return timeStackSecRaw.equals(60) ? new BigNumber(0): timeStackSecRaw;
+      var timeStackSecRaw = this.get('timeStackSecRaw').round();
+      return timeStackSecRaw.equals(60) ? new BigNumber(0) : timeStackSecRaw;
     }
   }),
 
@@ -282,24 +293,27 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  timeStackSecRaw: computed("timeSec", "timeMinRaw",function(){
+  timeStackSecRaw: computed('timeSec', 'timeMinRaw', function() {
     // a combinatin of round and floor is not necessary here, because there is no smaller metric than seconds
-    return this.get("timeSec").minus(this.get("timeMinRaw").floor().times(60));
+    return this.get('timeSec').minus(
+      this.get('timeMinRaw')
+        .floor()
+        .times(60)
+    );
   }),
 
   /**
    * timeStackSecFixed is a variation of timeStackSec with a fixed length as
    * defined in the digits property to make it possible to display 15:1 as 15:01
    */
-  timeStackSecFixed: computed("timeStackSecFixedRaw", "timeSec", {
-
+  timeStackSecFixed: computed('timeStackSecFixedRaw', 'timeSec', {
     /**
      * returns timeStackSecFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("timeStackSecFixedRaw");
+      return this.get('timeStackSecFixedRaw');
     },
 
     /**
@@ -310,9 +324,9 @@ export default DS.Model.extend({
      * @return {string} new timeStackSecFixed value
      */
     set: function(propertyName, value) {
-      this.set("timeStackSec", value);
-      return this.get("timeStackSecFixedRaw");
-    },
+      this.set('timeStackSec', value);
+      return this.get('timeStackSecFixedRaw');
+    }
   }),
 
   /**
@@ -320,10 +334,12 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  timeStackSecFixedRaw: computed("timeStackSec", "timeSec", function(){
-    var timeStackSec = this.get("timeStackSec").toString();
-    var zerosToAdd = this.get("digits").minus(timeStackSec.length);
-    while (zerosToAdd--) { timeStackSec = "0"+timeStackSec;}
+  timeStackSecFixedRaw: computed('timeStackSec', 'timeSec', function() {
+    var timeStackSec = this.get('timeStackSec').toString();
+    var zerosToAdd = this.get('digits').minus(timeStackSec.length);
+    while (zerosToAdd--) {
+      timeStackSec = '0' + timeStackSec;
+    }
     return timeStackSec;
   }),
 
@@ -343,15 +359,14 @@ export default DS.Model.extend({
   /**
    * lengthMStackM is used to display the length like 12,34 and represents the Meter value
    */
-  lengthMStackM: computed("lengthM", "lengthMStackMRaw", {
-
+  lengthMStackM: computed('lengthM', 'lengthMStackMRaw', {
     /**
      * returns lengthMStackM, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("lengthMStackMRaw");
+      return this.get('lengthMStackMRaw');
     },
 
     /**
@@ -362,10 +377,10 @@ export default DS.Model.extend({
      * @return {BigNumber} new lengthMStackM value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("lengthMStackMRaw");
+      var previousValue = this.get('lengthMStackMRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue)));
-      return this.get("lengthMStackMRaw");
+      this.set('lengthM', this.get('lengthM').plus(value.minus(previousValue)));
+      return this.get('lengthMStackMRaw');
     }
   }),
 
@@ -374,25 +389,29 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthMStackMRaw: computed("lengthM", function(){
+  lengthMStackMRaw: computed('lengthM', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthM").round(this.get("digits")).floor();
+    return this.get('lengthM')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
    * lengthMStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the meters value
    */
-  lengthMStackDecimal: computed("lengthM", "lengthMStackMRaw", {
-
+  lengthMStackDecimal: computed('lengthM', 'lengthMStackMRaw', {
     /**
      * returns lengthMStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var lengthMStackDecimal = this.get("lengthM").round(this.get("digits")).toString().split(".")[1];
-      return lengthMStackDecimal ? lengthMStackDecimal: "0";
+      var lengthMStackDecimal = this.get('lengthM')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthMStackDecimal ? lengthMStackDecimal : '0';
     },
 
     /**
@@ -409,15 +428,21 @@ export default DS.Model.extend({
 
       // reflects the decimal precision of the value
       // 1 = 100; 10 = 10
-      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      var decimalPrecision = 100 / Math.pow(10, valueLength - 1);
 
       // calulate the meters from decimal place
-      var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros)).dividedBy(1000);
+      var decimalMeters = value
+        .times(decimalPrecision)
+        .dividedBy(Math.pow(10, leadingZeros))
+        .dividedBy(1000);
 
-      this.set("lengthM", this.get("lengthMStackMRaw").plus(decimalMeters));
+      this.set('lengthM', this.get('lengthMStackMRaw').plus(decimalMeters));
 
-      var lengthMStackDecimal = this.get("lengthM").round(this.get("digits")).toString().split(".")[1];
-      return lengthMStackDecimal ? lengthMStackDecimal: "0";
+      var lengthMStackDecimal = this.get('lengthM')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthMStackDecimal ? lengthMStackDecimal : '0';
     }
   }),
 
@@ -426,15 +451,14 @@ export default DS.Model.extend({
    * length as defined in the digits property. It's basically lengthMStackDecimal
    * with trailing zero(s) to make it possible to display 12,3 as 12,30
    */
-  lengthMStackDecimalFixed: computed("lengthMStackDecimalFixedRaw", "lengthM", {
-
+  lengthMStackDecimalFixed: computed('lengthMStackDecimalFixedRaw', 'lengthM', {
     /**
      * returns lengthMStackDecimalFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("lengthMStackDecimalFixedRaw");
+      return this.get('lengthMStackDecimalFixedRaw');
     },
 
     /**
@@ -449,13 +473,19 @@ export default DS.Model.extend({
 
       // a value like 104 should result in 04 and increment the pre-decimal point position
       // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
-      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
-        this.set("lengthM", this.get("lengthMStackM").plus(valueBigNumber.dividedBy(100)));
-      }else{
-        this.set("lengthMStackDecimal", value);
+      if (
+        valueBigNumber.round().toString().length > this.digits ||
+        valueBigNumber.isNegative() === true
+      ) {
+        this.set(
+          'lengthM',
+          this.get('lengthMStackM').plus(valueBigNumber.dividedBy(100))
+        );
+      } else {
+        this.set('lengthMStackDecimal', value);
       }
-      return this.get("lengthMStackDecimalFixedRaw");
-    },
+      return this.get('lengthMStackDecimalFixedRaw');
+    }
   }),
 
   /**
@@ -463,25 +493,30 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  lengthMStackDecimalFixedRaw: computed("lengthMStackDecimal", "lengthM", function(){
-    var lengthMStackDecimal = this.get("lengthMStackDecimal");
-    var zerosToAdd = this.get("digits").minus(lengthMStackDecimal.length);
-    while (zerosToAdd--) { lengthMStackDecimal += "0";}
-    return lengthMStackDecimal;
-  }),
+  lengthMStackDecimalFixedRaw: computed(
+    'lengthMStackDecimal',
+    'lengthM',
+    function() {
+      var lengthMStackDecimal = this.get('lengthMStackDecimal');
+      var zerosToAdd = this.get('digits').minus(lengthMStackDecimal.length);
+      while (zerosToAdd--) {
+        lengthMStackDecimal += '0';
+      }
+      return lengthMStackDecimal;
+    }
+  ),
 
   /**
    * length of the run in km
    */
-  lengthKm: computed("lengthKmRaw", {
-
+  lengthKm: computed('lengthKmRaw', {
     /**
      * returns lengthKm, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("lengthKmRaw").round(20);
+      return this.get('lengthKmRaw').round(20);
     },
 
     /**
@@ -493,8 +528,8 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("lengthM", value.times(1000));
-      return this.get("lengthKmRaw").round(20);
+      this.set('lengthM', value.times(1000));
+      return this.get('lengthKmRaw').round(20);
     }
   }),
 
@@ -503,23 +538,21 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthKmRaw: computed("lengthM", function(){
-    return this.get("lengthM").dividedBy(1000);
+  lengthKmRaw: computed('lengthM', function() {
+    return this.get('lengthM').dividedBy(1000);
   }),
-
 
   /**
    * lengthKmStackKm is used to display the length like 12,34 and represents the kilometers value
    */
-  lengthKmStackKm: computed("lengthM", "lengthKmStackKmRaw", {
-
+  lengthKmStackKm: computed('lengthM', 'lengthKmStackKmRaw', {
     /**
      * returns lengthKmStackKm, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("lengthKmStackKmRaw");
+      return this.get('lengthKmStackKmRaw');
     },
 
     /**
@@ -530,10 +563,13 @@ export default DS.Model.extend({
      * @return {BigNumber} new lengthKmStackKm value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("lengthKmStackKmRaw");
+      var previousValue = this.get('lengthKmStackKmRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(1000)));
-      return this.get("lengthKmStackKmRaw");
+      this.set(
+        'lengthM',
+        this.get('lengthM').plus(value.minus(previousValue).times(1000))
+      );
+      return this.get('lengthKmStackKmRaw');
     }
   }),
 
@@ -542,25 +578,29 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthKmStackKmRaw: computed("lengthKm", function(){
+  lengthKmStackKmRaw: computed('lengthKm', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthKm").round(this.get("digits")).floor();
+    return this.get('lengthKm')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
    * lengthKmStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the kilometers value
    */
-  lengthKmStackDecimal: computed("lengthKm", "lengthKmStackKmRaw", {
-
+  lengthKmStackDecimal: computed('lengthKm', 'lengthKmStackKmRaw', {
     /**
      * returns lengthKmStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var lengthKmStackDecimal = this.get("lengthKm").round(this.get("digits")).toString().split(".")[1];
-      return lengthKmStackDecimal ? lengthKmStackDecimal: "0";
+      var lengthKmStackDecimal = this.get('lengthKm')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : '0';
     },
 
     /**
@@ -575,18 +615,27 @@ export default DS.Model.extend({
       value = this._ensureBigNumber(value).round();
       var valueLength = value.abs().toString().length;
 
-
       // reflects the decimal precision of the value
       // 1 = 100; 10 = 10
-      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      var decimalPrecision = 100 / Math.pow(10, valueLength - 1);
 
       // calulate the meters from decimal place
-      var decimalMeters = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      var decimalMeters = value
+        .times(decimalPrecision)
+        .dividedBy(Math.pow(10, leadingZeros));
 
-      this.set("lengthM", this.get("lengthKmStackKmRaw").times(1000).plus(decimalMeters));
+      this.set(
+        'lengthM',
+        this.get('lengthKmStackKmRaw')
+          .times(1000)
+          .plus(decimalMeters)
+      );
 
-      var lengthKmStackDecimal = this.get("lengthKmRaw").round(this.get("digits")).toString().split(".")[1];
-      return lengthKmStackDecimal ? lengthKmStackDecimal: "0";
+      var lengthKmStackDecimal = this.get('lengthKmRaw')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthKmStackDecimal ? lengthKmStackDecimal : '0';
     }
   }),
 
@@ -595,15 +644,14 @@ export default DS.Model.extend({
    * length as defined in the digits property. It's basically lengthKmStackDecimal
    * with trailing zero(s) to make it possible to display 12,3 as 12,30
    */
-  lengthKmStackDecimalFixed: computed("lengthKmStackDecimalFixedRaw", {
-
+  lengthKmStackDecimalFixed: computed('lengthKmStackDecimalFixedRaw', {
     /**
      * returns lengthKmStackDecimalFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("lengthKmStackDecimalFixedRaw");
+      return this.get('lengthKmStackDecimalFixedRaw');
     },
 
     /**
@@ -618,13 +666,21 @@ export default DS.Model.extend({
 
       // a value like 104 should result in 04 and increment the pre-decimal point position
       // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
-      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
-        this.set("lengthM", this.get("lengthKmStackKm").times(1000).plus(valueBigNumber.times(10)));
-      }else{
-        this.set("lengthKmStackDecimal", value);
+      if (
+        valueBigNumber.round().toString().length > this.digits ||
+        valueBigNumber.isNegative() === true
+      ) {
+        this.set(
+          'lengthM',
+          this.get('lengthKmStackKm')
+            .times(1000)
+            .plus(valueBigNumber.times(10))
+        );
+      } else {
+        this.set('lengthKmStackDecimal', value);
       }
-      return this.get("lengthKmStackDecimalFixedRaw");
-    },
+      return this.get('lengthKmStackDecimalFixedRaw');
+    }
   }),
 
   /**
@@ -632,25 +688,30 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  lengthKmStackDecimalFixedRaw: computed("lengthKmStackDecimal", "lengthKmRaw", function(){
-    var lengthKmStackDecimal = this.get("lengthKmStackDecimal");
-    var zerosToAdd = this.get("digits").minus(lengthKmStackDecimal.length);
-    while (zerosToAdd--) { lengthKmStackDecimal += "0";}
-    return lengthKmStackDecimal;
-  }),
+  lengthKmStackDecimalFixedRaw: computed(
+    'lengthKmStackDecimal',
+    'lengthKmRaw',
+    function() {
+      var lengthKmStackDecimal = this.get('lengthKmStackDecimal');
+      var zerosToAdd = this.get('digits').minus(lengthKmStackDecimal.length);
+      while (zerosToAdd--) {
+        lengthKmStackDecimal += '0';
+      }
+      return lengthKmStackDecimal;
+    }
+  ),
 
   /**
    * length of the run in miles
    */
-  lengthMi: computed("lengthMiRaw", {
-
+  lengthMi: computed('lengthMiRaw', {
     /**
      * returns lengthMi, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("lengthMiRaw").round(20);
+      return this.get('lengthMiRaw').round(20);
     },
 
     /**
@@ -662,8 +723,8 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("lengthM", value.times(this.miToM));
-      return this.get("lengthMiRaw").round(20);
+      this.set('lengthM', value.times(this.miToM));
+      return this.get('lengthMiRaw').round(20);
     }
   }),
 
@@ -672,22 +733,21 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthMiRaw: computed("lengthM", function(){
-    return this.get("lengthM").dividedBy(this.miToM);
+  lengthMiRaw: computed('lengthM', function() {
+    return this.get('lengthM').dividedBy(this.miToM);
   }),
 
   /**
    * lengthMiStackMi is used to display the length like 12,34 and represents the miles value
    */
-  lengthMiStackMi: computed("lengthM", "lengthMiStackMiRaw", {
-
+  lengthMiStackMi: computed('lengthM', 'lengthMiStackMiRaw', {
     /**
      * returns lengthMiStackMi, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("lengthMiStackMiRaw");
+      return this.get('lengthMiStackMiRaw');
     },
 
     /**
@@ -698,10 +758,13 @@ export default DS.Model.extend({
      * @return {BigNumber} new lengthMiStackMi value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("lengthMiStackMiRaw");
+      var previousValue = this.get('lengthMiStackMiRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("lengthM", this.get("lengthM").plus(value.minus(previousValue).times(this.miToM)));
-      return this.get("lengthMiStackMiRaw");
+      this.set(
+        'lengthM',
+        this.get('lengthM').plus(value.minus(previousValue).times(this.miToM))
+      );
+      return this.get('lengthMiStackMiRaw');
     }
   }),
 
@@ -710,25 +773,29 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  lengthMiStackMiRaw: computed("lengthMiRaw", function(){
+  lengthMiStackMiRaw: computed('lengthMiRaw', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("lengthMi").round(this.get("digits")).floor();
+    return this.get('lengthMi')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
    * lengthMiStackDecimal is used to display the length like 12,34
    * and represents up to two decimal places of the miles value
    */
-  lengthMiStackDecimal: computed("lengthMi", "lengthMiStackMiRaw", {
-
+  lengthMiStackDecimal: computed('lengthMi', 'lengthMiStackMiRaw', {
     /**
      * returns lengthMiStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var lengthMiStackDecimal = this.get("lengthMi").round(this.get("digits")).toString().split(".")[1];
-      return lengthMiStackDecimal ? lengthMiStackDecimal: "0";
+      var lengthMiStackDecimal = this.get('lengthMi')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : '0';
     },
 
     /**
@@ -746,16 +813,26 @@ export default DS.Model.extend({
 
       // reflects the decimal precision of the value
       // 1 = 100; 10 = 10
-      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      var decimalPrecision = 100 / Math.pow(10, valueLength - 1);
 
       // calulate the Meters from decimal place
-      var decimalMiles = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      var decimalMiles = value
+        .times(decimalPrecision)
+        .dividedBy(Math.pow(10, leadingZeros));
       var decimalMeters = decimalMiles.dividedBy(1000).times(this.miToM);
 
-      this.set("lengthM", this.get("lengthMiStackMiRaw").times(this.miToM).plus(decimalMeters));
+      this.set(
+        'lengthM',
+        this.get('lengthMiStackMiRaw')
+          .times(this.miToM)
+          .plus(decimalMeters)
+      );
 
-      var lengthMiStackDecimal = this.get("lengthMiRaw").round(this.get("digits")).toString().split(".")[1];
-      return lengthMiStackDecimal ? lengthMiStackDecimal: "0";
+      var lengthMiStackDecimal = this.get('lengthMiRaw')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return lengthMiStackDecimal ? lengthMiStackDecimal : '0';
     }
   }),
 
@@ -764,15 +841,14 @@ export default DS.Model.extend({
    * length as defined in the digits property. It's basically lengthMiStackDecimal
    * with trailing zero(s) to make it possible to display 12,3 as 12,30
    */
-  lengthMiStackDecimalFixed: computed("lengthMiStackDecimalFixedRaw", {
-
+  lengthMiStackDecimalFixed: computed('lengthMiStackDecimalFixedRaw', {
     /**
      * returns lengthMiStackDecimalFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("lengthMiStackDecimalFixedRaw");
+      return this.get('lengthMiStackDecimalFixedRaw');
     },
 
     /**
@@ -787,13 +863,19 @@ export default DS.Model.extend({
 
       // a value like 104 should result in 04 and increment the pre-decimal point position
       // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
-      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
-        this.set("lengthMi", this.get("lengthMiStackMi").plus(valueBigNumber.dividedBy(100)));
-      }else{
-        this.set("lengthMiStackDecimal", value);
+      if (
+        valueBigNumber.round().toString().length > this.digits ||
+        valueBigNumber.isNegative() === true
+      ) {
+        this.set(
+          'lengthMi',
+          this.get('lengthMiStackMi').plus(valueBigNumber.dividedBy(100))
+        );
+      } else {
+        this.set('lengthMiStackDecimal', value);
       }
-      return this.get("lengthMiStackDecimalFixedRaw");
-    },
+      return this.get('lengthMiStackDecimalFixedRaw');
+    }
   }),
 
   /**
@@ -801,25 +883,30 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  lengthMiStackDecimalFixedRaw: computed("lengthMiStackDecimal", "lengthKmRaw", function(){
-    var lengthMiStackDecimal = this.get("lengthMiStackDecimal");
-    var zerosToAdd = this.get("digits").minus(lengthMiStackDecimal.length);
-    while (zerosToAdd--) { lengthMiStackDecimal += "0";}
-    return lengthMiStackDecimal;
-  }),
+  lengthMiStackDecimalFixedRaw: computed(
+    'lengthMiStackDecimal',
+    'lengthKmRaw',
+    function() {
+      var lengthMiStackDecimal = this.get('lengthMiStackDecimal');
+      var zerosToAdd = this.get('digits').minus(lengthMiStackDecimal.length);
+      while (zerosToAdd--) {
+        lengthMiStackDecimal += '0';
+      }
+      return lengthMiStackDecimal;
+    }
+  ),
 
   /**
    * pace of the run in min/km
    */
-  paceMinPerKm: computed("paceMinPerKmRaw", "lengthKmRaw", {
-
+  paceMinPerKm: computed('paceMinPerKmRaw', 'lengthKmRaw', {
     /**
      * returns paceMinPerKm, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerKmRaw").round(20);
+      return this.get('paceMinPerKmRaw').round(20);
     },
 
     /**
@@ -831,9 +918,9 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec",value.times(this.get("lengthKmRaw").times(60)));
+      this.set('timeSec', value.times(this.get('lengthKmRaw').times(60)));
 
-      return this.get("paceMinPerKmRaw").round(20);
+      return this.get('paceMinPerKmRaw').round(20);
     }
   }),
 
@@ -842,23 +929,24 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerKmRaw: computed("timeMinRaw", "lengthKmRaw", function(){
-    var paceMinPerKmRaw = this.get("timeMinRaw").dividedBy(this.get("lengthKmRaw"));
-    return paceMinPerKmRaw.isFinite() ? paceMinPerKmRaw: new BigNumber(0);
+  paceMinPerKmRaw: computed('timeMinRaw', 'lengthKmRaw', function() {
+    var paceMinPerKmRaw = this.get('timeMinRaw').dividedBy(
+      this.get('lengthKmRaw')
+    );
+    return paceMinPerKmRaw.isFinite() ? paceMinPerKmRaw : new BigNumber(0);
   }),
 
   /**
    * paceMinPerKmStackMin is used to display the pace like 12:34 and represents the minutes value
    */
-  paceMinPerKmStackMin: computed("paceMinPerKmStackMinRaw", "paceMinPerKmRaw", {
-
+  paceMinPerKmStackMin: computed('paceMinPerKmStackMinRaw', 'paceMinPerKmRaw', {
     /**
      * returns paceMinPerKmStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerKmStackMinRaw");
+      return this.get('paceMinPerKmStackMinRaw');
     },
 
     /**
@@ -869,11 +957,14 @@ export default DS.Model.extend({
      * @return {BigNumber} new paceMinPerKmStackMin value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("paceMinPerKmStackMinRaw");
+      var previousValue = this.get('paceMinPerKmStackMinRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue)));
+      this.set(
+        'paceMinPerKm',
+        this.get('paceMinPerKmRaw').plus(value.minus(previousValue))
+      );
 
-      return this.get("paceMinPerKmStackMinRaw");
+      return this.get('paceMinPerKmStackMinRaw');
     }
   }),
 
@@ -882,24 +973,27 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerKmStackMinRaw: computed("paceMinPerKmRaw", function(){
+  paceMinPerKmStackMinRaw: computed('paceMinPerKmRaw', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerKm").round(this.get("digits")).floor();
+    return this.get('paceMinPerKm')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
    * paceMinPerKmStackSec is used to display the pace like 12:34 and represents the seconds value
    */
-  paceMinPerKmStackSec: computed("paceMinPerKmStackSecRaw", "paceMinPerKmRaw", {
-
+  paceMinPerKmStackSec: computed('paceMinPerKmStackSecRaw', 'paceMinPerKmRaw', {
     /**
      * returns paceMinPerKmStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      var paceMinPerKmStackSec = this.get("paceMinPerKmStackSecRaw").round();
-      return paceMinPerKmStackSec.equals(60) ? new BigNumber(0): paceMinPerKmStackSec;
+      var paceMinPerKmStackSec = this.get('paceMinPerKmStackSecRaw').round();
+      return paceMinPerKmStackSec.equals(60)
+        ? new BigNumber(0)
+        : paceMinPerKmStackSec;
     },
 
     /**
@@ -910,13 +1004,20 @@ export default DS.Model.extend({
      * @return {BigNumber} new paceMinPerKmStackSec value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("paceMinPerKmStackSecRaw");
+      var previousValue = this.get('paceMinPerKmStackSecRaw');
 
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerKm", this.get("paceMinPerKmRaw").plus(value.minus(previousValue).dividedBy(60)));
+      this.set(
+        'paceMinPerKm',
+        this.get('paceMinPerKmRaw').plus(
+          value.minus(previousValue).dividedBy(60)
+        )
+      );
 
-      var paceMinPerKmStackSec = this.get("paceMinPerKmStackSecRaw").round();
-      return paceMinPerKmStackSec.equals(60) ? new BigNumber(0): paceMinPerKmStackSec;
+      var paceMinPerKmStackSec = this.get('paceMinPerKmStackSecRaw').round();
+      return paceMinPerKmStackSec.equals(60)
+        ? new BigNumber(0)
+        : paceMinPerKmStackSec;
     }
   }),
 
@@ -925,23 +1026,28 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerKmStackSecRaw: computed("paceMinPerKmRaw", "paceMinPerKmStackMinRaw", function(){
-    return this.get("paceMinPerKmRaw").minus(this.get("paceMinPerKmStackMinRaw")).times(60);
-  }),
+  paceMinPerKmStackSecRaw: computed(
+    'paceMinPerKmRaw',
+    'paceMinPerKmStackMinRaw',
+    function() {
+      return this.get('paceMinPerKmRaw')
+        .minus(this.get('paceMinPerKmStackMinRaw'))
+        .times(60);
+    }
+  ),
 
   /**
    * paceMinPerKmStackSecFixed is a variation of paceMinPerKmStackSec with a fixed length as
    * defined in the digits property to make it possible to display 12:4 as 12:04
    */
-  paceMinPerKmStackSecFixed: computed("paceMinPerKmStackSecFixedRaw", {
-
+  paceMinPerKmStackSecFixed: computed('paceMinPerKmStackSecFixedRaw', {
     /**
      * returns paceMinPerKmStackSecFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("paceMinPerKmStackSecFixedRaw");
+      return this.get('paceMinPerKmStackSecFixedRaw');
     },
 
     /**
@@ -952,9 +1058,9 @@ export default DS.Model.extend({
      * @return {string} new paceMinPerKmStackSecFixed value
      */
     set: function(propertyName, value) {
-      this.set("paceMinPerKmStackSec", value);
-      return this.get("paceMinPerKmStackSecFixedRaw");
-    },
+      this.set('paceMinPerKmStackSec', value);
+      return this.get('paceMinPerKmStackSecFixedRaw');
+    }
   }),
 
   /**
@@ -962,39 +1068,40 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  paceMinPerKmStackSecFixedRaw: computed("paceMinPerKmStackSec", function(){
-    var paceMinPerKmStackSec = this.get("paceMinPerKmStackSec").toString();
-    var zerosToAdd = this.get("digits").minus(paceMinPerKmStackSec.length);
-    while (zerosToAdd--) { paceMinPerKmStackSec = "0"+paceMinPerKmStackSec; }
+  paceMinPerKmStackSecFixedRaw: computed('paceMinPerKmStackSec', function() {
+    var paceMinPerKmStackSec = this.get('paceMinPerKmStackSec').toString();
+    var zerosToAdd = this.get('digits').minus(paceMinPerKmStackSec.length);
+    while (zerosToAdd--) {
+      paceMinPerKmStackSec = '0' + paceMinPerKmStackSec;
+    }
     return paceMinPerKmStackSec;
   }),
 
   /**
    * pace of the run in min/mi
    */
-  paceMinPerMi: computed("paceMinPerMiRaw", "lengthMiRaw", {
-
+  paceMinPerMi: computed('paceMinPerMiRaw', 'lengthMiRaw', {
     /**
      * returns paceMinPerMi, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerMiRaw").round(20);
+      return this.get('paceMinPerMiRaw').round(20);
     },
 
     /**
-    * sets a new paceMinPerMi
-    *
-    * @param  {string} propertyName name of the changed property, always "paceMinPerMi"
-    * @param  {BigNumber|string|number} value new paceMinPerMi value
-    * @return {BigNumber} new paceMinPerMi value
-    */
+     * sets a new paceMinPerMi
+     *
+     * @param  {string} propertyName name of the changed property, always "paceMinPerMi"
+     * @param  {BigNumber|string|number} value new paceMinPerMi value
+     * @return {BigNumber} new paceMinPerMi value
+     */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec",value.times(this.get("lengthMiRaw").times(60)));
+      this.set('timeSec', value.times(this.get('lengthMiRaw').times(60)));
 
-      return this.get("paceMinPerMiRaw").round(20);
+      return this.get('paceMinPerMiRaw').round(20);
     }
   }),
 
@@ -1003,23 +1110,24 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerMiRaw: computed("timeMinRaw", "lengthMiRaw", function(){
-    var paceMinPerMiRaw = this.get("timeMinRaw").dividedBy(this.get("lengthMiRaw"));
-    return paceMinPerMiRaw.isFinite() ? paceMinPerMiRaw: new BigNumber(0);
+  paceMinPerMiRaw: computed('timeMinRaw', 'lengthMiRaw', function() {
+    var paceMinPerMiRaw = this.get('timeMinRaw').dividedBy(
+      this.get('lengthMiRaw')
+    );
+    return paceMinPerMiRaw.isFinite() ? paceMinPerMiRaw : new BigNumber(0);
   }),
 
   /**
    * paceMinPerMiStackMin is used to display the pace like 12:34 and represents the minutes value
    */
-  paceMinPerMiStackMin: computed("paceMinPerMiStackMinRaw", "paceMinPerMiRaw", {
-
+  paceMinPerMiStackMin: computed('paceMinPerMiStackMinRaw', 'paceMinPerMiRaw', {
     /**
      * returns paceMinPerMiStackMin, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("paceMinPerMiStackMinRaw");
+      return this.get('paceMinPerMiStackMinRaw');
     },
 
     /**
@@ -1030,11 +1138,14 @@ export default DS.Model.extend({
      * @return {BigNumber} new paceMinPerMiStackMin value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("paceMinPerMiStackMinRaw");
+      var previousValue = this.get('paceMinPerMiStackMinRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue)));
+      this.set(
+        'paceMinPerMi',
+        this.get('paceMinPerMiRaw').plus(value.minus(previousValue))
+      );
 
-      return this.get("paceMinPerMiStackMinRaw");
+      return this.get('paceMinPerMiStackMinRaw');
     }
   }),
 
@@ -1043,25 +1154,27 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerMiStackMinRaw: computed("paceMinPerMiRaw", function(){
+  paceMinPerMiStackMinRaw: computed('paceMinPerMiRaw', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("paceMinPerMi").round(this.get("digits")).floor();  // TODO make test recognize why not using paceMinPerMiRaw
+    return this.get('paceMinPerMi')
+      .round(this.get('digits'))
+      .floor(); // TODO make test recognize why not using paceMinPerMiRaw
   }),
-
 
   /**
    * paceMinPerMiStackSec is used to display the pace like 12:34 and represents the seconds value
    */
-  paceMinPerMiStackSec: computed("paceMinPerMiStackSecRaw", "paceMinPerMiRaw", {
-
+  paceMinPerMiStackSec: computed('paceMinPerMiStackSecRaw', 'paceMinPerMiRaw', {
     /**
      * returns paceMinPerMiStackSec, between 0 and 59, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      var paceMinPerMiStackSec = this.get("paceMinPerMiStackSecRaw").round();
-      return paceMinPerMiStackSec.equals(60) ? new BigNumber(0): paceMinPerMiStackSec;
+      var paceMinPerMiStackSec = this.get('paceMinPerMiStackSecRaw').round();
+      return paceMinPerMiStackSec.equals(60)
+        ? new BigNumber(0)
+        : paceMinPerMiStackSec;
     },
 
     /**
@@ -1072,12 +1185,19 @@ export default DS.Model.extend({
      * @return {BigNumber} new paceMinPerMiStackSec value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("paceMinPerMiStackSecRaw");
+      var previousValue = this.get('paceMinPerMiStackSecRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("paceMinPerMi", this.get("paceMinPerMiRaw").plus(value.minus(previousValue).dividedBy(60)));
+      this.set(
+        'paceMinPerMi',
+        this.get('paceMinPerMiRaw').plus(
+          value.minus(previousValue).dividedBy(60)
+        )
+      );
 
-      var paceMinPerMiStackSec = this.get("paceMinPerMiStackSecRaw").round();
-      return paceMinPerMiStackSec.equals(60) ? new BigNumber(0): paceMinPerMiStackSec;
+      var paceMinPerMiStackSec = this.get('paceMinPerMiStackSecRaw').round();
+      return paceMinPerMiStackSec.equals(60)
+        ? new BigNumber(0)
+        : paceMinPerMiStackSec;
     }
   }),
 
@@ -1086,23 +1206,28 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerMiStackSecRaw: computed("paceMinPerMiRaw", "paceMinPerMiStackMinRaw", function(){
-    return this.get("paceMinPerMiRaw").minus(this.get("paceMinPerMiStackMinRaw")).times(60);
-  }),
+  paceMinPerMiStackSecRaw: computed(
+    'paceMinPerMiRaw',
+    'paceMinPerMiStackMinRaw',
+    function() {
+      return this.get('paceMinPerMiRaw')
+        .minus(this.get('paceMinPerMiStackMinRaw'))
+        .times(60);
+    }
+  ),
 
   /**
    * paceMinPerMiStackSecFixed is a variation of paceMinPerMiStackSec with a fixed length as
    * defined in the digits property to make it possible to display 12:4 as 12:04
    */
-  paceMinPerMiStackSecFixed: computed("paceMinPerMiStackSecFixedRaw", {
-
+  paceMinPerMiStackSecFixed: computed('paceMinPerMiStackSecFixedRaw', {
     /**
      * returns paceMinPerMiStackSecFixed, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      return this.get("paceMinPerMiStackSecFixedRaw");
+      return this.get('paceMinPerMiStackSecFixedRaw');
     },
 
     /**
@@ -1113,9 +1238,9 @@ export default DS.Model.extend({
      * @return {string} new paceMinPerMiStackSecFixed value
      */
     set: function(propertyName, value) {
-      this.set("paceMinPerMiStackSec", value);
-      return this.get("paceMinPerMiStackSecFixedRaw");
-    },
+      this.set('paceMinPerMiStackSec', value);
+      return this.get('paceMinPerMiStackSecFixedRaw');
+    }
   }),
 
   /**
@@ -1123,26 +1248,26 @@ export default DS.Model.extend({
    *
    * @return {string}
    */
-  paceMinPerMiStackSecFixedRaw: computed("paceMinPerMiStackSec", function(){
-    var paceMinPerMiStackSec = this.get("paceMinPerMiStackSec").toString();
-    var zerosToAdd = this.get("digits").minus(paceMinPerMiStackSec.length);
-    while (zerosToAdd--) { paceMinPerMiStackSec = "0"+paceMinPerMiStackSec; }
+  paceMinPerMiStackSecFixedRaw: computed('paceMinPerMiStackSec', function() {
+    var paceMinPerMiStackSec = this.get('paceMinPerMiStackSec').toString();
+    var zerosToAdd = this.get('digits').minus(paceMinPerMiStackSec.length);
+    while (zerosToAdd--) {
+      paceMinPerMiStackSec = '0' + paceMinPerMiStackSec;
+    }
     return paceMinPerMiStackSec;
   }),
-
 
   /**
    * speed of the run in km/h
    */
-  speedKmHr: computed("speedKmHrRaw", "lengthM", {
-
+  speedKmHr: computed('speedKmHrRaw', 'lengthM', {
     /**
      * returns speedKmHr, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("speedKmHrRaw").round(20);
+      return this.get('speedKmHrRaw').round(20);
     },
 
     /**
@@ -1154,9 +1279,14 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeSec",this.get("lengthM").dividedBy(value).times(3.6));
+      this.set(
+        'timeSec',
+        this.get('lengthM')
+          .dividedBy(value)
+          .times(3.6)
+      );
 
-      return this.get("speedKmHrRaw").round(20);
+      return this.get('speedKmHrRaw').round(20);
     }
   }),
 
@@ -1165,23 +1295,22 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  speedKmHrRaw: computed("lengthKmRaw", "timeHrRaw", function(){
-    var speedKmHrRaw = this.get("lengthKmRaw").dividedBy(this.get("timeHrRaw"));
-    return speedKmHrRaw.isFinite() ? speedKmHrRaw: new BigNumber(0);
+  speedKmHrRaw: computed('lengthKmRaw', 'timeHrRaw', function() {
+    var speedKmHrRaw = this.get('lengthKmRaw').dividedBy(this.get('timeHrRaw'));
+    return speedKmHrRaw.isFinite() ? speedKmHrRaw : new BigNumber(0);
   }),
 
   /**
    * speedKmHrStackKm is used to display the speed like 12,34 and represents the kilometers value
    */
-  speedKmHrStackKm: computed("speedKmHrStackKmRaw", "speedKmHrRaw", {
-
+  speedKmHrStackKm: computed('speedKmHrStackKmRaw', 'speedKmHrRaw', {
     /**
      * returns speedKmHrStackKm, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("speedKmHrStackKmRaw");
+      return this.get('speedKmHrStackKmRaw');
     },
 
     /**
@@ -1192,11 +1321,14 @@ export default DS.Model.extend({
      * @return {BigNumber} new speedKmHrStackKm value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("speedKmHrStackKmRaw");
+      var previousValue = this.get('speedKmHrStackKmRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("speedKmHr", this.get("speedKmHrRaw").plus(value.minus(previousValue)));
+      this.set(
+        'speedKmHr',
+        this.get('speedKmHrRaw').plus(value.minus(previousValue))
+      );
 
-      return this.get("speedKmHrStackKmRaw");
+      return this.get('speedKmHrStackKmRaw');
     }
   }),
 
@@ -1205,116 +1337,147 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  speedKmHrStackKmRaw: computed("speedKmHrRaw", function(){
+  speedKmHrStackKmRaw: computed('speedKmHrRaw', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-   return this.get("speedKmHr").round(this.get("digits")).floor();
+    return this.get('speedKmHr')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
    * speedKmHrStackDecimal is used to display the speed like 12,34
    * and represents up to two decimal places of the kilometers value
    */
-  speedKmHrStackDecimal: computed("speedKmHr", "speedKmHrStackKmRaw", "speedKmHrRaw", {
+  speedKmHrStackDecimal: computed(
+    'speedKmHr',
+    'speedKmHrStackKmRaw',
+    'speedKmHrRaw',
+    {
+      /**
+       * returns speedKmHrStackDecimal, no decimal places
+       *
+       * @return {string}
+       */
+      get: function() {
+        var speedKmHrStackDecimal = this.get('speedKmHr')
+          .round(this.get('digits'))
+          .toString()
+          .split('.')[1];
+        return speedKmHrStackDecimal ? speedKmHrStackDecimal : '0';
+      },
 
-    /**
-     * returns speedKmHrStackDecimal, no decimal places
-     *
-     * @return {string}
-     */
-    get: function() {
-      var speedKmHrStackDecimal = this.get("speedKmHr").round(this.get("digits")).toString().split(".")[1];
-      return speedKmHrStackDecimal ? speedKmHrStackDecimal: "0";
-    },
+      /**
+       * sets a new speedKmHrStackDecimal
+       *
+       * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimal"
+       * @param  {BigNumber|string|number} value new speedKmHrStackDecimal value
+       * @return {string} new speedKmHrStackDecimal value
+       */
+      set: function(propertyName, value) {
+        var leadingZeros = this._getLeadingZerosFromString(value);
 
-    /**
-     * sets a new speedKmHrStackDecimal
-     *
-     * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimal"
-     * @param  {BigNumber|string|number} value new speedKmHrStackDecimal value
-     * @return {string} new speedKmHrStackDecimal value
-     */
-    set: function(propertyName, value) {
-      var leadingZeros = this._getLeadingZerosFromString(value);
+        value = this._ensureBigNumber(value).round();
 
-      value = this._ensureBigNumber(value).round();
+        var valueLength = value.abs().toString().length;
 
-      var valueLength = value.abs().toString().length;
+        // reflects the decimal precision of the value
+        // 1 = 100; 10 = 10
+        var decimalPrecision = 100 / Math.pow(10, valueLength - 1);
 
-      // reflects the decimal precision of the value
-      // 1 = 100; 10 = 10
-      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+        // calulate the speed from decimal place
+        var decimalSpeed = value
+          .times(decimalPrecision)
+          .dividedBy(Math.pow(10, leadingZeros));
 
-      // calulate the speed from decimal place
-      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+        this.set(
+          'speedKmHr',
+          this.get('speedKmHrStackKmRaw').plus(decimalSpeed.dividedBy(1000))
+        );
 
-      this.set("speedKmHr", this.get("speedKmHrStackKmRaw").plus(decimalSpeed.dividedBy(1000)));
-
-      var speedKmHrStackDecimal = this.get("speedKmHrRaw").round(this.get("digits")).toString().split(".")[1];
-      return speedKmHrStackDecimal ? speedKmHrStackDecimal: "0";
+        var speedKmHrStackDecimal = this.get('speedKmHrRaw')
+          .round(this.get('digits'))
+          .toString()
+          .split('.')[1];
+        return speedKmHrStackDecimal ? speedKmHrStackDecimal : '0';
+      }
     }
-  }),
+  ),
 
   /**
    * speedKmHrStackDecimalFixed is a variation of speedKmHrStackDecimal with a fixed
    * length as defined in the digits property. It's basically speedKmHrStackDecimal
    * with trailing zero(s) to make it possible to display 12,3 as 12,30
    */
-  speedKmHrStackDecimalFixed: computed("speedKmHrStackDecimalFixedRaw", "speedKmHr", {
+  speedKmHrStackDecimalFixed: computed(
+    'speedKmHrStackDecimalFixedRaw',
+    'speedKmHr',
+    {
+      /**
+       * returns speedKmHrStackDecimalFixedRaw, no decimal places
+       *
+       * @return {string}
+       */
+      get: function() {
+        return this.get('speedKmHrStackDecimalFixedRaw');
+      },
 
-    /**
-     * returns speedKmHrStackDecimalFixedRaw, no decimal places
-     *
-     * @return {string}
-     */
-    get: function() {
-      return this.get("speedKmHrStackDecimalFixedRaw");
-    },
+      /**
+       * sets a new speedKmHrStackDecimalFixed
+       *
+       * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimalFixed"
+       * @param  {BigNumber|string|number} value new speedKmHrStackDecimalFixed value
+       * @return {string} new speedKmHrStackDecimalFixed value
+       */
+      set: function(propertyName, value) {
+        var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
 
-    /**
-     * sets a new speedKmHrStackDecimalFixed
-     *
-     * @param  {string} propertyName name of the changed property, always "speedKmHrStackDecimalFixed"
-     * @param  {BigNumber|string|number} value new speedKmHrStackDecimalFixed value
-     * @return {string} new speedKmHrStackDecimalFixed value
-     */
-    set: function(propertyName, value) {
-      var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
-
-      // a value like 104 should result in 04 and increment the pre-decimal point position
-      // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
-      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
-        this.set("speedKmHr", this.get("speedKmHrStackKm").plus(valueBigNumber.dividedBy(100)));
-      }else{
-        this.set("speedKmHrStackDecimal", value);
+        // a value like 104 should result in 04 and increment the pre-decimal point position
+        // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
+        if (
+          valueBigNumber.round().toString().length > this.digits ||
+          valueBigNumber.isNegative() === true
+        ) {
+          this.set(
+            'speedKmHr',
+            this.get('speedKmHrStackKm').plus(valueBigNumber.dividedBy(100))
+          );
+        } else {
+          this.set('speedKmHrStackDecimal', value);
+        }
+        return this.get('speedKmHrStackDecimalFixedRaw');
       }
-      return this.get("speedKmHrStackDecimalFixedRaw");
-    },
-  }),
+    }
+  ),
 
   /**
    * calculates the value of speedKmHrStackDecimalFixed
    *
    * @return {string}
    */
-  speedKmHrStackDecimalFixedRaw: computed("speedKmHrStackDecimal", "speedKmHr", function(){
-    var speedKmHrStackDecimal = this.get("speedKmHrStackDecimal");
-    var zerosToAdd = this.get("digits").minus(speedKmHrStackDecimal.length);
-    while (zerosToAdd--) { speedKmHrStackDecimal += "0";}
-    return speedKmHrStackDecimal;
-  }),
+  speedKmHrStackDecimalFixedRaw: computed(
+    'speedKmHrStackDecimal',
+    'speedKmHr',
+    function() {
+      var speedKmHrStackDecimal = this.get('speedKmHrStackDecimal');
+      var zerosToAdd = this.get('digits').minus(speedKmHrStackDecimal.length);
+      while (zerosToAdd--) {
+        speedKmHrStackDecimal += '0';
+      }
+      return speedKmHrStackDecimal;
+    }
+  ),
 
   /**
    * speed of the run in mi/h
    */
-  speedMiHr: computed("speedMiHrRaw", "lengthMiRaw", {
-
+  speedMiHr: computed('speedMiHrRaw', 'lengthMiRaw', {
     /**
      * returns speedMiHr, rounded to 20 digits
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("speedMiHrRaw").round(20);
+      return this.get('speedMiHrRaw').round(20);
     },
 
     /**
@@ -1326,9 +1489,9 @@ export default DS.Model.extend({
      */
     set: function(propertyName, value) {
       value = this._ensureBigNumber(value);
-      this.set("timeHr",this.get("lengthMiRaw").dividedBy(value));
+      this.set('timeHr', this.get('lengthMiRaw').dividedBy(value));
 
-      return this.get("speedMiHrRaw").round(20);
+      return this.get('speedMiHrRaw').round(20);
     }
   }),
 
@@ -1337,23 +1500,22 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  speedMiHrRaw: computed("lengthMiRaw", "timeHrRaw", function(){
-    var speedMiHrRaw = this.get("lengthMiRaw").dividedBy(this.get("timeHrRaw"));
-    return speedMiHrRaw.isFinite() ? speedMiHrRaw: new BigNumber(0);
+  speedMiHrRaw: computed('lengthMiRaw', 'timeHrRaw', function() {
+    var speedMiHrRaw = this.get('lengthMiRaw').dividedBy(this.get('timeHrRaw'));
+    return speedMiHrRaw.isFinite() ? speedMiHrRaw : new BigNumber(0);
   }),
 
   /**
    * speedMiHrStackMi is used to display the speed like 12,34 and represents the miles value
    */
-  speedMiHrStackMi: computed("speedMiHrStackMiRaw", "speedMiHrRaw", {
-
+  speedMiHrStackMi: computed('speedMiHrStackMiRaw', 'speedMiHrRaw', {
     /**
      * returns speedMiHrStackMi, no decimal places
      *
      * @return {BigNumber}
      */
     get: function() {
-      return this.get("speedMiHrStackMiRaw");
+      return this.get('speedMiHrStackMiRaw');
     },
 
     /**
@@ -1364,11 +1526,14 @@ export default DS.Model.extend({
      * @return {BigNumber} new speedMiHrStackMi value
      */
     set: function(propertyName, value) {
-      var previousValue = this.get("speedMiHrStackMiRaw");
+      var previousValue = this.get('speedMiHrStackMiRaw');
       value = this._ensureBigNumber(value).round();
-      this.set("speedMiHr", this.get("speedMiHrRaw").plus(value.minus(previousValue)));
+      this.set(
+        'speedMiHr',
+        this.get('speedMiHrRaw').plus(value.minus(previousValue))
+      );
 
-      return this.get("speedMiHrStackMiRaw");
+      return this.get('speedMiHrStackMiRaw');
     }
   }),
 
@@ -1377,9 +1542,11 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  speedMiHrStackMiRaw: computed("speedMiHrRaw", function(){
+  speedMiHrStackMiRaw: computed('speedMiHrRaw', function() {
     // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get("speedMiHr").round(this.get("digits")).floor();
+    return this.get('speedMiHr')
+      .round(this.get('digits'))
+      .floor();
   }),
 
   /**
@@ -1387,15 +1554,18 @@ export default DS.Model.extend({
    * and represents up to two decimal places of the miles value
    *
    */
-  speedMiHrStackDecimal: computed("speedMiHr", "speedMiHrStackMiRaw", {
+  speedMiHrStackDecimal: computed('speedMiHr', 'speedMiHrStackMiRaw', {
     /**
      * returns speedMiHrStackDecimal, no decimal places
      *
      * @return {string}
      */
     get: function() {
-      var speedMiHrStackDecimal = this.get("speedMiHr").round(this.get("digits")).toString().split(".")[1];
-      return speedMiHrStackDecimal ? speedMiHrStackDecimal: "0";
+      var speedMiHrStackDecimal = this.get('speedMiHr')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : '0';
     },
 
     /**
@@ -1413,78 +1583,100 @@ export default DS.Model.extend({
 
       // reflects the decimal precision of the value
       // 1 = 100; 10 = 10
-      var decimalPrecision = 100/Math.pow(10, valueLength-1);
+      var decimalPrecision = 100 / Math.pow(10, valueLength - 1);
 
       // calulate the speed from decimal place
-      var decimalSpeed = value.times(decimalPrecision).dividedBy(Math.pow(10, leadingZeros));
+      var decimalSpeed = value
+        .times(decimalPrecision)
+        .dividedBy(Math.pow(10, leadingZeros));
 
-      this.set("speedMiHr", this.get("speedMiHrStackMiRaw").plus(decimalSpeed.dividedBy(1000)));
+      this.set(
+        'speedMiHr',
+        this.get('speedMiHrStackMiRaw').plus(decimalSpeed.dividedBy(1000))
+      );
 
-      var speedMiHrStackDecimal = this.get("speedMiHrRaw").round(this.get("digits")).toString().split(".")[1];
-      return speedMiHrStackDecimal ? speedMiHrStackDecimal: "0";
+      var speedMiHrStackDecimal = this.get('speedMiHrRaw')
+        .round(this.get('digits'))
+        .toString()
+        .split('.')[1];
+      return speedMiHrStackDecimal ? speedMiHrStackDecimal : '0';
     }
   }),
-
 
   /**
    * speedMiHrStackDecimalFixed is a variation of speedMiHrStackDecimal with a fixed
    * length as defined in the digits property. It's basically speedMiHrStackDecimal
    * with trailing zero(s) to make it possible to display 12,3 as 12,30
    */
-  speedMiHrStackDecimalFixed: computed("speedMiHrStackDecimalFixedRaw", "speedMiHr", {
+  speedMiHrStackDecimalFixed: computed(
+    'speedMiHrStackDecimalFixedRaw',
+    'speedMiHr',
+    {
+      /**
+       * returns speedMiHrStackDecimalFixedRaw, no decimal places
+       *
+       * @return {string}
+       */
+      get: function() {
+        return this.get('speedMiHrStackDecimalFixedRaw');
+      },
 
-    /**
-     * returns speedMiHrStackDecimalFixedRaw, no decimal places
-     *
-     * @return {string}
-     */
-    get: function() {
-      return this.get("speedMiHrStackDecimalFixedRaw");
-    },
+      /**
+       * sets a new speedMiHrStackDecimalFixed
+       *
+       * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimalFixed"
+       * @param  {BigNumber|string|number} value new speedMiHrStackDecimalFixed value
+       * @return {string} new speedMiHrStackDecimalFixed value
+       */
+      set: function(propertyName, value) {
+        var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
 
-    /**
-     * sets a new speedMiHrStackDecimalFixed
-     *
-     * @param  {string} propertyName name of the changed property, always "speedMiHrStackDecimalFixed"
-     * @param  {BigNumber|string|number} value new speedMiHrStackDecimalFixed value
-     * @return {string} new speedMiHrStackDecimalFixed value
-     */
-    set: function(propertyName, value) {
-      var valueBigNumber = this._ensureBigNumber(value); // don't change value itself, leading zeros may get lost
-
-      // a value like 104 should result in 04 and increment the pre-decimal point position
-      // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
-      if(valueBigNumber.round().toString().length > this.digits || valueBigNumber.isNegative() === true){
-        this.set("speedMiHr", this.get("speedMiHrStackMi").plus(valueBigNumber.dividedBy(100)));
-      }else{
-        this.set("speedMiHrStackDecimal", value);
+        // a value like 104 should result in 04 and increment the pre-decimal point position
+        // the same applies for a value like -1, value should be 99 and the pre-decimal point position should be decreased
+        if (
+          valueBigNumber.round().toString().length > this.digits ||
+          valueBigNumber.isNegative() === true
+        ) {
+          this.set(
+            'speedMiHr',
+            this.get('speedMiHrStackMi').plus(valueBigNumber.dividedBy(100))
+          );
+        } else {
+          this.set('speedMiHrStackDecimal', value);
+        }
+        return this.get('speedMiHrStackDecimalFixedRaw');
       }
-      return this.get("speedMiHrStackDecimalFixedRaw");
-    },
-  }),
+    }
+  ),
 
   /**
    * calculates the value of speedMiHrStackDecimalFixed
    *
    * @return {string}
    */
-  speedMiHrStackDecimalFixedRaw: computed("speedMiHrStackDecimal", "speedMiHr", function(){
-    var speedMiHrStackDecimal = this.get("speedMiHrStackDecimal");
-    var zerosToAdd = this.get("digits").minus(speedMiHrStackDecimal.length);
-    while (zerosToAdd--) { speedMiHrStackDecimal += "0";}
-    return speedMiHrStackDecimal;
-  }),
+  speedMiHrStackDecimalFixedRaw: computed(
+    'speedMiHrStackDecimal',
+    'speedMiHr',
+    function() {
+      var speedMiHrStackDecimal = this.get('speedMiHrStackDecimal');
+      var zerosToAdd = this.get('digits').minus(speedMiHrStackDecimal.length);
+      while (zerosToAdd--) {
+        speedMiHrStackDecimal += '0';
+      }
+      return speedMiHrStackDecimal;
+    }
+  ),
 
   /**
    * splits represents the splits of the current run
    */
-  splits : DS.belongsTo('splits'),
+  splits: DS.belongsTo('splits'),
 
   /**
    * update updatedAt before saving the run
    */
-  save: function(){
-    this.set("updatedAt", new Date());
+  save: function() {
+    this.set('updatedAt', new Date());
     this._super(...arguments);
   },
 
@@ -1495,10 +1687,13 @@ export default DS.Model.extend({
    * @param  {BigNumber|string|number} end end of the range in meter
    * @return {boolean}
    */
-  isInRange: function(startM, endM){
-    if(this.get("lengthM").greaterThan(startM) && this.get("lengthM").lessThan(endM)){
+  isInRange: function(startM, endM) {
+    if (
+      this.get('lengthM').greaterThan(startM) &&
+      this.get('lengthM').lessThan(endM)
+    ) {
       return true;
-    }else{
+    } else {
       return false;
     }
   },
@@ -1509,11 +1704,11 @@ export default DS.Model.extend({
    * @param  {string} string string that should be analyzed for leading zeros
    * @return {number} number of leading zeros
    */
-  _getLeadingZerosFromString: function(string){
+  _getLeadingZerosFromString: function(string) {
     var leadingZeros = 0;
-    while (string[0]==="0") {
+    while (string[0] === '0') {
       string = string.substring(1);
-      leadingZeros ++;
+      leadingZeros++;
     }
     return leadingZeros;
   },
@@ -1528,25 +1723,25 @@ export default DS.Model.extend({
    * @param  {BigNumber|string|number} input  any number like input
    * @return {BigNumber} output instance of BigNumber
    */
-  _ensureBigNumber: function(input){
-    return (input instanceof BigNumber) ? input: new BigNumber(+input || 0);
+  _ensureBigNumber: function(input) {
+    return input instanceof BigNumber ? input : new BigNumber(+input || 0);
   },
 
   /**
    * observer to prevent the length to be negative
    */
-  preventNegativeLengthM: observer("lengthM", function() {
-    if(this._ensureBigNumber(this.get("lengthM")).isNegative() === true){
-      this.set("lengthM", new BigNumber(0));
+  preventNegativeLengthM: observer('lengthM', function() {
+    if (this._ensureBigNumber(this.get('lengthM')).isNegative() === true) {
+      this.set('lengthM', new BigNumber(0));
     }
   }),
 
   /**
    * observer to prevent the time to be negative
    */
-  preventNegativeTimeSec: observer("timeSec", function() {
-    if(this._ensureBigNumber(this.get("timeSec")).isNegative() === true){
-      this.set("timeSec", new BigNumber(0));
+  preventNegativeTimeSec: observer('timeSec', function() {
+    if (this._ensureBigNumber(this.get('timeSec')).isNegative() === true) {
+      this.set('timeSec', new BigNumber(0));
     }
   })
 });

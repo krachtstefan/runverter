@@ -1,4 +1,4 @@
-html{
+html {
   font-family: 'Open Sans', Georgia, sans-serif;
   overflow-y: scroll;
   height: 100%;
@@ -6,222 +6,229 @@ html{
   background-color: inherit;
 }
 
-body{
-  line-height:0.8em;
-  color:$color-main-text;
-  background-color:$color-main-background;
+body {
+  line-height: 0.8em;
+  color: $color-main-text;
+  background-color: $color-main-background;
   position: relative;
   margin: 0;
   min-height: 100%;
-  h1{
-    color:$color-main-text;
-    font-size:2em;
-    line-height:1.5em;
+  h1 {
+    color: $color-main-text;
+    font-size: 2em;
+    line-height: 1.5em;
   }
-  h2, h3, h4{
-    color:$color-main-text;
+  h2,
+  h3,
+  h4 {
+    color: $color-main-text;
   }
 
-  p{
-    font-size:1.0em;
-    @include respond-to("small"){
-      font-size:1.5em;
+  p {
+    font-size: 1em;
+    @include respond-to('small') {
+      font-size: 1.5em;
     }
     line-height: 1.5em;
     margin: 0;
-    color:$color-main-text-light;
+    color: $color-main-text-light;
   }
 
-  a, a:hover{
-    color:$color-form-text;
+  a,
+  a:hover {
+    color: $color-form-text;
   }
 
-  form{
-    font-size:24px;
-    @include respond-to("small"){
-      font-size:42px;
+  form {
+    font-size: 24px;
+    @include respond-to('small') {
+      font-size: 42px;
     }
-    padding:50px 0 !important;
+    padding: 50px 0 !important;
   }
 
-  .expertModeOn form{
-    padding:20px 0 !important;
-
+  .expertModeOn form {
+    padding: 20px 0 !important;
   }
 
-  .expertModeOn form{
-    padding:10px 0;
+  .expertModeOn form {
+    padding: 10px 0;
   }
 
-  .header{
-    a{
+  .header {
+    a {
       display: block;
       margin: 10px auto 0 auto;
-      background: inline-image("runverter-logo.svg") no-repeat;
-      background-size:cover;
-      background-position:left;
+      background: inline-image('runverter-logo.svg') no-repeat;
+      background-size: cover;
+      background-position: left;
       width: 62px;
       height: 50px;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      @include respond-to("small"){
-        background-size:contain;
-        background-position:center;
+      @include respond-to('small') {
+        background-size: contain;
+        background-position: center;
         margin: 60px auto 0 auto;
         width: 342px;
         height: 60px;
       }
-      &:hover{
+      &:hover {
         text-decoration: none;
       }
-      &:active{
+      &:active {
         width: 50px;
         height: 40px;
-        margin-top:15px;
+        margin-top: 15px;
         @include transition(0.1s linear);
-        @include respond-to("small"){
-          margin-top:60px;
+        @include respond-to('small') {
+          margin-top: 60px;
           width: 312px;
           height: 60px;
         }
       }
       @include transition(0.1s linear);
     }
-    border:1px solid $color-secondary-background;
-    background-color:$color-secondary-background;
+    border: 1px solid $color-secondary-background;
+    background-color: $color-secondary-background;
     height: 60px;
-    &.expertModeOn{
-      display:none
+    &.expertModeOn {
+      display: none;
     }
-    @include respond-to("small"){
+    @include respond-to('small') {
       height: 180px;
     }
   }
 
-  .intro{
+  .intro {
     text-align: center;
-    h1{
+    h1 {
       font-size: 24px;
       margin-bottom: 15px;
-      @include respond-to("small"){
+      @include respond-to('small') {
         font-size: 42px;
       }
     }
-    background:$color-secondary-background;
-    padding:30px 0 40px 0;
+    background: $color-secondary-background;
+    padding: 30px 0 40px 0;
 
-    .toolLine{
+    .toolLine {
       margin-bottom: -2px;
     }
 
-    &.expertModeOn{
+    &.expertModeOn {
       text-align: left;
-      h1{
-        margin-bottom:7px;
-        @include respond-to("small"){
-          margin-bottom:10px;
+      h1 {
+        margin-bottom: 7px;
+        @include respond-to('small') {
+          margin-bottom: 10px;
         }
       }
-      padding:0;
-      p, .toolLabel{
-        display : none;
+      padding: 0;
+      p,
+      .toolLabel {
+        display: none;
       }
     }
-    .uk-container-center{
-       padding:0 25px;
+    .uk-container-center {
+      padding: 0 25px;
     }
   }
 
-  .uk-container-center{
-    padding:0 10px;
-    @include respond-to("xsmall"){
-      padding:0 25px;
+  .uk-container-center {
+    padding: 0 10px;
+    @include respond-to('xsmall') {
+      padding: 0 25px;
     }
   }
 
-  .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
+  .uk-form input[type='text'],
+  .uk-form input[type='number'],
+  .uk-form input[type='tel'] {
     text-align: center;
-    color:$color-form-text;
-    border-color:$color-form-border;
-    background-color:$color-main-background;
+    color: $color-form-text;
+    border-color: $color-form-border;
+    background-color: $color-main-background;
     @include transition(0s ease-out);
-    height:46px;
+    height: 46px;
     line-height: 46px; // for IE <= 10
-    @include respond-to("small"){
+    @include respond-to('small') {
       height: 84px;
     }
     padding: 0px 0px 6px 0px;
-    border-top:none; border-left:none; border-right:none;
-    &:focus{
-      color:$color-main-text;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    &:focus {
+      color: $color-main-text;
       background-color: $color-form-background;
       border-color: $color-form-border-active;
     }
   }
 
-  .digits-1{
-    width: 1.0em;
+  .digits-1 {
+    width: 1em;
   }
 
-  .digits-2{
+  .digits-2 {
     width: 1.6em;
   }
 
-  .digits-3{
+  .digits-3 {
     width: 2.2em;
   }
 
-  .digits-4{
+  .digits-4 {
     width: 2.7em;
   }
 
-  .digits-5{
+  .digits-5 {
     width: 3.3em;
   }
 
-  .digits-6{
+  .digits-6 {
     width: 3.9em;
   }
 
-  .digits-7{
+  .digits-7 {
     width: 4.5em;
   }
 
-  .toolLine{
+  .toolLine {
     margin-bottom: 30px;
-    margin-left:auto;
-    margin-right:auto;
-    @include respond-to("medium"){
+    margin-left: auto;
+    margin-right: auto;
+    @include respond-to('medium') {
       margin-left: inherit;
       margin-right: inherit;
       margin-bottom: 20px;
     }
-    .form-element{
-      line-height:40px;
-      @include respond-to("small"){
-        line-height:74px;
+    .form-element {
+      line-height: 40px;
+      @include respond-to('small') {
+        line-height: 74px;
       }
     }
   }
 
-  .tools{
-    padding-bottom:20px; // safe distance to footer
-    .toolLabel{
-      font-size:14px;
-      @include respond-to("small"){
-        font-size:21px;
+  .tools {
+    padding-bottom: 20px; // safe distance to footer
+    .toolLabel {
+      font-size: 14px;
+      @include respond-to('small') {
+        font-size: 21px;
       }
-      color:$color-main-text-light;
-      padding:0 0 4px 0;
+      color: $color-main-text-light;
+      padding: 0 0 4px 0;
       line-height: 20px;
       // separate column
-      @include respond-to("medium"){
+      @include respond-to('medium') {
         line-height: 30px;
-        padding:0 10px 0 0;
+        padding: 0 10px 0 0;
         text-align: right;
         display: table;
         height: 84px;
         vertical-align: middle;
-        span{
+        span {
           display: table-cell;
           vertical-align: middle;
         }
@@ -229,28 +236,31 @@ body{
     }
   }
 
-  .expertModeOn{
-    .toolLabel{
+  .expertModeOn {
+    .toolLabel {
       display: none;
     }
   }
 
-  .tools.container-pca .toolLine, .expertModeOn.container-pca .toolLine,
-  .tools.container-rp .toolLine, .expertModeOn.container-rp .toolLine,
-  .tools.container-sc .toolLine, .expertModeOn.container-sc .toolLine{
+  .tools.container-pca .toolLine,
+  .expertModeOn.container-pca .toolLine,
+  .tools.container-rp .toolLine,
+  .expertModeOn.container-rp .toolLine,
+  .tools.container-sc .toolLine,
+  .expertModeOn.container-sc .toolLine {
     max-width: 300px;
-    @include respond-to("small"){
+    @include respond-to('small') {
       max-width: 510px;
     }
-    @include respond-to("medium"){
+    @include respond-to('medium') {
       max-width: inherit;
     }
   }
 
   .expertModeOn.container-pca .toolLine,
   .expertModeOn.container-rp .toolLine,
-  .expertModeOn.container-sc .toolLine{
-    @include respond-to("medium"){
+  .expertModeOn.container-sc .toolLine {
+    @include respond-to('medium') {
       max-width: 500px;
     }
   }
@@ -258,45 +268,45 @@ body{
   .tools.container-pc .toolLine,
   .tools.container-lc .toolLine,
   .expertModeOn.container-pc .toolLine,
-  .expertModeOn.container-lc .toolLine{
+  .expertModeOn.container-lc .toolLine {
     max-width: 210px;
-    @include respond-to("small"){
+    @include respond-to('small') {
       max-width: 355px;
     }
-    @include respond-to("medium"){
+    @include respond-to('medium') {
       max-width: inherit;
     }
   }
 
   .expertModeOn.container-pc .toolLine,
-  .expertModeOn.container-lc .toolLine{
-    @include respond-to("medium"){
+  .expertModeOn.container-lc .toolLine {
+    @include respond-to('medium') {
       max-width: 400px;
     }
   }
 }
 
-#footer{
+#footer {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
   text-align: center;
   height: 50px;
-  font-size:0.8em;
-  #donateButton{
-    color:$color-main-text-light;
+  font-size: 0.8em;
+  #donateButton {
+    color: $color-main-text-light;
     width: 40px;
     height: 30px;
     padding: 10px 0 0 0;
     opacity: 0.4;
     @include transition(0.5s ease-out);
     @include box-sizing(border-box);
-    &:hover{
+    &:hover {
       opacity: 1;
       text-decoration: none;
-      color:$color-form-text;
-      font-size:2.5em;
+      color: $color-form-text;
+      font-size: 2.5em;
       padding: 0 0 0 0;
       @include transition(0.2s ease-out);
     }

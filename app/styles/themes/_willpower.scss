@@ -2,90 +2,99 @@ $color-willpower-background: #000;
 $color-willpower-main-text-light: #d5d5d5;
 $color-willpower-main-text: #fff;
 $color-willpower-form-text: #808080;
-$color-willpower-overlay-border: rgba(128,128,128,0.2);;
+$color-willpower-overlay-border: rgba(128, 128, 128, 0.2);
 
-body.willpower{
-  font-family: "Lato",sans-serif;
+body.willpower {
+  font-family: 'Lato', sans-serif;
 
   // _main.scss overrides
-  color:$color-willpower-main-text;
-  background-color:$color-willpower-background;
-  h1, h2, h3, h4{
-    color:$color-willpower-main-text;
-    font-family: "Lato",sans-serif;
+  color: $color-willpower-main-text;
+  background-color: $color-willpower-background;
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $color-willpower-main-text;
+    font-family: 'Lato', sans-serif;
   }
 
-  p{
-    color:$color-willpower-main-text-light;
+  p {
+    color: $color-willpower-main-text-light;
   }
 
-  a, a:hover{
-    color:$color-willpower-form-text;
+  a,
+  a:hover {
+    color: $color-willpower-form-text;
   }
 
-  .header{
-    border:1px solid $color-willpower-background;
-    background-color:$color-willpower-background;
+  .header {
+    border: 1px solid $color-willpower-background;
+    background-color: $color-willpower-background;
   }
 
-  .intro{
-    background:$color-willpower-background;
+  .intro {
+    background: $color-willpower-background;
   }
 
-  .uk-form input[type="text"], .uk-form input[type="number"], .uk-form input[type="tel"]{
-    color:$color-willpower-form-text;
-    background-color:$color-willpower-background;
-    &:focus{
-      color:$color-willpower-main-text;
+  .uk-form input[type='text'],
+  .uk-form input[type='number'],
+  .uk-form input[type='tel'] {
+    color: $color-willpower-form-text;
+    background-color: $color-willpower-background;
+    &:focus {
+      color: $color-willpower-main-text;
     }
   }
 
-  .tools{
-    .toolLabel{
-      color:$color-willpower-main-text-light;
+  .tools {
+    .toolLabel {
+      color: $color-willpower-main-text-light;
     }
   }
 
-  #footer #donateButton{
-    color:$color-willpower-main-text-light;
-    &:hover{
-      color:$color-willpower-form-text;
+  #footer #donateButton {
+    color: $color-willpower-main-text-light;
+    &:hover {
+      color: $color-willpower-form-text;
     }
   }
 
   // _imprint.scss overrides
-  .imprint{
-    .uk-container-center{
-      background-color:$color-willpower-background;
+  .imprint {
+    .uk-container-center {
+      background-color: $color-willpower-background;
       outline: 5px solid $color-willpower-overlay-border;
     }
   }
 
   // _menu.scss overrides
-  #toggle-panel span, #close-imprint-page span{
+  #toggle-panel span,
+  #close-imprint-page span {
     background: $color-willpower-form-text;
     border: 1px solid $color-willpower-form-text;
-    @include respond-to("small"){
-      background-color:$color-willpower-background;
+    @include respond-to('small') {
+      background-color: $color-willpower-background;
     }
   }
 
-  .open #toggle-panel span, .open #close-imprint-page span{
+  .open #toggle-panel span,
+  .open #close-imprint-page span {
     background: $color-willpower-form-text;
   }
 
   ul.settings {
-    background:$color-willpower-background;
+    background: $color-willpower-background;
     outline: 5px solid $color-willpower-overlay-border;
   }
 
-  ul.settings li>a, ul.settings li #share-container{
+  ul.settings li > a,
+  ul.settings li #share-container {
     color: $color-willpower-form-text;
   }
 
-  ul.settings li>a:hover {
+  ul.settings li > a:hover {
     text-decoration: underline;
-    background-color:$color-willpower-background;
+    background-color: $color-willpower-background;
   }
 
   // _selectordie.scss overrides
@@ -93,62 +102,63 @@ body.willpower{
     background-position: center center;
     background-size: 70%;
     background-repeat: no-repeat;
-    background-image: inline-image("suggest.svg");
+    background-image: inline-image('suggest.svg');
   }
 
-  .sod_select.focus{
-    background-color:$color-willpower-background;
+  .sod_select.focus {
+    background-color: $color-willpower-background;
   }
-  #menu{
-    background:$color-willpower-background;
+  #menu {
+    background: $color-willpower-background;
     &.sod_select:before,
-    &.sod_select:after{
-      color:$color-willpower-main-text;
+    &.sod_select:after {
+      color: $color-willpower-main-text;
     }
   }
-  .sod_select{
+  .sod_select {
     background: $color-willpower-background;
-    color:$color-willpower-form-text;
+    color: $color-willpower-form-text;
   }
 
-  .sod_select.focus{
-    color:$color-willpower-form-text;
+  .sod_select.focus {
+    color: $color-willpower-form-text;
   }
 
   .sod_select:before,
-  .sod_select:after{
-    color:$color-willpower-main-text-light;
+  .sod_select:after {
+    color: $color-willpower-main-text-light;
   }
 
-  .sod_select .sod_list_wrapper{
-    color:$color-willpower-main-text;
+  .sod_select .sod_list_wrapper {
+    color: $color-willpower-main-text;
     background: $color-willpower-background;
     outline: 5px solid $color-willpower-overlay-border;
   }
   .sod_select .sod_option.optgroup,
-  .sod_select .sod_option.optgroup.disabled{
-    color:$color-willpower-main-text;
+  .sod_select .sod_option.optgroup.disabled {
+    color: $color-willpower-main-text;
   }
 
-  .sod_select .sod_option.active{
-    color:$color-willpower-form-text;
+  .sod_select .sod_option.active {
+    color: $color-willpower-form-text;
   }
 
   // _splits.scss overrides
-  .splits-container table{
-    tr{
-      background-color:$color-willpower-background;
+  .splits-container table {
+    tr {
+      background-color: $color-willpower-background;
     }
-    tbody{
-      tr, tr:nth-of-type(odd){
+    tbody {
+      tr,
+      tr:nth-of-type(odd) {
         border-bottom: 10px solid $color-willpower-background;
-        background-color:$color-willpower-background;
+        background-color: $color-willpower-background;
       }
-      tr.progress{
-        background-color:$color-willpower-main-text;
-        td{
-          div.distance-progress{
-            background-color:$color-willpower-form-text;
+      tr.progress {
+        background-color: $color-willpower-main-text;
+        td {
+          div.distance-progress {
+            background-color: $color-willpower-form-text;
           }
         }
       }
