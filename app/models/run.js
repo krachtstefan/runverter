@@ -974,10 +974,15 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   paceMinPerKmStackMinRaw: computed('paceMinPerKmRaw', function() {
-    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get('paceMinPerKm')
-      .round(this.get('digits'))
-      .floor();
+    let seconds = this.get('paceMinPerKmRaw')
+      .minus(this.get('paceMinPerKmRaw').floor())
+      .times(60);
+
+    let paceMinPerKmRaw = this.get('paceMinPerKmRaw');
+    // Makes sure that 5 Minutes and 59.6 Seconds will translate to 6:00
+    return seconds.round().gte(60)
+      ? paceMinPerKmRaw.ceil()
+      : paceMinPerKmRaw.floor();
   }),
 
   /**
@@ -1026,15 +1031,11 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerKmStackSecRaw: computed(
-    'paceMinPerKmRaw',
-    'paceMinPerKmStackMinRaw',
-    function() {
-      return this.get('paceMinPerKmRaw')
-        .minus(this.get('paceMinPerKmStackMinRaw'))
-        .times(60);
-    }
-  ),
+  paceMinPerKmStackSecRaw: computed('paceMinPerKmRaw', function() {
+    return this.get('paceMinPerKmRaw')
+      .minus(this.get('paceMinPerKmRaw').floor())
+      .times(60);
+  }),
 
   /**
    * paceMinPerKmStackSecFixed is a variation of paceMinPerKmStackSec with a fixed length as
@@ -1155,10 +1156,15 @@ export default DS.Model.extend({
    * @return {BigNumber}
    */
   paceMinPerMiStackMinRaw: computed('paceMinPerMiRaw', function() {
-    // use a combinatin of round and floor because 4.9996 should result in 5 and 4.6 should stay 4
-    return this.get('paceMinPerMi')
-      .round(this.get('digits'))
-      .floor(); // TODO make test recognize why not using paceMinPerMiRaw
+    let seconds = this.get('paceMinPerMiRaw')
+      .minus(this.get('paceMinPerMiRaw').floor())
+      .times(60);
+
+    let paceMinPerMiRaw = this.get('paceMinPerMiRaw');
+    // Makes sure that 5 Minutes and 59.6 Seconds will translate to 6:00
+    return seconds.round().gte(60)
+      ? paceMinPerMiRaw.ceil()
+      : paceMinPerMiRaw.floor();
   }),
 
   /**
@@ -1206,15 +1212,11 @@ export default DS.Model.extend({
    *
    * @return {BigNumber}
    */
-  paceMinPerMiStackSecRaw: computed(
-    'paceMinPerMiRaw',
-    'paceMinPerMiStackMinRaw',
-    function() {
-      return this.get('paceMinPerMiRaw')
-        .minus(this.get('paceMinPerMiStackMinRaw'))
-        .times(60);
-    }
-  ),
+  paceMinPerMiStackSecRaw: computed('paceMinPerMiRaw', function() {
+    return this.get('paceMinPerMiRaw')
+      .minus(this.get('paceMinPerMiRaw').floor())
+      .times(60);
+  }),
 
   /**
    * paceMinPerMiStackSecFixed is a variation of paceMinPerMiStackSec with a fixed length as

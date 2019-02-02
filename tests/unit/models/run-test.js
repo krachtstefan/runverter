@@ -2191,20 +2191,26 @@ test('paceMinPerKmStackMin property can be zero', function(assert) {
 });
 
 test('paceMinPerKmStackMin rounds properly', function(assert) {
-  var runSubject = this.subject({
+  const runSubject = this.subject({
     timeMin: new BigNumber(1),
     lengthM: new BigNumber(1)
   });
 
   run(function() {
-    runSubject.set('paceMinPerKm', new BigNumber(0.995));
-  });
-  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '1'); // the paceMinPerKm of 0.995 results in a paceMinPerKmStackMin of 1
-
-  run(function() {
     runSubject.set('paceMinPerKm', new BigNumber(0.994));
   });
-  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '0'); // the paceMinPerKm of 0.994 results in a paceMinPerKmStackMin of 0
+
+  // 0 Minutes and 59.64 Seconds translates to 1:00
+  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '1');
+  assert.strictEqual(runSubject.get('paceMinPerKmStackSec').toString(), '0');
+
+  run(function() {
+    runSubject.set('paceMinPerKm', new BigNumber(0.99));
+  });
+
+  // 0 Minutes and 59.4 Seconds translates to 0:59
+  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '0');
+  assert.strictEqual(runSubject.get('paceMinPerKmStackSec').toString(), '59');
 });
 
 test('paceMinPerKmStackMin setter changes paceMinPerKmStackMin', function(assert) {
@@ -2372,6 +2378,22 @@ test('paceMinPerKmStackSec setter handles values over 59 and changes paceMinPerK
   });
   assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '6');
   assert.strictEqual(runSubject.get('paceMinPerKmStackSec').toString(), '20');
+});
+
+test('paceMinPerKmStackSecRaw handles 59 fractions without rounding while paceMinPerKmStackSec does not', function(assert) {
+  const runSubject = this.subject({
+    timeSec: new BigNumber(1200),
+    lengthM: new BigNumber(5007.68)
+  });
+
+  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '4');
+
+  assert.strictEqual(
+    runSubject.get('paceMinPerKmStackSecRaw').toString(),
+    '59.631925362642980382133044'
+  );
+
+  assert.strictEqual(runSubject.get('paceMinPerKmStackSec').toString(), '0');
 });
 
 test('paceMinPerKmStackSec setter influences all pace related properties', function(assert) {
@@ -2797,20 +2819,26 @@ test('paceMinPerMiStackMin property can be zero', function(assert) {
 });
 
 test('paceMinPerMiStackMin rounds properly', function(assert) {
-  var runSubject = this.subject({
+  const runSubject = this.subject({
     timeMin: new BigNumber(1),
     lengthMi: new BigNumber(1)
   });
 
   run(function() {
-    runSubject.set('paceMinPerMi', new BigNumber(0.995));
+    runSubject.set('paceMinPerMi', new BigNumber(0.992));
   });
-  assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '1'); // the paceMinPerMi of 0.995 results in a paceMinPerMiStackMin of 1
+
+  // 0 Minutes and 59.52 seconds translates to 0:59
+  assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '1');
+  assert.strictEqual(runSubject.get('paceMinPerMiStackSec').toString(), '0');
 
   run(function() {
-    runSubject.set('paceMinPerMi', new BigNumber(0.994));
+    runSubject.set('paceMinPerMi', new BigNumber(0.991));
   });
-  assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '0'); // the paceMinPerMi of 0.994 results in a paceMinPerMiStackMin of 0
+
+  // 0 Minutes and 59.46 seconds translates to 0:59
+  assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '0');
+  assert.strictEqual(runSubject.get('paceMinPerMiStackSec').toString(), '59');
 });
 
 test('paceMinPerMiStackMin setter changes paceMinPerMiStackMin', function(assert) {
@@ -2978,6 +3006,22 @@ test('paceMinPerMiStackSec setter handles values over 59 and changes paceMinPerM
   });
   assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '6');
   assert.strictEqual(runSubject.get('paceMinPerMiStackSec').toString(), '20');
+});
+
+test('paceMinPerMiStackSec handles 59 fractions without rounding while paceMinPerMiStackSecRaw does not', function(assert) {
+  const runSubject = this.subject({
+    timeSec: new BigNumber(1200),
+    lengthM: new BigNumber(8050.72) // a bit more than 5 miles
+  });
+
+  assert.strictEqual(runSubject.get('paceMinPerMiStackMin').toString(), '4');
+
+  assert.strictEqual(
+    runSubject.get('paceMinPerMiStackSecRaw').toString(),
+    '59.880756006916151598863208'
+  );
+
+  assert.strictEqual(runSubject.get('paceMinPerMiStackSec').toString(), '0');
 });
 
 test('paceMinPerMiStackSec setter influences all pace related properties', function(assert) {
@@ -4534,6 +4578,30 @@ test('timeStackSecFixed setter changes timeMin', function(assert) {
     timeSec: new BigNumber('3599.9999999999999999999999994')
   });
   assert.strictEqual(runSubject.get('timeStackSecFixed').toString(), '00'); // became 0-0 because of missing typecast
+});
+
+test('Rounding issue found by Dominik Wild', function(assert) {
+  const runSubject = this.subject({
+    timeSec: new BigNumber(1200),
+    lengthM: new BigNumber(5007.68)
+  });
+  assert.strictEqual(
+    runSubject.get('paceMinPerKm').toString(),
+    '3.9938654227107163397'
+  );
+
+  assert.strictEqual(runSubject.get('paceMinPerKmStackMin').toString(), '4'); // this was 3
+  assert.strictEqual(runSubject.get('paceMinPerKmStackMinRaw').toString(), '4'); // this was 3
+
+  assert.strictEqual(runSubject.get('paceMinPerKmStackSec').toString(), '0');
+  assert.strictEqual(
+    runSubject.get('paceMinPerKmStackSecRaw').toString(),
+    '59.631925362642980382133044'
+  );
+  assert.strictEqual(
+    runSubject.get('paceMinPerKm').toString(),
+    '3.9938654227107163397'
+  );
 });
 
 // splits
