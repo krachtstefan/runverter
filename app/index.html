@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="{{ rootURL }}manifest.appcache">
+<html manifest="{{rootURL}}manifest.appcache">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,36 +14,36 @@
     />
     <meta name="theme-color" content="#ffffff" />
     <meta name="robots" content="index, follow, archive" />
-    <meta property="og:image" content="{{ rootURL }}og-image.png" />
+    <meta property="og:image" content="{{rootURL}}og-image.png" />
     {{content-for "head"}}
 
     {{content-for 'concat-css'}}
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="{{ rootURL }}favicon.ico"
+      href="{{rootURL}}favicon.ico"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="{{ rootURL }}apple-touch-icon.png"
+      href="{{rootURL}}apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
-      href="{{ rootURL }}favicon-32x32.png"
+      href="{{rootURL}}favicon-32x32.png"
       sizes="32x32"
     />
     <link
       rel="icon"
       type="image/png"
-      href="{{ rootURL }}favicon-16x16.png"
+      href="{{rootURL}}favicon-16x16.png"
       sizes="16x16"
     />
-    <link rel="manifest" href="{{ rootURL }}manifest.json" />
+    <link rel="manifest" href="{{rootURL}}manifest.json" />
     <link
       rel="mask-icon"
-      href="{{ rootURL }}safari-pinned-tab.svg"
+      href="{{rootURL}}safari-pinned-tab.svg"
       color="#888888"
     />
     {{content-for "head-footer"}}
