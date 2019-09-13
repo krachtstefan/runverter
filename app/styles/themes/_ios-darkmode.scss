@@ -1,0 +1,164 @@
+$color-ios-darkmode-background: #000;
+$color-ios-darkmode-main-text-light: #d5d5d5;
+$color-ios-darkmode-main-text: #fff;
+$color-ios-darkmode-form-text: #0a84ff;
+$color-ios-darkmode-overlay-border: rgba(128, 128, 128, 0.2);
+
+body.ios-darkmode {
+  // _main.scss overrides
+  color: $color-ios-darkmode-main-text;
+  background-color: $color-ios-darkmode-background;
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $color-ios-darkmode-main-text;
+  }
+
+  p {
+    color: $color-ios-darkmode-main-text-light;
+  }
+
+  a,
+  a:hover {
+    color: $color-ios-darkmode-form-text;
+  }
+
+  .header {
+    border: 1px solid $color-ios-darkmode-background;
+    background-color: $color-ios-darkmode-background;
+  }
+
+  .intro {
+    background: $color-ios-darkmode-background;
+  }
+
+  .uk-form input[type='text'],
+  .uk-form input[type='number'],
+  .uk-form input[type='tel'] {
+    color: $color-ios-darkmode-form-text;
+    background-color: $color-ios-darkmode-background;
+    &:focus {
+      color: $color-ios-darkmode-main-text;
+    }
+  }
+
+  .tools {
+    .toolLabel {
+      color: $color-ios-darkmode-main-text-light;
+    }
+  }
+
+  #footer #donateButton {
+    color: $color-ios-darkmode-main-text-light;
+    &:hover {
+      color: $color-ios-darkmode-form-text;
+    }
+  }
+
+  // _imprint.scss overrides
+  .imprint {
+    .uk-container-center {
+      background-color: $color-ios-darkmode-background;
+      outline: 5px solid $color-ios-darkmode-overlay-border;
+    }
+  }
+
+  // _menu.scss overrides
+  #toggle-panel span,
+  #close-imprint-page span {
+    background: $color-ios-darkmode-form-text;
+    border: 1px solid $color-ios-darkmode-form-text;
+    @include respond-to('small') {
+      background-color: $color-ios-darkmode-background;
+    }
+  }
+
+  .open #toggle-panel span,
+  .open #close-imprint-page span {
+    background: $color-ios-darkmode-form-text;
+  }
+
+  ul.settings {
+    background: $color-ios-darkmode-background;
+    outline: 5px solid $color-ios-darkmode-overlay-border;
+  }
+
+  ul.settings li > a,
+  ul.settings li #share-container {
+    color: $color-ios-darkmode-form-text;
+  }
+
+  ul.settings li > a:hover {
+    text-decoration: underline;
+    background-color: $color-ios-darkmode-background;
+  }
+
+  // _selectordie.scss overrides
+  .suggest-select .sod_select {
+    background-position: center center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-image: inline-image('suggest.svg');
+  }
+
+  .sod_select.focus {
+    background-color: $color-ios-darkmode-background;
+  }
+  #menu {
+    background: $color-ios-darkmode-background;
+    &.sod_select:before,
+    &.sod_select:after {
+      color: $color-ios-darkmode-main-text;
+    }
+  }
+  .sod_select {
+    background: $color-ios-darkmode-background;
+    color: $color-ios-darkmode-form-text;
+  }
+
+  .sod_select.focus {
+    color: $color-ios-darkmode-form-text;
+  }
+
+  .sod_select:before,
+  .sod_select:after {
+    color: $color-ios-darkmode-main-text-light;
+  }
+
+  .sod_select .sod_list_wrapper {
+    color: $color-ios-darkmode-main-text;
+    background: $color-ios-darkmode-background;
+    outline: 5px solid $color-ios-darkmode-overlay-border;
+  }
+  .sod_select .sod_option.optgroup,
+  .sod_select .sod_option.optgroup.disabled {
+    color: $color-ios-darkmode-main-text;
+  }
+
+  .sod_select .sod_option.active {
+    color: $color-ios-darkmode-form-text;
+  }
+
+  // _splits.scss overrides
+  .splits-container table {
+    tr {
+      background-color: $color-ios-darkmode-background;
+    }
+    tbody {
+      tr,
+      tr:nth-of-type(odd) {
+        border-bottom: 10px solid $color-ios-darkmode-background;
+        background-color: $color-ios-darkmode-background;
+      }
+      tr.progress {
+        background-color: $color-ios-darkmode-main-text;
+        td {
+          div.distance-progress {
+            background-color: $color-ios-darkmode-form-text;
+          }
+        }
+      }
+    }
+  }
+}

@@ -58,6 +58,8 @@ export default Component.extend({
   color: computed('theme', function() {
     if (this.get('theme') === 'willpower') {
       return 'rgba(128,128,128,1)';
+    } else if (this.get('theme') === 'ios-darkmode') {
+      return 'rgba(10,132,255,1)';
     } else {
       return 'rgba(67,117,167,1)';
     }
