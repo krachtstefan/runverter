@@ -2,10 +2,10 @@ var VALID_DEPLOY_TARGETS = [
   'production',
   'staging',
   'production-appcache',
-  'staging-appcache'
+  'staging-appcache',
 ];
 
-module.exports = function(deployTarget) {
+module.exports = function (deployTarget) {
   if (deployTarget === 'production' || deployTarget === 'production-appcache') {
     var deployUser = process.env.RUNVERTER_DEPLOY_USER_PRODUCTION;
     var deployHost = 'runverter.production';
@@ -20,7 +20,7 @@ module.exports = function(deployTarget) {
   var ENV = {
     redis: {
       allowOverwrite: true,
-      keyPrefix: 'runverter:index'
+      keyPrefix: 'runverter:index',
     },
     s3: {
       accessKeyId: process.env.RUNVERTER_AWS_ACCESS_KEY_ID,
@@ -28,18 +28,18 @@ module.exports = function(deployTarget) {
       bucket: 's.runverter.io',
       region: 'eu-central-1',
       filePattern:
-        '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache,json}'
+        '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache,json}',
     },
     scp: {
       username: deployUser,
       host: deployHost,
       path: '~/runverter/',
-      exclude: '{*.html,*.png,*.svg,*.txt,*.xml,*.ico,assets,images}'
+      exclude: '{*.html,*.png,*.svg,*.txt,*.xml,*.ico,assets,images}',
     },
     'ssh-tunnel': {
       username: deployUser,
-      host: deployHost
-    }
+      host: deployHost,
+    },
   };
 
   if (
@@ -48,8 +48,8 @@ module.exports = function(deployTarget) {
   ) {
     ENV.pipeline = {
       disabled: {
-        allExcept: ['build', 'gzip', 'manifest', 'scp']
-      }
+        allExcept: ['build', 'gzip', 'manifest', 'scp'],
+      },
     };
   }
 
