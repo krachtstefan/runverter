@@ -1,18 +1,10 @@
-var VALID_DEPLOY_TARGETS = [
-  'production',
-  'staging',
-  'production-appcache',
-  'staging-appcache',
-];
+var VALID_DEPLOY_TARGETS = ['production', 'staging'];
 
 module.exports = function (deployTarget) {
-  if (deployTarget === 'production' || deployTarget === 'production-appcache') {
+  if (deployTarget === 'production') {
     var deployUser = process.env.RUNVERTER_DEPLOY_USER_PRODUCTION;
     var deployHost = 'runverter.production';
-  } else if (
-    deployTarget === 'staging' ||
-    deployTarget === 'staging-appcache'
-  ) {
+  } else if (deployTarget === 'staging') {
     var deployUser = process.env.RUNVERTER_DEPLOY_USER_STAGING;
     var deployHost = 'runverter.staging';
   }
@@ -41,17 +33,6 @@ module.exports = function (deployTarget) {
       host: deployHost,
     },
   };
-
-  if (
-    deployTarget === 'production-appcache' ||
-    deployTarget === 'staging-appcache'
-  ) {
-    ENV.pipeline = {
-      disabled: {
-        allExcept: ['build', 'gzip', 'manifest', 'scp'],
-      },
-    };
-  }
 
   if (VALID_DEPLOY_TARGETS.indexOf(deployTarget) === -1) {
     throw new Error('Invalid deployTarget ' + deployTarget);
