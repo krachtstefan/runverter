@@ -34,7 +34,7 @@ module.exports = function (deployTarget) {
     },
   };
 
-  if (VALID_DEPLOY_TARGETS.indexOf(deployTarget) === -1) {
+  if (VALID_DEPLOY_TARGETS.includes(deployTarget)) {
     throw new Error('Invalid deployTarget ' + deployTarget);
   }
   return ENV;
