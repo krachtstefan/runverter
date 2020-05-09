@@ -6,6 +6,7 @@ const deployConfig = {
       name: 'staging.runverter.io',
       region: 'eu-central-1',
     },
+    assetUrl: 'http://s.runverter.io/',
     assetBucket: {
       name: 's.runverter.io',
       region: 'eu-central-1',
@@ -20,7 +21,7 @@ module.exports = function (deployTarget) {
   if (Object.keys(deployConfig).includes(deployTarget) === false) {
     throw new Error('Invalid deployTarget ' + deployTarget);
   }
-  const { s3KeyId, s3Key, mainBucket, assetBucket } = deployConfig[
+  const { s3KeyId, s3Key, mainBucket, assetBucket, assetUrl } = deployConfig[
     deployTarget
   ];
 
@@ -39,6 +40,17 @@ module.exports = function (deployTarget) {
       region: assetBucket.region,
       filePattern:
         '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache,json}',
+    },
+    'html-manifest': {
+      filename: 'manifest.appcache',
+      manifestRoot: '/',
+      prependPath: assetUrl,
+      excludePaths: ['index.html'],
+      includePaths: [
+        'https://fonts.googleapis.com/css?family=Open+Sans:400,700',
+        'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf',
+      ],
+      network: ['*'],
     },
   };
 

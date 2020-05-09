@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
-    "broccoli-manifest": "git://github.com/krachtstefan/broccoli-manifest.git#pathprefix-includePaths-fix",
     "broccoli-strip-debug": "^1.1.0",
     "chart.js": "^2.2.1",
     "ember-ajax": "^3.0.0",
@@ -32,6 +31,7 @@
     "ember-cli-content-security-policy": "1.0.0",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-deploy": "1.0.2",
+    "ember-cli-deploy-html-manifest": "0.0.6",
     "ember-cli-deploy-s3-pack": "^1.0.0",
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-google-fonts": "^2.3.1",
