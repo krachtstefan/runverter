@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     i18n: {
-      defaultLocale: 'en'
+      defaultLocale: 'en',
     },
 
     modulePrefix: 'runverter',
@@ -17,8 +17,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -38,7 +38,7 @@ module.exports = function(environment) {
       'style-src':
         "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.gstatic.com",
       'media-src': "'self'",
-      'manifest-src': "'self'"
+      'manifest-src': "'self'",
     },
     manifest: {
       enabled: true,
@@ -46,11 +46,11 @@ module.exports = function(environment) {
       excludePaths: ['index.html', 'tests/index.html', 'testem.js'],
       includePaths: [
         'https://fonts.googleapis.com/css?family=Open+Sans:400,700',
-        'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'
+        'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf',
       ],
       prepend: 'https://s.runverter.io/',
-      showCreateDate: true
-    }
+      showCreateDate: true,
+    },
   };
 
   if (environment === 'development') {
