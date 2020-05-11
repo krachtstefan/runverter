@@ -16,7 +16,7 @@ const sharedConfig = {
 };
 
 const deployConfig = {
-  production: {
+  staging: {
     's3-index': {
       accessKeyId,
       secretAccessKey,
@@ -33,7 +33,7 @@ const deployConfig = {
     },
     ...sharedConfig,
   },
-  appcache: {
+  'staging-appcache': {
     ['s3']: {
       accessKeyId,
       secretAccessKey,
