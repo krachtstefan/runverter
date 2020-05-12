@@ -1,7 +1,7 @@
 export default {
   meta: {
     title: 'Runverter.io',
-    description: 'The only running calculator you will ever need.'
+    description: 'The only running calculator you will ever need.',
   },
   controlPanel: {
     switchLanguage: 'Deutsche Version',
@@ -14,7 +14,7 @@ export default {
     learnMore: 'Learn more about runverter',
     feedback: 'Tweet me your feedback',
     racedayme: 'Check out Raceday.me',
-    imprint: 'Imprint'
+    imprint: 'Imprint',
   },
   tools: {
     pca: {
@@ -24,7 +24,7 @@ export default {
         'See which pace you need to finish a run in your desired time.',
       distanceLabel: 'Running a distance of',
       timeLabel: 'in',
-      paceLabel: 'requires a pace of'
+      paceLabel: 'requires a pace of',
     },
     pc: {
       name: 'Pace Converter',
@@ -34,7 +34,7 @@ export default {
       minkmLabel: 'A pace of',
       minmiLabel: 'or',
       kmhLabel: 'equals a speed of',
-      mihLabel: 'or'
+      mihLabel: 'or',
     },
     lc: {
       name: 'Length Converter',
@@ -43,7 +43,7 @@ export default {
         'Here you can see the relation of all common length units. And yes, length matters.',
       kmLabel: 'A distance of',
       miLabel: 'equals a distance of',
-      mLabel: 'or'
+      mLabel: 'or',
     },
     rp: {
       name: 'Race Predictor',
@@ -52,7 +52,7 @@ export default {
       achievedDistanceLabel: 'Running',
       achievedTimeLabel: 'in',
       predictedDistanceLabel: 'enables you to run a race of',
-      predictedTimeLabel: 'in'
+      predictedTimeLabel: 'in',
     },
     sc: {
       name: 'Split Time Calculator',
@@ -72,13 +72,13 @@ export default {
         '0': 'even paced splits',
         '-1': '1% positive splits',
         '-2': '2% positive splits',
-        '-3': '3% positive splits'
+        '-3': '3% positive splits',
       },
       evenSlope: {
         false: 'in the middle',
-        true: 'gradually'
-      }
-    }
+        true: 'gradually',
+      },
+    },
   },
   flashMessages: {
     peterRiegelExlanation:
@@ -91,7 +91,7 @@ export default {
     racedayme:
       '<span>🤫 Pssssst. <br>You like Runverter? You gonna looooove <a href="https://raceday.me" target="_blank">my new project</a>!</span>',
     donationMessage:
-      'Hi there, good to see you! This tool is free and made from lots of spare time. If you like to motivate me, just <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> donate</a> me some <i class="fa fa-coffee" aria-hidden="true"></i> or tell your <i class="fa fa-twitter" aria-hidden="true"></i> and <i class="fa fa-facebook" aria-hidden="true"></i> about #runverter'
+      'Hi there, good to see you! This tool is free and made from lots of spare time. If you like to motivate me, just <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> donate</a> me some <i class="fa fa-coffee" aria-hidden="true"></i> or tell your <i class="fa fa-twitter" aria-hidden="true"></i> and <i class="fa fa-facebook" aria-hidden="true"></i> about #runverter',
   },
   metrics: {
     separator: '.',
@@ -99,21 +99,21 @@ export default {
       separator: '.',
       km: 'km',
       mi: 'mi',
-      m: 'm'
+      m: 'm',
     },
     tempo: {
       separator: ':',
       minkm: 'min/km',
       minmi: 'min/mi',
       kmh: 'km/h',
-      mih: 'mi/h'
+      mih: 'mi/h',
     },
     time: {
       separator: ':',
       hr: 'h',
       min: 'min',
-      sec: 'sec'
-    }
+      sec: 'sec',
+    },
   },
   races: {
     label: 'Select a race:',
@@ -123,7 +123,7 @@ export default {
     '50k': '50k',
     '50m': '50 Miles',
     '100k': '100k',
-    '100m': '100 Miles'
+    '100m': '100 Miles',
   },
   targetTimes: {
     label: 'Select a time goal:',
@@ -161,7 +161,7 @@ export default {
     sub50: 'sub 0:50',
     sub45: 'sub 0:45',
     sub40: 'sub 0:40',
-    sub35: 'sub 0:35'
+    sub35: 'sub 0:35',
   },
   imprint: {
     about: 'About',
@@ -172,11 +172,11 @@ export default {
       'This app is powered by <a href="http://emberjs.com/" target="_blank">Ember.js</a>. Most of the icons are from <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> creators <a href="https://thenounproject.com/term/speech-bubble/358344/" target="_blank">lipi</a>, <a href="https://thenounproject.com/term/happy/350362/" target="_blank">Bernadette Little</a>, <a href="https://thenounproject.com/term/glasses/31753/" target="_blank">Simon Child</a>, <a href="https://thenounproject.com/term/share/375368/" target="_blank">Aysgl Avcu</a>, <a href="https://thenounproject.com/term/bookmark/660529/" target="_blank">Kimmi Studio</a> and <a href="https://thenounproject.com/term/information/222828/" target="_blank">Douglas Santos</a>.',
     responsible: 'Responsible for the content',
     responsibleText:
-      'Stefan Kracht<br />Hasencleverstraße 1<br />22111 Hamburg<br />',
+      'Stefan Kracht<br />Gärtnerstraße 11<br />20253 Hamburg<br />',
     disclaimer: 'Disclaimer blah blah...',
     disclaimerText:
       'I assume no liability or responsibility to any linked websites.<br />This website uses Google Analytics, a web analytics service provided by Google, Inc. (“Google”). Google Analytics uses cookies, which are text files placed on your computer, to help the website analyze how users use the site. The information generated by the cookie about your use of the website (including your IP address) will be transmitted to and stored by Google on servers in the United States. Google will use this information for the purpose of evaluating your use of the website, compiling reports on website activity for website operators and providing other services relating to website activity and internet usage. Google may also transfer this information to third parties where required to do so by law, or where such third parties process the information on Google’s behalf. Google will not associate your IP address with any other data held by Google. You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website. By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.',
     localstorage: 'Local storage',
-    deleteData: 'Flush all locally stored data'
-  }
+    deleteData: 'Flush all locally stored data',
+  },
 };

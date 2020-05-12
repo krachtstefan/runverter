@@ -1,7 +1,7 @@
 export default {
   meta: {
     title: 'Runverter.io',
-    description: 'Der einzige Laufrechner den du je brauchen wirst.'
+    description: 'Der einzige Laufrechner den du je brauchen wirst.',
   },
   controlPanel: {
     switchLanguage: 'Switch to english',
@@ -14,7 +14,7 @@ export default {
     learnMore: 'Mehr über Runverter erfahren',
     feedback: 'Twitter mir dein Feedback',
     racedayme: 'Raceday.me ansehen',
-    imprint: 'Impressum'
+    imprint: 'Impressum',
   },
   tools: {
     pca: {
@@ -24,7 +24,7 @@ export default {
         'Finde heraus wie schnell du sein musst, um eine Strecke in gewünschter Zeit zu schaffen.',
       distanceLabel: 'Für eine Strecke von',
       timeLabel: 'in',
-      paceLabel: 'benötigst du eine Geschwindigkeit von'
+      paceLabel: 'benötigst du eine Geschwindigkeit von',
     },
     pc: {
       name: 'Pace-Umrechner',
@@ -34,7 +34,7 @@ export default {
       minkmLabel: 'Eine Pace von',
       minmiLabel: 'oder',
       kmhLabel: 'entspricht einer Geschwindigkeit von',
-      mihLabel: 'bzw.'
+      mihLabel: 'bzw.',
     },
     lc: {
       name: 'Längen-Umrechner',
@@ -43,7 +43,7 @@ export default {
         'Hier findest du die wichtigsten Längenangaben. Und ja, die Länge ist entscheidend.',
       kmLabel: 'Eine Strecke von',
       miLabel: 'entspricht',
-      mLabel: 'bzw.'
+      mLabel: 'bzw.',
     },
     rp: {
       name: 'Wettkampfprognose',
@@ -53,7 +53,7 @@ export default {
       achievedDistanceLabel: 'Eine Lauf von',
       achievedTimeLabel: 'in',
       predictedDistanceLabel: 'ermöglicht dir ein Rennen von',
-      predictedTimeLabel: 'in'
+      predictedTimeLabel: 'in',
     },
     sc: {
       name: 'Zwischenzeit-Rechner',
@@ -73,13 +73,13 @@ export default {
         '0': 'gleichmäßige Splits',
         '-1': '1% positive Splits',
         '-2': '2% positive Splits',
-        '-3': '3% positive Splits'
+        '-3': '3% positive Splits',
       },
       evenSlope: {
         false: 'in der Mitte',
-        true: 'gleichmäßig'
-      }
-    }
+        true: 'gleichmäßig',
+      },
+    },
   },
   metrics: {
     separator: ',',
@@ -87,21 +87,21 @@ export default {
       separator: ',',
       km: 'km',
       mi: 'mi',
-      m: 'm'
+      m: 'm',
     },
     tempo: {
       separator: ':',
       minkm: 'min/km',
       minmi: 'min/mi',
       kmh: 'km/h',
-      mih: 'mi/h'
+      mih: 'mi/h',
     },
     time: {
       separator: ':',
       hr: 'Std',
       min: 'Min',
-      sec: 'Sek'
-    }
+      sec: 'Sek',
+    },
   },
   races: {
     label: 'Wähle ein Wettkampf:',
@@ -111,7 +111,7 @@ export default {
     '50k': '50k',
     '50m': '50 Meilen',
     '100k': '100k',
-    '100m': '100 Meilen'
+    '100m': '100 Meilen',
   },
   targetTimes: {
     label: 'Wähle eine Wunschzeit:',
@@ -149,7 +149,7 @@ export default {
     sub50: 'unter 0:50',
     sub45: 'unter 0:45',
     sub40: 'unter 0:40',
-    sub35: 'unter 0:35'
+    sub35: 'unter 0:35',
   },
   flashMessages: {
     peterRiegelExlanation:
@@ -162,7 +162,7 @@ export default {
     racedayme:
       '<span>🤫 Pssssst. <br>Du magst Runverter? Dann wirst du <a href="https://raceday.me" target="_blank">mein neues Projekt</a> lieben!</span>',
     donationMessage:
-      'Hi, schön dich zu sehen! Dieses Tool ist kostenlos und in vielen Freizeitstunden entstanden. Wenn du mich motivieren willst, <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> spende</a> mir einfach etwas <i class="fa fa-coffee" aria-hidden="true"></i> oder erzähl <i class="fa fa-twitter" aria-hidden="true"></i> und <i class="fa fa-facebook" aria-hidden="true"></i> von #runverter'
+      'Hi, schön dich zu sehen! Dieses Tool ist kostenlos und in vielen Freizeitstunden entstanden. Wenn du mich motivieren willst, <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> spende</a> mir einfach etwas <i class="fa fa-coffee" aria-hidden="true"></i> oder erzähl <i class="fa fa-twitter" aria-hidden="true"></i> und <i class="fa fa-facebook" aria-hidden="true"></i> von #runverter',
   },
   imprint: {
     about: 'Über Runverter',
@@ -173,11 +173,11 @@ export default {
       'Diese App läuft mit <a href="http://emberjs.com/" target="_blank">Ember.js</a>. Die meisten Icons stammen von den <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> Usern <a href="https://thenounproject.com/term/speech-bubble/358344/" target="_blank">lipi</a>, <a href="https://thenounproject.com/term/happy/350362/" target="_blank">Bernadette Little</a>, <a href="https://thenounproject.com/term/glasses/31753/" target="_blank">Simon Child</a>, <a href="https://thenounproject.com/term/share/375368/" target="_blank">Aysgl Avcu</a>, <a href="https://thenounproject.com/term/bookmark/660529/" target="_blank">Kimmi Studio</a> and <a href="https://thenounproject.com/term/information/222828/" target="_blank">Douglas Santos</a>.',
     responsible: 'Verantwortlich für den Inhalt',
     responsibleText:
-      'Stefan Kracht<br />Hasencleverstraße 1<br />22111 Hamburg<br />',
+      'Stefan Kracht<br />Gärtnerstraße 11<br />20253 Hamburg<br />',
     disclaimer: 'Disclaimer blah blah...',
     disclaimerText:
       'Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. <br />Ich setze Google Analytics, einen Webanalysedienst der Google Inc. („Google“) ein. Google verwendet Cookies. Die durch das Cookie erzeugten Informationen über die Benutzung des Onlineangebotes durch die Nutzer werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.<br />Google wird diese Informationen in unserem Auftrag benutzen, um die Nutzung unseres Onlineangebotes durch die Nutzer auszuwerten, um Reports über die Aktivitäten innerhalb dieses Onlineangebotes zusammenzustellen und um weitere mit der Nutzung dieses Onlineangebotes und der Internetnutzung verbundene Dienstleistungen uns gegenüber zu erbringen. Dabei können aus den verarbeiteten Daten pseudonyme Nutzungsprofile der Nutzer erstellt werden.',
     localstorage: 'Lokale Daten',
-    deleteData: 'Alle lokal gespeicherten Daten löschen'
-  }
+    deleteData: 'Alle lokal gespeicherten Daten löschen',
+  },
 };
