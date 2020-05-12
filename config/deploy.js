@@ -15,6 +15,38 @@ const sharedConfig = {
 };
 
 const deployConfig = {
+  production: {
+    's3-index': {
+      accessKeyId,
+      secretAccessKey,
+      bucket: 'runverter.io',
+      region: 'eu-central-1',
+    },
+    ['s3']: {
+      accessKeyId,
+      secretAccessKey,
+      bucket: 's.runverter.io',
+      region: 'eu-central-1',
+      filePattern:
+        '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,appcache,json}',
+    },
+    ...sharedConfig,
+  },
+  'production-appcache': {
+    ['s3']: {
+      accessKeyId,
+      secretAccessKey,
+      bucket: 'runverter.io',
+      region: 'eu-central-1',
+      filePattern: '**/*.appcache', // only upload .appcache
+    },
+    pipeline: {
+      disabled: {
+        allExcept: ['build', 'gzip', 'html-manifest', 's3'],
+      },
+    },
+    ...sharedConfig,
+  },
   staging: {
     's3-index': {
       accessKeyId,
