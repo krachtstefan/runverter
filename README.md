@@ -20,34 +20,36 @@ Run `ember test` for a one time test and `ember test --server` to trigger tests 
 
 ## Deploy
 
-The server setup is maintained in the [runverter-server repository](https://github.com/krachtstefan/runverter-server) and the deploy process is done with [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy).
+The app is hosted on two aws buckets. One serves the main website at runverter.io and the other one provides all assets via s.runverter.io. There's is also an additional staging.runverter.io bucket for testing releases. This also uses the assets from s.runverter.io, since all files have a unique hashed filename.
+
+The deploy process itself is done with [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy) and the [ember-cli-deploy-s3-pack](https://github.com/Gaurav0/ember-cli-deploy-s3-pack) plugin.
 
 ### Workflow of a deploy
 
 As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment process is a combination of the following steps:
 
 - Compile the ember app locally.
-- Upload all files to Amazon S3 asset server.
-- Publish the index.html page in a dedicated Redis key (like runverter:index:XXXXXX).
-- Preview the version with a secret url like https://runverter.io/?index_key=XXXXXX.
-- Activate the deployed version by copying the value of runverter:index:XXXXXX key to runverter:index:current-content.
-- Since the `manifest.appcache` can not be delivered via CDN and must be available under the same origin as the app, we additionally upload the static files to the docker machine.
+- Upload all files to the Amazon S3 asset bucket.
+- upload the index.html with a hidden filename like `index.html:XXXXXX`.
+- Preview the version with a secret url like `https://runverter.io/index.html:XXXXXX`.
+- Activate the deployed version by copying the content of `index.html:XXXXXX` to the `index.html` file.
+- Since the `manifest.appcache` can not be delivered via CDN and must be available under the same origin as the app, we upload the manifest.appcache as the last step of the deploy routine to the S3 bucket where the index.html is hosted (not the asset bucket).
+- it might need some time until all apps are recognizing the ne manifest
+- open [chrome://appcache-internals/](chrome://appcache-internals/) in chrome to inspect the stored appcache and clear it manually
 
 ### Requirements
 
-- The hostname `runverter.staging` and `runverter.production` need to be added to your `/etc/hosts` file and point to the proper deployment server running the docker setup described in [runverter-server repository](https://github.com/krachtstefan/runverter-server).
-- The assets will be uploaded to Amazon S3, so you need a bucket called `s.runverter.io`.
-- There are a bunch of environment variables that need to be present to deploy the app. Environment variables can be defined by adding lines like `export AWS_SECRET_ACCESS_KEY=XXXXXX` to your `~/.bash_profile` or `~/.zshrc`.
-  - `RUNVERTER_AWS_ACCESS_KEY_ID`: Access key ID to access `s.runverter.io` bucket.
-  - `RUNVERTER_AWS_SECRET_ACCESS_KEY`: Access key to access `s.runverter.io` bucket.
-  - `RUNVERTER_DEPLOY_USER_STAGING`: SSH user to deploy on `runverter.staging`.
-  - `RUNVERTER_DEPLOY_USER_PRODUCTION`: SSH user to deploy on `runverter.production`.
+- The assets will be uploaded to Amazon S3, so you need a bucket called `s.runverter.io`, `staging.runverter.io`, `runverter.io`.
+- All these buckets need to be public and connected with the related domain via amazon cloudfront.
+- There are some environment variables that need to be present to deploy the app. Environment variables can be defined by adding lines like `export AWS_SECRET_ACCESS_KEY=XXXXXX` to your `~/.bash_profile` or `~/.zshrc`.
+  - `RUNVERTER_AWS_ACCESS_KEY_ID`: Access key ID to access all s3 buckets.
+  - `RUNVERTER_AWS_SECRET_ACCESS_KEY`: Access key to access all s3 buckets.
 
 ### Staging deploy
 
-- `ember deploy staging` will compile the app, upload the assets and publish the index page to redis. It will display the key of the deployed version like `XXXXXXX`.
-- preview the build on http://runverter.staging/?index_key=XXXXXX.
-- `ember deploy:list staging` lists all available revisions from redis.
+- `ember deploy staging` will compile the app, upload the assets and publish the index page on the `staging.runverter.io` bucket. It will display the key of the deployed version like `XXXXXXX`.
+- preview the build on http://staging.runverter.io/index.html:XXXXXX.
+- `ember deploy:list staging` lists all available revisions.
 - activate the version with `ember deploy:activate staging --revision=XXXXXXX`.
 - at last we deploy the `manifest.appcache file` with `ember deploy staging-appcache`
 
