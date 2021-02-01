@@ -1,2 +1,2 @@
-rvm ruby-2.3.1@runverter --create
+rvm ruby-3.0.0@runverter --create
 rvm gemset list
