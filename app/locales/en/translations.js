@@ -66,10 +66,10 @@ export default {
       distanceHeader: 'Distance',
       timeHeader: 'Time',
       splitStrategies: {
-        '3': '3% negative splits',
-        '2': '2% negative splits',
-        '1': '1% negative splits',
-        '0': 'even paced splits',
+        3: '3% negative splits',
+        2: '2% negative splits',
+        1: '1% negative splits',
+        0: 'even paced splits',
         '-1': '1% positive splits',
         '-2': '2% positive splits',
         '-3': '3% positive splits',
@@ -166,7 +166,7 @@ export default {
   imprint: {
     about: 'About',
     aboutText:
-      'Runverter.io is a pet project by <a href="https://twitter.com/stefan_kracht" target="_blank">Stefan Kracht</a>. Check out the <a href="http://stefankracht.de/news/runverter" target="_blank">detailed blog post</a> for more information.',
+      'Runverter.io is a pet project by <a href="https://twitter.com/stefan_kracht" target="_blank">Stefan Kracht</a>. Check out the <a href="https://stefankracht.de/p/runverter" target="_blank">detailed blog post</a> for more information.',
     thanks: 'Special thanks ♥',
     thanksText:
       'This app is powered by <a href="http://emberjs.com/" target="_blank">Ember.js</a>. Most of the icons are from <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> creators <a href="https://thenounproject.com/term/speech-bubble/358344/" target="_blank">lipi</a>, <a href="https://thenounproject.com/term/happy/350362/" target="_blank">Bernadette Little</a>, <a href="https://thenounproject.com/term/glasses/31753/" target="_blank">Simon Child</a>, <a href="https://thenounproject.com/term/share/375368/" target="_blank">Aysgl Avcu</a>, <a href="https://thenounproject.com/term/bookmark/660529/" target="_blank">Kimmi Studio</a> and <a href="https://thenounproject.com/term/information/222828/" target="_blank">Douglas Santos</a>.',
