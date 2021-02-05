@@ -5,7 +5,7 @@ var env = EmberApp.env();
 var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
 var stripDebug = require('broccoli-strip-debug');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
     fingerprint: {
       enabled: isProductionLikeBuild,
@@ -19,11 +19,11 @@ module.exports = function(defaults) {
         'map',
         'json',
         'svg',
-        'ico'
-      ]
+        'ico',
+      ],
     },
     sourcemaps: {
-      enabled: !isProductionLikeBuild
+      enabled: !isProductionLikeBuild,
     },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
@@ -35,12 +35,12 @@ module.exports = function(defaults) {
 
     emberCliConcat: {
       js: {
-        concat: isProductionLikeBuild
+        concat: isProductionLikeBuild,
       },
       css: {
-        concat: isProductionLikeBuild
-      }
-    }
+        concat: isProductionLikeBuild,
+      },
+    },
   });
 
   app.import('bower_components/uikit/css/uikit.min.css');
