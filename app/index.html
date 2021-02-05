@@ -40,7 +40,6 @@
       href="{{rootURL}}favicon-16x16.png"
       sizes="16x16"
     />
-    <link rel="manifest" href="{{rootURL}}manifest.json" />
     <link
       rel="mask-icon"
       href="{{rootURL}}safari-pinned-tab.svg"
@@ -54,27 +53,6 @@
     {{content-for 'concat-js'}}
 
     {{content-for "body-footer"}}
-    <script type="text/javascript">
-      window.addEventListener(
-        'load',
-        function(e) {
-          window.applicationCache.addEventListener(
-            'updateready',
-            function(e) {
-              if (
-                window.applicationCache.status ==
-                window.applicationCache.UPDATEREADY
-              ) {
-                window.applicationCache.swapCache();
-                window.location.reload();
-              }
-            },
-            false
-          );
-        },
-        false
-      );
-    </script>
     <script>
       (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
