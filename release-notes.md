@@ -1,6 +1,13 @@
 # Relase Notes
 
-- v1.6.1 -
+- v1.6.2 - House cleaning
+  - remove AppCache since most browsers dropped support
+  - move `uikit`, `bignumber.js` and `decimal.js` from bower
+  - update raceday.me toast message
+  - fix broken blogpost link
+  - add relase notes document
+  - update ff1 and runy version for compass (required for aple silicon)
+- v1.6.1 - Goodbye server
   - move completely to amazon s3
   - update imprint
 - v1.6.0 - Dark times ahead
