@@ -43,6 +43,8 @@ module.exports = function (defaults) {
     },
   });
 
+  app.import('node_modules/uikit/dist/js/uikit.min.js');
+  app.import('node_modules/uikit/dist/css/uikit.min.css');
   app.import('bower_components/SelectOrDie/_src/selectordie.min.js');
   app.import('bower_components/bignumber.js/bignumber.js');
   app.import('bower_components/decimal.js/decimal.min.js');
