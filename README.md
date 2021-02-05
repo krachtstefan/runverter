@@ -34,7 +34,7 @@ As described in this [video](https://youtu.be/MT0LKcVh6Rw) the deployment proces
 - Preview the version with a secret url like `https://runverter.io/index.html:XXXXXX`.
 - Activate the deployed version by copying the content of `index.html:XXXXXX` to the `index.html` file.
 - Since the `manifest.appcache` can not be delivered via CDN and must be available under the same origin as the app, we upload the manifest.appcache as the last step of the deploy routine to the S3 bucket where the index.html is hosted (not the asset bucket).
-- it might need some time until all apps are recognizing the ne manifest
+- it might need some time until all apps are recognizing the new manifest
 - open [chrome://appcache-internals/](chrome://appcache-internals/) in chrome to inspect the stored appcache and clear it manually
 
 ### Requirements
