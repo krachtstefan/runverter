@@ -45,6 +45,8 @@ module.exports = function (defaults) {
 
   app.import('node_modules/uikit/dist/js/uikit.min.js');
   app.import('node_modules/uikit/dist/css/uikit.min.css');
+  app.import('node_modules/bignumber.js/bignumber.min.js');
+  app.import('node_modules/decimal.js/decimal.min.js');
   app.import('bower_components/SelectOrDie/_src/selectordie.min.js');
 
   return isProductionLikeBuild ? stripDebug(app.toTree()) : app.toTree();
