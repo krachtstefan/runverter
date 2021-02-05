@@ -2,8 +2,6 @@
   "name": "runverter",
   "dependencies": {
     "SelectOrDie": "0.1.8",
-    "bignumber.js": "v4.0.2",
-    "decimal.js": "v7.0.1",
     "chartjs": "2.5.0"
   }
 }
