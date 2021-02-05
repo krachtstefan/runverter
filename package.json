@@ -65,5 +65,7 @@
   "prettier": {
     "singleQuote": true
   },
-  "dependencies": {}
+  "dependencies": {
+    "uikit": "^2.27.4"
+  }
 }
