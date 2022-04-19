@@ -30,11 +30,13 @@ module.exports = function (environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' https://www.google-analytics.com",
+      'script-src':
+        "'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com/ https://ssl.google-analytics.com http://www.pagespeed-mod.com",
       'font-src':
         "'self' https://fonts.googleapis.com http://fonts.gstatic.com",
-      'connect-src': "'self'",
-      'img-src': "'self' data:",
+      'connect-src': "'self' https://www.google-analytics.com/",
+      'img-src':
+        "'self' data: https://www.google-analytics.com/ http://www.google-analytics.com/",
       'style-src':
         "'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.gstatic.com",
       'media-src': "'self'",
