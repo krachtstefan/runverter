@@ -1,5 +1,9 @@
 # Relase Notes
 
+- v1.6.3 - GA4
+
+  - switch to Google Analytics 4
+
 - v1.6.2 - House cleaning
   - remove AppCache since most browsers dropped support
   - move `uikit`, `bignumber.js` and `decimal.js` from bower
