@@ -159,8 +159,6 @@ export default {
     localstorageCleared: 'Alle lokal gespeicherten Daten wurden entfernt.',
     noSplits:
       'Huch! Der ausgewählte Lauf ist kürzer als die Split Distanz. Bitte wählen einen längeren Lauf.',
-    racedayme:
-      '<span>🤫 Pssssst. <br>Du magst Runverter? Dann wirst du <a href="https://raceday.me" target="_blank">raceday.me</a> lieben!</span>',
     donationMessage:
       'Hi, schön dich zu sehen! Dieses Tool ist kostenlos und in vielen Freizeitstunden entstanden. Wenn du mich motivieren willst, <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> spende</a> mir einfach etwas <i class="fa fa-coffee" aria-hidden="true"></i> oder erzähl <i class="fa fa-twitter" aria-hidden="true"></i> und <i class="fa fa-facebook" aria-hidden="true"></i> von #runverter',
   },

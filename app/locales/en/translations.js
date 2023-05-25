@@ -88,8 +88,6 @@ export default {
     localstorageCleared: 'All locally stored data have been flushed.',
     noSplits:
       'Oooops. The selected run is shorter than the split distance. Please increase the run distance.',
-    racedayme:
-      '<span>🤫 Pssssst. <br>You like Runverter? You gonna looooove <a href="https://raceday.me" target="_blank">raceday.me</a>!</span>',
     donationMessage:
       'Hi there, good to see you! This tool is free and made from lots of spare time. If you like to motivate me, just <a target="_blank" href="https://paypal.me/stefankracht"><i class="fa fa-paypal" aria-hidden="true"></i> donate</a> me some <i class="fa fa-coffee" aria-hidden="true"></i> or tell your <i class="fa fa-twitter" aria-hidden="true"></i> and <i class="fa fa-facebook" aria-hidden="true"></i> about #runverter',
   },
