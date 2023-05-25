@@ -6,21 +6,5 @@ export default Component.extend({
   i18n: service(),
   init() {
     this._super(...arguments);
-    var self = this;
-
-    if (
-      this.get('settings.displayRacedaymeNote') === true &&
-      this.get('isEmbedded') === false
-    ) {
-      this.set('settings.displayRacedaymeNote', false);
-      this.get('notifications').success(
-        this.get('i18n').t('flashMessages.racedayme'),
-        {
-          onClick() {
-            self.get('settings').save();
-          }
-        }
-      );
-    }
-  }
+  },
 });
