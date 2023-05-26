@@ -11,7 +11,7 @@
   },
   "repository": "",
   "scripts": {
-    "build": "source $HOME/.nvm/nvm.sh; nvm use; ember build",
+    "build": "ember build",
     "lint:js": "source $HOME/.nvm/nvm.sh; nvm use; eslint ./*.js app config lib server tests",
     "start": "source $HOME/.nvm/nvm.sh; nvm use; ember serve",
     "test": "source $HOME/.nvm/nvm.sh; nvm use; ember test"
