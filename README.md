@@ -2,11 +2,22 @@
 
 Runverter is a toolset for runners that helps to convert metrics, calculate times and speed and much more. For more information about this project please check out the [detailed blog post](https://stefankracht.de/p/runverter).
 
+## Prerequisites
+
+```
+$ npm install -g ember-cli
+$ npm install -g bower
+$ brew install watchman
+$ gem install bundler -v 2.2.7
+```
+
 ## Installation
 
 ```
 $ git clone https://github.com/krachtstefan/runverter.git
 $ cd runverter
+$ rvm use
+$ bundle install
 $ npm install && bower install
 ```
 
