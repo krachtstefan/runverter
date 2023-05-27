@@ -1,5 +1,9 @@
 # Relase Notes
 
+- v1.6.4 - Less annoying
+
+  - remove raceday.me toast message
+
 - v1.6.3 - GA4
 
   - switch to Google Analytics 4
